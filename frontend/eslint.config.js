@@ -3,15 +3,20 @@ import globals from 'globals';
 import react from 'eslint-plugin-react';
 import reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
+import prettier from 'eslint-plugin-prettier';
+import typescriptParser from '@typescript-eslint/parser';
+import typescriptPlugin from '@typescript-eslint/eslint-plugin';
 
 export default [
-  { ignores: ['dist'] },
+  { ignores: ['dist', '**/*.d.ts'] },
   {
-    extends: ['react-app', 'plugin:prettier/recommended'],
-    files: ['**/*.{js,jsx}'],
+    files: ['**/*.{js,jsx,ts,tsx}'],
     languageOptions: {
       ecmaVersion: 2020,
-      globals: globals.browser,
+      globals: {
+        ...globals.browser,
+      },
+      parser: typescriptParser,
       parserOptions: {
         ecmaVersion: 'latest',
         ecmaFeatures: { jsx: true },
@@ -23,15 +28,20 @@ export default [
       react,
       'react-hooks': reactHooks,
       'react-refresh': reactRefresh,
+      prettier,
+      '@typescript-eslint': typescriptPlugin,
     },
     rules: {
       ...js.configs.recommended.rules,
       ...react.configs.recommended.rules,
       ...react.configs['jsx-runtime'].rules,
       ...reactHooks.configs.recommended.rules,
+      ...typescriptPlugin.configs.recommended.rules,
+      'no-console': ['error', { allow: ['warn', 'error'] }],
       'prettier/prettier': ['error'],
       'react/jsx-no-target-blank': 'off',
       'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
+      'no-undef': 'off',
     },
   },
 ];
