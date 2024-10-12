@@ -1,6 +1,6 @@
 # Frontend Mentor - Personal finance app
 
-![Design preview for the Personal finance app coding challenge](./preview.jpg)
+![Design preview for the Personal finance app coding challenge](preview.jpg)
 
 ## Welcome! 👋
 
@@ -101,7 +101,7 @@ You can host your site using one of these solutions or any of our other trusted 
 
 ## Create a custom `README.md`
 
-We strongly recommend overwriting this `README.md` with a custom one. We've provided a template inside the [`README-template.md`](./README-template.md) file in this starter code.
+We strongly recommend overwriting this `README.md` with a custom one. We've provided a template inside the [`README-template.md`](README-template.md) file in this starter code.
 
 The template provides a guide for what to add. A custom `README` will help you explain your project and reflect on your learnings. Please feel free to edit our template as much as you like.
 
