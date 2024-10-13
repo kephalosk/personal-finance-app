@@ -1,8 +1,11 @@
 import { render, screen } from '@testing-library/react';
 import App from './App';
+import { ProjectName } from './Constants/ProjectName';
 
-test('renders Vite + React', () => {
+it('renders Sidebar', () => {
   render(<App />);
-  const linkElement = screen.getByText('Vite + React');
+
+  const linkElement = screen.getByText(ProjectName);
+
   expect(linkElement).toBeInTheDocument();
 });
