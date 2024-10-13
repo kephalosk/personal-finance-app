@@ -11,7 +11,7 @@ SidebarListEntry.propTypes = {
 
 function SidebarListEntry({ name, imgSrc, imgAlt, className }: SidebarListEntryProps) {
   return (
-    <div className={className}>
+    <div className={`entryRow ${className ? className : ''}`} tabIndex={0}>
       <img src={imgSrc} alt={imgAlt} aria-hidden="true" />
       <label>{name}</label>
     </div>
