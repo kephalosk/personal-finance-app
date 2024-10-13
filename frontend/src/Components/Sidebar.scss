@@ -1,0 +1,22 @@
+h1 {
+  margin: 0 0 64px 24px;
+  font-size: 28px;
+  font-weight: 900;
+  transform: scale(1, 0.9);
+  letter-spacing: 1px;
+  color: var(--sidebar-title);
+}
+
+.sidebar {
+  border-radius: 0 15px 15px 0;
+  background-color: var(--sidebar-background-grey);
+  padding: 32px 24px 70px 0;
+  height: 1000px;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebarList {
+  flex-grow: 1;
+}
+

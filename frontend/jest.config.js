@@ -9,4 +9,8 @@ export default {
   moduleNameMapper: {
     '\\.(css|scss)$': 'identity-obj-proxy',
   },
+  testPathIgnorePatterns: [
+    '<rootDir>/node_modules/',
+    '<rootDir>/ui-tests/', // Füge hier dein auszuschließendes Verzeichnis hinzu
+  ],
 };

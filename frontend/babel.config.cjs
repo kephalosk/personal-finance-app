@@ -1,4 +1,4 @@
-export default {
+module.exports = {
   presets: [
     '@babel/preset-env', // Für die Unterstützung von ES6+ und modernen JavaScript-Funktionen
     '@babel/preset-react', // Für die Unterstützung von JSX

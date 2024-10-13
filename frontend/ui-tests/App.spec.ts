@@ -1,7 +1,8 @@
 import { test, expect } from '@playwright/test';
+import { ProjectName } from '../src/Constants/ProjectName';
 
-test('basic test', async ({ page }) => {
+test('page title', async ({ page }) => {
   await page.goto('http://localhost:5173/');
   const title = await page.title();
-  expect(title).toBe('Vite + React');
+  expect(title).toBe(ProjectName);
 });
