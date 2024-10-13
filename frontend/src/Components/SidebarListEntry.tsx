@@ -1,10 +1,6 @@
 import './SidebarListEntry.scss';
 import PropTypes from 'prop-types';
-import { SidebarPage } from '../Types/SidebarPage';
-
-interface SidebarListEntryProps extends SidebarPage {
-  className?: string;
-}
+import { SidebarListEntryProps } from '../Types/SidebarListEntryProps';
 
 SidebarListEntry.propTypes = {
   name: PropTypes.string.isRequired,
