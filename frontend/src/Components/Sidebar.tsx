@@ -8,7 +8,7 @@ import { ProjectName } from '../Constants/ProjectName';
 export function Sidebar() {
   return (
     <section className="sidebar">
-      <h1>{ProjectName}</h1>
+      <label className="sidebarTitle">{ProjectName}</label>
       <div className="sidebarList">
         {SidebarPages.map((entry: SidebarPage) => (
           <SidebarListEntry

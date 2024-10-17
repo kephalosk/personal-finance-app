@@ -13,7 +13,7 @@ function SidebarListEntry({ name, imgSrc, imgAlt, className }: SidebarListEntryP
   return (
     <div className={`entryRow ${className ? className : ''}`} tabIndex={0}>
       <img src={imgSrc} alt={imgAlt} aria-hidden="true" />
-      <label>{name}</label>
+      <label className="entryRowLabel">{name}</label>
     </div>
   );
 }
