@@ -1,4 +1,4 @@
-import SidebarListEntry from './SidebarListEntry';
+import { SidebarListEntry } from './SidebarListEntry';
 
 export function SidebarMinimize() {
   return (

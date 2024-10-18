@@ -9,7 +9,7 @@ SidebarListEntry.propTypes = {
   className: PropTypes.string,
 };
 
-function SidebarListEntry({ name, imgSrc, imgAlt, className }: SidebarListEntryProps) {
+export function SidebarListEntry({ name, imgSrc, imgAlt, className }: SidebarListEntryProps) {
   return (
     <div className={`entryRow ${className ? className : ''}`} tabIndex={0}>
       <img src={imgSrc} alt={imgAlt} aria-hidden="true" />
@@ -17,5 +17,3 @@ function SidebarListEntry({ name, imgSrc, imgAlt, className }: SidebarListEntryP
     </div>
   );
 }
-
-export default SidebarListEntry;
