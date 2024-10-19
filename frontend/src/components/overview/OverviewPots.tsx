@@ -1,20 +1,15 @@
 import './OverviewPots.scss';
 import { OverviewHeader } from './OverviewHeader';
 import { ValueBox } from './ValueBox';
+import { PotsSummary } from './PotsSummary';
 
 export function OverviewPots() {
   return (
     <>
-      <div className="overviewPots">
+      <div className="overviewPots" data-testid="overview-pots">
         <OverviewHeader title="Pots" linkText="See Details" linkTarget="//" />
         <div className="overviewPotsContent">
-          <div className="overviewPotsSummary">
-            <img className="overviewPotsSummaryIcon" alt="money icon" aria-hidden="true" />
-            <div className="overviewPotsSummaryContent">
-              <label className="overviewPotsSummaryContentTitle">Total Saved</label>
-              <label className="overviewPotsSummaryContentValue">$850</label>
-            </div>
-          </div>
+          <PotsSummary />
           <div className="overviewPotsValuesLeft">
             <ValueBox title="Savings" value="159" color="dark-green" />
             <ValueBox title="Concert Ticket" value="110" color="dark-grey" />

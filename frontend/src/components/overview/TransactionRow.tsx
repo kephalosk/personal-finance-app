@@ -12,7 +12,7 @@ TransactionRow.propTypes = {
 export function TransactionRow({ name, value, date, imgSrc }: TransactionRowProps) {
   return (
     <>
-      <div className="overviewTransactionRow">
+      <div className="overviewTransactionRow" data-testid="transaction-row">
         <img
           className="overviewTransactionRowImage"
           alt="image of payment partner"

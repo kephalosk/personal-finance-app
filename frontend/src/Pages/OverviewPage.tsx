@@ -7,7 +7,7 @@ import { OverviewBills } from '../components/overview/OverviewBills';
 
 export function OverviewPage() {
   return (
-    <div className="overviewPage">
+    <div className="overviewPage" data-testid="overview-page">
       <h1>Overview</h1>
       <OverviewSummary />
       <div className="overviewDetails">

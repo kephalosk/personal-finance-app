@@ -11,7 +11,7 @@ SummaryCard.propTypes = {
 export function SummaryCard({ title, value, isInverted }: SummaryCardProps) {
   return (
     <>
-      <div className="overviewSummaryCard">
+      <div className="overviewSummaryCard" data-testid="summary-card">
         <label className="overviewSummaryCardTitle">{title}</label>
         <label className="overviewSummaryCardValue">${value}</label>
       </div>

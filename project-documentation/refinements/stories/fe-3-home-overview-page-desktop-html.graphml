@@ -824,7 +824,7 @@
           <y:Geometry height="27.518575689716613" width="159.48680622593463" x="678.7488122040586" y="472.3781217760776"/>
           <y:Fill color="#99CCFF" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
-          <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="tl" textColor="#000000" verticalTextPosition="bottom" visible="true" width="144.00390625" x="4.0" xml:space="preserve" y="4.0">h2 "Pots" - flex-grow: 1</y:NodeLabel>
+          <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="tl" textColor="#000000" verticalTextPosition="bottom" visible="true" width="166.0703125" x="4.0" xml:space="preserve" y="4.0">h2 "Budgets" - flex-grow: 1</y:NodeLabel>
         </y:GenericNode>
       </data>
     </node>
@@ -1021,10 +1021,11 @@
     <node id="n100">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
-          <y:Geometry height="27.518575689716613" width="159.48680622593463" x="680.2372426682026" y="1036.0082598277122"/>
+          <y:Geometry height="37.06053502947714" width="159.48680622593463" x="680.2372426682025" y="1033.4877258474164"/>
           <y:Fill color="#99CCFF" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
-          <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="tl" textColor="#000000" verticalTextPosition="bottom" visible="true" width="144.00390625" x="4.0" xml:space="preserve" y="4.0">h2 "Pots" - flex-grow: 1</y:NodeLabel>
+          <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="32.265625" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="tl" textColor="#000000" verticalTextPosition="bottom" visible="true" width="118.90234375" x="4.0" xml:space="preserve" y="4.0">h2 "Recurring Bills" 
+- flex-grow: 1</y:NodeLabel>
         </y:GenericNode>
       </data>
     </node>
@@ -1194,7 +1195,7 @@
           <y:Geometry height="27.518575689716613" width="211.8994648556273" x="1151.770419656357" y="648.6478198651864"/>
           <y:Fill color="#99CCFF" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
-          <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="tl" textColor="#000000" verticalTextPosition="bottom" visible="true" width="113.1484375" x="4.0" xml:space="preserve" y="4.0">HeaderComponent</y:NodeLabel>
+          <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="tl" textColor="#000000" verticalTextPosition="bottom" visible="true" width="98.01953125" x="4.0" xml:space="preserve" y="4.0">OverviewHeader</y:NodeLabel>
         </y:GenericNode>
       </data>
     </node>
@@ -1204,7 +1205,7 @@
           <y:Geometry height="27.518575689716613" width="211.8994648556273" x="1151.770419656357" y="472.3781217760776"/>
           <y:Fill color="#99CCFF" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
-          <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="tl" textColor="#000000" verticalTextPosition="bottom" visible="true" width="79.755859375" x="4.0" xml:space="preserve" y="4.0">SummaryBox</y:NodeLabel>
+          <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="tl" textColor="#000000" verticalTextPosition="bottom" visible="true" width="85.515625" x="4.0" xml:space="preserve" y="4.0">SummaryCard</y:NodeLabel>
         </y:GenericNode>
       </data>
     </node>

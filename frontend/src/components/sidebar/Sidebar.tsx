@@ -7,7 +7,7 @@ import { ProjectName } from '../../constants/ProjectName';
 
 export function Sidebar() {
   return (
-    <section className="sidebar">
+    <section className="sidebar" data-testid="sidebar">
       <label className="sidebarTitle">{ProjectName}</label>
       <div className="sidebarList">
         {SidebarPages.map((entry: SidebarPage) => (

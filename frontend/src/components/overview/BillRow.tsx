@@ -5,12 +5,13 @@ import { BillRowProps } from '../../types/BillRowProps';
 BillRow.propTypes = {
   title: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
+  color: PropTypes.string.isRequired,
 };
 
-export function BillRow({ title, value }: BillRowProps) {
+export function BillRow({ title, value, color }: BillRowProps) {
   return (
     <>
-      <div className="overviewBillsRow">
+      <div className="overviewBillsRow" data-testid="bill-row">
         <label className="overviewBillsRowTitle">{title}</label>
         <label className="overviewBillsRowValue">{value}</label>
       </div>

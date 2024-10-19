@@ -11,7 +11,7 @@ ValueBox.propTypes = {
 export function ValueBox({ title, value, color }: ValueBoxProps) {
   return (
     <>
-      <div className="valueBox">
+      <div className="valueBox" data-testid="value-box">
         <label className="valueBoxTitle">{title}</label>
         <label className="valueBoxValue">${value}</label>
       </div>

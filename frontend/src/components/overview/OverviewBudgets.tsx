@@ -1,17 +1,15 @@
 import './OverviewBudgets.scss';
 import { OverviewHeader } from './OverviewHeader';
 import { ValueBox } from './ValueBox';
+import { BudgetsDiagram } from './BudgetsDiagram';
 
 export function OverviewBudgets() {
   return (
     <>
-      <div className="overviewBudgets">
+      <div className="overviewBudgets" data-testid="overview-budgets">
         <OverviewHeader title="Budgets" linkText="See Details" linkTarget="//" />
         <div className="overviewBudgetsContent">
-          <div className="overviewBudgetsDiagramm">
-            <label className="overviewBudgetsDiagrammSpend">$338</label>
-            <label className="overviewBudgetsDiagrammTotal">of $975 limit</label>
-          </div>
+          <BudgetsDiagram />
           <div className="overviewBudgetsValues">
             <ValueBox title="Entertainment" value="50.00" color="dark-green" />
             <ValueBox title="Bills" value="750.00" color="light-blue" />

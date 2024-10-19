@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import SidebarListEntry from './SidebarListEntry';
+import { SidebarListEntry } from './SidebarListEntry';
 import { SidebarListEntryProps } from '../../types/SidebarListEntryProps';
 
 describe('SidebarListEntry', () => {

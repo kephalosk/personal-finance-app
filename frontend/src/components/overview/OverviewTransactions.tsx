@@ -5,7 +5,7 @@ import { TransactionRow } from './TransactionRow';
 export function OverviewTransactions() {
   return (
     <>
-      <div className="overviewTransactions">
+      <div className="overviewTransactions" data-testid="overview-transactions">
         <OverviewHeader title="Transactions" linkText="View All" linkTarget="//" />
         <TransactionRow
           name="Emma Richardsen"

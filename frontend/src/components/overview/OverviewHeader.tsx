@@ -11,7 +11,7 @@ OverviewHeader.propTypes = {
 export function OverviewHeader({ title, linkText, linkTarget }: OverviewHeaderProps) {
   return (
     <>
-      <div className="overviewHeader">
+      <div className="overviewHeader" data-testid="overview-header">
         <h2 className="overviewHeaderTitle">{title}</h2>
         <a className="overviewHeaderLink" href={linkTarget}>
           {linkText}
