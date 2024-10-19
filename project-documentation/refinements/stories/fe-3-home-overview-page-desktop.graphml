@@ -17,7 +17,7 @@
     <node id="n0">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
-          <y:Geometry height="21.0" width="230.0" x="0.0" y="-297.54603174603176"/>
+          <y:Geometry height="21.0" width="230.0" x="0.0" y="-320.60853174603176"/>
           <y:Fill color="#00FFFF" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="l" textColor="#000000" verticalTextPosition="bottom" visible="true" width="230.0" x="4.0" xml:space="preserve" y="0.43359375">fe-3-home-overview-page-desktop</y:NodeLabel>
@@ -27,7 +27,7 @@
     <node id="n1">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
-          <y:Geometry height="118.99003623188412" width="348.6543257077677" x="250.0" y="-346.5410498619738"/>
+          <y:Geometry height="118.99003623188412" width="348.6543257077677" x="250.0" y="-369.6035498619738"/>
           <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="104.9296875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="348.6543257077677" x="0.0" xml:space="preserve" y="7.0301743659420595">WENN ein Nutzer die Webapp im Desktop-Format lädt,
@@ -42,7 +42,7 @@ Hier erstmal nur hardcodierte Testwerte verwenden.<y:LabelModel><y:SmartNodeLabe
     <node id="n2">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.cloud">
-          <y:Geometry height="50.0" width="178.65432570776773" x="335.0" y="-426.54126984126987"/>
+          <y:Geometry height="50.0" width="178.65432570776773" x="335.0" y="-449.60376984126987"/>
           <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="178.65432570776773" x="0.0" xml:space="preserve" y="14.93359375">Acceptance Criteria<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
@@ -52,7 +52,7 @@ Hier erstmal nur hardcodierte Testwerte verwenden.<y:LabelModel><y:SmartNodeLabe
     <node id="n3">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.cloud">
-          <y:Geometry height="50.0" width="178.65432570776773" x="671.6543257077676" y="-643.3744047619048"/>
+          <y:Geometry height="50.0" width="178.65432570776773" x="671.6543257077676" y="-694.3744047619048"/>
           <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="178.65432570776773" x="0.0" xml:space="preserve" y="14.93359375">Task-Breakdown<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
@@ -62,7 +62,7 @@ Hier erstmal nur hardcodierte Testwerte verwenden.<y:LabelModel><y:SmartNodeLabe
     <node id="n4">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
-          <y:Geometry height="21.0" width="198.65432570776773" x="661.6543257077676" y="-563.3744047619048"/>
+          <y:Geometry height="21.0" width="198.65432570776773" x="661.6543257077676" y="-614.3744047619048"/>
           <y:Fill color="#00FF00" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="198.65432570776773" x="0.0" xml:space="preserve" y="0.43359375">Entwurf der HTML-Struktur<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
@@ -72,7 +72,7 @@ Hier erstmal nur hardcodierte Testwerte verwenden.<y:LabelModel><y:SmartNodeLabe
     <node id="n5">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
-          <y:Geometry height="32.0" width="198.65432570776773" x="661.6543257077676" y="-511.24146825396826"/>
+          <y:Geometry height="32.0" width="198.65432570776773" x="661.6543257077676" y="-562.2414682539683"/>
           <y:Fill color="#00FF00" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="34.265625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="198.65432570776773" x="0.0" xml:space="preserve" y="-1.1328125">Identifikation möglicher REACT-Komponenten<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
@@ -112,7 +112,7 @@ Hier erstmal nur hardcodierte Testwerte verwenden.<y:LabelModel><y:SmartNodeLabe
     <node id="n9">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
-          <y:Geometry height="39.0" width="198.65432570776773" x="661.6543257077676" y="-359.98353174603176"/>
+          <y:Geometry height="39.0" width="198.65432570776773" x="661.6543257077676" y="-406.10853174603176"/>
           <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="34.265625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="198.65432570776773" x="0.0" xml:space="preserve" y="2.3671875">Implementierung von HTML/REACT-Komponenten<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
@@ -122,7 +122,7 @@ Hier erstmal nur hardcodierte Testwerte verwenden.<y:LabelModel><y:SmartNodeLabe
     <node id="n10">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
-          <y:Geometry height="21.0" width="141.0" x="44.5" y="-166.54603174603176"/>
+          <y:Geometry height="21.0" width="141.0" x="44.5" y="-189.60853174603176"/>
           <y:Fill color="#00FFFF" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="141.0" x="0.0" xml:space="preserve" y="0.43359375">TO-DO<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
@@ -132,7 +132,7 @@ Hier erstmal nur hardcodierte Testwerte verwenden.<y:LabelModel><y:SmartNodeLabe
     <node id="n11">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
-          <y:Geometry height="21.0" width="141.0" x="44.5" y="-115.54603174603174"/>
+          <y:Geometry height="21.0" width="141.0" x="44.5" y="-138.60853174603176"/>
           <y:Fill color="#00FF00" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="l" textColor="#000000" verticalTextPosition="bottom" visible="true" width="141.0" x="4.0" xml:space="preserve" y="0.43359375">DONE</y:NodeLabel>
@@ -142,7 +142,7 @@ Hier erstmal nur hardcodierte Testwerte verwenden.<y:LabelModel><y:SmartNodeLabe
     <node id="n12">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.cloud">
-          <y:Geometry height="50.0" width="198.65432570776773" x="15.672837146116137" y="-246.54603174603176"/>
+          <y:Geometry height="50.0" width="198.65432570776773" x="15.672837146116137" y="-269.60853174603176"/>
           <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="198.65432570776773" x="0.0" xml:space="preserve" y="14.93359375">LEGEND<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
@@ -152,7 +152,7 @@ Hier erstmal nur hardcodierte Testwerte verwenden.<y:LabelModel><y:SmartNodeLabe
     <node id="n13">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.cloud">
-          <y:Geometry height="50.0" width="178.65432570776773" x="925.8086514155355" y="-643.3744047619048"/>
+          <y:Geometry height="50.0" width="178.65432570776773" x="925.8086514155355" y="-694.3744047619048"/>
           <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="178.65432570776773" x="0.0" xml:space="preserve" y="14.93359375">Action Steps<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
@@ -192,7 +192,7 @@ Hier erstmal nur hardcodierte Testwerte verwenden.<y:LabelModel><y:SmartNodeLabe
     <node id="n17">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.cloud">
-          <y:Geometry height="50.0" width="178.65432570776773" x="1137.962977123303" y="-346.69940476190476"/>
+          <y:Geometry height="50.0" width="178.65432570776773" x="1137.962977123303" y="-372.19940476190476"/>
           <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="178.65432570776773" x="0.0" xml:space="preserve" y="14.93359375">Testbedarf<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
@@ -212,7 +212,7 @@ Hier erstmal nur hardcodierte Testwerte verwenden.<y:LabelModel><y:SmartNodeLabe
     <node id="n19">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
-          <y:Geometry height="21.0" width="215.65432570776773" x="907.3086514155355" y="-448.10853174603176"/>
+          <y:Geometry height="21.0" width="215.65432570776773" x="907.3086514155355" y="-499.10853174603176"/>
           <y:Fill color="#00FF00" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="215.65432570776773" x="0.0" xml:space="preserve" y="0.43359375">HTML statisch hinzufügen<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
@@ -252,7 +252,7 @@ Hier erstmal nur hardcodierte Testwerte verwenden.<y:LabelModel><y:SmartNodeLabe
     <node id="n23">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
-          <y:Geometry height="21.0" width="141.0" x="44.5" y="-64.54603174603174"/>
+          <y:Geometry height="21.0" width="141.0" x="44.5" y="-87.60853174603174"/>
           <y:Fill color="#999999" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="141.0" x="0.0" xml:space="preserve" y="0.43359375">OUTOFSCOPE<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
@@ -262,7 +262,7 @@ Hier erstmal nur hardcodierte Testwerte verwenden.<y:LabelModel><y:SmartNodeLabe
     <node id="n24">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
-          <y:Geometry height="21.0" width="215.6543257077675" x="907.3086514155357" y="-563.3744047619048"/>
+          <y:Geometry height="21.0" width="215.6543257077675" x="907.3086514155357" y="-614.3744047619048"/>
           <y:Fill color="#00FF00" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="215.6543257077675" x="0.0" xml:space="preserve" y="0.43359375">Entwurf der HTML-Struktur<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
@@ -272,10 +272,20 @@ Hier erstmal nur hardcodierte Testwerte verwenden.<y:LabelModel><y:SmartNodeLabe
     <node id="n25">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
-          <y:Geometry height="32.0" width="215.6543257077675" x="907.3086514155357" y="-511.24146825396826"/>
+          <y:Geometry height="32.0" width="215.6543257077675" x="907.3086514155357" y="-562.2414682539683"/>
           <y:Fill color="#00FF00" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="34.265625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="215.6543257077675" x="0.0" xml:space="preserve" y="-1.1328125">Identifikation möglicher REACT-Komponenten<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+        </y:GenericNode>
+      </data>
+    </node>
+    <node id="n26">
+      <data key="d6">
+        <y:GenericNode configuration="com.yworks.flowchart.process">
+          <y:Geometry height="21.0" width="215.65432570776773" x="907.3086514155355" y="-448.10853174603176"/>
+          <y:Fill color="#00FFFF" color2="#B7C9E3" transparent="false"/>
+          <y:BorderStyle color="#000000" type="line" width="1.0"/>
+          <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="215.65432570776773" x="0.0" xml:space="preserve" y="0.43359375">split up overview page<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
         </y:GenericNode>
       </data>
     </node>
@@ -283,8 +293,8 @@ Hier erstmal nur hardcodierte Testwerte verwenden.<y:LabelModel><y:SmartNodeLabe
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="174.32716285388386" sy="-49.57918176328505" tx="-99.32716285388386" ty="-0.0">
-            <y:Point x="614.1543257077677" y="-336.62521350931684"/>
-            <y:Point x="614.1543257077677" y="-552.8744047619048"/>
+            <y:Point x="614.1543257077677" y="-359.68771350931684"/>
+            <y:Point x="614.1543257077677" y="-603.8744047619048"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="standard"/>
@@ -296,8 +306,8 @@ Hier erstmal nur hardcodierte Testwerte verwenden.<y:LabelModel><y:SmartNodeLabe
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="174.32716285388386" sy="-29.74750905797103" tx="-99.32716285388386" ty="-0.0">
-            <y:Point x="630.1543257077677" y="-316.79354080400276"/>
-            <y:Point x="630.1543257077677" y="-495.24146825396826"/>
+            <y:Point x="630.1543257077677" y="-339.85604080400276"/>
+            <y:Point x="630.1543257077677" y="-546.2414682539683"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="standard"/>
@@ -309,7 +319,7 @@ Hier erstmal nur hardcodierte Testwerte verwenden.<y:LabelModel><y:SmartNodeLabe
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="174.32716285388386" sy="9.91583635265701" tx="-99.32716285388386" ty="-0.0">
-            <y:Point x="646.1543257077677" y="-277.1301953933747"/>
+            <y:Point x="646.1543257077677" y="-300.1926953933747"/>
             <y:Point x="646.1543257077677" y="-233.60853174603176"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
@@ -322,7 +332,7 @@ Hier erstmal nur hardcodierte Testwerte verwenden.<y:LabelModel><y:SmartNodeLabe
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="174.32716285388386" sy="29.74750905797103" tx="-99.32716285388386" ty="-0.0">
-            <y:Point x="630.1543257077677" y="-257.29852268806076"/>
+            <y:Point x="630.1543257077677" y="-280.36102268806076"/>
             <y:Point x="630.1543257077677" y="-168.37400793650792"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
@@ -335,7 +345,7 @@ Hier erstmal nur hardcodierte Testwerte verwenden.<y:LabelModel><y:SmartNodeLabe
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="174.32716285388386" sy="49.57918176328505" tx="-99.32716285388386" ty="-0.0">
-            <y:Point x="614.1543257077677" y="-237.4668499827467"/>
+            <y:Point x="614.1543257077677" y="-260.5293499827467"/>
             <y:Point x="614.1543257077677" y="-55.97559523809524"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
@@ -348,8 +358,8 @@ Hier erstmal nur hardcodierte Testwerte verwenden.<y:LabelModel><y:SmartNodeLabe
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="174.32716285388386" sy="-9.91583635265701" tx="-99.32716285388386" ty="-0.0">
-            <y:Point x="646.1543257077677" y="-296.9618680986888"/>
-            <y:Point x="646.1543257077677" y="-340.48353174603176"/>
+            <y:Point x="646.1543257077677" y="-320.0243680986888"/>
+            <y:Point x="646.1543257077677" y="-386.60853174603176"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="standard"/>
@@ -360,10 +370,7 @@ Hier erstmal nur hardcodierte Testwerte verwenden.<y:LabelModel><y:SmartNodeLabe
     <edge id="e6" source="n9" target="n14">
       <data key="d10">
         <y:PolyLineEdge>
-          <y:Path sx="99.32716285388386" sy="-4.875" tx="-107.82716285388386" ty="-0.0">
-            <y:Point x="891.8086514155355" y="-345.35853174603176"/>
-            <y:Point x="891.8086514155355" y="-386.60853174603176"/>
-          </y:Path>
+          <y:Path sx="99.32716285388386" sy="-0.0" tx="-107.82716285388386" ty="-0.0"/>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="standard"/>
           <y:BendStyle smoothed="false"/>
@@ -373,7 +380,10 @@ Hier erstmal nur hardcodierte Testwerte verwenden.<y:LabelModel><y:SmartNodeLabe
     <edge id="e7" source="n9" target="n15">
       <data key="d10">
         <y:PolyLineEdge>
-          <y:Path sx="99.32716285388386" sy="4.875" tx="-107.82716285388386" ty="-0.0"/>
+          <y:Path sx="99.32716285388386" sy="7.800000000000001" tx="-107.82716285388386" ty="-0.0">
+            <y:Point x="891.8086514155355" y="-378.80853174603175"/>
+            <y:Point x="891.8086514155355" y="-335.60853174603176"/>
+          </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="standard"/>
           <y:BendStyle smoothed="false"/>
@@ -383,8 +393,8 @@ Hier erstmal nur hardcodierte Testwerte verwenden.<y:LabelModel><y:SmartNodeLabe
     <edge id="e8" source="n9" target="n16">
       <data key="d10">
         <y:PolyLineEdge>
-          <y:Path sx="99.32716285388386" sy="14.625" tx="-107.82716285388386" ty="-0.0">
-            <y:Point x="875.8086514155355" y="-325.85853174603176"/>
+          <y:Path sx="99.32716285388386" sy="15.600000000000001" tx="-107.82716285388386" ty="-0.0">
+            <y:Point x="875.8086514155355" y="-371.00853174603174"/>
             <y:Point x="875.8086514155355" y="-284.60853174603176"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
@@ -406,9 +416,9 @@ Hier erstmal nur hardcodierte Testwerte verwenden.<y:LabelModel><y:SmartNodeLabe
     <edge id="e10" source="n9" target="n19">
       <data key="d10">
         <y:PolyLineEdge>
-          <y:Path sx="99.32716285388386" sy="-14.625" tx="-107.82716285388386" ty="-0.0">
-            <y:Point x="875.8086514155355" y="-355.10853174603176"/>
-            <y:Point x="875.8086514155355" y="-437.60853174603176"/>
+          <y:Path sx="99.32716285388386" sy="-15.6" tx="-107.82716285388386" ty="-0.0">
+            <y:Point x="875.8086514155355" y="-402.2085317460318"/>
+            <y:Point x="875.8086514155355" y="-488.60853174603176"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="standard"/>
@@ -476,6 +486,20 @@ Hier erstmal nur hardcodierte Testwerte verwenden.<y:LabelModel><y:SmartNodeLabe
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="99.32716285388386" sy="-0.0" tx="-107.82716285388375" ty="-0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e17" source="n9" target="n26">
+      <data key="d9"/>
+      <data key="d10">
+        <y:PolyLineEdge>
+          <y:Path sx="99.32716285388386" sy="-7.800000000000001" tx="-107.82716285388386" ty="-0.0">
+            <y:Point x="891.8086514155355" y="-394.40853174603177"/>
+            <y:Point x="891.8086514155355" y="-437.60853174603176"/>
+          </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="standard"/>
           <y:BendStyle smoothed="false"/>

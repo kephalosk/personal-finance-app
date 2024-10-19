@@ -1,6 +1,6 @@
 import './SummaryCard.scss';
 import PropTypes from 'prop-types';
-import { SummaryCardProps } from '../Types/SummaryCardProps';
+import { SummaryCardProps } from '../../types/SummaryCardProps';
 
 SummaryCard.propTypes = {
   title: PropTypes.string.isRequired,

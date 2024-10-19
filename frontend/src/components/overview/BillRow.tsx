@@ -1,6 +1,6 @@
 import './BillRow.scss';
 import PropTypes from 'prop-types';
-import { BillRowProps } from '../Types/BillRowProps';
+import { BillRowProps } from '../../types/BillRowProps';
 
 BillRow.propTypes = {
   title: PropTypes.string.isRequired,

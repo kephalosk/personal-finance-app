@@ -1,6 +1,6 @@
 import './OverviewHeader.scss';
 import PropTypes from 'prop-types';
-import { OverviewHeaderProps } from '../Types/OverviewHeaderProps';
+import { OverviewHeaderProps } from '../../types/OverviewHeaderProps';
 
 OverviewHeader.propTypes = {
   title: PropTypes.string.isRequired,

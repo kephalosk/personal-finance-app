@@ -1,9 +1,9 @@
 import './Sidebar.scss';
-import { SidebarPages } from '../Constants/SidebarPages';
-import { SidebarPage } from '../Types/SidebarPage';
+import { SidebarPages } from '../../constants/SidebarPages';
+import { SidebarPage } from '../../types/SidebarPage';
 import { SidebarListEntry } from './SidebarListEntry';
 import { SidebarMinimize } from './SidebarMinimize';
-import { ProjectName } from '../Constants/ProjectName';
+import { ProjectName } from '../../constants/ProjectName';
 
 export function Sidebar() {
   return (

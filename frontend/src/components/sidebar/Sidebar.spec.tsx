@@ -1,8 +1,8 @@
 import { Sidebar } from './Sidebar';
 import { render, screen } from '@testing-library/react';
-import { ProjectName } from '../Constants/ProjectName';
-import { SidebarPages } from '../Constants/SidebarPages';
-import { SidebarMinimizeProps } from '../Constants/SidebarMinimizeProps';
+import { ProjectName } from '../../constants/ProjectName';
+import { SidebarPages } from '../../constants/SidebarPages';
+import { SidebarMinimizeProps } from '../../constants/SidebarMinimizeProps';
 
 describe('Sidebar', () => {
   it('renders the project name', () => {

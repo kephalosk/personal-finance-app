@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import SidebarListEntry from './SidebarListEntry';
-import { SidebarListEntryProps } from '../Types/SidebarListEntryProps';
+import { SidebarListEntryProps } from '../../types/SidebarListEntryProps';
 
 describe('SidebarListEntry', () => {
   const name: string = 'testName';

@@ -1,6 +1,6 @@
 import './TransactionRow.scss';
 import PropTypes from 'prop-types';
-import { TransactionRowProps } from '../Types/TransactionRowProps';
+import { TransactionRowProps } from '../../types/TransactionRowProps';
 
 TransactionRow.propTypes = {
   name: PropTypes.string.isRequired,
