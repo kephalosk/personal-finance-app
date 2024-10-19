@@ -10,13 +10,15 @@ export function OverviewPots() {
         <OverviewHeader title="Pots" linkText="See Details" linkTarget="//" />
         <div className="overviewPotsContent">
           <PotsSummary />
-          <div className="overviewPotsValuesLeft">
-            <ValueBox title="Savings" value="159" color="dark-green" />
-            <ValueBox title="Concert Ticket" value="110" color="dark-grey" />
-          </div>
-          <div className="overviewPotsValuesRight">
-            <ValueBox title="Gift" value="40" color="light-blue" />
-            <ValueBox title="New Laptop" value="10" color="beige" />
+          <div className="overviewPotsValues">
+            <div className="overviewPotsValuesRow">
+              <ValueBox title="Savings" value="159" color="dark-green" />
+              <ValueBox title="Gift" value="40" color="light-blue" />
+            </div>
+            <div className="overviewPotsValuesRow">
+              <ValueBox title="Concert Ticket" value="110" color="dark-grey" />
+              <ValueBox title="New Laptop" value="10" color="beige" />
+            </div>
           </div>
         </div>
       </div>

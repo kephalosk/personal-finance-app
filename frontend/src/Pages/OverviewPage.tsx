@@ -10,12 +10,12 @@ export function OverviewPage() {
     <div className="overviewPage" data-testid="overview-page">
       <h1>Overview</h1>
       <OverviewSummary />
-      <div className="overviewDetails">
-        <div className="overviewDetailsLeft">
+      <div className="overviewPageDetails">
+        <div className="overviewPageDetailsLeft">
           <OverviewPots />
           <OverviewTransactions />
         </div>
-        <div className="overviewDetailsRight">
+        <div className="overviewPageDetailsRight">
           <OverviewBudgets />
           <OverviewBills />
         </div>

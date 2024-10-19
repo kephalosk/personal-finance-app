@@ -1,6 +1,6 @@
 export interface TransactionRowProps {
   name: string;
-  value: string;
+  value: number;
   date: string;
   imgSrc: string;
 }

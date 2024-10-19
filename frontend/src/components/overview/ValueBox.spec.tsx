@@ -20,19 +20,35 @@ describe('ValueBox', () => {
     expect(htmlElement).toBeInTheDocument();
   });
 
-  it('renders the label valueBoxTitle with passed title', () => {
+  it('renders div valueBoxBorder', () => {
     const { container } = render(<ValueBox {...testProps} />);
 
-    const htmlElement = container.querySelector('.valueBoxTitle');
+    const htmlElement = container.querySelector('.valueBoxBorder');
+
+    expect(htmlElement).toBeInTheDocument();
+  });
+
+  it('renders div valueBoxContent', () => {
+    const { container } = render(<ValueBox {...testProps} />);
+
+    const htmlElement = container.querySelector('.valueBoxContent');
+
+    expect(htmlElement).toBeInTheDocument();
+  });
+
+  it('renders the label valueBoxContentTitle with passed title', () => {
+    const { container } = render(<ValueBox {...testProps} />);
+
+    const htmlElement = container.querySelector('.valueBoxContentTitle');
 
     expect(htmlElement).toBeInTheDocument();
     expect(htmlElement).toHaveTextContent(title);
   });
 
-  it('renders the label valueBoxValue with passed value', () => {
+  it('renders the label valueBoxContentValue with passed value', () => {
     const { container } = render(<ValueBox {...testProps} />);
 
-    const htmlElement = container.querySelector('.valueBoxValue');
+    const htmlElement = container.querySelector('.valueBoxContentValue');
 
     expect(htmlElement).toBeInTheDocument();
     expect(htmlElement).toHaveTextContent(value);

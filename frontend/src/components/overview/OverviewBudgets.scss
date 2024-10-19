@@ -1,0 +1,21 @@
+.overviewBudgets {
+  border-radius: 12px;
+  background-color: var(--component-background-bright);
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+}
+
+.overviewBudgetsContent {
+  padding: 8px 0;
+  display: grid;
+  grid-template-columns: auto fit-content(100%);
+  column-gap: 16px;
+}
+
+.overviewBudgetsValues {
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+}

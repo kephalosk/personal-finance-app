@@ -34,18 +34,18 @@ describe('OverviewPots', () => {
     expect(reactComponent).toBeInTheDocument();
   });
 
-  it('renders div overviewPotsValuesLeft', () => {
+  it('renders div overviewPotsValues', () => {
     const { container } = render(<OverviewPots />);
 
-    const htmlElement = container.querySelector('.overviewPotsValuesLeft');
+    const htmlElement = container.querySelector('.overviewPotsValues');
 
     expect(htmlElement).toBeInTheDocument();
   });
 
-  it('renders div overviewPotsValuesRight', () => {
+  it('renders div overviewPotsValuesRow', () => {
     const { container } = render(<OverviewPots />);
 
-    const htmlElement = container.querySelector('.overviewPotsValuesRight');
+    const htmlElement = container.querySelector('.overviewPotsValuesRow');
 
     expect(htmlElement).toBeInTheDocument();
   });

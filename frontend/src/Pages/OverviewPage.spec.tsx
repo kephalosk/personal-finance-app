@@ -27,18 +27,18 @@ describe('OverviewPage', () => {
     expect(reactComponent).toBeInTheDocument();
   });
 
-  it('renders div overviewDetails', () => {
+  it('renders div overviewPageDetails', () => {
     const { container } = render(<OverviewPage />);
 
-    const htmlElement = container.querySelector('.overviewDetails');
+    const htmlElement = container.querySelector('.overviewPageDetails');
 
     expect(htmlElement).toBeInTheDocument();
   });
 
-  it('renders div overviewDetailsLeft', () => {
+  it('renders div overviewPageDetailsLeft', () => {
     const { container } = render(<OverviewPage />);
 
-    const htmlElement = container.querySelector('.overviewDetailsLeft');
+    const htmlElement = container.querySelector('.overviewPageDetailsLeft');
 
     expect(htmlElement).toBeInTheDocument();
   });
@@ -59,10 +59,10 @@ describe('OverviewPage', () => {
     expect(reactComponent).toBeInTheDocument();
   });
 
-  it('renders div overviewDetailsRight', () => {
+  it('renders div overviewPageDetailsRight', () => {
     const { container } = render(<OverviewPage />);
 
-    const htmlElement = container.querySelector('.overviewDetailsRight');
+    const htmlElement = container.querySelector('.overviewPageDetailsRight');
 
     expect(htmlElement).toBeInTheDocument();
   });

@@ -11,7 +11,7 @@ BillRow.propTypes = {
 export function BillRow({ title, value, color }: BillRowProps) {
   return (
     <>
-      <div className="overviewBillsRow" data-testid="bill-row">
+      <div className={`overviewBillsRow ${color}`} data-testid="bill-row">
         <label className="overviewBillsRowTitle">{title}</label>
         <label className="overviewBillsRowValue">{value}</label>
       </div>

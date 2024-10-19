@@ -1,0 +1,42 @@
+.valueBox {
+  display: flex;
+  flex-direction: row;
+  column-gap: 16px;
+}
+
+.valueBoxBorder {
+  border-radius: 8px;
+  height: 100%;
+  width: 4px;
+}
+.valueBoxBorder.beige {
+  background-color: var(--beige);
+}
+.valueBoxBorder.dark-green {
+  background-color: var(--dark-green);
+}
+.valueBoxBorder.dark-grey {
+  background-color: var(--dark-grey);
+}
+.valueBoxBorder.light-blue {
+  background-color: var(--light-blue);
+}
+
+.valueBoxContent {
+  display: flex;
+  flex-direction: column;
+  row-gap: 4px;
+}
+
+.valueBoxContentTitle {
+  margin: 2px 0;
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--text-grey);
+}
+
+.valueBoxContentValue {
+  margin: 2px 0;
+  font-size: 14px;
+  font-weight: 700;
+}

@@ -18,6 +18,14 @@ describe('OverviewBills', () => {
     expect(reactComponent).toBeInTheDocument();
   });
 
+  it('renders div overviewBillsContent', () => {
+    const { container } = render(<OverviewBills />);
+
+    const htmlElement = container.querySelector('.overviewBillsContent');
+
+    expect(htmlElement).toBeInTheDocument();
+  });
+
   it('renders react component BillRow 3 times', () => {
     render(<OverviewBills />);
 

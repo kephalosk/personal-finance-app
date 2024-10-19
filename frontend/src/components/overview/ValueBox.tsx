@@ -12,8 +12,11 @@ export function ValueBox({ title, value, color }: ValueBoxProps) {
   return (
     <>
       <div className="valueBox" data-testid="value-box">
-        <label className="valueBoxTitle">{title}</label>
-        <label className="valueBoxValue">${value}</label>
+        <div className={`valueBoxBorder ${color}`} data-testid="value-box"></div>
+        <div className="valueBoxContent" data-testid="value-box">
+          <label className="valueBoxContentTitle">{title}</label>
+          <label className="valueBoxContentValue">${value}</label>
+        </div>
       </div>
     </>
   );

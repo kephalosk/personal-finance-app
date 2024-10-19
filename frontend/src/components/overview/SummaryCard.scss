@@ -1,0 +1,30 @@
+.overviewSummaryCard {
+  border-radius: 12px;
+  background-color: var(--component-background-bright);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 12px;
+}
+.overviewSummaryCard.inverted {
+  background-color: var(--component-background-dark);
+}
+
+.overviewSummaryCardTitle {
+  margin: 5px 0;
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--text-grey);
+}
+.overviewSummaryCardTitle.inverted {
+  color: var(--text-white);
+}
+
+.overviewSummaryCardValue {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+.overviewSummaryCardValue.inverted {
+  color: var(--text-white);
+}

@@ -10,6 +10,22 @@ describe('BudgetsDiagram', () => {
     expect(htmlElement).toBeInTheDocument();
   });
 
+  it('renders div overviewBudgetsDiagramCircleBig', () => {
+    const { container } = render(<BudgetsDiagram />);
+
+    const htmlElement = container.querySelector('.overviewBudgetsDiagramCircleBig');
+
+    expect(htmlElement).toBeInTheDocument();
+  });
+
+  it('renders div overviewBudgetsDiagramCircleSmall', () => {
+    const { container } = render(<BudgetsDiagram />);
+
+    const htmlElement = container.querySelector('.overviewBudgetsDiagramCircleSmall');
+
+    expect(htmlElement).toBeInTheDocument();
+  });
+
   it('renders label overviewBudgetsDiagramSpend', () => {
     const { container } = render(<BudgetsDiagram />);
 
