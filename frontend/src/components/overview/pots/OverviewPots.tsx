@@ -1,6 +1,6 @@
 import './OverviewPots.scss';
-import { OverviewHeader } from './OverviewHeader';
-import { ValueBox } from './ValueBox';
+import { OverviewHeader } from '../OverviewHeader';
+import { ValueBox } from '../ValueBox';
 import { PotsSummary } from './PotsSummary';
 
 export function OverviewPots() {

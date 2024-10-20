@@ -1,5 +1,5 @@
 import './OverviewBills.scss';
-import { OverviewHeader } from './OverviewHeader';
+import { OverviewHeader } from '../OverviewHeader';
 import { BillRow } from './BillRow';
 
 export function OverviewBills() {

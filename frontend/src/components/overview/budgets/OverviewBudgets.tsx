@@ -1,6 +1,6 @@
 import './OverviewBudgets.scss';
-import { OverviewHeader } from './OverviewHeader';
-import { ValueBox } from './ValueBox';
+import { OverviewHeader } from '../OverviewHeader';
+import { ValueBox } from '../ValueBox';
 import { BudgetsDiagram } from './BudgetsDiagram';
 
 export function OverviewBudgets() {

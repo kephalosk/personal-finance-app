@@ -1,9 +1,9 @@
 import './OverviewPage.scss';
-import { OverviewSummary } from '../components/overview/OverviewSummary';
-import { OverviewPots } from '../components/overview/OverviewPots';
-import { OverviewTransactions } from '../components/overview/OverviewTransactions';
-import { OverviewBudgets } from '../components/overview/OverviewBudgets';
-import { OverviewBills } from '../components/overview/OverviewBills';
+import { OverviewSummary } from '../components/overview/summary/OverviewSummary';
+import { OverviewPots } from '../components/overview/pots/OverviewPots';
+import { OverviewTransactions } from '../components/overview/transactions/OverviewTransactions';
+import { OverviewBudgets } from '../components/overview/budgets/OverviewBudgets';
+import { OverviewBills } from '../components/overview/bills/OverviewBills';
 
 export function OverviewPage() {
   return (
