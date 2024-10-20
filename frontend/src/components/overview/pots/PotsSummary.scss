@@ -1,0 +1,32 @@
+.overviewPotsSummary {
+  border-radius: 12px;
+  background-color: var(--page-background);
+  padding: 16px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  column-gap: 16px;
+}
+
+.overviewPotsSummaryContent {
+  display: flex;
+  flex-direction: column;
+  row-gap: 11px;
+}
+
+.overviewPotsSummaryContentTitle {
+  font-weight: 300;
+  color: var(--text-grey);
+}
+
+.overviewPotsSummaryContentValue {
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+.overviewPotsSummaryIcon {
+  margin: 0 5px;
+  height: 40px;
+  width: auto;
+}

@@ -1,0 +1,29 @@
+h1 {
+  margin: 9px 0;
+  font-size: 30px;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+.overviewPage {
+  padding: 32px 40px;
+  width: 100%;
+}
+
+.overviewPageDetails {
+  display: grid;
+  grid-template-columns: calc(60% - 12px) calc(40% - 12px);
+  column-gap: 24px;
+}
+
+.overviewPageDetailsLeft {
+  display: grid;
+  grid-template-rows: repeat(2,auto);
+  row-gap: 24px;
+}
+
+.overviewPageDetailsRight {
+  display: grid;
+  grid-template-rows: fit-content(100%) auto;
+  row-gap: 24px;
+}

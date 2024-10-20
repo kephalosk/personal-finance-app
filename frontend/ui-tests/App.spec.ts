@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { ProjectName } from '../src/Constants/ProjectName';
+import { ProjectName } from '../src/constants/ProjectName';
 
 test('page title', async ({ page }) => {
   await page.goto('http://localhost:5173/');

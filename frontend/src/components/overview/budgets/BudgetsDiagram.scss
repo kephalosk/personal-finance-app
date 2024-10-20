@@ -1,0 +1,66 @@
+$size: 240px; // Größe des Diagramms
+
+.overviewBudgetsDiagram {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.overviewBudgetsDiagramCircleBig {
+  width: $size;
+  height: $size;
+  border-radius: 50%;
+  background: conic-gradient(
+                  var(--dark-green, #FFFFFF) 0deg var(--angle1, 0deg),
+                  var(--light-blue, #FFFFFF) var(--angle1, 0deg) var(--angle2, 0deg),
+                  var(--beige, #FFFFFF) var(--angle2, 0deg) var(--angle3, 0deg),
+                  var(--dark-grey, #FFFFFF) var(--angle3, 0deg) 360deg
+  );
+  display: flex;
+  flex-direction: column;
+  row-gap: 8px;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+
+.overviewBudgetsDiagramCircleSmall {
+  width: 80%;
+  height: 80%;
+  border-radius: 50%;
+  background: conic-gradient(
+                  var(--dark-green-lightened) 0deg var(--angle1),
+                  var(--light-blue-lightened) var(--angle1) var(--angle2),
+                  var(--beige-lightened) var(--angle2) var(--angle3),
+                  var(--dark-grey-lightened) var(--angle3) 360deg
+  );
+  display: flex;
+  flex-direction: column;
+  row-gap: 8px;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+.overviewBudgetsDiagramCircleSmall::before {
+  content: "";
+  width: 85%; // Innerer Kreis für Donut-Effekt
+  height: 85%;
+  background-color: #fff; // Farbe des inneren Kreises
+  border-radius: 50%;
+  position: absolute;
+  z-index: 1;
+}
+
+.overviewBudgetsDiagramSpend {
+  font-size: 32px;
+  font-weight: 700;
+  z-index: 2;
+  color: var(--text-dark);
+}
+
+.overviewBudgetsDiagramTotal {
+  font-size: 12px;
+  z-index: 2;
+  color: var(--text-grey);
+}
