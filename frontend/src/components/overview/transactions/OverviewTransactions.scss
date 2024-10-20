@@ -1,0 +1,16 @@
+hr {
+  margin: 20px 0;
+  border: 0;
+  background-color: var(--horizontal-line);
+  height: 1px;
+  width: 100%;
+}
+
+.overviewTransactions {
+  border-radius: 12px;
+  background-color: var(--component-background-bright);
+  padding: 32px;
+  display: grid;
+  grid-template-rows: auto auto;
+  row-gap: 32px;
+}

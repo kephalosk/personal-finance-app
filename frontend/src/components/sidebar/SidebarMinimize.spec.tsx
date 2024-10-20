@@ -1,6 +1,8 @@
 import { render, screen } from '@testing-library/react';
 import { SidebarMinimize } from './SidebarMinimize';
-import { SidebarMinimizeProps } from '../Constants/SidebarMinimizeProps';
+import { SidebarMinimizeProps } from '../../constants/SidebarMinimizeProps';
+import { MemoryRouter } from 'react-router-dom';
+import React from 'react';
 
 describe('SidebarMinimize', () => {
   it('has the correct name of SidebarMinimize', () => {
@@ -19,13 +21,17 @@ describe('SidebarMinimize', () => {
     expect(imgElement).toHaveAttribute('src', SidebarMinimizeProps.imgSrc);
   });
 
-  it('passes the correct class of SidebarMinimize', () => {
-    const { container } = render(<SidebarMinimize />);
-
-    const htmlElement: HTMLElement | null = container.querySelector(
-      `.${SidebarMinimizeProps.className}`
+  it('does not render a link for SidebarMinimize', () => {
+    const { container } = render(
+      <MemoryRouter>
+        <SidebarMinimize />
+      </MemoryRouter>
     );
 
-    expect(htmlElement).toBeInTheDocument();
+    const linkElement = container.querySelector('.link');
+    const divElement = container.querySelector('.div');
+
+    expect(linkElement).not.toBeInTheDocument();
+    expect(divElement).toBeInTheDocument();
   });
 });

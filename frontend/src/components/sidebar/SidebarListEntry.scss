@@ -1,15 +1,9 @@
-label {
-  margin-left: 16px;
-  font-weight: 600;
-  color: var(--sidebar-entry-text-default);
-  cursor: pointer;
-}
-
 .entryRow {
   border-radius: 0 15px 15px 0;
   padding: 18px 0 18px 32px;
   align-items: center;
   display: flex;
+  text-decoration: none;
   cursor: pointer;
 }
 .entryRow:hover {
@@ -21,7 +15,7 @@ label {
     color: var(--sidebar-title);
   }
 }
-.entryRow:focus {
+.entryRow.active {
   border-left: 4px solid var(--sidebar-entry-icon-selected);
   background-color: var(--sidebar-entry-selected-background);
 
@@ -32,4 +26,11 @@ label {
   label {
     color: var(--sidebar-entry-text-selected);
   }
+}
+
+.entryRowLabel {
+  margin-left: 16px;
+  font-weight: 600;
+  color: var(--sidebar-entry-text-default);
+  cursor: pointer;
 }

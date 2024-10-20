@@ -1,0 +1,15 @@
+.overviewBills {
+  border-radius: 12px;
+  background-color: var(--component-background-bright);
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 32px;
+}
+
+.overviewBillsContent {
+  height: 100%;
+  display: grid;
+  grid-template-rows: repeat(3,1fr);
+  row-gap: 12px;
+}
