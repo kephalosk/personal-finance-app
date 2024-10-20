@@ -4,6 +4,7 @@ import { OverviewPots } from '../components/overview/pots/OverviewPots';
 import { OverviewTransactions } from '../components/overview/transactions/OverviewTransactions';
 import { OverviewBudgets } from '../components/overview/budgets/OverviewBudgets';
 import { OverviewBills } from '../components/overview/bills/OverviewBills';
+import React from 'react';
 
 export function OverviewPage() {
   return (

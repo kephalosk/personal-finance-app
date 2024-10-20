@@ -16,6 +16,7 @@ export function Sidebar() {
             name={entry.name}
             imgSrc={entry.imgSrc}
             imgAlt={entry.imgAlt}
+            linkTarget={entry.linkTarget}
           />
         ))}
       </div>

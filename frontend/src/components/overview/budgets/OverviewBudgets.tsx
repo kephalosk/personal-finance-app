@@ -7,7 +7,7 @@ export function OverviewBudgets() {
   return (
     <>
       <div className="overviewBudgets" data-testid="overview-budgets">
-        <OverviewHeader title="Budgets" linkText="See Details" linkTarget="//" />
+        <OverviewHeader title="Budgets" linkText="See Details" linkTarget="/budgets" />
         <div className="overviewBudgetsContent">
           <BudgetsDiagram />
           <div className="overviewBudgetsValues">

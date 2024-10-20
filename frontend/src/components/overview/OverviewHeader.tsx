@@ -1,6 +1,7 @@
 import './OverviewHeader.scss';
 import PropTypes from 'prop-types';
 import { OverviewHeaderProps } from '../../types/OverviewHeaderProps';
+import { Link } from 'react-router-dom';
 
 OverviewHeader.propTypes = {
   title: PropTypes.string.isRequired,
@@ -13,7 +14,7 @@ export function OverviewHeader({ title, linkText, linkTarget }: OverviewHeaderPr
     <>
       <div className="overviewHeader" data-testid="overview-header">
         <h2 className="overviewHeaderTitle">{title}</h2>
-        <a className="overviewHeaderLink" href={linkTarget}>
+        <Link to={linkTarget} className="overviewHeaderLink">
           {linkText}
           <svg
             width="5"
@@ -27,7 +28,7 @@ export function OverviewHeader({ title, linkText, linkTarget }: OverviewHeaderPr
               fill="#696868"
             />
           </svg>
-        </a>
+        </Link>
       </div>
     </>
   );

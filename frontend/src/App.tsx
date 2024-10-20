@@ -8,8 +8,15 @@ import { BillsPage } from './pages/BillsPage';
 import { PotsPage } from './pages/PotsPage';
 import { BudgetsPage } from './pages/BudgetsPage';
 import { TransactionsPage } from './pages/TransactionsPage';
+import PropTypes from 'prop-types';
+import { AppProps } from './types/AppProps';
 
-function App({ Router = BrowserRouter, initialEntries = ['/'] }) {
+App.propTypes = {
+  Router: PropTypes.elementType,
+  initialEntries: PropTypes.arrayOf(PropTypes.string),
+};
+
+function App({ Router = BrowserRouter, initialEntries = ['/'] }: AppProps) {
   const routes = (
     <Routes>
       <Route path="/" element={<OverviewPage />} />
@@ -23,17 +30,20 @@ function App({ Router = BrowserRouter, initialEntries = ['/'] }) {
 
   const router =
     Router === MemoryRouter ? (
-      <MemoryRouter initialEntries={initialEntries}>{routes}</MemoryRouter>
+      <MemoryRouter initialEntries={initialEntries}>
+        <Sidebar />
+        <section className="content">{routes}</section>
+      </MemoryRouter>
     ) : (
-      <Router>{routes}</Router>
+      <Router>
+        <Sidebar />
+        <section className="content">{routes}</section>
+      </Router>
     );
 
   return (
     <>
-      <div className="webapp">
-        <Sidebar />
-        <section className="content">{router}</section>
-      </div>
+      <div className="webapp">{router}</div>
     </>
   );
 }

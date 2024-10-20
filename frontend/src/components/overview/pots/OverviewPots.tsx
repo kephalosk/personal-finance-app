@@ -7,7 +7,7 @@ export function OverviewPots() {
   return (
     <>
       <div className="overviewPots" data-testid="overview-pots">
-        <OverviewHeader title="Pots" linkText="See Details" linkTarget="//" />
+        <OverviewHeader title="Pots" linkText="See Details" linkTarget="/pots" />
         <div className="overviewPotsContent">
           <PotsSummary />
           <div className="overviewPotsValues">

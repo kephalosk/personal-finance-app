@@ -6,7 +6,7 @@ export function OverviewBills() {
   return (
     <>
       <div className="overviewBills" data-testid="overview-bills">
-        <OverviewHeader title="Recurring Bills" linkText="See Details" linkTarget="//" />
+        <OverviewHeader title="Recurring Bills" linkText="See Details" linkTarget="/bills" />
         <div className="overviewBillsContent">
           <BillRow title="Paid Bills" value="$190.00" color="dark-green" />
           <BillRow title="Total Upcoming" value="$194.98" color="beige" />

@@ -6,7 +6,7 @@ export function OverviewTransactions() {
   return (
     <>
       <div className="overviewTransactions" data-testid="overview-transactions">
-        <OverviewHeader title="Transactions" linkText="View All" linkTarget="//" />
+        <OverviewHeader title="Transactions" linkText="View All" linkTarget="/transactions" />
         <div className="overviewTransactionsContent">
           <TransactionRow
             name="Emma Richardsen"
