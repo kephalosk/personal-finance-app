@@ -15,7 +15,7 @@
     color: var(--sidebar-title);
   }
 }
-.entryRow:focus {
+.entryRow.active {
   border-left: 4px solid var(--sidebar-entry-icon-selected);
   background-color: var(--sidebar-entry-selected-background);
 

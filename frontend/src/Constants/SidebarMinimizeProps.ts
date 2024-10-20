@@ -5,4 +5,5 @@ export const SidebarMinimizeProps: SidebarListEntryProps = {
   imgSrc: './src/assets/images/icon-minimize-menu.svg',
   imgAlt: 'minimize icon',
   className: 'sidebarMinimize',
+  linkTarget: '/',
 };

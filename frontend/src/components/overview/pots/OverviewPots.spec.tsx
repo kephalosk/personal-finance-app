@@ -1,9 +1,14 @@
 import { render, screen } from '@testing-library/react';
 import { OverviewPots } from './OverviewPots';
+import { MemoryRouter } from 'react-router-dom';
 
 describe('OverviewPots', () => {
   it('renders div overviewPots', () => {
-    const { container } = render(<OverviewPots />);
+    const { container } = render(
+      <MemoryRouter>
+        <OverviewPots />
+      </MemoryRouter>
+    );
 
     const htmlElement = container.querySelector('.overviewPots');
 
@@ -11,7 +16,11 @@ describe('OverviewPots', () => {
   });
 
   it('renders react component OverviewHeader', () => {
-    render(<OverviewPots />);
+    render(
+      <MemoryRouter>
+        <OverviewPots />
+      </MemoryRouter>
+    );
 
     const reactComponent = screen.getByTestId('overview-header');
 
@@ -19,7 +28,11 @@ describe('OverviewPots', () => {
   });
 
   it('renders div overviewPotsContent', () => {
-    const { container } = render(<OverviewPots />);
+    const { container } = render(
+      <MemoryRouter>
+        <OverviewPots />
+      </MemoryRouter>
+    );
 
     const htmlElement = container.querySelector('.overviewPotsContent');
 
@@ -27,7 +40,11 @@ describe('OverviewPots', () => {
   });
 
   it('renders react component PotsSummary', () => {
-    render(<OverviewPots />);
+    render(
+      <MemoryRouter>
+        <OverviewPots />
+      </MemoryRouter>
+    );
 
     const reactComponent = screen.getByTestId('pots-summary');
 
@@ -35,7 +52,11 @@ describe('OverviewPots', () => {
   });
 
   it('renders div overviewPotsValues', () => {
-    const { container } = render(<OverviewPots />);
+    const { container } = render(
+      <MemoryRouter>
+        <OverviewPots />
+      </MemoryRouter>
+    );
 
     const htmlElement = container.querySelector('.overviewPotsValues');
 
@@ -43,7 +64,11 @@ describe('OverviewPots', () => {
   });
 
   it('renders div overviewPotsValuesRow', () => {
-    const { container } = render(<OverviewPots />);
+    const { container } = render(
+      <MemoryRouter>
+        <OverviewPots />
+      </MemoryRouter>
+    );
 
     const htmlElement = container.querySelector('.overviewPotsValuesRow');
 
@@ -51,7 +76,11 @@ describe('OverviewPots', () => {
   });
 
   it('renders react component ValueBox 4 times', () => {
-    render(<OverviewPots />);
+    render(
+      <MemoryRouter>
+        <OverviewPots />
+      </MemoryRouter>
+    );
 
     const reactComponents = screen.getAllByTestId('value-box');
 

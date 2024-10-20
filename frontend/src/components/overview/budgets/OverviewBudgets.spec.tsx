@@ -1,9 +1,14 @@
 import { render, screen } from '@testing-library/react';
 import { OverviewBudgets } from './OverviewBudgets';
+import { MemoryRouter } from 'react-router-dom';
 
 describe('OverviewBudgets', () => {
   it('renders div overviewBudgets', () => {
-    const { container } = render(<OverviewBudgets />);
+    const { container } = render(
+      <MemoryRouter>
+        <OverviewBudgets />
+      </MemoryRouter>
+    );
 
     const htmlElement = container.querySelector('.overviewBudgets');
 
@@ -11,7 +16,11 @@ describe('OverviewBudgets', () => {
   });
 
   it('renders react component OverviewHeader', () => {
-    render(<OverviewBudgets />);
+    render(
+      <MemoryRouter>
+        <OverviewBudgets />
+      </MemoryRouter>
+    );
 
     const reactComponent = screen.getByTestId('overview-header');
 
@@ -19,7 +28,11 @@ describe('OverviewBudgets', () => {
   });
 
   it('renders div overviewBudgetsContent', () => {
-    const { container } = render(<OverviewBudgets />);
+    const { container } = render(
+      <MemoryRouter>
+        <OverviewBudgets />
+      </MemoryRouter>
+    );
 
     const htmlElement = container.querySelector('.overviewBudgetsContent');
 
@@ -27,7 +40,11 @@ describe('OverviewBudgets', () => {
   });
 
   it('renders react component BudgetsDiagram', () => {
-    render(<OverviewBudgets />);
+    render(
+      <MemoryRouter>
+        <OverviewBudgets />
+      </MemoryRouter>
+    );
 
     const reactComponent = screen.getByTestId('budgets-diagram');
 
@@ -35,7 +52,11 @@ describe('OverviewBudgets', () => {
   });
 
   it('renders div overviewBudgetsValues', () => {
-    const { container } = render(<OverviewBudgets />);
+    const { container } = render(
+      <MemoryRouter>
+        <OverviewBudgets />
+      </MemoryRouter>
+    );
 
     const htmlElement = container.querySelector('.overviewBudgetsValues');
 
@@ -43,7 +64,11 @@ describe('OverviewBudgets', () => {
   });
 
   it('renders react component ValueBox 4 times', () => {
-    render(<OverviewBudgets />);
+    render(
+      <MemoryRouter>
+        <OverviewBudgets />
+      </MemoryRouter>
+    );
 
     const reactComponents = screen.getAllByTestId('value-box');
 

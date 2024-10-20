@@ -3,10 +3,48 @@ import { render, screen } from '@testing-library/react';
 import { ProjectName } from '../../constants/ProjectName';
 import { SidebarPages } from '../../constants/SidebarPages';
 import { SidebarMinimizeProps } from '../../constants/SidebarMinimizeProps';
+import { MemoryRouter, useLocation } from 'react-router-dom';
+import React from 'react';
+
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useLocation: jest.fn(),
+}));
+
+function initializeComponent() {
+  (useLocation as jest.Mock).mockReturnValue({
+    pathname: '/',
+  });
+  render(
+    <MemoryRouter>
+      <Sidebar />
+    </MemoryRouter>
+  );
+}
+
+function getInitializedContainer() {
+  (useLocation as jest.Mock).mockReturnValue({
+    pathname: '/',
+  });
+  const { container } = render(
+    <MemoryRouter>
+      <Sidebar />
+    </MemoryRouter>
+  );
+  return container;
+}
 
 describe('Sidebar', () => {
+  it('renders section sidebar', () => {
+    const container = getInitializedContainer();
+
+    const htmlElement = container.querySelector('.sidebar');
+
+    expect(htmlElement).toBeInTheDocument();
+  });
+
   it('renders the project name', () => {
-    render(<Sidebar />);
+    initializeComponent();
 
     const title: HTMLElement = screen.getByText(`${ProjectName}`);
 
@@ -14,7 +52,7 @@ describe('Sidebar', () => {
   });
 
   it('renders all the SidebarPages', () => {
-    render(<Sidebar />);
+    initializeComponent();
 
     SidebarPages.forEach((entry) => {
       const sidebarPage: HTMLElement = screen.getByText(entry.name);
@@ -24,7 +62,7 @@ describe('Sidebar', () => {
   });
 
   it('renders the SidebarMinimize option', () => {
-    render(<Sidebar />);
+    initializeComponent();
 
     const sidebarMinimize: HTMLElement = screen.getByText(SidebarMinimizeProps.name);
 

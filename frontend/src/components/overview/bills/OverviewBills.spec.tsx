@@ -1,9 +1,14 @@
 import { render, screen } from '@testing-library/react';
 import { OverviewBills } from './OverviewBills';
+import { MemoryRouter } from 'react-router-dom';
 
 describe('OverviewBills', () => {
   it('renders div overviewBills', () => {
-    const { container } = render(<OverviewBills />);
+    const { container } = render(
+      <MemoryRouter>
+        <OverviewBills />
+      </MemoryRouter>
+    );
 
     const htmlElement = container.querySelector('.overviewBills');
 
@@ -11,7 +16,11 @@ describe('OverviewBills', () => {
   });
 
   it('renders react component OverviewHeader', () => {
-    render(<OverviewBills />);
+    render(
+      <MemoryRouter>
+        <OverviewBills />
+      </MemoryRouter>
+    );
 
     const reactComponent = screen.getByTestId('overview-header');
 
@@ -19,7 +28,11 @@ describe('OverviewBills', () => {
   });
 
   it('renders div overviewBillsContent', () => {
-    const { container } = render(<OverviewBills />);
+    const { container } = render(
+      <MemoryRouter>
+        <OverviewBills />
+      </MemoryRouter>
+    );
 
     const htmlElement = container.querySelector('.overviewBillsContent');
 
@@ -27,7 +40,11 @@ describe('OverviewBills', () => {
   });
 
   it('renders react component BillRow 3 times', () => {
-    render(<OverviewBills />);
+    render(
+      <MemoryRouter>
+        <OverviewBills />
+      </MemoryRouter>
+    );
 
     const reactComponents = screen.getAllByTestId('bill-row');
 

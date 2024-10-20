@@ -1,5 +1,6 @@
 import { render } from '@testing-library/react';
 import { OverviewHeader } from './OverviewHeader';
+import { MemoryRouter } from 'react-router-dom';
 
 describe('OverviewHeader', () => {
   const title = 'testTitle';
@@ -13,7 +14,11 @@ describe('OverviewHeader', () => {
   };
 
   it('renders div overviewHeader', () => {
-    const { container } = render(<OverviewHeader {...testProps} />);
+    const { container } = render(
+      <MemoryRouter>
+        <OverviewHeader {...testProps} />
+      </MemoryRouter>
+    );
 
     const htmlElement = container.querySelector('.overviewHeader');
 
@@ -21,7 +26,11 @@ describe('OverviewHeader', () => {
   });
 
   it('renders headline h2 with passed title', () => {
-    const { container } = render(<OverviewHeader {...testProps} />);
+    const { container } = render(
+      <MemoryRouter>
+        <OverviewHeader {...testProps} />
+      </MemoryRouter>
+    );
 
     const htmlElement = container.querySelector('h2');
 
@@ -30,7 +39,11 @@ describe('OverviewHeader', () => {
   });
 
   it('renders link with passed linkText', () => {
-    const { container } = render(<OverviewHeader {...testProps} />);
+    const { container } = render(
+      <MemoryRouter>
+        <OverviewHeader {...testProps} />
+      </MemoryRouter>
+    );
 
     const htmlElement = container.querySelector('.overviewHeaderLink');
 
@@ -39,7 +52,11 @@ describe('OverviewHeader', () => {
   });
 
   it('renders the triangle svg for the link', () => {
-    const { container } = render(<OverviewHeader {...testProps} />);
+    const { container } = render(
+      <MemoryRouter>
+        <OverviewHeader {...testProps} />
+      </MemoryRouter>
+    );
 
     const htmlElement = container.querySelector('.overviewHeaderLink');
     const svgElement = htmlElement?.querySelector('svg');
@@ -48,10 +65,14 @@ describe('OverviewHeader', () => {
   });
 
   it('passes the prop linkTarget', () => {
-    const { getByRole } = render(<OverviewHeader {...testProps} />);
+    const { getByRole } = render(
+      <MemoryRouter>
+        <OverviewHeader {...testProps} />
+      </MemoryRouter>
+    );
 
     const linkElement = getByRole('link');
 
-    expect(linkElement).toHaveAttribute('href', linkTarget);
+    expect(linkElement).toHaveAttribute('href', `/${linkTarget}`);
   });
 });

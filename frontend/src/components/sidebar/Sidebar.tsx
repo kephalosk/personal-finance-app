@@ -4,8 +4,12 @@ import { SidebarPage } from '../../types/SidebarPage';
 import { SidebarListEntry } from './SidebarListEntry';
 import { SidebarMinimize } from './SidebarMinimize';
 import { ProjectName } from '../../constants/ProjectName';
+import { useLocation } from 'react-router-dom';
 
 export function Sidebar() {
+  const location = useLocation();
+  const currentPath = location.pathname;
+
   return (
     <section className="sidebar" data-testid="sidebar">
       <label className="sidebarTitle">{ProjectName}</label>
@@ -17,6 +21,7 @@ export function Sidebar() {
             imgSrc={entry.imgSrc}
             imgAlt={entry.imgAlt}
             linkTarget={entry.linkTarget}
+            isActive={currentPath === entry.linkTarget}
           />
         ))}
       </div>

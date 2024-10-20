@@ -1,9 +1,14 @@
 import { OverviewPage } from './OverviewPage';
 import { render, screen } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
 
 describe('OverviewPage', () => {
   it('renders div overviewPage', () => {
-    const { container } = render(<OverviewPage />);
+    const { container } = render(
+      <MemoryRouter>
+        <OverviewPage />
+      </MemoryRouter>
+    );
 
     const htmlElement = container.querySelector('.overviewPage');
 
@@ -11,7 +16,11 @@ describe('OverviewPage', () => {
   });
 
   it('renders headline h1 Overview', () => {
-    const { container } = render(<OverviewPage />);
+    const { container } = render(
+      <MemoryRouter>
+        <OverviewPage />
+      </MemoryRouter>
+    );
 
     const htmlElement = container.querySelector('h1');
 
@@ -20,7 +29,11 @@ describe('OverviewPage', () => {
   });
 
   it('renders react component OverviewSummary', () => {
-    render(<OverviewPage />);
+    render(
+      <MemoryRouter>
+        <OverviewPage />
+      </MemoryRouter>
+    );
 
     const reactComponent = screen.getByTestId('overview-summary');
 
@@ -28,7 +41,11 @@ describe('OverviewPage', () => {
   });
 
   it('renders div overviewPageDetails', () => {
-    const { container } = render(<OverviewPage />);
+    const { container } = render(
+      <MemoryRouter>
+        <OverviewPage />
+      </MemoryRouter>
+    );
 
     const htmlElement = container.querySelector('.overviewPageDetails');
 
@@ -36,7 +53,11 @@ describe('OverviewPage', () => {
   });
 
   it('renders div overviewPageDetailsLeft', () => {
-    const { container } = render(<OverviewPage />);
+    const { container } = render(
+      <MemoryRouter>
+        <OverviewPage />
+      </MemoryRouter>
+    );
 
     const htmlElement = container.querySelector('.overviewPageDetailsLeft');
 
@@ -44,7 +65,11 @@ describe('OverviewPage', () => {
   });
 
   it('renders react component OverviewPots', () => {
-    render(<OverviewPage />);
+    render(
+      <MemoryRouter>
+        <OverviewPage />
+      </MemoryRouter>
+    );
 
     const reactComponent = screen.getByTestId('overview-pots');
 
@@ -52,7 +77,11 @@ describe('OverviewPage', () => {
   });
 
   it('renders react component OverviewTransactions', () => {
-    render(<OverviewPage />);
+    render(
+      <MemoryRouter>
+        <OverviewPage />
+      </MemoryRouter>
+    );
 
     const reactComponent = screen.getByTestId('overview-transactions');
 
@@ -60,7 +89,11 @@ describe('OverviewPage', () => {
   });
 
   it('renders div overviewPageDetailsRight', () => {
-    const { container } = render(<OverviewPage />);
+    const { container } = render(
+      <MemoryRouter>
+        <OverviewPage />
+      </MemoryRouter>
+    );
 
     const htmlElement = container.querySelector('.overviewPageDetailsRight');
 
@@ -68,7 +101,11 @@ describe('OverviewPage', () => {
   });
 
   it('renders react component OverviewBudgets', () => {
-    render(<OverviewPage />);
+    render(
+      <MemoryRouter>
+        <OverviewPage />
+      </MemoryRouter>
+    );
 
     const reactComponent = screen.getByTestId('overview-budgets');
 
@@ -76,7 +113,11 @@ describe('OverviewPage', () => {
   });
 
   it('renders react component OverviewBills', () => {
-    render(<OverviewPage />);
+    render(
+      <MemoryRouter>
+        <OverviewPage />
+      </MemoryRouter>
+    );
 
     const reactComponent = screen.getByTestId('overview-bills');
 

@@ -3,7 +3,7 @@ import { TransactionRow } from './TransactionRow';
 
 describe('TransactionRow', () => {
   const name: string = 'testName';
-  const value: string = 'testValue';
+  const value: number = 100;
   const date: string = 'testDate';
   const imgSrc: string = 'testImgSrc';
 
@@ -53,7 +53,7 @@ describe('TransactionRow', () => {
     const htmlElement = container.querySelector('.overviewTransactionRowInfoValue');
 
     expect(htmlElement).toBeInTheDocument();
-    expect(htmlElement).toHaveTextContent(value);
+    expect(htmlElement).toHaveTextContent(`+$${value}`);
   });
 
   it('renders label overviewTransactionRowInfoDate with passed date', () => {
