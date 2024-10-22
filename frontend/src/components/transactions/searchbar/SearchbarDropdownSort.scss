@@ -1,0 +1,21 @@
+.searchbarDropdownSort {
+  border-radius: 8px;
+  border: 1px solid var(--searchbar-grey);
+  padding: 12px 40px 12px 16px;
+  color: var(--text-dark);
+  appearance: none; /* Standard-Pfeil ausblenden */
+  -webkit-appearance: none; /* Für Webkit-basierte Browser wie Chrome und Safari */
+  -moz-appearance: none; /* Für Firefox */
+}
+
+.searchbarDropdownSortIcon {
+  height: 6px;
+  width: auto;
+  top: calc(50% - 3px);
+  left: calc(100% - 32px);
+  position: absolute;
+}
+
+.searchbarDropdownSortWrapper {
+  position: relative;
+}

@@ -5,7 +5,7 @@ export function SearchbarInput() {
     <>
       <div className="searchbarInputContainer">
         <div className="searchbarInputRelative">
-          <input className="searchbarInput" placeholder="Search transactions" />
+          <input className="searchbarInput" placeholder="Search transaction" />
           <img
             className="searchbarInputLense"
             alt="icon of search"

@@ -18,9 +18,9 @@ export function TransactionsPage() {
         <div className="transactionsDetails">
           <div className="transactionsSearchbar">
             <SearchbarInput />
-            <label className="searchbarLabelSort">Sort by</label>
+            <label className="searchbarLabel">Sort by</label>
             <SearchbarDropdownSort />
-            <label className="searchbarLabelCategory">Category</label>
+            <label className="searchbarLabel">Category</label>
             <SearchbarDropdownCategory />
           </div>
           <div className="transactionsTable">

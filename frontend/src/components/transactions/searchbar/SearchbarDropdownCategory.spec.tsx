@@ -1,8 +1,17 @@
 import { render } from '@testing-library/react';
 import React from 'react';
 import { SearchbarDropdownCategory } from './SearchbarDropdownCategory';
+import { SearchbarDropdownSort } from './SearchbarDropdownSort';
 
 describe('searchbarDropdownCategory', () => {
+  it('renders div searchbarDropdownCategoryWrapper', () => {
+    const { container } = render(<SearchbarDropdownCategory />);
+
+    const htmlElement = container.querySelector('.searchbarDropdownCategoryWrapper');
+
+    expect(htmlElement).toBeInTheDocument();
+  });
+
   it('renders select searchbarDropdownCategory', () => {
     const { container } = render(<SearchbarDropdownCategory />);
 

@@ -7,10 +7,17 @@ TableRow.propTypes = {
   imgSrc: PropTypes.string.isRequired,
   category: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
+  value: PropTypes.number.isRequired,
 };
 
 export function TableRow({ name, imgSrc, category, date, value }: TransactionsPageTableRowProps) {
+  const isPositive: boolean = value > 0;
+  const color = isPositive ? 'green' : 'dark';
+  const sign = isPositive ? '+' : '-';
+
+  const valueNeutral = isPositive ? value : value * -1;
+  const valueNeutralFormatted = valueNeutral.toFixed(2);
+
   return (
     <>
       <hr className="transactionsTableLine" />
@@ -26,7 +33,9 @@ export function TableRow({ name, imgSrc, category, date, value }: TransactionsPa
         </div>
         <label className="tableRowCategory">{category}</label>
         <label className="tableRowDate">{date}</label>
-        <label className="tableRowValue">{value}</label>
+        <label className={`tableRowValue ${color}`}>
+          {sign}${valueNeutralFormatted}
+        </label>
       </div>
     </>
   );

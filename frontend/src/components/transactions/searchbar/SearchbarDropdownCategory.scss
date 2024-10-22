@@ -1,0 +1,21 @@
+.searchbarDropdownCategory {
+  border-radius: 8px;
+  border: 1px solid var(--searchbar-grey);
+  padding: 12px 48px 12px 16px;
+  color: var(--text-dark);
+  appearance: none; /* Standard-Pfeil ausblenden */
+  -webkit-appearance: none; /* Für Webkit-basierte Browser wie Chrome und Safari */
+  -moz-appearance: none; /* Für Firefox */
+}
+
+.searchbarDropdownCategoryIcon {
+  height: 6px;
+  width: auto;
+  top: calc(50% - 3px);
+  left: calc(100% - 32px);
+  position: absolute;
+}
+
+.searchbarDropdownCategoryWrapper {
+  position: relative;
+}

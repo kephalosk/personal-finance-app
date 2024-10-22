@@ -3,6 +3,14 @@ import React from 'react';
 import { SearchbarDropdownSort } from './SearchbarDropdownSort';
 
 describe('SearchbarDropdownSort', () => {
+  it('renders div searchbarDropdownSortWrapper', () => {
+    const { container } = render(<SearchbarDropdownSort />);
+
+    const htmlElement = container.querySelector('.searchbarDropdownSortWrapper');
+
+    expect(htmlElement).toBeInTheDocument();
+  });
+
   it('renders select searchbarDropdownSort', () => {
     const { container } = render(<SearchbarDropdownSort />);
 

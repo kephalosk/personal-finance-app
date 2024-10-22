@@ -3,5 +3,5 @@ export interface TransactionsPageTableRowProps {
   imgSrc: string;
   category: string;
   date: string;
-  value: string;
+  value: number;
 }

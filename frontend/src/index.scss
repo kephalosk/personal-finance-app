@@ -43,8 +43,25 @@
   --light-blue-lightened: #A3DCE5;
 
   --horizontal-line: #F2F2F2;
+
+  --searchbar-grey: #98908B;
 }
 
 * {
   box-sizing: border-box;
+}
+
+h1 {
+  margin: 9px 0;
+  font-size: 30px;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+hr {
+  margin: 20px 0;
+  border: 0;
+  background-color: var(--horizontal-line);
+  height: 1px;
+  width: 100%;
 }

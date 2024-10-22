@@ -1,0 +1,44 @@
+.tableRowPartner {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.tableRowPartnerImage {
+  margin-right: 16px;
+  border-radius: 50%;
+  height: 40px;
+  width: auto;
+}
+
+.tableRowPartnerName {
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+.tableRowValue {
+  display: flex;
+  justify-content: flex-end;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+.tableRowValue.dark {
+  color: var(--text-dark);
+}
+.tableRowValue.green {
+  color: var(--text-green);
+}
+
+.transactionsTableLine {
+  margin: 12px 0;
+}
+
+.transactionsTableRow {
+  padding: 0 16px;
+  display: grid;
+  grid-template-columns: calc(48% - 32px) calc(19% - 32px) calc(15% - 32px) 18%;
+  column-gap: 32px;
+  align-items: center;
+  font-size: 13px;
+  color: var(--text-grey);
+}
