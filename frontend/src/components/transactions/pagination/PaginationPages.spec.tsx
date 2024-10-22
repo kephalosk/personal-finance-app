@@ -1,7 +1,10 @@
-import { render } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 import { PaginationPages } from './PaginationPages';
+import React from 'react';
 
 describe('PaginationPages', () => {
+  let mockOnClick: jest.Mock<() => void>;
+
   const indexMax = 10;
   const currentIndex = 5;
 
@@ -10,8 +13,12 @@ describe('PaginationPages', () => {
     currentIndex,
   };
 
+  beforeEach(() => {
+    mockOnClick = jest.fn();
+  });
+
   it('renders div paginationPages', () => {
-    const { container } = render(<PaginationPages {...testProps} />);
+    const { container } = render(<PaginationPages onPageClick={mockOnClick} {...testProps} />);
 
     const htmlElement = container.querySelector('.paginationPages');
 
@@ -19,7 +26,7 @@ describe('PaginationPages', () => {
   });
 
   it('renders buttons with prop indexMax times', () => {
-    const { container } = render(<PaginationPages {...testProps} />);
+    const { container } = render(<PaginationPages onPageClick={mockOnClick} {...testProps} />);
 
     const htmlElements = container.querySelectorAll('.paginationPagesButton');
 
@@ -27,7 +34,7 @@ describe('PaginationPages', () => {
   });
 
   it('renders buttons with correct number', () => {
-    const { container } = render(<PaginationPages {...testProps} />);
+    const { container } = render(<PaginationPages onPageClick={mockOnClick} {...testProps} />);
 
     const htmlElements = container.querySelectorAll('.paginationPagesButton');
 
@@ -37,7 +44,7 @@ describe('PaginationPages', () => {
   });
 
   it('sets active button with prop currentIndex', () => {
-    const { container } = render(<PaginationPages {...testProps} />);
+    const { container } = render(<PaginationPages onPageClick={mockOnClick} {...testProps} />);
 
     const htmlElements = container.querySelectorAll('.paginationPagesButton');
 
@@ -50,7 +57,7 @@ describe('PaginationPages', () => {
   });
 
   it('sets not active button with prop currentIndex', () => {
-    const { container } = render(<PaginationPages {...testProps} />);
+    const { container } = render(<PaginationPages onPageClick={mockOnClick} {...testProps} />);
 
     const htmlElements = container.querySelectorAll('.paginationPagesButton');
 
@@ -59,6 +66,16 @@ describe('PaginationPages', () => {
       if (index !== currentIndex) {
         expect(button).toHaveClass('isNotActive');
       }
+    });
+  });
+
+  it('calls onClick with correct index when button is clicked', () => {
+    const { container } = render(<PaginationPages onPageClick={mockOnClick} {...testProps} />);
+
+    const buttons = container.querySelectorAll('.paginationPagesButton');
+    buttons.forEach((button, index) => {
+      fireEvent.click(buttons[index]!);
+      expect(mockOnClick).toHaveBeenLastCalledWith(index);
     });
   });
 });

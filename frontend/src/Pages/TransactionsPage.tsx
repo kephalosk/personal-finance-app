@@ -12,15 +12,37 @@ import { TransactionsPageTableRowProps } from '../types/TransactionsPageTableRow
 import { EPTransaction } from '../types/EPTransaction';
 import { getTransactions } from '../globals/services/TransactionService';
 import { splitIntoChunks } from '../globals/utils/SplitIntoChunks';
+import { useState } from 'react';
 
 export function TransactionsPage() {
+  const [pageIndex, setPageIndex] = useState(0);
   const transactions: EPTransaction[] = getTransactions();
   const pageEntrySize: number = 10;
   const transactionsPaged: EPTransaction[][] = splitIntoChunks(transactions, pageEntrySize);
-  const pageIndex = 0;
-  const isMaxIndex = !(pageIndex < transactionsPaged.length);
+  const isMaxIndex = pageIndex === transactionsPaged.length - 1;
 
   const currentIndexedTransactions = transactionsPaged.at(pageIndex) ?? [];
+
+  const handlePrevClick = () => {
+    if (pageIndex <= 0) {
+      return;
+    }
+    setPageIndex((prevIndex: number) => prevIndex - 1);
+  };
+
+  const handleNextClick = () => {
+    if (isMaxIndex) {
+      return;
+    }
+    setPageIndex((nextIndex: number) => nextIndex + 1);
+  };
+
+  const handlePageClick = (newIndex: number) => {
+    if (newIndex === pageIndex) {
+      return;
+    }
+    setPageIndex(newIndex);
+  };
 
   return (
     <>
@@ -48,9 +70,13 @@ export function TransactionsPage() {
             ))}
           </div>
           <div className="transactionsPagination">
-            <PaginationButtonPrev currentIndex={pageIndex} />
-            <PaginationPages indexMax={transactionsPaged.length} currentIndex={pageIndex} />
-            <PaginationButtonNext isMaxIndex={isMaxIndex} />
+            <PaginationButtonPrev onClick={handlePrevClick} currentIndex={pageIndex} />
+            <PaginationPages
+              onPageClick={handlePageClick}
+              indexMax={transactionsPaged.length}
+              currentIndex={pageIndex}
+            />
+            <PaginationButtonNext onClick={handleNextClick} isMaxIndex={isMaxIndex} />
           </div>
         </div>
       </div>

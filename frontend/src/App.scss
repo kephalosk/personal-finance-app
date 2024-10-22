@@ -1,6 +1,10 @@
+.content {
+  height: 100%;
+}
+
 .webapp {
   background-color: var(--page-background);
-  height: 100%;
+  height: calc(100vh - 12px);
   display: grid;
   grid-template-columns: 300px 1fr;
 }

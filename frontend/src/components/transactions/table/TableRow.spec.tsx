@@ -8,7 +8,7 @@ describe('TableRow', () => {
   const imgSrc: string = 'testImgSrc';
   const category: string = 'testCategory';
   const date: string = 'testDate';
-  const value: string = 'testValue';
+  const value: number = 100.21;
 
   const testProps: TransactionsPageTableRowProps = {
     name,
@@ -77,7 +77,7 @@ describe('TableRow', () => {
     const htmlElement = container.querySelector('.tableRowValue');
 
     expect(htmlElement).toBeInTheDocument();
-    expect(htmlElement).toHaveTextContent(value);
+    expect(htmlElement).toHaveTextContent(`+$${value}`);
   });
 
   it('passes prop imgSrc', () => {

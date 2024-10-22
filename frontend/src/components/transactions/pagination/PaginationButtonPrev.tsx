@@ -3,13 +3,15 @@ import PropTypes from 'prop-types';
 import { PaginationButtonPrevProps } from '../../../types/PaginationButtonPrevProps';
 
 PaginationButtonPrev.propTypes = {
+  onClick: PropTypes.func.isRequired,
   currentIndex: PropTypes.number.isRequired,
 };
 
-export function PaginationButtonPrev({ currentIndex }: PaginationButtonPrevProps) {
+export function PaginationButtonPrev({ onClick, currentIndex }: PaginationButtonPrevProps) {
   return (
     <>
       <button
+        onClick={onClick}
         className={`paginationButtonPrev ${currentIndex > 0 ? 'isEnabled' : 'isDisabled'}`}
         data-testid="pagination-button-prev"
       >

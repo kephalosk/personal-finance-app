@@ -5,6 +5,7 @@
 
 .transactionsPage {
   padding: 32px 40px;
+  height: 100%;
   display: grid;
   grid-template-rows: fit-content(100%) 1fr;
   row-gap: 24px;
@@ -14,6 +15,7 @@
   border-radius: 12px;
   background-color: var(--component-background-bright);
   padding: 32px;
+  height: 100%;
   display: grid;
   grid-template-rows: fit-content(100%) 1fr fit-content(100%);
   row-gap: 23px;
@@ -33,4 +35,8 @@
   align-items: center;
   font-size: 15px;
   color: var(--text-grey);
+}
+
+.transactionsTable {
+  height: 100%;
 }
