@@ -37,7 +37,7 @@
     <node id="n2">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
-          <y:Geometry height="46.265473587643214" width="1334.6578560561488" x="-264.93458517441974" y="1377.8171660197038"/>
+          <y:Geometry height="46.265473587643214" width="1430.9905990382754" x="-264.93458517441974" y="1377.8171660197038"/>
           <y:Fill hasColor="false" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="tl" textColor="#000000" verticalTextPosition="bottom" visible="true" width="39.23828125" x="4.0" xml:space="preserve" y="4.0">footer</y:NodeLabel>
@@ -448,7 +448,7 @@
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
           <y:Geometry height="85.46136803230007" width="1020.2868790409761" x="64.05017568522726" y="414.6461671895779"/>
-          <y:Fill color="#FFFFFF" transparent="false"/>
+          <y:Fill color="#99CCFF" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="tl" textColor="#000000" verticalTextPosition="bottom" visible="true" width="115.685546875" x="4.0" xml:space="preserve" y="4.0">table "tableHeader"</y:NodeLabel>
         </y:GenericNode>
@@ -458,7 +458,7 @@
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
           <y:Geometry height="37.06053502947714" width="172.65742552542906" x="89.10035137045452" y="440.2923343791558"/>
-          <y:Fill color="#FFFFFF" transparent="false"/>
+          <y:Fill color="#99CCFF" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="tl" textColor="#000000" verticalTextPosition="bottom" visible="true" width="152.0078125" x="4.0" xml:space="preserve" y="4.0">label "tableColumnName"</y:NodeLabel>
         </y:GenericNode>
@@ -468,7 +468,7 @@
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
           <y:Geometry height="37.06053502947714" width="180.43818970020743" x="328.38733341393504" y="440.2923343791558"/>
-          <y:Fill color="#FFFFFF" transparent="false"/>
+          <y:Fill color="#99CCFF" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="tl" textColor="#000000" verticalTextPosition="bottom" visible="true" width="170.763671875" x="4.0" xml:space="preserve" y="4.0">label "tableColumnCategory"</y:NodeLabel>
         </y:GenericNode>
@@ -478,7 +478,7 @@
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
           <y:Geometry height="37.06053502947714" width="159.48680622593463" x="575.4550796321939" y="440.2923343791558"/>
-          <y:Fill color="#FFFFFF" transparent="false"/>
+          <y:Fill color="#99CCFF" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="tl" textColor="#000000" verticalTextPosition="bottom" visible="true" width="145.416015625" x="4.0" xml:space="preserve" y="4.0">label "tableColumnDate"</y:NodeLabel>
         </y:GenericNode>
@@ -488,7 +488,7 @@
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
           <y:Geometry height="37.06053502947714" width="174.37047121670832" x="890.7304704553826" y="440.2923343791558"/>
-          <y:Fill color="#FFFFFF" transparent="false"/>
+          <y:Fill color="#99CCFF" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="tl" textColor="#000000" verticalTextPosition="bottom" visible="true" width="164.86328125" x="4.0" xml:space="preserve" y="4.0">label "tableColumnAmount"</y:NodeLabel>
         </y:GenericNode>
