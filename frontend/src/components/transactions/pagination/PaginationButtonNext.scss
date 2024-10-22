@@ -8,6 +8,22 @@
   align-items: center;
   color: var(--text-dark);
 }
+.paginationButtonNext.isEnabled:hover {
+  border: 1px solid var(--component-background-grey);
+  background-color: var(--component-background-grey);
+  color: var(--text-white);
+  cursor: pointer;
+
+  .paginationButtonNextCaret {
+    filter: invert(74%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(300%) contrast(100%);
+  }
+}
+.paginationButtonNext.isDisabled {
+  border: 1px solid var(--component-background-disabled);
+  background-color: var(--component-background-disabled);
+  color: var(--text-grey);
+  cursor: default;
+}
 
 .paginationButtonNextCaret {
   margin-left: 16px;

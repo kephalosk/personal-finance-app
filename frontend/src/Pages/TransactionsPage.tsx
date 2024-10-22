@@ -18,6 +18,7 @@ export function TransactionsPage() {
   const pageEntrySize: number = 10;
   const transactionsPaged: EPTransaction[][] = splitIntoChunks(transactions, pageEntrySize);
   const pageIndex = 0;
+  const isMaxIndex = !(pageIndex < transactionsPaged.length);
 
   const currentIndexedTransactions = transactionsPaged.at(pageIndex) ?? [];
 
@@ -47,9 +48,9 @@ export function TransactionsPage() {
             ))}
           </div>
           <div className="transactionsPagination">
-            <PaginationButtonPrev />
-            <PaginationPages />
-            <PaginationButtonNext />
+            <PaginationButtonPrev currentIndex={pageIndex} />
+            <PaginationPages indexMax={transactionsPaged.length} currentIndex={pageIndex} />
+            <PaginationButtonNext isMaxIndex={isMaxIndex} />
           </div>
         </div>
       </div>

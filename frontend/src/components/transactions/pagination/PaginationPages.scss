@@ -14,3 +14,16 @@
   align-items: center;
   color: var(--text-dark);
 }
+
+.paginationPagesButton.isActive {
+  border: 1px solid var(--component-background-dark);
+  background-color: var(--component-background-dark);
+  color: var(--text-white);
+}
+
+.paginationPagesButton.isNotActive:hover {
+  border: 1px solid var(--component-background-grey);
+  background-color: var(--component-background-grey);
+  color: var(--text-white);
+  cursor: pointer;
+}

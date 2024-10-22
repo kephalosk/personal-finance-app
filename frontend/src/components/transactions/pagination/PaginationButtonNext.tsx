@@ -1,9 +1,18 @@
 import './PaginationButtonNext.scss';
+import PropTypes from 'prop-types';
+import { PaginationButtonNextProps } from '../../../types/PaginationButtonNextProps';
 
-export function PaginationButtonNext() {
+PaginationButtonNext.propTypes = {
+  isMaxIndex: PropTypes.bool.isRequired,
+};
+
+export function PaginationButtonNext({ isMaxIndex }: PaginationButtonNextProps) {
   return (
     <>
-      <button className="paginationButtonNext" data-testid="pagination-button-next">
+      <button
+        className={`paginationButtonNext ${isMaxIndex ? 'isDisabled' : 'isEnabled'}`}
+        data-testid="pagination-button-next"
+      >
         Next
         <img
           className="paginationButtonNextCaret"

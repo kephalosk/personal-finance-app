@@ -1,14 +1,24 @@
 import './PaginationPages.scss';
+import PropTypes from 'prop-types';
+import { PaginationPagesProps } from '../../../types/PaginationPagesProps';
 
-export function PaginationPages() {
+PaginationPages.propTypes = {
+  indexMax: PropTypes.number.isRequired,
+  currentIndex: PropTypes.number.isRequired,
+};
+
+export function PaginationPages({ indexMax, currentIndex }: PaginationPagesProps) {
   return (
     <>
       <div className="paginationPages" data-testid="pagination-pages">
-        <button className="paginationPagesButton">1</button>
-        <button className="paginationPagesButton">2</button>
-        <button className="paginationPagesButton">3</button>
-        <button className="paginationPagesButton">4</button>
-        <button className="paginationPagesButton">5</button>
+        {Array.from({ length: indexMax }, (_, index) => (
+          <button
+            key={index}
+            className={`paginationPagesButton ${index === currentIndex ? 'isActive' : 'isNotActive'}`}
+          >
+            {index + 1}
+          </button>
+        ))}
       </div>
     </>
   );
