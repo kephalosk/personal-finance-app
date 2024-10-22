@@ -3,7 +3,7 @@ import './SearchbarDropdownCategory.scss';
 export function SearchbarDropdownCategory() {
   return (
     <>
-      <div className="searchbarDropdownCategoryWrapper">
+      <div className="searchbarDropdownCategoryWrapper" data-testid="searchbar-dropdown-category">
         <select
           className="searchbarDropdownCategory"
           value="selected"

@@ -3,7 +3,7 @@ import './SearchbarDropdownSort.scss';
 export function SearchbarDropdownSort() {
   return (
     <>
-      <div className="searchbarDropdownSortWrapper">
+      <div className="searchbarDropdownSortWrapper" data-testid="searchbar-dropdown-sort">
         <select className="searchbarDropdownSort" value="selected" id="options" onChange={() => {}}>
           <option className="latest" value="latest">
             Latest

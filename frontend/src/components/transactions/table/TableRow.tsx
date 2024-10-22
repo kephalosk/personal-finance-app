@@ -20,7 +20,7 @@ export function TableRow({ name, imgSrc, category, date, value }: TransactionsPa
 
   return (
     <>
-      <hr className="transactionsTableLine" />
+      <hr className="transactionsTableLine" data-testid="table-row" />
       <div className="transactionsTableRow">
         <div className="tableRowPartner">
           <img

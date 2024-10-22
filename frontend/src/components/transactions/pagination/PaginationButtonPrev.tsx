@@ -3,7 +3,7 @@ import './PaginationButtonPrev.scss';
 export function PaginationButtonPrev() {
   return (
     <>
-      <button className="paginationButtonPrev">
+      <button className="paginationButtonPrev" data-testid="pagination-button-prev">
         <img
           className="paginationButtonPrevCaret"
           alt="icon of caret left"

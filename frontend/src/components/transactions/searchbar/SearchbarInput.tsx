@@ -3,7 +3,7 @@ import './SearchbarInput.scss';
 export function SearchbarInput() {
   return (
     <>
-      <div className="searchbarInputContainer">
+      <div className="searchbarInputContainer" data-testid="searchbar-input">
         <div className="searchbarInputRelative">
           <input className="searchbarInput" placeholder="Search transaction" />
           <img

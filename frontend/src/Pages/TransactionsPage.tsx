@@ -19,7 +19,7 @@ export function TransactionsPage() {
   const transactionsPaged: EPTransaction[][] = splitIntoChunks(transactions, pageEntrySize);
   const pageIndex = 0;
 
-  const currentTransactions = transactionsPaged.at(pageIndex) ?? [];
+  const currentIndexedTransactions = transactionsPaged.at(pageIndex) ?? [];
 
   return (
     <>
@@ -28,14 +28,14 @@ export function TransactionsPage() {
         <div className="transactionsDetails">
           <div className="transactionsSearchbar">
             <SearchbarInput />
-            <label className="searchbarLabel">Sort by</label>
+            <label className="searchbarLabel sortBy">Sort by</label>
             <SearchbarDropdownSort />
-            <label className="searchbarLabel">Category</label>
+            <label className="searchbarLabel category">Category</label>
             <SearchbarDropdownCategory />
           </div>
           <div className="transactionsTable">
             <TableHeader />
-            {currentTransactions.map((entry: EPTransaction) => (
+            {currentIndexedTransactions.map((entry: EPTransaction) => (
               <TableRow
                 key={entry.name}
                 name={entry.name}

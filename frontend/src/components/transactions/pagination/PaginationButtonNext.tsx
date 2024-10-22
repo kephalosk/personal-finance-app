@@ -3,7 +3,7 @@ import './PaginationButtonNext.scss';
 export function PaginationButtonNext() {
   return (
     <>
-      <button className="paginationButtonNext">
+      <button className="paginationButtonNext" data-testid="pagination-button-next">
         Next
         <img
           className="paginationButtonNextCaret"
