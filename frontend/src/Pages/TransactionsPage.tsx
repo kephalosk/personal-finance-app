@@ -9,8 +9,18 @@ import { TableHeader } from '../components/transactions/table/TableHeader';
 import { TableRow } from '../components/transactions/table/TableRow';
 import { TransactionsPageEntries } from '../constants/TransactionsPageEntries';
 import { TransactionsPageTableRowProps } from '../types/TransactionsPageTableRowProps';
+import { EPTransaction } from '../types/EPTransaction';
+import { getTransactions } from '../globals/services/TransactionService';
+import { splitIntoChunks } from '../globals/utils/SplitIntoChunks';
 
 export function TransactionsPage() {
+  const transactions: EPTransaction[] = getTransactions();
+  const pageEntrySize: number = 10;
+  const transactionsPaged: EPTransaction[][] = splitIntoChunks(transactions, pageEntrySize);
+  const pageIndex = 0;
+
+  const currentTransactions = transactionsPaged.at(pageIndex) ?? [];
+
   return (
     <>
       <div className="transactionsPage" data-testid="transactions-page">
@@ -25,14 +35,14 @@ export function TransactionsPage() {
           </div>
           <div className="transactionsTable">
             <TableHeader />
-            {TransactionsPageEntries.map((entry: TransactionsPageTableRowProps) => (
+            {currentTransactions.map((entry: EPTransaction) => (
               <TableRow
                 key={entry.name}
                 name={entry.name}
-                imgSrc={entry.imgSrc}
+                imgSrc={entry.avatar}
                 category={entry.category}
                 date={entry.date}
-                value={entry.value}
+                value={entry.amount}
               />
             ))}
           </div>
