@@ -1,6 +1,7 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import { TransactionsPage } from './TransactionsPage';
 import React from 'react';
+import { convertSignedDollarStringToNumber } from '../globals/utils/ConvertSignedDollarStringToNumber';
 
 describe('TransactionsPage', () => {
   it('renders div transactionsPage', () => {
@@ -66,6 +67,110 @@ describe('TransactionsPage', () => {
       const reactComponent = screen.getByTestId('searchbar-dropdown-category');
 
       expect(reactComponent).toBeInTheDocument();
+    });
+
+    it('sorts the transactions from oldest to newest', () => {
+      render(<TransactionsPage />);
+      let tableRows = screen.getAllByTestId('table-row');
+      let secondDate = new Date(
+        tableRows[1].querySelector('.tableRowDate')!.textContent!
+      ).getTime();
+      let thirdDate = new Date(tableRows[2].querySelector('.tableRowDate')!.textContent!).getTime();
+      expect(secondDate - thirdDate > 0).toBe(true);
+
+      const selectElement = screen.getByTestId('searchbar-dropdown-sort').querySelector('select');
+      fireEvent.change(selectElement!, { target: { value: 'oldest' } });
+
+      tableRows = screen.getAllByTestId('table-row');
+      secondDate = new Date(tableRows[1].querySelector('.tableRowDate')!.textContent!).getTime();
+      thirdDate = new Date(tableRows[2].querySelector('.tableRowDate')!.textContent!).getTime();
+      expect(secondDate - thirdDate > 0).toBe(false);
+    });
+
+    it('sorts the transactions from newest to oldest', () => {
+      render(<TransactionsPage />);
+      let selectElement = screen.getByTestId('searchbar-dropdown-sort').querySelector('select');
+      fireEvent.change(selectElement!, { target: { value: 'oldest' } });
+      let tableRows = screen.getAllByTestId('table-row');
+      let secondDate = new Date(
+        tableRows[1].querySelector('.tableRowDate')!.textContent!
+      ).getTime();
+      let thirdDate = new Date(tableRows[2].querySelector('.tableRowDate')!.textContent!).getTime();
+      expect(secondDate - thirdDate > 0).toBe(false);
+
+      selectElement = screen.getByTestId('searchbar-dropdown-sort').querySelector('select');
+      fireEvent.change(selectElement!, { target: { value: 'latest' } });
+
+      tableRows = screen.getAllByTestId('table-row');
+      thirdDate = new Date(tableRows[2].querySelector('.tableRowDate')!.textContent!).getTime();
+      secondDate = new Date(tableRows[1].querySelector('.tableRowDate')!.textContent!).getTime();
+      expect(secondDate - thirdDate > 0).toBe(true);
+    });
+
+    it('sorts the transactions from A to Z', () => {
+      render(<TransactionsPage />);
+
+      const selectElement = screen.getByTestId('searchbar-dropdown-sort').querySelector('select');
+      fireEvent.change(selectElement!, { target: { value: 'atoz' } });
+
+      const tableRows = screen.getAllByTestId('table-row');
+      const secondName = tableRows[1].querySelector('.tableRowPartnerName')!.textContent!;
+      const thirdName = tableRows[2].querySelector('.tableRowPartnerName')!.textContent!;
+      expect(secondName.localeCompare(thirdName) < 0).toBe(true);
+    });
+
+    it('sorts the transactions from Z to A', () => {
+      render(<TransactionsPage />);
+
+      const selectElement = screen.getByTestId('searchbar-dropdown-sort').querySelector('select');
+      fireEvent.change(selectElement!, { target: { value: 'ztoa' } });
+
+      const tableRows = screen.getAllByTestId('table-row');
+      const secondName = tableRows[1].querySelector('.tableRowPartnerName')!.textContent!;
+      const thirdName = tableRows[2].querySelector('.tableRowPartnerName')!.textContent!;
+      expect(secondName.localeCompare(thirdName) > 0).toBe(true);
+    });
+
+    it('sorts the transactions from highest to lowest', () => {
+      render(<TransactionsPage />);
+
+      const selectElement = screen.getByTestId('searchbar-dropdown-sort').querySelector('select');
+      fireEvent.change(selectElement!, { target: { value: 'highest' } });
+
+      const tableRows = screen.getAllByTestId('table-row');
+      const thirdAmount = tableRows[2].querySelector('.tableRowValue')!.textContent!;
+      const thirdAmountValue = convertSignedDollarStringToNumber(thirdAmount);
+      const fourthAmount = tableRows[3].querySelector('.tableRowValue')!.textContent!;
+      const fourthAmountValue = convertSignedDollarStringToNumber(fourthAmount);
+      expect(thirdAmountValue - fourthAmountValue > 0).toBe(true);
+    });
+
+    it('sorts the transactions from lowest to highest', () => {
+      render(<TransactionsPage />);
+
+      const selectElement = screen.getByTestId('searchbar-dropdown-sort').querySelector('select');
+      fireEvent.change(selectElement!, { target: { value: 'lowest' } });
+
+      const tableRows = screen.getAllByTestId('table-row');
+      const fourthAmount = tableRows[3].querySelector('.tableRowValue')!.textContent!;
+      const fourthAmountValue = convertSignedDollarStringToNumber(fourthAmount);
+      const thirdAmount = tableRows[2].querySelector('.tableRowValue')!.textContent!;
+      const thirdAmountValue = convertSignedDollarStringToNumber(thirdAmount);
+      expect(thirdAmountValue - fourthAmountValue < 0).toBe(true);
+    });
+
+    it('resets the pageIndex after sorting the transactions', () => {
+      const { container } = render(<TransactionsPage />);
+      const buttons = container.querySelectorAll('.paginationPagesButton');
+      fireEvent.click(buttons[3]);
+      let activeButton = container.querySelector('.isActive');
+      expect(activeButton).toHaveTextContent('4');
+
+      const selectElement = screen.getByTestId('searchbar-dropdown-sort').querySelector('select');
+      fireEvent.change(selectElement!, { target: { value: 'ztoa' } });
+      activeButton = container.querySelector('.isActive');
+
+      expect(activeButton).toHaveTextContent('1');
     });
   });
 

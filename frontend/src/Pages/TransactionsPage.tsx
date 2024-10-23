@@ -18,7 +18,41 @@ export function TransactionsPage() {
   const [pageIndex, setPageIndex] = useState(0);
   const transactions: EPTransaction[] = getTransactions();
   const pageEntrySize: number = 10;
-  const transactionsPaged: EPTransaction[][] = splitIntoChunks(transactions, pageEntrySize);
+  const [sortedTransactions, setSortedTransactions] = useState(transactions);
+
+  const handleSortChange = (sortOption: string) => {
+    let sorted = [...transactions]; // Kopie der originalen Daten
+
+    switch (sortOption) {
+      case 'latest':
+        sorted.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+        break;
+      case 'oldest':
+        sorted.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+        break;
+      case 'atoz':
+        sorted.sort((a, b) => a.name.localeCompare(b.name));
+        break;
+      case 'ztoa':
+        sorted.sort((a, b) => b.name.localeCompare(a.name));
+        break;
+      case 'highest':
+        sorted.sort((a, b) => b.amount - a.amount);
+        break;
+      case 'lowest':
+        sorted.sort((a, b) => a.amount - b.amount);
+        break;
+      default:
+        break;
+    }
+
+    setSortedTransactions(sorted);
+
+    setPageIndex(0);
+  };
+
+  const transactionsPaged: EPTransaction[][] = splitIntoChunks(sortedTransactions, pageEntrySize);
+
   const isMaxIndex = pageIndex === transactionsPaged.length - 1;
 
   const currentIndexedTransactions = transactionsPaged.at(pageIndex) ?? [];
@@ -52,7 +86,7 @@ export function TransactionsPage() {
           <div className="transactionsSearchbar">
             <SearchbarInput />
             <label className="searchbarLabel sortBy">Sort by</label>
-            <SearchbarDropdownSort />
+            <SearchbarDropdownSort onSortChange={handleSortChange} />
             <label className="searchbarLabel category">Category</label>
             <SearchbarDropdownCategory />
           </div>
@@ -60,7 +94,7 @@ export function TransactionsPage() {
             <TableHeader />
             {currentIndexedTransactions.map((entry: EPTransaction) => (
               <TableRow
-                key={entry.name}
+                key={entry.date + entry.name}
                 name={entry.name}
                 imgSrc={entry.avatar}
                 category={entry.category}

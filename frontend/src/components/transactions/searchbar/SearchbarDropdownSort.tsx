@@ -1,10 +1,30 @@
 import './SearchbarDropdownSort.scss';
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import { SearchbarDropdownSortProps } from '../../../types/SearchbarDropdownSortProps';
 
-export function SearchbarDropdownSort() {
+SearchbarDropdownSort.propTypes = {
+  omSortChange: PropTypes.func,
+};
+
+export function SearchbarDropdownSort({ onSortChange }: SearchbarDropdownSortProps) {
+  const [selectedOption, setSelectedOption] = useState<string>('latest');
+
+  const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const newSortOption = event.target.value;
+    setSelectedOption(newSortOption);
+    onSortChange(newSortOption);
+  };
+
   return (
     <>
       <div className="searchbarDropdownSortWrapper" data-testid="searchbar-dropdown-sort">
-        <select className="searchbarDropdownSort" value="selected" id="options" onChange={() => {}}>
+        <select
+          className="searchbarDropdownSort"
+          value={selectedOption}
+          id="options"
+          onChange={handleSortChange}
+        >
           <option className="latest" value="latest">
             Latest
           </option>

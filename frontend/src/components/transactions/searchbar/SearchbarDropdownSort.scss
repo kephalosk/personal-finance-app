@@ -19,3 +19,15 @@
 .searchbarDropdownSortWrapper {
   position: relative;
 }
+.searchbarDropdownSortWrapper:hover {
+  .searchbarDropdownSort {
+    border: 1px solid var(--component-background-grey);
+    background-color: var(--component-background-grey);
+    color: var(--text-white);
+    cursor: pointer;
+  }
+
+  .searchbarDropdownSortIcon {
+    filter: invert(74%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(300%) contrast(100%);
+  }
+}
