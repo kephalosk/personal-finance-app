@@ -6,6 +6,7 @@ describe('TransactionService', () => {
     avatar: './src/assets/images/avatars/emma-richardson.jpg',
     name: 'Emma Richardson',
     category: 'General',
+    categoryKey: 'general',
     date: '19 Aug 2024',
     amount: 75.5,
     recurring: false,

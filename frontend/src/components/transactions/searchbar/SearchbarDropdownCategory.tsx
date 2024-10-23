@@ -1,14 +1,29 @@
 import './SearchbarDropdownCategory.scss';
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import { SearchbarDropdownCategoryProps } from '../../../types/SearchbarDropdownCategoryProps';
 
-export function SearchbarDropdownCategory() {
+SearchbarDropdownCategory.propTypes = {
+  onCategoryChange: PropTypes.func.isRequired,
+};
+
+export function SearchbarDropdownCategory({ onCategoryChange }: SearchbarDropdownCategoryProps) {
+  const [selectedOption, setSelectedOption] = useState<string>('all');
+
+  const handleCategoryChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedCategory = event.target.value;
+    setSelectedOption(selectedCategory);
+    onCategoryChange(selectedCategory);
+  };
+
   return (
     <>
       <div className="searchbarDropdownCategoryWrapper" data-testid="searchbar-dropdown-category">
         <select
           className="searchbarDropdownCategory"
-          value="selected"
+          value={selectedOption}
           id="options"
-          onChange={() => {}}
+          onChange={handleCategoryChange}
         >
           <option className="all" value="all">
             All Transactions
@@ -22,7 +37,7 @@ export function SearchbarDropdownCategory() {
           <option className="groceries" value="groceries">
             Groceries
           </option>
-          <option className="dining" value="dining">
+          <option className="diningout" value="diningout">
             Dining Out
           </option>
           <option className="transportation" value="transportation">

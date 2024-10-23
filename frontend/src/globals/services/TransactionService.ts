@@ -14,6 +14,7 @@ function fromAPITransactionDTOMapper(transactions: APITransactionDTO[]): EPTrans
       avatar: apiTransactionDTO.avatar,
       name: apiTransactionDTO.name,
       category: apiTransactionDTO.category,
+      categoryKey: toLowerCaseWithoutWhitespace(apiTransactionDTO.category),
       date: formatDate(apiTransactionDTO.date),
       amount: apiTransactionDTO.amount,
       recurring: apiTransactionDTO.recurring,
@@ -30,4 +31,9 @@ function formatDate(dateString: string): string {
     month: 'short',
     year: 'numeric',
   }).format(date);
+}
+
+function toLowerCaseWithoutWhitespace(category: string): string {
+  const lowerCase = category.toLowerCase();
+  return lowerCase.replace(' ', '');
 }

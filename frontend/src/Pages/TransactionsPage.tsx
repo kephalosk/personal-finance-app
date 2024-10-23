@@ -13,15 +13,22 @@ import { EPTransaction } from '../types/EPTransaction';
 import { getTransactions } from '../globals/services/TransactionService';
 import { splitIntoChunks } from '../globals/utils/SplitIntoChunks';
 import { useState } from 'react';
+import { meta } from 'eslint-plugin-react/lib/rules/jsx-props-no-spread-multi';
+import category = meta.docs.category;
 
 export function TransactionsPage() {
   const [pageIndex, setPageIndex] = useState(0);
   const transactions: EPTransaction[] = getTransactions();
   const pageEntrySize: number = 10;
-  const [sortedTransactions, setSortedTransactions] = useState(transactions);
+  const [filteredTransactions, setFilteredTransactions] = useState(transactions);
+  const [currentSortOption, setCurrentSortOption] = useState<string>('latest');
+  let shadowFilteredTransactions: EPTransaction[] = [...filteredTransactions];
 
   const handleSortChange = (sortOption: string) => {
-    let sorted = [...transactions]; // Kopie der originalen Daten
+    let sorted = [...shadowFilteredTransactions];
+    console.log('filteredTransactionsInMethodCategory', filteredTransactions);
+
+    setCurrentSortOption(sortOption);
 
     switch (sortOption) {
       case 'latest':
@@ -43,15 +50,32 @@ export function TransactionsPage() {
         sorted.sort((a, b) => a.amount - b.amount);
         break;
       default:
+        sorted.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
         break;
     }
-
-    setSortedTransactions(sorted);
+    console.log('sorted', sorted);
+    console.log('currentSortOptionSort', currentSortOption);
+    setFilteredTransactions(sorted);
 
     setPageIndex(0);
   };
 
-  const transactionsPaged: EPTransaction[][] = splitIntoChunks(sortedTransactions, pageEntrySize);
+  const handleCategoryChange = (category: string) => {
+    const filtered = transactions.filter((transaction) => {
+      return transaction.categoryKey === category || category === 'all';
+    });
+
+    console.log('filtered', filtered);
+    // setFilteredTransactions(filtered);
+    shadowFilteredTransactions = [...filtered];
+    console.log('shadowFilteredTransactionsInMethodCategory', shadowFilteredTransactions);
+    console.log('filteredTransactionsInMethodCategory', filteredTransactions);
+    console.log('currentSortOptionCategory', currentSortOption);
+
+    handleSortChange(currentSortOption);
+  };
+
+  const transactionsPaged: EPTransaction[][] = splitIntoChunks(filteredTransactions, pageEntrySize);
 
   const isMaxIndex = pageIndex === transactionsPaged.length - 1;
 
@@ -88,7 +112,7 @@ export function TransactionsPage() {
             <label className="searchbarLabel sortBy">Sort by</label>
             <SearchbarDropdownSort onSortChange={handleSortChange} />
             <label className="searchbarLabel category">Category</label>
-            <SearchbarDropdownCategory />
+            <SearchbarDropdownCategory onCategoryChange={handleCategoryChange} />
           </div>
           <div className="transactionsTable">
             <TableHeader />
