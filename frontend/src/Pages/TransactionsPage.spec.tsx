@@ -2,8 +2,13 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import { TransactionsPage } from './TransactionsPage';
 import React from 'react';
 import { convertSignedDollarStringToNumber } from '../globals/utils/ConvertSignedDollarStringToNumber';
+import { getTransactions } from '../globals/services/TransactionService';
 
 describe('TransactionsPage', () => {
+  const transactions = getTransactions();
+  const testCategory = transactions.at(0)!.category;
+  const testCategoryKey = transactions.at(0)!.categoryKey;
+
   it('renders div transactionsPage', () => {
     const { container } = render(<TransactionsPage />);
 
@@ -171,6 +176,61 @@ describe('TransactionsPage', () => {
       activeButton = container.querySelector('.isActive');
 
       expect(activeButton).toHaveTextContent('1');
+    });
+
+    it('filters the transactions correctly', () => {
+      render(<TransactionsPage />);
+
+      const selectElement = screen
+        .getByTestId('searchbar-dropdown-category')
+        .querySelector('select');
+      fireEvent.change(selectElement!, { target: { value: `${testCategoryKey}` } });
+
+      const tableRows = screen.getAllByTestId('table-row');
+      tableRows.forEach((row) => {
+        const rowCategory = row.querySelector('.tableRowCategory')!.textContent;
+        expect(rowCategory).toEqual(testCategory);
+      });
+    });
+
+    it('resets the pageIndex after filtering the transactions', () => {
+      const { container } = render(<TransactionsPage />);
+      const buttons = container.querySelectorAll('.paginationPagesButton');
+      fireEvent.click(buttons[3]);
+      let activeButton = container.querySelector('.isActive');
+      expect(activeButton).toHaveTextContent('4');
+
+      const selectElement = screen
+        .getByTestId('searchbar-dropdown-category')
+        .querySelector('select');
+      fireEvent.change(selectElement!, { target: { value: `${testCategoryKey}` } });
+      activeButton = container.querySelector('.isActive');
+
+      expect(activeButton).toHaveTextContent('1');
+    });
+
+    it('keeps filtered transactions after sorting', () => {
+      render(<TransactionsPage />);
+      const selectElement = screen
+        .getByTestId('searchbar-dropdown-category')
+        .querySelector('select');
+      fireEvent.change(selectElement!, { target: { value: `${testCategoryKey}` } });
+      const filteredTableRowBeforeSorting = screen.getAllByTestId('table-row');
+      filteredTableRowBeforeSorting.forEach((row) => {
+        const rowCategory = row.querySelector('.tableRowCategory')!.textContent;
+        expect(rowCategory).toEqual(testCategory);
+      });
+
+      const selectElementSort = screen
+        .getByTestId('searchbar-dropdown-sort')
+        .querySelector('select');
+      fireEvent.change(selectElementSort!, { target: { value: 'lowest' } });
+
+      const filteredTableRowAfterSorting = screen.getAllByTestId('table-row');
+      filteredTableRowAfterSorting.forEach((row) => {
+        const rowCategory = row.querySelector('.tableRowCategory')!.textContent;
+        expect(rowCategory).toEqual(testCategory);
+      });
     });
   });
 

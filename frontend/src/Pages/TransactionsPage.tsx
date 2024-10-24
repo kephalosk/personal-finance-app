@@ -7,14 +7,14 @@ import { SearchbarDropdownSort } from '../components/transactions/searchbar/Sear
 import { SearchbarDropdownCategory } from '../components/transactions/searchbar/SearchbarDropdownCategory';
 import { TableHeader } from '../components/transactions/table/TableHeader';
 import { TableRow } from '../components/transactions/table/TableRow';
-import { TransactionsPageEntries } from '../constants/TransactionsPageEntries';
-import { TransactionsPageTableRowProps } from '../types/TransactionsPageTableRowProps';
+// import { TransactionsPageEntries } from '../constants/TransactionsPageEntries';
+// import { TransactionsPageTableRowProps } from '../types/TransactionsPageTableRowProps';
 import { EPTransaction } from '../types/EPTransaction';
 import { getTransactions } from '../globals/services/TransactionService';
 import { splitIntoChunks } from '../globals/utils/SplitIntoChunks';
 import { useState } from 'react';
-import { meta } from 'eslint-plugin-react/lib/rules/jsx-props-no-spread-multi';
-import category = meta.docs.category;
+// import { meta } from 'eslint-plugin-react/lib/rules/jsx-props-no-spread-multi';
+// import category = meta.docs.category;
 
 export function TransactionsPage() {
   const [pageIndex, setPageIndex] = useState(0);
@@ -26,7 +26,7 @@ export function TransactionsPage() {
 
   const handleSortChange = (sortOption: string) => {
     let sorted = [...shadowFilteredTransactions];
-    console.log('filteredTransactionsInMethodCategory', filteredTransactions);
+    // console.log('filteredTransactionsInMethodCategory', filteredTransactions);
 
     setCurrentSortOption(sortOption);
 
@@ -53,8 +53,8 @@ export function TransactionsPage() {
         sorted.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
         break;
     }
-    console.log('sorted', sorted);
-    console.log('currentSortOptionSort', currentSortOption);
+    // console.log('sorted', sorted);
+    // console.log('currentSortOptionSort', currentSortOption);
     setFilteredTransactions(sorted);
 
     setPageIndex(0);
@@ -65,12 +65,12 @@ export function TransactionsPage() {
       return transaction.categoryKey === category || category === 'all';
     });
 
-    console.log('filtered', filtered);
+    // console.log('filtered', filtered);
     // setFilteredTransactions(filtered);
     shadowFilteredTransactions = [...filtered];
-    console.log('shadowFilteredTransactionsInMethodCategory', shadowFilteredTransactions);
-    console.log('filteredTransactionsInMethodCategory', filteredTransactions);
-    console.log('currentSortOptionCategory', currentSortOption);
+    // console.log('shadowFilteredTransactionsInMethodCategory', shadowFilteredTransactions);
+    // console.log('filteredTransactionsInMethodCategory', filteredTransactions);
+    // console.log('currentSortOptionCategory', currentSortOption);
 
     handleSortChange(currentSortOption);
   };
