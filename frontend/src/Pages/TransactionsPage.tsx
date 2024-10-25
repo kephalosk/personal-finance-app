@@ -7,14 +7,14 @@ import { SearchbarDropdownSort } from '../components/transactions/searchbar/Sear
 import { SearchbarDropdownCategory } from '../components/transactions/searchbar/SearchbarDropdownCategory';
 import { TableHeader } from '../components/transactions/table/TableHeader';
 import { TableRow } from '../components/transactions/table/TableRow';
-// import { TransactionsPageEntries } from '../constants/TransactionsPageEntries';
-// import { TransactionsPageTableRowProps } from '../types/TransactionsPageTableRowProps';
 import { EPTransaction } from '../types/EPTransaction';
 import { getTransactions } from '../globals/services/TransactionService';
 import { splitIntoChunks } from '../globals/utils/SplitIntoChunks';
-import { useState } from 'react';
-// import { meta } from 'eslint-plugin-react/lib/rules/jsx-props-no-spread-multi';
-// import category = meta.docs.category;
+import { useRef, useState } from 'react';
+
+type SearchbarInputHandle = {
+  clearInput: () => void;
+};
 
 export function TransactionsPage() {
   const [pageIndex, setPageIndex] = useState(0);
@@ -22,11 +22,12 @@ export function TransactionsPage() {
   const pageEntrySize: number = 10;
   const [filteredTransactions, setFilteredTransactions] = useState(transactions);
   const [currentSortOption, setCurrentSortOption] = useState<string>('latest');
+  const [currentCategory, setCurrentCategory] = useState<string>('all');
   let shadowFilteredTransactions: EPTransaction[] = [...filteredTransactions];
+  const searchbarRef = useRef<SearchbarInputHandle>();
 
   const handleSortChange = (sortOption: string) => {
     let sorted = [...shadowFilteredTransactions];
-    // console.log('filteredTransactionsInMethodCategory', filteredTransactions);
 
     setCurrentSortOption(sortOption);
 
@@ -53,26 +54,41 @@ export function TransactionsPage() {
         sorted.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
         break;
     }
-    // console.log('sorted', sorted);
-    // console.log('currentSortOptionSort', currentSortOption);
+
     setFilteredTransactions(sorted);
 
     setPageIndex(0);
   };
 
-  const handleCategoryChange = (category: string) => {
-    const filtered = transactions.filter((transaction) => {
+  const handleCategoryChange = (
+    category: string,
+    usedTransactions: EPTransaction[] = transactions
+  ) => {
+    if (usedTransactions.length === transactions.length && searchbarRef.current) {
+      searchbarRef.current.clearInput();
+    }
+
+    const filtered = usedTransactions.filter((transaction) => {
       return transaction.categoryKey === category || category === 'all';
     });
 
-    // console.log('filtered', filtered);
-    // setFilteredTransactions(filtered);
+    setCurrentCategory(category);
+
     shadowFilteredTransactions = [...filtered];
-    // console.log('shadowFilteredTransactionsInMethodCategory', shadowFilteredTransactions);
-    // console.log('filteredTransactionsInMethodCategory', filteredTransactions);
-    // console.log('currentSortOptionCategory', currentSortOption);
 
     handleSortChange(currentSortOption);
+  };
+
+  const handleInputChange = (currentInput: string) => {
+    const filteredByInput = transactions.filter((transaction) => {
+      const transactionSmall = transaction.name.toLowerCase();
+      const inputSmall = currentInput.toLowerCase();
+      return transactionSmall.includes(inputSmall);
+    });
+
+    shadowFilteredTransactions = [...filteredByInput];
+
+    handleCategoryChange(currentCategory, filteredByInput);
   };
 
   const transactionsPaged: EPTransaction[][] = splitIntoChunks(filteredTransactions, pageEntrySize);
@@ -108,7 +124,7 @@ export function TransactionsPage() {
         <h1>Transactions</h1>
         <div className="transactionsDetails">
           <div className="transactionsSearchbar">
-            <SearchbarInput />
+            <SearchbarInput ref={searchbarRef} onInputChange={handleInputChange} />
             <label className="searchbarLabel sortBy">Sort by</label>
             <SearchbarDropdownSort onSortChange={handleSortChange} />
             <label className="searchbarLabel category">Category</label>
