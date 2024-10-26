@@ -13,17 +13,31 @@
   flex-direction: row;
   align-items: center;
   color: var(--text-dark);
+  transition:
+          border 0.3s ease,
+          border-color 0.3s ease,
+          background-color 0.3s ease,
+          box-shadow 0.3s ease;
 }
-
 .paginationPagesButton.isActive {
   border: 1px solid var(--component-background-dark);
+  box-shadow: 0 0 0 2px var(--component-background-dark);
   background-color: var(--component-background-dark);
   color: var(--text-white);
 }
-
+.paginationPagesButton.isActive:focus-visible {
+  border: 1px solid var(--component-background-light);
+  box-shadow: 0 0 0 2px var(--component-background-light);
+  outline: none;
+}
 .paginationPagesButton.isNotActive:hover {
   border: 1px solid var(--component-background-grey);
   background-color: var(--component-background-grey);
   color: var(--text-white);
   cursor: pointer;
+}
+.paginationPagesButton.isNotActive:focus-visible {
+  border-color: var(--component-background-grey);
+  outline: none;
+  box-shadow: 0 0 0 2px var(--component-background-dark);
 }

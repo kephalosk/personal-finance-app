@@ -27,6 +27,7 @@
   --component-background-dark: #201F24;
   --component-background-bright: #FFFFFF;
   --component-background-grey: #98908B;
+  --component-background-light: #B1A9A4;
   --component-background-disabled: #F2F2F2;
 
   --text-dark: #201F24;
@@ -47,6 +48,8 @@
   --horizontal-line: #F2F2F2;
 
   --searchbar-grey: #98908B;
+
+  --icon-filter: invert(0%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);
 }
 
 * {

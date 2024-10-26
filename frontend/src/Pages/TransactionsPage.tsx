@@ -118,6 +118,18 @@ export function TransactionsPage() {
     setPageIndex(newIndex);
   };
 
+  // const dropdownCategory = document.querySelector('.searchbarDropdownCategory');
+  // const dropdownCategoryIcon = document.querySelector('.searchbarDropdownCategoryIcon');
+  //
+  // if (dropdownCategory) {
+  //   dropdownCategory.addEventListener('focus', () => {
+  //     dropdownCategoryIcon!.classList.add('lightened');
+  //   });
+  //   dropdownCategory.addEventListener('blur', () => {
+  //     dropdownCategoryIcon!.classList.remove('lightened');
+  //   });
+  // }
+
   return (
     <>
       <div className="transactionsPage" data-testid="transactions-page">

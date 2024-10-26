@@ -6,14 +6,31 @@
   appearance: none; /* Standard-Pfeil ausblenden */
   -webkit-appearance: none; /* Für Webkit-basierte Browser wie Chrome und Safari */
   -moz-appearance: none; /* Für Firefox */
+  transition:
+          border 0.3s ease,
+          border-color 0.3s ease,
+          background-color 0.3s ease,
+          box-shadow 0.3s ease;
+}
+.searchbarDropdownSort:focus-visible {
+  border: 1px solid var(--component-background-grey);
+  background-color: var(--component-background-grey);
+  border-color: var(--component-background-grey);
+  outline: none;
+  color: var(--text-white);
+  cursor: pointer;
+}
+.searchbarDropdownSort:focus-visible ~ .searchbarDropdownSortIcon {
+  --icon-filter: invert(74%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(300%) contrast(100%);
 }
 
 .searchbarDropdownSortIcon {
   height: 6px;
   width: auto;
   top: calc(50% - 3px);
-  left: calc(100% - 32px);
+  right: 20px;
   position: absolute;
+  filter: var(--icon-filter);
 }
 
 .searchbarDropdownSortWrapper {

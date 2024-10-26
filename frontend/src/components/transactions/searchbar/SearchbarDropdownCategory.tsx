@@ -17,6 +17,7 @@ export function SearchbarDropdownCategory({ onCategoryChange }: SearchbarDropdow
     const selectedCategory = event.target.value;
     setSelectedOption(selectedCategory);
     onCategoryChange(selectedCategory);
+    event.target.blur();
   };
 
   const haveSameKey = (key1: string, key2: string): boolean => {

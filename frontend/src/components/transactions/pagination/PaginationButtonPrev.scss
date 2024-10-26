@@ -7,6 +7,11 @@
   flex-direction: row;
   align-items: center;
   color: var(--text-dark);
+  transition:
+          border 0.3s ease,
+          border-color 0.3s ease,
+          background-color 0.3s ease,
+          box-shadow 0.3s ease;
 }
 .paginationButtonPrev.isEnabled:hover {
   border: 1px solid var(--component-background-grey);
@@ -18,11 +23,21 @@
     filter: invert(74%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(300%) contrast(100%);
   }
  }
+.paginationButtonPrev.isEnabled:focus-visible {
+  border-color: var(--component-background-grey);
+  outline: none;
+  box-shadow: 0 0 0 2px var(--component-background-dark);
+}
 .paginationButtonPrev.isDisabled {
   border: 1px solid var(--component-background-disabled);
   background-color: var(--component-background-disabled);
   color: var(--text-grey);
   cursor: default;
+}
+.paginationButtonPrev.isDisabled:focus-visible {
+  border: 1px solid var(--component-background-light);
+  box-shadow: 0 0 0 2px var(--component-background-light);
+  outline: none;
 }
 
 .paginationButtonPrevCaret {

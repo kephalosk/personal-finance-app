@@ -14,6 +14,7 @@ export function SearchbarDropdownSort({ onSortChange }: SearchbarDropdownSortPro
     const newSortOption = event.target.value;
     setSelectedOption(newSortOption);
     onSortChange(newSortOption);
+    event.target.blur();
   };
 
   return (
