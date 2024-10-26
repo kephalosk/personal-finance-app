@@ -1,11 +1,20 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
 import { SearchbarDropdownCategory } from './SearchbarDropdownCategory';
+import { getTransactions } from '../../../globals/services/TransactionService';
+import { mockedTransactions } from '../../../fixtures/MockedTransactions';
+
+jest.mock('../../../globals/services/TransactionService', () => ({
+  getTransactions: jest.fn(),
+}));
+
+const mockGetTransactions = getTransactions as jest.Mock;
 
 describe('searchbarDropdownCategory', () => {
   let mockOnCategoryChange: jest.Mock<() => void>;
 
   beforeEach(() => {
+    mockGetTransactions.mockReturnValue(mockedTransactions);
     mockOnCategoryChange = jest.fn();
   });
 
@@ -29,14 +38,14 @@ describe('searchbarDropdownCategory', () => {
     expect(htmlElement).toBeInTheDocument();
   });
 
-  it('renders all 6 sort options', () => {
+  it('renders all 3 categories when there are only 2 different ones', () => {
     const { container } = render(
       <SearchbarDropdownCategory onCategoryChange={mockOnCategoryChange} />
     );
 
     const htmlElements = container.querySelectorAll('option');
 
-    expect(htmlElements).toHaveLength(11);
+    expect(htmlElements).toHaveLength(3);
   });
 
   it('renders category option all', () => {
@@ -49,107 +58,7 @@ describe('searchbarDropdownCategory', () => {
     expect(htmlElement).toBeInTheDocument();
   });
 
-  it('renders category option entertainment', () => {
-    const { container } = render(
-      <SearchbarDropdownCategory onCategoryChange={mockOnCategoryChange} />
-    );
-
-    const htmlElement = container.querySelector('.entertainment');
-
-    expect(htmlElement).toBeInTheDocument();
-  });
-
-  it('renders category option bills', () => {
-    const { container } = render(
-      <SearchbarDropdownCategory onCategoryChange={mockOnCategoryChange} />
-    );
-
-    const htmlElement = container.querySelector('.bills');
-
-    expect(htmlElement).toBeInTheDocument();
-  });
-
-  it('renders category option groceries', () => {
-    const { container } = render(
-      <SearchbarDropdownCategory onCategoryChange={mockOnCategoryChange} />
-    );
-
-    const htmlElement = container.querySelector('.groceries');
-
-    expect(htmlElement).toBeInTheDocument();
-  });
-
-  it('renders category option diningout', () => {
-    const { container } = render(
-      <SearchbarDropdownCategory onCategoryChange={mockOnCategoryChange} />
-    );
-
-    const htmlElement = container.querySelector('.diningout');
-
-    expect(htmlElement).toBeInTheDocument();
-  });
-
-  it('renders category option transportation', () => {
-    const { container } = render(
-      <SearchbarDropdownCategory onCategoryChange={mockOnCategoryChange} />
-    );
-
-    const htmlElement = container.querySelector('.transportation');
-
-    expect(htmlElement).toBeInTheDocument();
-  });
-
-  it('renders category option personalcare', () => {
-    const { container } = render(
-      <SearchbarDropdownCategory onCategoryChange={mockOnCategoryChange} />
-    );
-
-    const htmlElement = container.querySelector('.personalcare');
-
-    expect(htmlElement).toBeInTheDocument();
-  });
-
-  it('renders category option education', () => {
-    const { container } = render(
-      <SearchbarDropdownCategory onCategoryChange={mockOnCategoryChange} />
-    );
-
-    const htmlElement = container.querySelector('.education');
-
-    expect(htmlElement).toBeInTheDocument();
-  });
-
-  it('renders category option lifestyle', () => {
-    const { container } = render(
-      <SearchbarDropdownCategory onCategoryChange={mockOnCategoryChange} />
-    );
-
-    const htmlElement = container.querySelector('.lifestyle');
-
-    expect(htmlElement).toBeInTheDocument();
-  });
-
-  it('renders category option shopping', () => {
-    const { container } = render(
-      <SearchbarDropdownCategory onCategoryChange={mockOnCategoryChange} />
-    );
-
-    const htmlElement = container.querySelector('.shopping');
-
-    expect(htmlElement).toBeInTheDocument();
-  });
-
-  it('renders category option general', () => {
-    const { container } = render(
-      <SearchbarDropdownCategory onCategoryChange={mockOnCategoryChange} />
-    );
-
-    const htmlElement = container.querySelector('.general');
-
-    expect(htmlElement).toBeInTheDocument();
-  });
-
-  it('calls onSortChange when a different option is selected', () => {
+  it('calls onCategoryChange when a different option is selected', () => {
     render(<SearchbarDropdownCategory onCategoryChange={mockOnCategoryChange} />);
 
     const selectElement = screen.getByTestId('searchbar-dropdown-category').querySelector('select');
@@ -157,5 +66,22 @@ describe('searchbarDropdownCategory', () => {
     fireEvent.change(selectElement!, { target: { value: 'all' } });
 
     expect(mockOnCategoryChange).toHaveBeenCalledWith('all');
+  });
+
+  it('has only categories in Dropdown, that are available in received transactions plus all', () => {
+    render(<SearchbarDropdownCategory onCategoryChange={mockOnCategoryChange} />);
+
+    const optionElements = screen
+      .getByTestId('searchbar-dropdown-category')
+      .querySelectorAll('option');
+
+    optionElements.forEach((option) => {
+      const testCategories = [
+        'All Transactions',
+        mockedTransactions[0].category,
+        mockedTransactions[1].category,
+      ];
+      expect(testCategories).toContain(option.textContent);
+    });
   });
 });
