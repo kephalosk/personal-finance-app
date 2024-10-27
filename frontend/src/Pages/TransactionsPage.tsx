@@ -11,19 +11,24 @@ import { EPTransaction } from '../types/EPTransaction';
 import { getTransactions } from '../globals/services/TransactionService';
 import { splitIntoChunks } from '../globals/utils/SplitIntoChunks';
 import { useRef, useState } from 'react';
-
-type SearchbarInputHandle = {
-  clearInput: () => void;
-};
+import { SortOptionEnum } from '../constants/SortOptionEnum';
+import { SearchbarInputHandle } from '../types/SearchbarInputHandle';
 
 export function TransactionsPage() {
   const [pageIndex, setPageIndex] = useState(0);
-  const transactions: EPTransaction[] = getTransactions();
-  const pageEntrySize: number = 10;
-  const [filteredTransactions, setFilteredTransactions] = useState(transactions);
-  const [currentSortOption, setCurrentSortOption] = useState<string>('latest');
+  const [currentSortOption, setCurrentSortOption] = useState<string>(SortOptionEnum.LATEST);
   const [currentCategory, setCurrentCategory] = useState<string>('all');
+
+  const transactions: EPTransaction[] = getTransactions();
+  const [filteredTransactions, setFilteredTransactions] = useState(transactions);
+
+  const pageEntrySize: number = 10;
+  const transactionsPaged: EPTransaction[][] = splitIntoChunks(filteredTransactions, pageEntrySize);
+  const currentIndexedTransactions = transactionsPaged.at(pageIndex) ?? [];
+  const isMaxIndex = pageIndex === transactionsPaged.length - 1;
+
   let shadowFilteredTransactions: EPTransaction[] = [...filteredTransactions];
+
   const searchbarRef = useRef<SearchbarInputHandle>();
 
   const handleSortChange = (sortOption: string) => {
@@ -32,22 +37,22 @@ export function TransactionsPage() {
     setCurrentSortOption(sortOption);
 
     switch (sortOption) {
-      case 'latest':
+      case SortOptionEnum.LATEST:
         sorted.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
         break;
-      case 'oldest':
+      case SortOptionEnum.OLDEST:
         sorted.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
         break;
-      case 'atoz':
+      case SortOptionEnum.ATOZ:
         sorted.sort((a, b) => a.name.localeCompare(b.name));
         break;
-      case 'ztoa':
+      case SortOptionEnum.ZTOA:
         sorted.sort((a, b) => b.name.localeCompare(a.name));
         break;
-      case 'highest':
+      case SortOptionEnum.HIGHEST:
         sorted.sort((a, b) => b.amount - a.amount);
         break;
-      case 'lowest':
+      case SortOptionEnum.LOWEST:
         sorted.sort((a, b) => a.amount - b.amount);
         break;
       default:
@@ -91,12 +96,6 @@ export function TransactionsPage() {
     handleCategoryChange(currentCategory, filteredByInput);
   };
 
-  const transactionsPaged: EPTransaction[][] = splitIntoChunks(filteredTransactions, pageEntrySize);
-
-  const isMaxIndex = pageIndex === transactionsPaged.length - 1;
-
-  const currentIndexedTransactions = transactionsPaged.at(pageIndex) ?? [];
-
   const handlePrevClick = () => {
     if (pageIndex <= 0) {
       return;
@@ -117,18 +116,6 @@ export function TransactionsPage() {
     }
     setPageIndex(newIndex);
   };
-
-  // const dropdownCategory = document.querySelector('.searchbarDropdownCategory');
-  // const dropdownCategoryIcon = document.querySelector('.searchbarDropdownCategoryIcon');
-  //
-  // if (dropdownCategory) {
-  //   dropdownCategory.addEventListener('focus', () => {
-  //     dropdownCategoryIcon!.classList.add('lightened');
-  //   });
-  //   dropdownCategory.addEventListener('blur', () => {
-  //     dropdownCategoryIcon!.classList.remove('lightened');
-  //   });
-  // }
 
   return (
     <>

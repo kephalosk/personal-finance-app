@@ -3,11 +3,13 @@ import { TransactionsPage } from './TransactionsPage';
 import React from 'react';
 import { convertSignedDollarStringToNumber } from '../globals/utils/ConvertSignedDollarStringToNumber';
 import { getTransactions } from '../globals/services/TransactionService';
+import { SortOptionEnum } from '../constants/SortOptionEnum';
 
 describe('TransactionsPage', () => {
   const transactions = getTransactions();
   const testCategory = transactions.at(0)!.category;
   const testCategoryKey = transactions.at(0)!.categoryKey;
+  const testSearchbarInput = 'liam';
 
   it('renders div transactionsPage', () => {
     const { container } = render(<TransactionsPage />);
@@ -74,162 +76,230 @@ describe('TransactionsPage', () => {
       expect(reactComponent).toBeInTheDocument();
     });
 
-    it('sorts the transactions from oldest to newest', () => {
-      render(<TransactionsPage />);
-      let tableRows = screen.getAllByTestId('table-row');
-      let secondDate = new Date(
-        tableRows[1].querySelector('.tableRowDate')!.textContent!
-      ).getTime();
-      let thirdDate = new Date(tableRows[2].querySelector('.tableRowDate')!.textContent!).getTime();
-      expect(secondDate - thirdDate > 0).toBe(true);
+    describe('Sorting', () => {
+      it('sorts the transactions from oldest to newest', () => {
+        render(<TransactionsPage />);
+        let tableRows = screen.getAllByTestId('table-row');
+        let secondDate = new Date(
+          tableRows[1].querySelector('.tableRowDate')!.textContent!
+        ).getTime();
+        let thirdDate = new Date(
+          tableRows[2].querySelector('.tableRowDate')!.textContent!
+        ).getTime();
+        expect(secondDate - thirdDate > 0).toBe(true);
 
-      const selectElement = screen.getByTestId('searchbar-dropdown-sort').querySelector('select');
-      fireEvent.change(selectElement!, { target: { value: 'oldest' } });
+        const selectElement = screen.getByTestId('searchbar-dropdown-sort').querySelector('select');
+        fireEvent.change(selectElement!, { target: { value: 'oldest' } });
 
-      tableRows = screen.getAllByTestId('table-row');
-      secondDate = new Date(tableRows[1].querySelector('.tableRowDate')!.textContent!).getTime();
-      thirdDate = new Date(tableRows[2].querySelector('.tableRowDate')!.textContent!).getTime();
-      expect(secondDate - thirdDate > 0).toBe(false);
-    });
+        tableRows = screen.getAllByTestId('table-row');
+        secondDate = new Date(tableRows[1].querySelector('.tableRowDate')!.textContent!).getTime();
+        thirdDate = new Date(tableRows[2].querySelector('.tableRowDate')!.textContent!).getTime();
+        expect(secondDate - thirdDate > 0).toBe(false);
+      });
 
-    it('sorts the transactions from newest to oldest', () => {
-      render(<TransactionsPage />);
-      let selectElement = screen.getByTestId('searchbar-dropdown-sort').querySelector('select');
-      fireEvent.change(selectElement!, { target: { value: 'oldest' } });
-      let tableRows = screen.getAllByTestId('table-row');
-      let secondDate = new Date(
-        tableRows[1].querySelector('.tableRowDate')!.textContent!
-      ).getTime();
-      let thirdDate = new Date(tableRows[2].querySelector('.tableRowDate')!.textContent!).getTime();
-      expect(secondDate - thirdDate > 0).toBe(false);
+      it('sorts the transactions from newest to oldest', () => {
+        render(<TransactionsPage />);
+        let selectElement = screen.getByTestId('searchbar-dropdown-sort').querySelector('select');
+        fireEvent.change(selectElement!, { target: { value: 'oldest' } });
+        let tableRows = screen.getAllByTestId('table-row');
+        let secondDate = new Date(
+          tableRows[1].querySelector('.tableRowDate')!.textContent!
+        ).getTime();
+        let thirdDate = new Date(
+          tableRows[2].querySelector('.tableRowDate')!.textContent!
+        ).getTime();
+        expect(secondDate - thirdDate > 0).toBe(false);
 
-      selectElement = screen.getByTestId('searchbar-dropdown-sort').querySelector('select');
-      fireEvent.change(selectElement!, { target: { value: 'latest' } });
+        selectElement = screen.getByTestId('searchbar-dropdown-sort').querySelector('select');
+        fireEvent.change(selectElement!, { target: { value: 'latest' } });
 
-      tableRows = screen.getAllByTestId('table-row');
-      thirdDate = new Date(tableRows[2].querySelector('.tableRowDate')!.textContent!).getTime();
-      secondDate = new Date(tableRows[1].querySelector('.tableRowDate')!.textContent!).getTime();
-      expect(secondDate - thirdDate > 0).toBe(true);
-    });
+        tableRows = screen.getAllByTestId('table-row');
+        thirdDate = new Date(tableRows[2].querySelector('.tableRowDate')!.textContent!).getTime();
+        secondDate = new Date(tableRows[1].querySelector('.tableRowDate')!.textContent!).getTime();
+        expect(secondDate - thirdDate > 0).toBe(true);
+      });
 
-    it('sorts the transactions from A to Z', () => {
-      render(<TransactionsPage />);
+      it('sorts the transactions from A to Z', () => {
+        render(<TransactionsPage />);
 
-      const selectElement = screen.getByTestId('searchbar-dropdown-sort').querySelector('select');
-      fireEvent.change(selectElement!, { target: { value: 'atoz' } });
+        const selectElement = screen.getByTestId('searchbar-dropdown-sort').querySelector('select');
+        fireEvent.change(selectElement!, { target: { value: 'atoz' } });
 
-      const tableRows = screen.getAllByTestId('table-row');
-      const secondName = tableRows[1].querySelector('.tableRowPartnerName')!.textContent!;
-      const thirdName = tableRows[2].querySelector('.tableRowPartnerName')!.textContent!;
-      expect(secondName.localeCompare(thirdName) < 0).toBe(true);
-    });
+        const tableRows = screen.getAllByTestId('table-row');
+        const secondName = tableRows[1].querySelector('.tableRowPartnerName')!.textContent!;
+        const thirdName = tableRows[2].querySelector('.tableRowPartnerName')!.textContent!;
+        expect(secondName.localeCompare(thirdName) < 0).toBe(true);
+      });
 
-    it('sorts the transactions from Z to A', () => {
-      render(<TransactionsPage />);
+      it('sorts the transactions from Z to A', () => {
+        render(<TransactionsPage />);
 
-      const selectElement = screen.getByTestId('searchbar-dropdown-sort').querySelector('select');
-      fireEvent.change(selectElement!, { target: { value: 'ztoa' } });
+        const selectElement = screen.getByTestId('searchbar-dropdown-sort').querySelector('select');
+        fireEvent.change(selectElement!, { target: { value: 'ztoa' } });
 
-      const tableRows = screen.getAllByTestId('table-row');
-      const secondName = tableRows[1].querySelector('.tableRowPartnerName')!.textContent!;
-      const thirdName = tableRows[2].querySelector('.tableRowPartnerName')!.textContent!;
-      expect(secondName.localeCompare(thirdName) > 0).toBe(true);
-    });
+        const tableRows = screen.getAllByTestId('table-row');
+        const secondName = tableRows[1].querySelector('.tableRowPartnerName')!.textContent!;
+        const thirdName = tableRows[2].querySelector('.tableRowPartnerName')!.textContent!;
+        expect(secondName.localeCompare(thirdName) > 0).toBe(true);
+      });
 
-    it('sorts the transactions from highest to lowest', () => {
-      render(<TransactionsPage />);
+      it('sorts the transactions from highest to lowest', () => {
+        render(<TransactionsPage />);
 
-      const selectElement = screen.getByTestId('searchbar-dropdown-sort').querySelector('select');
-      fireEvent.change(selectElement!, { target: { value: 'highest' } });
+        const selectElement = screen.getByTestId('searchbar-dropdown-sort').querySelector('select');
+        fireEvent.change(selectElement!, { target: { value: 'highest' } });
 
-      const tableRows = screen.getAllByTestId('table-row');
-      const thirdAmount = tableRows[2].querySelector('.tableRowValue')!.textContent!;
-      const thirdAmountValue = convertSignedDollarStringToNumber(thirdAmount);
-      const fourthAmount = tableRows[3].querySelector('.tableRowValue')!.textContent!;
-      const fourthAmountValue = convertSignedDollarStringToNumber(fourthAmount);
-      expect(thirdAmountValue - fourthAmountValue > 0).toBe(true);
-    });
+        const tableRows = screen.getAllByTestId('table-row');
+        const thirdAmount = tableRows[2].querySelector('.tableRowValue')!.textContent!;
+        const thirdAmountValue = convertSignedDollarStringToNumber(thirdAmount);
+        const fourthAmount = tableRows[3].querySelector('.tableRowValue')!.textContent!;
+        const fourthAmountValue = convertSignedDollarStringToNumber(fourthAmount);
+        expect(thirdAmountValue - fourthAmountValue > 0).toBe(true);
+      });
 
-    it('sorts the transactions from lowest to highest', () => {
-      render(<TransactionsPage />);
+      it('sorts the transactions from lowest to highest', () => {
+        render(<TransactionsPage />);
 
-      const selectElement = screen.getByTestId('searchbar-dropdown-sort').querySelector('select');
-      fireEvent.change(selectElement!, { target: { value: 'lowest' } });
+        const selectElement = screen.getByTestId('searchbar-dropdown-sort').querySelector('select');
+        fireEvent.change(selectElement!, { target: { value: 'lowest' } });
 
-      const tableRows = screen.getAllByTestId('table-row');
-      const fourthAmount = tableRows[3].querySelector('.tableRowValue')!.textContent!;
-      const fourthAmountValue = convertSignedDollarStringToNumber(fourthAmount);
-      const thirdAmount = tableRows[2].querySelector('.tableRowValue')!.textContent!;
-      const thirdAmountValue = convertSignedDollarStringToNumber(thirdAmount);
-      expect(thirdAmountValue - fourthAmountValue < 0).toBe(true);
-    });
+        const tableRows = screen.getAllByTestId('table-row');
+        const fourthAmount = tableRows[3].querySelector('.tableRowValue')!.textContent!;
+        const fourthAmountValue = convertSignedDollarStringToNumber(fourthAmount);
+        const thirdAmount = tableRows[2].querySelector('.tableRowValue')!.textContent!;
+        const thirdAmountValue = convertSignedDollarStringToNumber(thirdAmount);
+        expect(thirdAmountValue - fourthAmountValue < 0).toBe(true);
+      });
 
-    it('resets the pageIndex after sorting the transactions', () => {
-      const { container } = render(<TransactionsPage />);
-      const buttons = container.querySelectorAll('.paginationPagesButton');
-      fireEvent.click(buttons[3]);
-      let activeButton = container.querySelector('.isActive');
-      expect(activeButton).toHaveTextContent('4');
+      it('resets the pageIndex after sorting the transactions', () => {
+        const { container } = render(<TransactionsPage />);
+        const buttons = container.querySelectorAll('.paginationPagesButton');
+        fireEvent.click(buttons[3]);
+        let activeButton = container.querySelector('.isActive');
+        expect(activeButton).toHaveTextContent('4');
 
-      const selectElement = screen.getByTestId('searchbar-dropdown-sort').querySelector('select');
-      fireEvent.change(selectElement!, { target: { value: 'ztoa' } });
-      activeButton = container.querySelector('.isActive');
+        const selectElement = screen.getByTestId('searchbar-dropdown-sort').querySelector('select');
+        fireEvent.change(selectElement!, { target: { value: 'ztoa' } });
+        activeButton = container.querySelector('.isActive');
 
-      expect(activeButton).toHaveTextContent('1');
-    });
-
-    it('filters the transactions correctly', () => {
-      render(<TransactionsPage />);
-
-      const selectElement = screen
-        .getByTestId('searchbar-dropdown-category')
-        .querySelector('select');
-      fireEvent.change(selectElement!, { target: { value: `${testCategoryKey}` } });
-
-      const tableRows = screen.getAllByTestId('table-row');
-      tableRows.forEach((row) => {
-        const rowCategory = row.querySelector('.tableRowCategory')!.textContent;
-        expect(rowCategory).toEqual(testCategory);
+        expect(activeButton).toHaveTextContent('1');
       });
     });
 
-    it('resets the pageIndex after filtering the transactions', () => {
-      const { container } = render(<TransactionsPage />);
-      const buttons = container.querySelectorAll('.paginationPagesButton');
-      fireEvent.click(buttons[3]);
-      let activeButton = container.querySelector('.isActive');
-      expect(activeButton).toHaveTextContent('4');
+    describe('Filtering', () => {
+      it('filters the transactions correctly', () => {
+        render(<TransactionsPage />);
 
-      const selectElement = screen
-        .getByTestId('searchbar-dropdown-category')
-        .querySelector('select');
-      fireEvent.change(selectElement!, { target: { value: `${testCategoryKey}` } });
-      activeButton = container.querySelector('.isActive');
+        const selectElement = screen
+          .getByTestId('searchbar-dropdown-category')
+          .querySelector('select');
+        fireEvent.change(selectElement!, { target: { value: `${testCategoryKey}` } });
 
-      expect(activeButton).toHaveTextContent('1');
-    });
-
-    it('keeps filtered transactions after sorting', () => {
-      render(<TransactionsPage />);
-      const selectElement = screen
-        .getByTestId('searchbar-dropdown-category')
-        .querySelector('select');
-      fireEvent.change(selectElement!, { target: { value: `${testCategoryKey}` } });
-      const filteredTableRowBeforeSorting = screen.getAllByTestId('table-row');
-      filteredTableRowBeforeSorting.forEach((row) => {
-        const rowCategory = row.querySelector('.tableRowCategory')!.textContent;
-        expect(rowCategory).toEqual(testCategory);
+        const tableRows = screen.getAllByTestId('table-row');
+        tableRows.forEach((row) => {
+          const rowCategory = row.querySelector('.tableRowCategory')!.textContent;
+          expect(rowCategory).toEqual(testCategory);
+        });
       });
 
-      const selectElementSort = screen
-        .getByTestId('searchbar-dropdown-sort')
-        .querySelector('select');
-      fireEvent.change(selectElementSort!, { target: { value: 'lowest' } });
+      it('resets the pageIndex after filtering the transactions', () => {
+        const { container } = render(<TransactionsPage />);
+        const buttons = container.querySelectorAll('.paginationPagesButton');
+        fireEvent.click(buttons[3]);
+        let activeButton = container.querySelector('.isActive');
+        expect(activeButton).toHaveTextContent('4');
 
-      const filteredTableRowAfterSorting = screen.getAllByTestId('table-row');
-      filteredTableRowAfterSorting.forEach((row) => {
-        const rowCategory = row.querySelector('.tableRowCategory')!.textContent;
-        expect(rowCategory).toEqual(testCategory);
+        const selectElement = screen
+          .getByTestId('searchbar-dropdown-category')
+          .querySelector('select');
+        fireEvent.change(selectElement!, { target: { value: `${testCategoryKey}` } });
+        activeButton = container.querySelector('.isActive');
+
+        expect(activeButton).toHaveTextContent('1');
+      });
+
+      it('keeps filtered transactions after sorting', () => {
+        render(<TransactionsPage />);
+        const selectElement = screen
+          .getByTestId('searchbar-dropdown-category')
+          .querySelector('select');
+        fireEvent.change(selectElement!, { target: { value: `${testCategoryKey}` } });
+        const filteredTableRowBeforeSorting = screen.getAllByTestId('table-row');
+        filteredTableRowBeforeSorting.forEach((row) => {
+          const rowCategory = row.querySelector('.tableRowCategory')!.textContent;
+          expect(rowCategory).toEqual(testCategory);
+        });
+
+        const selectElementSort = screen
+          .getByTestId('searchbar-dropdown-sort')
+          .querySelector('select');
+        fireEvent.change(selectElementSort!, { target: { value: 'lowest' } });
+
+        const filteredTableRowAfterSorting = screen.getAllByTestId('table-row');
+        filteredTableRowAfterSorting.forEach((row) => {
+          const rowCategory = row.querySelector('.tableRowCategory')!.textContent;
+          expect(rowCategory).toEqual(testCategory);
+        });
+      });
+    });
+
+    describe('Searching', () => {
+      it('filters all transactions for content of current input of searchbar', () => {
+        render(<TransactionsPage />);
+
+        const inputElement = screen.getByTestId('searchbar-input').querySelector('input');
+        fireEvent.change(inputElement!, { target: { value: `${testSearchbarInput}` } });
+
+        const filteredTableRowAfterSearching = screen.getAllByTestId('table-row');
+        filteredTableRowAfterSearching.forEach((row) => {
+          const rowName = row.querySelector('.tableRowPartnerName')!.textContent;
+          expect(rowName!.toLowerCase()).toContain(testSearchbarInput);
+        });
+      });
+
+      it('resets the pageIndex after input of searchbar changes', () => {
+        const { container } = render(<TransactionsPage />);
+        const buttons = container.querySelectorAll('.paginationPagesButton');
+        fireEvent.click(buttons[3]);
+        let activeButton = container.querySelector('.isActive');
+        expect(activeButton).toHaveTextContent('4');
+
+        const inputElement = screen.getByTestId('searchbar-input').querySelector('input');
+        fireEvent.change(inputElement!, { target: { value: `${testSearchbarInput}` } });
+        activeButton = container.querySelector('.isActive');
+
+        expect(activeButton).toHaveTextContent('1');
+      });
+
+      it('keeps sorting and filter after searching', () => {
+        const testCategoryKeyGroceries = 'groceries';
+        render(<TransactionsPage />);
+        const selectSortElement = screen
+          .getByTestId('searchbar-dropdown-sort')
+          .querySelector('select');
+        fireEvent.change(selectSortElement!, { target: { value: SortOptionEnum.HIGHEST } });
+        const selectCategoryElement = screen
+          .getByTestId('searchbar-dropdown-category')
+          .querySelector('select');
+        fireEvent.change(selectCategoryElement!, {
+          target: { value: `${testCategoryKeyGroceries}` },
+        });
+
+        const inputElement = screen.getByTestId('searchbar-input').querySelector('input');
+        fireEvent.change(inputElement!, { target: { value: `${testSearchbarInput}` } });
+        const tableAfterSortingFilteringSearching = screen.getAllByTestId('table-row');
+        const firstRowValue =
+          tableAfterSortingFilteringSearching[0].querySelector('.tableRowValue');
+        const firstRowValueRaw = convertSignedDollarStringToNumber(firstRowValue!.textContent!);
+        const secondRowValue =
+          tableAfterSortingFilteringSearching[1].querySelector('.tableRowValue');
+        const secondRowValueRaw = convertSignedDollarStringToNumber(secondRowValue!.textContent!);
+
+        expect(firstRowValueRaw > secondRowValueRaw).toBe(true);
+        tableAfterSortingFilteringSearching.forEach((row) => {
+          const rowCategory = row.querySelector('.tableRowCategory')!.textContent;
+          expect(rowCategory!.toLowerCase()).toEqual(testCategoryKeyGroceries);
+        });
       });
     });
   });
