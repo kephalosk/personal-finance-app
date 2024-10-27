@@ -1,0 +1,50 @@
+.searchbarDropdownCategory {
+  border-radius: 8px;
+  border: 1px solid var(--searchbar-grey);
+  padding: 12px 48px 12px 16px;
+  color: var(--text-dark);
+  appearance: none; /* Standard-Pfeil ausblenden */
+  -webkit-appearance: none; /* Für Webkit-basierte Browser wie Chrome und Safari */
+  -moz-appearance: none; /* Für Firefox */
+  transition:
+          border 0.3s ease,
+          border-color 0.3s ease,
+          background-color 0.3s ease,
+          box-shadow 0.3s ease;
+}
+.searchbarDropdownCategory:focus-visible {
+  border: 1px solid var(--component-background-grey);
+  background-color: var(--component-background-grey);
+  border-color: var(--component-background-grey);
+  outline: none;
+  color: var(--text-white);
+  cursor: pointer;
+}
+.searchbarDropdownCategory:focus-visible ~ .searchbarDropdownCategoryIcon {
+  --icon-filter: invert(74%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(300%) contrast(100%);
+}
+
+.searchbarDropdownCategoryIcon {
+  height: 6px;
+  width: auto;
+  top: calc(50% - 3px);
+  right: 20px;
+  position: absolute;
+  filter: var(--icon-filter);
+}
+
+.searchbarDropdownCategoryWrapper {
+  position: relative;
+}
+.searchbarDropdownCategoryWrapper:hover {
+  .searchbarDropdownCategory {
+    border: 1px solid var(--component-background-grey);
+    background-color: var(--component-background-grey);
+    color: var(--text-white);
+    cursor: pointer;
+  }
+
+  .searchbarDropdownCategoryIcon {
+    filter: invert(74%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(300%) contrast(100%);
+  }
+}

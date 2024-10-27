@@ -26,6 +26,9 @@
   --page-background: #F8F4F0;
   --component-background-dark: #201F24;
   --component-background-bright: #FFFFFF;
+  --component-background-grey: #98908B;
+  --component-background-light: #B1A9A4;
+  --component-background-disabled: #F2F2F2;
 
   --text-dark: #201F24;
   --text-green: #277C78;
@@ -43,8 +46,27 @@
   --light-blue-lightened: #A3DCE5;
 
   --horizontal-line: #F2F2F2;
+
+  --searchbar-grey: #98908B;
+
+  --icon-filter: invert(0%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);
 }
 
 * {
   box-sizing: border-box;
+}
+
+h1 {
+  margin: 9px 0;
+  font-size: 30px;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+hr {
+  margin: 20px 0;
+  border: 0;
+  background-color: var(--horizontal-line);
+  height: 1px;
+  width: 100%;
 }
