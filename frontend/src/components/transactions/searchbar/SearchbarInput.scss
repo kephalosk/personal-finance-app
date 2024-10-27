@@ -1,0 +1,38 @@
+.searchbarInputContainer {
+  flex-grow: 1;
+}
+
+.searchbarInput {
+  border-radius: 12px;
+  border: 1px solid var(--searchbar-grey);
+  padding: 14px 48px 12px 18px;
+  width: 100%;
+  color: var(--text-dark);
+  transition:
+          border 0.3s ease,
+          border-color 0.3s ease,
+          background-color 0.3s ease,
+          box-shadow 0.3s ease;
+}
+.searchbarInput::placeholder {
+  color: var(--searchbar-grey);
+  letter-spacing: 1px;
+}
+.searchbarInput:focus {
+  border-color: var(--component-background-grey);
+  outline: none;
+  box-shadow: 0 0 0 2px var(--component-background-dark);
+}
+
+.searchbarInputLense {
+  height: 16px;
+  width: auto;
+  top: calc(50% - 8px);
+  right: 20px;
+  position: absolute;
+}
+
+.searchbarInputRelative {
+  max-width: 320px;
+  position: relative;
+}
