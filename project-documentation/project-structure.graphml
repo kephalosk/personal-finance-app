@@ -1992,7 +1992,7 @@ Organisation<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel>
     <node id="n197">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
-          <y:Geometry height="91.9809523809522" width="264.40275669092625" x="2120.8391437086752" y="-3793.721428571429"/>
+          <y:Geometry height="91.9809523809522" width="264.40275669092625" x="2135.8391437086757" y="-3793.721428571429"/>
           <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="90.796875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="264.40275669092625" x="0.0" xml:space="preserve" y="0.5920386904763291">Sidebar.spec.tsx:
@@ -2046,7 +2046,7 @@ statt alles in einem.<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:La
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
           <y:Geometry height="21.0" width="254.70945476654288" x="1846.1296889421328" y="-3522.980952380952"/>
-          <y:Fill color="#FFCC00" color2="#B7C9E3" transparent="false"/>
+          <y:Fill color="#999999" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="l" textColor="#000000" verticalTextPosition="bottom" visible="true" width="254.70945476654288" x="4.0" xml:space="preserve" y="0.43359375">wo-1-switch-tests-to-shallow-rendering</y:NodeLabel>
         </y:GenericNode>
@@ -2055,12 +2055,42 @@ statt alles in einem.<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:La
     <node id="n203">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
-          <y:Geometry height="91.9809523809522" width="264.40275669092625" x="2120.8391437086752" y="-3558.471428571429"/>
-          <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
+          <y:Geometry height="91.9809523809522" width="264.40275669092625" x="2135.8391437086757" y="-3653.9619047619053"/>
+          <y:Fill color="#999999" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="76.6640625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="264.40275669092625" x="0.0" xml:space="preserve" y="7.658444940476329">npm install enzyme enzyme-adapter-react-16 --save-dev
 
 und ersetze rendern mit shallow rendern in allen Tests<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+        </y:GenericNode>
+      </data>
+    </node>
+    <node id="n204">
+      <data key="d6">
+        <y:GenericNode configuration="com.yworks.flowchart.process">
+          <y:Geometry height="39.0" width="198.65432570776773" x="2168.7133592002547" y="-3531.980952380952"/>
+          <y:Fill color="#999999" color2="#B7C9E3" transparent="false"/>
+          <y:BorderStyle color="#000000" type="line" width="1.0"/>
+          <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="34.265625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="198.65432570776773" x="0.0" xml:space="preserve" y="2.3671875">npm install enzyme enzyme-adapter-react-16 --save-dev<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+        </y:GenericNode>
+      </data>
+    </node>
+    <node id="n205">
+      <data key="d6">
+        <y:GenericNode configuration="com.yworks.flowchart.process">
+          <y:Geometry height="21.0" width="254.70945476654288" x="2140.6857946708674" y="-3462.980952380952"/>
+          <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
+          <y:BorderStyle color="#000000" type="line" width="1.0"/>
+          <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="l" textColor="#000000" verticalTextPosition="bottom" visible="true" width="254.70945476654288" x="4.0" xml:space="preserve" y="0.43359375">geht nur bis react 16</y:NodeLabel>
+        </y:GenericNode>
+      </data>
+    </node>
+    <node id="n206">
+      <data key="d6">
+        <y:GenericNode configuration="com.yworks.flowchart.process">
+          <y:Geometry height="32.0" width="254.70945476654288" x="2140.6857946708674" y="-3410.848015873016"/>
+          <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
+          <y:BorderStyle color="#000000" type="line" width="1.0"/>
+          <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="34.265625" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="l" textColor="#000000" verticalTextPosition="bottom" visible="true" width="254.70945476654288" x="4.0" xml:space="preserve" y="-1.1328125">shallow rendering not supported by @testing-library/react</y:NodeLabel>
         </y:GenericNode>
       </data>
     </node>
@@ -4384,7 +4414,46 @@ und ersetze rendern mit shallow rendern in allen Tests<y:LabelModel><y:SmartNode
       <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
-          <y:Path sx="127.35472738327144" sy="-0.0" tx="-132.20137834546313" ty="-0.0"/>
+          <y:Path sx="127.35472738327144" sy="-7.0" tx="-132.20137834546313" ty="-0.0">
+            <y:Point x="2120.3391437086757" y="-3519.480952380952"/>
+            <y:Point x="2120.3391437086757" y="-3607.971428571429"/>
+          </y:Path>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e194" source="n204" target="n205">
+      <data key="d9"/>
+      <data key="d10">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="19.5" tx="0.0" ty="-10.5"/>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e195" source="n202" target="n204">
+      <data key="d9"/>
+      <data key="d10">
+        <y:PolyLineEdge>
+          <y:Path sx="127.35472738327144" sy="-0.0" tx="-99.32716285388386" ty="-0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e196" source="n202" target="n206">
+      <data key="d9"/>
+      <data key="d10">
+        <y:PolyLineEdge>
+          <y:Path sx="127.35472738327144" sy="7.0" tx="-127.35472738327144" ty="-0.0">
+            <y:Point x="2120.3391437086757" y="-3505.480952380952"/>
+            <y:Point x="2120.3391437086757" y="-3394.848015873016"/>
+          </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="standard"/>
           <y:BendStyle smoothed="false"/>

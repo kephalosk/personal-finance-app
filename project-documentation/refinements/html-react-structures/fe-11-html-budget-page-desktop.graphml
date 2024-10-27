@@ -291,7 +291,7 @@
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
           <y:Geometry height="588.416205127005" width="352.98650012162994" x="52.315287587881926" y="332.2460115349087"/>
-          <y:Fill hasColor="false" transparent="false"/>
+          <y:Fill color="#99CCFF" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="tl" textColor="#000000" verticalTextPosition="bottom" visible="true" width="158.01953125" x="4.0" xml:space="preserve" y="4.0">div "budgetsDiagramCard"</y:NodeLabel>
         </y:GenericNode>
@@ -403,7 +403,7 @@
           <y:Geometry height="329.64096341025936" width="592.9007378137835" x="484.7485785757907" y="649.2650661841415"/>
           <y:Fill color="#99CCFF" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
-          <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="tl" textColor="#000000" verticalTextPosition="bottom" visible="true" width="214.111328125" x="4.0" xml:space="preserve" y="4.0">div "budgetCardBarList" flex:column</y:NodeLabel>
+          <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="tl" textColor="#000000" verticalTextPosition="bottom" visible="true" width="195.671875" x="4.0" xml:space="preserve" y="4.0">div "budgetCardList" flex:column</y:NodeLabel>
         </y:GenericNode>
       </data>
     </node>
@@ -673,7 +673,7 @@
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
           <y:Geometry height="496.70302852723637" width="332.6919296641565" x="60.96736311847195" y="403.0870364706679"/>
-          <y:Fill hasColor="false" transparent="false"/>
+          <y:Fill color="#FFFFFF" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="tl" textColor="#000000" verticalTextPosition="bottom" visible="true" width="197.86328125" x="4.0" xml:space="preserve" y="4.0">div "budgetsDiagramCardDetails"</y:NodeLabel>
         </y:GenericNode>
@@ -683,7 +683,7 @@
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
           <y:Geometry height="27.17111080410797" width="311.9181942872484" x="70.36451617134526" y="431.68466117671994"/>
-          <y:Fill hasColor="false" transparent="false"/>
+          <y:Fill color="#FFFFFF" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="tl" textColor="#000000" verticalTextPosition="bottom" visible="true" width="169.919921875" x="4.0" xml:space="preserve" y="4.0">label = "Spending Summary"</y:NodeLabel>
         </y:GenericNode>
@@ -743,7 +743,7 @@
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
           <y:Geometry height="27.17111080410797" width="311.9181942872484" x="70.36451617134526" y="547.2480243311322"/>
-          <y:Fill hasColor="false" transparent="false"/>
+          <y:Fill color="#FFFFFF" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="tl" textColor="#000000" verticalTextPosition="bottom" visible="true" width="16.357421875" x="4.0" xml:space="preserve" y="4.0">hr</y:NodeLabel>
         </y:GenericNode>
@@ -803,7 +803,7 @@
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
           <y:Geometry height="27.17111080410797" width="311.9181942872484" x="70.36451617134526" y="664.0959166896929"/>
-          <y:Fill hasColor="false" transparent="false"/>
+          <y:Fill color="#FFFFFF" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="tl" textColor="#000000" verticalTextPosition="bottom" visible="true" width="16.357421875" x="4.0" xml:space="preserve" y="4.0">hr</y:NodeLabel>
         </y:GenericNode>
@@ -863,7 +863,7 @@
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
           <y:Geometry height="27.17111080410797" width="311.9181942872484" x="70.36451617134526" y="779.6592798441051"/>
-          <y:Fill hasColor="false" transparent="false"/>
+          <y:Fill color="#FFFFFF" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="tl" textColor="#000000" verticalTextPosition="bottom" visible="true" width="16.357421875" x="4.0" xml:space="preserve" y="4.0">hr</y:NodeLabel>
         </y:GenericNode>

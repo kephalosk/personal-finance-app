@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 ValueBox.propTypes = {
   title: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
+  value: PropTypes.number.isRequired,
   color: PropTypes.string.isRequired,
 };
 
