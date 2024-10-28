@@ -4,9 +4,11 @@ import { BudgetCardHeader } from './BudgetCardHeader';
 
 describe('BudgetCardHeader', () => {
   const title = 'testTitle';
+  const color = 'testColor';
 
   const testProps = {
     title,
+    color,
   };
 
   it('renders div budgetCardHeader', () => {
@@ -17,12 +19,13 @@ describe('BudgetCardHeader', () => {
     expect(htmlElement).toBeInTheDocument();
   });
 
-  it('renders div budgetCardHeaderCircle', () => {
+  it('renders div budgetCardHeaderCircle with passed color', () => {
     const { container } = render(<BudgetCardHeader {...testProps} />);
 
     const htmlElement = container.querySelector('.budgetCardHeaderCircle');
 
     expect(htmlElement).toBeInTheDocument();
+    expect(htmlElement).toHaveClass(color);
   });
 
   it('renders label budgetCardHeaderTitle with passed title', () => {

@@ -89,7 +89,7 @@ export function BudgetsPage() {
     },
   ];
 
-  const budgetCardListLink = 'transactions';
+  const budgetCardListLink = '../transactions';
 
   const budgetCardListEntertainmentBudgetCategory: string = 'Entertainment';
   const budgetCardListEntertainmentBudgetMaximum: number = 50.0;

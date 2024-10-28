@@ -11,6 +11,22 @@ describe('BudgetsDiagramCard', () => {
     expect(htmlElement).toBeInTheDocument();
   });
 
+  it('renders div budgetsDiagramWrapper', () => {
+    const { container } = render(<BudgetsDiagramCard />);
+
+    const htmlElement = container.querySelector('.budgetsDiagramWrapper');
+
+    expect(htmlElement).toBeInTheDocument();
+  });
+
+  it('renders div budgetsDiagramCardDetails', () => {
+    const { container } = render(<BudgetsDiagramCard />);
+
+    const htmlElement = container.querySelector('.budgetsDiagramCardDetails');
+
+    expect(htmlElement).toBeInTheDocument();
+  });
+
   it('renders label budgetsDiagramCardDetailsLabel', () => {
     const { container } = render(<BudgetsDiagramCard />);
 
@@ -18,6 +34,14 @@ describe('BudgetsDiagramCard', () => {
 
     expect(htmlElement).toBeInTheDocument();
     expect(htmlElement).toHaveTextContent('Spending Summary');
+  });
+
+  it('renders div budgetsDiagramCardRowWrapper', () => {
+    const { container } = render(<BudgetsDiagramCard />);
+
+    const htmlElement = container.querySelector('.budgetsDiagramCardRowWrapper');
+
+    expect(htmlElement).toBeInTheDocument();
   });
 
   it('renders all 4 divs budgetsDiagramCardDetails', () => {

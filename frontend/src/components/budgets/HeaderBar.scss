@@ -1,0 +1,16 @@
+.headerBar {
+  display: flex;
+  flex-direction: row;
+}
+
+.headerBarButton {
+  border-radius: 8px;
+  background-color: var(--component-background-dark);
+  padding: 16px;
+  font-weight: 600;
+  color: var(--text-white);
+}
+
+.headerBarTitle{
+  flex-grow: 1;
+}

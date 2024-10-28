@@ -70,6 +70,18 @@ describe('BudgetCard', () => {
     expect(component).toBeInTheDocument();
   });
 
+  it('renders div budgetCardBar', () => {
+    const { container } = render(
+      <MemoryRouter>
+        <BudgetCard {...testProps} />
+      </MemoryRouter>
+    );
+
+    const htmlElement = container.querySelector('.budgetCardBar');
+
+    expect(htmlElement).toBeInTheDocument();
+  });
+
   it('renders label budgetCardBarLabel', () => {
     const { container } = render(
       <MemoryRouter>

@@ -95,6 +95,18 @@ describe('BudgetCardList', () => {
     expect(svgElement).toBeInTheDocument();
   });
 
+  it('renders div budgetCardListTransactions', () => {
+    const { container } = render(
+      <MemoryRouter>
+        <BudgetCardList {...testProps} />
+      </MemoryRouter>
+    );
+
+    const htmlElement = container.querySelector('.budgetCardListTransactions');
+
+    expect(htmlElement).toBeInTheDocument();
+  });
+
   it('renders a maximum of 3 transaction-rows with all passed transactions', () => {
     const moreThan3Transactions = [...transactions, ...transactions];
     render(

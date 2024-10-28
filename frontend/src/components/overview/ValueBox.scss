@@ -21,6 +21,9 @@
 .valueBoxBorder.light-blue {
   background-color: var(--light-blue);
 }
+.valueBoxBorder.sepia {
+  background-color: var(--page-background);
+}
 
 .valueBoxContent {
   display: flex;
