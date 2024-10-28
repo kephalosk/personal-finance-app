@@ -5,4 +5,5 @@ export enum ColorNameEnum {
   BEIGE = 'beige',
   PURPLE = 'purple',
   WHITE = 'white',
+  SEPIA = 'sepia',
 }

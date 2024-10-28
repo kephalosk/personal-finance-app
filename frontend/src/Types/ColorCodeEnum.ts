@@ -5,4 +5,5 @@ export enum ColorCodeEnum {
   BEIGE = '#F2CDAC',
   PURPLE = '#826CB0',
   WHITE = '#FFFFFF',
+  SEPIA = '#F8F4F0',
 }

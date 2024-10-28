@@ -37,10 +37,10 @@ describe('BudgetCardHeader', () => {
     expect(htmlElement).toHaveTextContent(title);
   });
 
-  it('renders select budgetCardHeaderEdit', () => {
+  it('renders select budgetCardHeaderEditIcon', () => {
     const { container } = render(<BudgetCardHeader {...testProps} />);
 
-    const htmlElement = container.querySelector('.budgetCardHeaderEdit');
+    const htmlElement = container.querySelector('.budgetCardHeaderEditIcon');
 
     expect(htmlElement).toBeInTheDocument();
   });

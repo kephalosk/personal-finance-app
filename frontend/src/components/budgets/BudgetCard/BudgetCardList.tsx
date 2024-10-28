@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { TransactionRow } from '../../overview/transactions/TransactionRow';
 import { BudgetCardListProps } from '../../../types/BudgetCardListProps';
 import PropTypes from 'prop-types';
-import { TransactionRowProps } from '../../../types/TransactionRowProps';
 import { EPTransaction } from '../../../types/EPTransaction';
 
 BudgetCardList.propTypes = {

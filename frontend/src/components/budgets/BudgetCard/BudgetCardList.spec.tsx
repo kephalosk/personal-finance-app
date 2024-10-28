@@ -1,28 +1,37 @@
 import { render, screen } from '@testing-library/react';
 import { BudgetCardList } from './BudgetCardList';
 import { BudgetCardListProps } from '../../../types/BudgetCardListProps';
-import { TransactionRowProps } from '../../../types/TransactionRowProps';
 import { MemoryRouter } from 'react-router-dom';
+import { EPTransaction } from '../../../types/EPTransaction';
 
 describe('BudgetCardList', () => {
-  const transactions: TransactionRowProps[] = [
+  const transactions: EPTransaction[] = [
     {
+      avatar: './src/assets/images/avatars/james-thompson.jpg',
       name: 'James Thompson',
-      value: -5,
+      category: 'Entertainment',
+      categoryKey: 'entertainment',
       date: '11 Aug 2024',
-      imgSrc: './src/assets/images/avatars/james-thompson.jpg',
+      amount: -5,
+      recurring: false,
     },
     {
+      avatar: './src/assets/images/avatars/pixel-playground.jpg',
       name: 'Pixel Playground',
-      value: -10,
+      category: 'Entertainment',
+      categoryKey: 'entertainment',
       date: '15 Aug 2024',
-      imgSrc: './src/assets/images/avatars/pixel-playground.jpg',
+      amount: -10,
+      recurring: true,
     },
     {
+      avatar: './src/assets/images/avatars/rina-sato.jpg',
       name: 'Rina Sato',
-      value: -10,
+      category: 'Entertainment',
+      categoryKey: 'entertainment',
       date: '13 Jul 2024',
-      imgSrc: './src/assets/images/avatars/rina-sato.jpg',
+      amount: -10,
+      recurring: false,
     },
   ];
   const link: string = 'testLink';

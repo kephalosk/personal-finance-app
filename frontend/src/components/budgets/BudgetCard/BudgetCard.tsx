@@ -6,6 +6,7 @@ import { BudgetCardProps } from '../../../types/BudgetCardProps';
 import React from 'react';
 import { EPTransaction } from '../../../types/EPTransaction';
 import PropTypes from 'prop-types';
+import { ColorNameEnum } from '../../../types/ColorNameEnum';
 
 BudgetCard.propTypes = {
   budget: PropTypes.object.isRequired,
@@ -49,7 +50,7 @@ export function BudgetCard({ budget, transactions }: BudgetCardProps) {
           </div>
           <div className="budgetCardBarValues">
             <ValueBox title="Spent" value={spent} color={budget.color} />
-            <ValueBox title="Remaining" value={remainingPositive} color="sepia" />
+            <ValueBox title="Remaining" value={remainingPositive} color={ColorNameEnum.SEPIA} />
           </div>
         </div>
         <BudgetCardList transactions={budgetTransactions} link={link} />
