@@ -1,9 +1,7 @@
-import { TransactionRowProps } from './TransactionRowProps';
+import { EPTransaction } from './EPTransaction';
+import { EPBudget } from './EPBudget';
 
 export interface BudgetCardProps {
-  transactions: TransactionRowProps[];
-  link: string;
-  maximum: number;
-  category: string;
-  color: string;
+  budget: EPBudget;
+  transactions: EPTransaction[];
 }

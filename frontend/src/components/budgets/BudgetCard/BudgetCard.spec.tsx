@@ -168,6 +168,28 @@ describe('BudgetCard', () => {
     });
   });
 
+  it('resets negative remaining to 0', () => {
+    const propsWithOvermaxedSpending = {
+      ...testProps,
+      maximum: 5,
+    };
+    render(
+      <MemoryRouter>
+        <BudgetCard {...propsWithOvermaxedSpending} />
+      </MemoryRouter>
+    );
+
+    const components = screen.getAllByTestId('value-box');
+
+    components.forEach((component) => {
+      const title = component.querySelector('.valueBoxContentTitle')!.textContent;
+      if (title === 'Remaining') {
+        const value = component.querySelector('.valueBoxContentValue')!.textContent;
+        expect(value).toEqual('$0');
+      }
+    });
+  });
+
   it('renders component BudgetCardList', () => {
     render(
       <MemoryRouter>

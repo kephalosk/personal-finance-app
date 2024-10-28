@@ -4,6 +4,7 @@ import { TransactionRow } from '../../overview/transactions/TransactionRow';
 import { BudgetCardListProps } from '../../../types/BudgetCardListProps';
 import PropTypes from 'prop-types';
 import { TransactionRowProps } from '../../../types/TransactionRowProps';
+import { EPTransaction } from '../../../types/EPTransaction';
 
 BudgetCardList.propTypes = {
   transactions: PropTypes.array.isRequired,
@@ -11,10 +12,10 @@ BudgetCardList.propTypes = {
 };
 
 export function BudgetCardList({ transactions, link }: BudgetCardListProps) {
-  const latestTransactions: TransactionRowProps[] = [...transactions].sort(
+  const latestTransactions: EPTransaction[] = [...transactions].sort(
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
   );
-  const renderedTransactions: TransactionRowProps[] = latestTransactions.slice(0, 3);
+  const renderedTransactions: EPTransaction[] = latestTransactions.slice(0, 3);
   return (
     <>
       <div className="budgetCardList" data-testid="budget-card-list">
@@ -38,15 +39,15 @@ export function BudgetCardList({ transactions, link }: BudgetCardListProps) {
           </Link>
         </div>
         <div className="budgetCardListTransactions">
-          {renderedTransactions.map((transaction: TransactionRowProps, index: number) => (
+          {renderedTransactions.map((transaction: EPTransaction, index: number) => (
             <div key={index}>
               <TransactionRow
                 name={transaction.name}
-                value={transaction.value}
+                value={transaction.amount}
                 date={transaction.date}
-                imgSrc={transaction.imgSrc}
+                imgSrc={transaction.avatar}
               />
-              {index < transactions.length - 1 && <hr className="budgetCardListLine" />}
+              {index < renderedTransactions.length - 1 && <hr className="budgetCardListLine" />}
             </div>
           ))}
         </div>

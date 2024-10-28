@@ -1,6 +1,6 @@
-import { TransactionRowProps } from './TransactionRowProps';
+import { EPTransaction } from './EPTransaction';
 
 export interface BudgetCardListProps {
-  transactions: TransactionRowProps[];
+  transactions: EPTransaction[];
   link: string;
 }

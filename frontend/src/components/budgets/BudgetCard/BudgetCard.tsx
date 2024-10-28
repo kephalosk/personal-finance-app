@@ -4,28 +4,42 @@ import { ValueBox } from '../../overview/ValueBox';
 import { BudgetCardList } from './BudgetCardList';
 import { BudgetCardProps } from '../../../types/BudgetCardProps';
 import React from 'react';
+import { EPTransaction } from '../../../types/EPTransaction';
+import PropTypes from 'prop-types';
 
-export function BudgetCard({ transactions, link, maximum, category, color }: BudgetCardProps) {
+BudgetCard.propTypes = {
+  budget: PropTypes.object.isRequired,
+  transactions: PropTypes.array.isRequired,
+};
+
+export function BudgetCard({ budget, transactions }: BudgetCardProps) {
+  const budgetTransactions: EPTransaction[] = transactions.filter((transaction: EPTransaction) => {
+    return transaction.categoryKey === budget.categoryKey;
+  });
+
+  const link = '../transactions';
+
   let spent: number = 0;
-  transactions.forEach((transaction) => {
-    spent = spent + transaction.value;
+  budgetTransactions.forEach((transaction: EPTransaction) => {
+    spent = spent + transaction.amount;
   });
   spent = spent * -1;
 
-  const remaining: number = maximum - spent;
+  const remaining: number = budget.maximum - spent;
+  const remainingPositive: number = remaining > 0 ? remaining : 0;
 
-  const spentPercent: number = (spent / maximum) * 100;
+  const spentPercent: number = (spent / budget.maximum) * 100;
 
-  const maximumFormatted = maximum.toFixed(2);
+  const maximumFormatted = budget.maximum.toFixed(2);
   return (
     <>
       <div className="budgetCard" data-testid="budget-card">
-        <BudgetCardHeader title={category} color={color} />
+        <BudgetCardHeader title={budget.category} color={budget.color} />
         <div className="budgetCardBar">
           <label className="budgetCardBarLabel">Maximum of ${maximumFormatted}</label>
           <div className="budgetCardBarMax">
             <div
-              className={`budgetCardBarCurrent ${color}`}
+              className={`budgetCardBarCurrent ${budget.color}`}
               style={
                 {
                   '--barCurrentWidthPercent': `${spentPercent}%`,
@@ -34,11 +48,11 @@ export function BudgetCard({ transactions, link, maximum, category, color }: Bud
             ></div>
           </div>
           <div className="budgetCardBarValues">
-            <ValueBox title="Spent" value={spent} color={color} />
-            <ValueBox title="Remaining" value={remaining} color="sepia" />
+            <ValueBox title="Spent" value={spent} color={budget.color} />
+            <ValueBox title="Remaining" value={remainingPositive} color="sepia" />
           </div>
         </div>
-        <BudgetCardList transactions={transactions} link={link} />
+        <BudgetCardList transactions={budgetTransactions} link={link} />
       </div>
     </>
   );
