@@ -50,3 +50,33 @@ export const mockedTransactionsEntertainment: EPTransaction[] = [
     recurring: false,
   },
 ];
+
+export const mockedTransactionsWithDifferentCategoriesAndCategoryAsNames: EPTransaction[] = [
+  {
+    avatar: './src/assets/images/avatars/james-thompson.jpg',
+    name: 'Entertainment',
+    category: 'Entertainment',
+    categoryKey: 'entertainment',
+    date: '11 Aug 2024',
+    amount: -5,
+    recurring: false,
+  },
+  {
+    avatar: './src/assets/images/avatars/pixel-playground.jpg',
+    name: 'School',
+    category: 'School',
+    categoryKey: 'school',
+    date: '15 Aug 2024',
+    amount: -10,
+    recurring: true,
+  },
+  {
+    avatar: './src/assets/images/avatars/rina-sato.jpg',
+    name: 'Bills',
+    category: 'Bills',
+    categoryKey: 'bills',
+    date: '13 Jul 2024',
+    amount: -10,
+    recurring: false,
+  },
+];

@@ -1,8 +1,8 @@
 import { render } from '@testing-library/react';
 import React from 'react';
-import { BudgetCardHeader } from './BudgetCardHeader';
+import { CardHeader } from './CardHeader';
 
-describe('BudgetCardHeader', () => {
+describe('CardHeader', () => {
   const title = 'testTitle';
   const color = 'testColor';
 
@@ -11,16 +11,16 @@ describe('BudgetCardHeader', () => {
     color,
   };
 
-  it('renders div budgetCardHeader', () => {
-    const { container } = render(<BudgetCardHeader {...testProps} />);
+  it('renders div CardHeader', () => {
+    const { container } = render(<CardHeader {...testProps} />);
 
     const htmlElement = container.querySelector('.budgetCardHeader');
 
     expect(htmlElement).toBeInTheDocument();
   });
 
-  it('renders div budgetCardHeaderCircle with passed color', () => {
-    const { container } = render(<BudgetCardHeader {...testProps} />);
+  it('renders div CardHeaderCircle with passed color', () => {
+    const { container } = render(<CardHeader {...testProps} />);
 
     const htmlElement = container.querySelector('.budgetCardHeaderCircle');
 
@@ -28,8 +28,8 @@ describe('BudgetCardHeader', () => {
     expect(htmlElement).toHaveClass(color);
   });
 
-  it('renders label budgetCardHeaderTitle with passed title', () => {
-    const { container } = render(<BudgetCardHeader {...testProps} />);
+  it('renders label CardHeaderTitle with passed title', () => {
+    const { container } = render(<CardHeader {...testProps} />);
 
     const htmlElement = container.querySelector('.budgetCardHeaderTitle');
 
@@ -37,8 +37,8 @@ describe('BudgetCardHeader', () => {
     expect(htmlElement).toHaveTextContent(title);
   });
 
-  it('renders select budgetCardHeaderEditIcon', () => {
-    const { container } = render(<BudgetCardHeader {...testProps} />);
+  it('renders select CardHeaderEditIcon', () => {
+    const { container } = render(<CardHeader {...testProps} />);
 
     const htmlElement = container.querySelector('.budgetCardHeaderEditIcon');
 

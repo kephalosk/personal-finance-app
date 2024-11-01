@@ -1,0 +1,37 @@
+.CardHeader {
+  display: flex;
+  flex-direction: row;
+  column-gap: 16px;
+  align-items: center;
+}
+
+.CardHeaderCircle {
+  border-radius: 50%;
+  height: 16px;
+  width: 16px;
+}
+.CardHeaderCircle.dark-green{
+  background-color: var(--dark-green);
+}
+.CardHeaderCircle.light-blue{
+  background-color: var(--light-blue);
+}
+.CardHeaderCircle.beige{
+  background-color: var(--beige);
+}
+.CardHeaderCircle.dark-grey{
+  background-color: var(--dark-grey);
+}
+.CardHeaderCircle.purple{
+  background-color: var(--purple);
+}
+
+.CardHeaderEditIcon {
+  cursor: pointer;
+}
+
+.CardHeaderTitle {
+  flex-grow: 1;
+  font-size: 20px;
+  font-weight: 600;
+}

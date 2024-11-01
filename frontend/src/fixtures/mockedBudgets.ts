@@ -14,3 +14,10 @@ export const mockedBudgets: EPBudget[] = [
     color: 'testColor',
   },
 ];
+
+export const mockedBudget: EPBudget = {
+  category: 'Entertainment',
+  categoryKey: 'entertainment',
+  maximum: 100,
+  color: 'testColor',
+};
