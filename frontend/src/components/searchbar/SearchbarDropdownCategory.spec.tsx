@@ -1,10 +1,10 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
 import { SearchbarDropdownCategory } from './SearchbarDropdownCategory';
-import { getTransactions } from '../../../globals/services/TransactionService';
-import { mockedTransactions } from '../../../fixtures/MockedTransactions';
+import { getTransactions } from '../../globals/services/TransactionService';
+import { mockedTransactions } from '../../fixtures/MockedTransactions';
 
-jest.mock('../../../globals/services/TransactionService', () => ({
+jest.mock('../../globals/services/TransactionService', () => ({
   getTransactions: jest.fn(),
 }));
 

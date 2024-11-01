@@ -2,42 +2,13 @@ import { render, screen } from '@testing-library/react';
 import { BudgetCardList } from './BudgetCardList';
 import { BudgetCardListProps } from '../../../types/BudgetCardListProps';
 import { MemoryRouter } from 'react-router-dom';
-import { EPTransaction } from '../../../types/EPTransaction';
+import { mockedTransactions } from '../../../fixtures/MockedTransactions';
 
 describe('BudgetCardList', () => {
-  const transactions: EPTransaction[] = [
-    {
-      avatar: './src/assets/images/avatars/james-thompson.jpg',
-      name: 'James Thompson',
-      category: 'Entertainment',
-      categoryKey: 'entertainment',
-      date: '11 Aug 2024',
-      amount: -5,
-      recurring: false,
-    },
-    {
-      avatar: './src/assets/images/avatars/pixel-playground.jpg',
-      name: 'Pixel Playground',
-      category: 'Entertainment',
-      categoryKey: 'entertainment',
-      date: '15 Aug 2024',
-      amount: -10,
-      recurring: true,
-    },
-    {
-      avatar: './src/assets/images/avatars/rina-sato.jpg',
-      name: 'Rina Sato',
-      category: 'Entertainment',
-      categoryKey: 'entertainment',
-      date: '13 Jul 2024',
-      amount: -10,
-      recurring: false,
-    },
-  ];
   const link: string = 'testLink';
 
   const testProps: BudgetCardListProps = {
-    transactions,
+    transactions: mockedTransactions,
     link,
   };
 
@@ -117,7 +88,7 @@ describe('BudgetCardList', () => {
   });
 
   it('renders a maximum of 3 transaction-rows with all passed transactions', () => {
-    const moreThan3Transactions = [...transactions, ...transactions];
+    const moreThan3Transactions = [...mockedTransactions, ...mockedTransactions];
     render(
       <MemoryRouter>
         <BudgetCardList transactions={moreThan3Transactions} link="/" />

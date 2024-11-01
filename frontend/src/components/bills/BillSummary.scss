@@ -1,0 +1,44 @@
+.billSummary {
+  border-radius: 12px;
+  background-color: var(--component-background-bright);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+}
+
+.billSummaryRow {
+  display: flex;
+  flex-direction: row;
+  font-size: 14px;
+  color: var(--text-grey);
+}
+.billSummaryRow.red {
+  color: var(--text-red);
+}
+
+.billSummaryRowLine {
+  margin: 16px 0;
+}
+
+.billSummaryRowPaid,
+.billSummaryRowUpcoming,
+.billSummaryRowDue {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.billSummaryRowPaid,
+.billSummaryRowUpcoming{
+  color: var(--text-dark);
+}
+
+.billSummaryRowTitle {
+  flex-grow: 1;
+}
+
+.billSummaryTitle {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text-dark);
+}

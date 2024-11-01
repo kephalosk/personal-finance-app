@@ -8,6 +8,7 @@ describe('TransactionService', () => {
     category: 'General',
     categoryKey: 'general',
     date: '19 Aug 2024',
+    dateRaw: new Date('2024-08-19T14:23:11.000Z'),
     amount: 75.5,
     recurring: false,
   };

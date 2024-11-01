@@ -1,0 +1,35 @@
+.billCard {
+  border-radius: 12px;
+  background-color: var(--component-background-bright);
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 24px;
+}
+
+.billCardTableHeader{
+  display: grid;
+  grid-template-columns: 50% 25% 25%;
+  font-size: 14px;
+  color: var(--text-grey);
+}
+
+.billCardTableHeaderAmount {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.billCardTableHeaderDate {
+  font-size: 14px;
+  color: var(--text-grey);
+}
+
+.billCardSearchbar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.searchbarLabel {
+  color: var(--text-grey);
+}

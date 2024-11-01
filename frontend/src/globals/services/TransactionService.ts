@@ -17,6 +17,7 @@ function fromAPITransactionDTOMapper(transactions: APITransactionDTO[]): EPTrans
       category: apiTransactionDTO.category,
       categoryKey: toLowerCaseWithoutWhitespace(apiTransactionDTO.category),
       date: formatDate(apiTransactionDTO.date),
+      dateRaw: new Date(apiTransactionDTO.date),
       amount: apiTransactionDTO.amount,
       recurring: apiTransactionDTO.recurring,
     };
