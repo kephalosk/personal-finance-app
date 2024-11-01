@@ -7,7 +7,6 @@ import { useRef, useState } from 'react';
 import { SearchbarInputHandle } from '../../types/SearchbarInputHandle';
 import { SearchbarDropdownSort } from '../searchbar/SearchbarDropdownSort';
 import { SortOptionEnum } from '../../constants/SortOptionEnum';
-import { getTransactions } from '../../globals/services/TransactionService';
 import PropTypes from 'prop-types';
 
 BillCard.propTypes = {
@@ -16,34 +15,25 @@ BillCard.propTypes = {
 };
 
 export function BillCard({ bills, today }: BillCardProps) {
-  const [pageIndex, setPageIndex] = useState(0);
   const [currentSortOption, setCurrentSortOption] = useState<string>(SortOptionEnum.LATEST);
+
+  const [filteredTransactions, setFilteredTransactions] = useState(bills);
+
+  let shadowFilteredTransactions: EPTransaction[] = [...filteredTransactions];
+
   const searchbarRef = useRef<SearchbarInputHandle>();
 
-  const handleInputChange = (currentInput: string) => {
-    //TODO
-    // const filteredByInput = transactions.filter((transaction) => {
-    //     const transactionSmall = transaction.name.toLowerCase();
-    //     const inputSmall = currentInput.toLowerCase();
-    //     return transactionSmall.includes(inputSmall);
-    // });
-    //
-    // shadowFilteredTransactions = [...filteredByInput];
-    //
-    // handleCategoryChange(currentCategory, filteredByInput);
-  };
-
   const handleSortChange = (sortOption: string) => {
-    let sorted = [...getTransactions()];
+    let sorted = [...shadowFilteredTransactions];
 
     setCurrentSortOption(sortOption);
 
     switch (sortOption) {
       case SortOptionEnum.LATEST:
-        sorted.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+        sorted.sort((a, b) => b.dateRaw.getDate() - a.dateRaw.getDate());
         break;
       case SortOptionEnum.OLDEST:
-        sorted.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+        sorted.sort((a, b) => a.dateRaw.getDate() - b.dateRaw.getDate());
         break;
       case SortOptionEnum.ATOZ:
         sorted.sort((a, b) => a.name.localeCompare(b.name));
@@ -51,20 +41,34 @@ export function BillCard({ bills, today }: BillCardProps) {
       case SortOptionEnum.ZTOA:
         sorted.sort((a, b) => b.name.localeCompare(a.name));
         break;
-      case SortOptionEnum.HIGHEST:
+      case SortOptionEnum.LOWEST:
         sorted.sort((a, b) => b.amount - a.amount);
         break;
-      case SortOptionEnum.LOWEST:
+      case SortOptionEnum.HIGHEST:
         sorted.sort((a, b) => a.amount - b.amount);
         break;
       default:
-        sorted.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+        sorted.sort((a, b) => b.dateRaw.getTime() - a.dateRaw.getTime());
         break;
     }
 
-    // setFilteredTransactions(sorted);
+    setFilteredTransactions(sorted);
+  };
 
-    setPageIndex(0);
+  const handleInputChange = (currentInput: string) => {
+    const filteredByInput = bills.filter((transaction) => {
+      const transactionSmall = transaction.name.toLowerCase();
+      const inputSmall = currentInput.toLowerCase();
+      return transactionSmall.includes(inputSmall);
+    });
+
+    shadowFilteredTransactions = [...filteredByInput];
+
+    if (filteredByInput.length === bills.length && searchbarRef.current) {
+      searchbarRef.current.clearInput();
+    }
+
+    handleSortChange(currentSortOption);
   };
 
   return (
@@ -81,7 +85,7 @@ export function BillCard({ bills, today }: BillCardProps) {
             <label className="billCardTableHeaderDate">Due Date</label>
             <label className="billCardTableHeaderAmount">Amount</label>
           </div>
-          {bills.map((transaction: EPTransaction, index: number) => (
+          {filteredTransactions.map((transaction: EPTransaction, index: number) => (
             <BillCardTableRow key={index} transaction={transaction} today={today} />
           ))}
         </div>
