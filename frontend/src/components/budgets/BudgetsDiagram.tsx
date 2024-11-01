@@ -1,8 +1,8 @@
 import './BudgetsDiagram.scss';
 import React from 'react';
-import { BudgetsDiagramProps } from '../../../types/BudgetsDiagramProps';
-import { EPBudget } from '../../../types/EPBudget';
-import { EPTransaction } from '../../../types/EPTransaction';
+import { BudgetsDiagramProps } from '../../types/BudgetsDiagramProps';
+import { EPBudget } from '../../types/EPBudget';
+import { EPTransaction } from '../../types/EPTransaction';
 
 export function BudgetsDiagram({ budgets, transactions }: BudgetsDiagramProps) {
   let spentTotal = 0;

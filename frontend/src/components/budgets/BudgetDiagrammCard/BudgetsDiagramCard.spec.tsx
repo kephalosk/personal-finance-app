@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import React from 'react';
 import { BudgetsDiagramCard } from './BudgetsDiagramCard';
 import { BudgetsDiagramCardProps } from '../../../types/BudgetsDiagramCardProps';
-import { mockedBudgets } from '../../../fixtures/mockedBudgets';
+import { mockedBudgets } from '../../../fixtures/MockedBudgets';
 import { mockedTransactionsEntertainment } from '../../../fixtures/MockedTransactions';
 
 describe('BudgetsDiagramCard', () => {

@@ -14,7 +14,7 @@ describe('CardHeader', () => {
   it('renders div CardHeader', () => {
     const { container } = render(<CardHeader {...testProps} />);
 
-    const htmlElement = container.querySelector('.budgetCardHeader');
+    const htmlElement = container.querySelector('.cardHeader');
 
     expect(htmlElement).toBeInTheDocument();
   });
@@ -22,7 +22,7 @@ describe('CardHeader', () => {
   it('renders div CardHeaderCircle with passed color', () => {
     const { container } = render(<CardHeader {...testProps} />);
 
-    const htmlElement = container.querySelector('.budgetCardHeaderCircle');
+    const htmlElement = container.querySelector('.cardHeaderCircle');
 
     expect(htmlElement).toBeInTheDocument();
     expect(htmlElement).toHaveClass(color);
@@ -31,7 +31,7 @@ describe('CardHeader', () => {
   it('renders label CardHeaderTitle with passed title', () => {
     const { container } = render(<CardHeader {...testProps} />);
 
-    const htmlElement = container.querySelector('.budgetCardHeaderTitle');
+    const htmlElement = container.querySelector('.cardHeaderTitle');
 
     expect(htmlElement).toBeInTheDocument();
     expect(htmlElement).toHaveTextContent(title);
@@ -40,7 +40,7 @@ describe('CardHeader', () => {
   it('renders select CardHeaderEditIcon', () => {
     const { container } = render(<CardHeader {...testProps} />);
 
-    const htmlElement = container.querySelector('.budgetCardHeaderEditIcon');
+    const htmlElement = container.querySelector('.cardHeaderEditIcon');
 
     expect(htmlElement).toBeInTheDocument();
   });

@@ -6,7 +6,7 @@ import {
   mockedTransactionsEntertainment,
   mockedTransactionsWithDifferentCategoriesAndCategoryAsNames,
 } from '../../../fixtures/MockedTransactions';
-import { mockedBudget } from '../../../fixtures/mockedBudgets';
+import { mockedBudget } from '../../../fixtures/MockedBudgets';
 
 describe('BudgetCard', () => {
   const testProps: BudgetCardProps = {
