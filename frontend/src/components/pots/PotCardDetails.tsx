@@ -1,6 +1,7 @@
 import './PotCardDetails.scss';
 import { PotCardDetailsProps } from '../../types/PotCardDetailsProps';
 import PropTypes from 'prop-types';
+import React from 'react';
 
 PotCardDetails.propTypes = {
   pot: PropTypes.object.isRequired,
@@ -16,10 +17,17 @@ export function PotCardDetails({ pot }: PotCardDetailsProps) {
       <div className="potCardDetails" data-testid="pot-card-details">
         <div className="potCardDetailsTotal">
           <div className="potCardDetailsTotalLabel">Total Saved</div>
-          <div className="potCardDetailsTotalAmount">{totalFormatted}</div>
+          <div className="potCardDetailsTotalAmount">${totalFormatted}</div>
         </div>
         <div className="potCardBarMax">
-          <div className="potCardBarCurrent"></div>
+          <div
+            className={`potCardBarCurrent ${pot.theme}`}
+            style={
+              {
+                '--barCurrentWidthPercent': `${currentPercent}%`,
+              } as React.CSSProperties & { [key: string]: string }
+            }
+          ></div>
         </div>
         <div className="potCardDetailsPercent">
           <div className="potCardDetailsPercentCurrent">{currentPercentFormatted}%</div>

@@ -20,7 +20,7 @@
   max-width: calc(100% - 8px);
   top: calc(50% - 12px);
   left: 4px;
-  position: relative;
+  position: absolute;
 }
 .budgetCardBarCurrent.dark-green{
   background-color: var(--dark-green);

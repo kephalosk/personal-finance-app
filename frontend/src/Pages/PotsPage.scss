@@ -1,0 +1,13 @@
+.potsPage {
+  padding: 32px 40px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 32px;
+}
+
+.potPageGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, (minmax(300px, 1fr)));
+  column-gap: 24px;
+  row-gap: 24px;
+}

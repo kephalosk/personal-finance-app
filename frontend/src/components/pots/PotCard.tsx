@@ -15,8 +15,8 @@ export function PotCard({ pot }: PotCardProps) {
         <CardHeader title="Savings" color="dark-green" />
         <PotCardDetails pot={pot} />
         <div className="potCardButtons">
-          <button className="potCardButtonAdd">+ Add Money</button>
-          <button className="potCardButtonWithdraw">Withdraw</button>
+          <button className="potCardButton">+ Add Money</button>
+          <button className="potCardButton">Withdraw</button>
         </div>
       </div>
     </>
