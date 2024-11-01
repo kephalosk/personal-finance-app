@@ -1,5 +1,5 @@
 export interface ValueBoxProps {
   title: string;
-  value: string;
+  value: number;
   color: string;
 }

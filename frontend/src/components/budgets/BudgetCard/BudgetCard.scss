@@ -1,0 +1,19 @@
+.budgetCard {
+  border-radius: 12px;
+  background-color: var(--component-background-bright);
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+}
+
+.budgetCardBar {
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+}
+
+.budgetCardBarLabel {
+  font-size: 14px;
+  color: var(--text-grey)
+}

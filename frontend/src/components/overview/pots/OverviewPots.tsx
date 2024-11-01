@@ -12,12 +12,12 @@ export function OverviewPots() {
           <PotsSummary />
           <div className="overviewPotsValues">
             <div className="overviewPotsValuesRow">
-              <ValueBox title="Savings" value="159" color="dark-green" />
-              <ValueBox title="Gift" value="40" color="light-blue" />
+              <ValueBox title="Savings" value={159} color="dark-green" />
+              <ValueBox title="Gift" value={40} color="light-blue" />
             </div>
             <div className="overviewPotsValuesRow">
-              <ValueBox title="Concert Ticket" value="110" color="dark-grey" />
-              <ValueBox title="New Laptop" value="10" color="beige" />
+              <ValueBox title="Concert Ticket" value={110} color="dark-grey" />
+              <ValueBox title="New Laptop" value={10} color="beige" />
             </div>
           </div>
         </div>

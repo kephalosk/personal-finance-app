@@ -1,0 +1,36 @@
+.budgetCardList{
+  border-radius: 12px;
+  background-color: var(--page-background);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px
+}
+
+.budgetCardListHeader {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.budgetCardListHeaderLabel {
+  flex-grow: 1;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.budgetCardListHeaderLink {
+  font-size: 14px;
+  text-decoration: none;
+  color: var(--text-grey);
+}
+
+.budgetCardListHeaderLinkCaret {
+  margin-left: 16px;
+}
+
+.budgetCardListLine {
+  margin: 12px 0;
+  background-color: var(--horizontal-line-darker);
+}

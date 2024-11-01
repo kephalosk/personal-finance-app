@@ -20,3 +20,33 @@ export const mockedTransactions: EPTransaction[] = [
     recurring: false,
   },
 ];
+
+export const mockedTransactionsEntertainment: EPTransaction[] = [
+  {
+    avatar: './src/assets/images/avatars/james-thompson.jpg',
+    name: 'James Thompson',
+    category: 'Entertainment',
+    categoryKey: 'entertainment',
+    date: '11 Aug 2024',
+    amount: -5,
+    recurring: false,
+  },
+  {
+    avatar: './src/assets/images/avatars/pixel-playground.jpg',
+    name: 'Pixel Playground',
+    category: 'Entertainment',
+    categoryKey: 'entertainment',
+    date: '15 Aug 2024',
+    amount: -10,
+    recurring: true,
+  },
+  {
+    avatar: './src/assets/images/avatars/rina-sato.jpg',
+    name: 'Rina Sato',
+    category: 'Entertainment',
+    categoryKey: 'entertainment',
+    date: '13 Jul 2024',
+    amount: -10,
+    recurring: false,
+  },
+];

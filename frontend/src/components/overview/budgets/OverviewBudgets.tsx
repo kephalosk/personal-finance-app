@@ -11,10 +11,10 @@ export function OverviewBudgets() {
         <div className="overviewBudgetsContent">
           <BudgetsDiagram />
           <div className="overviewBudgetsValues">
-            <ValueBox title="Entertainment" value="50.00" color="dark-green" />
-            <ValueBox title="Bills" value="750.00" color="light-blue" />
-            <ValueBox title="Dining Out" value="75.00" color="beige" />
-            <ValueBox title="Personal Care" value="100.00" color="dark-grey" />
+            <ValueBox title="Entertainment" value={50.0} color="dark-green" />
+            <ValueBox title="Bills" value={750.0} color="light-blue" />
+            <ValueBox title="Dining Out" value={75.0} color="beige" />
+            <ValueBox title="Personal Care" value={100.0} color="dark-grey" />
           </div>
         </div>
       </div>

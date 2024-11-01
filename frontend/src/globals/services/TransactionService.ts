@@ -1,6 +1,7 @@
 import data from '../data.json';
 import { EPTransaction } from '../../types/EPTransaction';
 import { APITransactionDTO } from '../../types/APITransactionDTO';
+import { toLowerCaseWithoutWhitespace } from '../utils/ToLowerCaseWithoutWhitespace';
 
 export function getTransactions(): EPTransaction[] {
   const { transactions } = data;
@@ -31,9 +32,4 @@ function formatDate(dateString: string): string {
     month: 'short',
     year: 'numeric',
   }).format(date);
-}
-
-function toLowerCaseWithoutWhitespace(category: string): string {
-  const lowerCase = category.toLowerCase();
-  return lowerCase.replace(' ', '');
 }
