@@ -13,7 +13,42 @@
   row-gap: 16px;
 }
 
+.budgetCardBarCurrent {
+  border-radius: 4px;
+  height: 24px;
+  width: var(--barCurrentWidthPercent);
+  max-width: calc(100% - 8px);
+  top: calc(50% - 12px);
+  left: 4px;
+  position: absolute;
+}
+.budgetCardBarCurrent.dark-green{
+  background-color: var(--dark-green);
+}
+.budgetCardBarCurrent.light-blue{
+  background-color: var(--light-blue);
+}
+.budgetCardBarCurrent.beige{
+  background-color: var(--beige);
+}
+.budgetCardBarCurrent.dark-grey{
+  background-color: var(--dark-grey);
+}
+
 .budgetCardBarLabel {
   font-size: 14px;
   color: var(--text-grey)
+}
+
+.budgetCardBarMax {
+  border-radius: 4px;
+  background-color: var(--page-background);
+  height: 32px;
+  position: relative;
+}
+
+.budgetCardBarValues {
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  column-gap: 16px;
 }

@@ -1,6 +1,6 @@
 import './HeaderBar.scss';
 import PropTypes from 'prop-types';
-import { HeaderBarProps } from '../../types/HeaderBarProps';
+import { HeaderBarProps } from '../types/HeaderBarProps';
 
 HeaderBar.propTypes = {
   h1Headline: PropTypes.string.isRequired,

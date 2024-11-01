@@ -1,5 +1,5 @@
 import './BudgetCard.scss';
-import { BudgetCardHeader } from './BudgetCardHeader';
+import { CardHeader } from '../../CardHeader';
 import { ValueBox } from '../../overview/ValueBox';
 import { BudgetCardList } from './BudgetCardList';
 import { BudgetCardProps } from '../../../types/BudgetCardProps';
@@ -35,7 +35,7 @@ export function BudgetCard({ budget, transactions }: BudgetCardProps) {
   return (
     <>
       <div className="budgetCard" data-testid="budget-card">
-        <BudgetCardHeader title={budget.category} color={budget.color} />
+        <CardHeader title={budget.category} color={budget.color} />
         <div className="budgetCardBar">
           <label className="budgetCardBarLabel">Maximum of ${maximumFormatted}</label>
           <div className="budgetCardBarMax">
