@@ -17,7 +17,7 @@ export function BudgetsPage() {
         <HeaderBar h1Headline="Budgets" buttonText="+ Add New Budget" />
         <div className="budgetsDetails">
           <div className="budgetsDetailsLeft">
-            <BudgetsDiagramCard />
+            <BudgetsDiagramCard budgets={budgets} transactions={transactions} />
           </div>
           <div className="budgetsDetailsRight">
             {budgets.map((budget: EPBudget, index: number) => (

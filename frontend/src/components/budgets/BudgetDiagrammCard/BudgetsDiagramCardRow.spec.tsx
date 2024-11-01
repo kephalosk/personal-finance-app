@@ -4,8 +4,8 @@ import { BudgetsDiagramCardRow } from './BudgetsDiagramCardRow';
 
 describe('BudgetsDiagramCardRow', () => {
   const title = 'testTitle';
-  const currentAmount = 'testCurrentAmount';
-  const maxAmount = 'testMaxAmount';
+  const currentAmount = 10;
+  const maxAmount = 100;
   const color = 'testColor';
   const testProps = {
     title,
@@ -46,7 +46,7 @@ describe('BudgetsDiagramCardRow', () => {
     const htmlElement = container.querySelector('.cardRowTitleCurrentAmount');
 
     expect(htmlElement).toBeInTheDocument();
-    expect(htmlElement).toHaveTextContent(currentAmount);
+    expect(htmlElement).toHaveTextContent(`$${currentAmount}`);
   });
 
   it('renders label cardRowTitleMaxAmount with passed maxAmount', () => {
@@ -55,6 +55,6 @@ describe('BudgetsDiagramCardRow', () => {
     const htmlElement = container.querySelector('.cardRowTitleMaxAmount');
 
     expect(htmlElement).toBeInTheDocument();
-    expect(htmlElement).toHaveTextContent(maxAmount);
+    expect(htmlElement).toHaveTextContent(`of $${maxAmount}`);
   });
 });

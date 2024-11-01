@@ -4,8 +4,6 @@ import { BudgetCard } from './BudgetCard';
 import { BudgetCardProps } from '../../../types/BudgetCardProps';
 import { EPTransaction } from '../../../types/EPTransaction';
 import { EPBudget } from '../../../types/EPBudget';
-import { meta } from 'eslint-plugin-react/lib/rules/jsx-props-no-spread-multi';
-import category = meta.docs.category;
 
 describe('BudgetCard', () => {
   const transactions: EPTransaction[] = [

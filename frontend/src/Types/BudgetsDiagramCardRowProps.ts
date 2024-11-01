@@ -1,6 +1,6 @@
 export interface BudgetsDiagramCardRowProps {
   title: string;
-  currentAmount: string;
-  maxAmount: string;
+  currentAmount: number;
+  maxAmount: number;
   color: string;
 }

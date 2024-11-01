@@ -4,8 +4,8 @@ import { BudgetsDiagramCardRowProps } from '../../../types/BudgetsDiagramCardRow
 
 BudgetsDiagramCardRow.propTypes = {
   title: PropTypes.string.isRequired,
-  currentAmount: PropTypes.string.isRequired,
-  maxAmount: PropTypes.string.isRequired,
+  currentAmount: PropTypes.number.isRequired,
+  maxAmount: PropTypes.number.isRequired,
   color: PropTypes.string.isRequired,
 };
 
@@ -15,13 +15,15 @@ export function BudgetsDiagramCardRow({
   maxAmount,
   color,
 }: BudgetsDiagramCardRowProps) {
+  const currentAmountFormatted = currentAmount.toFixed(2);
+  const maxAmountFormatted = maxAmount.toFixed(2);
   return (
     <>
       <div className="budgetsDiagramCardRow" data-testid="budgets-diagramm-card-row">
         <div className={`cardRowLeftBorder ${color}`}></div>
         <label className="cardRowTitle">{title}</label>
-        <label className="cardRowTitleCurrentAmount">{currentAmount}</label>
-        <label className="cardRowTitleMaxAmount">of {maxAmount}</label>
+        <label className="cardRowTitleCurrentAmount">${currentAmountFormatted}</label>
+        <label className="cardRowTitleMaxAmount">of ${maxAmountFormatted}</label>
       </div>
     </>
   );
