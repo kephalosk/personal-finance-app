@@ -32,7 +32,7 @@ export function BillsPage() {
             <BillTotal sum={billsTotal} />
             <BillSummary bills={billsFiltered} today={today} />
           </div>
-          <BillCard bills={billsFiltered} />
+          <BillCard bills={billsFiltered} today={today} />
         </div>
       </div>
     </>

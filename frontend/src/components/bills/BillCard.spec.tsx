@@ -3,8 +3,11 @@ import { BillCard } from './BillCard';
 import { mockedBills } from '../../fixtures/MockedBills';
 
 describe('BillCard', () => {
+  const fakeToday: Date = new Date('2024-08-03T14:23:11.000Z');
+
   const testProps = {
     bills: mockedBills,
+    today: fakeToday,
   };
 
   it('renders div billCard', () => {

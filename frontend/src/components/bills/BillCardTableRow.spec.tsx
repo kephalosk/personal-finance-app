@@ -1,11 +1,15 @@
-import { render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import { mockedTransaction } from '../../fixtures/MockedTransactions';
 import { BillCardTableRow } from './BillCardTableRow';
+import { toOrdinal } from '../../globals/utils/ToOrdinal';
 
 describe('BillCardTableRow', () => {
   const transaction = mockedTransaction;
+  const fakeToday: Date = new Date('2024-08-03T14:23:11.000Z');
+
   const testProps = {
     transaction,
+    today: fakeToday,
   };
 
   it('renders div billCardTableRowWrapper', () => {
@@ -59,30 +63,14 @@ describe('BillCardTableRow', () => {
   });
 
   it('renders label billCardTableRowDate', () => {
+    const transactionDay = mockedTransaction.dateRaw.getDate();
+    const expectedText = `Monthly - ${toOrdinal(transactionDay)}`;
     const { container } = render(<BillCardTableRow {...testProps} />);
 
     const htmlElement = container.querySelector('.billCardTableRowDate');
 
     expect(htmlElement).toBeInTheDocument();
-    expect(htmlElement).toHaveTextContent(transaction.date);
-  });
-
-  it('renders img exclamation mark icon', () => {
-    render(<BillCardTableRow {...testProps} />);
-
-    const htmlElement = screen.getByAltText('exclamation mark icon');
-
-    expect(htmlElement).toBeInTheDocument();
-    expect(htmlElement).toHaveAttribute('src', './src/assets/images/icon-bill-due.svg');
-  });
-
-  it('renders img check mark icon', () => {
-    render(<BillCardTableRow {...testProps} />);
-
-    const htmlElement = screen.getByAltText('check mark icon');
-
-    expect(htmlElement).toBeInTheDocument();
-    expect(htmlElement).toHaveAttribute('src', './src/assets/images/icon-bill-paid.svg');
+    expect(htmlElement).toHaveTextContent(expectedText);
   });
 
   it('renders label billCardTableRowAmount', () => {
@@ -92,5 +80,42 @@ describe('BillCardTableRow', () => {
 
     expect(htmlElement).toBeInTheDocument();
     expect(htmlElement).toHaveTextContent(`${transaction.amount}`);
+  });
+
+  it('sets isPaid to true if transactionDay is smaller then today', () => {
+    const fakeToday: Date = new Date('2024-08-20T14:23:11.000Z');
+    const { container } = render(<BillCardTableRow {...testProps} today={fakeToday} />);
+
+    const htmlElement = container.querySelector('.billCardTableRowDate');
+    const htmlElementIcon = container.querySelector('.billCardTableRowDateIcon');
+
+    expect(htmlElement).toBeInTheDocument();
+    expect(htmlElement).toHaveClass('green');
+    expect(htmlElementIcon).toHaveAttribute('alt', 'check mark icon');
+  });
+
+  it('sets isDue to true if transactionDay is less then 5 days in the future', () => {
+    const fakeToday: Date = new Date('2024-08-18T14:23:11.000Z');
+    const { container } = render(<BillCardTableRow {...testProps} today={fakeToday} />);
+
+    const htmlElement = container.querySelector('.billCardTableRowAmount');
+    const htmlElementIcon = container.querySelector('.billCardTableRowDateIcon');
+
+    expect(htmlElement).toBeInTheDocument();
+    expect(htmlElement).toHaveClass('red');
+    expect(htmlElementIcon).toHaveAttribute('alt', 'exclamation mark icon');
+  });
+
+  it('does not set isPaid or isDue if transactionDay is more then 5 days in the future', () => {
+    const fakeToday: Date = new Date('2024-08-10T14:23:11.000Z');
+    const { container } = render(<BillCardTableRow {...testProps} today={fakeToday} />);
+
+    const htmlElementDate = container.querySelector('.billCardTableRowDate');
+    const htmlElementAmount = container.querySelector('.billCardTableRowAmount');
+    const htmlElementIcon = container.querySelector('.billCardTableRowDateIcon');
+
+    expect(htmlElementDate).not.toHaveClass('green');
+    expect(htmlElementAmount).not.toHaveClass('red');
+    expect(htmlElementIcon).not.toBeInTheDocument();
   });
 });

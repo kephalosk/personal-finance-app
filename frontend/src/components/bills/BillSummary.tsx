@@ -54,26 +54,28 @@ export function BillSummary({ bills, today }: BillSummaryProps) {
   return (
     <>
       <div className="billSummary" data-testid="bill-summary">
-        <div className="billSummaryTitle"></div>
-        <div className="billSummaryRow">
-          <label>Paid Bills</label>
-          <label className="billSummaryRowPaid">
-            {paidBillsIndex} (${paidBillsSumFormatted})
-          </label>
-        </div>
-        <hr />
-        <div className="billSummaryRow">
-          <label>Total Upcoming</label>
-          <label className="billSummaryRowUpcoming">
-            {upcomingBillsIndex} (${upcomingBillsSumFormatted})
-          </label>
-        </div>
-        <hr />
-        <div className="billSummaryRow red">
-          <label>Due soon</label>
-          <label className="billSummaryRowDue">
-            {dueBillsIndex} (${dueBillsSumFormatted})
-          </label>
+        <div className="billSummaryTitle">Summary</div>
+        <div className="billSummaryRowWrapper">
+          <div className="billSummaryRow">
+            <label className="billSummaryRowTitle">Paid Bills</label>
+            <label className="billSummaryRowPaid">
+              {paidBillsIndex} (${paidBillsSumFormatted})
+            </label>
+          </div>
+          <hr className="billSummaryRowLine" />
+          <div className="billSummaryRow">
+            <label className="billSummaryRowTitle">Total Upcoming</label>
+            <label className="billSummaryRowUpcoming">
+              {upcomingBillsIndex} (${upcomingBillsSumFormatted})
+            </label>
+          </div>
+          <hr className="billSummaryRowLine" />
+          <div className="billSummaryRow red">
+            <label className="billSummaryRowTitle">Due soon</label>
+            <label className="billSummaryRowDue">
+              {dueBillsIndex} (${dueBillsSumFormatted})
+            </label>
+          </div>
         </div>
       </div>
     </>

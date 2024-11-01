@@ -11,11 +11,13 @@ export function BillTotal({ sum }: BillTotalProps) {
   return (
     <>
       <div className="billTotal" data-testid="bill-total">
-        <img
-          className="billTotalImage"
-          src="./src/assets/images/icon-recurring-bills.svg"
-          alt="icon of recurring bills"
-        />
+        <div className="billTotalImageWrapper">
+          <img
+            className="billTotalImage"
+            src="./src/assets/images/icon-recurring-bills.svg"
+            alt="icon of recurring bills"
+          />
+        </div>
         <label className="billTotalTitle">Total Bills</label>
         <label className="billTotalAmount">${sumFormatted}</label>
       </div>

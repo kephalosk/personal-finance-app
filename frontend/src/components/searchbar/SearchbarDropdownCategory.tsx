@@ -1,10 +1,10 @@
 import './SearchbarDropdownCategory.scss';
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { SearchbarDropdownCategoryProps } from '../../../types/SearchbarDropdownCategoryProps';
-import { EPTransaction } from '../../../types/EPTransaction';
-import { getTransactions } from '../../../globals/services/TransactionService';
-import { Category } from '../../../types/Category';
+import { SearchbarDropdownCategoryProps } from '../../types/SearchbarDropdownCategoryProps';
+import { EPTransaction } from '../../types/EPTransaction';
+import { getTransactions } from '../../globals/services/TransactionService';
+import { Category } from '../../types/Category';
 
 SearchbarDropdownCategory.propTypes = {
   onCategoryChange: PropTypes.func.isRequired,
