@@ -1,0 +1,42 @@
+.budgetsDiagramCardRow {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.cardRowLeftBorder{
+  margin-right: 16px;
+  border-radius: 8px;
+  height: 21px;
+  width: 4px;
+}
+.cardRowLeftBorder.dark-green{
+  background-color: var(--dark-green);
+}
+.cardRowLeftBorder.light-blue{
+  background-color: var(--light-blue);
+}
+.cardRowLeftBorder.beige{
+  background-color: var(--beige);
+}
+.cardRowLeftBorder.dark-grey{
+  background-color: var(--dark-grey);
+}
+
+.cardRowTitle {
+  flex-grow: 1;
+  font-size: 14px;
+  color: var(--text-grey);
+}
+
+.cardRowTitleCurrentAmount {
+  margin-right: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.cardRowTitleMaxAmount {
+  font-size: 14px;
+  color: var(--text-grey);
+}

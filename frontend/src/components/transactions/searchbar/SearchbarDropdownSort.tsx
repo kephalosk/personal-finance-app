@@ -2,6 +2,7 @@ import './SearchbarDropdownSort.scss';
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { SearchbarDropdownSortProps } from '../../../types/SearchbarDropdownSortProps';
+import { SortOptionEnum } from '../../../constants/SortOptionEnum';
 
 SearchbarDropdownSort.propTypes = {
   omSortChange: PropTypes.func,
@@ -26,22 +27,22 @@ export function SearchbarDropdownSort({ onSortChange }: SearchbarDropdownSortPro
           id="options"
           onChange={handleSortChange}
         >
-          <option className="latest" value="latest">
+          <option className={SortOptionEnum.LATEST} value={SortOptionEnum.LATEST}>
             Latest
           </option>
-          <option className="oldest" value="oldest">
+          <option className={SortOptionEnum.OLDEST} value={SortOptionEnum.OLDEST}>
             Oldest
           </option>
-          <option className="atoz" value="atoz">
+          <option className={SortOptionEnum.ATOZ} value={SortOptionEnum.ATOZ}>
             A to Z
           </option>
-          <option className="ztoa" value="ztoa">
+          <option className={SortOptionEnum.ZTOA} value={SortOptionEnum.ZTOA}>
             Z to A
           </option>
-          <option className="highest" value="highest">
+          <option className={SortOptionEnum.HIGHEST} value={SortOptionEnum.HIGHEST}>
             Highest
           </option>
-          <option className="lowest" value="lowest">
+          <option className={SortOptionEnum.LOWEST} value={SortOptionEnum.LOWEST}>
             Lowest
           </option>
         </select>

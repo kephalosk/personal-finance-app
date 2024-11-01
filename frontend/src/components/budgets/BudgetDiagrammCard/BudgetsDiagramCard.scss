@@ -1,0 +1,27 @@
+.budgetsDiagramCard {
+  border-radius: 12px;
+  background-color: var(--component-background-bright);
+  padding: 32px 32px 24px 32px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 32px;
+}
+
+.budgetsDiagramCardDetails {
+  display: flex;
+  flex-direction: column;
+  row-gap: 24px;
+}
+
+.budgetsDiagramCardDetailsLabel {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.budgetsDiagramCardDetailsLine {
+  margin: 16px 0;
+}
+
+.budgetsDiagramWrapper {
+  padding: 20px 0;
+}
