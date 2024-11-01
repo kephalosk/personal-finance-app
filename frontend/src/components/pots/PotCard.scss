@@ -1,0 +1,23 @@
+.potCard {
+  border-radius: 12px;
+  background-color: var(--component-background-bright);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 32px;
+}
+
+.potCardButton {
+  border: 0;
+  border-radius: 8px;
+  background-color: var(--page-background);
+  padding: 16px;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.potCardButtons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 16px;
+}

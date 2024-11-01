@@ -1,8 +1,8 @@
 import { render } from '@testing-library/react';
 import { BudgetsDiagram } from './BudgetsDiagram';
-import { BudgetsDiagramProps } from '../../../types/BudgetsDiagramProps';
-import { mockedTransactionsEntertainment } from '../../../fixtures/MockedTransactions';
-import { mockedBudgets } from '../../../fixtures/mockedBudgets';
+import { BudgetsDiagramProps } from '../../types/BudgetsDiagramProps';
+import { mockedTransactionsEntertainment } from '../../fixtures/MockedTransactions';
+import { mockedBudgets } from '../../fixtures/MockedBudgets';
 
 describe('BudgetsDiagram', () => {
   let totalSpend = 0;

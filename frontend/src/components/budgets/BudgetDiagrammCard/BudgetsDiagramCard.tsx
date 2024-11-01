@@ -1,5 +1,5 @@
 import './BudgetsDiagramCard.scss';
-import { BudgetsDiagram } from '../../overview/budgets/BudgetsDiagram';
+import { BudgetsDiagram } from '../BudgetsDiagram';
 import { BudgetsDiagramCardRow } from './BudgetsDiagramCardRow';
 import { BudgetsDiagramCardProps } from '../../../types/BudgetsDiagramCardProps';
 import PropTypes from 'prop-types';
