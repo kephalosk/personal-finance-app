@@ -1,4 +1,4 @@
-import { EPTransaction } from '../../types/EPTransaction';
+import { EPTransaction } from '../../model/entrypoints/EPTransaction';
 import { getTransactions } from './TransactionService';
 
 describe('TransactionService', () => {

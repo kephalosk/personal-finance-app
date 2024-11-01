@@ -1,6 +1,6 @@
 import './TableRow.scss';
 import PropTypes from 'prop-types';
-import { TransactionsPageTableRowProps } from '../../../types/TransactionsPageTableRowProps';
+import { TransactionsPageTableRowProps } from '../../../model/props/TransactionsPageTableRowProps';
 
 TableRow.propTypes = {
   name: PropTypes.string.isRequired,

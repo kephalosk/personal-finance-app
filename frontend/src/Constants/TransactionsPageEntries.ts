@@ -1,4 +1,4 @@
-import { TransactionsPageTableRowProps } from '../types/TransactionsPageTableRowProps';
+import { TransactionsPageTableRowProps } from '../model/props/TransactionsPageTableRowProps';
 
 export const TransactionsPageEntries: TransactionsPageTableRowProps[] = [
   {

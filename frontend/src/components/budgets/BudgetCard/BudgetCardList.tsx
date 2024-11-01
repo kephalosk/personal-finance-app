@@ -1,9 +1,9 @@
 import './BudgetCardList.scss';
 import { Link } from 'react-router-dom';
 import { TransactionRow } from '../../overview/transactions/TransactionRow';
-import { BudgetCardListProps } from '../../../types/BudgetCardListProps';
+import { BudgetCardListProps } from '../../../model/props/BudgetCardListProps';
 import PropTypes from 'prop-types';
-import { EPTransaction } from '../../../types/EPTransaction';
+import { EPTransaction } from '../../../model/entrypoints/EPTransaction';
 
 BudgetCardList.propTypes = {
   transactions: PropTypes.array.isRequired,

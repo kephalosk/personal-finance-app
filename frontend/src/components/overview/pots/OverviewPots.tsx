@@ -3,7 +3,7 @@ import { OverviewHeader } from '../OverviewHeader';
 import { ValueBox } from '../ValueBox';
 import { PotsSummary } from './PotsSummary';
 import { getPots } from '../../../globals/services/PotService';
-import { EPPot } from '../../../types/EPPot';
+import { EPPot } from '../../../model/entrypoints/EPPot';
 
 export function OverviewPots() {
   const pots: EPPot[] = getPots();

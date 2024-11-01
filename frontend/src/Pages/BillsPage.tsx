@@ -3,7 +3,7 @@ import { BillCard } from '../components/bills/BillCard';
 import { BillTotal } from '../components/bills/BillTotal';
 import { BillSummary } from '../components/bills/BillSummary';
 import { getTransactions } from '../globals/services/TransactionService';
-import { EPTransaction } from '../types/EPTransaction';
+import { EPTransaction } from '../model/entrypoints/EPTransaction';
 
 export function BillsPage() {
   const bills: EPTransaction[] = getTransactions().filter((transaction) => {

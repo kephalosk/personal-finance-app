@@ -1,6 +1,6 @@
 import data from '../data.json';
-import { APIBalanceDTO } from '../../types/APIBalanceDTO';
-import { EPBalance } from '../../types/EPBalance';
+import { APIBalanceDTO } from '../../model/api/APIBalanceDTO';
+import { EPBalance } from '../../model/entrypoints/EPBalance';
 
 export function getBalance(): EPBalance {
   const { balance } = data;

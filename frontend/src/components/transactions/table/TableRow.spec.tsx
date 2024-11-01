@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 import { TableRow } from './TableRow';
-import { TransactionsPageTableRowProps } from '../../../types/TransactionsPageTableRowProps';
+import { TransactionsPageTableRowProps } from '../../../model/props/TransactionsPageTableRowProps';
 
 describe('TableRow', () => {
   const name: string = 'testName';

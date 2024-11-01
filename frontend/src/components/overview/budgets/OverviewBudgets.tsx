@@ -4,8 +4,8 @@ import { ValueBox } from '../ValueBox';
 import { BudgetsDiagram } from '../../budgets/BudgetsDiagram';
 import { getBudgets } from '../../../globals/services/BudgetService';
 import { getTransactions } from '../../../globals/services/TransactionService';
-import { EPBudget } from '../../../types/EPBudget';
-import { EPTransaction } from '../../../types/EPTransaction';
+import { EPBudget } from '../../../model/entrypoints/EPBudget';
+import { EPTransaction } from '../../../model/entrypoints/EPTransaction';
 
 export function OverviewBudgets() {
   const budgets: EPBudget[] = getBudgets();

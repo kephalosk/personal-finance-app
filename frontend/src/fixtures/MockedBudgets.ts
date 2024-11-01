@@ -1,4 +1,4 @@
-import { EPBudget } from '../types/EPBudget';
+import { EPBudget } from '../model/entrypoints/EPBudget';
 
 export const mockedBudgets: EPBudget[] = [
   {

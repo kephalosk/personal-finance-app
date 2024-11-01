@@ -1,7 +1,7 @@
 import data from '../data.json';
 import { fromColorCodeToName } from '../utils/FromColorCodeToName';
-import { APIPotDTO } from '../../types/APIPotDTO';
-import { EPPot } from '../../types/EPPot';
+import { APIPotDTO } from '../../model/api/APIPotDTO';
+import { EPPot } from '../../model/entrypoints/EPPot';
 
 export function getPots(): EPPot[] {
   const { pots } = data;

@@ -1,6 +1,6 @@
 import './PaginationButtonNext.scss';
 import PropTypes from 'prop-types';
-import { PaginationButtonNextProps } from '../../../types/PaginationButtonNextProps';
+import { PaginationButtonNextProps } from '../../../model/props/PaginationButtonNextProps';
 
 PaginationButtonNext.propTypes = {
   onClick: PropTypes.func.isRequired,

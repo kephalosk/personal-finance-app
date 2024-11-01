@@ -1,5 +1,5 @@
 import './PotsSummary.scss';
-import { PotsSummaryProps } from '../../../types/PotsSummaryProps';
+import { PotsSummaryProps } from '../../../model/props/PotsSummaryProps';
 
 export function PotsSummary({ potSum }: PotsSummaryProps) {
   const potFormatted = potSum.toFixed(0);

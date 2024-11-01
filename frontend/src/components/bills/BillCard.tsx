@@ -1,10 +1,10 @@
 import './BillCard.scss';
-import { EPTransaction } from '../../types/EPTransaction';
+import { EPTransaction } from '../../model/entrypoints/EPTransaction';
 import { BillCardTableRow } from './BillCardTableRow';
-import { BillCardProps } from '../../types/BillCardProps';
+import { BillCardProps } from '../../model/props/BillCardProps';
 import { SearchbarInput } from '../searchbar/SearchbarInput';
 import { useRef, useState } from 'react';
-import { SearchbarInputHandle } from '../../types/SearchbarInputHandle';
+import { SearchbarInputHandle } from '../../model/SearchbarInputHandle';
 import { SearchbarDropdownSort } from '../searchbar/SearchbarDropdownSort';
 import { SortOptionEnum } from '../../constants/SortOptionEnum';
 import PropTypes from 'prop-types';

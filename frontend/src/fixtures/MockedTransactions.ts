@@ -1,4 +1,4 @@
-import { EPTransaction } from '../types/EPTransaction';
+import { EPTransaction } from '../model/entrypoints/EPTransaction';
 
 export const mockedTransaction: EPTransaction = {
   avatar: './src/assets/images/avatars/emma-richardson.jpg',

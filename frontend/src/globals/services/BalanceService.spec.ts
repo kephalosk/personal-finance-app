@@ -1,4 +1,4 @@
-import { EPBalance } from '../../types/EPBalance';
+import { EPBalance } from '../../model/entrypoints/EPBalance';
 import { getBalance } from './BalanceService';
 
 describe('BalanceService', () => {

@@ -7,12 +7,12 @@ import { SearchbarDropdownSort } from '../components/searchbar/SearchbarDropdown
 import { SearchbarDropdownCategory } from '../components/searchbar/SearchbarDropdownCategory';
 import { TableHeader } from '../components/transactions/table/TableHeader';
 import { TableRow } from '../components/transactions/table/TableRow';
-import { EPTransaction } from '../types/EPTransaction';
+import { EPTransaction } from '../model/entrypoints/EPTransaction';
 import { getTransactions } from '../globals/services/TransactionService';
 import { splitIntoChunks } from '../globals/utils/SplitIntoChunks';
 import { useRef, useState } from 'react';
 import { SortOptionEnum } from '../constants/SortOptionEnum';
-import { SearchbarInputHandle } from '../types/SearchbarInputHandle';
+import { SearchbarInputHandle } from '../model/SearchbarInputHandle';
 
 export function TransactionsPage() {
   const [pageIndex, setPageIndex] = useState(0);

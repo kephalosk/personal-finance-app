@@ -1,5 +1,5 @@
-import { EPPot } from '../types/EPPot';
-import { ColorNameEnum } from '../types/ColorNameEnum';
+import { EPPot } from '../model/entrypoints/EPPot';
+import { ColorNameEnum } from '../model/enum/ColorNameEnum';
 
 export const pot: EPPot = {
   name: 'Savings',

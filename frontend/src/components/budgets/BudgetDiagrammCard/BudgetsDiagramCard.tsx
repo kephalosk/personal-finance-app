@@ -1,9 +1,9 @@
 import './BudgetsDiagramCard.scss';
 import { BudgetsDiagram } from '../BudgetsDiagram';
 import { BudgetsDiagramCardRow } from './BudgetsDiagramCardRow';
-import { BudgetsDiagramCardProps } from '../../../types/BudgetsDiagramCardProps';
+import { BudgetsDiagramCardProps } from '../../../model/props/BudgetsDiagramCardProps';
 import PropTypes from 'prop-types';
-import { EPBudget } from '../../../types/EPBudget';
+import { EPBudget } from '../../../model/entrypoints/EPBudget';
 
 BudgetsDiagramCard.propTypes = {
   budgets: PropTypes.array.isRequired,

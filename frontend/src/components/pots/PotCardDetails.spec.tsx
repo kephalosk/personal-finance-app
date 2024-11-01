@@ -1,4 +1,4 @@
-import { PotCardDetailsProps } from '../../types/PotCardDetailsProps';
+import { PotCardDetailsProps } from '../../model/props/PotCardDetailsProps';
 import { render } from '@testing-library/react';
 import { PotCardDetails } from './PotCardDetails';
 import { pot } from '../../fixtures/MockedPots';

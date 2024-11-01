@@ -1,4 +1,4 @@
-import { EPTransaction } from './EPTransaction';
+import { EPTransaction } from '../entrypoints/EPTransaction';
 
 export interface BillSummaryProps {
   bills: EPTransaction[];

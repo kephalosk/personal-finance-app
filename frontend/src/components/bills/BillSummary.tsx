@@ -1,5 +1,5 @@
 import './BillSummary.scss';
-import { BillSummaryProps } from '../../types/BillSummaryProps';
+import { BillSummaryProps } from '../../model/props/BillSummaryProps';
 import PropTypes from 'prop-types';
 
 BillSummary.propTypes = {

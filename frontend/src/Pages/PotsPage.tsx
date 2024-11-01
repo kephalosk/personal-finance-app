@@ -1,6 +1,6 @@
 import './PotsPage.scss';
 import { HeaderBar } from '../components/HeaderBar';
-import { EPPot } from '../types/EPPot';
+import { EPPot } from '../model/entrypoints/EPPot';
 import { PotCard } from '../components/pots/PotCard';
 import { getPots } from '../globals/services/PotService';
 
