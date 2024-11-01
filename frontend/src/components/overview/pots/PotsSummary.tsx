@@ -1,6 +1,8 @@
 import './PotsSummary.scss';
+import { PotsSummaryProps } from '../../../types/PotsSummaryProps';
 
-export function PotsSummary() {
+export function PotsSummary({ potSum }: PotsSummaryProps) {
+  const potFormatted = potSum.toFixed(0);
   return (
     <>
       <div className="overviewPotsSummary" data-testid="pots-summary">
@@ -12,7 +14,7 @@ export function PotsSummary() {
         />
         <div className="overviewPotsSummaryContent">
           <label className="overviewPotsSummaryContentTitle">Total Saved</label>
-          <label className="overviewPotsSummaryContentValue">$850</label>
+          <label className="overviewPotsSummaryContentValue">${potFormatted}</label>
         </div>
       </div>
     </>
