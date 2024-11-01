@@ -12,11 +12,11 @@ export function PotCard({ pot }: PotCardProps) {
   return (
     <>
       <div className="potCard" data-testid="pot-card">
-        <CardHeader title="Savings" color="dark-green" />
+        <CardHeader title={pot.name} color={pot.color} />
         <PotCardDetails pot={pot} />
         <div className="potCardButtons">
-          <button className="potCardButton">+ Add Money</button>
-          <button className="potCardButton">Withdraw</button>
+          <button className="potCardButton add">+ Add Money</button>
+          <button className="potCardButton withdraw">Withdraw</button>
         </div>
       </div>
     </>

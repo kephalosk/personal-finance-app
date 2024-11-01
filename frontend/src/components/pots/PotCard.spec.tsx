@@ -42,7 +42,7 @@ describe('PotCard', () => {
   it('renders div potCardButtonAdd with correct text', () => {
     const { container } = render(<PotCard {...testProps} />);
 
-    const htmlElement = container.querySelector('.potCardButtonAdd');
+    const htmlElement = container.querySelector('.add');
 
     expect(htmlElement).toBeInTheDocument();
     expect(htmlElement).toHaveTextContent('+ Add Money');
@@ -51,7 +51,7 @@ describe('PotCard', () => {
   it('renders div potCardButtonWithdraw with correct text', () => {
     const { container } = render(<PotCard {...testProps} />);
 
-    const htmlElement = container.querySelector('.potCardButtonWithdraw');
+    const htmlElement = container.querySelector('.withdraw');
 
     expect(htmlElement).toBeInTheDocument();
     expect(htmlElement).toHaveTextContent('Withdraw');

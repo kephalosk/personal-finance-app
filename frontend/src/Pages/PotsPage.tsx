@@ -1,18 +1,17 @@
-import data from '../globals/data.json';
 import './PotsPage.scss';
 import { HeaderBar } from '../components/HeaderBar';
 import { EPPot } from '../types/EPPot';
 import { PotCard } from '../components/pots/PotCard';
+import { getPots } from '../globals/services/PotService';
 
 export function PotsPage() {
-  const { pots } = data;
-  const potsTyped: EPPot[] = pots as EPPot[];
+  const pots = getPots();
   return (
     <>
       <div className="potsPage" data-testid="pots-page">
         <HeaderBar h1Headline="Pots" buttonText="+ Add New Pot" />
         <div className="potPageGrid">
-          {potsTyped.map((pot: EPPot, index: number) => (
+          {pots.map((pot: EPPot, index: number) => (
             <PotCard key={index} pot={pot} />
           ))}
         </div>

@@ -21,7 +21,7 @@ export function PotCardDetails({ pot }: PotCardDetailsProps) {
         </div>
         <div className="potCardBarMax">
           <div
-            className={`potCardBarCurrent ${pot.theme}`}
+            className={`potCardBarCurrent ${pot.color}`}
             style={
               {
                 '--barCurrentWidthPercent': `${currentPercent}%`,

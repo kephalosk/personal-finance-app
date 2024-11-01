@@ -4,5 +4,5 @@ export interface EPPot {
   name: string;
   target: number;
   total: number;
-  theme: ColorNameEnum;
+  color: ColorNameEnum;
 }
