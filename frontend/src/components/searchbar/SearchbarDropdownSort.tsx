@@ -1,8 +1,8 @@
 import './SearchbarDropdownSort.scss';
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { SearchbarDropdownSortProps } from '../../../types/SearchbarDropdownSortProps';
-import { SortOptionEnum } from '../../../constants/SortOptionEnum';
+import { SearchbarDropdownSortProps } from '../../types/SearchbarDropdownSortProps';
+import { SortOptionEnum } from '../../constants/SortOptionEnum';
 
 SearchbarDropdownSort.propTypes = {
   omSortChange: PropTypes.func,

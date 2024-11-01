@@ -1,0 +1,26 @@
+.billTotal {
+  border-radius: 12px;
+  background-color: var(--component-background-dark);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+.billTotalImage {
+  justify-content: flex-start;
+  margin-bottom: 32px;
+  height: 40px;
+  width: auto;
+}
+
+.billTotalTitle {
+  margin-bottom: 11px;
+  font-size: 14px;
+  color: var(--text-white);
+}
+
+.billTotalAmount {
+  font-size: 32px;
+  font-weight: 600;
+  color: var(--text-white);
+}

@@ -1,0 +1,19 @@
+.billsPage {
+  background-color: var(--);
+  padding: 32px 40px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 32px;
+}
+
+.billsPageDetails {
+  display: grid;
+  grid-template-columns: calc(33% - 24px) 67%;
+  column-gap: 24px;
+}
+
+.billsPageDetailsOverview {
+  display: flex;
+  flex-direction: column;
+  row-gap: 24px;
+}
