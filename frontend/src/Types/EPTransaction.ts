@@ -4,6 +4,7 @@ export interface EPTransaction {
   category: string;
   categoryKey: string;
   date: string;
+  dateRaw: Date;
   amount: number;
   recurring: boolean;
 }
