@@ -1,6 +1,6 @@
 import './SidebarListEntry.scss';
 import PropTypes from 'prop-types';
-import { SidebarListEntryProps } from '../../types/SidebarListEntryProps';
+import { SidebarListEntryProps } from '../../model/props/SidebarListEntryProps';
 import React from 'react';
 import { Link } from 'react-router-dom';
 

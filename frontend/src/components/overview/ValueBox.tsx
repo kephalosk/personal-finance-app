@@ -1,5 +1,5 @@
 import './ValueBox.scss';
-import { ValueBoxProps } from '../../types/ValueBoxProps';
+import { ValueBoxProps } from '../../model/props/ValueBoxProps';
 import PropTypes from 'prop-types';
 
 ValueBox.propTypes = {

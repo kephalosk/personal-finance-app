@@ -1,11 +1,11 @@
-import { PotCardDetailsProps } from '../../types/PotCardDetailsProps';
+import { PotCardDetailsProps } from '../../model/props/PotCardDetailsProps';
 import { render, screen } from '@testing-library/react';
-import { pot } from '../../fixtures/MockedPots';
+import { mockedPot } from '../../fixtures/MockedPots';
 import { PotCard } from './PotCard';
 
 describe('PotCard', () => {
   const testProps: PotCardDetailsProps = {
-    pot,
+    pot: mockedPot,
   };
 
   it('renders div potCard', () => {

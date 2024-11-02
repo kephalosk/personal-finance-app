@@ -1,5 +1,5 @@
 export interface SummaryCardProps {
   title: string;
-  value: string;
+  value: number;
   isInverted?: boolean;
 }

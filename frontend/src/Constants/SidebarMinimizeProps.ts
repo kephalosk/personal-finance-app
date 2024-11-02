@@ -1,4 +1,4 @@
-import { SidebarListEntryProps } from '../types/SidebarListEntryProps';
+import { SidebarListEntryProps } from '../model/props/SidebarListEntryProps';
 
 export const SidebarMinimizeProps: SidebarListEntryProps = {
   name: 'Minimize Menu',

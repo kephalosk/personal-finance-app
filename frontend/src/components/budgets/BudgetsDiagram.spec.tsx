@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 import { BudgetsDiagram } from './BudgetsDiagram';
-import { BudgetsDiagramProps } from '../../types/BudgetsDiagramProps';
+import { BudgetsDiagramProps } from '../../model/props/BudgetsDiagramProps';
 import { mockedTransactionsEntertainment } from '../../fixtures/MockedTransactions';
 import { mockedBudgets } from '../../fixtures/MockedBudgets';
 

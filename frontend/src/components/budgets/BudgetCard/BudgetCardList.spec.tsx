@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { BudgetCardList } from './BudgetCardList';
-import { BudgetCardListProps } from '../../../types/BudgetCardListProps';
+import { BudgetCardListProps } from '../../../model/props/BudgetCardListProps';
 import { MemoryRouter } from 'react-router-dom';
 import { mockedTransactions } from '../../../fixtures/MockedTransactions';
 

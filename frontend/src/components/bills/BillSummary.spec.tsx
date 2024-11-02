@@ -2,7 +2,7 @@ import { render } from '@testing-library/react';
 import React from 'react';
 import { BillSummary } from './BillSummary';
 import { mockedBills } from '../../fixtures/MockedBills';
-import { EPTransaction } from '../../types/EPTransaction';
+import { EPTransaction } from '../../model/entrypoints/EPTransaction';
 
 describe('BillSummary', () => {
   const bills: EPTransaction[] = mockedBills;

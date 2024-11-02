@@ -1,5 +1,5 @@
 export interface BillRowProps {
   title: string;
-  value: string;
+  value: number;
   color: string;
 }

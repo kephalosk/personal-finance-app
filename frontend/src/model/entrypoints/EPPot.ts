@@ -1,4 +1,4 @@
-import { ColorNameEnum } from './ColorNameEnum';
+import { ColorNameEnum } from '../enum/ColorNameEnum';
 
 export interface EPPot {
   name: string;

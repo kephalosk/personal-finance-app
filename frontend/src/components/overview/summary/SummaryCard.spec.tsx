@@ -1,9 +1,9 @@
 import { SummaryCard } from './SummaryCard';
-import { render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
 
 describe('SummaryCard', () => {
   const title: string = 'testTitle';
-  const value: string = 'testValue';
+  const value: number = 100;
 
   const testProps = {
     title,
@@ -33,6 +33,6 @@ describe('SummaryCard', () => {
     const htmlElement = container.querySelector('.overviewSummaryCardValue');
 
     expect(htmlElement).toBeInTheDocument();
-    expect(htmlElement).toHaveTextContent(value);
+    expect(htmlElement).toHaveTextContent(`${value}`);
   });
 });

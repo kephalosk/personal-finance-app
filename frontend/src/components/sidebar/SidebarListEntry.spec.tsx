@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { SidebarListEntry } from './SidebarListEntry';
-import { SidebarListEntryProps } from '../../types/SidebarListEntryProps';
+import { SidebarListEntryProps } from '../../model/props/SidebarListEntryProps';
 import { MemoryRouter } from 'react-router-dom';
 import React from 'react';
 import { SidebarMinimizeProps } from '../../constants/SidebarMinimizeProps';

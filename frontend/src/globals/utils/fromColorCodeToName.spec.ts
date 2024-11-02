@@ -1,5 +1,5 @@
-import { ColorNameEnum } from '../../types/ColorNameEnum';
-import { ColorCodeEnum } from '../../types/ColorCodeEnum';
+import { ColorNameEnum } from '../../model/enum/ColorNameEnum';
+import { ColorCodeEnum } from '../../model/enum/ColorCodeEnum';
 import { fromColorCodeToName } from './FromColorCodeToName';
 
 describe('BudgetService', () => {

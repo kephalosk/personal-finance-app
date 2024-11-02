@@ -1,6 +1,6 @@
 import './BudgetsDiagramCardRow.scss';
 import PropTypes from 'prop-types';
-import { BudgetsDiagramCardRowProps } from '../../../types/BudgetsDiagramCardRowProps';
+import { BudgetsDiagramCardRowProps } from '../../../model/props/BudgetsDiagramCardRowProps';
 
 BudgetsDiagramCardRow.propTypes = {
   title: PropTypes.string.isRequired,

@@ -1,6 +1,6 @@
 import './OverviewHeader.scss';
 import PropTypes from 'prop-types';
-import { OverviewHeaderProps } from '../../types/OverviewHeaderProps';
+import { OverviewHeaderProps } from '../../model/props/OverviewHeaderProps';
 import { Link } from 'react-router-dom';
 
 OverviewHeader.propTypes = {

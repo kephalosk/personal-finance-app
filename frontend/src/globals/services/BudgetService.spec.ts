@@ -1,5 +1,5 @@
-import { EPBudget } from '../../types/EPBudget';
-import { ColorNameEnum } from '../../types/ColorNameEnum';
+import { EPBudget } from '../../model/entrypoints/EPBudget';
+import { ColorNameEnum } from '../../model/enum/ColorNameEnum';
 import { getBudgets } from './BudgetService';
 
 describe('BudgetService', () => {

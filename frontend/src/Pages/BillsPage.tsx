@@ -2,22 +2,12 @@ import './BillsPage.scss';
 import { BillCard } from '../components/bills/BillCard';
 import { BillTotal } from '../components/bills/BillTotal';
 import { BillSummary } from '../components/bills/BillSummary';
-import { getTransactions } from '../globals/services/TransactionService';
-import { EPTransaction } from '../types/EPTransaction';
+import { BillsHelper } from '../globals/helper/BillsHelper';
 
 export function BillsPage() {
-  const bills: EPTransaction[] = getTransactions().filter((transaction) => {
-    return transaction.recurring;
-  });
-  const billsFiltered: EPTransaction[] = bills.filter(
-    (transaction, index, self) =>
-      index ===
-      self.findIndex((t) => {
-        return t.name === transaction.name;
-      })
-  );
+  const bills = BillsHelper.getRecurringBillsFromTransactions();
   let billsTotal = 0;
-  billsFiltered.forEach((bill) => {
+  bills.forEach((bill) => {
     billsTotal = billsTotal + bill.amount;
   });
   billsTotal = billsTotal * -1;
@@ -30,9 +20,9 @@ export function BillsPage() {
         <div className="billsPageDetails">
           <div className="billsPageDetailsOverview">
             <BillTotal sum={billsTotal} />
-            <BillSummary bills={billsFiltered} today={today} />
+            <BillSummary bills={bills} today={today} />
           </div>
-          <BillCard bills={billsFiltered} today={today} />
+          <BillCard bills={bills} today={today} />
         </div>
       </div>
     </>

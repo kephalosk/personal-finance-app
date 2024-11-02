@@ -1,6 +1,6 @@
 import data from '../data.json';
-import { APIBudgetDTO } from '../../types/APIBudgetDTO';
-import { EPBudget } from '../../types/EPBudget';
+import { APIBudgetDTO } from '../../model/api/APIBudgetDTO';
+import { EPBudget } from '../../model/entrypoints/EPBudget';
 import { toLowerCaseWithoutWhitespace } from '../utils/ToLowerCaseWithoutWhitespace';
 import { fromColorCodeToName } from '../utils/FromColorCodeToName';
 

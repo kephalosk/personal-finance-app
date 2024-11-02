@@ -20,12 +20,13 @@ describe('ValueBox', () => {
     expect(htmlElement).toBeInTheDocument();
   });
 
-  it('renders div valueBoxBorder', () => {
+  it('renders div valueBoxBorder with passed color', () => {
     const { container } = render(<ValueBox {...testProps} />);
 
     const htmlElement = container.querySelector('.valueBoxBorder');
 
     expect(htmlElement).toBeInTheDocument();
+    expect(htmlElement).toHaveClass(color);
   });
 
   it('renders div valueBoxContent', () => {
@@ -42,7 +43,7 @@ describe('ValueBox', () => {
     const htmlElement = container.querySelector('.valueBoxContentTitle');
 
     expect(htmlElement).toBeInTheDocument();
-    expect(htmlElement).toHaveTextContent(title);
+    expect(htmlElement!.textContent).toEqual(title);
   });
 
   it('renders the label valueBoxContentValue with passed value', () => {
@@ -51,6 +52,6 @@ describe('ValueBox', () => {
     const htmlElement = container.querySelector('.valueBoxContentValue');
 
     expect(htmlElement).toBeInTheDocument();
-    expect(htmlElement).toHaveTextContent(`${value}`);
+    expect(htmlElement!.textContent).toEqual(`$${value}.00`);
   });
 });

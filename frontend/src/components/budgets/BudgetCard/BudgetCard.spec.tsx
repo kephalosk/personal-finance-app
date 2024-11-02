@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { BudgetCard } from './BudgetCard';
-import { BudgetCardProps } from '../../../types/BudgetCardProps';
+import { BudgetCardProps } from '../../../model/props/BudgetCardProps';
 import {
   mockedTransactionsEntertainment,
   mockedTransactionsWithDifferentCategoriesAndCategoryAsNames,
