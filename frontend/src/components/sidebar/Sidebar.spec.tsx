@@ -1,6 +1,5 @@
 import { Sidebar } from './Sidebar';
-import { render, screen } from '@testing-library/react';
-import { ProjectName } from '../../constants/ProjectName';
+import { fireEvent, render, screen } from '@testing-library/react';
 import { SidebarPages } from '../../constants/SidebarPages';
 import { SidebarMinimizeProps } from '../../constants/SidebarMinimizeProps';
 import { MemoryRouter, useLocation } from 'react-router-dom';
@@ -22,7 +21,7 @@ function initializeComponent() {
   );
 }
 
-function getInitializedContainer() {
+function getInitializedContainer(): HTMLElement {
   (useLocation as jest.Mock).mockReturnValue({
     pathname: '/',
   });
@@ -43,12 +42,24 @@ describe('Sidebar', () => {
     expect(htmlElement).toBeInTheDocument();
   });
 
-  it('renders the project name', () => {
-    initializeComponent();
+  it('renders the project icon', () => {
+    const container = getInitializedContainer();
 
-    const title: HTMLElement = screen.getByText(`${ProjectName}`);
+    const icon = container.querySelector('.sidebarTitle');
 
-    expect(title).toBeInTheDocument();
+    expect(icon).toBeInTheDocument();
+    expect(icon).toHaveAttribute('src', './src/assets/images/project-big.png');
+  });
+
+  it('renders the project icon small if isMinimized is true', () => {
+    localStorage.setItem('isMinimized', JSON.stringify(true));
+    const container = getInitializedContainer();
+
+    const icon = container.querySelector('.sidebarTitle');
+
+    expect(icon).toBeInTheDocument();
+    expect(icon).toHaveAttribute('src', './src/assets/images/project-small.png');
+    localStorage.clear();
   });
 
   describe('SidebarPages', () => {
@@ -67,5 +78,19 @@ describe('Sidebar', () => {
     const sidebarMinimize: HTMLElement = screen.getByText(SidebarMinimizeProps.name);
 
     expect(sidebarMinimize).toBeInTheDocument();
+  });
+
+  it('changes state isMinimized if sidebarMinimizeWrapper is clicked', () => {
+    localStorage.setItem('isMinimized', JSON.stringify(false));
+    const container = getInitializedContainer();
+    const iconBeforeClick = container.querySelector('.sidebarTitle');
+    expect(iconBeforeClick).toHaveAttribute('src', './src/assets/images/project-big.png');
+
+    const button = container.querySelector('.sidebarMinimizeWrapper');
+    fireEvent.click(button!);
+
+    const iconAfterClick = container.querySelector('.sidebarTitle');
+    expect(iconAfterClick).toHaveAttribute('src', './src/assets/images/project-small.png');
+    localStorage.clear();
   });
 });

@@ -17,12 +17,37 @@ describe('SidebarMinimize', () => {
     expect(labelElement).toBeInTheDocument();
   });
 
-  it('passes the correct icon of SidebarMinimize', () => {
+  it('passes the correct icon of SidebarMinimize if isMinimized is false', () => {
+    localStorage.clear();
     render(<SidebarMinimize {...testProps} />);
 
     const imgElement: HTMLElement = screen.getByAltText(SidebarMinimizeProps.imgAlt);
 
     expect(imgElement).toHaveAttribute('src', SidebarMinimizeProps.imgSrc);
+  });
+
+  it('sets the correct icon of SidebarMinimize if isMinimized is true in store', () => {
+    localStorage.setItem('isMinimized', JSON.stringify(true));
+    render(<SidebarMinimize {...testProps} />);
+
+    const imgElement: HTMLElement = screen.getByAltText(SidebarMinimizeProps.imgAlt);
+
+    expect(imgElement).toHaveAttribute('src', SidebarMinimizeProps.altImgSrc);
+    localStorage.clear();
+  });
+
+  it('sets the correct icon of SidebarMinimize if sidebarMinimizeWrapper is clicked', () => {
+    localStorage.setItem('isMinimized', JSON.stringify(false));
+    const { container } = render(<SidebarMinimize {...testProps} />);
+    const imgElementBeforeClick: HTMLElement = screen.getByAltText(SidebarMinimizeProps.imgAlt);
+    expect(imgElementBeforeClick).toHaveAttribute('src', SidebarMinimizeProps.imgSrc);
+
+    const minimizeDiv = container.querySelector('.sidebarMinimizeWrapper');
+    fireEvent.click(minimizeDiv!);
+
+    const imgElementAfterClick: HTMLElement = screen.getByAltText(SidebarMinimizeProps.imgAlt);
+    expect(imgElementAfterClick).toHaveAttribute('src', SidebarMinimizeProps.altImgSrc);
+    localStorage.clear();
   });
 
   it('does not render a link for SidebarMinimize', () => {
