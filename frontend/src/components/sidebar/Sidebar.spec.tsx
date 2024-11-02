@@ -51,13 +51,13 @@ describe('Sidebar', () => {
     expect(title).toBeInTheDocument();
   });
 
-  it('renders all the SidebarPages', () => {
-    initializeComponent();
-
+  describe('SidebarPages', () => {
     SidebarPages.forEach((entry) => {
-      const sidebarPage: HTMLElement = screen.getByText(entry.name);
-
-      expect(sidebarPage).toBeInTheDocument();
+      it(`renders link to page ${entry.name}`, () => {
+        initializeComponent();
+        const sidebarPage: HTMLElement = screen.getByText(entry.name);
+        expect(sidebarPage).toBeInTheDocument();
+      });
     });
   });
 
