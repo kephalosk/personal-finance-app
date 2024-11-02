@@ -1,14 +1,14 @@
 import { EPPot } from '../model/entrypoints/EPPot';
 import { ColorNameEnum } from '../model/enum/ColorNameEnum';
 
-export const pot: EPPot = {
+export const mockedPot: EPPot = {
   name: 'Savings',
   target: 2000.0,
   total: 159.0,
   color: ColorNameEnum.DARKGREEN,
 };
 
-export const pots: EPPot[] = [
+export const mockedPots: EPPot[] = [
   {
     name: 'Savings',
     target: 2000.0,

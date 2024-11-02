@@ -3,7 +3,7 @@ import { BillRow } from './BillRow';
 
 describe('BillRow', () => {
   const title: string = 'testTitle';
-  const value: string = 'testValue';
+  const value: number = 100;
   const color: string = 'testColor';
 
   const testProps = {
@@ -12,12 +12,13 @@ describe('BillRow', () => {
     color,
   };
 
-  it('renders div overviewBillsRow', () => {
+  it('renders div overviewBillsRow with passed color', () => {
     const { container } = render(<BillRow {...testProps} />);
 
     const htmlElement = container.querySelector('.overviewBillsRow');
 
     expect(htmlElement).toBeInTheDocument();
+    expect(htmlElement).toHaveClass(color);
   });
 
   it('renders label overviewBillsRowTitle with passed title', () => {
@@ -35,6 +36,6 @@ describe('BillRow', () => {
     const htmlElement = container.querySelector('.overviewBillsRowValue');
 
     expect(htmlElement).toBeInTheDocument();
-    expect(htmlElement).toHaveTextContent(value);
+    expect(htmlElement!.textContent).toEqual(`$${value}.00`);
   });
 });

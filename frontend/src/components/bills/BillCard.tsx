@@ -17,7 +17,10 @@ BillCard.propTypes = {
 export function BillCard({ bills, today }: BillCardProps) {
   const [currentSortOption, setCurrentSortOption] = useState<string>(SortOptionEnum.LATEST);
 
-  const [filteredTransactions, setFilteredTransactions] = useState(bills);
+  const billsInitLatest: EPTransaction[] = bills.sort(
+    (a, b) => b.dateRaw.getDate() - a.dateRaw.getDate()
+  );
+  const [filteredTransactions, setFilteredTransactions] = useState(billsInitLatest);
 
   let shadowFilteredTransactions: EPTransaction[] = [...filteredTransactions];
 

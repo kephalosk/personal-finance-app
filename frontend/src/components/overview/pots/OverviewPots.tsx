@@ -4,9 +4,14 @@ import { ValueBox } from '../ValueBox';
 import { PotsSummary } from './PotsSummary';
 import { getPots } from '../../../globals/services/PotService';
 import { EPPot } from '../../../model/entrypoints/EPPot';
+import { OverviewPotsProps } from '../../../model/props/OverviewPotsProps';
+import PropTypes from 'prop-types';
 
-export function OverviewPots() {
-  const pots: EPPot[] = getPots();
+OverviewPots.propTypes = {
+  pots: PropTypes.array.isRequired,
+};
+
+export function OverviewPots({ pots }: OverviewPotsProps) {
   let potSum: number = 0;
   pots.forEach((pot) => {
     potSum = potSum + pot.total;
