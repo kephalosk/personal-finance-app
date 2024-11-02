@@ -6,5 +6,5 @@
   background-color: var(--page-background);
   height: 100%;
   display: grid;
-  grid-template-columns: 300px 1fr;
+  grid-template-columns: fit-content(100%) 1fr;
 }
