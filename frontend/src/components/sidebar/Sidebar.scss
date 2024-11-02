@@ -3,16 +3,23 @@
   background-color: var(--sidebar-background-grey);
   padding: 32px 24px 70px 0;
   height: 100%;
+  width: 300px;
   display: flex;
   flex-direction: column;
+  transition: width 0.5s ease, padding 0.5s ease;
+}
+.sidebar.minimized {
+  width: 90px;
+  padding: 32px 18px 70px 0;
 }
 
 .sidebarList {
-  height: 775px;
+  height: 600px;
 }
 
 .sidebarTitle {
   margin: 0 0 64px 24px;
+  height: 80px;
   font-size: 28px;
   font-weight: 900;
   transform: scale(1, 0.9);

@@ -28,9 +28,27 @@
   }
 }
 
+.entryRowImg {
+  width: 20px;
+}
+
+.entryRowImgWrapper {
+  height: 25px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
 .entryRowLabel {
   margin-left: 16px;
   font-weight: 600;
   color: var(--sidebar-entry-text-default);
   cursor: pointer;
+  white-space: nowrap;
+  opacity: 1;
+  transition: opacity 0.5s ease-in;
+}
+.entryRowLabel.minimized {
+  opacity: 0;
+  transition: opacity 0.2s ease-out;
 }

@@ -3,16 +3,31 @@ import { SidebarPages } from '../../constants/SidebarPages';
 import { SidebarPage } from '../../model/SidebarPage';
 import { SidebarListEntry } from './SidebarListEntry';
 import { SidebarMinimize } from './SidebarMinimize';
-import { ProjectName } from '../../constants/ProjectName';
 import { useLocation } from 'react-router-dom';
+import { useState } from 'react';
 
 export function Sidebar() {
+  const [isMinimized, setIsMinimized] = useState<boolean>(() => {
+    return JSON.parse(localStorage.getItem('isMinimized') ?? 'false');
+  });
+
   const location = useLocation();
   const currentPath = location.pathname;
 
+  const handleSidebarMinimize = (minimized: boolean) => {
+    setIsMinimized(minimized);
+  };
+
+  const projectIconBig = './src/assets/images/project-big.png';
+  const projectIconSmall = './src/assets/images/project-small.png';
+
   return (
-    <section className="sidebar" data-testid="sidebar">
-      <label className="sidebarTitle">{ProjectName}</label>
+    <section className={`sidebar ${isMinimized ? 'minimized' : ''}`} data-testid="sidebar">
+      <img
+        className="sidebarTitle"
+        alt="project icon"
+        src={`${isMinimized ? projectIconSmall : projectIconBig}`}
+      />
       <div className="sidebarList">
         {SidebarPages.map((entry: SidebarPage) => (
           <SidebarListEntry
@@ -22,10 +37,11 @@ export function Sidebar() {
             imgAlt={entry.imgAlt}
             linkTarget={entry.linkTarget}
             isActive={currentPath === entry.linkTarget}
+            isMinimized={isMinimized}
           />
         ))}
       </div>
-      <SidebarMinimize />
+      <SidebarMinimize onMinimize={handleSidebarMinimize} />
     </section>
   );
 }
