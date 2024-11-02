@@ -853,7 +853,7 @@ Organisation<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel>
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
           <y:Geometry height="21.0" width="141.0" x="1185.5981301896327" y="-3792.105952380952"/>
-          <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
+          <y:Fill color="#00FF00" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="141.0" x="0.0" xml:space="preserve" y="0.43359375">Desktop<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
         </y:GenericNode>
@@ -1013,7 +1013,7 @@ Organisation<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel>
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
           <y:Geometry height="21.0" width="141.0" x="1389.5981301896327" y="-3840.480952380952"/>
-          <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
+          <y:Fill color="#00FF00" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="141.0" x="0.0" xml:space="preserve" y="0.43359375">Minimize Sidebar<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
         </y:GenericNode>
@@ -1053,7 +1053,7 @@ Organisation<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel>
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
           <y:Geometry height="21.0" width="230.0" x="1586.7930414915081" y="-3840.480952380952"/>
-          <y:Fill color="#00FFFF" color2="#B7C9E3" transparent="false"/>
+          <y:Fill color="#00FF00" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="l" textColor="#000000" verticalTextPosition="bottom" visible="true" width="230.0" x="4.0" xml:space="preserve" y="0.43359375">fe-2-minimize-desktop-sidebar</y:NodeLabel>
         </y:GenericNode>
@@ -2138,7 +2138,7 @@ und ersetze rendern mit shallow rendern in allen Tests<y:LabelModel><y:SmartNode
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
           <y:Geometry height="32.0" width="174.88760896373037" x="711.7105212259025" y="-3262.145634920635"/>
-          <y:Fill color="#00FFFF" color2="#B7C9E3" transparent="false"/>
+          <y:Fill color="#00FF00" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="34.265625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="174.88760896373037" x="0.0" xml:space="preserve" y="-1.1328125">Phase 1 - Desktop Frontend Layout<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
         </y:GenericNode>
@@ -2148,7 +2148,7 @@ und ersetze rendern mit shallow rendern in allen Tests<y:LabelModel><y:SmartNode
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
           <y:Geometry height="32.0" width="174.88760896373037" x="711.7105212259025" y="-3197.879761904762"/>
-          <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
+          <y:Fill color="#00FFFF" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="34.265625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="174.88760896373037" x="0.0" xml:space="preserve" y="-1.1328125">Phase 2 - Responsive Frontend Layout<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
         </y:GenericNode>

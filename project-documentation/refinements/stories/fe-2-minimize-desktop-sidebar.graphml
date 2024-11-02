@@ -18,7 +18,7 @@
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
           <y:Geometry height="21.0" width="230.0" x="0.0" y="-274.0"/>
-          <y:Fill color="#00FFFF" color2="#B7C9E3" transparent="false"/>
+          <y:Fill color="#00FF00" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="l" textColor="#000000" verticalTextPosition="bottom" visible="true" width="230.0" x="4.0" xml:space="preserve" y="0.43359375">fe-2-minimize-desktop-sidebar</y:NodeLabel>
         </y:GenericNode>
@@ -28,7 +28,7 @@
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
           <y:Geometry height="64.25372762877464" width="348.6543257077677" x="250.0" y="-295.6268638143873"/>
-          <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
+          <y:Fill color="#00FF00" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.53125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="348.6543257077677" x="0.0" xml:space="preserve" y="0.8612388143873204">WENN ein Nutzer den Minimize-Button in der Sidebar klickt,
 DANN wird die sidebar minimiert und es sind nur noch icons sichtbar in der Sidebar<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
@@ -109,7 +109,7 @@ DANN wird die sidebar minimiert und es sind nur noch icons sichtbar in der Sideb
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
           <y:Geometry height="32.02008053334805" width="198.65432570776773" x="629.6543257077676" y="-295.5735323301661"/>
-          <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
+          <y:Fill color="#00FF00" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="34.265625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="198.65432570776773" x="0.0" xml:space="preserve" y="-1.1227722333259749">create layout for minimized sidebar<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
         </y:GenericNode>
@@ -118,7 +118,7 @@ DANN wird die sidebar minimiert und es sind nur noch icons sichtbar in der Sideb
     <node id="n10">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.cloud">
-          <y:Geometry height="50.0" width="178.65432570776773" x="1072.962977123303" y="-248.84821428571428"/>
+          <y:Geometry height="50.0" width="178.65432570776773" x="1098.962977123303" y="-421.06349206349205"/>
           <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="178.65432570776773" x="0.0" xml:space="preserve" y="14.93359375">Testhinweise<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
@@ -129,7 +129,7 @@ DANN wird die sidebar minimiert und es sind nur noch icons sichtbar in der Sideb
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
           <y:Geometry height="21.0" width="198.65432570776773" x="859.3086514155355" y="-347.69642857142856"/>
-          <y:Fill color="#00FFFF" color2="#B7C9E3" transparent="false"/>
+          <y:Fill color="#00FF00" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="198.65432570776773" x="0.0" xml:space="preserve" y="0.43359375">Philipp Kraatz finance zu PKf<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
         </y:GenericNode>
@@ -139,7 +139,7 @@ DANN wird die sidebar minimiert und es sind nur noch icons sichtbar in der Sideb
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
           <y:Geometry height="32.02008053334805" width="198.65432570776773" x="859.3086514155355" y="-295.5735323301661"/>
-          <y:Fill color="#00FFFF" color2="#B7C9E3" transparent="false"/>
+          <y:Fill color="#00FF00" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="34.265625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="198.65432570776773" x="0.0" xml:space="preserve" y="-1.1227722333259749">entry-sichtbarkeit über klasse steuern<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
         </y:GenericNode>
@@ -149,7 +149,7 @@ DANN wird die sidebar minimiert und es sind nur noch icons sichtbar in der Sideb
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
           <y:Geometry height="21.0" width="198.65432570776773" x="629.6543257077676" y="-181.43055555555554"/>
-          <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
+          <y:Fill color="#00FF00" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="198.65432570776773" x="0.0" xml:space="preserve" y="0.43359375">transition<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
         </y:GenericNode>
@@ -159,7 +159,7 @@ DANN wird die sidebar minimiert und es sind nur noch icons sichtbar in der Sideb
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
           <y:Geometry height="21.0" width="198.65432570776773" x="859.3086514155355" y="-181.43055555555554"/>
-          <y:Fill color="#00FFFF" color2="#B7C9E3" transparent="false"/>
+          <y:Fill color="#00FF00" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="198.65432570776773" x="0.0" xml:space="preserve" y="0.43359375">add transition<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
         </y:GenericNode>
@@ -169,9 +169,39 @@ DANN wird die sidebar minimiert und es sind nur noch icons sichtbar in der Sideb
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
           <y:Geometry height="21.0" width="198.65432570776773" x="859.3086514155355" y="-232.43055555555554"/>
-          <y:Fill color="#00FFFF" color2="#B7C9E3" transparent="false"/>
+          <y:Fill color="#00FF00" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="198.65432570776773" x="0.0" xml:space="preserve" y="0.43359375">check layout for selected entry<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+        </y:GenericNode>
+      </data>
+    </node>
+    <node id="n16">
+      <data key="d6">
+        <y:GenericNode configuration="com.yworks.flowchart.process">
+          <y:Geometry height="21.0" width="198.65432570776773" x="1088.962977123303" y="-341.06349206349205"/>
+          <y:Fill color="#00FF00" color2="#B7C9E3" transparent="false"/>
+          <y:BorderStyle color="#000000" type="line" width="1.0"/>
+          <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="198.65432570776773" x="0.0" xml:space="preserve" y="0.43359375">Sidebar<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+        </y:GenericNode>
+      </data>
+    </node>
+    <node id="n17">
+      <data key="d6">
+        <y:GenericNode configuration="com.yworks.flowchart.process">
+          <y:Geometry height="21.0" width="198.65432570776773" x="1088.962977123303" y="-290.06349206349205"/>
+          <y:Fill color="#00FF00" color2="#B7C9E3" transparent="false"/>
+          <y:BorderStyle color="#000000" type="line" width="1.0"/>
+          <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="198.65432570776773" x="0.0" xml:space="preserve" y="0.43359375">SidebarListEntry<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+        </y:GenericNode>
+      </data>
+    </node>
+    <node id="n18">
+      <data key="d6">
+        <y:GenericNode configuration="com.yworks.flowchart.process">
+          <y:Geometry height="21.0" width="198.65432570776773" x="1088.962977123303" y="-239.06349206349208"/>
+          <y:Fill color="#00FF00" color2="#B7C9E3" transparent="false"/>
+          <y:BorderStyle color="#000000" type="line" width="1.0"/>
+          <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="198.65432570776773" x="0.0" xml:space="preserve" y="0.43359375">SidebarMinimize<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
         </y:GenericNode>
       </data>
     </node>
@@ -254,6 +284,45 @@ DANN wird die sidebar minimiert und es sind nur noch icons sichtbar in der Sideb
           <y:Path sx="99.32716285388386" sy="10.673360177782683" tx="-99.32716285388386" ty="-0.0">
             <y:Point x="843.8086514155355" y="-268.89013188570937"/>
             <y:Point x="843.8086514155355" y="-221.93055555555554"/>
+          </y:Path>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e7" source="n12" target="n16">
+      <data key="d9"/>
+      <data key="d10">
+        <y:PolyLineEdge>
+          <y:Path sx="99.32716285388386" sy="-10.673360177782683" tx="-99.32716285388386" ty="-0.0">
+            <y:Point x="1073.462977123303" y="-290.23685224127473"/>
+            <y:Point x="1073.462977123303" y="-330.56349206349205"/>
+          </y:Path>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e8" source="n12" target="n17">
+      <data key="d9"/>
+      <data key="d10">
+        <y:PolyLineEdge>
+          <y:Path sx="99.32716285388386" sy="-0.0" tx="-99.32716285388386" ty="-0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e9" source="n12" target="n18">
+      <data key="d9"/>
+      <data key="d10">
+        <y:PolyLineEdge>
+          <y:Path sx="99.32716285388386" sy="10.673360177782683" tx="-99.32716285388386" ty="-0.0">
+            <y:Point x="1073.462977123303" y="-268.89013188570937"/>
+            <y:Point x="1073.462977123303" y="-228.56349206349208"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="standard"/>
