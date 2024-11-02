@@ -3,8 +3,8 @@ import { HeaderBar } from '../components/HeaderBar';
 import { BudgetsDiagramCard } from '../components/budgets/BudgetDiagrammCard/BudgetsDiagramCard';
 import { BudgetCard } from '../components/budgets/BudgetCard/BudgetCard';
 import { getBudgets } from '../globals/services/BudgetService';
-import { EPBudget } from '../types/EPBudget';
-import { EPTransaction } from '../types/EPTransaction';
+import { EPBudget } from '../model/entrypoints/EPBudget';
+import { EPTransaction } from '../model/entrypoints/EPTransaction';
 import { getTransactions } from '../globals/services/TransactionService';
 
 export function BudgetsPage() {

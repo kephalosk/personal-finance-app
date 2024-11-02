@@ -1,5 +1,5 @@
 import './PotCardDetails.scss';
-import { PotCardDetailsProps } from '../../types/PotCardDetailsProps';
+import { PotCardDetailsProps } from '../../model/props/PotCardDetailsProps';
 import PropTypes from 'prop-types';
 import React from 'react';
 

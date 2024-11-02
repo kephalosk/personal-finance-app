@@ -1,6 +1,6 @@
 import './PaginationButtonPrev.scss';
 import PropTypes from 'prop-types';
-import { PaginationButtonPrevProps } from '../../../types/PaginationButtonPrevProps';
+import { PaginationButtonPrevProps } from '../../../model/props/PaginationButtonPrevProps';
 
 PaginationButtonPrev.propTypes = {
   onClick: PropTypes.func.isRequired,

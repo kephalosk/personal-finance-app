@@ -1,4 +1,4 @@
-import { EPTransaction } from '../types/EPTransaction';
+import { EPTransaction } from '../model/entrypoints/EPTransaction';
 
 export const mockedTransaction: EPTransaction = {
   avatar: './src/assets/images/avatars/emma-richardson.jpg',
@@ -93,6 +93,69 @@ export const mockedTransactionsWithDifferentCategoriesAndCategoryAsNames: EPTran
     name: 'Bills',
     category: 'Bills',
     categoryKey: 'bills',
+    date: '13 Jul 2024',
+    dateRaw: new Date('2024-07-13T14:00:37Z'),
+    amount: -10,
+    recurring: false,
+  },
+];
+
+export const mockedTransactionsLength6: EPTransaction[] = [
+  {
+    avatar: './src/assets/images/avatars/james-thompson.jpg',
+    name: 'James Thompson',
+    category: 'Entertainment',
+    categoryKey: 'entertainment',
+    date: '11 Aug 2024',
+    dateRaw: new Date('2024-08-11T14:00:37Z'),
+    amount: -5,
+    recurring: false,
+  },
+  {
+    avatar: './src/assets/images/avatars/pixel-playground.jpg',
+    name: 'Pixel Playground',
+    category: 'Entertainment',
+    categoryKey: 'entertainment',
+    date: '15 Aug 2024',
+    dateRaw: new Date('2024-08-15T14:00:37Z'),
+    amount: -10,
+    recurring: true,
+  },
+  {
+    avatar: './src/assets/images/avatars/rina-sato.jpg',
+    name: 'Rina Sato',
+    category: 'Entertainment',
+    categoryKey: 'entertainment',
+    date: '13 Jul 2024',
+    dateRaw: new Date('2024-07-13T14:00:37Z'),
+    amount: -10,
+    recurring: false,
+  },
+  {
+    avatar: './src/assets/images/avatars/james-thompson.jpg',
+    name: 'James Thompson',
+    category: 'Entertainment',
+    categoryKey: 'entertainment',
+    date: '11 Aug 2024',
+    dateRaw: new Date('2024-08-11T14:00:37Z'),
+    amount: -5,
+    recurring: false,
+  },
+  {
+    avatar: './src/assets/images/avatars/pixel-playground.jpg',
+    name: 'Pixel Playground',
+    category: 'Entertainment',
+    categoryKey: 'entertainment',
+    date: '15 Aug 2024',
+    dateRaw: new Date('2024-08-15T14:00:37Z'),
+    amount: -10,
+    recurring: true,
+  },
+  {
+    avatar: './src/assets/images/avatars/rina-sato.jpg',
+    name: 'Rina Sato',
+    category: 'Entertainment',
+    categoryKey: 'entertainment',
     date: '13 Jul 2024',
     dateRaw: new Date('2024-07-13T14:00:37Z'),
     amount: -10,

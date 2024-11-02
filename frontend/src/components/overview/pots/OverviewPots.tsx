@@ -2,22 +2,40 @@ import './OverviewPots.scss';
 import { OverviewHeader } from '../OverviewHeader';
 import { ValueBox } from '../ValueBox';
 import { PotsSummary } from './PotsSummary';
+import { OverviewPotsProps } from '../../../model/props/OverviewPotsProps';
+import PropTypes from 'prop-types';
 
-export function OverviewPots() {
+OverviewPots.propTypes = {
+  pots: PropTypes.array.isRequired,
+};
+
+export function OverviewPots({ pots }: OverviewPotsProps) {
+  let potSum: number = 0;
+  pots.forEach((pot) => {
+    potSum = potSum + pot.total;
+  });
   return (
     <>
       <div className="overviewPots" data-testid="overview-pots">
         <OverviewHeader title="Pots" linkText="See Details" linkTarget="/pots" />
         <div className="overviewPotsContent">
-          <PotsSummary />
+          <PotsSummary potSum={potSum} />
           <div className="overviewPotsValues">
             <div className="overviewPotsValuesRow">
-              <ValueBox title="Savings" value={159} color="dark-green" />
-              <ValueBox title="Gift" value={40} color="light-blue" />
+              {pots[0] && (
+                <ValueBox title={pots[0].name} value={pots[0].total} color={pots[0].color} />
+              )}
+              {pots[1] && (
+                <ValueBox title={pots[1].name} value={pots[1].total} color={pots[1].color} />
+              )}
             </div>
             <div className="overviewPotsValuesRow">
-              <ValueBox title="Concert Ticket" value={110} color="dark-grey" />
-              <ValueBox title="New Laptop" value={10} color="beige" />
+              {pots[2] && (
+                <ValueBox title={pots[2].name} value={pots[2].total} color={pots[2].color} />
+              )}
+              {pots[3] && (
+                <ValueBox title={pots[3].name} value={pots[3].total} color={pots[3].color} />
+              )}
             </div>
           </div>
         </div>

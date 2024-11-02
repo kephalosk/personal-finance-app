@@ -2,11 +2,11 @@ import './BudgetCard.scss';
 import { CardHeader } from '../../CardHeader';
 import { ValueBox } from '../../overview/ValueBox';
 import { BudgetCardList } from './BudgetCardList';
-import { BudgetCardProps } from '../../../types/BudgetCardProps';
+import { BudgetCardProps } from '../../../model/props/BudgetCardProps';
 import React from 'react';
-import { EPTransaction } from '../../../types/EPTransaction';
+import { EPTransaction } from '../../../model/entrypoints/EPTransaction';
 import PropTypes from 'prop-types';
-import { ColorNameEnum } from '../../../types/ColorNameEnum';
+import { ColorNameEnum } from '../../../model/enum/ColorNameEnum';
 
 BudgetCard.propTypes = {
   budget: PropTypes.object.isRequired,

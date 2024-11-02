@@ -1,10 +1,10 @@
 import './BillCard.scss';
-import { EPTransaction } from '../../types/EPTransaction';
+import { EPTransaction } from '../../model/entrypoints/EPTransaction';
 import { BillCardTableRow } from './BillCardTableRow';
-import { BillCardProps } from '../../types/BillCardProps';
+import { BillCardProps } from '../../model/props/BillCardProps';
 import { SearchbarInput } from '../searchbar/SearchbarInput';
 import { useRef, useState } from 'react';
-import { SearchbarInputHandle } from '../../types/SearchbarInputHandle';
+import { SearchbarInputHandle } from '../../model/SearchbarInputHandle';
 import { SearchbarDropdownSort } from '../searchbar/SearchbarDropdownSort';
 import { SortOptionEnum } from '../../constants/SortOptionEnum';
 import PropTypes from 'prop-types';
@@ -17,7 +17,10 @@ BillCard.propTypes = {
 export function BillCard({ bills, today }: BillCardProps) {
   const [currentSortOption, setCurrentSortOption] = useState<string>(SortOptionEnum.LATEST);
 
-  const [filteredTransactions, setFilteredTransactions] = useState(bills);
+  const billsInitLatest: EPTransaction[] = bills.sort(
+    (a, b) => b.dateRaw.getDate() - a.dateRaw.getDate()
+  );
+  const [filteredTransactions, setFilteredTransactions] = useState(billsInitLatest);
 
   let shadowFilteredTransactions: EPTransaction[] = [...filteredTransactions];
 

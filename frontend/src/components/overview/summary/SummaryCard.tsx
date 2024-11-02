@@ -1,14 +1,15 @@
 import './SummaryCard.scss';
 import PropTypes from 'prop-types';
-import { SummaryCardProps } from '../../../types/SummaryCardProps';
+import { SummaryCardProps } from '../../../model/props/SummaryCardProps';
 
 SummaryCard.propTypes = {
   title: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
+  value: PropTypes.number.isRequired,
   isInverted: PropTypes.bool,
 };
 
 export function SummaryCard({ title, value, isInverted }: SummaryCardProps) {
+  const valueFormatted = value.toFixed(2);
   return (
     <>
       <div
@@ -19,7 +20,7 @@ export function SummaryCard({ title, value, isInverted }: SummaryCardProps) {
           {title}
         </label>
         <label className={`overviewSummaryCardValue ${isInverted ? 'inverted' : ''}`}>
-          ${value}
+          ${valueFormatted}
         </label>
       </div>
     </>

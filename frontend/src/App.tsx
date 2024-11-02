@@ -9,7 +9,7 @@ import { PotsPage } from './pages/PotsPage';
 import { BudgetsPage } from './pages/BudgetsPage';
 import { TransactionsPage } from './pages/TransactionsPage';
 import PropTypes from 'prop-types';
-import { AppProps } from './types/AppProps';
+import { AppProps } from './model/props/AppProps';
 
 App.propTypes = {
   Router: PropTypes.elementType,

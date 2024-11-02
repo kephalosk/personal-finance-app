@@ -1,6 +1,6 @@
 import './SearchbarInput.scss';
 import React, { forwardRef, useImperativeHandle, useState } from 'react';
-import { SearchbarInputProps } from '../../types/SearchbarInputProps';
+import { SearchbarInputProps } from '../../model/props/SearchbarInputProps';
 
 export const SearchbarInput = forwardRef(({ onInputChange }: SearchbarInputProps, ref) => {
   const [currentInput, setCurrentInput] = useState<string>('');

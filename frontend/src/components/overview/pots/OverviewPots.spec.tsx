@@ -1,12 +1,17 @@
 import { render, screen } from '@testing-library/react';
 import { OverviewPots } from './OverviewPots';
 import { MemoryRouter } from 'react-router-dom';
+import { mockedPot, mockedPots } from '../../../fixtures/MockedPots';
 
 describe('OverviewPots', () => {
+  const pots = mockedPots;
+  const testProps = {
+    pots,
+  };
   it('renders div overviewPots', () => {
     const { container } = render(
       <MemoryRouter>
-        <OverviewPots />
+        <OverviewPots {...testProps} />
       </MemoryRouter>
     );
 
@@ -18,7 +23,7 @@ describe('OverviewPots', () => {
   it('renders react component OverviewHeader', () => {
     render(
       <MemoryRouter>
-        <OverviewPots />
+        <OverviewPots {...testProps} />
       </MemoryRouter>
     );
 
@@ -30,7 +35,7 @@ describe('OverviewPots', () => {
   it('renders div overviewPotsContent', () => {
     const { container } = render(
       <MemoryRouter>
-        <OverviewPots />
+        <OverviewPots {...testProps} />
       </MemoryRouter>
     );
 
@@ -42,7 +47,7 @@ describe('OverviewPots', () => {
   it('renders react component PotsSummary', () => {
     render(
       <MemoryRouter>
-        <OverviewPots />
+        <OverviewPots {...testProps} />
       </MemoryRouter>
     );
 
@@ -54,7 +59,7 @@ describe('OverviewPots', () => {
   it('renders div overviewPotsValues', () => {
     const { container } = render(
       <MemoryRouter>
-        <OverviewPots />
+        <OverviewPots {...testProps} />
       </MemoryRouter>
     );
 
@@ -63,27 +68,39 @@ describe('OverviewPots', () => {
     expect(htmlElement).toBeInTheDocument();
   });
 
-  it('renders div overviewPotsValuesRow', () => {
+  it('renders 2 divs overviewPotsValuesRow', () => {
     const { container } = render(
       <MemoryRouter>
-        <OverviewPots />
+        <OverviewPots {...testProps} />
       </MemoryRouter>
     );
 
-    const htmlElement = container.querySelector('.overviewPotsValuesRow');
+    const htmlElements = container.querySelectorAll('.overviewPotsValuesRow');
 
-    expect(htmlElement).toBeInTheDocument();
+    expect(htmlElements).toHaveLength(2);
   });
 
-  it('renders react component ValueBox 4 times', () => {
+  it('renders react component ValueBox 4 times with passed pots', () => {
     render(
       <MemoryRouter>
-        <OverviewPots />
+        <OverviewPots {...testProps} />
       </MemoryRouter>
     );
 
     const reactComponents = screen.getAllByTestId('value-box');
 
     expect(reactComponents).toHaveLength(4);
+  });
+
+  it('renders react component ValueBox only 1 time if only 1 pot is passed', () => {
+    render(
+      <MemoryRouter>
+        <OverviewPots {...testProps} pots={[mockedPot]} />
+      </MemoryRouter>
+    );
+
+    const reactComponents = screen.getAllByTestId('value-box');
+
+    expect(reactComponents).toHaveLength(1);
   });
 });

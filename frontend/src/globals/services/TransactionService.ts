@@ -1,6 +1,6 @@
 import data from '../data.json';
-import { EPTransaction } from '../../types/EPTransaction';
-import { APITransactionDTO } from '../../types/APITransactionDTO';
+import { EPTransaction } from '../../model/entrypoints/EPTransaction';
+import { APITransactionDTO } from '../../model/api/APITransactionDTO';
 import { toLowerCaseWithoutWhitespace } from '../utils/ToLowerCaseWithoutWhitespace';
 
 export function getTransactions(): EPTransaction[] {

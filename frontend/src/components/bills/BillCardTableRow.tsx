@@ -1,5 +1,5 @@
 import './BillCardTableRow.scss';
-import { BillCardTableRowProps } from '../../types/BillCardTableRowProps';
+import { BillCardTableRowProps } from '../../model/props/BillCardTableRowProps';
 import PropTypes from 'prop-types';
 import { toOrdinal } from '../../globals/utils/ToOrdinal';
 

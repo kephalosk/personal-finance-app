@@ -1,6 +1,6 @@
 import './PaginationPages.scss';
 import PropTypes from 'prop-types';
-import { PaginationPagesProps } from '../../../types/PaginationPagesProps';
+import { PaginationPagesProps } from '../../../model/props/PaginationPagesProps';
 
 PaginationPages.propTypes = {
   onPageClick: PropTypes.func.isRequired,

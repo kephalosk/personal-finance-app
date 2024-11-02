@@ -1,6 +1,6 @@
 import './Sidebar.scss';
 import { SidebarPages } from '../../constants/SidebarPages';
-import { SidebarPage } from '../../types/SidebarPage';
+import { SidebarPage } from '../../model/SidebarPage';
 import { SidebarListEntry } from './SidebarListEntry';
 import { SidebarMinimize } from './SidebarMinimize';
 import { ProjectName } from '../../constants/ProjectName';

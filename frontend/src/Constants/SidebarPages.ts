@@ -1,4 +1,4 @@
-import { SidebarPage } from '../types/SidebarPage';
+import { SidebarPage } from '../model/SidebarPage';
 
 export const SidebarPages: SidebarPage[] = [
   {

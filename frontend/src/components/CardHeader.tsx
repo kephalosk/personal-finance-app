@@ -1,5 +1,5 @@
 import './CardHeader.scss';
-import { BudgetCardHeaderProps } from '../types/BudgetCardHeaderProps';
+import { BudgetCardHeaderProps } from '../model/props/BudgetCardHeaderProps';
 import PropTypes from 'prop-types';
 import React from 'react';
 

@@ -1,6 +1,6 @@
 import './BillTotal.scss';
 import PropTypes from 'prop-types';
-import { BillTotalProps } from '../../types/BillTotalProps';
+import { BillTotalProps } from '../../model/props/BillTotalProps';
 
 BillTotal.propTypes = {
   sum: PropTypes.number.isRequired,

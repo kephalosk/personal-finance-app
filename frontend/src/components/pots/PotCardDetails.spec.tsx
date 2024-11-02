@@ -1,11 +1,11 @@
-import { PotCardDetailsProps } from '../../types/PotCardDetailsProps';
+import { PotCardDetailsProps } from '../../model/props/PotCardDetailsProps';
 import { render } from '@testing-library/react';
 import { PotCardDetails } from './PotCardDetails';
-import { pot } from '../../fixtures/MockedPots';
+import { mockedPot } from '../../fixtures/MockedPots';
 
 describe('PotCardDetails', () => {
   const testProps: PotCardDetailsProps = {
-    pot,
+    pot: mockedPot,
   };
 
   it('renders div potCardDetails', () => {
@@ -38,7 +38,7 @@ describe('PotCardDetails', () => {
     const htmlElement = container.querySelector('.potCardDetailsTotalAmount');
 
     expect(htmlElement).toBeInTheDocument();
-    expect(htmlElement).toHaveTextContent(`${pot.total}`);
+    expect(htmlElement).toHaveTextContent(`${mockedPot.total}`);
   });
 
   it('renders div potCardBarMax', () => {
@@ -66,7 +66,7 @@ describe('PotCardDetails', () => {
   });
 
   it('renders div potCardDetailsPercentCurrent with correct percentage', () => {
-    const percentage = (pot.total / pot.target) * 100;
+    const percentage = (mockedPot.total / mockedPot.target) * 100;
     const { container } = render(<PotCardDetails {...testProps} />);
 
     const htmlElement = container.querySelector('.potCardDetailsPercentCurrent');
@@ -81,6 +81,6 @@ describe('PotCardDetails', () => {
     const htmlElement = container.querySelector('.potCardDetailsPercentTotal');
 
     expect(htmlElement).toBeInTheDocument();
-    expect(htmlElement).toHaveTextContent(`${pot.target}`);
+    expect(htmlElement).toHaveTextContent(`${mockedPot.target}`);
   });
 });
