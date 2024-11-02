@@ -10,10 +10,13 @@ import { EPTransaction } from '../model/entrypoints/EPTransaction';
 import { BillsHelper } from '../globals/helper/BillsHelper';
 import { EPPot } from '../model/entrypoints/EPPot';
 import { getPots } from '../globals/services/PotService';
+import { EPBudget } from '../model/entrypoints/EPBudget';
+import { getBudgets } from '../globals/services/BudgetService';
 
 export function OverviewPage() {
   const pots: EPPot[] = getPots();
   const transactions: EPTransaction[] = getTransactions();
+  const budgets: EPBudget[] = getBudgets();
   const bills: EPTransaction[] = BillsHelper.getRecurringBillsFromTransactions();
   const today = new Date();
   return (
@@ -26,7 +29,7 @@ export function OverviewPage() {
           <OverviewTransactions transactions={transactions} />
         </div>
         <div className="overviewPageDetailsRight">
-          <OverviewBudgets />
+          <OverviewBudgets budgets={budgets} transactions={transactions} />
           <OverviewBills bills={bills} today={today} />
         </div>
       </div>

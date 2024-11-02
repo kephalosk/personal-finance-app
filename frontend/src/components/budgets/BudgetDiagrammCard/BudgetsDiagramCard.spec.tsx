@@ -71,8 +71,8 @@ describe('BudgetsDiagramCard', () => {
   });
 
   it('calculates currentAmount with passed transactions', () => {
-    const categoryEntertainment = mockedBudgets.at(0)!.category;
-    const categoryDiningOut = mockedBudgets.at(1)!.category;
+    const categoryDiningOut = mockedBudgets.at(0)!.category;
+    const categoryEntertainment = mockedBudgets.at(1)!.category;
     render(<BudgetsDiagramCard {...testProps} />);
 
     const reactComponents = screen.getAllByTestId('budgets-diagramm-card-row');
@@ -81,11 +81,11 @@ describe('BudgetsDiagramCard', () => {
       const title = row.querySelector('.cardRowTitle')!.textContent;
       const currentAmount = row.querySelector('.cardRowTitleCurrentAmount')!.textContent;
       switch (title) {
-        case categoryEntertainment:
-          expect(currentAmount).toEqual(`$${currentAmountEntertainment}.00`);
-          break;
         case categoryDiningOut:
           expect(currentAmount).toEqual(`$${currentAmountDiningOut}.00`);
+          break;
+        case categoryEntertainment:
+          expect(currentAmount).toEqual(`$${currentAmountEntertainment}.00`);
           break;
       }
     });

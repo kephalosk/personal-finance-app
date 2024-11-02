@@ -21,6 +21,7 @@ export function BudgetsDiagramCard({ budgets, transactions }: BudgetsDiagramCard
     spent = spent * -1;
     return spent;
   };
+  budgets.sort((a, b) => b.maximum - a.maximum);
 
   return (
     <>

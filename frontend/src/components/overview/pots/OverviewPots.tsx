@@ -2,8 +2,6 @@ import './OverviewPots.scss';
 import { OverviewHeader } from '../OverviewHeader';
 import { ValueBox } from '../ValueBox';
 import { PotsSummary } from './PotsSummary';
-import { getPots } from '../../../globals/services/PotService';
-import { EPPot } from '../../../model/entrypoints/EPPot';
 import { OverviewPotsProps } from '../../../model/props/OverviewPotsProps';
 import PropTypes from 'prop-types';
 
