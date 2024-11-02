@@ -5,8 +5,11 @@ import { OverviewTransactions } from '../components/overview/transactions/Overvi
 import { OverviewBudgets } from '../components/overview/budgets/OverviewBudgets';
 import { OverviewBills } from '../components/overview/bills/OverviewBills';
 import React from 'react';
+import { getTransactions } from '../globals/services/TransactionService';
+import { EPTransaction } from '../model/entrypoints/EPTransaction';
 
 export function OverviewPage() {
+  const transactions: EPTransaction[] = getTransactions();
   return (
     <div className="overviewPage" data-testid="overview-page">
       <h1>Overview</h1>
@@ -14,7 +17,7 @@ export function OverviewPage() {
       <div className="overviewPageDetails">
         <div className="overviewPageDetailsLeft">
           <OverviewPots />
-          <OverviewTransactions />
+          <OverviewTransactions transactions={transactions} />
         </div>
         <div className="overviewPageDetailsRight">
           <OverviewBudgets />
