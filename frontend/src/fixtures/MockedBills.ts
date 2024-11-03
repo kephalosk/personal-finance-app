@@ -2,7 +2,7 @@ import { EPTransaction } from '../model/entrypoints/EPTransaction';
 
 export const mockedBills: EPTransaction[] = [
   {
-    avatar: './src/assets/images/avatars/pixel-playground.jpg',
+    avatar: '/images/avatars/pixel-playground.jpg',
     name: 'Pixel Playground',
     category: 'Entertainment',
     categoryKey: 'entertainment',
@@ -12,7 +12,7 @@ export const mockedBills: EPTransaction[] = [
     recurring: true,
   },
   {
-    avatar: './src/assets/images/avatars/elevate-education.jpg',
+    avatar: '/images/avatars/elevate-education.jpg',
     name: 'Elevate Education',
     category: 'Education',
     categoryKey: 'education',
@@ -22,7 +22,7 @@ export const mockedBills: EPTransaction[] = [
     recurring: true,
   },
   {
-    avatar: './src/assets/images/avatars/serenity-spa-and-wellness.jpg',
+    avatar: '/images/avatars/serenity-spa-and-wellness.jpg',
     name: 'Serenity Spa & Wellness',
     category: 'Personal Care',
     categoryKey: 'personalcare',
@@ -32,7 +32,7 @@ export const mockedBills: EPTransaction[] = [
     recurring: true,
   },
   {
-    avatar: './src/assets/images/avatars/spark-electric-solutions.jpg',
+    avatar: '/images/avatars/spark-electric-solutions.jpg',
     name: 'Spark Electric Solutions',
     category: 'Bills',
     categoryKey: 'bills',

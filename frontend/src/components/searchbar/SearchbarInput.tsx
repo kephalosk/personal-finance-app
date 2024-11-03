@@ -31,7 +31,7 @@ export const SearchbarInput = forwardRef(({ onInputChange }: SearchbarInputProps
             className="searchbarInputLense"
             alt="icon of search"
             aria-hidden="true"
-            src="./src/assets/images/icon-search.svg"
+            src="/images/icon-search.svg"
           />
         </div>
       </div>

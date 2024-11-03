@@ -1,7 +1,7 @@
 import { EPTransaction } from '../model/entrypoints/EPTransaction';
 
 export const mockedTransaction: EPTransaction = {
-  avatar: './src/assets/images/avatars/emma-richardson.jpg',
+  avatar: '/images/avatars/emma-richardson.jpg',
   name: 'Emma Richardson',
   category: 'General',
   categoryKey: 'general',
@@ -13,7 +13,7 @@ export const mockedTransaction: EPTransaction = {
 
 export const mockedTransactions: EPTransaction[] = [
   {
-    avatar: './src/assets/images/avatars/emma-richardson.jpg',
+    avatar: '/images/avatars/emma-richardson.jpg',
     name: 'Emma Richardson',
     category: 'General',
     categoryKey: 'general',
@@ -23,7 +23,7 @@ export const mockedTransactions: EPTransaction[] = [
     recurring: false,
   },
   {
-    avatar: './src/assets/images/avatars/savory-bites-bistro.jpg',
+    avatar: '/images/avatars/savory-bites-bistro.jpg',
     name: 'Savory Bites Bistro',
     category: 'Dining Out',
     categoryKey: 'diningout',
@@ -36,7 +36,7 @@ export const mockedTransactions: EPTransaction[] = [
 
 export const mockedTransactionsEntertainment: EPTransaction[] = [
   {
-    avatar: './src/assets/images/avatars/james-thompson.jpg',
+    avatar: '/images/avatars/james-thompson.jpg',
     name: 'James Thompson',
     category: 'Entertainment',
     categoryKey: 'entertainment',
@@ -46,7 +46,7 @@ export const mockedTransactionsEntertainment: EPTransaction[] = [
     recurring: false,
   },
   {
-    avatar: './src/assets/images/avatars/pixel-playground.jpg',
+    avatar: '/images/avatars/pixel-playground.jpg',
     name: 'Pixel Playground',
     category: 'Entertainment',
     categoryKey: 'entertainment',
@@ -56,7 +56,7 @@ export const mockedTransactionsEntertainment: EPTransaction[] = [
     recurring: true,
   },
   {
-    avatar: './src/assets/images/avatars/rina-sato.jpg',
+    avatar: '/images/avatars/rina-sato.jpg',
     name: 'Rina Sato',
     category: 'Entertainment',
     categoryKey: 'entertainment',
@@ -69,7 +69,7 @@ export const mockedTransactionsEntertainment: EPTransaction[] = [
 
 export const mockedTransactionsWithDifferentCategoriesAndCategoryAsNames: EPTransaction[] = [
   {
-    avatar: './src/assets/images/avatars/james-thompson.jpg',
+    avatar: '/images/avatars/james-thompson.jpg',
     name: 'Entertainment',
     category: 'Entertainment',
     categoryKey: 'entertainment',
@@ -79,7 +79,7 @@ export const mockedTransactionsWithDifferentCategoriesAndCategoryAsNames: EPTran
     recurring: false,
   },
   {
-    avatar: './src/assets/images/avatars/pixel-playground.jpg',
+    avatar: '/images/avatars/pixel-playground.jpg',
     name: 'School',
     category: 'School',
     categoryKey: 'school',
@@ -89,7 +89,7 @@ export const mockedTransactionsWithDifferentCategoriesAndCategoryAsNames: EPTran
     recurring: true,
   },
   {
-    avatar: './src/assets/images/avatars/rina-sato.jpg',
+    avatar: '/images/avatars/rina-sato.jpg',
     name: 'Bills',
     category: 'Bills',
     categoryKey: 'bills',
@@ -102,7 +102,7 @@ export const mockedTransactionsWithDifferentCategoriesAndCategoryAsNames: EPTran
 
 export const mockedTransactionsLength6: EPTransaction[] = [
   {
-    avatar: './src/assets/images/avatars/james-thompson.jpg',
+    avatar: '/images/avatars/james-thompson.jpg',
     name: 'James Thompson',
     category: 'Entertainment',
     categoryKey: 'entertainment',
@@ -112,7 +112,7 @@ export const mockedTransactionsLength6: EPTransaction[] = [
     recurring: false,
   },
   {
-    avatar: './src/assets/images/avatars/pixel-playground.jpg',
+    avatar: '/images/avatars/pixel-playground.jpg',
     name: 'Pixel Playground',
     category: 'Entertainment',
     categoryKey: 'entertainment',
@@ -122,7 +122,7 @@ export const mockedTransactionsLength6: EPTransaction[] = [
     recurring: true,
   },
   {
-    avatar: './src/assets/images/avatars/rina-sato.jpg',
+    avatar: '/images/avatars/rina-sato.jpg',
     name: 'Rina Sato',
     category: 'Entertainment',
     categoryKey: 'entertainment',
@@ -132,7 +132,7 @@ export const mockedTransactionsLength6: EPTransaction[] = [
     recurring: false,
   },
   {
-    avatar: './src/assets/images/avatars/james-thompson.jpg',
+    avatar: '/images/avatars/james-thompson.jpg',
     name: 'James Thompson',
     category: 'Entertainment',
     categoryKey: 'entertainment',
@@ -142,7 +142,7 @@ export const mockedTransactionsLength6: EPTransaction[] = [
     recurring: false,
   },
   {
-    avatar: './src/assets/images/avatars/pixel-playground.jpg',
+    avatar: '/images/avatars/pixel-playground.jpg',
     name: 'Pixel Playground',
     category: 'Entertainment',
     categoryKey: 'entertainment',
@@ -152,7 +152,7 @@ export const mockedTransactionsLength6: EPTransaction[] = [
     recurring: true,
   },
   {
-    avatar: './src/assets/images/avatars/rina-sato.jpg',
+    avatar: '/images/avatars/rina-sato.jpg',
     name: 'Rina Sato',
     category: 'Entertainment',
     categoryKey: 'entertainment',

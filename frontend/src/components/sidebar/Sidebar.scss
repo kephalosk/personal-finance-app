@@ -20,9 +20,8 @@
 .sidebarTitle {
   margin: 0 0 64px 24px;
   height: 80px;
-  font-size: 28px;
-  font-weight: 900;
-  transform: scale(1, 0.9);
-  letter-spacing: 1px;
-  color: var(--sidebar-title);
+}
+.sidebarTitle.minimized {
+  margin: 0 0 74px 20px;
+  height: 70px;
 }
