@@ -23,7 +23,7 @@ export function Sidebar() {
   return (
     <section className={`sidebar ${isMinimized ? 'minimized' : ''}`} data-testid="sidebar">
       <img
-        className={`sidebarTitle ${isMinimized ? 'minimized' : ''}`}
+        className="sidebarTitle"
         alt="project icon"
         src={`${isMinimized ? projectIconSmall : projectIconBig}`}
       />
