@@ -185,3 +185,11 @@ jobs:
   
       - name: Verify deployment
         run: kubectl rollout status deployment/personal-finance-app
+
+      - name: Set CURRENT_SERVICE_VERSION in GitHub Repository Variables
+        run: |
+          curl -X PATCH \
+            -H "Authorization: Bearer ${{ secrets.GHCR_PAT }}" \
+            -H "Accept: application/vnd.github+json" \
+            -d '{"name": "CURRENT_SERVICE_VERSION", "value": "${{ env.PACKAGE_VERSION }}"}' \
+            https://api.github.com/repos/${{ github.repository }}/actions/variables/CURRENT_SERVICE_VERSION
