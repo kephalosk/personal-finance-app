@@ -30,7 +30,7 @@ jobs:
 
       - name: Save Package Version
         run: |
-          echo "export ${{ env.VERSION_TAG }}.${{ env.BUILD_TAG }}" > PACKAGE_VERSION
+          echo "${{ env.VERSION_TAG }}.${{ env.BUILD_TAG }}" > PACKAGE_VERSION
         shell: bash
 
       - name: Upload Package Version as Artifact
