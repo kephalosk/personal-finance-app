@@ -189,7 +189,7 @@ jobs:
       - name: Set CURRENT_SERVICE_VERSION in GitHub Repository Variables
         run: |
           curl -X PATCH \
-            -H "Authorization: Bearer ${{ secrets.GHCR_PAT }}" \
+            -H "Authorization: Bearer ${{ secrets.VARIABLE_GITHUB_TOKEN }}" \
             -H "Accept: application/vnd.github+json" \
             -d '{"name": "CURRENT_SERVICE_VERSION", "value": "${{ env.PACKAGE_VERSION }}"}' \
             https://api.github.com/repos/${{ github.repository }}/actions/variables/CURRENT_SERVICE_VERSION
