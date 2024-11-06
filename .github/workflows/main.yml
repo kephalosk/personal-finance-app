@@ -2,19 +2,39 @@ name: build, push, scan and deploy
 
 on:
   push:
-    branches: [ "master" ]
+    branches: 
+      - "develop"
+      - "master"
   pull_request:
-    branches: [ "master" ]
+    branches:
+      - "develop"
+      - "master"
 
 jobs:
+  unit-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout master
+        uses: actions/checkout@main
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Run Unit Tests
+        run: npm run test
+  
   build:
     runs-on: ubuntu-latest
+
+    needs: unit-tests
 
     steps:
     - name: Checkout master
       uses: actions/checkout@main
 
     - name: Install doctl
+      if: github.ref == 'refs/heads/master'
       uses: digitalocean/action-doctl@v2
       with:
         token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
@@ -23,9 +43,11 @@ jobs:
       run: docker build -t registry.digitalocean.com/kephalosk/personal-finance-app:latest -f deployment/Dockerfile .
 
     - name: Log in to DigitalOcean Container Registry with short-lived credentials
+      if: github.ref == 'refs/heads/master'
       run: doctl registry login --expiry-seconds 1200
       
     - name: Push image to DigitalOcean Container Registry
+      if: github.ref == 'refs/heads/master'
       run: docker push registry.digitalocean.com/kephalosk/personal-finance-app:latest
       
   scan:
@@ -34,6 +56,8 @@ jobs:
     needs: build
 
     continue-on-error: true
+
+    if: github.ref == 'refs/heads/master'
     
     steps:
       - name: Checkout code
@@ -67,6 +91,8 @@ jobs:
     runs-on: ubuntu-latest
     
     needs: scan
+
+    if: github.ref == 'refs/heads/master'
 
     steps:
     - name: Checkout master
