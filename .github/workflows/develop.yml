@@ -1,9 +1,9 @@
-name: version, test, build, push, scan and deploy
+name: version, test, build, push and scan
 
 on:
   push:
     branches: 
-      - 'master'
+      - 'develop'
 
 jobs:
   versioning:
@@ -93,7 +93,15 @@ jobs:
         
       - name: Push image to DigitalOcean Container Registry
         run: docker push registry.digitalocean.com/kephalosk/personal-finance-app:${{ env.PACKAGE_VERSION }}
-      
+
+      - name: Set CURRENT_IAT_SERVICE_VERSION in GitHub Repository Variables
+        run: |
+          curl -X PATCH \
+            -H "Authorization: Bearer ${{ secrets.VARIABLE_GITHUB_TOKEN }}" \
+            -H "Accept: application/vnd.github+json" \
+            -d '{"name": "CURRENT_IAT_SERVICE_VERSION", "value": "${{ env.PACKAGE_VERSION }}"}' \
+            https://api.github.com/repos/${{ github.repository }}/actions/variables/CURRENT_IAT_SERVICE_VERSION
+
   scan:
     runs-on: ubuntu-latest
 
@@ -246,10 +254,3 @@ jobs:
       - name: Verify deployment
         run: kubectl rollout status deployment/personal-finance-app
 
-      - name: Set CURRENT_PROD_SERVICE_VERSION in GitHub Repository Variables
-        run: |
-          curl -X PATCH \
-            -H "Authorization: Bearer ${{ secrets.VARIABLE_GITHUB_TOKEN }}" \
-            -H "Accept: application/vnd.github+json" \
-            -d '{"name": "CURRENT_PROD_SERVICE_VERSION", "value": "${{ env.PACKAGE_VERSION }}"}' \
-            https://api.github.com/repos/${{ github.repository }}/actions/variables/CURRENT_PROD_SERVICE_VERSION
