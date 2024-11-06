@@ -46,9 +46,8 @@ describe('Sidebar', () => {
     const container = getInitializedContainer();
 
     const icon = container.querySelector('.sidebarTitle');
-
     expect(icon).toBeInTheDocument();
-    expect(icon).toHaveAttribute('src', '/images/project-big.png');
+    expect(icon).toHaveAttribute('src', '/assets/images/project-big.png');
   });
 
   it('renders the project icon small if isMinimized is true', () => {
@@ -58,7 +57,7 @@ describe('Sidebar', () => {
     const icon = container.querySelector('.sidebarTitle');
 
     expect(icon).toBeInTheDocument();
-    expect(icon).toHaveAttribute('src', '/images/project-small.png');
+    expect(icon).toHaveAttribute('src', '/assets/images/project-small.png');
     localStorage.clear();
   });
 
@@ -84,13 +83,13 @@ describe('Sidebar', () => {
     localStorage.setItem('isMinimized', JSON.stringify(false));
     const container = getInitializedContainer();
     const iconBeforeClick = container.querySelector('.sidebarTitle');
-    expect(iconBeforeClick).toHaveAttribute('src', '/images/project-big.png');
+    expect(iconBeforeClick).toHaveAttribute('src', '/assets/images/project-big.png');
 
     const button = container.querySelector('.sidebarMinimizeWrapper');
     fireEvent.click(button!);
 
     const iconAfterClick = container.querySelector('.sidebarTitle');
-    expect(iconAfterClick).toHaveAttribute('src', '/images/project-small.png');
+    expect(iconAfterClick).toHaveAttribute('src', '/assets/images/project-small.png');
     localStorage.clear();
   });
 });
