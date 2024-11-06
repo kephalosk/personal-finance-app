@@ -50,7 +50,7 @@ export function SearchbarDropdownSort({ onSortChange }: SearchbarDropdownSortPro
           className="searchbarDropdownSortIcon"
           alt="icon of caret down"
           aria-hidden="true"
-          src="./src/assets/images/icon-caret-down.svg"
+          src="/images/icon-caret-down.svg"
         />
       </div>
     </>

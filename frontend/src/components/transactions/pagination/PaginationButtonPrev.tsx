@@ -19,7 +19,7 @@ export function PaginationButtonPrev({ onClick, currentIndex }: PaginationButton
           className="paginationButtonPrevCaret"
           alt="icon of caret left"
           aria-hidden="true"
-          src="./src/assets/images/icon-caret-left.svg"
+          src="/images/icon-caret-left.svg"
         />
         Prev
       </button>

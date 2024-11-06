@@ -19,7 +19,7 @@ describe('PotsSummary', () => {
 
     const imgElement: HTMLElement = screen.getByAltText('pot icon');
 
-    expect(imgElement).toHaveAttribute('src', './src/assets/images/icon-pot.svg');
+    expect(imgElement).toHaveAttribute('src', '/images/icon-pot.svg');
   });
 
   it('renders div overviewPotsSummaryContent', () => {

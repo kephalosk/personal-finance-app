@@ -38,14 +38,14 @@ export function BillCardTableRow({ transaction, today }: BillCardTableRowProps) 
             Monthly - {transactionDaySuffix}
             {isDue && (
               <img
-                src="./src/assets/images/icon-bill-due.svg"
+                src="/images/icon-bill-due.svg"
                 alt="exclamation mark icon"
                 className="billCardTableRowDateIcon"
               />
             )}
             {isPaid && (
               <img
-                src="./src/assets/images/icon-bill-paid.svg"
+                src="/images/icon-bill-paid.svg"
                 alt="check mark icon"
                 className="billCardTableRowDateIcon"
               />

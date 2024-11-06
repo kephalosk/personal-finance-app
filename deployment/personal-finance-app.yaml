@@ -1,0 +1,108 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: personal-finance-app
+  labels:
+    app: personal-finance-app
+  namespace: default
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: personal-finance-app
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  minReadySeconds: 5
+  template:
+    metadata:
+      labels:
+        app: personal-finance-app
+    spec:
+      containers:
+        - name: personal-finance-app
+          image: registry.digitalocean.com/kephalosk/personal-finance-app:latest
+          imagePullPolicy: Always
+          ports:
+            - name: http
+              containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: personal-finance-app-service
+  namespace: default
+spec:
+  ports:
+    - port: 80
+      protocol: TCP
+      targetPort: 80
+  selector:
+    app: personal-finance-app
+  type: ClusterIP
+---
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-prod
+spec:
+  acme:
+    server: https://acme-v02.api.letsencrypt.org/directory
+    email: watchfromtheshore@gmail.com
+    privateKeySecretRef:
+      name: letsencrypt-prod
+    solvers:
+      - http01:
+          ingress:
+            class: nginx
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: philippkraatz-com-cert
+  namespace: default
+spec:
+  secretName: personal-finance-app-tls
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  dnsNames:
+    - philippkraatz.com
+    - www.philippkraatz.com
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: personal-finance-app-ingress
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: philippkraatz.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: personal-finance-app-service
+                port:
+                  number: 80
+    - host: www.philippkraatz.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: personal-finance-app-service
+                port:
+                  number: 80
+  tls:
+    - hosts:
+        - philippkraatz.com
+        - www.philippkraatz.com
+      secretName: personal-finance-app-tls

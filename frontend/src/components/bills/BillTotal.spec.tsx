@@ -22,7 +22,7 @@ describe('BillTotal', () => {
     const htmlElement = screen.getByAltText('icon of recurring bills');
 
     expect(htmlElement).toBeInTheDocument();
-    expect(htmlElement).toHaveAttribute('src', './src/assets/images/icon-recurring-bills.svg');
+    expect(htmlElement).toHaveAttribute('src', '/images/icon-recurring-bills.svg');
   });
 
   it('renders label billTotalTitle', () => {

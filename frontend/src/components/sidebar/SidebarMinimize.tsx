@@ -27,8 +27,8 @@ export function SidebarMinimize({ onMinimize }: SidebarMinimizeProps) {
       <SidebarListEntry
         isMinimized={isMinimized}
         name="Minimize Menu"
-        imgSrc="./src/assets/images/icon-minimize-menu.svg"
-        altImgSrc="./src/assets/images/icon-maximize-menu.svg"
+        imgSrc="/images/icon-minimize-menu.svg"
+        altImgSrc="/images/icon-maximize-menu.svg"
         imgAlt="minimize icon"
         className="sidebarMinimize"
       />

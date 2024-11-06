@@ -18,7 +18,7 @@ export function CardHeader({ title, color }: BudgetCardHeaderProps) {
           className="cardHeaderEditIcon"
           alt="ellipsis icon"
           aria-hidden="true"
-          src="./src/assets/images/icon-ellipsis.svg"
+          src="/images/icon-ellipsis.svg"
         />
       </div>
     </>
