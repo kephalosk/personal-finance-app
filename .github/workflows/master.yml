@@ -154,10 +154,14 @@ jobs:
           node-version: lts/*
 
       - name: Install dependencies
-        run: npm ci
+        run: |
+         cd frontend
+         npm ci
 
       - name: Install Playwright Browsers
-        run: npx playwright install --with-deps
+        run: |
+         cd frontend
+         npx playwright install --with-deps
 
       - name: Install doctl
         uses: digitalocean/action-doctl@v2
@@ -186,7 +190,9 @@ jobs:
         run: docker run -d -p 80:80 registry.digitalocean.com/kephalosk/personal-finance-app:${{ env.PACKAGE_VERSION }}
 
       - name: Run Playwright tests
-        run: npx playwright test e2e-tests
+        run: |
+         cd frontend
+         npx playwright test e2e-tests
 
       - uses: actions/upload-artifact@v4
         if: always()
