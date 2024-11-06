@@ -3,7 +3,7 @@ name: version, test, build, push, scan and deploy
 on:
   push:
     branches: 
-      - '*'
+      - 'master'
 
 jobs:
   versioning:
@@ -82,17 +82,14 @@ jobs:
         run: docker build -t registry.digitalocean.com/kephalosk/personal-finance-app:${{ env.PACKAGE_VERSION }} -f deployment/Dockerfile .
   
       - name: Install doctl
-        if: github.ref == 'refs/heads/master'
         uses: digitalocean/action-doctl@v2
         with:
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
   
       - name: Log in to DigitalOcean Container Registry with short-lived credentials
-        if: github.ref == 'refs/heads/master'
         run: doctl registry login --expiry-seconds 1200
         
       - name: Push image to DigitalOcean Container Registry
-        if: github.ref == 'refs/heads/master'
         run: docker push registry.digitalocean.com/kephalosk/personal-finance-app:${{ env.PACKAGE_VERSION }}
       
   scan:
@@ -101,8 +98,6 @@ jobs:
     needs: build
 
     continue-on-error: true
-
-    if: github.ref == 'refs/heads/master'
     
     steps:
       - name: Checkout code
@@ -148,8 +143,6 @@ jobs:
     runs-on: ubuntu-latest
     
     needs: scan
-
-    if: github.ref == 'refs/heads/master'
 
     steps:
     - name: Checkout master
