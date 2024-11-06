@@ -55,8 +55,11 @@ jobs:
         run: |
           curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -
 
+      - name: Set TRIVY_DBREPO to avoid rate limiting
+        run: echo "TRIVY_DBREPO=ghcr.io/aquasecurity/trivy-db" >> $GITHUB_ENV
+
       - name: Scan Docker Image
-        run: ./bin/trivy image registry.digitalocean.com/kephalosk/personal-finance-app:latest
+        run: ./bin/trivy image --exit-code 1 --severity HIGH,CRITICAL registry.digitalocean.com/kephalosk/personal-finance-app:latest
 
   deploy:
     runs-on: ubuntu-latest
