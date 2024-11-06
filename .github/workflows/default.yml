@@ -1,0 +1,36 @@
+name: test and build
+
+on:
+  push:
+    branches:
+      - '*'
+
+jobs:
+  unit-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout master
+        uses: actions/checkout@main
+
+      - name: Install Dependencies
+        run: |
+          cd frontend
+          npm install
+
+      - name: Run Unit Tests
+        run: |
+          cd frontend
+          npm run test
+
+  build:
+    runs-on: ubuntu-latest
+
+    needs: unit-tests
+
+    steps:
+      - name: Checkout master
+        uses: actions/checkout@main
+
+      - name: Build container image
+        run: docker build -t registry.digitalocean.com/kephalosk/personal-finance-app:latest -f deployment/Dockerfile .
