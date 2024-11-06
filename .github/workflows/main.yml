@@ -6,6 +6,40 @@ on:
       - '*'
 
 jobs:
+  versioning:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Set Build Tag
+        id: build_tag
+        run: |
+          COMMIT_DATE=$(git show -s --format=%ct $GITHUB_SHA)
+          DATE_TAG=$(date -d "@$COMMIT_DATE" +%Y%m%d_%H%M%S)
+          SHORT_SHA=${GITHUB_SHA:0:7}
+          BUILD_TAG="${DATE_TAG}_${SHORT_SHA}_$(date +%Y%m%d_%H%M%S)"
+          echo "BUILD_TAG=$BUILD_TAG" >> $GITHUB_ENV
+
+      - name: Set Version Tag
+        id: version_tag
+        run: |
+          VERSION_TAG=$(jq -r '(.version | split(".") | del(.[2]) | join("."))' frontend/package.json)
+          echo "VERSION_TAG=$VERSION_TAG" >> $GITHUB_ENV
+
+      - name: Save Package Version
+        run: |
+          echo "export PACKAGE_VERSION=${{ env.VERSION_TAG }}.${{ env.BUILD_TAG }}" > PACKAGE_VERSION
+        shell: bash
+
+      - name: Upload Package Version as Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: PACKAGE_VERSION
+          path: PACKAGE_VERSION
+          retention-days: 7
+          
   unit-tests:
     runs-on: ubuntu-latest
 
@@ -29,25 +63,37 @@ jobs:
     needs: unit-tests
 
     steps:
-    - name: Checkout master
-      uses: actions/checkout@main
-      
-    - name: Build container image
-      run: docker build -t registry.digitalocean.com/kephalosk/personal-finance-app:latest -f deployment/Dockerfile .
-
-    - name: Install doctl
-      if: github.ref == 'refs/heads/master'
-      uses: digitalocean/action-doctl@v2
-      with:
-        token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
-
-    - name: Log in to DigitalOcean Container Registry with short-lived credentials
-      if: github.ref == 'refs/heads/master'
-      run: doctl registry login --expiry-seconds 1200
-      
-    - name: Push image to DigitalOcean Container Registry
-      if: github.ref == 'refs/heads/master'
-      run: docker push registry.digitalocean.com/kephalosk/personal-finance-app:latest
+      - name: Checkout master
+        uses: actions/checkout@main
+  
+      - name: Download PACKAGE_VERSION Artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: PACKAGE_VERSION
+          path: .
+  
+      - name: Read PACKAGE_VERSION
+        id: read_package_version
+        run: |
+          export PACKAGE_VERSION=$(cat PACKAGE_VERSION)
+          echo "PACKAGE_VERSION=$PACKAGE_VERSION" >> $GITHUB_ENV
+        
+      - name: Build container image
+        run: docker build -t registry.digitalocean.com/kephalosk/personal-finance-app:${{ env.PACKAGE_VERSION }} -f deployment/Dockerfile .
+  
+      - name: Install doctl
+        if: github.ref == 'refs/heads/master'
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+  
+      - name: Log in to DigitalOcean Container Registry with short-lived credentials
+        if: github.ref == 'refs/heads/master'
+        run: doctl registry login --expiry-seconds 1200
+        
+      - name: Push image to DigitalOcean Container Registry
+        if: github.ref == 'refs/heads/master'
+        run: docker push registry.digitalocean.com/kephalosk/personal-finance-app:${{ env.PACKAGE_VERSION }}
       
   scan:
     runs-on: ubuntu-latest
@@ -70,8 +116,20 @@ jobs:
       - name: Log in to DigitalOcean Container Registry with short-lived credentials
         run: doctl registry login --expiry-seconds 1200
         
+      - name: Download PACKAGE_VERSION Artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: PACKAGE_VERSION
+          path: .
+  
+      - name: Read PACKAGE_VERSION
+        id: read_package_version
+        run: |
+          export PACKAGE_VERSION=$(cat PACKAGE_VERSION)
+          echo "PACKAGE_VERSION=$PACKAGE_VERSION" >> $GITHUB_ENV
+        
       - name: Pull image from registry
-        run: docker pull registry.digitalocean.com/kephalosk/personal-finance-app:latest
+        run: docker pull registry.digitalocean.com/kephalosk/personal-finance-app:${{ env.PACKAGE_VERSION }}
 
       - name: Authenticate GitHub Container Registry
         run: echo "${{ secrets.GHCR_PAT }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
@@ -84,7 +142,7 @@ jobs:
         run: echo "TRIVY_DBREPO=ghcr.io/aquasecurity/trivy-db" >> $GITHUB_ENV
 
       - name: Scan Docker Image
-        run: ./bin/trivy image --exit-code 1 --severity HIGH,CRITICAL registry.digitalocean.com/kephalosk/personal-finance-app:latest
+        run: ./bin/trivy image --exit-code 1 --severity HIGH,CRITICAL registry.digitalocean.com/kephalosk/personal-finance-app:${{ env.PACKAGE_VERSION }}
 
   deploy:
     runs-on: ubuntu-latest
@@ -107,6 +165,10 @@ jobs:
 
     - name: Renew cluster’s certificate
       run: doctl kubernetes cluster kubeconfig save ${{ secrets.CLUSTER_ID }}
+
+    - name: Replace image tag in Kubernetes manifest
+      run: |
+        sed -i "s|registry.digitalocean.com/kephalosk/personal-finance-app:latest|registry.digitalocean.com/kephalosk/personal-finance-app:${{ env.PACKAGE_VERSION }}|g" deployment/personal-finance-app.yaml
 
     - name: Deploy to DigitalOcean Kubernetes
       run: kubectl apply -f deployment/personal-finance-app.yaml
