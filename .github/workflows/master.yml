@@ -164,7 +164,10 @@ jobs:
     - name: Replace image tag in Kubernetes manifest
       run: |
         sed -i "s|registry.digitalocean.com/kephalosk/personal-finance-app:latest|registry.digitalocean.com/kephalosk/personal-finance-app:${{ env.PACKAGE_VERSION }}|g" deployment/personal-finance-app.yaml
-
+    
+    - name: Show modified Kubernetes manifest
+      run: cat deployment/personal-finance-app.yaml
+  
     - name: Deploy to DigitalOcean Kubernetes
       run: kubectl apply -f deployment/personal-finance-app.yaml
         
