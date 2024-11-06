@@ -118,7 +118,7 @@
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
           <y:Geometry height="867.5958589740036" width="753.6666666666667" x="838.7735599479585" y="-1887.6983263123986"/>
-          <y:Fill color="#00FFFF" color2="#B7C9E3" transparent="false"/>
+          <y:Fill color="#00FF00" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="853.96875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="753.6666666666667" x="0.0" xml:space="preserve" y="6.813554487001738">  gui-tests:
     timeout-minutes: 60
@@ -187,7 +187,7 @@
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
           <y:Geometry height="21.000000000000455" width="237.88677997397917" x="580.8867799739792" y="-1464.4003968253971"/>
-          <y:Fill color="#00FFFF" color2="#B7C9E3" transparent="false"/>
+          <y:Fill color="#00FF00" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="l" textColor="#000000" verticalTextPosition="bottom" visible="true" width="237.88677997397917" x="4.0" xml:space="preserve" y="0.4335937500002274">job in workflow hinzufügen</y:NodeLabel>
         </y:GenericNode>
