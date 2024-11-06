@@ -252,7 +252,7 @@ jobs:
       - name: Run Playwright tests
         run: |
           cd frontend
-          npx playwright test gui-tests
+          npx playwright test ui-tests/gui-tests
 
       - name: Create Artifact for Playwright report
         uses: actions/upload-artifact@v4
@@ -314,7 +314,7 @@ jobs:
       - name: Run Playwright tests
         run: |
           cd frontend
-          npx playwright test integration-tests --update-snapshots
+          npx playwright test ui-tests/gui-tests --update-snapshots
 
       - name: Create Artifact for new vrt screenshots
         uses: actions/upload-artifact@v4
