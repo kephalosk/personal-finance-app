@@ -3,7 +3,7 @@ import { TransactionsPage } from './TransactionsPage';
 import React from 'react';
 import { convertSignedDollarStringToNumber } from '../globals/utils/ConvertSignedDollarStringToNumber';
 import { getTransactions } from '../globals/services/TransactionService';
-import { SortOptionEnum } from '../constantsRename/SortOptionEnum';
+import { SortOptionEnum } from '../constants/SortOptionEnum';
 
 describe('TransactionsPage', () => {
   const transactions = getTransactions();
@@ -350,7 +350,7 @@ describe('TransactionsPage', () => {
     it('renders react component PaginationPages', () => {
       render(<TransactionsPage />);
 
-      const reactComponent = screen.getByTestId('pagination-pagesRename');
+      const reactComponent = screen.getByTestId('pagination-pages');
 
       expect(reactComponent).toBeInTheDocument();
     });

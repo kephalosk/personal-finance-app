@@ -3,7 +3,7 @@ import { SidebarListEntry } from './SidebarListEntry';
 import { SidebarListEntryProps } from '../../model/props/SidebarListEntryProps';
 import { MemoryRouter } from 'react-router-dom';
 import React from 'react';
-import { SidebarMinimizeProps } from '../../constantsRename/SidebarMinimizeProps';
+import { SidebarMinimizeProps } from '../../constants/SidebarMinimizeProps';
 
 describe('SidebarListEntry', () => {
   const name: string = 'testName';

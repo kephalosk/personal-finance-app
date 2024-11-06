@@ -11,7 +11,7 @@ import { EPTransaction } from '../model/entrypoints/EPTransaction';
 import { getTransactions } from '../globals/services/TransactionService';
 import { splitIntoChunks } from '../globals/utils/SplitIntoChunks';
 import { useRef, useState } from 'react';
-import { SortOptionEnum } from '../constantsRename/SortOptionEnum';
+import { SortOptionEnum } from '../constants/SortOptionEnum';
 import { SearchbarInputHandle } from '../model/SearchbarInputHandle';
 
 export function TransactionsPage() {
