@@ -3,7 +3,7 @@ import { getTransactions } from './TransactionService';
 
 describe('TransactionService', () => {
   const firstEPTransaction: EPTransaction = {
-    avatar: './src/assets/images/avatars/emma-richardson.jpg',
+    avatar: '/images/avatars/emma-richardson.jpg',
     name: 'Emma Richardson',
     category: 'General',
     categoryKey: 'general',

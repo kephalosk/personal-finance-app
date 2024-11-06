@@ -10,7 +10,7 @@ export function PotsSummary({ potSum }: PotsSummaryProps) {
           className="overviewPotsSummaryIcon"
           alt="pot icon"
           aria-hidden="true"
-          src="./src/assets/images/icon-pot.svg"
+          src="/images/icon-pot.svg"
         />
         <div className="overviewPotsSummaryContent">
           <label className="overviewPotsSummaryContentTitle">Total Saved</label>

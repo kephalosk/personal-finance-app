@@ -14,7 +14,7 @@ export function BillTotal({ sum }: BillTotalProps) {
         <div className="billTotalImageWrapper">
           <img
             className="billTotalImage"
-            src="./src/assets/images/icon-recurring-bills.svg"
+            src="/images/icon-recurring-bills.svg"
             alt="icon of recurring bills"
           />
         </div>

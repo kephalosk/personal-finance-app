@@ -3,7 +3,7 @@ import React from 'react';
 import { PaginationButtonPrev } from './PaginationButtonPrev';
 
 const imgAlt: string = 'icon of caret left';
-const imgSrc: string = './src/assets/images/icon-caret-left.svg';
+const imgSrc: string = '/images/icon-caret-left.svg';
 
 describe('PaginationButtonPrev', () => {
   let mockOnClick: jest.Mock<() => void>;

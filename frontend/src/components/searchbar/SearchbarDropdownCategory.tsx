@@ -76,7 +76,7 @@ export function SearchbarDropdownCategory({ onCategoryChange }: SearchbarDropdow
           className="searchbarDropdownCategoryIcon"
           alt="icon of caret down"
           aria-hidden="true"
-          src="./src/assets/images/icon-caret-down.svg"
+          src="/images/icon-caret-down.svg"
         />
       </div>
     </>

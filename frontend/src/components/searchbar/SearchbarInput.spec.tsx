@@ -3,7 +3,7 @@ import React from 'react';
 import { SearchbarInput } from './SearchbarInput';
 
 const imgAlt: string = 'icon of search';
-const imgSrc: string = './src/assets/images/icon-search.svg';
+const imgSrc: string = '/images/icon-search.svg';
 
 describe('SearchbarInput', () => {
   let mockOnInputChange: jest.Mock<() => void>;

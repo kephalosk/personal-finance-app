@@ -20,7 +20,7 @@ export function PaginationButtonNext({ onClick, isMaxIndex }: PaginationButtonNe
           className="paginationButtonNextCaret"
           alt="icon of caret right"
           aria-hidden="true"
-          src="./src/assets/images/icon-caret-right.svg"
+          src="/images/icon-caret-right.svg"
         />
       </button>
     </>
