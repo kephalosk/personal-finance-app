@@ -18,8 +18,8 @@ export function Sidebar() {
     setIsMinimized(minimized);
   };
 
-  const projectIconBig = '/assets/images/project-big.png';
-  const projectIconSmall = '/assets/images/project-small.png';
+  const projectIconBig = '/images/project-big.png';
+  const projectIconSmall = '/images/project-small.png';
 
   return (
     <section className={`sidebar ${isMinimized ? 'minimized' : ''}`} data-testid="sidebar">
