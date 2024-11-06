@@ -10,7 +10,8 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "jest",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test ui-tests/e2e-tests",
+    "test:gui": "playwright test ui-tests/gui-tests"
   },
   "dependencies": {
     "prop-types": "^15.8.1",
