@@ -32,17 +32,5 @@ jobs:
       - name: Checkout master
         uses: actions/checkout@main
 
-      - name: Download PACKAGE_VERSION Artifact
-        uses: actions/download-artifact@v3
-        with:
-          name: PACKAGE_VERSION
-          path: .
-
-      - name: Read PACKAGE_VERSION
-        id: read_package_version
-        run: |
-          export PACKAGE_VERSION=$(cat PACKAGE_VERSION)
-          echo "PACKAGE_VERSION=$PACKAGE_VERSION" >> $GITHUB_ENV
-
       - name: Build container image
         run: docker build -t registry.digitalocean.com/kephalosk/personal-finance-app:latest -f deployment/Dockerfile .
