@@ -1,4 +1,4 @@
-name: build, push, scan and deploy
+name: version, test, build, push, scan and deploy
 
 on:
   push:
