@@ -3,7 +3,7 @@ name: test and build
 on:
   push:
     branches:
-      - '*'
+      - '!master'
 
 jobs:
   unit-tests:
