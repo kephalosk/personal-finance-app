@@ -1,13 +1,13 @@
 import './App.scss';
 import { Sidebar } from './components/sidebar/Sidebar';
-import { OverviewPage } from '././pagesRename/OverviewPage';
+import { OverviewPage } from './pages/OverviewPage';
 import { BrowserRouter, MemoryRouter, Route, Routes } from 'react-router-dom';
 import React from 'react';
-import { NoPage } from '././pagesRename/NoPage';
-import { BillsPage } from '././pagesRename/BillsPage';
-import { PotsPage } from '././pagesRename/PotsPage';
-import { BudgetsPage } from '././pagesRename/BudgetsPage';
-import { TransactionsPage } from '././pagesRename/TransactionsPage';
+import { NoPage } from './pages/NoPage';
+import { BillsPage } from './pages/BillsPage';
+import { PotsPage } from './pages/PotsPage';
+import { BudgetsPage } from './pages/BudgetsPage';
+import { TransactionsPage } from './pages/TransactionsPage';
 import PropTypes from 'prop-types';
 import { AppProps } from './model/props/AppProps';
 
