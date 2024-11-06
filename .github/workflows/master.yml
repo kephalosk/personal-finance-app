@@ -182,6 +182,6 @@ jobs:
           
       - name: restart Pods
         run: kubectl -n default rollout restart deploy
-
-    - name: Verify deployment
-      run: kubectl rollout status deployment/personal-finance-app
+  
+      - name: Verify deployment
+        run: kubectl rollout status deployment/personal-finance-app
