@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import { SidebarMinimize } from './SidebarMinimize';
-import { SidebarMinimizeProps } from '../../constants/SidebarMinimizeProps';
+import { SidebarMinimizeProps } from '../../constantsRename/SidebarMinimizeProps';
 import React from 'react';
 
 describe('SidebarMinimize', () => {

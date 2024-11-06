@@ -1,7 +1,7 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import { BillCard } from './BillCard';
 import { mockedBills } from '../../fixtures/MockedBills';
-import { SortOptionEnum } from '../../constants/SortOptionEnum';
+import { SortOptionEnum } from '../../constantsRename/SortOptionEnum';
 import React from 'react';
 
 describe('BillCard', () => {

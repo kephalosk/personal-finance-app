@@ -1,5 +1,5 @@
 import './Sidebar.scss';
-import { SidebarPages } from '../../constants/SidebarPages';
+import { SidebarPages } from '../../constantsRename/SidebarPages';
 import { SidebarPage } from '../../model/SidebarPage';
 import { SidebarListEntry } from './SidebarListEntry';
 import { SidebarMinimize } from './SidebarMinimize';

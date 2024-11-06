@@ -1,7 +1,7 @@
 import { Sidebar } from './Sidebar';
 import { fireEvent, render, screen } from '@testing-library/react';
-import { SidebarPages } from '../../constants/SidebarPages';
-import { SidebarMinimizeProps } from '../../constants/SidebarMinimizeProps';
+import { SidebarPages } from '../../constantsRename/SidebarPages';
+import { SidebarMinimizeProps } from '../../constantsRename/SidebarMinimizeProps';
 import { MemoryRouter, useLocation } from 'react-router-dom';
 import React from 'react';
 

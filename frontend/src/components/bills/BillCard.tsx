@@ -6,7 +6,7 @@ import { SearchbarInput } from '../searchbar/SearchbarInput';
 import { useRef, useState } from 'react';
 import { SearchbarInputHandle } from '../../model/SearchbarInputHandle';
 import { SearchbarDropdownSort } from '../searchbar/SearchbarDropdownSort';
-import { SortOptionEnum } from '../../constants/SortOptionEnum';
+import { SortOptionEnum } from '../../constantsRename/SortOptionEnum';
 import PropTypes from 'prop-types';
 
 BillCard.propTypes = {
