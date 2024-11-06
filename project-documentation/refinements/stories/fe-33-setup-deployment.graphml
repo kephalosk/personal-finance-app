@@ -725,10 +725,10 @@ type: kubernetes.io/service-account-token  <y:LabelModel><y:SmartNodeLabelModel 
     <node id="n68">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
-          <y:Geometry height="26.0" width="294.7335709907866" x="1269.541105681747" y="-2937.1369047619046"/>
+          <y:Geometry height="36.5" width="294.7335709907866" x="1269.541105681747" y="-2937.1369047619046"/>
           <y:Fill color="#00FF00" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
-          <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="294.7335709907866" x="0.0" xml:space="preserve" y="2.93359375">kubectl apply -f dashboard-adminuser.yaml<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="34.265625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="294.7335709907866" x="0.0" xml:space="preserve" y="1.1171875">kubectl apply -f deployment/dashboard-adminuser.yaml<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
         </y:GenericNode>
       </data>
     </node>
@@ -816,7 +816,7 @@ type: kubernetes.io/service-account-token  <y:LabelModel><y:SmartNodeLabelModel 
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
           <y:Geometry height="26.0" width="294.7335709907866" x="1269.541105681747" y="-2444.1369047619046"/>
-          <y:Fill color="#00FFFF" color2="#B7C9E3" transparent="false"/>
+          <y:Fill color="#00FF00" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="294.7335709907866" x="0.0" xml:space="preserve" y="2.93359375">create new file personal-finance-app.yaml<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
         </y:GenericNode>
@@ -825,10 +825,10 @@ type: kubernetes.io/service-account-token  <y:LabelModel><y:SmartNodeLabelModel 
     <node id="n78">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
-          <y:Geometry height="793.7052042973828" width="437.85822863289377" x="1742.2129241789028" y="-2807.19903072012"/>
+          <y:Geometry height="793.7052042973828" width="486.6385650306829" x="1742.2129241789028" y="-2807.19903072012"/>
           <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
-          <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="783.3046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="437.85822863289377" x="0.0" xml:space="preserve" y="5.200258398691403">apiVersion: apps/v1
+          <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="783.3046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="486.6385650306829" x="0.0" xml:space="preserve" y="5.200258398691403">apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: personal-finance-app
@@ -852,7 +852,7 @@ spec:
     spec:
       containers:
       - name: personal-finance-app
-        image: registry.digitalocean.com/kephalosk/derpfad:latest
+        image: registry.digitalocean.com/kephalosk/personal-finance-app:latest
         imagePullPolicy: Always
         ports:
         - name: http
@@ -1130,10 +1130,10 @@ jobs:
     <node id="n90">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
-          <y:Geometry height="30.0" width="294.7335709907866" x="1269.541105681747" y="-2386.003968253968"/>
+          <y:Geometry height="34.5" width="294.7335709907866" x="1269.541105681747" y="-2390.503968253968"/>
           <y:Fill color="#00FF00" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
-          <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="34.265625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="294.7335709907866" x="0.0" xml:space="preserve" y="-2.1328125">secrets.DIGITALOCEAN_ACCESS_TOKEN in github repository<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="34.265625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="294.7335709907866" x="0.0" xml:space="preserve" y="0.1171875">secrets.DIGITALOCEAN_ACCESS_TOKEN in github repository<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
         </y:GenericNode>
       </data>
     </node>
@@ -2142,7 +2142,7 @@ personal-finance-app-c69d7854b-7pp95   0/1     ErrImagePull   0          35s<y:L
     <edge id="e57" source="n67" target="n68">
       <data key="d10">
         <y:PolyLineEdge>
-          <y:Path sx="0.0" sy="13.0" tx="0.0" ty="-13.0"/>
+          <y:Path sx="0.0" sy="13.0" tx="0.0" ty="-18.249999999999996"/>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="standard"/>
           <y:BendStyle smoothed="false"/>
@@ -2238,7 +2238,7 @@ personal-finance-app-c69d7854b-7pp95   0/1     ErrImagePull   0          35s<y:L
     <edge id="e66" source="n77" target="n78">
       <data key="d10">
         <y:PolyLineEdge>
-          <y:Path sx="147.3667854953933" sy="-0.0" tx="-218.92911431644688" ty="-0.0">
+          <y:Path sx="147.3667854953933" sy="-0.0" tx="-243.31928251534143" ty="-0.0">
             <y:Point x="1579.7746766725336" y="-2431.1369047619046"/>
             <y:Point x="1579.7746766725336" y="-2410.3464285714285"/>
           </y:Path>
@@ -2629,7 +2629,7 @@ personal-finance-app-c69d7854b-7pp95   0/1     ErrImagePull   0          35s<y:L
     <edge id="e100" source="n90" target="n111">
       <data key="d10">
         <y:PolyLineEdge>
-          <y:Path sx="0.0" sy="15.0" tx="0.0" ty="-15.0"/>
+          <y:Path sx="0.0" sy="17.25" tx="0.0" ty="-15.0"/>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="standard"/>
           <y:BendStyle smoothed="false"/>

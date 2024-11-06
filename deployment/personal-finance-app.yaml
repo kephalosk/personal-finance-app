@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: personal-finance-app
+  labels:
+    app: personal-finance-app
+  namespace: default
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: personal-finance-app
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  minReadySeconds: 5
+  template:
+    metadata:
+      labels:
+        app: personal-finance-app
+    spec:
+      containers:
+        - name: personal-finance-app
+          image: registry.digitalocean.com/kephalosk/personal-finance-app:latest
+          imagePullPolicy: Always
+          ports:
+            - name: http
+              containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  finalizers:
+    - service.kubernetes.io/load-balancer-cleanup
+  labels:
+    app: personal-finance-app
+  name: personal-finance-app
+  namespace: default
+spec:
+  allocateLoadBalancerNodePorts: true
+  externalTrafficPolicy: Cluster
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+    - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+    - nodePort: 32573
+      port: 80
+      protocol: TCP
+      targetPort: 80
+  selector:
+    app: personal-finance-app
+  sessionAffinity: None
+  type: LoadBalancer
