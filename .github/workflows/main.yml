@@ -3,12 +3,7 @@ name: build, push, scan and deploy
 on:
   push:
     branches: 
-      - "develop"
-      - "master"
-  pull_request:
-    branches:
-      - "develop"
-      - "master"
+      - '*'
 
 jobs:
   unit-tests:
@@ -36,15 +31,15 @@ jobs:
     steps:
     - name: Checkout master
       uses: actions/checkout@main
+      
+    - name: Build container image
+      run: docker build -t registry.digitalocean.com/kephalosk/personal-finance-app:latest -f deployment/Dockerfile .
 
     - name: Install doctl
       if: github.ref == 'refs/heads/master'
       uses: digitalocean/action-doctl@v2
       with:
         token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
-      
-    - name: Build container image
-      run: docker build -t registry.digitalocean.com/kephalosk/personal-finance-app:latest -f deployment/Dockerfile .
 
     - name: Log in to DigitalOcean Container Registry with short-lived credentials
       if: github.ref == 'refs/heads/master'
