@@ -187,7 +187,7 @@ jobs:
         run: docker pull registry.digitalocean.com/kephalosk/personal-finance-app:${{ env.PACKAGE_VERSION }}
 
       - name: Run image from registry
-        run: docker run -d -p 80:80 registry.digitalocean.com/kephalosk/personal-finance-app:${{ env.PACKAGE_VERSION }}
+        run: docker run -d -p 5173:80 registry.digitalocean.com/kephalosk/personal-finance-app:${{ env.PACKAGE_VERSION }}
 
       - name: Run Playwright tests
         run: |
