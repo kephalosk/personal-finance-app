@@ -1,4 +1,4 @@
-name: build, push, and deploy
+name: build, push, scan and deploy
 
 on:
   push:
@@ -7,35 +7,82 @@ on:
     branches: [ "master" ]
 
 jobs:
-  build-push-deploy:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout master
-        uses: actions/checkout@main
-  
+    - name: Checkout master
+      uses: actions/checkout@main
+
+    - name: Install doctl
+      uses: digitalocean/action-doctl@v2
+      with:
+        token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+        
+    - name: Build container image
+      run: docker build -t registry.digitalocean.com/kephalosk/personal-finance-app:latest -f deployment/Dockerfile .
+
+    - name: Log in to DigitalOcean Container Registry with short-lived credentials
+      run: doctl registry login --expiry-seconds 1200
+      
+    - name: Push image to DigitalOcean Container Registry
+      run: docker push registry.digitalocean.com/kephalosk/personal-finance-app:latest
+      
+  scan:
+    runs-on: ubuntu-latest
+
+    needs: build
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        
       - name: Install doctl
         uses: digitalocean/action-doctl@v2
         with:
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
-  
-      - name: Build container image
-        run: docker build -t registry.digitalocean.com/kephalosk/personal-finance-app:latest -f deployment/Dockerfile .
-  
+          
       - name: Log in to DigitalOcean Container Registry with short-lived credentials
         run: doctl registry login --expiry-seconds 1200
         
-      - name: Push image to DigitalOcean Container Registry
-        run: docker push registry.digitalocean.com/kephalosk/personal-finance-app:latest
-  
-      - name: Renew cluster’s certificate
-        run: doctl kubernetes cluster kubeconfig save ${{ secrets.CLUSTER_ID }}
-  
-      - name: Deploy to DigitalOcean Kubernetes
-        run: kubectl apply -f deployment/personal-finance-app.yaml
-          
-      - name: restart Pods
-        run: kubectl -n default rollout restart deploy
-  
-      - name: Verify deployment
-        run: kubectl rollout status deployment/personal-finance-app
+      - name: Pull image from registry
+        run: docker pull registry.digitalocean.com/kephalosk/personal-finance-app:latest
+        
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: 'registry.digitalocean.com/kephalosk/personal-finance-app:latest'
+          format: 'table'
+          exit-code: '1'
+          ignore-unfixed: true
+          vuln-type: 'os,library'
+          severity: 'CRITICAL,HIGH'
+
+  deploy:
+    runs-on: ubuntu-latest
+    
+    needs: scan
+
+    steps:
+    - name: Checkout master
+      uses: actions/checkout@main
+
+    - name: Install doctl
+      uses: digitalocean/action-doctl@v2
+      with:
+        token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+
+    - name: Log in to DigitalOcean Container Registry with short-lived credentials
+      run: doctl registry login --expiry-seconds 1200
+
+    - name: Renew cluster’s certificate
+      run: doctl kubernetes cluster kubeconfig save ${{ secrets.CLUSTER_ID }}
+
+    - name: Deploy to DigitalOcean Kubernetes
+      run: kubectl apply -f deployment/personal-finance-app.yaml
+        
+    - name: restart Pods
+      run: kubectl -n default rollout restart deploy
+
+    - name: Verify deployment
+      run: kubectl rollout status deployment/personal-finance-app
