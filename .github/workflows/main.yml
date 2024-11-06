@@ -53,6 +53,9 @@ jobs:
         
       - name: Pull image from registry
         run: docker pull registry.digitalocean.com/kephalosk/personal-finance-app:latest
+
+      - name: Authenticate GitHub Container Registry
+        run: echo "${{ secrets.GHCR_PAT }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
         
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
