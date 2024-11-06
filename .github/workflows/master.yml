@@ -30,7 +30,7 @@ jobs:
 
       - name: Save Package Version
         run: |
-          echo "export PACKAGE_VERSION=${{ env.VERSION_TAG }}.${{ env.BUILD_TAG }}" > PACKAGE_VERSION
+          echo "export ${{ env.VERSION_TAG }}.${{ env.BUILD_TAG }}" > PACKAGE_VERSION
         shell: bash
 
       - name: Upload Package Version as Artifact
@@ -42,6 +42,8 @@ jobs:
           
   unit-tests:
     runs-on: ubuntu-latest
+
+    needs: versioning
 
     steps:
       - name: Checkout master
@@ -75,7 +77,7 @@ jobs:
       - name: Read PACKAGE_VERSION
         id: read_package_version
         run: |
-          export PACKAGE_VERSION=$(cat PACKAGE_VERSION)
+          PACKAGE_VERSION=$(cat PACKAGE_VERSION)
           echo "PACKAGE_VERSION=$PACKAGE_VERSION" >> $GITHUB_ENV
         
       - name: Build container image
