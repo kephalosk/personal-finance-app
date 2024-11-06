@@ -18,6 +18,9 @@ jobs:
       - name: Checkout master
         uses: actions/checkout@main
 
+      - name: Change Directory
+        run: cd frontend
+
       - name: Install Dependencies
         run: npm install
 
