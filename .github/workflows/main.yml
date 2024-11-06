@@ -19,12 +19,6 @@ jobs:
       with:
         token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
       
-    - name: test node version
-      run: node --version
-        
-    - name: test npm version
-      run: npm --version
-        
     - name: Build container image
       run: docker build -t registry.digitalocean.com/kephalosk/personal-finance-app:latest -f deployment/Dockerfile .
 
@@ -62,7 +56,7 @@ jobs:
           curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -
 
       - name: Scan Docker Image
-        run: ./trivy image registry.digitalocean.com/kephalosk/personal-finance-app:latest
+        run: ./bin/trivy image registry.digitalocean.com/kephalosk/personal-finance-app:latest
 
   deploy:
     runs-on: ubuntu-latest
