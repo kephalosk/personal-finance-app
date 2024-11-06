@@ -5,8 +5,6 @@ import { SidebarListEntry } from './SidebarListEntry';
 import { SidebarMinimize } from './SidebarMinimize';
 import { useLocation } from 'react-router-dom';
 import { useState } from 'react';
-import projectIconBig from '../../../public/images/project-big.png';
-import projectIconSmall from '../../../public/images/project-small.png';
 
 export function Sidebar() {
   const [isMinimized, setIsMinimized] = useState<boolean>(() => {
@@ -19,6 +17,9 @@ export function Sidebar() {
   const handleSidebarMinimize = (minimized: boolean) => {
     setIsMinimized(minimized);
   };
+
+  const projectIconBig = '/assets/images/project-big.png';
+  const projectIconSmall = '/assets/images/project-small.png';
 
   return (
     <section className={`sidebar ${isMinimized ? 'minimized' : ''}`} data-testid="sidebar">
