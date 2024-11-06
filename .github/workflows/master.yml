@@ -122,7 +122,7 @@ jobs:
       - name: Read PACKAGE_VERSION
         id: read_package_version
         run: |
-          export PACKAGE_VERSION=$(cat PACKAGE_VERSION)
+          PACKAGE_VERSION=$(cat PACKAGE_VERSION)
           echo "PACKAGE_VERSION=$PACKAGE_VERSION" >> $GITHUB_ENV
         
       - name: Pull image from registry
@@ -147,32 +147,41 @@ jobs:
     needs: scan
 
     steps:
-    - name: Checkout master
-      uses: actions/checkout@main
-
-    - name: Install doctl
-      uses: digitalocean/action-doctl@v2
-      with:
-        token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
-
-    - name: Log in to DigitalOcean Container Registry with short-lived credentials
-      run: doctl registry login --expiry-seconds 1200
-
-    - name: Renew cluster’s certificate
-      run: doctl kubernetes cluster kubeconfig save ${{ secrets.CLUSTER_ID }}
-
-    - name: Replace image tag in Kubernetes manifest
-      run: |
-        sed -i "s|registry.digitalocean.com/kephalosk/personal-finance-app:latest|registry.digitalocean.com/kephalosk/personal-finance-app:${{ env.PACKAGE_VERSION }}|g" deployment/personal-finance-app.yaml
-    
-    - name: Show modified Kubernetes manifest
-      run: cat deployment/personal-finance-app.yaml
+      - name: Checkout master
+        uses: actions/checkout@main
   
-    - name: Deploy to DigitalOcean Kubernetes
-      run: kubectl apply -f deployment/personal-finance-app.yaml
-        
-    - name: restart Pods
-      run: kubectl -n default rollout restart deploy
+      - name: Install doctl
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+  
+      - name: Log in to DigitalOcean Container Registry with short-lived credentials
+        run: doctl registry login --expiry-seconds 1200
+  
+      - name: Renew cluster’s certificate
+        run: doctl kubernetes cluster kubeconfig save ${{ secrets.CLUSTER_ID }}
+
+      - name: Download PACKAGE_VERSION Artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: PACKAGE_VERSION
+          path: .
+  
+      - name: Read PACKAGE_VERSION
+        id: read_package_version
+        run: |
+          PACKAGE_VERSION=$(cat PACKAGE_VERSION)
+          echo "PACKAGE_VERSION=$PACKAGE_VERSION" >> $GITHUB_ENV
+  
+      - name: Replace image tag in Kubernetes manifest
+        run: |
+          sed -i "s|registry.digitalocean.com/kephalosk/personal-finance-app:latest|registry.digitalocean.com/kephalosk/personal-finance-app:${{ env.PACKAGE_VERSION }}|g" deployment/personal-finance-app.yaml
+    
+      - name: Deploy to DigitalOcean Kubernetes
+        run: kubectl apply -f deployment/personal-finance-app.yaml
+          
+      - name: restart Pods
+        run: kubectl -n default rollout restart deploy
 
     - name: Verify deployment
       run: kubectl rollout status deployment/personal-finance-app
