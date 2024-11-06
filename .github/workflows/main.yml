@@ -57,15 +57,12 @@ jobs:
       - name: Authenticate GitHub Container Registry
         run: echo "${{ secrets.GHCR_PAT }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
         
-      - name: Run Trivy vulnerability scanner
-        uses: aquasecurity/trivy-action@master
-        with:
-          image-ref: 'registry.digitalocean.com/kephalosk/personal-finance-app:latest'
-          format: 'table'
-          exit-code: '1'
-          ignore-unfixed: true
-          vuln-type: 'os,library'
-          severity: 'CRITICAL,HIGH'
+      - name: Set up Trivy
+        run: |
+          curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -
+
+      - name: Scan Docker Image
+        run: ./trivy image registry.digitalocean.com/kephalosk/personal-finance-app:latest
 
   deploy:
     runs-on: ubuntu-latest
