@@ -198,7 +198,7 @@ jobs:
         if: always()
         with:
           name: playwright-report
-          path: ui-tests/e2e-tests
+          path: frontend/ui-tests/e2e-tests
           retention-days: 30
 
   gui-tests:
@@ -259,7 +259,7 @@ jobs:
         if: always()
         with:
           name: playwright-report-integration
-          path: ui-tests/gui-tests
+          path: frontend/ui-tests/gui-tests
           retention-days: 30
 
   create-new-vrts:
@@ -321,7 +321,7 @@ jobs:
         if: always()
         with:
           name: new-vrts
-          path: ui-tests/gui-tests
+          path: frontend/ui-tests/gui-tests
           retention-days: 30
           
   deploy:
