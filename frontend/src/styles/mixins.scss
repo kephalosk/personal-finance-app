@@ -1,0 +1,7 @@
+$tablet-width: 960px;
+
+@mixin tablet-and-down($size-of-surrounding-elements: 0) {
+  @media (max-width: #{$tablet-width + $size-of-surrounding-elements}) {
+    @content;
+  }
+}
