@@ -1,3 +1,5 @@
+@use './styles/mixins';
+
 .content {
   height: 100%;
 }
@@ -7,4 +9,9 @@
   height: 100%;
   display: grid;
   grid-template-columns: fit-content(100%) 1fr;
+
+  @include mixins.tablet-and-down() {
+    grid-template-columns: 1fr;
+    grid-template-rows: fit-content(100%) 1fr;
+  }
 }
