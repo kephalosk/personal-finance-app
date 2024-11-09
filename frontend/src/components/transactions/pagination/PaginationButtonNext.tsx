@@ -1,6 +1,7 @@
 import './PaginationButtonNext.scss';
 import PropTypes from 'prop-types';
 import { PaginationButtonNextProps } from '../../../model/props/PaginationButtonNextProps';
+import useIsSmallScreen from '../../../globals/hooks/useIsSmallScreen';
 
 PaginationButtonNext.propTypes = {
   onClick: PropTypes.func.isRequired,
@@ -8,6 +9,7 @@ PaginationButtonNext.propTypes = {
 };
 
 export function PaginationButtonNext({ onClick, isMaxIndex }: PaginationButtonNextProps) {
+  const isSmallScreen = useIsSmallScreen();
   return (
     <>
       <button
@@ -15,7 +17,7 @@ export function PaginationButtonNext({ onClick, isMaxIndex }: PaginationButtonNe
         className={`paginationButtonNext ${isMaxIndex ? 'isDisabled' : 'isEnabled'}`}
         data-testid="pagination-button-next"
       >
-        Next
+        {!isSmallScreen && 'Next'}
         <img
           className="paginationButtonNextCaret"
           alt="icon of caret right"

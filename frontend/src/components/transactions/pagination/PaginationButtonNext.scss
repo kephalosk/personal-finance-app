@@ -1,4 +1,7 @@
+@use '../../../styles/mixins';
+
 .paginationButtonNext {
+  margin-left: 8px;
   border-radius: 8px;
   border: 1px solid var(--searchbar-grey);
   background-color: var(--component-background-bright);
@@ -12,6 +15,10 @@
           border-color 0.3s ease,
           background-color 0.3s ease,
           box-shadow 0.3s ease;
+
+  @include mixins.phone() {
+    padding: 12px 15px 10px 1px;
+  }
 }
 .paginationButtonNext.isEnabled:hover {
   border: 1px solid var(--component-background-grey);

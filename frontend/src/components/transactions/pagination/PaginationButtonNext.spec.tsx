@@ -1,6 +1,12 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import { PaginationButtonNext } from './PaginationButtonNext';
 import React from 'react';
+import useIsSmallScreen from '../../../globals/hooks/useIsSmallScreen';
+
+jest.mock('../../../globals/hooks/useIsSmallScreen', () => ({
+  __esModule: true,
+  default: jest.fn(),
+}));
 
 const imgAlt: string = 'icon of caret right';
 const imgSrc: string = '/images/icon-caret-right.svg';
@@ -13,6 +19,7 @@ describe('PaginationButtonNext', () => {
 
   beforeEach(() => {
     mockOnClick = jest.fn();
+    (useIsSmallScreen as jest.Mock).mockReturnValue(false);
   });
 
   it('renders button paginationButtonNext', () => {
@@ -72,5 +79,16 @@ describe('PaginationButtonNext', () => {
     fireEvent.click(button);
 
     expect(mockOnClick).toHaveBeenCalled();
+  });
+
+  it('does not render text of paginationButtonNext in mobile view', () => {
+    (useIsSmallScreen as jest.Mock).mockReturnValue(true);
+    const { container } = render(
+      <PaginationButtonNext onClick={mockOnClick} isMaxIndex={isMaxIndex} />
+    );
+
+    const htmlElement = container.querySelector('.paginationButtonNext');
+
+    expect(htmlElement).not.toHaveTextContent('Next');
   });
 });

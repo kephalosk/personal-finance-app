@@ -1,6 +1,7 @@
 import './PaginationButtonPrev.scss';
 import PropTypes from 'prop-types';
 import { PaginationButtonPrevProps } from '../../../model/props/PaginationButtonPrevProps';
+import useIsSmallScreen from '../../../globals/hooks/useIsSmallScreen';
 
 PaginationButtonPrev.propTypes = {
   onClick: PropTypes.func.isRequired,
@@ -8,6 +9,7 @@ PaginationButtonPrev.propTypes = {
 };
 
 export function PaginationButtonPrev({ onClick, currentIndex }: PaginationButtonPrevProps) {
+  const isSmallScreen = useIsSmallScreen();
   return (
     <>
       <button
@@ -21,7 +23,7 @@ export function PaginationButtonPrev({ onClick, currentIndex }: PaginationButton
           aria-hidden="true"
           src="/images/icon-caret-left.svg"
         />
-        Prev
+        {!isSmallScreen && 'Prev'}
       </button>
     </>
   );
