@@ -124,10 +124,12 @@ export function TransactionsPage() {
         <div className="transactionsDetails">
           <div className="transactionsSearchbar">
             <SearchbarInput ref={searchbarRef} onInputChange={handleInputChange} />
-            <label className="searchbarLabel sortBy">Sort by</label>
-            <SearchbarDropdownSort onSortChange={handleSortChange} />
-            <label className="searchbarLabel category">Category</label>
-            <SearchbarDropdownCategory onCategoryChange={handleCategoryChange} />
+            <div className="searchbarLabelWrapper">
+              <label className="searchbarLabel sortBy">Sort by</label>
+              <SearchbarDropdownSort onSortChange={handleSortChange} />
+              <label className="searchbarLabel category">Category</label>
+              <SearchbarDropdownCategory onCategoryChange={handleCategoryChange} />
+            </div>
           </div>
           <div className="transactionsTable">
             <TableHeader />
