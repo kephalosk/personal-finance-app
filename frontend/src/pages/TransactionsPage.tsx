@@ -137,18 +137,8 @@ export function TransactionsPage() {
             )}
             {isSmallScreen && (
               <div className="searchbarSmall">
-                <img
-                  className="searchbarSmallIcon sort"
-                  alt="sort select icon"
-                  aria-hidden="false"
-                  src="/images/icon-sort-mobile.svg"
-                />
-                <img
-                  className="searchbarSmallIcon category"
-                  alt="sort select icon"
-                  aria-hidden="false"
-                  src="/images/icon-filter-mobile.svg"
-                />
+                <SearchbarDropdownSort onSortChange={handleSortChange} />
+                <SearchbarDropdownCategory onCategoryChange={handleCategoryChange} />
               </div>
             )}
           </div>
