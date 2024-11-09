@@ -44,6 +44,14 @@ describe('TransactionsPage', () => {
       expect(reactComponent).toBeInTheDocument();
     });
 
+    it('renders div searchbarLabelWrapper', () => {
+      const { container } = render(<TransactionsPage />);
+
+      const htmlElement = container.querySelector('.searchbarLabelWrapper');
+
+      expect(htmlElement).toBeInTheDocument();
+    });
+
     it('renders label Sort by', () => {
       const { container } = render(<TransactionsPage />);
 

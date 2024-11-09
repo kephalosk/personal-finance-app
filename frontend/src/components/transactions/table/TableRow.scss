@@ -1,3 +1,9 @@
+.tableRowCategory {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .tableRowPartner {
   display: flex;
   flex-direction: row;
@@ -14,6 +20,9 @@
 .tableRowPartnerName {
   font-weight: 700;
   color: var(--text-dark);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .tableRowValue {
