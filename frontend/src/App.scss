@@ -1,18 +1,32 @@
 @use './styles/mixins';
 
 .content {
+  padding-left: 300px;
   height: auto;
+  transition: padding 0.4s ease;
+
+  @include mixins.tablet-and-down(50) {
+    transition: padding 0s ease;
+  }
 
   @include mixins.tablet-and-down() {
     padding-bottom: 81px;
+    padding-left: 0;
+  }
+}
+.content.minimized {
+  padding-left: 90px;
+
+  @include mixins.tablet-and-down() {
+    padding-bottom: 81px;
+    padding-left: 0;
   }
 }
 
 .webapp {
   background-color: var(--page-background);
   height: auto;
-  display: grid;
-  grid-template-columns: fit-content(100%) 1fr;
+  min-height: calc(100vh - 14px);
 
   @include mixins.tablet-and-down() {
     grid-template-columns: 1fr;
