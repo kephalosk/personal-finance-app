@@ -1,12 +1,19 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
 import { SearchbarDropdownSort } from './SearchbarDropdownSort';
+import useIsSmallScreen from '../../globals/hooks/useIsSmallScreen';
+
+jest.mock('../../globals/hooks/useIsSmallScreen', () => ({
+  __esModule: true,
+  default: jest.fn(),
+}));
 
 describe('SearchbarDropdownSort', () => {
   let mockOnSortChange: jest.Mock<() => void>;
 
   beforeEach(() => {
     mockOnSortChange = jest.fn();
+    (useIsSmallScreen as jest.Mock).mockReturnValue(false);
   });
 
   it('renders div searchbarDropdownSortWrapper', () => {
@@ -89,5 +96,27 @@ describe('SearchbarDropdownSort', () => {
     fireEvent.change(selectElement!, { target: { value: 'oldest' } });
 
     expect(mockOnSortChange).toHaveBeenCalledWith('oldest');
+  });
+
+  describe('Mobile View', () => {
+    it('renders caret icon in desktop and tablet view', () => {
+      (useIsSmallScreen as jest.Mock).mockReturnValue(false);
+      const { container } = render(<SearchbarDropdownSort onSortChange={mockOnSortChange} />);
+
+      const htmlElement = container.querySelector('.searchbarDropdownSortIcon');
+
+      expect(htmlElement).toBeInTheDocument();
+      expect(htmlElement).toHaveAttribute('src', '/images/icon-caret-down.svg');
+    });
+
+    it('renders document icon in mobile view', () => {
+      (useIsSmallScreen as jest.Mock).mockReturnValue(true);
+      const { container } = render(<SearchbarDropdownSort onSortChange={mockOnSortChange} />);
+
+      const htmlElement = container.querySelector('.searchbarDropdownSortIcon');
+
+      expect(htmlElement).toBeInTheDocument();
+      expect(htmlElement).toHaveAttribute('src', '/images/icon-sort-mobile.svg');
+    });
   });
 });
