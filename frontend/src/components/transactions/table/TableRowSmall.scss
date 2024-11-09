@@ -1,0 +1,61 @@
+.tableRowSmallCategory {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tableRowSmallNameCategoryWrapper {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  row-gap: 8px;
+}
+
+.tableRowSmallPartner {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.tableRowSmallPartnerImage {
+  border-radius: 50%;
+  height: 32px;
+  width: auto;
+}
+
+.tableRowSmallPartnerName {
+  font-weight: 700;
+  color: var(--text-dark);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tableRowSmallValue {
+  display: flex;
+  justify-content: flex-end;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+.tableRowSmallValue.dark {
+  color: var(--text-dark);
+}
+.tableRowSmallValue.green {
+  color: var(--text-green);
+}
+
+.tableRowSmallValueDateWrapper {
+  display: flex;
+  flex-direction: column;
+  row-gap: 8px;
+}
+
+.transactionsTableRowSmall {
+  padding: 0 16px;
+  display: flex;
+  flex-direction: row;
+  column-gap: 12px;
+  align-items: center;
+  font-size: 13px;
+  color: var(--text-grey);
+}

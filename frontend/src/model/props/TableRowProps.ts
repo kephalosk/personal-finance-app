@@ -1,4 +1,4 @@
-export interface TransactionsPageTableRowProps {
+export interface TableRowProps {
   name: string;
   imgSrc: string;
   category: string;
