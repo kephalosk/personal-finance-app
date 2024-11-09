@@ -3,16 +3,20 @@
 .overviewPage {
   padding: 32px 40px;
   width: 100%;
+
+  @include mixins.phone(){
+    padding: 24px 16px;
+  }
 }
 
 .overviewPageDetails {
   display: grid;
-  grid-template-columns: calc(60% - 12px) calc(40% - 12px);
+  grid-template-columns: repeat(auto-fit, (minmax(480px, 1fr)));
   column-gap: 24px;
+  row-gap: 24px;
 
   @include mixins.tablet-and-down() {
     grid-template-columns: 1fr;
-    row-gap: 24px;
   }
 }
 
