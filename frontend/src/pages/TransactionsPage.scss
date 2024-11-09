@@ -13,8 +13,9 @@
   justify-content: flex-end;
 }
 
-.searchbarSmallIcon {
-  margin-left: 24px;
+.searchbarSmall {
+  display: flex;
+  flex-direction: row;
 }
 
 .transactionsPage {
@@ -59,6 +60,10 @@
   font-size: 15px;
   color: var(--text-grey);
   row-gap: 16px;
+
+  @include mixins.phone() {
+    flex-wrap: nowrap;
+  }
 }
 
 .transactionsTable {
