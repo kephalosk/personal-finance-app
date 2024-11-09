@@ -5,8 +5,14 @@ import { SidebarListEntry } from './SidebarListEntry';
 import { SidebarMinimize } from './SidebarMinimize';
 import { useLocation } from 'react-router-dom';
 import { useState } from 'react';
+import { SidebarProps } from '../../model/props/SidebarProps';
+import PropTypes from 'prop-types';
 
-export function Sidebar() {
+SidebarMinimize.propTypes = {
+  onMinimize: PropTypes.func.isRequired,
+};
+
+export function Sidebar({ onMinimize }: SidebarProps) {
   const [isMinimized, setIsMinimized] = useState<boolean>(() => {
     return JSON.parse(localStorage.getItem('isMinimized') ?? 'false');
   });
@@ -16,6 +22,7 @@ export function Sidebar() {
 
   const handleSidebarMinimize = (minimized: boolean) => {
     setIsMinimized(minimized);
+    onMinimize(!isMinimized);
   };
 
   const projectIconBig = '/images/project-big.png';

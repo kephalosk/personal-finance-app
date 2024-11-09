@@ -2,7 +2,7 @@ import './App.scss';
 import { Sidebar } from './components/sidebar/Sidebar';
 import { OverviewPage } from './pages/OverviewPage';
 import { BrowserRouter, MemoryRouter, Route, Routes } from 'react-router-dom';
-import React from 'react';
+import React, { useState } from 'react';
 import { NoPage } from './pages/NoPage';
 import { BillsPage } from './pages/BillsPage';
 import { PotsPage } from './pages/PotsPage';
@@ -17,6 +17,10 @@ App.propTypes = {
 };
 
 function App({ Router = BrowserRouter, initialEntries = ['/'] }: AppProps) {
+  const [isMinimized, setIsMinimized] = useState<boolean>(() => {
+    return JSON.parse(localStorage.getItem('isMinimized') ?? 'false');
+  });
+
   const routes = (
     <Routes>
       <Route path="/" element={<OverviewPage />} />
@@ -28,16 +32,20 @@ function App({ Router = BrowserRouter, initialEntries = ['/'] }: AppProps) {
     </Routes>
   );
 
+  const handleSidebarMinimize = (minimized: boolean) => {
+    setIsMinimized(minimized);
+  };
+
   const router =
     Router === MemoryRouter ? (
       <MemoryRouter initialEntries={initialEntries}>
-        <Sidebar />
-        <section className="content">{routes}</section>
+        <Sidebar onMinimize={handleSidebarMinimize} />
+        <section className={`content ${isMinimized ? 'minimized' : ''}`}>{routes}</section>
       </MemoryRouter>
     ) : (
       <Router>
-        <Sidebar />
-        <section className="content">{routes}</section>
+        <Sidebar onMinimize={handleSidebarMinimize} />
+        <section className={`content ${isMinimized ? 'minimized' : ''}`}>{routes}</section>
       </Router>
     );
 

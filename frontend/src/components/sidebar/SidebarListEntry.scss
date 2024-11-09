@@ -76,7 +76,11 @@
   cursor: pointer;
   white-space: nowrap;
   opacity: 1;
-  transition: opacity 0.5s ease-in;
+  transition: opacity 0.4s ease-in;
+
+  @include mixins.tablet-and-down(50) {
+    transition: width 0s ease;
+  }
 
   @include mixins.tablet-and-down() {
     margin-top: 8px;
@@ -92,6 +96,10 @@
 .entryRowLabel.minimized {
   opacity: 0;
   transition: opacity 0.2s ease-out;
+
+  @include mixins.tablet-and-down(50) {
+    transition: width 0s ease;
+  }
 
   @include mixins.tablet-and-down() {
     opacity: 1;
