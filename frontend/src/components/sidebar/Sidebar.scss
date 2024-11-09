@@ -8,7 +8,7 @@
   width: 300px;
   display: flex;
   flex-direction: column;
-  transition: width 0.5s ease, padding 0.5s ease;
+  transition: width 0.5s ease;
 
   @include mixins.tablet-and-down() {
     border-radius: 16px 16px 0 0;
