@@ -4,12 +4,22 @@ import React from 'react';
 import { convertSignedDollarStringToNumber } from '../globals/utils/ConvertSignedDollarStringToNumber';
 import { getTransactions } from '../globals/services/TransactionService';
 import { SortOptionEnum } from '../constants/SortOptionEnum';
+import useIsSmallScreen from '../globals/hooks/useIsSmallScreen';
+
+jest.mock('../globals/hooks/useIsSmallScreen', () => ({
+  __esModule: true,
+  default: jest.fn(),
+}));
 
 describe('TransactionsPage', () => {
   const transactions = getTransactions();
   const testCategory = transactions.at(0)!.category;
   const testCategoryKey = transactions.at(0)!.categoryKey;
   const testSearchbarInput = 'liam';
+
+  beforeEach(() => {
+    (useIsSmallScreen as jest.Mock).mockReturnValue(false);
+  });
 
   it('renders div transactionsPage', () => {
     const { container } = render(<TransactionsPage />);
@@ -446,6 +456,26 @@ describe('TransactionsPage', () => {
 
       activePageButton = container.querySelector('.isActive');
       expect(activePageButton).toHaveTextContent('3');
+    });
+  });
+
+  describe('Mobile View', () => {
+    it('does not render divs searchbarLabel in Mobile View', () => {
+      (useIsSmallScreen as jest.Mock).mockReturnValue(true);
+      const { container } = render(<TransactionsPage />);
+
+      const htmlElements = container.querySelectorAll('.searchbarLabel');
+
+      expect(htmlElements.length).toBe(0);
+    });
+
+    it('renders div searchbarSmall', () => {
+      (useIsSmallScreen as jest.Mock).mockReturnValue(true);
+      const { container } = render(<TransactionsPage />);
+
+      const htmlElement = container.querySelector('.searchbarSmall');
+
+      expect(htmlElement).toBeInTheDocument();
     });
   });
 });
