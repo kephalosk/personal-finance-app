@@ -5,6 +5,7 @@ import { SearchbarDropdownCategoryProps } from '../../model/props/SearchbarDropd
 import { EPTransaction } from '../../model/entrypoints/EPTransaction';
 import { getTransactions } from '../../globals/services/TransactionService';
 import { Category } from '../../model/Category';
+import useIsSmallScreen from '../../globals/hooks/useIsSmallScreen';
 
 SearchbarDropdownCategory.propTypes = {
   onCategoryChange: PropTypes.func.isRequired,
@@ -12,6 +13,7 @@ SearchbarDropdownCategory.propTypes = {
 
 export function SearchbarDropdownCategory({ onCategoryChange }: SearchbarDropdownCategoryProps) {
   const [selectedOption, setSelectedOption] = useState<string>('all');
+  const isSmallScreen = useIsSmallScreen();
 
   const handleCategoryChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedCategory = event.target.value;
@@ -59,26 +61,50 @@ export function SearchbarDropdownCategory({ onCategoryChange }: SearchbarDropdow
 
   return (
     <>
-      <div className="searchbarDropdownCategoryWrapper" data-testid="searchbar-dropdown-category">
-        <select
-          className="searchbarDropdownCategory"
-          value={selectedOption}
-          id="options"
-          onChange={handleCategoryChange}
-        >
-          {allCategories.map((category) => (
-            <option key={category.key} className={category.key} value={category.key}>
-              {category.name}
-            </option>
-          ))}
-        </select>
-        <img
-          className="searchbarDropdownCategoryIcon"
-          alt="icon of caret down"
-          aria-hidden="true"
-          src="/images/icon-caret-down.svg"
-        />
-      </div>
+      {!isSmallScreen && (
+        <div className="searchbarDropdownCategoryWrapper" data-testid="searchbar-dropdown-category">
+          <select
+            className="searchbarDropdownCategory"
+            value={selectedOption}
+            id="optionsBig"
+            onChange={handleCategoryChange}
+          >
+            {allCategories.map((category) => (
+              <option key={category.key} className={category.key} value={category.key}>
+                {category.name}
+              </option>
+            ))}
+          </select>
+          <img
+            className="searchbarDropdownCategoryIcon"
+            alt="icon of caret down"
+            aria-hidden="true"
+            src="/images/icon-caret-down.svg"
+          />
+        </div>
+      )}
+      {isSmallScreen && (
+        <div className="searchbarDropdownCategoryWrapper" data-testid="searchbar-dropdown-category">
+          <select
+            className="searchbarDropdownCategory"
+            value={selectedOption}
+            id="optionsSmall"
+            onChange={handleCategoryChange}
+          >
+            {allCategories.map((category) => (
+              <option key={category.key} className={category.key} value={category.key}>
+                {category.name}
+              </option>
+            ))}
+          </select>
+          <img
+            className="searchbarDropdownCategoryIcon"
+            alt="category select icon"
+            aria-hidden="false"
+            src="/images/icon-filter-mobile.svg"
+          />
+        </div>
+      )}
     </>
   );
 }

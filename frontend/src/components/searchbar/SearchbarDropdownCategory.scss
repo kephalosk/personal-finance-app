@@ -1,3 +1,5 @@
+@use '../../styles/mixins';
+
 .searchbarDropdownCategory {
   border-radius: 8px;
   border: 1px solid var(--searchbar-grey);
@@ -11,6 +13,15 @@
           border-color 0.3s ease,
           background-color 0.3s ease,
           box-shadow 0.3s ease;
+
+  @include mixins.phone() {
+    margin-left: 8px;
+    border: 1px solid transparent;
+    padding: 12px;
+    background: transparent;
+    width: 42px;
+    color: transparent;
+  }
 }
 .searchbarDropdownCategory:focus-visible {
   border: 1px solid var(--component-background-grey);
@@ -19,18 +30,39 @@
   outline: none;
   color: var(--text-white);
   cursor: pointer;
+
+  @include mixins.phone() {
+    color: transparent;
+  }
 }
 .searchbarDropdownCategory:focus-visible ~ .searchbarDropdownCategoryIcon {
   --icon-filter: invert(74%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(300%) contrast(100%);
 }
 
+
+.searchbarDropdownSort option{
+  @include mixins.phone() {
+    color: var(--text-dark);
+  }
+}
+
 .searchbarDropdownCategoryIcon {
+  background: transparent;
   height: 6px;
   width: auto;
   top: calc(50% - 3px);
   right: 20px;
   position: absolute;
+  cursor: pointer;
+  pointer-events: none;
   filter: var(--icon-filter);
+
+  @include mixins.phone() {
+    height: 20px;
+    top: calc(50% - 10px);
+    right: 10px;
+    z-index: 1;
+  }
 }
 
 .searchbarDropdownCategoryWrapper {
@@ -46,5 +78,11 @@
 
   .searchbarDropdownCategoryIcon {
     filter: invert(74%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(300%) contrast(100%);
+  }
+
+  @include mixins.phone() {
+    .searchbarDropdownCategory {
+      color: transparent;
+    }
   }
 }
