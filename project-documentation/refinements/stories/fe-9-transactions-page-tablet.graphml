@@ -17,7 +17,7 @@
     <node id="n0">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
-          <y:Geometry height="21.000000000000455" width="237.88677997397917" x="0.0" y="-325.00039682539705"/>
+          <y:Geometry height="21.000000000000455" width="237.88677997397917" x="0.0" y="-341.0023809523812"/>
           <y:Fill color="#00FFFF" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="l" textColor="#000000" verticalTextPosition="bottom" visible="true" width="237.88677997397917" x="4.0" xml:space="preserve" y="0.4335937500002274">fe-9-transactions-page-tablet</y:NodeLabel>
@@ -27,7 +27,7 @@
     <node id="n1">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.cloud">
-          <y:Geometry height="50.0" width="178.65432570776773" x="306.5596171200953" y="-439.10833333333335"/>
+          <y:Geometry height="50.0" width="178.65432570776773" x="306.5596171200953" y="-455.11031746031745"/>
           <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="178.65432570776773" x="0.0" xml:space="preserve" y="14.93359375">Acceptance Criteria<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
@@ -37,7 +37,7 @@
     <node id="n2">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.cloud">
-          <y:Geometry height="50.0" width="178.65432570776773" x="583.5030071070848" y="-414.00079365079364"/>
+          <y:Geometry height="50.0" width="178.65432570776773" x="583.5030071070848" y="-430.0027777777778"/>
           <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="178.65432570776773" x="0.0" xml:space="preserve" y="14.93359375">Task-Breakdown<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
@@ -47,7 +47,7 @@
     <node id="n3">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.cloud">
-          <y:Geometry height="50.0" width="178.65432570776773" x="856.389787081064" y="-456.00119047619046"/>
+          <y:Geometry height="50.0" width="178.65432570776773" x="856.389787081064" y="-472.0031746031746"/>
           <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="178.65432570776773" x="0.0" xml:space="preserve" y="14.93359375">Action Steps<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
@@ -57,7 +57,7 @@
     <node id="n4">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
-          <y:Geometry height="21.0" width="141.0" x="48.44338998698959" y="-194.0"/>
+          <y:Geometry height="21.0" width="141.0" x="48.44338998698959" y="-210.00198412698413"/>
           <y:Fill color="#00FFFF" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="141.0" x="0.0" xml:space="preserve" y="0.43359375">TO-DO<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
@@ -67,7 +67,7 @@
     <node id="n5">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
-          <y:Geometry height="21.0" width="141.0" x="48.44338998698959" y="-143.0"/>
+          <y:Geometry height="21.0" width="141.0" x="48.44338998698959" y="-159.00198412698413"/>
           <y:Fill color="#00FF00" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="l" textColor="#000000" verticalTextPosition="bottom" visible="true" width="141.0" x="4.0" xml:space="preserve" y="0.43359375">DONE</y:NodeLabel>
@@ -77,7 +77,7 @@
     <node id="n6">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.cloud">
-          <y:Geometry height="50.0" width="198.65432570776773" x="19.616227133105724" y="-274.0"/>
+          <y:Geometry height="50.0" width="198.65432570776773" x="19.616227133105724" y="-290.00198412698415"/>
           <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="198.65432570776773" x="0.0" xml:space="preserve" y="14.93359375">LEGEND<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
@@ -87,7 +87,7 @@
     <node id="n7">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
-          <y:Geometry height="21.0" width="141.0" x="48.44338998698959" y="-92.0"/>
+          <y:Geometry height="21.0" width="141.0" x="48.44338998698959" y="-108.00198412698413"/>
           <y:Fill color="#999999" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="141.0" x="0.0" xml:space="preserve" y="0.43359375">OUTOFSCOPE<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
@@ -97,7 +97,7 @@
     <node id="n8">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
-          <y:Geometry height="89.21565059984516" width="276.0" x="257.8867799739792" y="-359.1082221253194"/>
+          <y:Geometry height="89.21565059984516" width="276.0" x="257.8867799739792" y="-375.11020625230356"/>
           <y:Fill color="#00FFFF" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.53125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="276.0" x="0.0" xml:space="preserve" y="13.342200299922581">WENN der Nutzer das Browserfenster auf tablet-größe verkleinert,
@@ -108,7 +108,7 @@ DANN soll die TransactionPage im Tablet-Look erscheinen<y:LabelModel><y:SmartNod
     <node id="n9">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
-          <y:Geometry height="21.0" width="141.0" x="48.44338998698959" y="-41.0"/>
+          <y:Geometry height="21.0" width="141.0" x="48.44338998698959" y="-57.00198412698413"/>
           <y:Fill color="#FF0000" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="141.0" x="0.0" xml:space="preserve" y="0.43359375">ERROR<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
@@ -118,7 +118,7 @@ DANN soll die TransactionPage im Tablet-Look erscheinen<y:LabelModel><y:SmartNod
     <node id="n10">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
-          <y:Geometry height="39.000000000000455" width="237.88677997397917" x="553.8867799739792" y="-334.00039682539705"/>
+          <y:Geometry height="39.000000000000455" width="237.88677997397917" x="553.8867799739792" y="-350.0023809523812"/>
           <y:Fill color="#00FFFF" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="34.265625" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="l" textColor="#000000" verticalTextPosition="bottom" visible="true" width="237.88677997397917" x="4.0" xml:space="preserve" y="2.3671875000002274">scss styling der TransactionPage anpassen</y:NodeLabel>
@@ -128,7 +128,7 @@ DANN soll die TransactionPage im Tablet-Look erscheinen<y:LabelModel><y:SmartNod
     <node id="n11">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
-          <y:Geometry height="21.000000000000455" width="237.88677997397917" x="826.7735599479583" y="-376.00079365079387"/>
+          <y:Geometry height="21.000000000000455" width="237.88677997397917" x="826.7735599479583" y="-392.002777777778"/>
           <y:Fill color="#00FF00" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="l" textColor="#000000" verticalTextPosition="bottom" visible="true" width="237.88677997397917" x="4.0" xml:space="preserve" y="0.4335937500002274">scss styling anpassen für tablet</y:NodeLabel>
@@ -138,7 +138,7 @@ DANN soll die TransactionPage im Tablet-Look erscheinen<y:LabelModel><y:SmartNod
     <node id="n12">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
-          <y:Geometry height="21.000000000000455" width="237.88677997397917" x="826.7735599479583" y="-325.00039682539705"/>
+          <y:Geometry height="21.000000000000455" width="237.88677997397917" x="826.7735599479583" y="-341.0023809523812"/>
           <y:Fill color="#00FF00" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="l" textColor="#000000" verticalTextPosition="bottom" visible="true" width="237.88677997397917" x="4.0" xml:space="preserve" y="0.4335937500002274">scss styling anpassen für desktop</y:NodeLabel>
@@ -148,7 +148,7 @@ DANN soll die TransactionPage im Tablet-Look erscheinen<y:LabelModel><y:SmartNod
     <node id="n13">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
-          <y:Geometry height="21.000000000000455" width="237.88677997397917" x="826.7735599479583" y="-274.0000000000002"/>
+          <y:Geometry height="21.000000000000455" width="237.88677997397917" x="826.7735599479583" y="-290.0019841269844"/>
           <y:Fill color="#00FFFF" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="l" textColor="#000000" verticalTextPosition="bottom" visible="true" width="237.88677997397917" x="4.0" xml:space="preserve" y="0.4335937500002274">scss styling anpassen für mobile</y:NodeLabel>
@@ -158,8 +158,8 @@ DANN soll die TransactionPage im Tablet-Look erscheinen<y:LabelModel><y:SmartNod
     <node id="n14">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
-          <y:Geometry height="21.000000000000455" width="237.88677997397917" x="1131.6603399219375" y="-385.00079365079387"/>
-          <y:Fill color="#00FFFF" color2="#B7C9E3" transparent="false"/>
+          <y:Geometry height="21.000000000000455" width="237.88677997397917" x="1147.6603399219375" y="-470.00317460317484"/>
+          <y:Fill color="#00FF00" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="l" textColor="#000000" verticalTextPosition="bottom" visible="true" width="237.88677997397917" x="4.0" xml:space="preserve" y="0.4335937500002274">neue phone-komponente anlegen</y:NodeLabel>
         </y:GenericNode>
@@ -168,8 +168,8 @@ DANN soll die TransactionPage im Tablet-Look erscheinen<y:LabelModel><y:SmartNod
     <node id="n15">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
-          <y:Geometry height="21.000000000000455" width="237.88677997397917" x="1131.6603399219375" y="-334.00039682539705"/>
-          <y:Fill color="#00FFFF" color2="#B7C9E3" transparent="false"/>
+          <y:Geometry height="21.000000000000455" width="237.88677997397917" x="1147.6603399219375" y="-419.002777777778"/>
+          <y:Fill color="#00FF00" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="l" textColor="#000000" verticalTextPosition="bottom" visible="true" width="237.88677997397917" x="4.0" xml:space="preserve" y="0.4335937500002274">Liste ersetzen für mobile</y:NodeLabel>
         </y:GenericNode>
@@ -178,8 +178,8 @@ DANN soll die TransactionPage im Tablet-Look erscheinen<y:LabelModel><y:SmartNod
     <node id="n16">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
-          <y:Geometry height="39.000000000000455" width="237.88677997397917" x="1131.6603399219375" y="-454.0011904761907"/>
-          <y:Fill color="#00FFFF" color2="#B7C9E3" transparent="false"/>
+          <y:Geometry height="39.000000000000455" width="237.88677997397917" x="1147.6603399219375" y="-539.0035714285716"/>
+          <y:Fill color="#00FF00" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="34.265625" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="l" textColor="#000000" verticalTextPosition="bottom" visible="true" width="237.88677997397917" x="4.0" xml:space="preserve" y="2.3671875000002274">herausfinden wie ich in tsx die width herkriege</y:NodeLabel>
         </y:GenericNode>
@@ -188,8 +188,8 @@ DANN soll die TransactionPage im Tablet-Look erscheinen<y:LabelModel><y:SmartNod
     <node id="n17">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
-          <y:Geometry height="21.000000000000455" width="237.88677997397917" x="1404.5471198959167" y="-403.75079365079387"/>
-          <y:Fill color="#00FFFF" color2="#B7C9E3" transparent="false"/>
+          <y:Geometry height="21.000000000000455" width="237.88677997397917" x="1420.5471198959167" y="-488.75317460317484"/>
+          <y:Fill color="#00FF00" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="l" textColor="#000000" verticalTextPosition="bottom" visible="true" width="237.88677997397917" x="4.0" xml:space="preserve" y="0.4335937500002274">&amp;&amp;</y:NodeLabel>
         </y:GenericNode>
@@ -198,8 +198,8 @@ DANN soll die TransactionPage im Tablet-Look erscheinen<y:LabelModel><y:SmartNod
     <node id="n18">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
-          <y:Geometry height="21.000000000000455" width="237.88677997397917" x="1404.5471198959167" y="-454.7511904761907"/>
-          <y:Fill color="#00FFFF" color2="#B7C9E3" transparent="false"/>
+          <y:Geometry height="21.000000000000455" width="237.88677997397917" x="1420.5471198959167" y="-539.7535714285716"/>
+          <y:Fill color="#00FF00" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="l" textColor="#000000" verticalTextPosition="bottom" visible="true" width="237.88677997397917" x="4.0" xml:space="preserve" y="0.4335937500002274">create custom hook</y:NodeLabel>
         </y:GenericNode>
@@ -208,18 +208,18 @@ DANN soll die TransactionPage im Tablet-Look erscheinen<y:LabelModel><y:SmartNod
     <node id="n19">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
-          <y:Geometry height="39.000000000000455" width="237.88677997397917" x="1131.6603399219375" y="-283.0000000000002"/>
-          <y:Fill color="#00FFFF" color2="#B7C9E3" transparent="false"/>
+          <y:Geometry height="39.000000000000455" width="237.88677997397917" x="1147.6603399219375" y="-368.0023809523812"/>
+          <y:Fill color="#00FF00" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
-          <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="34.265625" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="l" textColor="#000000" verticalTextPosition="bottom" visible="true" width="237.88677997397917" x="4.0" xml:space="preserve" y="2.3671875000002274">test, dass searchbarLabelWrapper nicht da, wenn smallscreen</y:NodeLabel>
+          <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="34.265625" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="l" textColor="#000000" verticalTextPosition="bottom" visible="true" width="237.88677997397917" x="4.0" xml:space="preserve" y="2.3671875000002274">test, dass searchbarLabel nicht da, wenn smallscreen</y:NodeLabel>
         </y:GenericNode>
       </data>
     </node>
     <node id="n20">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
-          <y:Geometry height="39.000000000000455" width="237.88677997397917" x="1131.6603399219375" y="-213.9996031746034"/>
-          <y:Fill color="#00FFFF" color2="#B7C9E3" transparent="false"/>
+          <y:Geometry height="39.000000000000455" width="237.88677997397917" x="1147.6603399219375" y="-299.0019841269844"/>
+          <y:Fill color="#00FF00" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="34.265625" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="l" textColor="#000000" verticalTextPosition="bottom" visible="true" width="237.88677997397917" x="4.0" xml:space="preserve" y="2.3671875000002274">test, dass searchbarSmall ist da, wenn smallscreen</y:NodeLabel>
         </y:GenericNode>
@@ -228,8 +228,8 @@ DANN soll die TransactionPage im Tablet-Look erscheinen<y:LabelModel><y:SmartNod
     <node id="n21">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
-          <y:Geometry height="39.000000000000455" width="237.88677997397917" x="1131.6603399219375" y="-144.9992063492066"/>
-          <y:Fill color="#00FFFF" color2="#B7C9E3" transparent="false"/>
+          <y:Geometry height="39.000000000000455" width="237.88677997397917" x="1147.6603399219375" y="-230.00158730158753"/>
+          <y:Fill color="#00FF00" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="34.265625" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="l" textColor="#000000" verticalTextPosition="bottom" visible="true" width="237.88677997397917" x="4.0" xml:space="preserve" y="2.3671875000002274">test, dass searchbarSmallIconSort ist da, wenn smallscreen</y:NodeLabel>
         </y:GenericNode>
@@ -238,8 +238,8 @@ DANN soll die TransactionPage im Tablet-Look erscheinen<y:LabelModel><y:SmartNod
     <node id="n22">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
-          <y:Geometry height="39.000000000000455" width="237.88677997397917" x="1131.6603399219375" y="-75.99880952380975"/>
-          <y:Fill color="#00FFFF" color2="#B7C9E3" transparent="false"/>
+          <y:Geometry height="39.000000000000455" width="237.88677997397917" x="1147.6603399219375" y="-161.00119047619071"/>
+          <y:Fill color="#00FF00" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="34.265625" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="l" textColor="#000000" verticalTextPosition="bottom" visible="true" width="237.88677997397917" x="4.0" xml:space="preserve" y="2.3671875000002274">test, dass searchbarSmallIconCategory ist da, wenn smallscreen</y:NodeLabel>
         </y:GenericNode>
@@ -248,10 +248,30 @@ DANN soll die TransactionPage im Tablet-Look erscheinen<y:LabelModel><y:SmartNod
     <node id="n23">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
-          <y:Geometry height="21.000000000000455" width="237.88677997397917" x="1662.4338998698959" y="-454.7511904761907"/>
-          <y:Fill color="#00FFFF" color2="#B7C9E3" transparent="false"/>
+          <y:Geometry height="21.000000000000455" width="237.88677997397917" x="1678.4338998698959" y="-539.7535714285716"/>
+          <y:Fill color="#00FF00" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="l" textColor="#000000" verticalTextPosition="bottom" visible="true" width="237.88677997397917" x="4.0" xml:space="preserve" y="0.4335937500002274">hook mocken in tests</y:NodeLabel>
+        </y:GenericNode>
+      </data>
+    </node>
+    <node id="n24">
+      <data key="d6">
+        <y:GenericNode configuration="com.yworks.flowchart.process">
+          <y:Geometry height="21.000000000000455" width="237.88677997397917" x="1147.6603399219375" y="-41.000396825397054"/>
+          <y:Fill color="#00FFFF" color2="#B7C9E3" transparent="false"/>
+          <y:BorderStyle color="#000000" type="line" width="1.0"/>
+          <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="l" textColor="#000000" verticalTextPosition="bottom" visible="true" width="237.88677997397917" x="4.0" xml:space="preserve" y="0.4335937500002274">buttons ausblenden, wenn kein Platz</y:NodeLabel>
+        </y:GenericNode>
+      </data>
+    </node>
+    <node id="n25">
+      <data key="d6">
+        <y:GenericNode configuration="com.yworks.flowchart.process">
+          <y:Geometry height="21.000000000000455" width="237.88677997397917" x="1147.6603399219375" y="-92.00079365079388"/>
+          <y:Fill color="#00FF00" color2="#B7C9E3" transparent="false"/>
+          <y:BorderStyle color="#000000" type="line" width="1.0"/>
+          <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="l" textColor="#000000" verticalTextPosition="bottom" visible="true" width="237.88677997397917" x="4.0" xml:space="preserve" y="0.4335937500002274">tests für tablerowsmall</y:NodeLabel>
         </y:GenericNode>
       </data>
     </node>
@@ -281,8 +301,8 @@ DANN soll die TransactionPage im Tablet-Look erscheinen<y:LabelModel><y:SmartNod
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="118.94338998698959" sy="-13.000000000000153" tx="-118.94338998698959" ty="-0.0">
-            <y:Point x="811.2735599479583" y="-327.500396825397"/>
-            <y:Point x="811.2735599479583" y="-365.50079365079364"/>
+            <y:Point x="811.2735599479583" y="-343.50238095238115"/>
+            <y:Point x="811.2735599479583" y="-381.5027777777778"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="standard"/>
@@ -306,8 +326,8 @@ DANN soll die TransactionPage im Tablet-Look erscheinen<y:LabelModel><y:SmartNod
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="118.94338998698959" sy="13.000000000000156" tx="-118.94338998698959" ty="-0.0">
-            <y:Point x="811.2735599479583" y="-301.50039682539665"/>
-            <y:Point x="811.2735599479583" y="-263.5"/>
+            <y:Point x="811.2735599479583" y="-317.5023809523808"/>
+            <y:Point x="811.2735599479583" y="-279.50198412698415"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="standard"/>
@@ -319,9 +339,9 @@ DANN soll die TransactionPage im Tablet-Look erscheinen<y:LabelModel><y:SmartNod
       <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
-          <y:Path sx="118.94338998698959" sy="-6.00000000000013" tx="-118.94338998698959" ty="-0.0">
-            <y:Point x="1100.1603399219375" y="-269.5000000000001"/>
-            <y:Point x="1100.1603399219375" y="-374.50079365079364"/>
+          <y:Path sx="118.94338998698959" sy="-7.000000000000152" tx="-118.94338998698959" ty="-0.0">
+            <y:Point x="1100.1603399219375" y="-286.5019841269843"/>
+            <y:Point x="1100.1603399219375" y="-459.5031746031746"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="standard"/>
@@ -333,9 +353,9 @@ DANN soll die TransactionPage im Tablet-Look erscheinen<y:LabelModel><y:SmartNod
       <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
-          <y:Path sx="118.94338998698959" sy="-3.000000000000064" tx="-118.94338998698959" ty="-0.0">
-            <y:Point x="1116.1603399219375" y="-266.50000000000006"/>
-            <y:Point x="1116.1603399219375" y="-323.5003968253968"/>
+          <y:Path sx="118.94338998698959" sy="-4.666666666666768" tx="-118.94338998698959" ty="-0.0">
+            <y:Point x="1116.1603399219375" y="-284.1686507936509"/>
+            <y:Point x="1116.1603399219375" y="-408.5027777777778"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="standard"/>
@@ -347,9 +367,9 @@ DANN soll die TransactionPage im Tablet-Look erscheinen<y:LabelModel><y:SmartNod
       <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
-          <y:Path sx="118.94338998698959" sy="-9.000000000000195" tx="-118.94338998698959" ty="-0.0">
-            <y:Point x="1084.1603399219375" y="-272.50000000000017"/>
-            <y:Point x="1084.1603399219375" y="-434.50119047619046"/>
+          <y:Path sx="118.94338998698959" sy="-9.333333333333535" tx="-118.94338998698959" ty="-0.0">
+            <y:Point x="1084.1603399219375" y="-288.8353174603177"/>
+            <y:Point x="1084.1603399219375" y="-519.5035714285714"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="standard"/>
@@ -362,8 +382,8 @@ DANN soll die TransactionPage im Tablet-Look erscheinen<y:LabelModel><y:SmartNod
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="118.94338998698959" sy="9.750000000000114" tx="-118.94338998698959" ty="-0.0">
-            <y:Point x="1389.0471198959167" y="-424.75119047619035"/>
-            <y:Point x="1389.0471198959167" y="-393.25079365079364"/>
+            <y:Point x="1405.0471198959167" y="-509.75357142857126"/>
+            <y:Point x="1405.0471198959167" y="-478.2531746031746"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="standard"/>
@@ -386,7 +406,10 @@ DANN soll die TransactionPage im Tablet-Look erscheinen<y:LabelModel><y:SmartNod
       <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
-          <y:Path sx="118.94338998698959" sy="1.7763568394002505E-15" tx="-118.94338998698959" ty="-0.0"/>
+          <y:Path sx="118.94338998698959" sy="-2.3333333333333854" tx="-118.94338998698959" ty="-0.0">
+            <y:Point x="1132.1603399219375" y="-281.8353174603175"/>
+            <y:Point x="1132.1603399219375" y="-348.502380952381"/>
+          </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="standard"/>
           <y:BendStyle smoothed="false"/>
@@ -397,10 +420,7 @@ DANN soll die TransactionPage im Tablet-Look erscheinen<y:LabelModel><y:SmartNod
       <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
-          <y:Path sx="118.94338998698959" sy="3.0000000000000675" tx="-118.94338998698959" ty="-0.0">
-            <y:Point x="1116.1603399219375" y="-260.49999999999994"/>
-            <y:Point x="1116.1603399219375" y="-194.49960317460318"/>
-          </y:Path>
+          <y:Path sx="118.94338998698959" sy="-1.7763568394002505E-15" tx="-118.94338998698959" ty="-0.0"/>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="standard"/>
           <y:BendStyle smoothed="false"/>
@@ -411,9 +431,9 @@ DANN soll die TransactionPage im Tablet-Look erscheinen<y:LabelModel><y:SmartNod
       <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
-          <y:Path sx="118.94338998698959" sy="6.0000000000001315" tx="-118.94338998698959" ty="-0.0">
-            <y:Point x="1100.1603399219375" y="-257.4999999999999"/>
-            <y:Point x="1100.1603399219375" y="-125.49920634920635"/>
+          <y:Path sx="118.94338998698959" sy="2.333333333333382" tx="-118.94338998698959" ty="-0.0">
+            <y:Point x="1132.1603399219375" y="-277.1686507936508"/>
+            <y:Point x="1132.1603399219375" y="-210.5015873015873"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="standard"/>
@@ -425,9 +445,9 @@ DANN soll die TransactionPage im Tablet-Look erscheinen<y:LabelModel><y:SmartNod
       <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
-          <y:Path sx="118.94338998698959" sy="9.000000000000195" tx="-118.94338998698959" ty="-0.0">
-            <y:Point x="1084.1603399219375" y="-254.4999999999998"/>
-            <y:Point x="1084.1603399219375" y="-56.49880952380953"/>
+          <y:Path sx="118.94338998698959" sy="4.6666666666667656" tx="-118.94338998698959" ty="-0.0">
+            <y:Point x="1116.1603399219375" y="-274.8353174603174"/>
+            <y:Point x="1116.1603399219375" y="-141.5011904761905"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="standard"/>
@@ -440,6 +460,34 @@ DANN soll die TransactionPage im Tablet-Look erscheinen<y:LabelModel><y:SmartNod
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="118.94338998698959" sy="-0.0" tx="-118.94338998698959" ty="-0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e15" source="n13" target="n24">
+      <data key="d9"/>
+      <data key="d10">
+        <y:PolyLineEdge>
+          <y:Path sx="118.94338998698959" sy="9.333333333333535" tx="-118.94338998698959" ty="-0.0">
+            <y:Point x="1084.1603399219375" y="-270.1686507936506"/>
+            <y:Point x="1084.1603399219375" y="-30.500396825396827"/>
+          </y:Path>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e16" source="n13" target="n25">
+      <data key="d9"/>
+      <data key="d10">
+        <y:PolyLineEdge>
+          <y:Path sx="118.94338998698959" sy="7.000000000000149" tx="-118.94338998698959" ty="-0.0">
+            <y:Point x="1100.1603399219375" y="-272.501984126984"/>
+            <y:Point x="1100.1603399219375" y="-81.50079365079365"/>
+          </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="standard"/>
           <y:BendStyle smoothed="false"/>

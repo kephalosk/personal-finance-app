@@ -3,9 +3,15 @@ import React from 'react';
 import { SearchbarDropdownCategory } from './SearchbarDropdownCategory';
 import { getTransactions } from '../../globals/services/TransactionService';
 import { mockedTransactions } from '../../fixtures/MockedTransactions';
+import useIsSmallScreen from '../../globals/hooks/useIsSmallScreen';
 
 jest.mock('../../globals/services/TransactionService', () => ({
   getTransactions: jest.fn(),
+}));
+
+jest.mock('../../globals/hooks/useIsSmallScreen', () => ({
+  __esModule: true,
+  default: jest.fn(),
 }));
 
 const mockGetTransactions = getTransactions as jest.Mock;
@@ -16,6 +22,7 @@ describe('searchbarDropdownCategory', () => {
   beforeEach(() => {
     mockGetTransactions.mockReturnValue(mockedTransactions);
     mockOnCategoryChange = jest.fn();
+    (useIsSmallScreen as jest.Mock).mockReturnValue(false);
   });
 
   it('renders div searchbarDropdownCategoryWrapper', () => {
@@ -82,6 +89,32 @@ describe('searchbarDropdownCategory', () => {
         mockedTransactions[1].category,
       ];
       expect(testCategories).toContain(option.textContent);
+    });
+  });
+
+  describe('Mobile View', () => {
+    it('renders caret icon in desktop and tablet view', () => {
+      (useIsSmallScreen as jest.Mock).mockReturnValue(false);
+      const { container } = render(
+        <SearchbarDropdownCategory onCategoryChange={mockOnCategoryChange} />
+      );
+
+      const htmlElement = container.querySelector('.searchbarDropdownCategoryIcon');
+
+      expect(htmlElement).toBeInTheDocument();
+      expect(htmlElement).toHaveAttribute('src', '/images/icon-caret-down.svg');
+    });
+
+    it('renders filter icon in mobile view', () => {
+      (useIsSmallScreen as jest.Mock).mockReturnValue(true);
+      const { container } = render(
+        <SearchbarDropdownCategory onCategoryChange={mockOnCategoryChange} />
+      );
+
+      const htmlElement = container.querySelector('.searchbarDropdownCategoryIcon');
+
+      expect(htmlElement).toBeInTheDocument();
+      expect(htmlElement).toHaveAttribute('src', '/images/icon-filter-mobile.svg');
     });
   });
 });
