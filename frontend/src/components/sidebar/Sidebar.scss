@@ -12,10 +12,10 @@
 
   @include mixins.tablet-and-down() {
     border-radius: 16px 16px 0 0;
-    padding: 8px 0 16px 0;
+    padding: 8px 0 0 0;
     position: fixed;
     bottom: 0;
-    height: 84px;
+    height: auto;
     width: 100%;
     z-index: 10;
     transition: width 0s ease, padding 0s ease;
@@ -36,9 +36,14 @@
 
   @include mixins.tablet-and-down() {
     padding: 0 40px;
+    height: auto;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+  }
+
+  @include mixins.phone() {
+    padding: 0 16px;
   }
 }
 
