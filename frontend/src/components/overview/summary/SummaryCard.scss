@@ -1,3 +1,5 @@
+@use '../../../styles/mixins';
+
 .overviewSummaryCard {
   border-radius: 12px;
   background-color: var(--component-background-bright);
@@ -5,6 +7,10 @@
   display: flex;
   flex-direction: column;
   row-gap: 12px;
+
+  @include mixins.phone(){
+    padding: 20px;
+  }
 }
 .overviewSummaryCard.inverted {
   background-color: var(--component-background-dark);
