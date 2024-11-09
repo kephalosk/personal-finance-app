@@ -14,6 +14,7 @@ import React, { useRef, useState } from 'react';
 import { SortOptionEnum } from '../constants/SortOptionEnum';
 import { SearchbarInputHandle } from '../model/SearchbarInputHandle';
 import useIsSmallScreen from '../globals/hooks/useIsSmallScreen';
+import { TableRowSmall } from '../components/transactions/table/TableRowSmall';
 
 export function TransactionsPage() {
   const [pageIndex, setPageIndex] = useState(0);
@@ -142,19 +143,39 @@ export function TransactionsPage() {
               </div>
             )}
           </div>
-          <div className="transactionsTable">
-            <TableHeader />
-            {currentIndexedTransactions.map((entry: EPTransaction) => (
-              <TableRow
-                key={entry.date + entry.name}
-                name={entry.name}
-                imgSrc={entry.avatar}
-                category={entry.category}
-                date={entry.date}
-                value={entry.amount}
-              />
-            ))}
-          </div>
+          {!isSmallScreen && (
+            <div className="transactionsTable">
+              <TableHeader />
+              {currentIndexedTransactions.map((entry: EPTransaction) => (
+                <TableRow
+                  key={entry.date + entry.name}
+                  name={entry.name}
+                  imgSrc={entry.avatar}
+                  category={entry.category}
+                  date={entry.date}
+                  value={entry.amount}
+                />
+              ))}
+            </div>
+          )}
+          {isSmallScreen && (
+            <div className="transactionsTable">
+              {currentIndexedTransactions.map((entry: EPTransaction, index: number) => (
+                <div key={index}>
+                  <TableRowSmall
+                    name={entry.name}
+                    imgSrc={entry.avatar}
+                    category={entry.category}
+                    date={entry.date}
+                    value={entry.amount}
+                  />
+                  {index < currentIndexedTransactions.length - 1 && (
+                    <hr className="transactionsTableLine" />
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
           <div className="transactionsPagination">
             <PaginationButtonPrev onClick={handlePrevClick} currentIndex={pageIndex} />
             <PaginationPages

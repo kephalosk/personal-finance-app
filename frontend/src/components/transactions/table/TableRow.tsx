@@ -1,6 +1,6 @@
 import './TableRow.scss';
 import PropTypes from 'prop-types';
-import { TransactionsPageTableRowProps } from '../../../model/props/TransactionsPageTableRowProps';
+import { TableRowProps } from '../../../model/props/TableRowProps';
 
 TableRow.propTypes = {
   name: PropTypes.string.isRequired,
@@ -10,7 +10,7 @@ TableRow.propTypes = {
   value: PropTypes.number.isRequired,
 };
 
-export function TableRow({ name, imgSrc, category, date, value }: TransactionsPageTableRowProps) {
+export function TableRow({ name, imgSrc, category, date, value }: TableRowProps) {
   const isPositive: boolean = value > 0;
   const color = isPositive ? 'green' : 'dark';
   const sign = isPositive ? '+' : '-';
