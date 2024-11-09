@@ -2,8 +2,18 @@ import { render, screen } from '@testing-library/react';
 import App from './App';
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
+import useIsSmallScreen from './globals/hooks/useIsSmallScreen';
+
+jest.mock('./globals/hooks/useIsSmallScreen', () => ({
+  __esModule: true,
+  default: jest.fn(),
+}));
 
 describe('App', () => {
+  beforeEach(() => {
+    (useIsSmallScreen as jest.Mock).mockReturnValue(false);
+  });
+
   it('renders div webapp', () => {
     const { container } = render(<App />);
 

@@ -1,7 +1,17 @@
 import { render, screen } from '@testing-library/react';
 import { BillsPage } from './BillsPage';
+import useIsSmallScreen from '../globals/hooks/useIsSmallScreen';
+
+jest.mock('../globals/hooks/useIsSmallScreen', () => ({
+  __esModule: true,
+  default: jest.fn(),
+}));
 
 describe('BillsPage', () => {
+  beforeEach(() => {
+    (useIsSmallScreen as jest.Mock).mockReturnValue(false);
+  });
+
   it('renders div billsPage', () => {
     const { container } = render(<BillsPage />);
 

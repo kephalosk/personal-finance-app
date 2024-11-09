@@ -1,3 +1,5 @@
+@use '../../../styles/mixins';
+
 .paginationPages {
   display: flex;
   flex-direction: row;

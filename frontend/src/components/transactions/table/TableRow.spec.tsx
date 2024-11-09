@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 import { TableRow } from './TableRow';
-import { TransactionsPageTableRowProps } from '../../../model/props/TableRowProps';
+import { TableRowProps } from '../../../model/props/TableRowProps';
 
 describe('TableRow', () => {
   const name: string = 'testName';
@@ -10,7 +10,7 @@ describe('TableRow', () => {
   const date: string = 'testDate';
   const value: number = 100.21;
 
-  const testProps: TransactionsPageTableRowProps = {
+  const testProps: TableRowProps = {
     name,
     imgSrc,
     category,
