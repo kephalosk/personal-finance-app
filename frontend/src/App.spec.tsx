@@ -28,6 +28,16 @@ describe('App', () => {
     expect(htmlElement).toBeInTheDocument();
   });
 
+  it('renders the project icon small if isMinimized is true', () => {
+    localStorage.setItem('isMinimized', JSON.stringify(true));
+    const { container } = render(<App />);
+
+    const htmlElement = container.querySelector('.content');
+
+    expect(htmlElement).toHaveClass('minimized');
+    localStorage.clear();
+  });
+
   describe('Router', () => {
     it('renders OverviewPage by default', () => {
       const { getByTestId } = render(<App />);
