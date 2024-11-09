@@ -10,9 +10,10 @@ import { TableRow } from '../components/transactions/table/TableRow';
 import { EPTransaction } from '../model/entrypoints/EPTransaction';
 import { getTransactions } from '../globals/services/TransactionService';
 import { splitIntoChunks } from '../globals/utils/SplitIntoChunks';
-import { useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { SortOptionEnum } from '../constants/SortOptionEnum';
 import { SearchbarInputHandle } from '../model/SearchbarInputHandle';
+import useIsSmallScreen from '../globals/hooks/useIsSmallScreen';
 
 export function TransactionsPage() {
   const [pageIndex, setPageIndex] = useState(0);
@@ -30,6 +31,8 @@ export function TransactionsPage() {
   let shadowFilteredTransactions: EPTransaction[] = [...filteredTransactions];
 
   const searchbarRef = useRef<SearchbarInputHandle>();
+
+  const isSmallScreen = useIsSmallScreen();
 
   const handleSortChange = (sortOption: string) => {
     let sorted = [...shadowFilteredTransactions];
@@ -124,12 +127,30 @@ export function TransactionsPage() {
         <div className="transactionsDetails">
           <div className="transactionsSearchbar">
             <SearchbarInput ref={searchbarRef} onInputChange={handleInputChange} />
-            <div className="searchbarLabelWrapper">
-              <label className="searchbarLabel sortBy">Sort by</label>
-              <SearchbarDropdownSort onSortChange={handleSortChange} />
-              <label className="searchbarLabel category">Category</label>
-              <SearchbarDropdownCategory onCategoryChange={handleCategoryChange} />
-            </div>
+            {!isSmallScreen && (
+              <div className="searchbarLabelWrapper">
+                <label className="searchbarLabel sortBy">Sort by</label>
+                <SearchbarDropdownSort onSortChange={handleSortChange} />
+                <label className="searchbarLabel category">Category</label>
+                <SearchbarDropdownCategory onCategoryChange={handleCategoryChange} />
+              </div>
+            )}
+            {isSmallScreen && (
+              <div className="searchbarSmall">
+                <img
+                  className="searchbarSmallIcon sort"
+                  alt="sort select icon"
+                  aria-hidden="false"
+                  src="/images/icon-sort-mobile.svg"
+                />
+                <img
+                  className="searchbarSmallIcon category"
+                  alt="sort select icon"
+                  aria-hidden="false"
+                  src="/images/icon-filter-mobile.svg"
+                />
+              </div>
+            )}
           </div>
           <div className="transactionsTable">
             <TableHeader />

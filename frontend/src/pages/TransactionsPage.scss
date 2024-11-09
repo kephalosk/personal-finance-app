@@ -1,3 +1,5 @@
+@use '../styles/mixins';
+
 .searchbarLabel {
   margin-right: 8px;
   margin-left: 24px;
@@ -11,12 +13,20 @@
   justify-content: flex-end;
 }
 
+.searchbarSmallIcon {
+  margin-left: 24px;
+}
+
 .transactionsPage {
   padding: 32px 40px;
   height: 100%;
   display: grid;
   grid-template-rows: fit-content(100%) 1fr;
   row-gap: 24px;
+
+  @include mixins.phone() {
+    padding: 24px 16px;
+  }
 }
 
 .transactionsDetails {
@@ -27,6 +37,10 @@
   display: grid;
   grid-template-rows: fit-content(100%) 1fr fit-content(100%);
   row-gap: 23px;
+
+  @include mixins.phone() {
+    padding: 24px 20px;
+  }
 }
 
 .transactionsPagination {
