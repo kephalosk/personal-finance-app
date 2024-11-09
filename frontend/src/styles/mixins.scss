@@ -1,8 +1,16 @@
+$phone-width: 600px;
 $sidebar-width: 300px;
 $tablet-width: 960px;
+
+@mixin phone($size-of-surrounding-elements: 0) {
+  @media (max-width: #{$phone-width + $size-of-surrounding-elements}) {
+    @content;
+  }
+}
 
 @mixin tablet-and-down($size-of-surrounding-elements: 0) {
   @media (max-width: #{$tablet-width + $size-of-surrounding-elements}) {
     @content;
   }
 }
+
