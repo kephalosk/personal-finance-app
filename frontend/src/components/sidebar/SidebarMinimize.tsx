@@ -2,6 +2,7 @@ import { SidebarListEntry } from './SidebarListEntry';
 import { SidebarMinimizeProps } from '../../model/props/SidebarMinimizeProps';
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
+import './SidebarMinimize.scss';
 
 SidebarMinimize.propTypes = {
   onMinimize: PropTypes.func.isRequired,

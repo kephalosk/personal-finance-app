@@ -1,3 +1,5 @@
+@use '../../styles/mixins';
+
 .entryRow {
   border-radius: 0 15px 15px 0;
   padding: 18px 0 18px 32px;
@@ -5,6 +7,15 @@
   display: flex;
   text-decoration: none;
   cursor: pointer;
+
+  @include mixins.tablet-and-down() {
+    border-radius: 15px 15px 0 0;
+    padding: 10px 0 12px 0;
+    width: 104px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
 }
 .entryRow:hover {
   img {
@@ -26,10 +37,21 @@
   label {
     color: var(--sidebar-entry-text-selected);
   }
+
+  @include mixins.tablet-and-down() {
+    border-left: 0;
+    border-bottom: 4px solid var(--sidebar-entry-icon-selected);
+    background-color: var(--sidebar-entry-selected-background);
+  }
 }
 
 .entryRowImg {
   width: 20px;
+
+  @include mixins.tablet-and-down() {
+    height: 24px;
+    width: auto;
+  }
 }
 
 .entryRowImgWrapper {
@@ -37,6 +59,11 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+
+  @include mixins.tablet-and-down() {
+    margin-bottom: 8px;
+    height: 24px;
+  }
 }
 
 .entryRowLabel {
@@ -47,8 +74,19 @@
   white-space: nowrap;
   opacity: 1;
   transition: opacity 0.5s ease-in;
+
+  @include mixins.tablet-and-down() {
+    margin-left: 0;
+    font-size: 12px;
+    transition: opacity 0s ease-in;
+  }
 }
 .entryRowLabel.minimized {
   opacity: 0;
   transition: opacity 0.2s ease-out;
+
+  @include mixins.tablet-and-down() {
+    opacity: 1;
+    transition: opacity 0s ease-out;
+  }
 }
