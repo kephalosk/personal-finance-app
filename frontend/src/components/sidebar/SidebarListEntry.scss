@@ -16,6 +16,10 @@
     flex-direction: column;
     justify-content: center;
   }
+
+  @include mixins.phone() {
+    width: 68px;
+  }
 }
 .entryRow:hover {
   img {
@@ -40,7 +44,7 @@
 
   @include mixins.tablet-and-down() {
     border-left: 0;
-    border-bottom: 4px solid var(--sidebar-entry-icon-selected);
+    border-bottom: 5px solid var(--sidebar-entry-icon-selected);
     background-color: var(--sidebar-entry-selected-background);
   }
 }
@@ -61,7 +65,6 @@
   align-items: center;
 
   @include mixins.tablet-and-down() {
-    margin-bottom: 8px;
     height: 24px;
   }
 }
@@ -76,9 +79,14 @@
   transition: opacity 0.5s ease-in;
 
   @include mixins.tablet-and-down() {
+    margin-top: 8px;
     margin-left: 0;
     font-size: 12px;
     transition: opacity 0s ease-in;
+  }
+
+  @include mixins.phone() {
+    display: none;
   }
 }
 .entryRowLabel.minimized {

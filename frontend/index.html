@@ -10,7 +10,7 @@
         margin: 0;
         padding: 0;
         height: auto;
-        min-height: 100vh;
+        min-height: auto;
         display: flex;
         flex-direction: column;
       }
@@ -24,10 +24,14 @@
       }
 
       .appSpace {
-        height: auto;
+        min-height: calc(100vh - 14px);
       }
 
       .attribution {
+        background-color: #ffffff;
+        width: 100%;
+        position: fixed;
+        bottom: 0;
         font-size: 11px;
         text-align: center;
       }
@@ -44,7 +48,7 @@
     </main>
     <footer class="attribution">
       Coding challenge by
-      <a href="https://www.frontendmentor.io/challenges" target="_blank">Frontend Mentor</a>. Coded
+      <a href="https://www.frontendmentor.io/challenges/personal-finance-app-JfjtZgyMt1" target="_blank">Frontend Mentor</a>. Coded
       by <a href="https://github.com/kephalosk">Philipp Kraatz</a>.
     </footer>
   </body>
