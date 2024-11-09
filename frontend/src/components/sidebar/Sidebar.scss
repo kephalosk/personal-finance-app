@@ -1,3 +1,5 @@
+@use '../../styles/mixins';
+
 .sidebar {
   border-radius: 0 16px 16px 0;
   background-color: var(--sidebar-background-grey);
@@ -7,17 +9,44 @@
   display: flex;
   flex-direction: column;
   transition: width 0.5s ease, padding 0.5s ease;
+
+  @include mixins.tablet-and-down() {
+    border-radius: 16px 16px 0 0;
+    padding: 8px 0 16px 0;
+    position: fixed;
+    bottom: 0;
+    height: 84px;
+    width: 100%;
+    z-index: 10;
+    transition: width 0s ease, padding 0s ease;
+  }
 }
 .sidebar.minimized {
   width: 90px;
   padding: 32px 18px 70px 0;
+
+  @include mixins.tablet-and-down() {
+    padding: 8px 0 16px 0;
+    width: 100%;
+  }
 }
 
 .sidebarList {
   height: 600px;
+
+  @include mixins.tablet-and-down() {
+    padding: 0 40px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
 }
 
 .sidebarTitle {
   margin: 0 0 64px 24px;
   height: 60px;
+
+  @include mixins.tablet-and-down() {
+    display: none;
+  }
 }
