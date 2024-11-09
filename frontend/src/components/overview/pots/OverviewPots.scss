@@ -1,3 +1,5 @@
+@use '../../../styles/mixins';
+
 .overviewPots {
   border-radius: 12px;
   background-color: var(--component-background-bright);
@@ -5,12 +7,21 @@
   display: grid;
   grid-template-rows: auto auto;
   row-gap: 20px;
+
+  @include mixins.phone() {
+    padding: 24px 20px;
+  }
 }
 
 .overviewPotsContent {
   display: grid;
   grid-template-columns: 45% 55%;
   column-gap: 20px;
+
+  @include mixins.phone() {
+    grid-template-columns: 1fr;
+    row-gap: 20px;
+  }
 }
 
 .overviewPotsValues {
