@@ -4,11 +4,17 @@ import { SidebarPages } from '../../constants/SidebarPages';
 import { SidebarMinimizeProps } from '../../constants/SidebarMinimizeProps';
 import { MemoryRouter, useLocation } from 'react-router-dom';
 import React from 'react';
+import { SidebarMinimize } from './SidebarMinimize';
 
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
   useLocation: jest.fn(),
 }));
+
+const mockOnMinimize = jest.fn();
+const testProps = {
+  onMinimize: mockOnMinimize,
+};
 
 function initializeComponent() {
   (useLocation as jest.Mock).mockReturnValue({
@@ -16,7 +22,7 @@ function initializeComponent() {
   });
   render(
     <MemoryRouter>
-      <Sidebar />
+      <Sidebar {...testProps} />
     </MemoryRouter>
   );
 }
@@ -27,7 +33,7 @@ function getInitializedContainer(): HTMLElement {
   });
   const { container } = render(
     <MemoryRouter>
-      <Sidebar />
+      <Sidebar {...testProps} />
     </MemoryRouter>
   );
   return container;
@@ -91,5 +97,14 @@ describe('Sidebar', () => {
     const iconAfterClick = container.querySelector('.sidebarTitle');
     expect(iconAfterClick).toHaveAttribute('src', '/images/project-small.png');
     localStorage.clear();
+  });
+
+  it('calls callback function onMinimize when div sidebarMinimizeWrapper is clicked', () => {
+    const { container } = render(<SidebarMinimize {...testProps} />);
+
+    const divElement = container.querySelector('.sidebarMinimizeWrapper');
+    fireEvent.click(divElement!);
+
+    expect(mockOnMinimize).toHaveBeenCalled();
   });
 });

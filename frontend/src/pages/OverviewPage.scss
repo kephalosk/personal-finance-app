@@ -1,3 +1,5 @@
+@use '../styles/mixins';
+
 .overviewPage {
   padding: 32px 40px;
   width: 100%;
@@ -7,6 +9,11 @@
   display: grid;
   grid-template-columns: calc(60% - 12px) calc(40% - 12px);
   column-gap: 24px;
+
+  @include mixins.tablet-and-down() {
+    grid-template-columns: 1fr;
+    row-gap: 24px;
+  }
 }
 
 .overviewPageDetailsLeft {

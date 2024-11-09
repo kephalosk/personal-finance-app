@@ -37,7 +37,7 @@
     <node id="n2">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.cloud">
-          <y:Geometry height="50.0" width="178.65432570776773" x="594.5030071070848" y="-480.50119047619046"/>
+          <y:Geometry height="50.0" width="178.65432570776773" x="594.5030071070848" y="-490.50138888888887"/>
           <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="178.65432570776773" x="0.0" xml:space="preserve" y="14.93359375">Task-Breakdown<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
@@ -47,7 +47,7 @@
     <node id="n3">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.cloud">
-          <y:Geometry height="50.0" width="178.65432570776773" x="852.389787081064" y="-471.50119047619046"/>
+          <y:Geometry height="50.0" width="178.65432570776773" x="852.389787081064" y="-490.50138888888887"/>
           <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="178.65432570776773" x="0.0" xml:space="preserve" y="14.93359375">Action Steps<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
@@ -118,7 +118,7 @@ DANN soll die Overview-Page im Tablet-Look erscheinen<y:LabelModel><y:SmartNodeL
     <node id="n10">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
-          <y:Geometry height="39.000000000000455" width="237.88677997397917" x="564.8867799739792" y="-400.50079365079387"/>
+          <y:Geometry height="39.000000000000455" width="237.88677997397917" x="564.8867799739792" y="-410.5009920634923"/>
           <y:Fill color="#00FFFF" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="34.265625" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="l" textColor="#000000" verticalTextPosition="bottom" visible="true" width="237.88677997397917" x="4.0" xml:space="preserve" y="2.3671875000002274">scss styling der Overview-Page anpassen</y:NodeLabel>
@@ -128,7 +128,7 @@ DANN soll die Overview-Page im Tablet-Look erscheinen<y:LabelModel><y:SmartNodeL
     <node id="n11">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
-          <y:Geometry height="21.000000000000455" width="237.88677997397917" x="822.7735599479583" y="-391.50079365079387"/>
+          <y:Geometry height="21.000000000000455" width="237.88677997397917" x="822.7735599479583" y="-401.5009920634923"/>
           <y:Fill color="#00FFFF" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="l" textColor="#000000" verticalTextPosition="bottom" visible="true" width="237.88677997397917" x="4.0" xml:space="preserve" y="0.4335937500002274">scss styling anpassen</y:NodeLabel>
@@ -138,7 +138,7 @@ DANN soll die Overview-Page im Tablet-Look erscheinen<y:LabelModel><y:SmartNodeL
     <node id="n12">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
-          <y:Geometry height="21.000000000000455" width="102.88677997397917" x="1070.6603399219375" y="-258.5000000000002"/>
+          <y:Geometry height="21.000000000000455" width="102.88677997397917" x="1070.6603399219375" y="-217.49980158730182"/>
           <y:Fill color="#00FF00" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="l" textColor="#000000" verticalTextPosition="bottom" visible="true" width="102.88677997397917" x="4.0" xml:space="preserve" y="0.4335937500002274">isMinimized</y:NodeLabel>
@@ -148,7 +148,7 @@ DANN soll die Overview-Page im Tablet-Look erscheinen<y:LabelModel><y:SmartNodeL
     <node id="n13">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
-          <y:Geometry height="21.000000000000455" width="157.88677997397917" x="1235.5471198959167" y="-284.00019841269864"/>
+          <y:Geometry height="21.000000000000455" width="157.88677997397917" x="1235.5471198959167" y="-243.00000000000023"/>
           <y:Fill color="#00FF00" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="l" textColor="#000000" verticalTextPosition="bottom" visible="true" width="157.88677997397917" x="4.0" xml:space="preserve" y="0.4335937500002274">statisch aus localStorage</y:NodeLabel>
@@ -158,7 +158,7 @@ DANN soll die Overview-Page im Tablet-Look erscheinen<y:LabelModel><y:SmartNodeL
     <node id="n14">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
-          <y:Geometry height="21.000000000000455" width="211.88677997397917" x="1208.5471198959167" y="-232.99980158730182"/>
+          <y:Geometry height="21.000000000000455" width="211.88677997397917" x="1208.5471198959167" y="-191.9996031746034"/>
           <y:Fill color="#00FF00" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="l" textColor="#000000" verticalTextPosition="bottom" visible="true" width="211.88677997397917" x="4.0" xml:space="preserve" y="0.4335937500002274">dynamisch bei Klick auf Minimize</y:NodeLabel>
@@ -168,7 +168,7 @@ DANN soll die Overview-Page im Tablet-Look erscheinen<y:LabelModel><y:SmartNodeL
     <node id="n15">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
-          <y:Geometry height="21.000000000000455" width="211.88677997397917" x="1440.4338998698959" y="-232.99980158730182"/>
+          <y:Geometry height="21.000000000000455" width="211.88677997397917" x="1440.4338998698959" y="-191.9996031746034"/>
           <y:Fill color="#00FF00" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="l" textColor="#000000" verticalTextPosition="bottom" visible="true" width="211.88677997397917" x="4.0" xml:space="preserve" y="0.4335937500002274">brauche reactive hook</y:NodeLabel>
@@ -178,7 +178,7 @@ DANN soll die Overview-Page im Tablet-Look erscheinen<y:LabelModel><y:SmartNodeL
     <node id="n16">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
-          <y:Geometry height="83.00000000000045" width="172.88677997397917" x="855.2735599479583" y="-289.5000000000002"/>
+          <y:Geometry height="83.00000000000045" width="172.88677997397917" x="855.2735599479583" y="-248.49980158730182"/>
           <y:Fill color="#00FF00" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="76.6640625" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="l" textColor="#000000" verticalTextPosition="bottom" visible="true" width="172.88677997397917" x="4.0" xml:space="preserve" y="3.1679687500002274">Aufgabe:
@@ -190,10 +190,20 @@ padding left von content fixen, wenn sidebar ist minimized</y:NodeLabel>
     <node id="n17">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
-          <y:Geometry height="21.000000000000455" width="237.88677997397917" x="822.7735599479583" y="-340.50039682539705"/>
-          <y:Fill color="#00FFFF" color2="#B7C9E3" transparent="false"/>
+          <y:Geometry height="21.000000000000455" width="237.88677997397917" x="822.7735599479583" y="-350.50059523809546"/>
+          <y:Fill color="#00FF00" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="l" textColor="#000000" verticalTextPosition="bottom" visible="true" width="237.88677997397917" x="4.0" xml:space="preserve" y="0.4335937500002274">Test für isMinimized in App.tsx</y:NodeLabel>
+        </y:GenericNode>
+      </data>
+    </node>
+    <node id="n18">
+      <data key="d6">
+        <y:GenericNode configuration="com.yworks.flowchart.process">
+          <y:Geometry height="21.000000000000455" width="237.88677997397917" x="822.7735599479583" y="-299.50019841269864"/>
+          <y:Fill color="#00FF00" color2="#B7C9E3" transparent="false"/>
+          <y:BorderStyle color="#000000" type="line" width="1.0"/>
+          <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="l" textColor="#000000" verticalTextPosition="bottom" visible="true" width="237.88677997397917" x="4.0" xml:space="preserve" y="0.4335937500002274">Test für onMinimize in Sidebar.tsx</y:NodeLabel>
         </y:GenericNode>
       </data>
     </node>
@@ -211,9 +221,9 @@ padding left von content fixen, wenn sidebar ist minimized</y:NodeLabel>
       <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
-          <y:Path sx="138.0" sy="-22.30391264996129" tx="-118.94338998698959" ty="-0.0">
-            <y:Point x="549.3867799739792" y="-336.8043094753581"/>
-            <y:Point x="549.3867799739792" y="-381.00079365079364"/>
+          <y:Path sx="138.0" sy="-33.455868974941936" tx="-118.94338998698959" ty="-0.0">
+            <y:Point x="549.3867799739792" y="-347.95626580033877"/>
+            <y:Point x="549.3867799739792" y="-391.00099206349205"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="standard"/>
@@ -237,8 +247,8 @@ padding left von content fixen, wenn sidebar ist minimized</y:NodeLabel>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="51.44338998698959" sy="-5.250000000000114" tx="-78.94338998698959" ty="-0.0">
-            <y:Point x="1193.0471198959167" y="-253.2500000000001"/>
-            <y:Point x="1193.0471198959167" y="-273.5001984126984"/>
+            <y:Point x="1193.0471198959167" y="-212.2498015873017"/>
+            <y:Point x="1193.0471198959167" y="-232.5"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="standard"/>
@@ -251,8 +261,8 @@ padding left von content fixen, wenn sidebar ist minimized</y:NodeLabel>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="51.44338998698959" sy="5.250000000000114" tx="-105.94338998698959" ty="-0.0">
-            <y:Point x="1193.0471198959167" y="-242.7499999999999"/>
-            <y:Point x="1193.0471198959167" y="-222.4998015873016"/>
+            <y:Point x="1193.0471198959167" y="-201.74980158730148"/>
+            <y:Point x="1193.0471198959167" y="-181.49960317460318"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="standard"/>
@@ -286,9 +296,37 @@ padding left von content fixen, wenn sidebar ist minimized</y:NodeLabel>
       <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
-          <y:Path sx="138.0" sy="22.303912649961262" tx="-86.44338998698959" ty="-0.0">
-            <y:Point x="549.3867799739792" y="-292.19648417543556"/>
-            <y:Point x="549.3867799739792" y="-248.0"/>
+          <y:Path sx="138.0" sy="33.45586897494195" tx="-86.44338998698959" ty="-0.0">
+            <y:Point x="549.3867799739792" y="-281.04452785045487"/>
+            <y:Point x="549.3867799739792" y="-206.9998015873016"/>
+          </y:Path>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e8" source="n8" target="n17">
+      <data key="d9"/>
+      <data key="d10">
+        <y:PolyLineEdge>
+          <y:Path sx="138.0" sy="-11.151956324980631" tx="-118.94338998698959" ty="-0.0">
+            <y:Point x="565.3867799739792" y="-325.65235315037745"/>
+            <y:Point x="565.3867799739792" y="-340.00059523809523"/>
+          </y:Path>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e9" source="n8" target="n18">
+      <data key="d9"/>
+      <data key="d10">
+        <y:PolyLineEdge>
+          <y:Path sx="138.0" sy="11.151956324980631" tx="-118.94338998698959" ty="-0.0">
+            <y:Point x="565.3867799739792" y="-303.3484405004162"/>
+            <y:Point x="565.3867799739792" y="-289.0001984126984"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="standard"/>
