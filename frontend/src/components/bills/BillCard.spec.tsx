@@ -3,6 +3,12 @@ import { BillCard } from './BillCard';
 import { mockedBills } from '../../fixtures/MockedBills';
 import { SortOptionEnum } from '../../constants/SortOptionEnum';
 import React from 'react';
+import useIsSmallScreen from '../../globals/hooks/useIsSmallScreen';
+
+jest.mock('../../globals/hooks/useIsSmallScreen', () => ({
+  __esModule: true,
+  default: jest.fn(),
+}));
 
 describe('BillCard', () => {
   const fakeToday: Date = new Date('2024-08-01T14:23:11.000Z');
@@ -13,6 +19,10 @@ describe('BillCard', () => {
   };
 
   const testSearchbarInput = 'sp';
+
+  beforeEach(() => {
+    (useIsSmallScreen as jest.Mock).mockReturnValue(false);
+  });
 
   it('renders div billCard', () => {
     const { container } = render(<BillCard {...testProps} />);
