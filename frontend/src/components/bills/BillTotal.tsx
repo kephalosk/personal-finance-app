@@ -18,8 +18,10 @@ export function BillTotal({ sum }: BillTotalProps) {
             alt="icon of recurring bills"
           />
         </div>
-        <label className="billTotalTitle">Total Bills</label>
-        <label className="billTotalAmount">${sumFormatted}</label>
+        <div className="billTotalLabelWrapper">
+          <label className="billTotalTitle">Total Bills</label>
+          <label className="billTotalAmount">${sumFormatted}</label>
+        </div>
       </div>
     </>
   );

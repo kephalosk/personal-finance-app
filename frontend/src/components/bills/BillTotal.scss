@@ -1,9 +1,17 @@
+@use '../../styles/mixins';
+
 .billTotal {
   border-radius: 12px;
   background-color: var(--component-background-dark);
   padding: 24px;
   display: flex;
   flex-direction: column;
+
+  @include mixins.phone() {
+    flex-direction: row;
+    align-items: center;
+    column-gap: 16px;
+  }
 }
 
 .billTotalImage {
@@ -11,6 +19,15 @@
   margin-bottom: 32px;
   height: 40px;
   width: auto;
+
+  @include mixins.phone() {
+    margin-bottom: 0;
+  }
+}
+
+.billTotalLabelWrapper {
+  display: flex;
+  flex-direction: column;
 }
 
 .billTotalTitle {
