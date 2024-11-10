@@ -7,6 +7,12 @@ import {
   mockedTransactionsWithDifferentCategoriesAndCategoryAsNames,
 } from '../../../fixtures/MockedTransactions';
 import { mockedBudget } from '../../../fixtures/MockedBudgets';
+import useIsSmallScreen from '../../../globals/hooks/useIsSmallScreen';
+
+jest.mock('../../../globals/hooks/useIsSmallScreen', () => ({
+  __esModule: true,
+  default: jest.fn(),
+}));
 
 describe('BudgetCard', () => {
   const testProps: BudgetCardProps = {
@@ -21,6 +27,10 @@ describe('BudgetCard', () => {
   spent = spent * -1;
 
   const remaining: number = mockedBudget.maximum - spent;
+
+  beforeEach(() => {
+    (useIsSmallScreen as jest.Mock).mockReturnValue(false);
+  });
 
   it('renders div budgetCard', () => {
     const { container } = render(
@@ -142,6 +152,26 @@ describe('BudgetCard', () => {
         expect(value).toEqual(`$${remaining.toFixed(2)}`);
       }
     });
+  });
+
+  it('renders component ValueBox-remaining with text Free in mobile view', () => {
+    (useIsSmallScreen as jest.Mock).mockReturnValue(true);
+    render(
+      <MemoryRouter>
+        <BudgetCard {...testProps} />
+      </MemoryRouter>
+    );
+
+    const components = screen.getAllByTestId('value-box');
+
+    let hasTitleFree = false;
+    components.forEach((component) => {
+      const title = component.querySelector('.valueBoxContentTitle')!.textContent;
+      if (title === 'Free') {
+        hasTitleFree = true;
+      }
+    });
+    expect(hasTitleFree).toBe(true);
   });
 
   it('resets negative remaining to 0', () => {

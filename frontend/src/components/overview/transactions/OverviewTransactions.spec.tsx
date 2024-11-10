@@ -24,7 +24,7 @@ describe('OverviewTransactions', () => {
     expect(htmlElement).toBeInTheDocument();
   });
 
-  it('renders the react component TransactionRow max 5 times', () => {
+  it('renders the react component TransactionRowSmall max 5 times', () => {
     render(
       <MemoryRouter>
         <OverviewTransactions {...testProps} transactions={mockedTransactionsLength6} />
