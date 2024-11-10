@@ -1,3 +1,5 @@
+@use '../styles/mixins';
+
 .billsPage {
   background-color: var(--);
   height: 100%;
@@ -11,10 +13,21 @@
   display: grid;
   grid-template-columns: calc(33% - 24px) 67%;
   column-gap: 24px;
+
+  @include mixins.tablet-and-down(250) {
+    grid-template-columns: 1fr;
+    row-gap: 24px;
+  }
 }
 
 .billsPageDetailsOverview {
   display: flex;
   flex-direction: column;
   row-gap: 24px;
+
+  @include mixins.tablet-and-down(250) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 24px;
+  }
 }
