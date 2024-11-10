@@ -16,7 +16,7 @@ export function BudgetsDiagramCardRow({
   color,
 }: BudgetsDiagramCardRowProps) {
   const currentAmountFormatted = currentAmount.toFixed(2);
-  const maxAmountFormatted = maxAmount.toFixed(2);
+  const maxAmountFormatted = maxAmount.toFixed(0);
   return (
     <>
       <div className="budgetsDiagramCardRow" data-testid="budgets-diagramm-card-row">
