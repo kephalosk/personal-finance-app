@@ -10,6 +10,7 @@ import { BudgetsPage } from './pages/BudgetsPage';
 import { TransactionsPage } from './pages/TransactionsPage';
 import PropTypes from 'prop-types';
 import { AppProps } from './model/props/AppProps';
+import ScrollToTop from './components/ScrollToTop';
 
 App.propTypes = {
   Router: PropTypes.elementType,
@@ -40,11 +41,13 @@ function App({ Router = BrowserRouter, initialEntries = ['/'] }: AppProps) {
     Router === MemoryRouter ? (
       <MemoryRouter initialEntries={initialEntries}>
         <Sidebar onMinimize={handleSidebarMinimize} />
+        <ScrollToTop />
         <section className={`content ${isMinimized ? 'minimized' : ''}`}>{routes}</section>
       </MemoryRouter>
     ) : (
       <Router>
         <Sidebar onMinimize={handleSidebarMinimize} />
+        <ScrollToTop />
         <section className={`content ${isMinimized ? 'minimized' : ''}`}>{routes}</section>
       </Router>
     );
