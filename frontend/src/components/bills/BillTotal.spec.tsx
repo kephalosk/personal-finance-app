@@ -25,6 +25,14 @@ describe('BillTotal', () => {
     expect(htmlElement).toHaveAttribute('src', '/images/icon-recurring-bills.svg');
   });
 
+  it('renders div billTotalLabelWrapper', () => {
+    const { container } = render(<BillTotal {...testProps} />);
+
+    const htmlElement = container.querySelector('.billTotalLabelWrapper');
+
+    expect(htmlElement).toBeInTheDocument();
+  });
+
   it('renders label billTotalTitle', () => {
     const { container } = render(<BillTotal {...testProps} />);
 

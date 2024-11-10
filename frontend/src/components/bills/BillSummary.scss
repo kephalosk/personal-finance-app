@@ -1,3 +1,5 @@
+@use '../../styles/mixins';
+
 .billSummary {
   border-radius: 12px;
   background-color: var(--component-background-bright);
@@ -5,6 +7,10 @@
   display: flex;
   flex-direction: column;
   row-gap: 20px;
+
+  @include mixins.phone() {
+    padding: 20px;
+  }
 }
 
 .billSummaryRow {
@@ -31,14 +37,26 @@
 .billSummaryRowPaid,
 .billSummaryRowUpcoming{
   color: var(--text-dark);
+
+  @include mixins.phone() {
+    font-size: 14px;
+  }
 }
 
 .billSummaryRowTitle {
   flex-grow: 1;
+
+  @include mixins.phone() {
+    font-size: 14px;
+  }
 }
 
 .billSummaryTitle {
   font-size: 20px;
   font-weight: 600;
   color: var(--text-dark);
+
+  @include mixins.phone() {
+    font-size: 18px;
+  }
 }
