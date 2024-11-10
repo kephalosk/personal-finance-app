@@ -35,6 +35,12 @@
   font-weight: 600;
 }
 
+.billCardTableRowNameLabel {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .billCardTableRowNamePicture {
   margin-right: 16px;
   border-radius: 50%;
