@@ -1,3 +1,5 @@
+@use '../../styles/mixins';
+
 .potCardDetailsPercentCurrent {
   font-size: 12px;
   font-weight: 600;
@@ -17,6 +19,10 @@
 .potCardDetailsTotalAmount {
   font-size: 32px;
   font-weight: 600;
+
+  @include mixins.phone() {
+    font-size: 24px;
+  }
 }
 
 .potCardDetailsTotalLabel {
