@@ -1,3 +1,5 @@
+@use '../../styles/mixins';
+
 .valueBox {
   display: flex;
   flex-direction: row;
@@ -36,10 +38,18 @@
   font-size: 13px;
   font-weight: 300;
   color: var(--text-grey);
+
+  @include mixins.phone() {
+    font-size: 12px;
+  }
 }
 
 .valueBoxContentValue {
   margin: 2px 0;
   font-size: 14px;
   font-weight: 700;
+
+  @include mixins.phone() {
+    font-size: 12px;
+  }
 }

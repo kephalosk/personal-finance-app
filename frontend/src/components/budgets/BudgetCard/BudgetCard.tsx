@@ -7,6 +7,7 @@ import React from 'react';
 import { EPTransaction } from '../../../model/entrypoints/EPTransaction';
 import PropTypes from 'prop-types';
 import { ColorNameEnum } from '../../../model/enum/ColorNameEnum';
+import useIsSmallScreen from '../../../globals/hooks/useIsSmallScreen';
 
 BudgetCard.propTypes = {
   budget: PropTypes.object.isRequired,
@@ -32,6 +33,8 @@ export function BudgetCard({ budget, transactions }: BudgetCardProps) {
   const spentPercent: number = (spent / budget.maximum) * 100;
 
   const maximumFormatted = budget.maximum.toFixed(2);
+
+  const isSmallScreen = useIsSmallScreen();
   return (
     <>
       <div className="budgetCard" data-testid="budget-card">
@@ -50,7 +53,11 @@ export function BudgetCard({ budget, transactions }: BudgetCardProps) {
           </div>
           <div className="budgetCardBarValues">
             <ValueBox title="Spent" value={spent} color={budget.color} />
-            <ValueBox title="Remaining" value={remainingPositive} color={ColorNameEnum.SEPIA} />
+            <ValueBox
+              title={`${isSmallScreen ? 'Free' : 'Remaining'}`}
+              value={remainingPositive}
+              color={ColorNameEnum.SEPIA}
+            />
           </div>
         </div>
         <BudgetCardList transactions={budgetTransactions} link={link} />

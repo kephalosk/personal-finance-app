@@ -3,6 +3,12 @@ import { BudgetCardList } from './BudgetCardList';
 import { BudgetCardListProps } from '../../../model/props/BudgetCardListProps';
 import { MemoryRouter } from 'react-router-dom';
 import { mockedTransactions } from '../../../fixtures/MockedTransactions';
+import useIsSmallScreen from '../../../globals/hooks/useIsSmallScreen';
+
+jest.mock('../../../globals/hooks/useIsSmallScreen', () => ({
+  __esModule: true,
+  default: jest.fn(),
+}));
 
 describe('BudgetCardList', () => {
   const link: string = 'testLink';
@@ -11,6 +17,10 @@ describe('BudgetCardList', () => {
     transactions: mockedTransactions,
     link,
   };
+
+  beforeEach(() => {
+    (useIsSmallScreen as jest.Mock).mockReturnValue(false);
+  });
 
   it('renders div budgetCardList', () => {
     const { container } = render(
@@ -117,5 +127,18 @@ describe('BudgetCardList', () => {
     )!.textContent;
 
     expect(firstTransactionDate! > secondTransactionDate!).toBe(true);
+  });
+
+  it('renders transaction-rows-small in mobile view', () => {
+    (useIsSmallScreen as jest.Mock).mockReturnValue(true);
+    render(
+      <MemoryRouter>
+        <BudgetCardList {...testProps} />
+      </MemoryRouter>
+    );
+
+    const rowsSmall = screen.getAllByTestId('transaction-row-small');
+
+    expect(rowsSmall.length).toBe(2);
   });
 });
