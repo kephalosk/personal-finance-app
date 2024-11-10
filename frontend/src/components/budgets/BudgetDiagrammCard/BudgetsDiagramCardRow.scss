@@ -1,7 +1,16 @@
+@use '../../../styles/mixins';
+
 .budgetsDiagramCardRow {
   display: flex;
   flex-direction: row;
   align-items: center;
+
+  @include mixins.tablet-and-down() {
+    display: grid;
+    grid-template-columns: auto 1fr 70px 70px;
+    column-gap: 8px;
+    align-items: center;
+  }
 }
 
 .cardRowLeftBorder{
@@ -9,6 +18,10 @@
   border-radius: 8px;
   height: 21px;
   width: 4px;
+
+  @include mixins.tablet-and-down() {
+    margin-right: 8px;
+  }
 }
 .cardRowLeftBorder.dark-green{
   background-color: var(--dark-green);
@@ -25,8 +38,12 @@
 
 .cardRowTitle {
   flex-grow: 1;
+  flex-shrink: 1;
   font-size: 14px;
   color: var(--text-grey);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .cardRowTitleCurrentAmount {
@@ -34,9 +51,16 @@
   font-size: 16px;
   font-weight: 600;
   color: var(--text-dark);
+
+  @include mixins.tablet-and-down() {
+    margin-right: 0;
+    display: flex;
+    justify-content: flex-end;
+  }
 }
 
 .cardRowTitleMaxAmount {
   font-size: 14px;
   color: var(--text-grey);
+  white-space: nowrap;
 }
