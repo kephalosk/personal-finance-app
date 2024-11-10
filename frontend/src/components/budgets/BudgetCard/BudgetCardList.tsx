@@ -4,6 +4,8 @@ import { TransactionRow } from '../../overview/transactions/TransactionRow';
 import { BudgetCardListProps } from '../../../model/props/BudgetCardListProps';
 import PropTypes from 'prop-types';
 import { EPTransaction } from '../../../model/entrypoints/EPTransaction';
+import useIsSmallScreen from '../../../globals/hooks/useIsSmallScreen';
+import { TransactionRowSmall } from './TransactionRowSmall';
 
 BudgetCardList.propTypes = {
   transactions: PropTypes.array.isRequired,
@@ -15,6 +17,7 @@ export function BudgetCardList({ transactions, link }: BudgetCardListProps) {
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
   );
   const renderedTransactions: EPTransaction[] = latestTransactions.slice(0, 3);
+  const isSmallScreen = useIsSmallScreen();
   return (
     <>
       <div className="budgetCardList" data-testid="budget-card-list">
@@ -40,12 +43,20 @@ export function BudgetCardList({ transactions, link }: BudgetCardListProps) {
         <div className="budgetCardListTransactions">
           {renderedTransactions.map((transaction: EPTransaction, index: number) => (
             <div key={index}>
-              <TransactionRow
-                name={transaction.name}
-                value={transaction.amount}
-                date={transaction.date}
-                imgSrc={transaction.avatar}
-              />
+              {!isSmallScreen ? (
+                <TransactionRow
+                  name={transaction.name}
+                  value={transaction.amount}
+                  date={transaction.date}
+                  imgSrc={transaction.avatar}
+                />
+              ) : (
+                <TransactionRowSmall
+                  name={transaction.name}
+                  value={transaction.amount}
+                  date={transaction.date}
+                />
+              )}
               {index < renderedTransactions.length - 1 && <hr className="budgetCardListLine" />}
             </div>
           ))}

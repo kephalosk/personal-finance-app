@@ -11,6 +11,13 @@
     column-gap: 8px;
     align-items: center;
   }
+
+  @include mixins.phone() {
+    display: grid;
+    grid-template-columns: auto 1fr 60px 60px;
+    column-gap: 8px;
+    align-items: center;
+  }
 }
 
 .cardRowLeftBorder{
@@ -44,6 +51,10 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+
+  @include mixins.phone() {
+    font-size: 12px;
+  }
 }
 
 .cardRowTitleCurrentAmount {
@@ -57,10 +68,18 @@
     display: flex;
     justify-content: flex-end;
   }
+
+  @include mixins.phone() {
+    font-size: 14px;
+  }
 }
 
 .cardRowTitleMaxAmount {
   font-size: 14px;
   color: var(--text-grey);
   white-space: nowrap;
+
+  @include mixins.phone() {
+    font-size: 12px;
+  }
 }

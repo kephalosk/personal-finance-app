@@ -1,3 +1,5 @@
+@use '../styles/mixins';
+
 .cardHeader {
   display: flex;
   flex-direction: row;
@@ -34,4 +36,8 @@
   flex-grow: 1;
   font-size: 20px;
   font-weight: 600;
+
+  @include mixins.phone() {
+    font-size: 16px;
+  }
 }

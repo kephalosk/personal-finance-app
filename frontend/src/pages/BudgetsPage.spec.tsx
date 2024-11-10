@@ -1,8 +1,18 @@
 import { render, screen } from '@testing-library/react';
 import { BudgetsPage } from './BudgetsPage';
 import { MemoryRouter } from 'react-router-dom';
+import useIsSmallScreen from '../globals/hooks/useIsSmallScreen';
+
+jest.mock('../globals/hooks/useIsSmallScreen', () => ({
+  __esModule: true,
+  default: jest.fn(),
+}));
 
 describe('BudgetsPage', () => {
+  beforeEach(() => {
+    (useIsSmallScreen as jest.Mock).mockReturnValue(false);
+  });
+
   it('renders div budgetsPage', () => {
     const { container } = render(
       <MemoryRouter>
