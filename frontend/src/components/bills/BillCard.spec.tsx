@@ -64,6 +64,15 @@ describe('BillCard', () => {
     expect(component).toHaveLength(4);
   });
 
+  it('renders component BillCardTableRowSmall for mobile screen', () => {
+    (useIsSmallScreen as jest.Mock).mockReturnValue(true);
+    render(<BillCard {...testProps} />);
+
+    const component = screen.getAllByTestId('bill-card-table-row-small');
+
+    expect(component).toHaveLength(4);
+  });
+
   describe('Sorting', () => {
     it('sorts the bills from oldest to newest', () => {
       render(<BillCard {...testProps} />);
