@@ -10,7 +10,7 @@ import { TableRow } from '../components/transactions/table/TableRow';
 import { EPTransaction } from '../model/entrypoints/EPTransaction';
 import { getTransactions } from '../globals/services/TransactionService';
 import { splitIntoChunks } from '../globals/utils/SplitIntoChunks';
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { SortOptionEnum } from '../constants/SortOptionEnum';
 import { SearchbarInputHandle } from '../model/SearchbarInputHandle';
 import useIsSmallScreen from '../globals/hooks/useIsSmallScreen';
@@ -21,7 +21,7 @@ export function TransactionsPage() {
   const [currentSortOption, setCurrentSortOption] = useState<string>(SortOptionEnum.LATEST);
   const [currentCategory, setCurrentCategory] = useState<string>('all');
 
-  const transactions: EPTransaction[] = getTransactions();
+  const [transactions, setTransactions] = useState<EPTransaction[]>([]);
   const [filteredTransactions, setFilteredTransactions] = useState(transactions);
 
   const pageEntrySize: number = 10;
@@ -34,6 +34,14 @@ export function TransactionsPage() {
   const searchbarRef = useRef<SearchbarInputHandle>();
 
   const isSmallScreen = useIsSmallScreen();
+
+  useEffect(() => {
+    const fetchTransactions = async (): Promise<void> => {
+      const fetchedTransactions: EPTransaction[] = await getTransactions();
+      setTransactions(fetchedTransactions);
+    };
+    fetchTransactions().then();
+  });
 
   const handleSortChange = (sortOption: string) => {
     let sorted = [...shadowFilteredTransactions];

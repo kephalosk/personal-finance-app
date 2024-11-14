@@ -1,5 +1,10 @@
-import { EPTransaction } from '../../model/entrypoints/EPTransaction';
 import { getTransactions } from './TransactionService';
+import axios from 'axios';
+import { mockedTransactionsDTO } from '../../fixtures/MockedTransactionsDTO';
+import { mockedTransactions } from '../../fixtures/MockedTransactions';
+import { EPTransaction } from '../../model/entrypoints/EPTransaction';
+
+jest.mock('axios');
 
 describe('TransactionService', () => {
   const firstEPTransaction: EPTransaction = {
@@ -13,8 +18,25 @@ describe('TransactionService', () => {
     recurring: false,
   };
 
-  it('maps array APITransactionDTO to array EPTransaction correctly', () => {
-    const transactions = getTransactions();
+  beforeEach(() => {
+    (axios.get as jest.Mock).mockResolvedValue({ data: mockedTransactionsDTO });
+  });
+
+  it('maps array APITransactionDTO to array EPTransaction correctly', async () => {
+    const transactions = await getTransactions();
+    expect(transactions).toEqual(mockedTransactions);
+  });
+
+  it('returns fallback values if fetching transactions fails', async () => {
+    const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation();
+    (axios.get as jest.Mock).mockRejectedValue(new Error('Network Error'));
+
+    const transactions = await getTransactions();
+
+    expect(consoleErrorSpy).toHaveBeenCalledWith(
+      expect.stringContaining('Unable to fetch Transactions:')
+    );
+    expect(transactions).toHaveLength(49);
     expect(transactions.at(0)).toEqual(firstEPTransaction);
   });
 });

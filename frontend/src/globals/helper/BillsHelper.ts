@@ -11,8 +11,9 @@ interface PaidUpcomingAndDueSumAndIndex {
 }
 
 export class BillsHelper {
-  static getRecurringBillsFromTransactions(): EPTransaction[] {
-    const bills: EPTransaction[] = getTransactions().filter((transaction) => {
+  static async getRecurringBillsFromTransactions(): Promise<EPTransaction[]> {
+    const transactions: EPTransaction[] = await getTransactions();
+    const bills: EPTransaction[] = transactions.filter((transaction) => {
       return transaction.recurring;
     });
     return bills.filter(

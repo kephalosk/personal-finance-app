@@ -1,13 +1,13 @@
 import { EPBalance } from '../../model/entrypoints/EPBalance';
 import { getBalance } from './BalanceService';
 import axios from 'axios';
-import { mockedBalance } from '../../fixtures/MockedBalance';
+import { mockedBalanceDTO } from '../../fixtures/MockedBalanceDTO';
 
 jest.mock('axios');
 
 describe('BalanceService', () => {
   beforeEach(() => {
-    (axios.get as jest.Mock).mockResolvedValue({ data: mockedBalance });
+    (axios.get as jest.Mock).mockResolvedValue({ data: mockedBalanceDTO });
   });
   const epBalance: EPBalance = {
     current: 300000,
