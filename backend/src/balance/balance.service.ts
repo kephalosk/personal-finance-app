@@ -6,7 +6,7 @@ import * as fs from 'node:fs';
 @Injectable()
 export class BalanceService {
   getBalance(): APIBalanceDTO {
-    const filePath = path.join(__dirname, '../data.json');
+    const filePath = path.join(__dirname, '../balance/balance.data.json');
     const data = JSON.parse(fs.readFileSync(filePath, 'utf8'));
     const { balance } = data;
     return balance;

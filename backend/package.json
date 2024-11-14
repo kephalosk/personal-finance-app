@@ -6,7 +6,7 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
-    "build": "../backend/node_modules/.bin/nest build && cp ./src/data.json ./dist/data.json",
+    "build": "../backend/node_modules/.bin/nest build && cp ./src/data.json ./dist/data.json && cp ./src/balance/balance.data.json ./dist/balance/balance.data.json && cp ./src/transactions/transactions.data.json ./dist/transactions/transactions.data.json",
     "format": "../backend/node_modules/.bin/prettier --write \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"/src/**/*.ts\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\" \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"../backendneu/test/**/*.ts\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"",
     "start": "npm run build && node dist/main.js",
     "start:dev": "../backend/node_modules/.bin/nest start --watch",
