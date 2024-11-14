@@ -39,9 +39,10 @@ export function TransactionsPage() {
     const fetchTransactions = async (): Promise<void> => {
       const fetchedTransactions: EPTransaction[] = await getTransactions();
       setTransactions(fetchedTransactions);
+      setFilteredTransactions(fetchedTransactions);
     };
     fetchTransactions().then();
-  });
+  }, []);
 
   const handleSortChange = (sortOption: string) => {
     let sorted = [...shadowFilteredTransactions];
@@ -154,9 +155,9 @@ export function TransactionsPage() {
           {!isSmallScreen && (
             <div className="transactionsTable">
               <TableHeader />
-              {currentIndexedTransactions.map((entry: EPTransaction) => (
+              {currentIndexedTransactions.map((entry: EPTransaction, index: number) => (
                 <TableRow
-                  key={entry.date + entry.name}
+                  key={index}
                   name={entry.name}
                   imgSrc={entry.avatar}
                   category={entry.category}
