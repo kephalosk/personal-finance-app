@@ -1,5 +1,5 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-import React from 'react';
+import React, { act } from 'react';
 import { SearchbarDropdownCategory } from './SearchbarDropdownCategory';
 import { getTransactions } from '../../globals/services/TransactionService';
 import { mockedTransactions } from '../../fixtures/MockedTransactions';
@@ -20,53 +20,67 @@ describe('searchbarDropdownCategory', () => {
   let mockOnCategoryChange: jest.Mock<() => void>;
 
   beforeEach(() => {
-    mockGetTransactions.mockReturnValue(mockedTransactions);
+    mockGetTransactions.mockResolvedValue(mockedTransactions);
     mockOnCategoryChange = jest.fn();
     (useIsSmallScreen as jest.Mock).mockReturnValue(false);
   });
 
-  it('renders div searchbarDropdownCategoryWrapper', () => {
-    const { container } = render(
-      <SearchbarDropdownCategory onCategoryChange={mockOnCategoryChange} />
-    );
+  it('renders div searchbarDropdownCategoryWrapper', async () => {
+    const cut: HTMLElement = await act(async (): Promise<HTMLElement> => {
+      const { container } = render(
+        <SearchbarDropdownCategory onCategoryChange={mockOnCategoryChange} />
+      );
+      return container;
+    });
 
-    const htmlElement = container.querySelector('.searchbarDropdownCategoryWrapper');
-
-    expect(htmlElement).toBeInTheDocument();
-  });
-
-  it('renders select searchbarDropdownCategory', () => {
-    const { container } = render(
-      <SearchbarDropdownCategory onCategoryChange={mockOnCategoryChange} />
-    );
-
-    const htmlElement = container.querySelector('.searchbarDropdownCategory');
+    const htmlElement = cut.querySelector('.searchbarDropdownCategoryWrapper');
 
     expect(htmlElement).toBeInTheDocument();
   });
 
-  it('renders all 3 categories when there are only 2 different ones', () => {
-    const { container } = render(
-      <SearchbarDropdownCategory onCategoryChange={mockOnCategoryChange} />
-    );
+  it('renders select searchbarDropdownCategory', async () => {
+    const cut: HTMLElement = await act(async (): Promise<HTMLElement> => {
+      const { container } = render(
+        <SearchbarDropdownCategory onCategoryChange={mockOnCategoryChange} />
+      );
+      return container;
+    });
 
-    const htmlElements = container.querySelectorAll('option');
+    const htmlElement = cut.querySelector('.searchbarDropdownCategory');
+
+    expect(htmlElement).toBeInTheDocument();
+  });
+
+  it('renders all 3 categories when there are only 2 different ones', async () => {
+    const cut: HTMLElement = await act(async (): Promise<HTMLElement> => {
+      const { container } = render(
+        <SearchbarDropdownCategory onCategoryChange={mockOnCategoryChange} />
+      );
+      return container;
+    });
+
+    const htmlElements = cut.querySelectorAll('option');
 
     expect(htmlElements).toHaveLength(3);
   });
 
-  it('renders category option all', () => {
-    const { container } = render(
-      <SearchbarDropdownCategory onCategoryChange={mockOnCategoryChange} />
-    );
+  it('renders category option all', async () => {
+    const cut: HTMLElement = await act(async (): Promise<HTMLElement> => {
+      const { container } = render(
+        <SearchbarDropdownCategory onCategoryChange={mockOnCategoryChange} />
+      );
+      return container;
+    });
 
-    const htmlElement = container.querySelector('.all');
+    const htmlElement = cut.querySelector('.all');
 
     expect(htmlElement).toBeInTheDocument();
   });
 
-  it('calls onCategoryChange when a different option is selected', () => {
-    render(<SearchbarDropdownCategory onCategoryChange={mockOnCategoryChange} />);
+  it('calls onCategoryChange when a different option is selected', async () => {
+    await act(async (): Promise<void> => {
+      render(<SearchbarDropdownCategory onCategoryChange={mockOnCategoryChange} />);
+    });
 
     const selectElement = screen.getByTestId('searchbar-dropdown-category').querySelector('select');
 
@@ -75,8 +89,10 @@ describe('searchbarDropdownCategory', () => {
     expect(mockOnCategoryChange).toHaveBeenCalledWith('all');
   });
 
-  it('has only categories in Dropdown, that are available in received transactions plus all', () => {
-    render(<SearchbarDropdownCategory onCategoryChange={mockOnCategoryChange} />);
+  it('has only categories in Dropdown, that are available in received transactions plus all', async () => {
+    await act(async (): Promise<void> => {
+      render(<SearchbarDropdownCategory onCategoryChange={mockOnCategoryChange} />);
+    });
 
     const optionElements = screen
       .getByTestId('searchbar-dropdown-category')
@@ -93,25 +109,31 @@ describe('searchbarDropdownCategory', () => {
   });
 
   describe('Mobile View', () => {
-    it('renders caret icon in desktop and tablet view', () => {
+    it('renders caret icon in desktop and tablet view', async () => {
       (useIsSmallScreen as jest.Mock).mockReturnValue(false);
-      const { container } = render(
-        <SearchbarDropdownCategory onCategoryChange={mockOnCategoryChange} />
-      );
+      const cut: HTMLElement = await act(async (): Promise<HTMLElement> => {
+        const { container } = render(
+          <SearchbarDropdownCategory onCategoryChange={mockOnCategoryChange} />
+        );
+        return container;
+      });
 
-      const htmlElement = container.querySelector('.searchbarDropdownCategoryIcon');
+      const htmlElement = cut.querySelector('.searchbarDropdownCategoryIcon');
 
       expect(htmlElement).toBeInTheDocument();
       expect(htmlElement).toHaveAttribute('src', '/images/icon-caret-down.svg');
     });
 
-    it('renders filter icon in mobile view', () => {
+    it('renders filter icon in mobile view', async () => {
       (useIsSmallScreen as jest.Mock).mockReturnValue(true);
-      const { container } = render(
-        <SearchbarDropdownCategory onCategoryChange={mockOnCategoryChange} />
-      );
+      const cut: HTMLElement = await act(async (): Promise<HTMLElement> => {
+        const { container } = render(
+          <SearchbarDropdownCategory onCategoryChange={mockOnCategoryChange} />
+        );
+        return container;
+      });
 
-      const htmlElement = container.querySelector('.searchbarDropdownCategoryIcon');
+      const htmlElement = cut.querySelector('.searchbarDropdownCategoryIcon');
 
       expect(htmlElement).toBeInTheDocument();
       expect(htmlElement).toHaveAttribute('src', '/images/icon-filter-mobile.svg');

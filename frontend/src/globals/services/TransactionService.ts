@@ -2,10 +2,23 @@ import data from '../data.json';
 import { EPTransaction } from '../../model/entrypoints/EPTransaction';
 import { APITransactionDTO } from '../../model/api/APITransactionDTO';
 import { toLowerCaseWithoutWhitespace } from '../utils/ToLowerCaseWithoutWhitespace';
+import axios, { AxiosResponse } from 'axios';
 
-export function getTransactions(): EPTransaction[] {
-  const { transactions } = data;
-  return fromAPITransactionDTOMapper(transactions);
+export async function getTransactions(): Promise<EPTransaction[]> {
+  const apiUrl = 'http://localhost:3000/balance';
+
+  try {
+    const response: AxiosResponse<APITransactionDTO[]> =
+      await axios.get<APITransactionDTO[]>(apiUrl);
+
+    const fetchedTransactions: APITransactionDTO[] = response.data;
+
+    return fromAPITransactionDTOMapper(fetchedTransactions);
+  } catch (error) {
+    console.error(`Unable to fetch Transactions: ${error}`);
+    const { transactions } = data;
+    return fromAPITransactionDTOMapper(transactions);
+  }
 }
 
 function fromAPITransactionDTOMapper(transactions: APITransactionDTO[]): EPTransaction[] {

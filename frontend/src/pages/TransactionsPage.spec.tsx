@@ -1,10 +1,17 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import { TransactionsPage } from './TransactionsPage';
-import React from 'react';
+import React, { act } from 'react';
 import { convertSignedDollarStringToNumber } from '../globals/utils/ConvertSignedDollarStringToNumber';
 import { getTransactions } from '../globals/services/TransactionService';
 import { SortOptionEnum } from '../constants/SortOptionEnum';
 import useIsSmallScreen from '../globals/hooks/useIsSmallScreen';
+import { mockedTransactions } from '../fixtures/MockedTransactions';
+import { MemoryRouter } from 'react-router-dom';
+import { OverviewPage } from './OverviewPage';
+
+jest.mock('../globals/services/TransactionService', () => ({
+  getTransactions: jest.fn(),
+}));
 
 jest.mock('../globals/hooks/useIsSmallScreen', () => ({
   __esModule: true,
@@ -18,29 +25,39 @@ describe('TransactionsPage', () => {
   const testSearchbarInput = 'liam';
 
   beforeEach(() => {
+    (getTransactions as jest.Mock).mockResolvedValue(mockedTransactions);
     (useIsSmallScreen as jest.Mock).mockReturnValue(false);
   });
 
-  it('renders div transactionsPage', () => {
-    const { container } = render(<TransactionsPage />);
+  it('renders div transactionsPage', async () => {
+    const cut: HTMLElement = await act(async (): Promise<HTMLElement> => {
+      const { container } = render(<TransactionsPage />);
+      return container;
+    });
 
-    const htmlElement = container.querySelector('.transactionsPage');
+    const htmlElement = cut.querySelector('.transactionsPage');
 
     expect(htmlElement).toBeInTheDocument();
   });
 
-  it('renders headline h1 of TransactionsPage', () => {
-    const { container } = render(<TransactionsPage />);
+  it('renders headline h1 of TransactionsPage', async () => {
+    const cut: HTMLElement = await act(async (): Promise<HTMLElement> => {
+      const { container } = render(<TransactionsPage />);
+      return container;
+    });
 
-    const htmlElement = container.querySelector('h1');
+    const htmlElement = cut.querySelector('h1');
 
     expect(htmlElement).toHaveTextContent('Transactions');
   });
 
-  it('renders div transactionsDetails', () => {
-    const { container } = render(<TransactionsPage />);
+  it('renders div transactionsDetails', async () => {
+    const cut: HTMLElement = await act(async (): Promise<HTMLElement> => {
+      const { container } = render(<TransactionsPage />);
+      return container;
+    });
 
-    const htmlElement = container.querySelector('.transactionsDetails');
+    const htmlElement = cut.querySelector('.transactionsDetails');
 
     expect(htmlElement).toBeInTheDocument();
   });
@@ -54,18 +71,23 @@ describe('TransactionsPage', () => {
       expect(reactComponent).toBeInTheDocument();
     });
 
-    it('renders div searchbarLabelWrapper', () => {
-      const { container } = render(<TransactionsPage />);
+    it('renders div searchbarLabelWrapper', async () => {
+      const cut: HTMLElement = await act(async (): Promise<HTMLElement> => {
+        const { container } = render(<TransactionsPage />);
+        return container;
+      });
 
-      const htmlElement = container.querySelector('.searchbarLabelWrapper');
+      const htmlElement = cut.querySelector('.searchbarLabelWrapper');
 
       expect(htmlElement).toBeInTheDocument();
     });
 
-    it('renders label Sort by', () => {
-      const { container } = render(<TransactionsPage />);
-
-      const htmlElement = container.querySelector('.sortBy');
+    it('renders label Sort by', async () => {
+      const cut: HTMLElement = await act(async (): Promise<HTMLElement> => {
+        const { container } = render(<TransactionsPage />);
+        return container;
+      });
+      const htmlElement = cut.querySelector('.sortBy');
 
       expect(htmlElement).toHaveTextContent('Sort by');
     });
@@ -78,10 +100,13 @@ describe('TransactionsPage', () => {
       expect(reactComponent).toBeInTheDocument();
     });
 
-    it('renders label Category', () => {
-      const { container } = render(<TransactionsPage />);
+    it('renders label Category', async () => {
+      const cut: HTMLElement = await act(async (): Promise<HTMLElement> => {
+        const { container } = render(<TransactionsPage />);
+        return container;
+      });
 
-      const htmlElement = container.querySelector('.category');
+      const htmlElement = cut.cut('.category');
 
       expect(htmlElement).toHaveTextContent('Category');
     });
@@ -189,16 +214,19 @@ describe('TransactionsPage', () => {
         expect(thirdAmountValue - fourthAmountValue < 0).toBe(true);
       });
 
-      it('resets the pageIndex after sorting the transactions', () => {
-        const { container } = render(<TransactionsPage />);
-        const buttons = container.querySelectorAll('.paginationPagesButton');
+      it('resets the pageIndex after sorting the transactions', async () => {
+        const cut: HTMLElement = await act(async (): Promise<HTMLElement> => {
+          const { container } = render(<TransactionsPage />);
+          return container;
+        });
+        const buttons = cut.querySelectorAll('.paginationPagesButton');
         fireEvent.click(buttons[3]);
-        let activeButton = container.querySelector('.isActive');
+        let activeButton = cut.querySelector('.isActive');
         expect(activeButton).toHaveTextContent('4');
 
         const selectElement = screen.getByTestId('searchbar-dropdown-sort').querySelector('select');
         fireEvent.change(selectElement!, { target: { value: 'ztoa' } });
-        activeButton = container.querySelector('.isActive');
+        activeButton = cut.querySelector('.isActive');
 
         expect(activeButton).toHaveTextContent('1');
       });
@@ -220,18 +248,21 @@ describe('TransactionsPage', () => {
         });
       });
 
-      it('resets the pageIndex after filtering the transactions', () => {
-        const { container } = render(<TransactionsPage />);
-        const buttons = container.querySelectorAll('.paginationPagesButton');
+      it('resets the pageIndex after filtering the transactions', async () => {
+        const cut: HTMLElement = await act(async (): Promise<HTMLElement> => {
+          const { container } = render(<TransactionsPage />);
+          return container;
+        });
+        const buttons = cut.querySelectorAll('.paginationPagesButton');
         fireEvent.click(buttons[3]);
-        let activeButton = container.querySelector('.isActive');
+        let activeButton = cut.querySelector('.isActive');
         expect(activeButton).toHaveTextContent('4');
 
         const selectElement = screen
           .getByTestId('searchbar-dropdown-category')
           .querySelector('select');
         fireEvent.change(selectElement!, { target: { value: `${testCategoryKey}` } });
-        activeButton = container.querySelector('.isActive');
+        activeButton = cut.querySelector('.isActive');
 
         expect(activeButton).toHaveTextContent('1');
       });
@@ -275,16 +306,19 @@ describe('TransactionsPage', () => {
         });
       });
 
-      it('resets the pageIndex after input of searchbar changes', () => {
-        const { container } = render(<TransactionsPage />);
-        const buttons = container.querySelectorAll('.paginationPagesButton');
+      it('resets the pageIndex after input of searchbar changes', async () => {
+        const cut: HTMLElement = await act(async (): Promise<HTMLElement> => {
+          const { container } = render(<TransactionsPage />);
+          return container;
+        });
+        const buttons = cut.querySelectorAll('.paginationPagesButton');
         fireEvent.click(buttons[3]);
-        let activeButton = container.querySelector('.isActive');
+        let activeButton = cut.querySelector('.isActive');
         expect(activeButton).toHaveTextContent('4');
 
         const inputElement = screen.getByTestId('searchbar-input').querySelector('input');
         fireEvent.change(inputElement!, { target: { value: `${testSearchbarInput}` } });
-        activeButton = container.querySelector('.isActive');
+        activeButton = cut.querySelector('.isActive');
 
         expect(activeButton).toHaveTextContent('1');
       });
@@ -323,10 +357,13 @@ describe('TransactionsPage', () => {
   });
 
   describe('transactionsTable', () => {
-    it('renders div transactionsTable', () => {
-      const { container } = render(<TransactionsPage />);
+    it('renders div transactionsTable', async () => {
+      const cut: HTMLElement = await act(async (): Promise<HTMLElement> => {
+        const { container } = render(<TransactionsPage />);
+        return container;
+      });
 
-      const htmlElement = container.querySelector('.transactionsTable');
+      const htmlElement = cut.querySelector('.transactionsTable');
 
       expect(htmlElement).toBeInTheDocument();
     });
@@ -349,10 +386,13 @@ describe('TransactionsPage', () => {
   });
 
   describe('transactionsPagination', () => {
-    it('renders div transactionsPagination', () => {
-      const { container } = render(<TransactionsPage />);
+    it('renders div transactionsPagination', async () => {
+      const cut: HTMLElement = await act(async (): Promise<HTMLElement> => {
+        const { container } = render(<TransactionsPage />);
+        return container;
+      });
 
-      const htmlElement = container.querySelector('.transactionsPagination');
+      const htmlElement = cut.querySelector('.transactionsPagination');
 
       expect(htmlElement).toBeInTheDocument();
     });
@@ -381,55 +421,67 @@ describe('TransactionsPage', () => {
       expect(reactComponent).toBeInTheDocument();
     });
 
-    it('increases page Number when next button is clicked', () => {
-      const { container, getByTestId } = render(<TransactionsPage />);
-      let activePageButton = container.querySelector('.isActive');
+    it('increases page Number when next button is clicked', async () => {
+      const cut: HTMLElement = await act(async (): Promise<HTMLElement> => {
+        const { container } = render(<TransactionsPage />);
+        return container;
+      });
+      let activePageButton = cut.querySelector('.isActive');
       expect(activePageButton).toHaveTextContent('1');
 
-      const button = getByTestId('pagination-button-next');
+      const button = screen.getByTestId('pagination-button-next');
       fireEvent.click(button);
 
-      activePageButton = container.querySelector('.isActive');
+      activePageButton = cut.querySelector('.isActive');
       expect(activePageButton).toHaveTextContent('2');
     });
 
-    it('does not increases page Number when isMaxIndex is true and next button is clicked', () => {
-      const { container, getByTestId } = render(<TransactionsPage />);
-      const buttons = container.querySelectorAll('.paginationPagesButton');
+    it('does not increases page Number when isMaxIndex is true and next button is clicked', async () => {
+      const cut: HTMLElement = await act(async (): Promise<HTMLElement> => {
+        const { container } = render(<TransactionsPage />);
+        return container;
+      });
+      const buttons = cut.querySelectorAll('.paginationPagesButton');
       fireEvent.click(buttons[4]);
-      let activePageButton = container.querySelector('.isActive');
+      let activePageButton = cut.querySelector('.isActive');
       expect(activePageButton).toHaveTextContent('5');
 
-      const button = getByTestId('pagination-button-next');
+      const button = screen.getByTestId('pagination-button-next');
       fireEvent.click(button);
 
-      activePageButton = container.querySelector('.isActive');
+      activePageButton = cut.querySelector('.isActive');
       expect(activePageButton).toHaveTextContent('5');
     });
 
-    it('decreases page Number when prev button is clicked', () => {
-      const { container, getByTestId } = render(<TransactionsPage />);
-      const buttonNext = getByTestId('pagination-button-next');
+    it('decreases page Number when prev button is clicked', async () => {
+      const cut: HTMLElement = await act(async (): Promise<HTMLElement> => {
+        const { container } = render(<TransactionsPage />);
+        return container;
+      });
+      const buttonNext = screen.getByTestId('pagination-button-next');
       fireEvent.click(buttonNext);
-      let activePageButton = container.querySelector('.isActive');
+      let activePageButton = cut.querySelector('.isActive');
       expect(activePageButton).toHaveTextContent('2');
 
-      const buttonPrev = getByTestId('pagination-button-prev');
+      const buttonPrev = screen.getByTestId('pagination-button-prev');
       fireEvent.click(buttonPrev);
 
-      activePageButton = container.querySelector('.isActive');
+      activePageButton = cut.querySelector('.isActive');
       expect(activePageButton).toHaveTextContent('1');
     });
 
-    it('does not decreases page Number when pageIndex is 0 and prev button is clicked', () => {
-      const { container, getByTestId } = render(<TransactionsPage />);
-      let activePageButton = container.querySelector('.isActive');
+    it('does not decreases page Number when pageIndex is 0 and prev button is clicked', async () => {
+      const cut: HTMLElement = await act(async (): Promise<HTMLElement> => {
+        const { container } = render(<TransactionsPage />);
+        return container;
+      });
+      let activePageButton = cut.querySelector('.isActive');
       expect(activePageButton).toHaveTextContent('1');
 
-      const buttonPrev = getByTestId('pagination-button-prev');
+      const buttonPrev = screen.getByTestId('pagination-button-prev');
       fireEvent.click(buttonPrev);
 
-      activePageButton = container.querySelector('.isActive');
+      activePageButton = cut.querySelector('.isActive');
       expect(activePageButton).toHaveTextContent('1');
     });
 
