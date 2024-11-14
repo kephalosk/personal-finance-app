@@ -3,7 +3,7 @@ import { EPTransaction } from '../../model/entrypoints/EPTransaction';
 import { BillCardTableRow } from './BillCardTableRow';
 import { BillCardProps } from '../../model/props/BillCardProps';
 import { SearchbarInput } from '../searchbar/SearchbarInput';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { SearchbarInputHandle } from '../../model/SearchbarInputHandle';
 import { SearchbarDropdownSort } from '../searchbar/SearchbarDropdownSort';
 import { SortOptionEnum } from '../../constants/SortOptionEnum';
@@ -29,6 +29,11 @@ export function BillCard({ bills, today }: BillCardProps) {
   const searchbarRef = useRef<SearchbarInputHandle>();
 
   const isSmallScreen = useIsSmallScreen();
+
+  useEffect(() => {
+    const sortedBills = [...bills].sort((a, b) => b.dateRaw.getDate() - a.dateRaw.getDate());
+    setFilteredTransactions(sortedBills);
+  }, [bills]);
 
   const handleSortChange = (sortOption: string) => {
     let sorted = [...shadowFilteredTransactions];

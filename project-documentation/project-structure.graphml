@@ -1722,7 +1722,7 @@ Organisation<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel>
     <node id="n170">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.cloud">
-          <y:Geometry height="50.0" width="273.6543257077677" x="1603.0841852970063" y="-4634.374404761905"/>
+          <y:Geometry height="50.0" width="273.6543257077677" x="1603.0841852970063" y="-4580.955555555555"/>
           <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="273.6543257077677" x="0.0" xml:space="preserve" y="14.93359375">Stories<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
@@ -2458,6 +2458,26 @@ gewünschte Lösung: aufsplittung in 2 Komponenten. eine mit transition(desktop)
           <y:Fill color="#00FFFF" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="l" textColor="#000000" verticalTextPosition="bottom" visible="true" width="237.88677997397917" x="4.0" xml:space="preserve" y="0.43359375">be-1-nestjs-enabler</y:NodeLabel>
+        </y:GenericNode>
+      </data>
+    </node>
+    <node id="n240">
+      <data key="d6">
+        <y:GenericNode configuration="com.yworks.flowchart.process">
+          <y:Geometry height="21.0" width="237.88677997397917" x="1935.1693365093638" y="-1739.7313492063493"/>
+          <y:Fill color="#FFCC00" color2="#B7C9E3" transparent="false"/>
+          <y:BorderStyle color="#000000" type="line" width="1.0"/>
+          <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="l" textColor="#000000" verticalTextPosition="bottom" visible="true" width="237.88677997397917" x="4.0" xml:space="preserve" y="0.43359375">wo-3-caching-mechanismus</y:NodeLabel>
+        </y:GenericNode>
+      </data>
+    </node>
+    <node id="n241">
+      <data key="d6">
+        <y:GenericNode configuration="com.yworks.flowchart.process">
+          <y:Geometry height="50.0" width="254.70945476654288" x="2406.7331144949385" y="-1754.2313492063493"/>
+          <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
+          <y:BorderStyle color="#000000" type="line" width="1.0"/>
+          <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.3984375" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="l" textColor="#000000" verticalTextPosition="bottom" visible="true" width="254.70945476654288" x="4.0" xml:space="preserve" y="0.80078125">anfragen ans backend begrenzen durch Zwischenspeichern von antworten in singletons</y:NodeLabel>
         </y:GenericNode>
       </data>
     </node>
@@ -5314,6 +5334,28 @@ gewünschte Lösung: aufsplittung in 2 Komponenten. eine mit transition(desktop)
             <y:Point x="1181.3769556123134" y="-1867.8297619047619"/>
             <y:Point x="1181.3769556123134" y="-1729.2313492063493"/>
           </y:Path>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e238" source="n239" target="n240">
+      <data key="d9"/>
+      <data key="d10">
+        <y:PolyLineEdge>
+          <y:Path sx="118.94338998698959" sy="-0.0" tx="-118.94338998698959" ty="-0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e239" source="n240" target="n241">
+      <data key="d9"/>
+      <data key="d10">
+        <y:PolyLineEdge>
+          <y:Path sx="118.94338998698959" sy="-0.0" tx="-127.35472738327144" ty="-0.0"/>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="standard"/>
           <y:BendStyle smoothed="false"/>

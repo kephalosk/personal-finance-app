@@ -5,7 +5,7 @@ import { toLowerCaseWithoutWhitespace } from '../utils/ToLowerCaseWithoutWhitesp
 import axios, { AxiosResponse } from 'axios';
 
 export async function getTransactions(): Promise<EPTransaction[]> {
-  const apiUrl = 'http://localhost:3000/balance';
+  const apiUrl = 'http://localhost:3000/transactions';
 
   try {
     const response: AxiosResponse<APITransactionDTO[]> =
