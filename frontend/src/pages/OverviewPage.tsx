@@ -4,7 +4,7 @@ import { OverviewPots } from '../components/overview/pots/OverviewPots';
 import { OverviewTransactions } from '../components/overview/transactions/OverviewTransactions';
 import { OverviewBudgets } from '../components/overview/budgets/OverviewBudgets';
 import { OverviewBills } from '../components/overview/bills/OverviewBills';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { getTransactions } from '../globals/services/TransactionService';
 import { EPTransaction } from '../model/entrypoints/EPTransaction';
 import { BillsHelper } from '../globals/helper/BillsHelper';
@@ -14,11 +14,28 @@ import { EPBudget } from '../model/entrypoints/EPBudget';
 import { getBudgets } from '../globals/services/BudgetService';
 
 export function OverviewPage() {
+  const [bills, setBills] = useState<EPTransaction[]>([]);
+  const [transactions, setTransactions] = useState<EPTransaction[]>([]);
   const pots: EPPot[] = getPots();
-  const transactions: EPTransaction[] = getTransactions();
   const budgets: EPBudget[] = getBudgets();
-  const bills: EPTransaction[] = BillsHelper.getRecurringBillsFromTransactions();
-  const today = new Date();
+  const today: Date = new Date();
+
+  useEffect(() => {
+    const fetchTransactions = async (): Promise<void> => {
+      const fetchedTransactions: EPTransaction[] = await getTransactions();
+      setTransactions(fetchedTransactions);
+    };
+
+    fetchTransactions().then();
+
+    const fetchBills = async (): Promise<void> => {
+      const fetchedBills: EPTransaction[] = await BillsHelper.getRecurringBillsFromTransactions();
+      setBills(fetchedBills);
+    };
+
+    fetchBills().then();
+  });
+
   return (
     <div className="overviewPage" data-testid="overview-page">
       <h1>Overview</h1>

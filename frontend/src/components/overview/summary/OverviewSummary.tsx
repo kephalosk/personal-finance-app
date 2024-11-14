@@ -2,6 +2,7 @@ import './OverviewSummary.scss';
 import { SummaryCard } from './SummaryCard';
 import { getBalance } from '../../../globals/services/BalanceService';
 import { useEffect, useState } from 'react';
+import { EPBalance } from '../../../model/entrypoints/EPBalance';
 
 export function OverviewSummary() {
   const [balance, setBalance] = useState<{
@@ -16,7 +17,7 @@ export function OverviewSummary() {
 
   useEffect(() => {
     const fetchBalance = async () => {
-      const balanceData = await getBalance();
+      const balanceData: EPBalance = await getBalance();
       setBalance(balanceData);
     };
     fetchBalance().then();

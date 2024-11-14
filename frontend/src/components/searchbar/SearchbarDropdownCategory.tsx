@@ -1,5 +1,5 @@
 import './SearchbarDropdownCategory.scss';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { SearchbarDropdownCategoryProps } from '../../model/props/SearchbarDropdownCategoryProps';
 import { EPTransaction } from '../../model/entrypoints/EPTransaction';
@@ -13,7 +13,16 @@ SearchbarDropdownCategory.propTypes = {
 
 export function SearchbarDropdownCategory({ onCategoryChange }: SearchbarDropdownCategoryProps) {
   const [selectedOption, setSelectedOption] = useState<string>('all');
+  const [allTransactions, setAllTransactions] = useState<EPTransaction[]>([]);
   const isSmallScreen = useIsSmallScreen();
+
+  useEffect(() => {
+    const fetchTransactions = async () => {
+      const transactions: EPTransaction[] = await getTransactions();
+      setAllTransactions(transactions);
+    };
+    fetchTransactions().then();
+  }, []);
 
   const handleCategoryChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedCategory = event.target.value;
@@ -44,7 +53,6 @@ export function SearchbarDropdownCategory({ onCategoryChange }: SearchbarDropdow
       },
     ];
 
-    const allTransactions: EPTransaction[] = getTransactions();
     allTransactions.forEach((transaction: EPTransaction) => {
       if (hasNewKey(transaction, allCategories)) {
         allCategories.push({

@@ -6,10 +6,20 @@ import { getBudgets } from '../globals/services/BudgetService';
 import { EPBudget } from '../model/entrypoints/EPBudget';
 import { EPTransaction } from '../model/entrypoints/EPTransaction';
 import { getTransactions } from '../globals/services/TransactionService';
+import { useEffect, useState } from 'react';
 
 export function BudgetsPage() {
+  const [transactions, setTransactions] = useState<EPTransaction[]>([]);
   const budgets: EPBudget[] = getBudgets();
-  const transactions: EPTransaction[] = getTransactions();
+
+  useEffect(() => {
+    const fetchTransactions = async (): Promise<void> => {
+      const fetchedTransactions: EPTransaction[] = await getTransactions();
+      setTransactions(fetchedTransactions);
+    };
+
+    fetchTransactions().then();
+  });
 
   return (
     <>

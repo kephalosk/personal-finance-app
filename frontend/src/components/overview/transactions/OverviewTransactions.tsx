@@ -1,7 +1,6 @@
 import './OverviewTransactions.scss';
 import { OverviewHeader } from '../OverviewHeader';
 import { TransactionRow } from './TransactionRow';
-import { getTransactions } from '../../../globals/services/TransactionService';
 import { EPTransaction } from '../../../model/entrypoints/EPTransaction';
 import { OverviewTransactionsProps } from '../../../model/props/OverviewTransactionsProps';
 import PropTypes from 'prop-types';
