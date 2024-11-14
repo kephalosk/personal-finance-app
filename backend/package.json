@@ -6,9 +6,9 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
-    "build": "../backend/node_modules/.bin/nest build",
+    "build": "../backend/node_modules/.bin/nest build && cp ./src/data.json ./dist/data.json",
     "format": "../backend/node_modules/.bin/prettier --write \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"/src/**/*.ts\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\" \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"../backendneu/test/**/*.ts\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"",
-    "start": "../backend/node_modules/.bin/nest start",
+    "start": "npm run build && node dist/main.js",
     "start:dev": "../backend/node_modules/.bin/nest start --watch",
     "start:debug": "../backend/node_modules/.bin/nest start --debug --watch",
     "start:prod": "node dist/main",
