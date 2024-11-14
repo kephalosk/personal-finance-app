@@ -34,7 +34,7 @@ export function OverviewPage() {
     };
 
     fetchBills().then();
-  });
+  }, []);
 
   return (
     <div className="overviewPage" data-testid="overview-page">

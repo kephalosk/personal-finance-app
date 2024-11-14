@@ -3,9 +3,20 @@ import { BillCard } from '../components/bills/BillCard';
 import { BillTotal } from '../components/bills/BillTotal';
 import { BillSummary } from '../components/bills/BillSummary';
 import { BillsHelper } from '../globals/helper/BillsHelper';
+import { useEffect, useState } from 'react';
+import { EPTransaction } from '../model/entrypoints/EPTransaction';
 
 export function BillsPage() {
-  const bills = BillsHelper.getRecurringBillsFromTransactions();
+  const [bills, setBills] = useState<EPTransaction[]>([]);
+
+  useEffect(() => {
+    const fetchBills = async () => {
+      const fetchedBills = await BillsHelper.getRecurringBillsFromTransactions();
+      setBills(fetchedBills);
+    };
+    fetchBills().then();
+  }, []);
+
   let billsTotal = 0;
   bills.forEach((bill) => {
     billsTotal = billsTotal + bill.amount;
