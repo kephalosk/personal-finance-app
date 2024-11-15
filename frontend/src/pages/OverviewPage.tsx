@@ -16,7 +16,7 @@ import { getBudgets } from '../globals/services/BudgetService';
 export function OverviewPage() {
   const [bills, setBills] = useState<EPTransaction[]>([]);
   const [transactions, setTransactions] = useState<EPTransaction[]>([]);
-  const pots: EPPot[] = getPots();
+  const [pots, setPots] = useState<EPPot[]>([]);
   const budgets: EPBudget[] = getBudgets();
   const today: Date = new Date();
 
@@ -25,15 +25,19 @@ export function OverviewPage() {
       const fetchedTransactions: EPTransaction[] = await getTransactions();
       setTransactions(fetchedTransactions);
     };
-
     fetchTransactions().then();
 
     const fetchBills = async (): Promise<void> => {
       const fetchedBills: EPTransaction[] = await BillsHelper.getRecurringBillsFromTransactions();
       setBills(fetchedBills);
     };
-
     fetchBills().then();
+
+    const fetchPots = async (): Promise<void> => {
+      const fetchedPots: EPPot[] = await getPots();
+      setPots(fetchedPots);
+    };
+    fetchPots().then();
   }, []);
 
   return (
