@@ -11,6 +11,8 @@ import { getBalance } from '../globals/services/BalanceService';
 import { mockedBalance } from '../fixtures/MockedBalance';
 import { getPots } from '../globals/services/PotService';
 import { mockedPots } from '../fixtures/MockedPots';
+import { getBudgets } from '../globals/services/BudgetService';
+import { mockedBudgets } from '../fixtures/MockedBudgets';
 
 jest.mock('../globals/services/TransactionService', () => ({
   getTransactions: jest.fn(),
@@ -29,6 +31,10 @@ jest.mock('../globals/services/PotService', () => ({
   getPots: jest.fn(),
 }));
 
+jest.mock('../globals/services/BudgetService', () => ({
+  getBudgets: jest.fn(),
+}));
+
 describe('OverviewPage', () => {
   beforeEach(() => {
     (getTransactions as jest.Mock).mockResolvedValue(mockedTransactions);
@@ -36,6 +42,7 @@ describe('OverviewPage', () => {
     (useIsSmallScreen as jest.Mock).mockReturnValue(false);
     (getBalance as jest.Mock).mockResolvedValue(mockedBalance);
     (getPots as jest.Mock).mockResolvedValue(mockedPots);
+    (getBudgets as jest.Mock).mockResolvedValue(mockedBudgets);
   });
 
   it('renders div overviewPage', async () => {
