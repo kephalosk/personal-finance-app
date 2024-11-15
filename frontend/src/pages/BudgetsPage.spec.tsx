@@ -5,6 +5,8 @@ import useIsSmallScreen from '../globals/hooks/useIsSmallScreen';
 import { getTransactions } from '../globals/services/TransactionService';
 import { mockedTransactions } from '../fixtures/MockedTransactions';
 import { act } from 'react';
+import { getBudgets } from '../globals/services/BudgetService';
+import { mockedBudgets } from '../fixtures/MockedBudgets';
 
 jest.mock('../globals/services/TransactionService', () => ({
   getTransactions: jest.fn(),
@@ -15,10 +17,15 @@ jest.mock('../globals/hooks/useIsSmallScreen', () => ({
   default: jest.fn(),
 }));
 
+jest.mock('../globals/services/BudgetService', () => ({
+  getBudgets: jest.fn(),
+}));
+
 describe('BudgetsPage', () => {
   beforeEach(() => {
     (getTransactions as jest.Mock).mockResolvedValue(mockedTransactions);
     (useIsSmallScreen as jest.Mock).mockReturnValue(false);
+    (getBudgets as jest.Mock).mockResolvedValue(mockedBudgets);
   });
 
   it('renders div budgetsPage', async () => {
@@ -109,7 +116,7 @@ describe('BudgetsPage', () => {
     expect(htmlElement).toBeInTheDocument();
   });
 
-  it('renders component BudgetCard 4 times', async () => {
+  it('renders component BudgetCard', async () => {
     await act(async () => {
       render(
         <MemoryRouter>
@@ -120,6 +127,6 @@ describe('BudgetsPage', () => {
 
     const components = screen.getAllByTestId('budget-card');
 
-    expect(components).toHaveLength(4);
+    expect(components).toHaveLength(2);
   });
 });
