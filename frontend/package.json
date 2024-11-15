@@ -9,7 +9,8 @@
     "format": "prettier --write .",
     "lint": "eslint .",
     "preview": "vite preview",
-    "test": "jest && cd .. && cd backend && jest",
+    "test": "jest",
+    "test:all": "jest && cd .. && cd backend && jest",
     "test:e2e": "playwright test ui-tests/e2e-tests",
     "test:gui": "playwright test ui-tests/gui-tests"
   },
