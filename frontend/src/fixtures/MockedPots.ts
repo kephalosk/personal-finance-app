@@ -1,5 +1,6 @@
 import { EPPot } from '../model/entrypoints/EPPot';
 import { ColorNameEnum } from '../model/enum/ColorNameEnum';
+import { APIPotDTO } from '../model/api/APIPotDTO';
 
 export const mockedPot: EPPot = {
   name: 'Savings',
@@ -31,6 +32,21 @@ export const mockedPots: EPPot[] = [
     name: 'Handy',
     target: 20.0,
     total: 15.0,
+    color: ColorNameEnum.DARKGREY,
+  },
+];
+
+export const mockedPots2: EPPot[] = [
+  {
+    name: 'Savings',
+    target: 2000.0,
+    total: 159.0,
+    color: ColorNameEnum.DARKGREEN,
+  },
+  {
+    name: 'Concert Ticket',
+    target: 150.0,
+    total: 110.0,
     color: ColorNameEnum.DARKGREY,
   },
 ];
