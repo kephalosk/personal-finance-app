@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { APIPotDTO } from '../model/APIPotDTO';
+import { APIPotDTO } from '../../model/APIPotDTO';
 import * as path from 'node:path';
 import * as fs from 'node:fs';
 
