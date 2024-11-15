@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { APIBalanceDTO } from '../model/APIBalanceDTO';
+import { APIBalanceDTO } from '../../model/APIBalanceDTO';
 import * as path from 'node:path';
 import * as fs from 'node:fs';
 

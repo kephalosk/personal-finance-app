@@ -1,6 +1,6 @@
 import { Controller, Get } from '@nestjs/common';
 import { PotsService } from './pots.service';
-import { APIPotDTO } from '../model/APIPotDTO';
+import { APIPotDTO } from '../../model/APIPotDTO';
 
 @Controller('pots')
 export class PotsController {
