@@ -9,6 +9,8 @@ import { BillsHelper } from '../globals/helper/BillsHelper';
 import { mockedBills } from '../fixtures/MockedBills';
 import { getBalance } from '../globals/services/BalanceService';
 import { mockedBalance } from '../fixtures/MockedBalance';
+import { getPots } from '../globals/services/PotService';
+import { mockedPots } from '../fixtures/MockedPots';
 
 jest.mock('../globals/services/TransactionService', () => ({
   getTransactions: jest.fn(),
@@ -23,12 +25,17 @@ jest.mock('../globals/services/BalanceService', () => ({
   getBalance: jest.fn(),
 }));
 
+jest.mock('../globals/services/PotService', () => ({
+  getPots: jest.fn(),
+}));
+
 describe('OverviewPage', () => {
   beforeEach(() => {
     (getTransactions as jest.Mock).mockResolvedValue(mockedTransactions);
     jest.spyOn(BillsHelper, 'getRecurringBillsFromTransactions').mockResolvedValue(mockedBills);
     (useIsSmallScreen as jest.Mock).mockReturnValue(false);
-    (getBalance as jest.Mock).mockResolvedValue({ data: mockedBalance });
+    (getBalance as jest.Mock).mockResolvedValue(mockedBalance);
+    (getPots as jest.Mock).mockResolvedValue(mockedPots);
   });
 
   it('renders div overviewPage', async () => {
