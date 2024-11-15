@@ -10,15 +10,20 @@ import { useEffect, useState } from 'react';
 
 export function BudgetsPage() {
   const [transactions, setTransactions] = useState<EPTransaction[]>([]);
-  const budgets: EPBudget[] = getBudgets();
+  const [budgets, setBudgets] = useState<EPBudget[]>([]);
 
   useEffect(() => {
     const fetchTransactions = async (): Promise<void> => {
       const fetchedTransactions: EPTransaction[] = await getTransactions();
       setTransactions(fetchedTransactions);
     };
-
     fetchTransactions().then();
+
+    const fetchBudgets = async (): Promise<void> => {
+      const fetchedBudgets: EPBudget[] = await getBudgets();
+      setBudgets(fetchedBudgets);
+    };
+    fetchBudgets().then();
   }, []);
 
   return (

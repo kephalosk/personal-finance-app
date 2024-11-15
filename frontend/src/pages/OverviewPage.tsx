@@ -17,7 +17,7 @@ export function OverviewPage() {
   const [bills, setBills] = useState<EPTransaction[]>([]);
   const [transactions, setTransactions] = useState<EPTransaction[]>([]);
   const [pots, setPots] = useState<EPPot[]>([]);
-  const budgets: EPBudget[] = getBudgets();
+  const [budgets, setBudgets] = useState<EPBudget[]>([]);
   const today: Date = new Date();
 
   useEffect(() => {
@@ -38,6 +38,12 @@ export function OverviewPage() {
       setPots(fetchedPots);
     };
     fetchPots().then();
+
+    const fetchBudgets = async () => {
+      const fetchedBudgets: EPBudget[] = await getBudgets();
+      setBudgets(fetchedBudgets);
+    };
+    fetchBudgets().then();
   }, []);
 
   return (
