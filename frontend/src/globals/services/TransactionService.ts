@@ -3,9 +3,10 @@ import { EPTransaction } from '../../model/entrypoints/EPTransaction';
 import { APITransactionDTO } from '../../model/api/APITransactionDTO';
 import { toLowerCaseWithoutWhitespace } from '../utils/ToLowerCaseWithoutWhitespace';
 import axios, { AxiosResponse } from 'axios';
+import { AppConfig } from '../../config';
 
 export async function getTransactions(): Promise<EPTransaction[]> {
-  const apiUrl = 'http://localhost:3000/transactions';
+  const apiUrl = `${AppConfig.API_BASE_PATH}/transactions`;
 
   try {
     const response: AxiosResponse<APITransactionDTO[]> =
