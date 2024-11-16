@@ -77,7 +77,8 @@ metadata:
   name: personal-finance-app-ingress
   annotations:
     cert-manager.io/cluster-issuer: "letsencrypt-prod"
-    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
 spec:
   ingressClassName: nginx
   rules:
@@ -91,6 +92,13 @@ spec:
                 name: personal-finance-app-service
                 port:
                   number: 80
+          - path: /api(/|$)(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: nestjs-backend-service
+                port:
+                  number: 80
     - host: www.philippkraatz.com
       http:
         paths:
@@ -99,6 +107,13 @@ spec:
             backend:
               service:
                 name: personal-finance-app-service
+                port:
+                  number: 80
+          - path: /api(/|$)(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: nestjs-backend-service
                 port:
                   number: 80
   tls:
