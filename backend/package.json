@@ -6,9 +6,10 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
-    "build": "../backend/node_modules/.bin/nest build && cp ./src/apis/balance/balance.data.json ./dist/apis/balance/balance.data.json && cp ./src/apis/transactions/transactions.data.json ./dist/apis/transactions/transactions.data.json && cp ./src/apis/pots/pots.data.json ./dist/apis/pots/pots.data.json && cp ./src/apis/budget/budget.data.json ./dist/apis/budget/budget.data.json",
+    "build": "./node_modules/.bin/nest build && cp ./src/apis/balance/balance.data.json ./dist/apis/balance/balance.data.json && cp ./src/apis/transactions/transactions.data.json ./dist/apis/transactions/transactions.data.json && cp ./src/apis/pots/pots.data.json ./dist/apis/pots/pots.data.json && cp ./src/apis/budget/budget.data.json ./dist/apis/budget/budget.data.json",
+    "build:local": "../backend/node_modules/.bin/nest build && cp ./src/apis/balance/balance.data.json ./dist/apis/balance/balance.data.json && cp ./src/apis/transactions/transactions.data.json ./dist/apis/transactions/transactions.data.json && cp ./src/apis/pots/pots.data.json ./dist/apis/pots/pots.data.json && cp ./src/apis/budget/budget.data.json ./dist/apis/budget/budget.data.json",
     "format": "../backend/node_modules/.bin/prettier --write \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"/src/**/*.ts\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\" \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"../backendneu/test/**/*.ts\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"",
-    "start": "npm run build && node dist/main.js",
+    "start": "npm run build:local && node dist/main.js",
     "start:dev": "../backend/node_modules/.bin/nest start --watch",
     "start:debug": "../backend/node_modules/.bin/nest start --debug --watch",
     "start:prod": "node dist/main",
