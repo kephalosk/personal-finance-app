@@ -4,9 +4,10 @@ import { EPBudget } from '../../model/entrypoints/EPBudget';
 import { toLowerCaseWithoutWhitespace } from '../utils/ToLowerCaseWithoutWhitespace';
 import { fromColorCodeToName } from '../utils/FromColorCodeToName';
 import axios, { AxiosResponse } from 'axios';
+import { AppConfig } from '../../config';
 
 export async function getBudgets(): Promise<EPBudget[]> {
-  const apiUrl = 'http://localhost:3000/budget';
+  const apiUrl = `${AppConfig.API_BASE_PATH}/budget`;
 
   try {
     const response: AxiosResponse<APIBudgetDTO[]> = await axios.get<APIBudgetDTO[]>(apiUrl);

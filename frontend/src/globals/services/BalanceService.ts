@@ -2,9 +2,10 @@ import { APIBalanceDTO } from '../../model/api/APIBalanceDTO';
 import { EPBalance } from '../../model/entrypoints/EPBalance';
 import axios, { AxiosResponse } from 'axios';
 import data from '../data.json';
+import { AppConfig } from '../../config';
 
 export async function getBalance(): Promise<EPBalance> {
-  const apiUrl = 'http://localhost:3000/balance';
+  const apiUrl = `${AppConfig.API_BASE_PATH}/balance`;
 
   try {
     const response: AxiosResponse<APIBalanceDTO> = await axios.get<APIBalanceDTO>(apiUrl);
