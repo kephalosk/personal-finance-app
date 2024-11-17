@@ -78,7 +78,7 @@ jobs:
   frontend-unit-tests:
     runs-on: ubuntu-latest
 
-    needs: versioning
+    needs: frontend-versioning
 
     steps:
       - name: Checkout master
@@ -116,7 +116,7 @@ jobs:
   backend-e2e-tests:
     runs-on: ubuntu-latest
 
-    needs: versioning
+    needs: backend-versioning
 
     steps:
       - name: Checkout master
