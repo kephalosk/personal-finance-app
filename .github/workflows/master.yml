@@ -537,7 +537,7 @@ jobs:
   backend-deploy:
     runs-on: ubuntu-latest
 
-    needs: [frontend-e2e-tests, frontend-gui-tests]
+    needs: [backend-scan, frontend-e2e-tests, frontend-gui-tests]
 
     steps:
       - name: Checkout master
