@@ -80,7 +80,7 @@ jobs:
 
     if: github.ref != 'refs/heads/master' && github.ref != 'refs/heads/develop'
 
-    needs: versioning
+    needs: frontend-versioning
 
     steps:
       - name: Checkout master
@@ -101,7 +101,7 @@ jobs:
 
     if: github.ref != 'refs/heads/master' && github.ref != 'refs/heads/develop'
 
-    needs: versioning
+    needs: backend-versioning
 
     steps:
       - name: Checkout master
@@ -122,7 +122,7 @@ jobs:
 
     if: github.ref != 'refs/heads/master' && github.ref != 'refs/heads/develop'
 
-    needs: versioning
+    needs: backend-versioning
 
     steps:
       - name: Checkout master
