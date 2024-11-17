@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:java="http://www.yworks.com/xml/yfiles-common/1.0/java" xmlns:sys="http://www.yworks.com/xml/yfiles-common/markup/primitives/2.0" xmlns:x="http://www.yworks.com/xml/yfiles-common/markup/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:y="http://www.yworks.com/xml/graphml" xmlns:yed="http://www.yworks.com/xml/yed/3" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://www.yworks.com/xml/schema/graphml/1.1/ygraphml.xsd">
+  <!--Created by yEd 3.21.1-->
+  <key attr.name="Beschreibung" attr.type="string" for="graph" id="d0"/>
+  <key for="port" id="d1" yfiles.type="portgraphics"/>
+  <key for="port" id="d2" yfiles.type="portgeometry"/>
+  <key for="port" id="d3" yfiles.type="portuserdata"/>
+  <key attr.name="url" attr.type="string" for="node" id="d4"/>
+  <key attr.name="description" attr.type="string" for="node" id="d5"/>
+  <key for="node" id="d6" yfiles.type="nodegraphics"/>
+  <key for="graphml" id="d7" yfiles.type="resources"/>
+  <key attr.name="url" attr.type="string" for="edge" id="d8"/>
+  <key attr.name="description" attr.type="string" for="edge" id="d9"/>
+  <key for="edge" id="d10" yfiles.type="edgegraphics"/>
+  <graph edgedefault="directed" id="G">
+    <data key="d0"/>
+    <node id="n0">
+      <data key="d5"/>
+      <data key="d6">
+        <y:GenericNode configuration="com.yworks.flowchart.process">
+          <y:Geometry height="1557.0000000000002" width="984.3333333333333" x="378.0" y="-1577.0003968253968"/>
+          <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
+          <y:BorderStyle color="#000000" type="line" width="1.0"/>
+          <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="1546.4765625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="984.3333333333333" x="0.0" xml:space="preserve" y="5.26171875">Eine REST-Schnittstelle (REST API, von Representational State Transfer) ist ein Architekturstil, der es ermöglicht, Anwendungen über das HTTP-Protokoll miteinander kommunizieren zu lassen. REST ist besonders beliebt für Webservices und APIs, da es einfach, leichtgewichtig und weit verbreitet ist.
+
+Hier sind die wesentlichen Konzepte und Eigenschaften einer REST-Schnittstelle:
+1. Ressourcenorientierung
+
+    In REST dreht sich alles um Ressourcen, die durch eindeutige URLs (URIs) identifiziert werden.
+    Eine Ressource könnte z. B. ein Benutzer, ein Artikel, ein Produkt oder ein Kommentar sein.
+    Beispiel:
+        Ressource "Benutzer": /users
+        Ressource "Benutzer mit ID 1": /users/1
+
+2. HTTP-Methoden
+
+REST nutzt die standardmäßigen HTTP-Methoden, um Aktionen auf Ressourcen zu definieren:
+HTTP-Methode	Aktion	Beispiel
+GET	Ressource lesen	GET /users → Alle Benutzer
+		GET /users/1 → Benutzer mit ID 1
+POST	Neue Ressource erstellen	POST /users → Neuen Benutzer hinzufügen
+PUT	Ressource vollständig aktualisieren	PUT /users/1 → Benutzer mit ID 1 aktualisieren
+PATCH	Ressource teilweise aktualisieren	PATCH /users/1 → Benutzer-Daten teilweise ändern
+DELETE	Ressource löschen	DELETE /users/1 → Benutzer mit ID 1 löschen
+3. Stateless (Zustandslosigkeit)
+
+    Jede Anfrage an die REST-API ist unabhängig von früheren Anfragen.
+    Der Server speichert keinen Sitzungsstatus. Alle notwendigen Informationen müssen in der Anfrage (z. B. in den Headern oder der URL) mitgesendet werden.
+
+4. Datenformat
+
+    REST APIs liefern Daten typischerweise in JSON-Format aus (JavaScript Object Notation), können aber auch andere Formate wie XML verwenden.
+    Beispiel für JSON-Antwort:
+
+    {
+      "id": 1,
+      "name": "John Doe",
+      "email": "johndoe@example.com"
+    }
+
+5. URI-Design und Ressourcen-Hierarchie
+
+    Die URLs (URIs) sollten klar und hierarchisch aufgebaut sein.
+    Beispiel für eine Blog-API:
+        GET /posts → Liste aller Blogbeiträge
+        GET /posts/123 → Details zum Blogbeitrag mit ID 123
+        GET /posts/123/comments → Kommentare für Blogbeitrag 123
+        POST /posts/123/comments → Einen neuen Kommentar für Blogbeitrag 123 erstellen
+
+6. HATEOAS (Hypermedia As The Engine Of Application State)
+
+    REST kann Links bereitstellen, die den Client leiten.
+    Beispiel:
+
+    {
+      "id": 1,
+      "name": "John Doe",
+      "links": [
+        { "rel": "self", "href": "/users/1" },
+        { "rel": "orders", "href": "/users/1/orders" }
+      ]
+    }
+
+Vorteile von REST:
+
+    Einfachheit: Standardisierte HTTP-Methoden und URLs.
+    Flexibilität: Unterstützt mehrere Datentypen (JSON, XML usw.).
+    Interoperabilität: Plattformunabhängig und leicht in bestehende Systeme integrierbar.
+    Skalierbarkeit: Gut geeignet für verteilte Systeme.
+
+Nachteile von REST:
+
+    Performance-Limitierungen: Kann bei sehr komplexen Abfragen ineffizient sein.
+    Zustandslosigkeit: Bei häufigen Anfragen wird oft derselbe Kontext übertragen, was zu mehr Overhead führen kann.
+    Fehlender Standard für APIs: REST gibt einen Architekturstil vor, aber keine genauen Regeln für die API-Struktur.
+
+Beispiel für eine REST-Schnittstelle
+
+Stellen wir uns eine REST API für eine Bibliothek vor:
+
+    Liste aller Bücher anzeigen:
+        Anfrage: GET /books
+        Antwort:
+
+    [
+      { "id": 1, "title": "1984", "author": "George Orwell" },
+      { "id": 2, "title": "Brave New World", "author": "Aldous Huxley" }
+    ]
+
+Ein Buch abrufen:
+
+    Anfrage: GET /books/1
+    Antwort:
+
+    { "id": 1, "title": "1984", "author": "George Orwell" }
+
+Ein neues Buch hinzufügen:
+
+    Anfrage: POST /books
+    Body:
+
+        { "title": "Dune", "author": "Frank Herbert" }
+
+        Antwort: HTTP 201 Created.
+
+    Ein Buch löschen:
+        Anfrage: DELETE /books/1
+        Antwort: HTTP 204 No Content.
+
+Das ist der Kern einer REST-Schnittstelle: ein einfaches, klar definiertes System, das durch HTTP-Standards unterstützt wird.
+<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+        </y:GenericNode>
+      </data>
+    </node>
+    <node id="n1">
+      <data key="d5"/>
+      <data key="d6">
+        <y:GenericNode configuration="com.yworks.flowchart.process">
+          <y:Geometry height="21.0" width="169.0" x="189.0" y="-809.0003968253968"/>
+          <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
+          <y:BorderStyle color="#000000" type="line" width="1.0"/>
+          <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="169.0" x="0.0" xml:space="preserve" y="0.43359375">Theorie<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+        </y:GenericNode>
+      </data>
+    </node>
+    <node id="n2">
+      <data key="d5"/>
+      <data key="d6">
+        <y:GenericNode configuration="com.yworks.flowchart.process">
+          <y:Geometry height="21.0" width="169.0" x="0.0" y="-809.0003968253968"/>
+          <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
+          <y:BorderStyle color="#000000" type="line" width="1.0"/>
+          <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="169.0" x="0.0" xml:space="preserve" y="0.43359375">HowTo REST<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+        </y:GenericNode>
+      </data>
+    </node>
+    <node id="n3">
+      <data key="d6">
+        <y:GenericNode configuration="com.yworks.flowchart.process">
+          <y:Geometry height="21.0" width="141.0" x="14.0" y="-678.0003968253968"/>
+          <y:Fill color="#00FFFF" color2="#B7C9E3" transparent="false"/>
+          <y:BorderStyle color="#000000" type="line" width="1.0"/>
+          <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="141.0" x="0.0" xml:space="preserve" y="0.43359375">TO-DO<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+        </y:GenericNode>
+      </data>
+    </node>
+    <node id="n4">
+      <data key="d6">
+        <y:GenericNode configuration="com.yworks.flowchart.process">
+          <y:Geometry height="21.0" width="141.0" x="14.0" y="-627.0003968253968"/>
+          <y:Fill color="#00FF00" color2="#B7C9E3" transparent="false"/>
+          <y:BorderStyle color="#000000" type="line" width="1.0"/>
+          <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="l" textColor="#000000" verticalTextPosition="bottom" visible="true" width="141.0" x="4.0" xml:space="preserve" y="0.43359375">DONE</y:NodeLabel>
+        </y:GenericNode>
+      </data>
+    </node>
+    <node id="n5">
+      <data key="d6">
+        <y:GenericNode configuration="com.yworks.flowchart.process">
+          <y:Geometry height="21.0" width="141.0" x="14.0" y="-576.0003968253968"/>
+          <y:Fill color="#3366FF" color2="#B7C9E3" transparent="false"/>
+          <y:BorderStyle color="#000000" type="line" width="1.0"/>
+          <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="141.0" x="0.0" xml:space="preserve" y="0.43359375">VERWEIS<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+        </y:GenericNode>
+      </data>
+    </node>
+    <node id="n6">
+      <data key="d6">
+        <y:GenericNode configuration="com.yworks.flowchart.process">
+          <y:Geometry height="21.0" width="141.0" x="14.0" y="-525.0003968253968"/>
+          <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
+          <y:BorderStyle color="#000000" type="line" width="1.0"/>
+          <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="141.0" x="0.0" xml:space="preserve" y="0.43359375">NEUTRAL<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+        </y:GenericNode>
+      </data>
+    </node>
+    <node id="n7">
+      <data key="d6">
+        <y:GenericNode configuration="com.yworks.flowchart.cloud">
+          <y:Geometry height="50.0" width="169.0" x="0.0" y="-758.0003968253968"/>
+          <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
+          <y:BorderStyle color="#000000" type="line" width="1.0"/>
+          <y:NodeLabel alignment="center" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="169.0" x="0.0" xml:space="preserve" y="14.93359375">LEGEND<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+        </y:GenericNode>
+      </data>
+    </node>
+    <edge id="e0" source="n1" target="n0">
+      <data key="d9"/>
+      <data key="d10">
+        <y:PolyLineEdge>
+          <y:Path sx="84.5" sy="-0.0" tx="-492.16666666666663" ty="-0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e1" source="n2" target="n1">
+      <data key="d9"/>
+      <data key="d10">
+        <y:PolyLineEdge>
+          <y:Path sx="84.5" sy="-0.0" tx="-84.5" ty="-0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+  </graph>
+  <data key="d7">
+    <y:Resources/>
+  </data>
+</graphml>
