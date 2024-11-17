@@ -6,7 +6,7 @@ import axios, { AxiosResponse } from 'axios';
 import { AppConfig } from '../../config';
 
 export async function getPots(): Promise<EPPot[]> {
-  const apiUrl = `${AppConfig.API_BASE_PATH}/pots`;
+  const apiUrl = `${AppConfig.API_BACKEND_HOST}/pots`;
 
   try {
     const response: AxiosResponse<APIPotDTO[]> = await axios.get<APIPotDTO[]>(apiUrl);

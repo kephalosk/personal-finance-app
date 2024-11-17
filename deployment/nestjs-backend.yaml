@@ -36,3 +36,42 @@ spec:
   selector:
     app: nestjs-backend
   type: ClusterIP
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: backend-philippkraatz-com-cert
+  namespace: default
+spec:
+  secretName: nestjs-backend-tls
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  dnsNames:
+    - backend.philippkraatz.com
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: nestjs-backend-ingress
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: backend.philippkraatz.com
+      http:
+        paths:
+          - path: /(/|$)(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: nestjs-backend-service
+                port:
+                  number: 80
+  tls:
+    - hosts:
+        - backend.philippkraatz.com
+      secretName: nestjs-backend-tls

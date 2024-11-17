@@ -1,12 +1,9 @@
 export interface Config {
-  BASE_PATH: string;
-  API_BASE_PATH: string;
+  API_BACKEND_HOST: string;
 }
 
-const BASE_PATH = process.env.BASE_PATH || `${window.location.origin}`;
-const API_BASE_PATH = `${BASE_PATH}/api`;
+const API_BACKEND_HOST = 'https://backend.philippkraatz.com';
 
 export const AppConfig: Config = {
-  BASE_PATH,
-  API_BASE_PATH,
+  API_BACKEND_HOST,
 };
