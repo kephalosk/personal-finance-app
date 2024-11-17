@@ -14,13 +14,13 @@ export class PotsService {
   ) {}
 
   async findAll(): Promise<APIPotDTO[]> {
-    const pots = await this.potsRepository.find();
+    const pots: Pot[] = await this.potsRepository.find();
     return this.mapPotEntities(pots);
   }
 
-  mapPotEntities(pots): APIPotDTO[] {
-    let mappedPots = [];
-    pots.forEach((pot) => {
+  mapPotEntities(pots: Pot[]): APIPotDTO[] {
+    let mappedPots: APIPotDTO[] = [];
+    pots.forEach((pot: Pot): void => {
       const newPot: APIPotDTO = {
         name: pot.name,
         target: pot.target,
