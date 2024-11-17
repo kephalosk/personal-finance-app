@@ -6,7 +6,7 @@ on:
       - 'master'
 
 jobs:
-  versioning:
+  frontend-versioning:
     runs-on: ubuntu-latest
 
     steps:
@@ -30,18 +30,55 @@ jobs:
 
       - name: Save Package Version
         run: |
-          echo "${{ env.VERSION_TAG }}.${{ env.BUILD_TAG }}" > PACKAGE_VERSION
+          echo "${{ env.VERSION_TAG }}.${{ env.BUILD_TAG }}" > PACKAGE_VERSION_FRONTEND
         shell: bash
 
       - name: Upload Package Version as Artifact
         uses: actions/upload-artifact@v3
         with:
-          name: PACKAGE_VERSION
-          path: PACKAGE_VERSION
+          name: PACKAGE_VERSION_FRONTEND
+          path: PACKAGE_VERSION_FRONTEND
           retention-days: 7
-          
-  unit-tests:
+
+
+  backend-versioning:
     runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Set Build Tag
+        id: build_tag
+        run: |
+          COMMIT_DATE=$(git show -s --format=%ct $GITHUB_SHA)
+          DATE_TAG=$(date -d "@$COMMIT_DATE" +%Y%m%d_%H%M%S)
+          SHORT_SHA=${GITHUB_SHA:0:7}
+          BUILD_TAG="${DATE_TAG}_${SHORT_SHA}_$(date +%Y%m%d_%H%M%S)"
+          echo "BUILD_TAG=$BUILD_TAG" >> $GITHUB_ENV
+
+      - name: Set Version Tag
+        id: version_tag
+        run: |
+          VERSION_TAG=$(jq -r '(.version | split(".") | del(.[2]) | join("."))' backend/package.json)
+          echo "VERSION_TAG=$VERSION_TAG" >> $GITHUB_ENV
+
+      - name: Save Package Version
+        run: |
+          echo "${{ env.VERSION_TAG }}.${{ env.BUILD_TAG }}" > PACKAGE_VERSION_BACKEND
+        shell: bash
+
+      - name: Upload Package Version as Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: PACKAGE_VERSION_BACKEND
+          path: PACKAGE_VERSION_BACKEND
+          retention-days: 7
+
+  frontend-unit-tests:
+    runs-on: ubuntu-latest
+
+    if: github.ref != 'refs/heads/master' && github.ref != 'refs/heads/develop'
 
     needs: versioning
 
@@ -51,86 +88,169 @@ jobs:
 
       - name: Install Dependencies
         run: |
-         cd frontend
-         npm install
+          cd frontend
+          npm install
 
-      - name: Run Unit Tests
+      - name: Run Frontend Unit Tests
         run: |
-         cd frontend
-         npm run test
-  
-  build:
+          cd frontend
+          npm run test
+
+  backend-unit-tests:
     runs-on: ubuntu-latest
 
-    needs: unit-tests
+    if: github.ref != 'refs/heads/master' && github.ref != 'refs/heads/develop'
+
+    needs: versioning
 
     steps:
       - name: Checkout master
         uses: actions/checkout@main
-  
-      - name: Download PACKAGE_VERSION Artifact
+
+      - name: Install Dependencies
+        run: |
+          cd backend
+          npm install
+
+      - name: Run Backend Unit Tests
+        run: |
+          cd backend
+          npm run test
+
+  backend-e2e-tests:
+    runs-on: ubuntu-latest
+
+    if: github.ref != 'refs/heads/master' && github.ref != 'refs/heads/develop'
+
+    needs: versioning
+
+    steps:
+      - name: Checkout master
+        uses: actions/checkout@main
+
+      - name: Install Dependencies
+        run: |
+          cd backend
+          npm install
+
+      - name: Run Backend E2E Tests
+        run: |
+          cd backend
+          npm run test:e2e
+
+  frontend-build:
+    runs-on: ubuntu-latest
+
+    if: github.ref != 'refs/heads/master' && github.ref != 'refs/heads/develop'
+
+    needs: frontend-unit-tests
+
+    steps:
+      - name: Checkout master
+        uses: actions/checkout@main
+
+      - name: Download PACKAGE_VERSION_FRONTEND Artifact
         uses: actions/download-artifact@v3
         with:
-          name: PACKAGE_VERSION
+          name: PACKAGE_VERSION_FRONTEND
           path: .
-  
-      - name: Read PACKAGE_VERSION
+
+      - name: Read PACKAGE_VERSION_FRONTEND
         id: read_package_version
         run: |
-          PACKAGE_VERSION=$(cat PACKAGE_VERSION)
-          echo "PACKAGE_VERSION=$PACKAGE_VERSION" >> $GITHUB_ENV
-        
+          PACKAGE_VERSION_FRONTEND=$(cat PACKAGE_VERSION_FRONTEND)
+          echo "PACKAGE_VERSION_FRONTEND=$PACKAGE_VERSION_FRONTEND" >> $GITHUB_ENV
+
       - name: Build container image
-        run: docker build -t registry.digitalocean.com/kephalosk/personal-finance-app:${{ env.PACKAGE_VERSION }} -f deployment/frontend.Dockerfile .
-  
+        run: docker build -t registry.digitalocean.com/kephalosk/personal-finance-app:${{ env.PACKAGE_VERSION_FRONTEND }} -f deployment/frontend.Dockerfile .
+
       - name: Install doctl
         uses: digitalocean/action-doctl@v2
         with:
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
-  
+
       - name: Log in to DigitalOcean Container Registry with short-lived credentials
         run: doctl registry login --expiry-seconds 1200
-        
+
       - name: Push image to DigitalOcean Container Registry
-        run: docker push registry.digitalocean.com/kephalosk/personal-finance-app:${{ env.PACKAGE_VERSION }}
-      
-  scan:
+        run: docker push registry.digitalocean.com/kephalosk/personal-finance-app:${{ env.PACKAGE_VERSION_FRONTEND }}
+
+  backend-build:
     runs-on: ubuntu-latest
 
-    needs: build
+    if: github.ref != 'refs/heads/master' && github.ref != 'refs/heads/develop'
+
+    needs:
+      - backend-unit-tests
+      - backend-e2e-tests
+
+    steps:
+      - name: Checkout master
+        uses: actions/checkout@main
+
+      - name: Download PACKAGE_VERSION_BACKEND Artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: PACKAGE_VERSION_BACKEND
+          path: .
+
+      - name: Read PACKAGE_VERSION_BACKEND
+        id: read_package_version
+        run: |
+          PACKAGE_VERSION_BACKEND=$(cat PACKAGE_VERSION_BACKEND)
+          echo "PACKAGE_VERSION_BACKEND=$PACKAGE_VERSION_BACKEND" >> $GITHUB_ENV
+
+      - name: Build container image
+        run: docker build -t registry.digitalocean.com/kephalosk/nestjs-backend:${{ env.PACKAGE_VERSION_BACKEND }} -f deployment/backend.Dockerfile .
+
+      - name: Install doctl
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+
+      - name: Log in to DigitalOcean Container Registry with short-lived credentials
+        run: doctl registry login --expiry-seconds 1200
+
+      - name: Push image to DigitalOcean Container Registry
+        run: docker push registry.digitalocean.com/kephalosk/nestjs-backend:${{ env.PACKAGE_VERSION_BACKEND }}
+
+  frontend-scan:
+    runs-on: ubuntu-latest
+
+    needs: frontend-build
 
     continue-on-error: true
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-        
+
       - name: Install doctl
         uses: digitalocean/action-doctl@v2
         with:
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
-          
+
       - name: Log in to DigitalOcean Container Registry with short-lived credentials
         run: doctl registry login --expiry-seconds 1200
-        
-      - name: Download PACKAGE_VERSION Artifact
+
+      - name: Download PACKAGE_VERSION_FRONTEND Artifact
         uses: actions/download-artifact@v3
         with:
-          name: PACKAGE_VERSION
+          name: PACKAGE_VERSION_FRONTEND
           path: .
-  
-      - name: Read PACKAGE_VERSION
+
+      - name: Read PACKAGE_VERSION_FRONTEND
         id: read_package_version
         run: |
-          PACKAGE_VERSION=$(cat PACKAGE_VERSION)
-          echo "PACKAGE_VERSION=$PACKAGE_VERSION" >> $GITHUB_ENV
-        
+          PACKAGE_VERSION_FRONTEND=$(cat PACKAGE_VERSION_FRONTEND)
+          echo "PACKAGE_VERSION_FRONTEND=$PACKAGE_VERSION_FRONTEND" >> $GITHUB_ENV
+
       - name: Pull image from registry
-        run: docker pull registry.digitalocean.com/kephalosk/personal-finance-app:${{ env.PACKAGE_VERSION }}
+        run: docker pull registry.digitalocean.com/kephalosk/personal-finance-app:${{ env.PACKAGE_VERSION_FRONTEND }}
 
       - name: Authenticate GitHub Container Registry
         run: echo "${{ secrets.GHCR_PAT }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
-        
+
       - name: Set up Trivy
         run: |
           curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -
@@ -138,30 +258,19 @@ jobs:
       - name: Set TRIVY_DBREPO to avoid rate limiting
         run: echo "TRIVY_DBREPO=ghcr.io/aquasecurity/trivy-db" >> $GITHUB_ENV
 
-      - name: Scan Docker Image
-        run: ./bin/trivy image --exit-code 1 --severity HIGH,CRITICAL registry.digitalocean.com/kephalosk/personal-finance-app:${{ env.PACKAGE_VERSION }}
+      - name: Scan Frontend Docker Image
+        run: ./bin/trivy image --exit-code 1 --severity HIGH,CRITICAL registry.digitalocean.com/kephalosk/personal-finance-app:${{ env.PACKAGE_VERSION_FRONTEND }}
 
-  e2e-tests:
-    timeout-minutes: 60
+  backend-scan:
     runs-on: ubuntu-latest
 
-    needs: scan
+    needs: backend-build
+
+    continue-on-error: true
 
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: lts/*
-
-      - name: Install dependencies
-        run: |
-         cd frontend
-         npm ci
-
-      - name: Install Playwright Browsers
-        run: |
-         cd frontend
-         npx playwright install --with-deps
+      - name: Checkout code
+        uses: actions/checkout@v2
 
       - name: Install doctl
         uses: digitalocean/action-doctl@v2
@@ -171,41 +280,39 @@ jobs:
       - name: Log in to DigitalOcean Container Registry with short-lived credentials
         run: doctl registry login --expiry-seconds 1200
 
-      - name: Download PACKAGE_VERSION Artifact
+      - name: Download PACKAGE_VERSION_BACKEND Artifact
         uses: actions/download-artifact@v3
         with:
-          name: PACKAGE_VERSION
+          name: PACKAGE_VERSION_BACKEND
           path: .
-  
-      - name: Read PACKAGE_VERSION
+
+      - name: Read PACKAGE_VERSION_BACKEND
         id: read_package_version
         run: |
-          PACKAGE_VERSION=$(cat PACKAGE_VERSION)
-          echo "PACKAGE_VERSION=$PACKAGE_VERSION" >> $GITHUB_ENV
+          PACKAGE_VERSION_BACKEND=$(cat PACKAGE_VERSION_BACKEND)
+          echo "PACKAGE_VERSION_BACKEND=$PACKAGE_VERSION_BACKEND" >> $GITHUB_ENV
 
       - name: Pull image from registry
-        run: docker pull registry.digitalocean.com/kephalosk/personal-finance-app:${{ env.PACKAGE_VERSION }}
+        run: docker pull registry.digitalocean.com/kephalosk/nestjs-backend:${{ env.PACKAGE_VERSION_BACKEND }}
 
-      - name: Run image from registry
-        run: docker run -d -p 5173:80 registry.digitalocean.com/kephalosk/personal-finance-app:${{ env.PACKAGE_VERSION }}
+      - name: Authenticate GitHub Container Registry
+        run: echo "${{ secrets.GHCR_PAT }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
-      - name: Run Playwright tests
+      - name: Set up Trivy
         run: |
-         cd frontend
-         npx playwright test ui-tests/e2e-tests
+          curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -
 
-      - uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: playwright-report
-          path: frontend/ui-tests/e2e-tests
-          retention-days: 30
+      - name: Set TRIVY_DBREPO to avoid rate limiting
+        run: echo "TRIVY_DBREPO=ghcr.io/aquasecurity/trivy-db" >> $GITHUB_ENV
 
-  gui-tests:
+      - name: Scan Backend Docker Image
+        run: ./bin/trivy image --exit-code 1 --severity HIGH,CRITICAL registry.digitalocean.com/kephalosk/nestjs-backend:${{ env.PACKAGE_VERSION_BACKEND }}
+
+  frontend-e2e-tests:
     timeout-minutes: 60
     runs-on: ubuntu-latest
 
-    needs: scan
+    needs: frontend-scan
 
     steps:
       - uses: actions/checkout@v4
@@ -231,23 +338,83 @@ jobs:
       - name: Log in to DigitalOcean Container Registry with short-lived credentials
         run: doctl registry login --expiry-seconds 1200
 
-      - name: Download PACKAGE_VERSION Artifact
+      - name: Download PACKAGE_VERSION_FRONTEND Artifact
         uses: actions/download-artifact@v3
         with:
-          name: PACKAGE_VERSION
+          name: PACKAGE_VERSION_FRONTEND
           path: .
 
-      - name: Read PACKAGE_VERSION
+      - name: Read PACKAGE_VERSION_FRONTEND
         id: read_package_version
         run: |
-          PACKAGE_VERSION=$(cat PACKAGE_VERSION)
-          echo "PACKAGE_VERSION=$PACKAGE_VERSION" >> $GITHUB_ENV
+          PACKAGE_VERSION_FRONTEND=$(cat PACKAGE_VERSION_FRONTEND)
+          echo "PACKAGE_VERSION_FRONTEND=$PACKAGE_VERSION_FRONTEND" >> $GITHUB_ENV
 
       - name: Pull image from registry
-        run: docker pull registry.digitalocean.com/kephalosk/personal-finance-app:${{ env.PACKAGE_VERSION }}
+        run: docker pull registry.digitalocean.com/kephalosk/personal-finance-app:${{ env.PACKAGE_VERSION_FRONTEND }}
 
       - name: Run image from registry
-        run: docker run -d -p 5173:80 registry.digitalocean.com/kephalosk/personal-finance-app:${{ env.PACKAGE_VERSION }}
+        run: docker run -d -p 5173:80 registry.digitalocean.com/kephalosk/personal-finance-app:${{ env.PACKAGE_VERSION_FRONTEND }}
+
+      - name: Run Playwright tests
+        run: |
+          cd frontend
+          npx playwright test ui-tests/e2e-tests
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: playwright-report
+          path: frontend/ui-tests/e2e-tests
+          retention-days: 30
+
+  frontend-gui-tests:
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+
+    needs: frontend-scan
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+
+      - name: Install dependencies
+        run: |
+          cd frontend
+          npm ci
+
+      - name: Install Playwright Browsers
+        run: |
+          cd frontend
+          npx playwright install --with-deps
+
+      - name: Install doctl
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+
+      - name: Log in to DigitalOcean Container Registry with short-lived credentials
+        run: doctl registry login --expiry-seconds 1200
+
+      - name: Download PACKAGE_VERSION_FRONTEND Artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: PACKAGE_VERSION_FRONTEND
+          path: .
+
+      - name: Read PACKAGE_VERSION_FRONTEND
+        id: read_package_version
+        run: |
+          PACKAGE_VERSION_FRONTEND=$(cat PACKAGE_VERSION_FRONTEND)
+          echo "PACKAGE_VERSION_FRONTEND=$PACKAGE_VERSION_FRONTEND" >> $GITHUB_ENV
+
+      - name: Pull image from registry
+        run: docker pull registry.digitalocean.com/kephalosk/personal-finance-app:${{ env.PACKAGE_VERSION_FRONTEND }}
+
+      - name: Run image from registry
+        run: docker run -d -p 5173:80 registry.digitalocean.com/kephalosk/personal-finance-app:${{ env.PACKAGE_VERSION_FRONTEND }}
 
       - name: Run Playwright tests
         run: |
@@ -266,7 +433,7 @@ jobs:
     timeout-minutes: 60
     runs-on: ubuntu-latest
 
-    needs: gui-tests
+    needs: frontend-gui-tests
     if: failure()
 
     steps:
@@ -293,23 +460,23 @@ jobs:
       - name: Log in to DigitalOcean Container Registry with short-lived credentials
         run: doctl registry login --expiry-seconds 1200
 
-      - name: Download PACKAGE_VERSION Artifact
+      - name: Download PACKAGE_VERSION_FRONTEND Artifact
         uses: actions/download-artifact@v3
         with:
-          name: PACKAGE_VERSION
+          name: PACKAGE_VERSION_FRONTEND
           path: .
 
-      - name: Read PACKAGE_VERSION
+      - name: Read PACKAGE_VERSION_FRONTEND
         id: read_package_version
         run: |
-          PACKAGE_VERSION=$(cat PACKAGE_VERSION)
-          echo "PACKAGE_VERSION=$PACKAGE_VERSION" >> $GITHUB_ENV
+          PACKAGE_VERSION_FRONTEND=$(cat PACKAGE_VERSION_FRONTEND)
+          echo "PACKAGE_VERSION_FRONTEND=$PACKAGE_VERSION_FRONTEND" >> $GITHUB_ENV
 
       - name: Pull image from registry
-        run: docker pull registry.digitalocean.com/kephalosk/personal-finance-app:${{ env.PACKAGE_VERSION }}
+        run: docker pull registry.digitalocean.com/kephalosk/personal-finance-app:${{ env.PACKAGE_VERSION_FRONTEND }}
 
       - name: Run image from registry
-        run: docker run -d -p 5173:80 registry.digitalocean.com/kephalosk/personal-finance-app:${{ env.PACKAGE_VERSION }}
+        run: docker run -d -p 5173:80 registry.digitalocean.com/kephalosk/personal-finance-app:${{ env.PACKAGE_VERSION_FRONTEND }}
 
       - name: Run Playwright tests
         run: |
@@ -324,10 +491,10 @@ jobs:
           path: frontend/ui-tests/gui-tests
           retention-days: 30
           
-  deploy:
+  frontend-deploy:
     runs-on: ubuntu-latest
     
-    needs: [e2e-tests, gui-tests]
+    needs: [frontend-e2e-tests, frontend-gui-tests]
 
     steps:
       - name: Checkout master
@@ -344,21 +511,21 @@ jobs:
       - name: Renew cluster’s certificate
         run: doctl kubernetes cluster kubeconfig save ${{ secrets.CLUSTER_ID }}
 
-      - name: Download PACKAGE_VERSION Artifact
+      - name: Download PACKAGE_VERSION_FRONTEND Artifact
         uses: actions/download-artifact@v3
         with:
-          name: PACKAGE_VERSION
+          name: PACKAGE_VERSION_FRONTEND
           path: .
   
-      - name: Read PACKAGE_VERSION
+      - name: Read PACKAGE_VERSION_FRONTEND
         id: read_package_version
         run: |
-          PACKAGE_VERSION=$(cat PACKAGE_VERSION)
-          echo "PACKAGE_VERSION=$PACKAGE_VERSION" >> $GITHUB_ENV
+          PACKAGE_VERSION_FRONTEND=$(cat PACKAGE_VERSION_FRONTEND)
+          echo "PACKAGE_VERSION_FRONTEND=$PACKAGE_VERSION_FRONTEND" >> $GITHUB_ENV
   
       - name: Replace image tag in Kubernetes manifest
         run: |
-          sed -i "s|registry.digitalocean.com/kephalosk/personal-finance-app:latest|registry.digitalocean.com/kephalosk/personal-finance-app:${{ env.PACKAGE_VERSION }}|g" deployment/personal-finance-app.yaml
+          sed -i "s|registry.digitalocean.com/kephalosk/personal-finance-app:latest|registry.digitalocean.com/kephalosk/personal-finance-app:${{ env.PACKAGE_VERSION_FRONTEND }}|g" deployment/personal-finance-app.yaml
     
       - name: Deploy to DigitalOcean Kubernetes
         run: kubectl apply -f deployment/personal-finance-app.yaml
@@ -369,10 +536,63 @@ jobs:
       - name: Verify deployment
         run: kubectl rollout status deployment/personal-finance-app
 
-      - name: Set CURRENT_PROD_SERVICE_VERSION in GitHub Repository Variables
+      - name: Set CURRENT_PROD_FRONTEND_SERVICE_VERSION in GitHub Repository Variables
         run: |
           curl -X PATCH \
             -H "Authorization: Bearer ${{ secrets.VARIABLE_GITHUB_TOKEN }}" \
             -H "Accept: application/vnd.github+json" \
-            -d '{"name": "CURRENT_PROD_SERVICE_VERSION", "value": "${{ env.PACKAGE_VERSION }}"}' \
-            https://api.github.com/repos/${{ github.repository }}/actions/variables/CURRENT_PROD_SERVICE_VERSION
+            -d '{"name": "CURRENT_PROD_FRONTEND_SERVICE_VERSION", "value": "${{ env.PACKAGE_VERSION_FRONTEND }}"}' \
+            https://api.github.com/repos/${{ github.repository }}/actions/variables/CURRENT_PROD_FRONTEND_SERVICE_VERSION
+
+  backend-deploy:
+    runs-on: ubuntu-latest
+
+    needs: [frontend-e2e-tests, frontend-gui-tests]
+
+    steps:
+      - name: Checkout master
+        uses: actions/checkout@main
+
+      - name: Install doctl
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+
+      - name: Log in to DigitalOcean Container Registry with short-lived credentials
+        run: doctl registry login --expiry-seconds 1200
+
+      - name: Renew cluster’s certificate
+        run: doctl kubernetes cluster kubeconfig save ${{ secrets.CLUSTER_ID }}
+
+      - name: Download PACKAGE_VERSION_BACKEND Artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: PACKAGE_VERSION_BACKEND
+          path: .
+
+      - name: Read PACKAGE_VERSION_BACKEND
+        id: read_package_version
+        run: |
+          PACKAGE_VERSION_BACKEND=$(cat PACKAGE_VERSION_BACKEND)
+          echo "PACKAGE_VERSION_BACKEND=$PACKAGE_VERSION_BACKEND" >> $GITHUB_ENV
+
+      - name: Replace image tag in Kubernetes manifest
+        run: |
+          sed -i "s|registry.digitalocean.com/kephalosk/personal-finance-app:latest|registry.digitalocean.com/kephalosk/nestjs-backend:${{ env.PACKAGE_VERSION_BACKEND }}|g" deployment/nestjs-backend.yaml
+
+      - name: Deploy to DigitalOcean Kubernetes
+        run: kubectl apply -f deployment/nestjs-backend.yaml
+
+      - name: restart Pods
+        run: kubectl -n default rollout restart deploy
+
+      - name: Verify deployment
+        run: kubectl rollout status deployment/nestjs-backend
+
+      - name: Set CURRENT_PROD_BACKEND_SERVICE_VERSION in GitHub Repository Variables
+        run: |
+          curl -X PATCH \
+            -H "Authorization: Bearer ${{ secrets.VARIABLE_GITHUB_TOKEN }}" \
+            -H "Accept: application/vnd.github+json" \
+            -d '{"name": "CURRENT_PROD_BACKEND_SERVICE_VERSION", "value": "${{ env.PACKAGE_VERSION_BACKEND }}"}' \
+            https://api.github.com/repos/${{ github.repository }}/actions/variables/CURRENT_PROD_BACKEND_SERVICE_VERSION

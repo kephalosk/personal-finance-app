@@ -7,7 +7,7 @@ on:
 
 jobs:
 
-  unit-tests:
+  frontend-unit-tests:
     runs-on: ubuntu-latest
 
     if: github.ref != 'refs/heads/master' && github.ref != 'refs/heads/develop'
@@ -21,17 +21,36 @@ jobs:
           cd frontend
           npm install
 
-      - name: Run Unit Tests
+      - name: Run Frontend Unit Tests
         run: |
           cd frontend
           npm run test
 
-  build:
+  backend-unit-tests:
     runs-on: ubuntu-latest
 
     if: github.ref != 'refs/heads/master' && github.ref != 'refs/heads/develop'
 
-    needs: unit-tests
+    steps:
+      - name: Checkout master
+        uses: actions/checkout@main
+
+      - name: Install Dependencies
+        run: |
+          cd backend
+          npm install
+
+      - name: Run Backend Unit Tests
+        run: |
+          cd backend
+          npm run test
+
+  frontend-build:
+    runs-on: ubuntu-latest
+
+    if: github.ref != 'refs/heads/master' && github.ref != 'refs/heads/develop'
+
+    needs: frontend-unit-tests
 
     steps:
       - name: Checkout master
@@ -39,3 +58,17 @@ jobs:
 
       - name: Build container image
         run: docker build -t registry.digitalocean.com/kephalosk/personal-finance-app:latest -f deployment/frontend.Dockerfile .
+
+  backend-build:
+    runs-on: ubuntu-latest
+
+    if: github.ref != 'refs/heads/master' && github.ref != 'refs/heads/develop'
+
+    needs: backend-unit-tests
+
+    steps:
+      - name: Checkout master
+        uses: actions/checkout@main
+
+      - name: Build container image
+        run: docker build -t registry.digitalocean.com/kephalosk/nestjs-backend:latest -f deployment/backend.Dockerfile .
