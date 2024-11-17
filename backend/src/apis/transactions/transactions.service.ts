@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import * as path from 'node:path';
 import * as fs from 'node:fs';
-import { APITransactionDTO } from '../../model/APITransactionDTO';
+import { APITransactionDTO } from '../../model/apis/APITransactionDTO';
 
 @Injectable()
 export class TransactionsService {

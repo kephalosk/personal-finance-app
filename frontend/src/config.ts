@@ -1,4 +1,4 @@
-export interface Config {
+interface Config {
   API_BACKEND_HOST: string;
 }
 
