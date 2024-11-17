@@ -6,7 +6,7 @@ import axios, { AxiosResponse } from 'axios';
 import { AppConfig } from '../../config';
 
 export async function getTransactions(): Promise<EPTransaction[]> {
-  const apiUrl = `${AppConfig.API_BASE_PATH}/transactions`;
+  const apiUrl = `${AppConfig.API_BACKEND_HOST}/transactions`;
 
   try {
     const response: AxiosResponse<APITransactionDTO[]> =
