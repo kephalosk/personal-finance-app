@@ -92,13 +92,6 @@ spec:
                 name: personal-finance-app-service
                 port:
                   number: 80
-          - path: /api(/|$)(.*)
-            pathType: ImplementationSpecific
-            backend:
-              service:
-                name: nestjs-backend-service
-                port:
-                  number: 80
     - host: www.philippkraatz.com
       http:
         paths:
@@ -107,13 +100,6 @@ spec:
             backend:
               service:
                 name: personal-finance-app-service
-                port:
-                  number: 80
-          - path: /api(/|$)(.*)
-            pathType: ImplementationSpecific
-            backend:
-              service:
-                name: nestjs-backend-service
                 port:
                   number: 80
   tls:

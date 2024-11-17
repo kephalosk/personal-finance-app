@@ -7,7 +7,7 @@ import axios, { AxiosResponse } from 'axios';
 import { AppConfig } from '../../config';
 
 export async function getBudgets(): Promise<EPBudget[]> {
-  const apiUrl = `${AppConfig.API_BASE_PATH}/budget`;
+  const apiUrl = `${AppConfig.API_BACKEND_HOST}/budget`;
 
   try {
     const response: AxiosResponse<APIBudgetDTO[]> = await axios.get<APIBudgetDTO[]>(apiUrl);

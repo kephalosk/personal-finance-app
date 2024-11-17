@@ -5,7 +5,7 @@ import data from '../data.json';
 import { AppConfig } from '../../config';
 
 export async function getBalance(): Promise<EPBalance> {
-  const apiUrl = `${AppConfig.API_BASE_PATH}/balance`;
+  const apiUrl = `${AppConfig.API_BACKEND_HOST}/balance`;
 
   try {
     const response: AxiosResponse<APIBalanceDTO> = await axios.get<APIBalanceDTO>(apiUrl);
