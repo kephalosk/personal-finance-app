@@ -1,6 +1,6 @@
 import { Controller, Get } from '@nestjs/common';
 import { BalanceService } from './balance.service';
-import { APIBalanceDTO } from '../../model/APIBalanceDTO';
+import { APIBalanceDTO } from '../../model/apis/APIBalanceDTO';
 
 @Controller('balance')
 export class BalanceController {
