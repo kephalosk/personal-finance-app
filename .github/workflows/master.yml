@@ -78,8 +78,6 @@ jobs:
   frontend-unit-tests:
     runs-on: ubuntu-latest
 
-    if: github.ref != 'refs/heads/master' && github.ref != 'refs/heads/develop'
-
     needs: versioning
 
     steps:
@@ -98,8 +96,6 @@ jobs:
 
   backend-unit-tests:
     runs-on: ubuntu-latest
-
-    if: github.ref != 'refs/heads/master' && github.ref != 'refs/heads/develop'
 
     needs: versioning
 
@@ -120,8 +116,6 @@ jobs:
   backend-e2e-tests:
     runs-on: ubuntu-latest
 
-    if: github.ref != 'refs/heads/master' && github.ref != 'refs/heads/develop'
-
     needs: versioning
 
     steps:
@@ -140,8 +134,6 @@ jobs:
 
   frontend-build:
     runs-on: ubuntu-latest
-
-    if: github.ref != 'refs/heads/master' && github.ref != 'refs/heads/develop'
 
     needs: frontend-unit-tests
 
@@ -177,8 +169,6 @@ jobs:
 
   backend-build:
     runs-on: ubuntu-latest
-
-    if: github.ref != 'refs/heads/master' && github.ref != 'refs/heads/develop'
 
     needs:
       - backend-unit-tests
