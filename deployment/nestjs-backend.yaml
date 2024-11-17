@@ -64,7 +64,7 @@ spec:
     - host: backend.philippkraatz.com
       http:
         paths:
-          - path: /(/|$)(.*)
+          - path: /api(/|$)(.*)
             pathType: ImplementationSpecific
             backend:
               service:
