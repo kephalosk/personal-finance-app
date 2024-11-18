@@ -1,18 +1,15 @@
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
 @Entity()
-export class Pot {
+export class Budgets {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
-  name: string;
+  category: string;
 
   @Column('decimal', { precision: 10, scale: 2 })
-  target: number;
-
-  @Column('decimal', { precision: 10, scale: 2 })
-  total: number;
+  maximum: number;
 
   @Column()
   theme: string;
