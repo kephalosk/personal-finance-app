@@ -4,7 +4,7 @@ import { BudgetService } from './budget.service';
 
 jest.mock('./budget.service', () => ({
   BudgetService: jest.fn().mockImplementation(() => ({
-    getBudget: jest.fn(),
+    findAll: jest.fn(),
   })),
 }));
 
@@ -32,7 +32,7 @@ describe('BudgetController', () => {
     }).compile();
 
     budgetService = module.get<BudgetService>(BudgetService);
-    (budgetService.getBudget as jest.Mock).mockReturnValue(mockedBudgets);
+    (budgetService.findAll as jest.Mock).mockResolvedValue(mockedBudgets);
 
     controller = module.get<BudgetController>(BudgetController);
   });
@@ -41,16 +41,18 @@ describe('BudgetController', () => {
     expect(controller).toBeDefined();
   });
 
-  it('returns budgets', () => {
-    expect(controller.getBudget()).toEqual(mockedBudgets);
+  it('returns budgets', async () => {
+    const result = await controller.getBudget();
+
+    expect(result).toEqual(mockedBudgets);
   });
 
-  it('throws if service call fails', () => {
-    (budgetService.getBudget as jest.Mock).mockImplementation(() => {
+  it('throws if service call fails', async () => {
+    (budgetService.findAll as jest.Mock).mockImplementation(() => {
       throw new Error('Service failure');
     });
 
-    expect(() => controller.getBudget()).toThrow(
+    await expect(() => controller.getBudget()).rejects.toThrow(
       'Fehler beim Abrufen der Budgets: Error: Service failure',
     );
   });
