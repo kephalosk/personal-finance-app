@@ -9,6 +9,8 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Pots } from './model/entities/Pots';
 import { Budgets } from './model/entities/Budgets';
+import { Balance } from './model/entities/Balance';
+import { Transactions } from './model/entities/Transactions';
 
 @Module({
   imports: [
@@ -28,7 +30,7 @@ import { Budgets } from './model/entities/Budgets';
         },
         synchronize: false,
         logging: true,
-        entities: [Pots, Budgets],
+        entities: [Pots, Budgets, Balance, Transactions],
         migrations: [],
         subscribers: [],
       }),

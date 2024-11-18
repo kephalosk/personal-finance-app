@@ -7,9 +7,9 @@ export class BalanceController {
   constructor(private readonly balanceService: BalanceService) {}
 
   @Get()
-  getBalance(): APIBalanceDTO {
+  async getBalance(): Promise<APIBalanceDTO> {
     try {
-      return this.balanceService.getBalance();
+      return this.balanceService.findBalance();
     } catch (error) {
       throw new Error(`Fehler beim Abrufen des Kontostands: ${error}`);
     }
