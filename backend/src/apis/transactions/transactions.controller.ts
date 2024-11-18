@@ -7,9 +7,9 @@ export class TransactionsController {
   constructor(private readonly transactionsService: TransactionsService) {}
 
   @Get()
-  getBalance(): APITransactionDTO[] {
+  async getBalance(): Promise<APITransactionDTO[]> {
     try {
-      return this.transactionsService.getTransactions();
+      return await this.transactionsService.findAll();
     } catch (error) {
       throw new Error(`Fehler beim Abrufen der Transaktionen: ${error}`);
     }
