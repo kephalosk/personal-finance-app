@@ -36,6 +36,7 @@ describe('BalanceController', () => {
 
   it('returns balance', async () => {
     const result = await controller.getBalance();
+
     expect(result).toEqual(mockedBalance);
   });
 
