@@ -5,24 +5,33 @@ import { BalanceModule } from './apis/balance/balance.module';
 import { TransactionsModule } from './apis/transactions/transactions.module';
 import { PotsModule } from './apis/pots/pots.module';
 import { BudgetModule } from './apis/budget/budget.module';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import * as process from 'node:process';
-import { Pot } from './model/entities/pot.entity';
+import { Pots } from './model/entities/Pots';
+import { Budgets } from './model/entities/Budgets';
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      host: process.env.DATABASE_HOST,
-      port: parseInt(process.env.DATABASE_PORT, 10),
-      username: process.env.DATABASE_USERNAME,
-      password: process.env.DATABASE_PASSWORD,
-      database: process.env.DATABASE_NAME,
-      entities: [Pot],
-      synchronize: true, //TODO false for production
-      ssl: {
-        rejectUnauthorized: false,
-      },
+    ConfigModule.forRoot(),
+    TypeOrmModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: (configService: ConfigService) => ({
+        type: 'postgres',
+        host: configService.get<string>('DATABASE_HOST'),
+        port: parseInt(configService.get<string>('DATABASE_PORT'), 10),
+        username: configService.get<string>('DATABASE_USERNAME'),
+        password: configService.get<string>('DATABASE_PASSWORD'),
+        database: configService.get<string>('DATABASE_NAME'),
+        ssl: {
+          rejectUnauthorized: false,
+        },
+        synchronize: false,
+        logging: true,
+        entities: [Pots, Budgets],
+        migrations: [],
+        subscribers: [],
+      }),
     }),
     BalanceModule,
     TransactionsModule,

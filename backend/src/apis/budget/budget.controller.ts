@@ -7,9 +7,9 @@ export class BudgetController {
   constructor(private readonly budgetService: BudgetService) {}
 
   @Get()
-  getBudget(): APIBudgetDTO[] {
+  async getBudget(): Promise<APIBudgetDTO[]> {
     try {
-      return this.budgetService.getBudget();
+      return await this.budgetService.findAll();
     } catch (error) {
       throw new Error(`Fehler beim Abrufen der Budgets: ${error}`);
     }
