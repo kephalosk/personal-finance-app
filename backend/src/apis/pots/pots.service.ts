@@ -2,25 +2,30 @@ import { Injectable } from '@nestjs/common';
 import { APIPotDTO } from '../../model/apis/APIPotDTO';
 import * as path from 'node:path';
 import * as fs from 'node:fs';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Pot } from '../../model/entities/pot.entity';
+import { Pots } from '../../model/entities/Pots';
 import { Repository } from 'typeorm';
+import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
 export class PotsService {
   constructor(
-    @InjectRepository(Pot)
-    private potsRepository: Repository<Pot>,
+    @InjectRepository(Pots)
+    private readonly potsRepository: Repository<Pots>,
   ) {}
 
   async findAll(): Promise<APIPotDTO[]> {
-    const pots: Pot[] = await this.potsRepository.find();
-    return this.mapPotEntities(pots);
+    try {
+      const pots = await this.potsRepository.find();
+      return this.mapPotEntities(pots);
+    } catch (error) {
+      console.error('Failed to read pots from database', error);
+      return this.getPots();
+    }
   }
 
-  mapPotEntities(pots: Pot[]): APIPotDTO[] {
+  mapPotEntities(pots: Pots[]): APIPotDTO[] {
     let mappedPots: APIPotDTO[] = [];
-    pots.forEach((pot: Pot): void => {
+    pots.forEach((pot: Pots): void => {
       const newPot: APIPotDTO = {
         name: pot.name,
         target: pot.target,
