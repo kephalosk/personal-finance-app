@@ -11,8 +11,7 @@ export class PotsController {
     try {
       return await this.potsService.findAll();
     } catch (error) {
-      console.error(`Fehler beim Abrufen der Pots: ${error}`);
-      return this.potsService.getPots();
+      throw new Error(`Fehler beim Abrufen der Pots: ${error}`);
     }
   }
 }
