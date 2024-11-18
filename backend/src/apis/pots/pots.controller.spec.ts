@@ -4,7 +4,7 @@ import { PotsService } from './pots.service';
 
 jest.mock('./pots.service', () => ({
   PotsService: jest.fn().mockImplementation(() => ({
-    getPots: jest.fn(),
+    findAll: jest.fn(),
   })),
 }));
 
@@ -34,7 +34,7 @@ describe('PotsController', () => {
     }).compile();
 
     potsService = module.get<PotsService>(PotsService);
-    (potsService.getPots as jest.Mock).mockReturnValue(mockedPots);
+    (potsService.findAll as jest.Mock).mockResolvedValue(mockedPots);
 
     controller = module.get<PotsController>(PotsController);
   });
@@ -43,16 +43,18 @@ describe('PotsController', () => {
     expect(controller).toBeDefined();
   });
 
-  it('returns transactions', () => {
-    expect(controller.getPots()).toEqual(mockedPots);
+  it('returns transactions', async () => {
+    const result = await controller.getPots();
+
+    expect(result).toEqual(mockedPots);
   });
 
-  it('throws if service call fails', () => {
-    (potsService.getPots as jest.Mock).mockImplementation(() => {
+  it('throws if service call fails', async () => {
+    (potsService.findAll as jest.Mock).mockImplementation(() => {
       throw new Error('Service failure');
     });
 
-    expect(() => controller.getPots()).toThrow(
+    await expect(() => controller.getPots()).rejects.toThrow(
       'Fehler beim Abrufen der Pots: Error: Service failure',
     );
   });

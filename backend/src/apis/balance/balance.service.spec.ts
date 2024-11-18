@@ -67,6 +67,7 @@ describe('BalanceService', () => {
 
   it('returns balance from repository', async () => {
     const result = await service.findBalance();
+
     expect(repository.find).toHaveBeenCalled();
     expect(result).toEqual(mockedBalanceEntityMapped);
     expect(result).not.toEqual(mockedBalance);
@@ -76,7 +77,9 @@ describe('BalanceService', () => {
     jest
       .spyOn(repository, 'find')
       .mockRejectedValue(new Error('Database error'));
+
     const result = await service.findBalance();
+
     expect(result).toEqual(mockedBalance);
     expect(result).not.toEqual(mockedBalanceEntityMapped);
   });

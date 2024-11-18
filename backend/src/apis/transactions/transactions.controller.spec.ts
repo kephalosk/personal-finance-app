@@ -4,7 +4,7 @@ import { TransactionsService } from './transactions.service';
 
 jest.mock('./transactions.service', () => ({
   TransactionsService: jest.fn().mockImplementation(() => ({
-    getTransactions: jest.fn(),
+    findAll: jest.fn(),
   })),
 }));
 
@@ -38,7 +38,7 @@ describe('TransactionsController', () => {
     }).compile();
 
     transactionsService = module.get<TransactionsService>(TransactionsService);
-    (transactionsService.getTransactions as jest.Mock).mockReturnValue(
+    (transactionsService.findAll as jest.Mock).mockResolvedValue(
       mockedTransactions,
     );
 
@@ -49,18 +49,18 @@ describe('TransactionsController', () => {
     expect(controller).toBeDefined();
   });
 
-  it('returns transactions', () => {
-    expect(controller.getBalance()).toEqual(mockedTransactions);
+  it('returns transactions', async () => {
+    const result = await controller.getBalance();
+
+    expect(result).toEqual(mockedTransactions);
   });
 
-  it('throws if service call fails', () => {
-    (transactionsService.getTransactions as jest.Mock).mockImplementation(
-      () => {
-        throw new Error('Service failure');
-      },
-    );
+  it('throws if service call fails', async () => {
+    (transactionsService.findAll as jest.Mock).mockImplementation(() => {
+      throw new Error('Service failure');
+    });
 
-    expect(() => controller.getBalance()).toThrow(
+    await expect(() => controller.getBalance()).rejects.toThrow(
       'Fehler beim Abrufen der Transaktionen: Error: Service failure',
     );
   });
