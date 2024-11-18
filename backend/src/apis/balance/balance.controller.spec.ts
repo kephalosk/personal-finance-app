@@ -4,7 +4,7 @@ import { BalanceService } from './balance.service';
 
 jest.mock('./balance.service', () => ({
   BalanceService: jest.fn().mockImplementation(() => ({
-    getBalance: jest.fn(),
+    findBalance: jest.fn(),
   })),
 }));
 
@@ -25,7 +25,7 @@ describe('BalanceController', () => {
     }).compile();
 
     balanceService = module.get<BalanceService>(BalanceService);
-    (balanceService.getBalance as jest.Mock).mockReturnValue(mockedBalance);
+    (balanceService.findBalance as jest.Mock).mockResolvedValue(mockedBalance);
 
     controller = module.get<BalanceController>(BalanceController);
   });
@@ -34,16 +34,17 @@ describe('BalanceController', () => {
     expect(controller).toBeDefined();
   });
 
-  it('returns balance', () => {
-    expect(controller.getBalance()).toEqual(mockedBalance);
+  it('returns balance', async () => {
+    const result = await controller.getBalance();
+    expect(result).toEqual(mockedBalance);
   });
 
-  it('throws if service call fails', () => {
-    (balanceService.getBalance as jest.Mock).mockImplementation(() => {
+  it('throws if service call fails', async () => {
+    (balanceService.findBalance as jest.Mock).mockImplementation(() => {
       throw new Error('Service failure');
     });
 
-    expect(() => controller.getBalance()).toThrow(
+    await expect(() => controller.getBalance()).rejects.toThrow(
       'Fehler beim Abrufen des Kontostands: Error: Service failure',
     );
   });
