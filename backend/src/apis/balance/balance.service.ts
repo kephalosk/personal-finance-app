@@ -31,7 +31,7 @@ export class BalanceService {
     };
   }
 
-  getBalance(): APIBalanceDTO {
+  private getBalance(): APIBalanceDTO {
     const filePath = path.join(__dirname, '../balance/balance.data.json');
     const data = JSON.parse(fs.readFileSync(filePath, 'utf8'));
     const { balance } = data;
