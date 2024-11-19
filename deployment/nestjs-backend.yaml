@@ -29,13 +29,13 @@ metadata:
   name: nestjs-backend-service
   namespace: default
 spec:
+  type: ClusterIP
   ports:
     - port: 80
       protocol: TCP
       targetPort: 3000
   selector:
     app: nestjs-backend
-  type: ClusterIP
 ---
 apiVersion: cert-manager.io/v1
 kind: Certificate
@@ -60,6 +60,10 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /$2
 spec:
   ingressClassName: nginx
+  tls:
+    - hosts:
+        - backend.philippkraatz.com
+      secretName: nestjs-backend-tls
   rules:
     - host: backend.philippkraatz.com
       http:
@@ -71,7 +75,3 @@ spec:
                 name: nestjs-backend-service
                 port:
                   number: 80
-  tls:
-    - hosts:
-        - backend.philippkraatz.com
-      secretName: nestjs-backend-tls
