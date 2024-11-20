@@ -1722,7 +1722,7 @@ Organisation<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel>
     <node id="n170">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.cloud">
-          <y:Geometry height="50.0" width="273.6543257077677" x="1614.9675436690252" y="-5120.678968253968"/>
+          <y:Geometry height="50.0" width="273.6543257077677" x="1614.9675436690252" y="-5174.097817460318"/>
           <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="273.6543257077677" x="0.0" xml:space="preserve" y="14.93359375">Stories<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
@@ -2454,7 +2454,7 @@ gewünschte Lösung: aufsplittung in 2 Komponenten. eine mit transition(desktop)
     <node id="n239">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
-          <y:Geometry height="21.0" width="237.88677997397917" x="1947.0526948813826" y="-2131.704761904762"/>
+          <y:Geometry height="21.0" width="237.88677997397917" x="1947.0526948813826" y="-2195.269246031746"/>
           <y:Fill color="#FFCC00" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="l" textColor="#000000" verticalTextPosition="bottom" visible="true" width="237.88677997397917" x="4.0" xml:space="preserve" y="0.43359375">wo-3-caching-mechanismus</y:NodeLabel>
@@ -2560,7 +2560,7 @@ Lösungsidee: getrennte ingress? eigene subdomain für backend</y:NodeLabel>
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
           <y:Geometry height="21.0" width="237.88677997397917" x="1632.8513165359195" y="-1793.281746031746"/>
-          <y:Fill color="#00FFFF" color2="#B7C9E3" transparent="false"/>
+          <y:Fill color="#00FF00" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="l" textColor="#000000" verticalTextPosition="bottom" visible="true" width="237.88677997397917" x="4.0" xml:space="preserve" y="0.43359375">be-4-add-database</y:NodeLabel>
         </y:GenericNode>
@@ -2599,7 +2599,7 @@ Lösungsidee: getrennte ingress? eigene subdomain für backend</y:NodeLabel>
     <node id="n252">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
-          <y:Geometry height="21.0" width="237.88677997397917" x="1947.0526948813826" y="-1798.531746031746"/>
+          <y:Geometry height="21.0" width="237.88677997397917" x="1947.0526948813826" y="-1834.8642857142856"/>
           <y:Fill color="#FFCC00" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="l" textColor="#000000" verticalTextPosition="bottom" visible="true" width="237.88677997397917" x="4.0" xml:space="preserve" y="0.43359375">wo-5-dependency update</y:NodeLabel>
@@ -2689,8 +2689,8 @@ Lösungsidee: getrennte ingress? eigene subdomain für backend</y:NodeLabel>
     <node id="n261">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
-          <y:Geometry height="21.0" width="264.40275669092625" x="1933.794706522909" y="-1576.236111111111"/>
-          <y:Fill color="#FFFF00" color2="#B7C9E3" transparent="false"/>
+          <y:Geometry height="21.0" width="264.40275669092625" x="1933.794706522909" y="-1469.5714285714287"/>
+          <y:Fill color="#00FF00" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="l" textColor="#000000" verticalTextPosition="bottom" visible="true" width="264.40275669092625" x="4.0" xml:space="preserve" y="0.43359375">df-7-backend-e2e-test-db-access</y:NodeLabel>
         </y:GenericNode>
@@ -2699,7 +2699,7 @@ Lösungsidee: getrennte ingress? eigene subdomain für backend</y:NodeLabel>
     <node id="n262">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
-          <y:Geometry height="491.92098915446695" width="572.5427356896485" x="2259.699832405405" y="-1811.6966056883446"/>
+          <y:Geometry height="491.92098915446695" width="572.5427356896485" x="2259.699832405405" y="-1705.0319231486621"/>
           <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="486.515625" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="l" textColor="#000000" verticalTextPosition="bottom" visible="true" width="572.5427356896485" x="4.0" xml:space="preserve" y="2.702682077233476">backend e2e tests scheitern in pipeline, weil sie keine IP-Freigabe im Datenbank-Cluster haben.
@@ -2733,6 +2733,29 @@ curl -X DELETE \
   -H "Authorization: Bearer &lt;your_api_token&gt;" \
   https://api.digitalocean.com/v2/databases/&lt;db-id&gt;/firewall/&lt;rule-id&gt;
 </y:NodeLabel>
+        </y:GenericNode>
+      </data>
+    </node>
+    <node id="n263">
+      <data key="d6">
+        <y:GenericNode configuration="com.yworks.flowchart.process">
+          <y:Geometry height="21.0" width="237.88677997397917" x="1947.0526948813826" y="-1783.8642857142856"/>
+          <y:Fill color="#FFCC00" color2="#B7C9E3" transparent="false"/>
+          <y:BorderStyle color="#000000" type="line" width="1.0"/>
+          <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="l" textColor="#000000" verticalTextPosition="bottom" visible="true" width="237.88677997397917" x="4.0" xml:space="preserve" y="0.43359375">wo-6-jest-not-exit-after-run</y:NodeLabel>
+        </y:GenericNode>
+      </data>
+    </node>
+    <node id="n264">
+      <data key="d6">
+        <y:GenericNode configuration="com.yworks.flowchart.process">
+          <y:Geometry height="75.3788265907292" width="547.0884763563786" x="2272.4269620720397" y="-1811.0536990096502"/>
+          <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
+          <y:BorderStyle color="#000000" type="line" width="1.0"/>
+          <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="76.6640625" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="l" textColor="#000000" verticalTextPosition="bottom" visible="true" width="547.0884763563786" x="4.0" xml:space="preserve" y="-0.6426179546353978">Jest did not exit one second after the test run has completed.
+'This usually means that there are asynchronous operations that weren't stopped in your tests. Consider running Jest with `--detectOpenHandles` to troubleshoot this issue.
+
+in pipeline backend e2e-tests.</y:NodeLabel>
         </y:GenericNode>
       </data>
     </node>
@@ -5573,7 +5596,10 @@ curl -X DELETE \
       <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
-          <y:Path sx="118.94338998698959" sy="-0.0" tx="-118.94338998698959" ty="-0.0"/>
+          <y:Path sx="118.94338998698959" sy="-0.0" tx="-118.94338998698959" ty="-0.0">
+            <y:Point x="1890.2380965098987" y="-2121.204761904762"/>
+            <y:Point x="1890.2380965098987" y="-2184.769246031746"/>
+          </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="standard"/>
           <y:BendStyle smoothed="false"/>
@@ -5585,7 +5611,7 @@ curl -X DELETE \
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="118.94338998698959" sy="-0.0" tx="-127.35472738327144" ty="-0.0">
-            <y:Point x="2204.439474855362" y="-2121.204761904762"/>
+            <y:Point x="2204.439474855362" y="-2184.769246031746"/>
             <y:Point x="2204.439474855362" y="-2248.3337301587303"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
@@ -5737,7 +5763,10 @@ curl -X DELETE \
       <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
-          <y:Path sx="118.94338998698959" sy="-5.25" tx="-118.94338998698959" ty="-0.0"/>
+          <y:Path sx="118.94338998698959" sy="-7.0" tx="-118.94338998698959" ty="-0.0">
+            <y:Point x="1890.2380965098987" y="-1789.781746031746"/>
+            <y:Point x="1890.2380965098987" y="-1824.3642857142856"/>
+          </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="standard"/>
           <y:BendStyle smoothed="false"/>
@@ -5854,9 +5883,9 @@ curl -X DELETE \
       <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
-          <y:Path sx="118.94338998698959" sy="5.25" tx="-132.20137834546313" ty="-0.0">
-            <y:Point x="1890.2380965098987" y="-1777.531746031746"/>
-            <y:Point x="1890.2380965098987" y="-1565.736111111111"/>
+          <y:Path sx="118.94338998698959" sy="7.0" tx="-132.20137834546313" ty="-0.0">
+            <y:Point x="1890.2380965098987" y="-1775.781746031746"/>
+            <y:Point x="1890.2380965098987" y="-1459.0714285714287"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="standard"/>
@@ -5869,6 +5898,31 @@ curl -X DELETE \
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="132.20137834546313" sy="-0.0" tx="-286.2713678448242" ty="-0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e261" source="n248" target="n263">
+      <data key="d9"/>
+      <data key="d10">
+        <y:PolyLineEdge>
+          <y:Path sx="118.94338998698959" sy="-0.0" tx="-118.94338998698959" ty="-0.0">
+            <y:Point x="1906.2380965098987" y="-1782.781746031746"/>
+            <y:Point x="1906.2380965098987" y="-1773.3642857142856"/>
+          </y:Path>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e262" source="n263" target="n264">
+      <data key="d9"/>
+      <data key="d10">
+        <y:PolyLineEdge>
+          <y:Path sx="118.94338998698959" sy="-0.0" tx="-273.5442381781893" ty="-0.0"/>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="standard"/>
           <y:BendStyle smoothed="false"/>
