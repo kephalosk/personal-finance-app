@@ -118,6 +118,8 @@ jobs:
 
     needs: backend-versioning
 
+    continue-on-error: true
+
     steps:
       - name: Checkout master
         uses: actions/checkout@main
