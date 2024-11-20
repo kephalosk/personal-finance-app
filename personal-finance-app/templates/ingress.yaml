@@ -2,7 +2,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: {{ include "personal-finance-app.fullname" . }}
+  name: {{ .Values.ingress.name }}
   labels:
     {{- include "personal-finance-app.labels" . | nindent 4 }}
   {{- with .Values.ingress.annotations }}
@@ -25,7 +25,7 @@ spec:
   {{- end }}
   rules:
     {{- range .Values.ingress.hosts }}
-    - host: {{ .host | quote }}
+    - host: {{ .host }}
       http:
         paths:
           {{- range .paths }}
@@ -35,7 +35,7 @@ spec:
             {{- end }}
             backend:
               service:
-                name: {{ include "personal-finance-app.fullname" $ }}
+                name: {{ include "personal-finance-app.servicename" $ }}
                 port:
                   number: {{ $.Values.service.port }}
           {{- end }}

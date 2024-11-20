@@ -81,6 +81,11 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   ingressClassName: nginx
+  tls:
+    - hosts:
+        - philippkraatz.com
+        - www.philippkraatz.com
+      secretName: personal-finance-app-tls
   rules:
     - host: philippkraatz.com
       http:
@@ -102,8 +107,3 @@ spec:
                 name: personal-finance-app-service
                 port:
                   number: 80
-  tls:
-    - hosts:
-        - philippkraatz.com
-        - www.philippkraatz.com
-      secretName: personal-finance-app-tls
