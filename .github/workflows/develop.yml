@@ -134,8 +134,7 @@ jobs:
 
       - name: get Runner IP
         run: |
-          RUNNER_IP=curl -4 ifconfig.me
-          echo "RUNNER_IP=$RUNNER_IP" >> $GITHUB_ENV
+          curl -4 ifconfig.me >> RUNNER_IP && echo "RUNNER_IP=$RUNNER_IP" >> $GITHUB_ENV
 
       - name: call Digital Ocean - Databases
         run: |
