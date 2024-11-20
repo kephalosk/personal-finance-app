@@ -149,3 +149,18 @@ deployment:
     maxSurge: 1
     maxUnavailable: 1
   minReadySeconds: 5
+
+envVariables:
+  - name: DATABASE_HOST
+    value: "postgresql-database-do-user-16267792-0.m.db.ondigitalocean.com"
+  - name: DATABASE_PORT
+    value: "25060"
+  - name: DATABASE_USERNAME
+    value: "doadmin"
+  - name: DATABASE_NAME
+    value: "defaultdb"
+
+envSecrets:
+  - name: DATABASE_PASSWORD
+    secretName: db-secret
+    secretKey: password
