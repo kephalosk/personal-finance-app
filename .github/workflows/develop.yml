@@ -132,19 +132,21 @@ jobs:
       - name: install curl
         run: sudo apt update && sudo apt install curl
 
-      - name: get Runner IP
+      - name: Get Runner IP
         run: |
-          curl -4 ifconfig.me >> RUNNER_IP && echo "RUNNER_IP=$RUNNER_IP" >> $GITHUB_ENV
+          export RUNNER_IP=$(curl -4 -s ifconfig.me)
+          echo "RUNNER_IP=$RUNNER_IP" >> $GITHUB_ENV
+          echo "Runner IP: $RUNNER_IP"
 
-      - name: call Digital Ocean - Databases
+      - name: Call Digital Ocean - Databases
         run: |
           curl -X POST \
           -H "Authorization: Bearer ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}" \
           -H "Content-Type: application/json" \
           -d '{
-            "rules": [{"type": "ip_addr", "value": "${{ env.RUNNER_IP }}", "database": "all"}]
+            "rules": [{"type": "ip_addr", "value": "'"${{ env.RUNNER_IP }}"'", "database": "all"}]
           }' \
-          https://api.digitalocean.com/v2/databases/<db-id>/firewall
+          https://api.digitalocean.com/v2/databases/6652f7a3-beaa-416a-8bbd-e44c084b121d/firewall
 
       - name: Run Backend E2E Tests
         env:
