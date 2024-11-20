@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:java="http://www.yworks.com/xml/yfiles-common/1.0/java" xmlns:sys="http://www.yworks.com/xml/yfiles-common/markup/primitives/2.0" xmlns:x="http://www.yworks.com/xml/yfiles-common/markup/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:y="http://www.yworks.com/xml/graphml" xmlns:yed="http://www.yworks.com/xml/yed/3" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://www.yworks.com/xml/schema/graphml/1.1/ygraphml.xsd">
+  <!--Created by yEd 3.21.1-->
+  <key attr.name="Beschreibung" attr.type="string" for="graph" id="d0"/>
+  <key for="port" id="d1" yfiles.type="portgraphics"/>
+  <key for="port" id="d2" yfiles.type="portgeometry"/>
+  <key for="port" id="d3" yfiles.type="portuserdata"/>
+  <key attr.name="url" attr.type="string" for="node" id="d4"/>
+  <key attr.name="description" attr.type="string" for="node" id="d5"/>
+  <key for="node" id="d6" yfiles.type="nodegraphics"/>
+  <key for="graphml" id="d7" yfiles.type="resources"/>
+  <key attr.name="url" attr.type="string" for="edge" id="d8"/>
+  <key attr.name="description" attr.type="string" for="edge" id="d9"/>
+  <key for="edge" id="d10" yfiles.type="edgegraphics"/>
+  <graph edgedefault="directed" id="G">
+    <data key="d0"/>
+    <node id="n0">
+      <data key="d6">
+        <y:GenericNode configuration="com.yworks.flowchart.process">
+          <y:Geometry height="26.000000000000227" width="97.99815946054167" x="0.0" y="-673.1392857142858"/>
+          <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
+          <y:BorderStyle color="#000000" type="line" width="1.0"/>
+          <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="97.99815946054167" x="0.0" xml:space="preserve" y="2.9335937500001137">HowTo curl<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+        </y:GenericNode>
+      </data>
+    </node>
+    <node id="n1">
+      <data key="d6">
+        <y:GenericNode configuration="com.yworks.flowchart.process">
+          <y:Geometry height="1280.278456762889" width="863.9981594605417" x="117.99815946054161" y="-1300.2785140957303"/>
+          <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
+          <y:BorderStyle color="#000000" type="line" width="1.0"/>
+          <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="1263.8203125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="863.9981594605417" x="0.0" xml:space="preserve" y="8.229072131444354">curl (Client for URL) ist ein leistungsstarkes Kommandozeilen-Tool, das zur Datenübertragung von und zu einem Server über verschiedene Protokolle verwendet wird. Es wird häufig für Aufgaben wie das Abrufen von Webinhalten, API-Abfragen, Dateiübertragungen oder Testen von Netzwerkanfragen verwendet.
+Hauptfunktionen von curl:
+
+    HTTP-Anfragen senden:
+        Mit curl kannst du HTTP(S)-Anfragen an Server senden und die Antwort (z. B. HTML, JSON) anzeigen:
+
+    curl https://example.com
+
+Daten über verschiedene Protokolle übertragen:
+
+    curl unterstützt viele Protokolle, darunter:
+        HTTP/HTTPS
+        FTP/SFTP
+        SMTP
+        IMAP
+        LDAP
+        ... und mehr.
+
+API-Aufrufe und Datenübertragung:
+
+    Es wird häufig verwendet, um REST-APIs zu testen:
+
+    curl -X POST -H "Content-Type: application/json" -d '{"name":"test"}' https://api.example.com/resource
+
+Dateien herunterladen:
+
+    Lade Dateien direkt von einer URL herunter:
+
+    curl -O https://example.com/file.zip
+
+Daten hochladen:
+
+    Lade Daten (z. B. Dateien) auf einen Server hoch:
+
+    curl -T file.txt ftp://example.com/
+
+Erweiterte Authentifizierung:
+
+    curl unterstützt Basic Auth, Tokens, OAuth und andere Authentifizierungsmethoden:
+
+    curl -u username:password https://example.com
+
+Header anzeigen oder anpassen:
+
+    Header in HTTP-Anfragen hinzufügen:
+
+curl -H "Authorization: Bearer YOUR_TOKEN" https://api.example.com
+
+Antwort-Header anzeigen:
+
+    curl -I https://example.com
+
+Debugging und Netzwerkanalyse:
+
+    Verfolge Details der Anfrage und Antwort:
+
+        curl -v https://example.com
+
+Typische Optionen von curl:
+Option	Beschreibung
+-X	Gibt die HTTP-Methode an (z. B. GET, POST, PUT, DELETE).
+-H	Fügt einen HTTP-Header hinzu.
+-d	Sendet Daten in einer POST-Anfrage.
+-o	Speichert die Antwort in einer Datei.
+-u	Nutzt Benutzerauthentifizierung (z. B. username:password).
+-L	Folgt HTTP-Redirects automatisch.
+-k	Ignoriert SSL-Zertifikat-Warnungen.
+Beispiele:
+
+    Webseite abrufen:
+
+curl https://example.com
+
+JSON-Daten an eine API senden:
+
+curl -X POST -H "Content-Type: application/json" -d '{"key":"value"}' https://api.example.com
+
+Datei herunterladen und speichern:
+
+curl -o output.txt https://example.com/file.txt
+
+API mit Token-Authentifizierung aufrufen:
+
+    curl -H "Authorization: Bearer MY_TOKEN" https://api.example.com
+
+curl ist besonders nützlich für Entwickler, Administratoren und Tester, die schnell Netzwerkanfragen analysieren oder Skripte für API-Integrationen erstellen müssen.<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+        </y:GenericNode>
+      </data>
+    </node>
+    <edge id="e0" source="n0" target="n1">
+      <data key="d9"/>
+      <data key="d10">
+        <y:PolyLineEdge>
+          <y:Path sx="48.999079730270836" sy="-0.0" tx="-431.99907973027086" ty="-0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+  </graph>
+  <data key="d7">
+    <y:Resources/>
+  </data>
+</graphml>
