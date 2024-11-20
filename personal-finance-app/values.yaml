@@ -153,3 +153,9 @@ clusterissuer:
   class: nginx
   server: https://acme-v02.api.letsencrypt.org/directory
   email: watchfromtheshore@gmail.com
+
+deployment:
+  rollingUpdate:
+    maxSurge: 1
+    maxUnavailable: 1
+  minReadySeconds: 5
