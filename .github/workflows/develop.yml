@@ -129,6 +129,21 @@ jobs:
           cd backend
           npm install
 
+      - name: get Runner IP
+        run: |
+          RUNNER_IP=curl -4 ifconfig.me
+          echo "RUNNER_IP=$RUNNER_IP" >> $GITHUB_ENV
+
+      - name: call Digital Ocean - Databases
+        run: |
+          curl -X POST \
+          -H "Authorization: Bearer ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}" \
+          -H "Content-Type: application/json" \
+          -d '{
+            "rules": [{"type": "ip_addr", "value": "${{ env.RUNNER_IP }}", "database": "all"}]
+          }' \
+          https://api.digitalocean.com/v2/databases/<db-id>/firewall
+
       - name: Run Backend E2E Tests
         env:
           DATABASE_HOST: "postgresql-database-do-user-16267792-0.m.db.ondigitalocean.com"
