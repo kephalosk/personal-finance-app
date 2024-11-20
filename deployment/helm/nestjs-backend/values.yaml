@@ -1,7 +1,7 @@
 # Default values for nestjs-backend.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
-serviceVersion: 0.0.20241117_134907_5f3c3f2_20241117_134918
+serviceVersion: defined_during_deployment
 
 # This will set the replicaset count more information can be found here: https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/
 replicaCount: 2
