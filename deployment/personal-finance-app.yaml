@@ -34,13 +34,13 @@ metadata:
   name: personal-finance-app-service
   namespace: default
 spec:
+  type: ClusterIP
   ports:
     - port: 80
       protocol: TCP
       targetPort: 80
   selector:
     app: personal-finance-app
-  type: ClusterIP
 ---
 apiVersion: cert-manager.io/v1
 kind: ClusterIssuer

@@ -17,6 +17,11 @@ spec:
     matchLabels:
       app: {{ .Chart.Name }}
       {{- include "personal-finance-app.selectorLabels" . | nindent 6 }}
+  strategy:
+    rollingUpdate:
+      maxSurge: {{ .Values.deployment.rollingUpdate.maxSurge }}
+      maxUnavailable: {{ .Values.deployment.rollingUpdate.maxUnavailable }}
+  minReadySeconds: {{ .Values.deployment.minReadySeconds }}
   template:
     metadata:
       {{- with .Values.podAnnotations }}
@@ -41,7 +46,7 @@ spec:
         - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http
