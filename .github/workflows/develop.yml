@@ -138,15 +138,35 @@ jobs:
           echo "RUNNER_IP=$RUNNER_IP" >> $GITHUB_ENV
           echo "Runner IP: $RUNNER_IP"
 
-      - name: Call Digital Ocean - Databases
+      - name: Get existing firewall rules from DigitalOcean
+        id: get_firewall
         run: |
-          curl -i -X PUT \
-          -H "Authorization: Bearer ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}" \
-          -H "Content-Type: application/json" \
-          -d '{
-            "rules": [{"type": "ip_addr", "value": "${{ env.RUNNER_IP }}", "database": "all"}]
-          }' \
-          https://api.digitalocean.com/v2/databases/6652f7a3-beaa-416a-8bbd-e44c084b121d/firewall
+          RESPONSE=$(curl -s -X GET \
+            -H "Authorization: Bearer ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}" \
+            https://api.digitalocean.com/v2/databases/6652f7a3-beaa-416a-8bbd-e44c084b121d/firewall)
+          echo "RESPONSE=$RESPONSE" >> $GITHUB_ENV
+
+      # Step 3: Add new rule to the firewall
+      - name: Add new IP to firewall rules
+        id: add_rule
+        run: |
+          # Parse existing rules from the response
+          EXISTING_RULES=$(echo $RESPONSE | jq '.rules')
+          
+          # Create new rule
+          NEW_RULE=$(jq -n --arg ip "${{ env.RUNNER_IP }}" '{"type": "ip_addr", "value": $ip, "database": "all"}')
+
+          # Combine existing rules and the new rule
+          UPDATED_RULES=$(echo $EXISTING_RULES | jq ". + [${NEW_RULE}]")
+
+          # Update firewall with the new rules
+          curl -X PUT \
+            -H "Authorization: Bearer ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}" \
+            -H "Content-Type: application/json" \
+            -d '{"rules": '"${UPDATED_RULES}"'}' \
+            https://api.digitalocean.com/v2/databases/6652f7a3-beaa-416a-8bbd-e44c084b121d/firewall
+        env:
+          RUNNER_IP: ${{ env.RUNNER_IP }}
 
       - name: Run Backend E2E Tests
         env:
