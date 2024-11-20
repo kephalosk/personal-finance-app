@@ -512,14 +512,11 @@ jobs:
         run: |
           PACKAGE_VERSION_FRONTEND=$(cat PACKAGE_VERSION_FRONTEND)
           echo "PACKAGE_VERSION_FRONTEND=$PACKAGE_VERSION_FRONTEND" >> $GITHUB_ENV
-  
-      - name: Replace image tag in Kubernetes manifest
-        run: |
-          sed -i "s|registry.digitalocean.com/kephalosk/personal-finance-app:latest|registry.digitalocean.com/kephalosk/personal-finance-app:${{ env.PACKAGE_VERSION_FRONTEND }}|g" deployment/personal-finance-app.yaml
-    
+
       - name: Deploy to DigitalOcean Kubernetes
-        run: kubectl apply -f deployment/personal-finance-app.yaml
-          
+        run: |
+          helm upgrade personal-finance-app ./deployment/helm/personal-finance-app --namespace default --set serviceVersion=${{ env.PACKAGE_VERSION_FRONTEND }} --wait
+
       - name: restart Pods
         run: kubectl -n default rollout restart deploy
   
@@ -566,12 +563,9 @@ jobs:
           PACKAGE_VERSION_BACKEND=$(cat PACKAGE_VERSION_BACKEND)
           echo "PACKAGE_VERSION_BACKEND=$PACKAGE_VERSION_BACKEND" >> $GITHUB_ENV
 
-      - name: Replace image tag in Kubernetes manifest
-        run: |
-          sed -i "s|registry.digitalocean.com/kephalosk/personal-finance-app:latest|registry.digitalocean.com/kephalosk/nestjs-backend:${{ env.PACKAGE_VERSION_BACKEND }}|g" deployment/nestjs-backend.yaml
-
       - name: Deploy to DigitalOcean Kubernetes
-        run: kubectl apply -f deployment/nestjs-backend.yaml
+        run: |
+          helm upgrade nestjs-backend ./deployment/helm/nestjs-backend --namespace default --set serviceVersion=${{ env.PACKAGE_VERSION_BACKEND }} --wait
 
       - name: restart Pods
         run: kubectl -n default rollout restart deploy
