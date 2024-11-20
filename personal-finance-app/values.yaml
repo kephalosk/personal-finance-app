@@ -3,15 +3,15 @@
 # Declare variables to be passed into your templates.
 
 # This will set the replicaset count more information can be found here: https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/
-replicaCount: 1
+replicaCount: 3
 
 # This sets the container image more information can be found here: https://kubernetes.io/docs/concepts/containers/images/
 image:
-  repository: nginx
+  repository: registry.digitalocean.com/kephalosk/personal-finance-app
   # This sets the pull policy for images.
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
-  tag: ""
+  tag: latest
 
 # This is for the secretes for pulling an image from a private repository more information can be found here: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
 imagePullSecrets: []
@@ -54,24 +54,37 @@ service:
   # This sets the service type more information can be found here: https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types
   type: ClusterIP
   # This sets the ports more information can be found here: https://kubernetes.io/docs/concepts/services-networking/service/#field-spec-ports
+  containerPort: 80
+  targetPort: 80
   port: 80
 
 # This block is for setting up the ingress for more information can be found here: https://kubernetes.io/docs/concepts/services-networking/ingress/
 ingress:
-  enabled: false
-  className: ""
-  annotations: {}
+  enabled: true
+  className: nginx
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    nginx.ingress.kubernetes.io/rewrite-target: /
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
   hosts:
-    - host: chart-example.local
+    - host: philippkraatz.com
       paths:
         - path: /
-          pathType: ImplementationSpecific
-  tls: []
+          pathType: Prefix
+    - host: www.philippkraatz.com
+      paths:
+        - path: /
+          pathType: Prefix
+  tls:
+    - hosts:
+        - philippkraatz.com
+        - www.philippkraatz.com
+      secretName: personal-finance-app-tls
   #  - secretName: chart-example-tls
   #    hosts:
   #      - chart-example.local
+  name: personal-finance-app-ingress
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
@@ -121,3 +134,22 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+namespace: default
+
+author: kephalosk
+
+certificate:
+  name: philippkraatz-com-cert
+  secretName: personal-finance-app-tls
+  clusterIssuerName: letsencrypt-prod
+
+hosts:
+  frontend: philippkraatz.com
+  frontendWWW: www.philippkraatz.com
+
+clusterissuer:
+  name: letsencrypt-prod
+  class: nginx
+  server: https://acme-v02.api.letsencrypt.org/directory
+  email: watchfromtheshore@gmail.com
