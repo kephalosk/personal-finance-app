@@ -3,13 +3,19 @@ kind: Deployment
 metadata:
   name: {{ include "personal-finance-app.fullname" . }}
   labels:
+    app: {{ .Chart.Name }}
     {{- include "personal-finance-app.labels" . | nindent 4 }}
+  namespace: {{ .Values.namespace }}
+  annotations:
+    description: Deployment for {{ .Chart.Name }}
+    createdBy: {{ .Values.author }}
 spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
   {{- end }}
   selector:
     matchLabels:
+      app: {{ .Chart.Name }}
       {{- include "personal-finance-app.selectorLabels" . | nindent 6 }}
   template:
     metadata:
@@ -18,6 +24,7 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
+        app: {{ .Chart.Name }}
         {{- include "personal-finance-app.labels" . | nindent 8 }}
         {{- with .Values.podLabels }}
         {{- toYaml . | nindent 8 }}
@@ -38,7 +45,7 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http
-              containerPort: {{ .Values.service.port }}
+              containerPort: {{ .Values.service.containerPort }}
               protocol: TCP
           livenessProbe:
             {{- toYaml .Values.livenessProbe | nindent 12 }}
