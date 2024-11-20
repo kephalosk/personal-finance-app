@@ -140,11 +140,11 @@ jobs:
 
       - name: Call Digital Ocean - Databases
         run: |
-          curl -X POST \
+          curl -i -X POST \
           -H "Authorization: Bearer ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}" \
           -H "Content-Type: application/json" \
           -d '{
-            "rules": [{"type": "ip_addr", "value": "'"${{ env.RUNNER_IP }}"'", "database": "all"}]
+            "rules": [{"type": "ip_addr", "value": "${{ env.RUNNER_IP }}", "database": "all"}]
           }' \
           https://api.digitalocean.com/v2/databases/6652f7a3-beaa-416a-8bbd-e44c084b121d/firewall
 
