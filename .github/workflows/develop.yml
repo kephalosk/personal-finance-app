@@ -179,6 +179,32 @@ jobs:
           cd backend
           npm run test:e2e
 
+      - name: Get existing firewall rules from DigitalOcean
+        id: get_firewall_after
+        run: |
+          NEWRESPONSE=$(curl -s -X GET \
+            -H "Authorization: Bearer ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}" \
+            https://api.digitalocean.com/v2/databases/6652f7a3-beaa-416a-8bbd-e44c084b121d/firewall)
+          echo "NEWRESPONSE=$NEWRESPONSE" >> $GITHUB_ENV
+
+      - name: Remove Runner IP from firewall rules
+        id: remove_rule
+        run: |
+          # Parse existing rules from the response
+          EXISTING_RULES=$(echo $NEWRESPONSE | jq '.rules')
+          
+          # Filter out the rule with the Runner IP
+          UPDATED_RULES=$(echo $EXISTING_RULES | jq 'map(select(.value != "${{ env.RUNNER_IP }}"))')
+
+          # Update firewall with the new rules
+          curl -X PUT \
+            -H "Authorization: Bearer ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}" \
+            -H "Content-Type: application/json" \
+            -d '{"rules": '"${UPDATED_RULES}"'}' \
+            https://api.digitalocean.com/v2/databases/6652f7a3-beaa-416a-8bbd-e44c084b121d/firewall
+        env:
+          RUNNER_IP: ${{ env.RUNNER_IP }}
+
   frontend-build:
     runs-on: ubuntu-latest
 
