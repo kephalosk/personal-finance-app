@@ -47,6 +47,18 @@ spec:
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: {{ .Values.image.repository }}:{{ .Values.serviceVersion }}
+          env:
+            {{- range .Values.envVariables }}
+            - name: {{ .name }}
+              value: "{{ .value }}"
+            {{- end }}
+            {{- range .Values.envSecrets }}
+            - name: {{ .name }}
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .secretName }}
+                  key: {{ .secretKey }}
+            {{- end }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http
