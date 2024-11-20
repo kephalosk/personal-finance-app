@@ -118,8 +118,6 @@ jobs:
 
     needs: backend-versioning
 
-    continue-on-error: true
-
     steps:
       - name: Checkout master
         uses: actions/checkout@main
@@ -146,7 +144,6 @@ jobs:
             https://api.digitalocean.com/v2/databases/6652f7a3-beaa-416a-8bbd-e44c084b121d/firewall)
           echo "RESPONSE=$RESPONSE" >> $GITHUB_ENV
 
-      # Step 3: Add new rule to the firewall
       - name: Add new IP to firewall rules
         id: add_rule
         run: |
