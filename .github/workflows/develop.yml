@@ -128,6 +128,9 @@ jobs:
         run: |
           cd backend
           npm install
+          
+      - name: install curl
+        run: sudo apt update && sudo apt install curl
 
       - name: get Runner IP
         run: |
