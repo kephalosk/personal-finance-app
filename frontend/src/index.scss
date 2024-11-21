@@ -1,18 +1,4 @@
 :root {
-  @font-face {
-    font-family: 'Public Sans';
-    src: url('assets/fonts/PublicSans-VariableFont_wght.ttf') format('truetype');
-    font-weight: 100 900; /* Variable Font unterstützt Gewichtung von 100 bis 900 */
-    font-style: normal;
-  }
-
-  @font-face {
-    font-family: 'Public Sans';
-    src: url('assets/fonts/PublicSans-Italic-VariableFont_wght.ttf') format('truetype');
-    font-weight: 100 900;
-    font-style: italic;
-  }
-
   font-family: 'Public Sans', sans-serif;
   font-weight: normal;
 
@@ -54,6 +40,20 @@
   --searchbar-grey: #98908B;
 
   --icon-filter: invert(0%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);
+
+  @font-face {
+    font-family: 'Public Sans';
+    src: url('assets/fonts/PublicSans-VariableFont_wght.ttf') format('truetype');
+    font-weight: 100 900; /* Variable Font unterstützt Gewichtung von 100 bis 900 */
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'Public Sans';
+    src: url('assets/fonts/PublicSans-Italic-VariableFont_wght.ttf') format('truetype');
+    font-weight: 100 900;
+    font-style: italic;
+  }
 }
 
 * {
