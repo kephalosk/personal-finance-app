@@ -4,11 +4,13 @@ import { BudgetsDiagramCard } from './BudgetsDiagramCard';
 import { BudgetsDiagramCardProps } from '../../../model/props/BudgetsDiagramCardProps';
 import { mockedBudgets } from '../../../fixtures/MockedBudgets';
 import { mockedTransactionsEntertainment } from '../../../fixtures/MockedTransactions';
+import { MemoryRouter } from 'react-router-dom';
 
 describe('BudgetsDiagramCard', () => {
   const testProps: BudgetsDiagramCardProps = {
     budgets: mockedBudgets,
     transactions: mockedTransactionsEntertainment,
+    isLoading: false,
   };
 
   const currentAmountEntertainment = 25;
@@ -89,5 +91,19 @@ describe('BudgetsDiagramCard', () => {
           break;
       }
     });
+  });
+
+  it('renders LoadingSpinner if isLoading is true', () => {
+    const { container } = render(
+      <MemoryRouter>
+        <BudgetsDiagramCard {...testProps} isLoading={true} />
+      </MemoryRouter>
+    );
+
+    const htmlElement = container.querySelector('.loadingSpinner');
+    const components = screen.queryAllByTestId('budgets-diagram');
+
+    expect(htmlElement).toBeInTheDocument();
+    expect(components).toHaveLength(0);
   });
 });

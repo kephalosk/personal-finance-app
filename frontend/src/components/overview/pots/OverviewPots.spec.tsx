@@ -5,8 +5,10 @@ import { mockedPot, mockedPots } from '../../../fixtures/MockedPots';
 
 describe('OverviewPots', () => {
   const pots = mockedPots;
+  const isLoading = false;
   const testProps = {
     pots,
+    isLoading,
   };
   it('renders div overviewPots', () => {
     const { container } = render(
@@ -102,5 +104,19 @@ describe('OverviewPots', () => {
     const reactComponents = screen.getAllByTestId('value-box');
 
     expect(reactComponents).toHaveLength(1);
+  });
+
+  it('renders LoadingSpinner if isLoading is true', () => {
+    const { container } = render(
+      <MemoryRouter>
+        <OverviewPots {...testProps} isLoading={true} />
+      </MemoryRouter>
+    );
+
+    const htmlElement = container.querySelector('.loadingSpinner');
+    const components = screen.queryAllByTestId('value-box');
+
+    expect(htmlElement).toBeInTheDocument();
+    expect(components).toHaveLength(0);
   });
 });

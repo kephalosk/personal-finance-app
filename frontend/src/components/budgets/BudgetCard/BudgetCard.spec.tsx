@@ -18,6 +18,7 @@ describe('BudgetCard', () => {
   const testProps: BudgetCardProps = {
     budget: mockedBudget,
     transactions: mockedTransactionsEntertainment,
+    isLoading: false,
   };
 
   let spent: number = 0;
@@ -235,5 +236,19 @@ describe('BudgetCard', () => {
     htmlElements.forEach((category) => {
       expect(category.textContent).toEqual(mockedBudget.category);
     });
+  });
+
+  it('renders LoadingSpinner if isLoading is true', () => {
+    const { container } = render(
+      <MemoryRouter>
+        <BudgetCard {...testProps} isLoading={true} />
+      </MemoryRouter>
+    );
+
+    const htmlElement = container.querySelector('.loadingSpinner');
+    const components = screen.queryAllByTestId('value-box');
+
+    expect(htmlElement).toBeInTheDocument();
+    expect(components).toHaveLength(0);
   });
 });

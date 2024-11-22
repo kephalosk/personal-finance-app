@@ -10,13 +10,15 @@ import { SortOptionEnum } from '../../constants/SortOptionEnum';
 import PropTypes from 'prop-types';
 import useIsSmallScreen from '../../globals/hooks/useIsSmallScreen';
 import { BillCardTableRowSmall } from './BillCardTableRowSmall';
+import LoadingSpinner from '../LoadingSpinner';
 
 BillCard.propTypes = {
   bills: PropTypes.array.isRequired,
   today: PropTypes.object.isRequired,
+  isLoading: PropTypes.bool.isRequired,
 };
 
-export function BillCard({ bills, today }: BillCardProps) {
+export function BillCard({ bills, today, isLoading }: BillCardProps) {
   const [currentSortOption, setCurrentSortOption] = useState<string>(SortOptionEnum.LATEST);
 
   const billsInitLatest: EPTransaction[] = bills.sort(
@@ -85,33 +87,37 @@ export function BillCard({ bills, today }: BillCardProps) {
 
   return (
     <>
-      <div className="billCard" data-testid="bill-card">
-        <div className="billCardSearchbar">
-          <SearchbarInput ref={searchbarRef} onInputChange={handleInputChange} />
-          {!isSmallScreen && <label className="searchbarLabel sortBy">Sort by</label>}
-          <SearchbarDropdownSort onSortChange={handleSortChange} />
-        </div>
-        <div className="billCardTable">
-          {!isSmallScreen && (
-            <div className="billCardTableHeader">
-              <label className="billCardTableHeaderName">Bill Title</label>
-              <label className="billCardTableHeaderDate">Due Date</label>
-              <label className="billCardTableHeaderAmount">Amount</label>
-            </div>
-          )}
-          {!isSmallScreen &&
-            filteredTransactions.map((transaction: EPTransaction, index: number) => (
-              <BillCardTableRow key={index} transaction={transaction} today={today} />
-            ))}
-          {isSmallScreen &&
-            filteredTransactions.map((transaction: EPTransaction, index: number) => (
-              <div key={index}>
-                <BillCardTableRowSmall transaction={transaction} today={today} />
-                {index < filteredTransactions.length - 1 && <hr />}
+      {isLoading ? (
+        <LoadingSpinner />
+      ) : (
+        <div className="billCard" data-testid="bill-card">
+          <div className="billCardSearchbar">
+            <SearchbarInput ref={searchbarRef} onInputChange={handleInputChange} />
+            {!isSmallScreen && <label className="searchbarLabel sortBy">Sort by</label>}
+            <SearchbarDropdownSort onSortChange={handleSortChange} />
+          </div>
+          <div className="billCardTable">
+            {!isSmallScreen && (
+              <div className="billCardTableHeader">
+                <label className="billCardTableHeaderName">Bill Title</label>
+                <label className="billCardTableHeaderDate">Due Date</label>
+                <label className="billCardTableHeaderAmount">Amount</label>
               </div>
-            ))}
+            )}
+            {!isSmallScreen &&
+              filteredTransactions.map((transaction: EPTransaction, index: number) => (
+                <BillCardTableRow key={index} transaction={transaction} today={today} />
+              ))}
+            {isSmallScreen &&
+              filteredTransactions.map((transaction: EPTransaction, index: number) => (
+                <div key={index}>
+                  <BillCardTableRowSmall transaction={transaction} today={today} />
+                  {index < filteredTransactions.length - 1 && <hr />}
+                </div>
+              ))}
+          </div>
         </div>
-      </div>
+      )}
     </>
   );
 }

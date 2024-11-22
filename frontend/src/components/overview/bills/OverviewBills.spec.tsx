@@ -7,9 +7,11 @@ import { mockedTodayAugust3rd } from '../../../fixtures/MockedToday';
 describe('OverviewBills', () => {
   const bills = mockedBills;
   const today = mockedTodayAugust3rd;
+  const isLoading = false;
   const testProps = {
     bills,
     today,
+    isLoading,
   };
 
   const billsPaid = 130;
@@ -89,5 +91,19 @@ describe('OverviewBills', () => {
     const billRowDue = reactComponents.at(2)!.querySelector('.overviewBillsRowValue');
 
     expect(billRowDue!.textContent).toEqual(`$${billsDue}.00`);
+  });
+
+  it('renders LoadingSpinner if isLoading is true', () => {
+    const { container } = render(
+      <MemoryRouter>
+        <OverviewBills {...testProps} isLoading={true} />
+      </MemoryRouter>
+    );
+
+    const htmlElement = container.querySelector('.loadingSpinner');
+    const components = screen.queryAllByTestId('bill-row');
+
+    expect(htmlElement).toBeInTheDocument();
+    expect(components).toHaveLength(0);
   });
 });

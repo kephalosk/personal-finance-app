@@ -9,10 +9,13 @@ import { EPTransaction } from '../model/entrypoints/EPTransaction';
 export function BillsPage() {
   const [bills, setBills] = useState<EPTransaction[]>([]);
 
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+
   useEffect(() => {
     const fetchBills = async () => {
       const fetchedBills = await BillsHelper.getRecurringBillsFromTransactions();
       setBills(fetchedBills);
+      setIsLoading(false);
     };
     fetchBills().then();
   }, []);
@@ -30,10 +33,10 @@ export function BillsPage() {
         <h1>Recurring Bills</h1>
         <div className="billsPageDetails">
           <div className="billsPageDetailsOverview">
-            <BillTotal sum={billsTotal} />
-            <BillSummary bills={bills} today={today} />
+            <BillTotal sum={billsTotal} isLoading={isLoading} />
+            <BillSummary bills={bills} today={today} isLoading={isLoading} />
           </div>
-          <BillCard bills={bills} today={today} />
+          <BillCard bills={bills} today={today} isLoading={isLoading} />
         </div>
       </div>
     </>

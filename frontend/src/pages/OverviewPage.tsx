@@ -20,28 +20,37 @@ export function OverviewPage() {
   const [budgets, setBudgets] = useState<EPBudget[]>([]);
   const today: Date = new Date();
 
+  const [isLoadingTransactions, setIsLoadingTransactions] = useState<boolean>(true);
+  const [isLoadingBills, setIsLoadingBills] = useState<boolean>(true);
+  const [isLoadingPots, setIsLoadingPots] = useState<boolean>(true);
+  const [isLoadingBudgets, setIsLoadingBudgets] = useState<boolean>(true);
+
   useEffect(() => {
     const fetchTransactions = async (): Promise<void> => {
       const fetchedTransactions: EPTransaction[] = await getTransactions();
       setTransactions(fetchedTransactions);
+      setIsLoadingTransactions(false);
     };
     fetchTransactions().then();
 
     const fetchBills = async (): Promise<void> => {
       const fetchedBills: EPTransaction[] = await BillsHelper.getRecurringBillsFromTransactions();
       setBills(fetchedBills);
+      setIsLoadingBills(false);
     };
     fetchBills().then();
 
     const fetchPots = async (): Promise<void> => {
       const fetchedPots: EPPot[] = await getPots();
       setPots(fetchedPots);
+      setIsLoadingPots(false);
     };
     fetchPots().then();
 
     const fetchBudgets = async () => {
       const fetchedBudgets: EPBudget[] = await getBudgets();
       setBudgets(fetchedBudgets);
+      setIsLoadingBudgets(false);
     };
     fetchBudgets().then();
   }, []);
@@ -52,12 +61,19 @@ export function OverviewPage() {
       <OverviewSummary />
       <div className="overviewPageDetails">
         <div className="overviewPageDetailsLeft">
-          <OverviewPots pots={pots} />
-          <OverviewTransactions transactions={transactions} />
+          <OverviewPots pots={pots} isLoading={isLoadingPots} />
+          <OverviewTransactions
+            transactions={transactions}
+            isLoading={isLoadingTransactions || isLoadingBudgets}
+          />
         </div>
         <div className="overviewPageDetailsRight">
-          <OverviewBudgets budgets={budgets} transactions={transactions} />
-          <OverviewBills bills={bills} today={today} />
+          <OverviewBudgets
+            budgets={budgets}
+            transactions={transactions}
+            isLoading={isLoadingTransactions}
+          />
+          <OverviewBills bills={bills} today={today} isLoading={isLoadingBills} />
         </div>
       </div>
     </div>

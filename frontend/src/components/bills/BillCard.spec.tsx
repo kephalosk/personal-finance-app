@@ -4,6 +4,7 @@ import { mockedBills } from '../../fixtures/MockedBills';
 import { SortOptionEnum } from '../../constants/SortOptionEnum';
 import React from 'react';
 import useIsSmallScreen from '../../globals/hooks/useIsSmallScreen';
+import { MemoryRouter } from 'react-router-dom';
 
 jest.mock('../../globals/hooks/useIsSmallScreen', () => ({
   __esModule: true,
@@ -16,6 +17,7 @@ describe('BillCard', () => {
   const testProps = {
     bills: mockedBills,
     today: fakeToday,
+    isLoading: false,
   };
 
   const testSearchbarInput = 'sp';
@@ -224,5 +226,19 @@ describe('BillCard', () => {
       const secondAmountValue = parseInt(secondAmount.substring(1, firstAmount.length));
       expect(firstAmountValue > secondAmountValue).toBe(true);
     });
+  });
+
+  it('renders LoadingSpinner if isLoading is true', () => {
+    const { container } = render(
+      <MemoryRouter>
+        <BillCard {...testProps} isLoading={true} />
+      </MemoryRouter>
+    );
+
+    const htmlElement = container.querySelector('.loadingSpinner');
+    const components = screen.queryAllByTestId('bill-card-table-row');
+
+    expect(htmlElement).toBeInTheDocument();
+    expect(components).toHaveLength(0);
   });
 });

@@ -1,11 +1,14 @@
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 import { BillTotal } from './BillTotal';
+import { MemoryRouter } from 'react-router-dom';
 
 describe('BillTotal', () => {
   const sum = 100;
+  const isLoading = false;
   const testProps = {
     sum,
+    isLoading,
   };
 
   it('renders div billTotal', () => {
@@ -48,5 +51,17 @@ describe('BillTotal', () => {
 
     expect(htmlElement).toBeInTheDocument();
     expect(htmlElement).toHaveTextContent(`${sum}.00`);
+  });
+
+  it('renders LoadingSpinner if isLoading is true', () => {
+    const { container } = render(
+      <MemoryRouter>
+        <BillTotal {...testProps} isLoading={true} />
+      </MemoryRouter>
+    );
+
+    const htmlElement = container.querySelector('.loadingSpinner');
+
+    expect(htmlElement).toBeInTheDocument();
   });
 });
