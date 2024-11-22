@@ -26,8 +26,8 @@ export async function getBalance(): Promise<EPBalance> {
 
 function fromAPIBalanceDTOMapper(balance: APIBalanceDTO): EPBalance {
   return {
-    current: balance.current,
-    income: balance.income,
-    expenses: balance.expenses,
+    current: Number(balance.current),
+    income: Number(balance.income),
+    expenses: Number(balance.expenses),
   };
 }
