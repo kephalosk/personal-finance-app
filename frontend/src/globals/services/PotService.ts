@@ -26,8 +26,8 @@ function fromAPIPotsDTOMapper(pots: APIPotDTO[]): EPPot[] {
   pots.forEach((pot: APIPotDTO) => {
     const newPot: EPPot = {
       name: pot.name,
-      target: pot.target,
-      total: pot.total,
+      target: Number(pot.target),
+      total: Number(pot.total),
       color: fromColorCodeToName(pot.theme),
     };
     epPots.push(newPot);

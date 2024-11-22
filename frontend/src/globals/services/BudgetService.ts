@@ -28,7 +28,7 @@ function fromAPIBudgetDTOMapper(budgets: APIBudgetDTO[]): EPBudget[] {
     const newBudget: EPBudget = {
       category: budget.category,
       categoryKey: toLowerCaseWithoutWhitespace(budget.category),
-      maximum: budget.maximum,
+      maximum: Number(budget.maximum),
       color: fromColorCodeToName(budget.theme),
     };
     epBudgets.push(newBudget);
