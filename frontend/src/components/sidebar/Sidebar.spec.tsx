@@ -5,10 +5,16 @@ import { SidebarMinimizeProps } from '../../constants/SidebarMinimizeProps';
 import { MemoryRouter, useLocation } from 'react-router-dom';
 import React from 'react';
 import { SidebarMinimize } from './SidebarMinimize';
+import useIsTabletScreen from '../../globals/hooks/useIsTabletScreen';
 
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
   useLocation: jest.fn(),
+}));
+
+jest.mock('../../globals/hooks/useIsTabletScreen', () => ({
+  __esModule: true,
+  default: jest.fn(),
 }));
 
 const mockOnMinimize = jest.fn();
@@ -40,10 +46,23 @@ function getInitializedContainer(): HTMLElement {
 }
 
 describe('Sidebar', () => {
-  it('renders section sidebar', () => {
+  beforeEach(() => {
+    (useIsTabletScreen as jest.Mock).mockReturnValue(false);
+  });
+
+  it('renders section sidebarLeft', () => {
     const container = getInitializedContainer();
 
-    const htmlElement = container.querySelector('.sidebar');
+    const htmlElement = container.querySelector('.sidebarLeft');
+
+    expect(htmlElement).toBeInTheDocument();
+  });
+
+  it('renders div sidebarBottom', () => {
+    (useIsTabletScreen as jest.Mock).mockReturnValue(true);
+    const container = getInitializedContainer();
+
+    const htmlElement = container.querySelector('.sidebarBottom');
 
     expect(htmlElement).toBeInTheDocument();
   });

@@ -1,6 +1,6 @@
 @use '../../styles/mixins';
 
-.sidebar {
+.sidebarLeft {
   border-radius: 0 16px 16px 0;
   background-color: var(--sidebar-background-grey);
   padding: 32px 24px 70px 0;
@@ -11,30 +11,23 @@
   flex-direction: column;
   transition: width 0.4s ease;
   z-index: 10;
-
-  @include mixins.tablet-and-down(50) {
-    transition: width 0s ease;
-  }
-
-  @include mixins.tablet-and-down() {
-    border-radius: 16px 16px 0 0;
-    padding: 8px 0 13px 0;
-    position: fixed;
-    bottom: 0;
-    height: auto;
-    width: 100%;
-    z-index: 10;
-    transition: width 0s ease;
-  }
 }
-.sidebar.minimized {
+.sidebarLeft.minimized {
   width: 90px;
   padding: 32px 18px 70px 0;
+}
 
-  @include mixins.tablet-and-down() {
-    padding: 8px 0 13px 0;
-    width: 100%;
-  }
+.sidebarBottom {
+  border-radius: 16px 16px 0 0;
+  background-color: var(--sidebar-background-grey);
+  padding: 8px 0 13px 0;
+  height: auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  bottom: 0;
+  z-index: 10;
 }
 
 .sidebarList {
