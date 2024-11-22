@@ -1,67 +1,42 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-import { TransactionsPage } from './TransactionsPage';
 import React, { act } from 'react';
-import { convertSignedDollarStringToNumber } from '../globals/utils/ConvertSignedDollarStringToNumber';
-import { getTransactions } from '../globals/services/TransactionService';
-import { SortOptionEnum } from '../constants/SortOptionEnum';
-import useIsSmallScreen from '../globals/hooks/useIsSmallScreen';
-import { mockedTransactions11Records } from '../fixtures/MockedTransactions';
+import { mockedTransactions11Records } from '../../../fixtures/MockedTransactions';
+import { getTransactions } from '../../../globals/services/TransactionService';
+import useIsSmallScreen from '../../../globals/hooks/useIsSmallScreen';
+import { convertSignedDollarStringToNumber } from '../../../globals/utils/ConvertSignedDollarStringToNumber';
+import { SortOptionEnum } from '../../../constants/SortOptionEnum';
+import TransactionsDetails from './TransactionsDetails';
+import { MemoryRouter } from 'react-router-dom';
 
-jest.mock('../globals/services/TransactionService', () => ({
+jest.mock('../../../globals/services/TransactionService', () => ({
   getTransactions: jest.fn(),
 }));
 
-jest.mock('../globals/hooks/useIsSmallScreen', () => ({
+jest.mock('../../../globals/hooks/useIsSmallScreen', () => ({
   __esModule: true,
   default: jest.fn(),
 }));
 
-describe('TransactionsPage', () => {
-  const transactions = mockedTransactions11Records;
-  const testCategory = transactions.at(0)!.category;
-  const testCategoryKey = transactions.at(0)!.categoryKey;
+describe('TransactionsDetails', () => {
+  const fetchedTransactions = mockedTransactions11Records;
+  const testCategory = fetchedTransactions.at(0)!.category;
+  const testCategoryKey = fetchedTransactions.at(0)!.categoryKey;
   const testSearchbarInput = 'emma';
+  const isLoading = false;
+
+  const testProps = {
+    fetchedTransactions,
+    isLoading,
+  };
 
   beforeEach(() => {
     (getTransactions as jest.Mock).mockResolvedValue(mockedTransactions11Records);
     (useIsSmallScreen as jest.Mock).mockReturnValue(false);
   });
 
-  it('renders div transactionsPage', async () => {
-    const cut: HTMLElement = await act(async (): Promise<HTMLElement> => {
-      const { container } = render(<TransactionsPage />);
-      return container;
-    });
-
-    const htmlElement = cut.querySelector('.transactionsPage');
-
-    expect(htmlElement).toBeInTheDocument();
-  });
-
-  it('renders headline h1 of TransactionsPage', async () => {
-    const cut: HTMLElement = await act(async (): Promise<HTMLElement> => {
-      const { container } = render(<TransactionsPage />);
-      return container;
-    });
-
-    const htmlElement = cut.querySelector('h1');
-
-    expect(htmlElement).toHaveTextContent('Transactions');
-  });
-
-    it('renders react component TransactionsDetails', async () => {
-        await act(async (): Promise<void> => {
-            render(<TransactionsPage />);
-        });
-
-        const reactComponent = screen.getByTestId('transactions-details');
-
-        expect(reactComponent).toBeInTheDocument();
-    });
-
   it('renders div transactionsDetails', async () => {
     const cut: HTMLElement = await act(async (): Promise<HTMLElement> => {
-      const { container } = render(<TransactionsPage />);
+      const { container } = render(<TransactionsDetails {...testProps} />);
       return container;
     });
 
@@ -73,7 +48,7 @@ describe('TransactionsPage', () => {
   describe('transactionsSearchbar', () => {
     it('renders react component SearchbarInput', async () => {
       await act(async (): Promise<void> => {
-        render(<TransactionsPage />);
+        render(<TransactionsDetails {...testProps} />);
       });
 
       const reactComponent = screen.getByTestId('searchbar-input');
@@ -83,7 +58,7 @@ describe('TransactionsPage', () => {
 
     it('renders div searchbarLabelWrapper', async () => {
       const cut: HTMLElement = await act(async (): Promise<HTMLElement> => {
-        const { container } = render(<TransactionsPage />);
+        const { container } = render(<TransactionsDetails {...testProps} />);
         return container;
       });
 
@@ -94,7 +69,7 @@ describe('TransactionsPage', () => {
 
     it('renders label Sort by', async () => {
       const cut: HTMLElement = await act(async (): Promise<HTMLElement> => {
-        const { container } = render(<TransactionsPage />);
+        const { container } = render(<TransactionsDetails {...testProps} />);
         return container;
       });
       const htmlElement = cut.querySelector('.sortBy');
@@ -103,19 +78,18 @@ describe('TransactionsPage', () => {
     });
 
     it('renders react component SearchbarDropdownSort', async () => {
-      const cut: HTMLElement = await act(async (): Promise<HTMLElement> => {
-        const { container } = render(<TransactionsPage />);
-        return container;
+      await act(async (): Promise<void> => {
+        render(<TransactionsDetails {...testProps} />);
       });
 
-      const htmlElement = cut.querySelector('.dropdownSort');
+      const reactComponent = screen.getByTestId('searchbar-dropdown-sort');
 
-      expect(htmlElement).toBeInTheDocument();
+      expect(reactComponent).toBeInTheDocument();
     });
 
     it('renders label Category', async () => {
       const cut: HTMLElement = await act(async (): Promise<HTMLElement> => {
-        const { container } = render(<TransactionsPage />);
+        const { container } = render(<TransactionsDetails {...testProps} />);
         return container;
       });
 
@@ -125,14 +99,13 @@ describe('TransactionsPage', () => {
     });
 
     it('renders react component SearchbarDropdownCategory', async () => {
-      const cut: HTMLElement = await act(async (): Promise<HTMLElement> => {
-        const { container } = render(<TransactionsPage />);
-        return container;
+      await act(async (): Promise<void> => {
+        render(<TransactionsDetails {...testProps} />);
       });
 
-      const htmlElement = cut.querySelector('.dropdownCategory');
+      const reactComponent = screen.getByTestId('searchbar-dropdown-category');
 
-      expect(htmlElement).toBeInTheDocument();
+      expect(reactComponent).toBeInTheDocument();
     });
 
     function flushPromises(): Promise<void> {
@@ -141,10 +114,9 @@ describe('TransactionsPage', () => {
 
     describe('Sorting', () => {
       it('sorts the transactions from oldest to newest', async () => {
-        const cut: HTMLElement = await act(async (): Promise<HTMLElement> => {
-          const { container } = render(<TransactionsPage />);
+        await act(async (): Promise<void> => {
+          render(<TransactionsDetails {...testProps} />);
           await flushPromises();
-          return container;
         });
         let tableRows = await screen.findAllByTestId('table-row');
         let secondDate = new Date(
@@ -155,11 +127,8 @@ describe('TransactionsPage', () => {
         ).getTime();
         expect(secondDate - thirdDate > 0).toBe(true);
 
-        const dropdown = cut.querySelector('.dropdownSort');
-        const selectElement = dropdown!.querySelector('.selectionMenu');
-        fireEvent.click(selectElement!);
-        const optionElement = screen.getByText('Oldest');
-        fireEvent.click(optionElement);
+        const selectElement = screen.getByTestId('searchbar-dropdown-sort').querySelector('select');
+        fireEvent.change(selectElement!, { target: { value: 'oldest' } });
 
         tableRows = screen.getAllByTestId('table-row');
         secondDate = new Date(tableRows[1].querySelector('.tableRowDate')!.textContent!).getTime();
@@ -168,16 +137,11 @@ describe('TransactionsPage', () => {
       });
 
       it('sorts the transactions from newest to oldest', async () => {
-        const cut: HTMLElement = await act(async (): Promise<HTMLElement> => {
-          const { container } = render(<TransactionsPage />);
-          await flushPromises();
-          return container;
+        await act(async (): Promise<void> => {
+          render(<TransactionsDetails {...testProps} />);
         });
-        let dropdown = cut.querySelector('.dropdownSort');
-        let selectElement = dropdown!.querySelector('.selectionMenu');
-        fireEvent.click(selectElement!);
-        let optionElement = screen.getByText('Oldest');
-        fireEvent.click(optionElement);
+        let selectElement = screen.getByTestId('searchbar-dropdown-sort').querySelector('select');
+        fireEvent.change(selectElement!, { target: { value: 'oldest' } });
         let tableRows = screen.getAllByTestId('table-row');
         let secondDate = new Date(
           tableRows[1].querySelector('.tableRowDate')!.textContent!
@@ -187,11 +151,8 @@ describe('TransactionsPage', () => {
         ).getTime();
         expect(secondDate - thirdDate > 0).toBe(false);
 
-        dropdown = cut.querySelector('.dropdownSort');
-        selectElement = dropdown!.querySelector('.selectionMenu');
-        fireEvent.click(selectElement!);
-        optionElement = screen.getByText('Latest');
-        fireEvent.click(optionElement);
+        selectElement = screen.getByTestId('searchbar-dropdown-sort').querySelector('select');
+        fireEvent.change(selectElement!, { target: { value: 'latest' } });
 
         tableRows = screen.getAllByTestId('table-row');
         thirdDate = new Date(tableRows[2].querySelector('.tableRowDate')!.textContent!).getTime();
@@ -200,17 +161,12 @@ describe('TransactionsPage', () => {
       });
 
       it('sorts the transactions from A to Z', async () => {
-        const cut: HTMLElement = await act(async (): Promise<HTMLElement> => {
-          const { container } = render(<TransactionsPage />);
-          await flushPromises();
-          return container;
+        await act(async (): Promise<void> => {
+          render(<TransactionsDetails {...testProps} />);
         });
 
-        const dropdown = cut.querySelector('.dropdownSort');
-        const selectElement = dropdown!.querySelector('.selectionMenu');
-        fireEvent.click(selectElement!);
-        const optionElement = screen.getByText('A to Z');
-        fireEvent.click(optionElement);
+        const selectElement = screen.getByTestId('searchbar-dropdown-sort').querySelector('select');
+        fireEvent.change(selectElement!, { target: { value: 'atoz' } });
 
         const tableRows = screen.getAllByTestId('table-row');
         const secondName = tableRows[1].querySelector('.tableRowPartnerName')!.textContent!;
@@ -219,17 +175,12 @@ describe('TransactionsPage', () => {
       });
 
       it('sorts the transactions from Z to A', async () => {
-        const cut: HTMLElement = await act(async (): Promise<HTMLElement> => {
-          const { container } = render(<TransactionsPage />);
-          await flushPromises();
-          return container;
+        await act(async (): Promise<void> => {
+          render(<TransactionsDetails {...testProps} />);
         });
 
-        const dropdown = cut.querySelector('.dropdownSort');
-        const selectElement = dropdown!.querySelector('.selectionMenu');
-        fireEvent.click(selectElement!);
-        const optionElement = screen.getByText('Z to A');
-        fireEvent.click(optionElement);
+        const selectElement = screen.getByTestId('searchbar-dropdown-sort').querySelector('select');
+        fireEvent.change(selectElement!, { target: { value: 'ztoa' } });
 
         const tableRows = screen.getAllByTestId('table-row');
         const secondName = tableRows[1].querySelector('.tableRowPartnerName')!.textContent!;
@@ -238,17 +189,12 @@ describe('TransactionsPage', () => {
       });
 
       it('sorts the transactions from highest to lowest', async () => {
-        const cut: HTMLElement = await act(async (): Promise<HTMLElement> => {
-          const { container } = render(<TransactionsPage />);
-          await flushPromises();
-          return container;
+        await act(async (): Promise<void> => {
+          render(<TransactionsDetails {...testProps} />);
         });
 
-        const dropdown = cut.querySelector('.dropdownSort');
-        const selectElement = dropdown!.querySelector('.selectionMenu');
-        fireEvent.click(selectElement!);
-        const optionElement = screen.getByText('Highest');
-        fireEvent.click(optionElement);
+        const selectElement = screen.getByTestId('searchbar-dropdown-sort').querySelector('select');
+        fireEvent.change(selectElement!, { target: { value: 'highest' } });
 
         const tableRows = screen.getAllByTestId('table-row');
         const thirdAmount = tableRows[2].querySelector('.tableRowValue')!.textContent!;
@@ -259,17 +205,12 @@ describe('TransactionsPage', () => {
       });
 
       it('sorts the transactions from lowest to highest', async () => {
-        const cut: HTMLElement = await act(async (): Promise<HTMLElement> => {
-          const { container } = render(<TransactionsPage />);
-          await flushPromises();
-          return container;
+        await act(async (): Promise<void> => {
+          render(<TransactionsDetails {...testProps} />);
         });
 
-        const dropdown = cut.querySelector('.dropdownSort');
-        const selectElement = dropdown!.querySelector('.selectionMenu');
-        fireEvent.click(selectElement!);
-        const optionElement = screen.getByText('Lowest');
-        fireEvent.click(optionElement);
+        const selectElement = screen.getByTestId('searchbar-dropdown-sort').querySelector('select');
+        fireEvent.change(selectElement!, { target: { value: 'lowest' } });
 
         const tableRows = screen.getAllByTestId('table-row');
         const fourthAmount = tableRows[3].querySelector('.tableRowValue')!.textContent!;
@@ -281,7 +222,7 @@ describe('TransactionsPage', () => {
 
       it('resets the pageIndex after sorting the transactions', async () => {
         const cut: HTMLElement = await act(async (): Promise<HTMLElement> => {
-          const { container } = render(<TransactionsPage />);
+          const { container } = render(<TransactionsDetails {...testProps} />);
           return container;
         });
         const buttons = cut.querySelectorAll('.paginationPagesButton');
@@ -289,11 +230,8 @@ describe('TransactionsPage', () => {
         let activeButton = cut.querySelector('.isActive');
         expect(activeButton).toHaveTextContent('2');
 
-        const dropdown = cut.querySelector('.dropdownSort');
-        const selectElement = dropdown!.querySelector('.selectionMenu');
-        fireEvent.click(selectElement!);
-        const optionElement = screen.getByText('Z to A');
-        fireEvent.click(optionElement);
+        const selectElement = screen.getByTestId('searchbar-dropdown-sort').querySelector('select');
+        fireEvent.change(selectElement!, { target: { value: 'ztoa' } });
         activeButton = cut.querySelector('.isActive');
 
         expect(activeButton).toHaveTextContent('1');
@@ -302,16 +240,14 @@ describe('TransactionsPage', () => {
 
     describe('Filtering', () => {
       it('filters the transactions correctly', async () => {
-        const cut: HTMLElement = await act(async (): Promise<HTMLElement> => {
-          const { container } = render(<TransactionsPage />);
-          return container;
+        await act(async (): Promise<void> => {
+          render(<TransactionsDetails {...testProps} />);
         });
 
-        const dropdown = cut.querySelector('.dropdownCategory');
-        const selectElement = dropdown!.querySelector('.selectionMenu');
-        fireEvent.click(selectElement!);
-        const optionElements = screen.getAllByText(testCategory);
-        fireEvent.click(optionElements[0]);
+        const selectElement = screen
+          .getByTestId('searchbar-dropdown-category')
+          .querySelector('select');
+        fireEvent.change(selectElement!, { target: { value: `${testCategoryKey}` } });
 
         const tableRows = screen.getAllByTestId('table-row');
         tableRows.forEach((row) => {
@@ -322,7 +258,7 @@ describe('TransactionsPage', () => {
 
       it('resets the pageIndex after filtering the transactions', async () => {
         const cut: HTMLElement = await act(async (): Promise<HTMLElement> => {
-          const { container } = render(<TransactionsPage />);
+          const { container } = render(<TransactionsDetails {...testProps} />);
           return container;
         });
         const buttons = cut.querySelectorAll('.paginationPagesButton');
@@ -330,38 +266,33 @@ describe('TransactionsPage', () => {
         let activeButton = cut.querySelector('.isActive');
         expect(activeButton).toHaveTextContent('2');
 
-        const dropdown = cut.querySelector('.dropdownCategory');
-        const selectElement = dropdown!.querySelector('.selectionMenu');
-        fireEvent.click(selectElement!);
-        const optionElements = screen.getAllByText(testCategory);
-        fireEvent.click(optionElements[0]);
+        const selectElement = screen
+          .getByTestId('searchbar-dropdown-category')
+          .querySelector('select');
+        fireEvent.change(selectElement!, { target: { value: `${testCategoryKey}` } });
         activeButton = cut.querySelector('.isActive');
 
         expect(activeButton).toHaveTextContent('1');
       });
 
       it('keeps filtered transactions after sorting', async () => {
-        const cut: HTMLElement = await act(async (): Promise<HTMLElement> => {
-          const { container } = render(<TransactionsPage />);
-          return container;
+        await act(async (): Promise<void> => {
+          render(<TransactionsDetails {...testProps} />);
         });
-
-        const dropdown = cut.querySelector('.dropdownCategory');
-        const selectElement = dropdown!.querySelector('.selectionMenu');
-        fireEvent.click(selectElement!);
-        const optionElements = screen.getAllByText(testCategory);
-        fireEvent.click(optionElements[0]);
+        const selectElement = screen
+          .getByTestId('searchbar-dropdown-category')
+          .querySelector('select');
+        fireEvent.change(selectElement!, { target: { value: `${testCategoryKey}` } });
         const filteredTableRowBeforeSorting = screen.getAllByTestId('table-row');
         filteredTableRowBeforeSorting.forEach((row) => {
           const rowCategory = row.querySelector('.tableRowCategory')!.textContent;
           expect(rowCategory).toEqual(testCategory);
         });
 
-        const dropdownSort = cut.querySelector('.dropdownSort');
-        const selectElementSort = dropdownSort!.querySelector('.selectionMenu');
-        fireEvent.click(selectElementSort!);
-        const optionElement = screen.getByText('Lowest');
-        fireEvent.click(optionElement);
+        const selectElementSort = screen
+          .getByTestId('searchbar-dropdown-sort')
+          .querySelector('select');
+        fireEvent.change(selectElementSort!, { target: { value: 'lowest' } });
 
         const filteredTableRowAfterSorting = screen.getAllByTestId('table-row');
         filteredTableRowAfterSorting.forEach((row) => {
@@ -374,7 +305,7 @@ describe('TransactionsPage', () => {
     describe('Searching', () => {
       it('filters all transactions for content of current input of searchbar', async () => {
         await act(async (): Promise<void> => {
-          render(<TransactionsPage />);
+          render(<TransactionsDetails {...testProps} />);
         });
 
         const inputElement = screen.getByTestId('searchbar-input').querySelector('input');
@@ -389,7 +320,7 @@ describe('TransactionsPage', () => {
 
       it('resets the pageIndex after input of searchbar changes', async () => {
         const cut: HTMLElement = await act(async (): Promise<HTMLElement> => {
-          const { container } = render(<TransactionsPage />);
+          const { container } = render(<TransactionsDetails {...testProps} />);
           return container;
         });
         const buttons = cut.querySelectorAll('.paginationPagesButton');
@@ -406,22 +337,19 @@ describe('TransactionsPage', () => {
 
       it('keeps sorting and filter after searching', async () => {
         const testCategoryKeyGeneral = 'general';
-        const cut: HTMLElement = await act(async (): Promise<HTMLElement> => {
-          const { container } = render(<TransactionsPage />);
-          await flushPromises();
-          return container;
+        await act(async (): Promise<void> => {
+          render(<TransactionsDetails {...testProps} />);
         });
-
-        const dropdownSort = cut.querySelector('.dropdownSort');
-        const selectElementSort = dropdownSort!.querySelector('.selectionMenu');
-        fireEvent.click(selectElementSort!);
-        const optionElement = screen.getByText('Highest');
-        fireEvent.click(optionElement);
-        const dropdown = cut.querySelector('.dropdownCategory');
-        const selectElement = dropdown!.querySelector('.selectionMenu');
-        fireEvent.click(selectElement!);
-        const optionElements = screen.getAllByText(testCategory);
-        fireEvent.click(optionElements[0]);
+        const selectSortElement = screen
+          .getByTestId('searchbar-dropdown-sort')
+          .querySelector('select');
+        fireEvent.change(selectSortElement!, { target: { value: SortOptionEnum.HIGHEST } });
+        const selectCategoryElement = screen
+          .getByTestId('searchbar-dropdown-category')
+          .querySelector('select');
+        fireEvent.change(selectCategoryElement!, {
+          target: { value: `${testCategoryKeyGeneral}` },
+        });
 
         const inputElement = screen.getByTestId('searchbar-input').querySelector('input');
         fireEvent.change(inputElement!, { target: { value: `${testSearchbarInput}` } });
@@ -445,7 +373,7 @@ describe('TransactionsPage', () => {
   describe('transactionsTable', () => {
     it('renders div transactionsTable', async () => {
       const cut: HTMLElement = await act(async (): Promise<HTMLElement> => {
-        const { container } = render(<TransactionsPage />);
+        const { container } = render(<TransactionsDetails {...testProps} />);
         return container;
       });
 
@@ -456,7 +384,7 @@ describe('TransactionsPage', () => {
 
     it('renders react component TableHeader', async () => {
       await act(async (): Promise<void> => {
-        render(<TransactionsPage />);
+        render(<TransactionsDetails {...testProps} />);
       });
 
       const reactComponent = screen.getByTestId('table-header');
@@ -466,7 +394,7 @@ describe('TransactionsPage', () => {
 
     it('renders react component TableRow 10 times', async () => {
       await act(async (): Promise<void> => {
-        render(<TransactionsPage />);
+        render(<TransactionsDetails {...testProps} />);
       });
 
       const reactComponents = screen.getAllByTestId('table-row');
@@ -478,7 +406,7 @@ describe('TransactionsPage', () => {
   describe('transactionsPagination', () => {
     it('renders div transactionsPagination', async () => {
       const cut: HTMLElement = await act(async (): Promise<HTMLElement> => {
-        const { container } = render(<TransactionsPage />);
+        const { container } = render(<TransactionsDetails {...testProps} />);
         return container;
       });
 
@@ -489,7 +417,7 @@ describe('TransactionsPage', () => {
 
     it('renders react component PaginationButtonPrev', async () => {
       await act(async (): Promise<void> => {
-        render(<TransactionsPage />);
+        render(<TransactionsDetails {...testProps} />);
       });
 
       const reactComponent = screen.getByTestId('pagination-button-prev');
@@ -499,7 +427,7 @@ describe('TransactionsPage', () => {
 
     it('renders react component PaginationPages', async () => {
       await act(async (): Promise<void> => {
-        render(<TransactionsPage />);
+        render(<TransactionsDetails {...testProps} />);
       });
 
       const reactComponent = screen.getByTestId('pagination-pages');
@@ -509,7 +437,7 @@ describe('TransactionsPage', () => {
 
     it('renders react component PaginationButtonNext', async () => {
       await act(async (): Promise<void> => {
-        render(<TransactionsPage />);
+        render(<TransactionsDetails {...testProps} />);
       });
 
       const reactComponent = screen.getByTestId('pagination-button-next');
@@ -519,7 +447,7 @@ describe('TransactionsPage', () => {
 
     it('increases page Number when next button is clicked', async () => {
       const cut: HTMLElement = await act(async (): Promise<HTMLElement> => {
-        const { container } = render(<TransactionsPage />);
+        const { container } = render(<TransactionsDetails {...testProps} />);
         return container;
       });
       let activePageButton = cut.querySelector('.isActive');
@@ -534,7 +462,7 @@ describe('TransactionsPage', () => {
 
     it('does not increases page Number when isMaxIndex is true and next button is clicked', async () => {
       const cut: HTMLElement = await act(async (): Promise<HTMLElement> => {
-        const { container } = render(<TransactionsPage />);
+        const { container } = render(<TransactionsDetails {...testProps} />);
         return container;
       });
       const buttons = cut.querySelectorAll('.paginationPagesButton');
@@ -551,7 +479,7 @@ describe('TransactionsPage', () => {
 
     it('decreases page Number when prev button is clicked', async () => {
       const cut: HTMLElement = await act(async (): Promise<HTMLElement> => {
-        const { container } = render(<TransactionsPage />);
+        const { container } = render(<TransactionsDetails {...testProps} />);
         return container;
       });
       const buttonNext = screen.getByTestId('pagination-button-next');
@@ -568,7 +496,7 @@ describe('TransactionsPage', () => {
 
     it('does not decreases page Number when pageIndex is 0 and prev button is clicked', async () => {
       const cut: HTMLElement = await act(async (): Promise<HTMLElement> => {
-        const { container } = render(<TransactionsPage />);
+        const { container } = render(<TransactionsDetails {...testProps} />);
         return container;
       });
       let activePageButton = cut.querySelector('.isActive');
@@ -583,7 +511,7 @@ describe('TransactionsPage', () => {
 
     it('changes page Number when a pageButton is clicked', async () => {
       const cut: HTMLElement = await act(async (): Promise<HTMLElement> => {
-        const { container } = render(<TransactionsPage />);
+        const { container } = render(<TransactionsDetails {...testProps} />);
         return container;
       });
       let activePageButton = cut.querySelector('.isActive');
@@ -598,7 +526,7 @@ describe('TransactionsPage', () => {
 
     it('does not change page Number when same pageButton is clicked', async () => {
       const cut: HTMLElement = await act(async (): Promise<HTMLElement> => {
-        const { container } = render(<TransactionsPage />);
+        const { container } = render(<TransactionsDetails {...testProps} />);
         return container;
       });
       const buttons = cut.querySelectorAll('.paginationPagesButton');
@@ -617,7 +545,7 @@ describe('TransactionsPage', () => {
     it('does not render divs searchbarLabel in Mobile View', async () => {
       (useIsSmallScreen as jest.Mock).mockReturnValue(true);
       const cut: HTMLElement = await act(async (): Promise<HTMLElement> => {
-        const { container } = render(<TransactionsPage />);
+        const { container } = render(<TransactionsDetails {...testProps} />);
         return container;
       });
 
@@ -629,12 +557,26 @@ describe('TransactionsPage', () => {
     it('renders div searchbarSmall', async () => {
       (useIsSmallScreen as jest.Mock).mockReturnValue(true);
       const cut: HTMLElement = await act(async (): Promise<HTMLElement> => {
-        const { container } = render(<TransactionsPage />);
+        const { container } = render(<TransactionsDetails {...testProps} />);
         return container;
       });
       const htmlElement = cut.querySelector('.searchbarSmall');
 
       expect(htmlElement).toBeInTheDocument();
     });
+  });
+
+  it('renders LoadingSpinner if isLoading is true', () => {
+    const { container } = render(
+      <MemoryRouter>
+        <TransactionsDetails {...testProps} isLoading={true} />
+      </MemoryRouter>
+    );
+
+    const htmlElement = container.querySelector('.loadingSpinner');
+    const components = screen.queryAllByTestId('table-row');
+
+    expect(htmlElement).toBeInTheDocument();
+    expect(components).toHaveLength(0);
   });
 });

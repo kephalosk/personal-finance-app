@@ -7,9 +7,11 @@ import { mockedTransactions } from '../../../fixtures/MockedTransactions';
 describe('OverviewBudgets', () => {
   const budgets = mockedBudgets6;
   const transactions = mockedTransactions;
+  const isLoading = false;
   const testProps = {
     budgets,
     transactions,
+    isLoading,
   };
 
   it('renders div overviewBudgets', () => {
@@ -94,5 +96,19 @@ describe('OverviewBudgets', () => {
     const reactComponents = screen.getAllByTestId('value-box');
 
     expect(reactComponents).toHaveLength(1);
+  });
+
+  it('renders LoadingSpinner if isLoading is true', () => {
+    const { container } = render(
+      <MemoryRouter>
+        <OverviewBudgets {...testProps} isLoading={true} />
+      </MemoryRouter>
+    );
+
+    const htmlElement = container.querySelector('.loadingSpinner');
+    const components = screen.queryAllByTestId('budgets-diagram');
+
+    expect(htmlElement).toBeInTheDocument();
+    expect(components).toHaveLength(0);
   });
 });

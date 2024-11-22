@@ -3,13 +3,16 @@ import React from 'react';
 import { BillSummary } from './BillSummary';
 import { mockedBills } from '../../fixtures/MockedBills';
 import { EPTransaction } from '../../model/entrypoints/EPTransaction';
+import { MemoryRouter } from 'react-router-dom';
 
 describe('BillSummary', () => {
   const bills: EPTransaction[] = mockedBills;
   const fakeToday: Date = new Date('2024-08-03T14:23:11.000Z');
+  const isLoading = false;
   const testProps = {
     bills,
     today: fakeToday,
+    isLoading,
   };
 
   let testPaidBillsSum = 0;
@@ -105,5 +108,17 @@ describe('BillSummary', () => {
     const htmlElement = container.querySelector('.billSummaryRowDue');
 
     expect(htmlElement).toHaveTextContent(`${testDueBillsIndex} ($${testDueBillsSum}.00)`);
+  });
+
+  it('renders LoadingSpinner if isLoading is true', () => {
+    const { container } = render(
+      <MemoryRouter>
+        <BillSummary {...testProps} isLoading={true} />
+      </MemoryRouter>
+    );
+
+    const htmlElement = container.querySelector('.loadingSpinner');
+
+    expect(htmlElement).toBeInTheDocument();
   });
 });

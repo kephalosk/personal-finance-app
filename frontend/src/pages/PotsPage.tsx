@@ -1,17 +1,20 @@
 import './PotsPage.scss';
 import { HeaderBar } from '../components/HeaderBar';
 import { EPPot } from '../model/entrypoints/EPPot';
-import { PotCard } from '../components/pots/PotCard';
 import { getPots } from '../globals/services/PotService';
 import { useEffect, useState } from 'react';
+import PotPageGrid from '../components/pots/PotPageGrid';
 
 export function PotsPage() {
   const [pots, setPots] = useState<EPPot[]>([]);
+
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const fetchPots = async (): Promise<void> => {
       const fetchedPots: EPPot[] = await getPots();
       setPots(fetchedPots);
+      setIsLoading(false);
     };
     fetchPots().then();
   }, []);
@@ -20,11 +23,7 @@ export function PotsPage() {
     <>
       <div className="potsPage" data-testid="pots-page">
         <HeaderBar h1Headline="Pots" buttonText="+ Add New Pot" />
-        <div className="potPageGrid">
-          {pots.map((pot: EPPot, index: number) => (
-            <PotCard key={index} pot={pot} />
-          ))}
-        </div>
+        <PotPageGrid pots={pots} isLoading={isLoading} />
       </div>
     </>
   );

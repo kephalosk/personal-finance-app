@@ -23,24 +23,14 @@ describe('PotsPage', () => {
     expect(htmlElement).toBeInTheDocument();
   });
 
-  it('renders div potPageGrid', async () => {
-    const cut = await act(async (): Promise<HTMLElement> => {
+  it('renders component PotPageGrid', async () => {
+    await act(async (): Promise<HTMLElement> => {
       const { container } = render(<PotsPage />);
       return container;
     });
 
-    const htmlElement = cut.querySelector('.potPageGrid');
+    const htmlElement = screen.getByTestId('pot-page-grid');
 
     expect(htmlElement).toBeInTheDocument();
-  });
-
-  it('renders components PotCard', async () => {
-    await act(async (): Promise<void> => {
-      render(<PotsPage />);
-    });
-
-    const components = screen.getAllByTestId('pot-card');
-
-    expect(components).toHaveLength(4);
   });
 });

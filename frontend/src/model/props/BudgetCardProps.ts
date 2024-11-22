@@ -4,4 +4,5 @@ import { EPBudget } from '../entrypoints/EPBudget';
 export interface BudgetCardProps {
   budget: EPBudget;
   transactions: EPTransaction[];
+  isLoading: boolean;
 }

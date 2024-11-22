@@ -15,10 +15,13 @@ export function OverviewSummary() {
     expenses: 0,
   });
 
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+
   useEffect(() => {
     const fetchBalance = async () => {
       const balanceData: EPBalance = await getBalance();
       setBalance(balanceData);
+      setIsLoading(false);
     };
     fetchBalance().then();
   }, []);
@@ -30,9 +33,14 @@ export function OverviewSummary() {
   return (
     <>
       <div className="overviewSummary" data-testid="overview-summary">
-        <SummaryCard title="Current Balance" value={balance.current ?? 0} isInverted={true} />
-        <SummaryCard title="Income" value={balance.income ?? 0} />
-        <SummaryCard title="Expenses" value={balance.expenses ?? 0} />
+        <SummaryCard
+          title="Current Balance"
+          value={balance.current ?? 0}
+          isInverted={true}
+          isLoading={isLoading}
+        />
+        <SummaryCard title="Income" value={balance.income ?? 0} isLoading={isLoading} />
+        <SummaryCard title="Expenses" value={balance.expenses ?? 0} isLoading={isLoading} />
       </div>
     </>
   );
