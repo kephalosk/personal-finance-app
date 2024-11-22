@@ -1,11 +1,12 @@
-import { PotCardDetailsProps } from '../../model/props/PotCardDetailsProps';
 import { render, screen } from '@testing-library/react';
 import { mockedPot } from '../../fixtures/MockedPots';
 import { PotCard } from './PotCard';
+import { MemoryRouter } from 'react-router-dom';
 
 describe('PotCard', () => {
-  const testProps: PotCardDetailsProps = {
+  const testProps = {
     pot: mockedPot,
+    isLoading: false,
   };
 
   it('renders div potCard', () => {
@@ -55,5 +56,19 @@ describe('PotCard', () => {
 
     expect(htmlElement).toBeInTheDocument();
     expect(htmlElement).toHaveTextContent('Withdraw');
+  });
+
+  it('renders LoadingSpinner if isLoading is true', () => {
+    const { container } = render(
+      <MemoryRouter>
+        <PotCard {...testProps} isLoading={true} />
+      </MemoryRouter>
+    );
+
+    const htmlElement = container.querySelector('.loadingSpinner');
+    const components = screen.queryAllByTestId('pot-card-details');
+
+    expect(htmlElement).toBeInTheDocument();
+    expect(components).toHaveLength(0);
   });
 });

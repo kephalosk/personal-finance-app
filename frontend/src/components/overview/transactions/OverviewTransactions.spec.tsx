@@ -8,8 +8,10 @@ import {
 
 describe('OverviewTransactions', () => {
   const transactions = mockedTransactions;
+  const isLoading = false;
   const testProps = {
     transactions,
+    isLoading,
   };
 
   it('renders div overviewTransactions', () => {
@@ -47,5 +49,19 @@ describe('OverviewTransactions', () => {
     const reactComponents = screen.getAllByTestId('transaction-row');
 
     expect(htmlElements).toHaveLength(reactComponents.length - 1);
+  });
+
+  it('renders LoadingSpinner if isLoading is true', () => {
+    const { container } = render(
+      <MemoryRouter>
+        <OverviewTransactions {...testProps} isLoading={true} />
+      </MemoryRouter>
+    );
+
+    const htmlElement = container.querySelector('.loadingSpinner');
+    const components = screen.queryAllByTestId('transaction-row');
+
+    expect(htmlElement).toBeInTheDocument();
+    expect(components).toHaveLength(0);
   });
 });

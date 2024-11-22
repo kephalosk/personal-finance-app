@@ -8,13 +8,15 @@ import { EPTransaction } from '../../../model/entrypoints/EPTransaction';
 import PropTypes from 'prop-types';
 import { ColorNameEnum } from '../../../model/enum/ColorNameEnum';
 import useIsSmallScreen from '../../../globals/hooks/useIsSmallScreen';
+import LoadingSpinner from '../../LoadingSpinner';
 
 BudgetCard.propTypes = {
   budget: PropTypes.object.isRequired,
   transactions: PropTypes.array.isRequired,
+  isLoading: PropTypes.bool.isRequired,
 };
 
-export function BudgetCard({ budget, transactions }: BudgetCardProps) {
+export function BudgetCard({ budget, transactions, isLoading }: BudgetCardProps) {
   const budgetTransactions: EPTransaction[] = transactions.filter((transaction: EPTransaction) => {
     return transaction.categoryKey === budget.categoryKey;
   });
@@ -37,31 +39,35 @@ export function BudgetCard({ budget, transactions }: BudgetCardProps) {
   const isSmallScreen = useIsSmallScreen();
   return (
     <>
-      <div className="budgetCard" data-testid="budget-card">
-        <CardHeader title={budget.category} color={budget.color} />
-        <div className="budgetCardBar">
-          <label className="budgetCardBarLabel">Maximum of ${maximumFormatted}</label>
-          <div className="budgetCardBarMax">
-            <div
-              className={`budgetCardBarCurrent ${budget.color}`}
-              style={
-                {
-                  '--barCurrentWidthPercent': `${spentPercent}%`,
-                } as React.CSSProperties & { [key: string]: string }
-              }
-            ></div>
+      {isLoading ? (
+        <LoadingSpinner />
+      ) : (
+        <div className="budgetCard" data-testid="budget-card">
+          <CardHeader title={budget.category} color={budget.color} />
+          <div className="budgetCardBar">
+            <label className="budgetCardBarLabel">Maximum of ${maximumFormatted}</label>
+            <div className="budgetCardBarMax">
+              <div
+                className={`budgetCardBarCurrent ${budget.color}`}
+                style={
+                  {
+                    '--barCurrentWidthPercent': `${spentPercent}%`,
+                  } as React.CSSProperties & { [key: string]: string }
+                }
+              ></div>
+            </div>
+            <div className="budgetCardBarValues">
+              <ValueBox title="Spent" value={spent} color={budget.color} />
+              <ValueBox
+                title={`${isSmallScreen ? 'Free' : 'Remaining'}`}
+                value={remainingPositive}
+                color={ColorNameEnum.SEPIA}
+              />
+            </div>
           </div>
-          <div className="budgetCardBarValues">
-            <ValueBox title="Spent" value={spent} color={budget.color} />
-            <ValueBox
-              title={`${isSmallScreen ? 'Free' : 'Remaining'}`}
-              value={remainingPositive}
-              color={ColorNameEnum.SEPIA}
-            />
-          </div>
+          <BudgetCardList transactions={budgetTransactions} link={link} />
         </div>
-        <BudgetCardList transactions={budgetTransactions} link={link} />
-      </div>
+      )}
     </>
   );
 }
