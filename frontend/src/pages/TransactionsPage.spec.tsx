@@ -31,7 +31,7 @@ describe('TransactionsPage', () => {
     expect(htmlElement).toBeInTheDocument();
   });
 
-  it('renders headline h1 of TransactionsPage', async () => {
+  it('renders headline h1 of TransactionsDetails', async () => {
     const cut: HTMLElement = await act(async (): Promise<HTMLElement> => {
       const { container } = render(<TransactionsPage />);
       return container;

@@ -8,6 +8,7 @@ import LoadingSpinner from '../../LoadingSpinner';
 
 OverviewTransactions.propTypes = {
   transactions: PropTypes.array.isRequired,
+  isLoading: PropTypes.bool.isRequired,
 };
 
 export function OverviewTransactions({ transactions, isLoading }: OverviewTransactionsProps) {
