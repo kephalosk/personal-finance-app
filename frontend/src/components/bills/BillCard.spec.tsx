@@ -1,7 +1,6 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import { BillCard } from './BillCard';
 import { mockedBills } from '../../fixtures/MockedBills';
-import { SortOptionEnum } from '../../constants/SortOptionEnum';
 import React from 'react';
 import useIsSmallScreen from '../../globals/hooks/useIsSmallScreen';
 import { MemoryRouter } from 'react-router-dom';
