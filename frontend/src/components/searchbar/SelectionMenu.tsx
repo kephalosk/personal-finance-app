@@ -1,23 +1,30 @@
 import './SelectionMenu.scss';
 import { Category } from '../../model/Category';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import useIsSmallScreen from '../../globals/hooks/useIsSmallScreen';
 
 interface Props {
   selectedItem: string;
   items: Category[];
   handleItemChange: (item: string) => void;
+  mobileIcon: string;
   hasSmallerWidth?: boolean;
 }
 
-function SelectionMenu({ selectedItem, items, handleItemChange, hasSmallerWidth = false }: Props) {
+function SelectionMenu({
+  selectedItem,
+  items,
+  handleItemChange,
+  mobileIcon,
+  hasSmallerWidth = false,
+}: Props) {
   const [showSelection, setShowSelection] = useState<boolean>(false);
-  const dropdownRef = useRef<HTMLLabelElement | null>(null);
+  const isSmallScreen = useIsSmallScreen();
+  const menuClass = 'selectionMenuListElement';
 
   const handleDropdownClick = () => {
     setShowSelection(!showSelection);
   };
-
-  const menuClass = 'categorySelectionElement';
 
   useEffect(() => {
     const handleOutsideClick = (event: MouseEvent) => {
@@ -35,31 +42,38 @@ function SelectionMenu({ selectedItem, items, handleItemChange, hasSmallerWidth 
   }, []);
 
   return (
-    <div
-      className={`searchbarDropdownCategory ${hasSmallerWidth ? 'smallerWidth' : ''}`}
-      onClick={handleDropdownClick}
-    >
-      {selectedItem}
-      {showSelection && (
-        <div className="categorySelection">
-          <label ref={dropdownRef} className={`${menuClass} selected`}>
-            {selectedItem}
-          </label>
-          {items.map((category: Category, index: number) => (
-            <div key={category.key}>
-              {category.name !== selectedItem && (
-                <label
-                  ref={dropdownRef}
-                  className={`${menuClass}`}
-                  onClick={() => handleItemChange(category.key)}
-                >
-                  {category.name}
-                </label>
-              )}
-              {index < items.length - 1 && <hr className="categorySelectionLine" />}
-            </div>
-          ))}
-        </div>
+    <div className="selectionMenuWrapper" data-testid="selection-menu">
+      <div
+        className={`selectionMenu ${hasSmallerWidth ? 'smallerWidth' : ''}`}
+        onClick={handleDropdownClick}
+      >
+        {selectedItem}
+        {showSelection && (
+          <div className="selectionMenuList">
+            <label className={`${menuClass} selected`}>{selectedItem}</label>
+            {items.map((category: Category, index: number) => (
+              <div key={category.key}>
+                {category.name !== selectedItem && (
+                  <label className={`${menuClass}`} onClick={() => handleItemChange(category.key)}>
+                    {category.name}
+                  </label>
+                )}
+                {index < items.length - 1 && <hr className="selectionMenuListLine" />}
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+      {!isSmallScreen && (
+        <img
+          className="selectionMenuIcon"
+          alt="icon of caret down"
+          aria-hidden="true"
+          src="/images/icon-caret-down.svg"
+        />
+      )}
+      {isSmallScreen && (
+        <img className="selectionMenuIcon" alt="select icon" aria-hidden="false" src={mobileIcon} />
       )}
     </div>
   );
