@@ -75,7 +75,7 @@ describe('BillCard', () => {
 
   describe('Sorting', () => {
     it('sorts the bills from oldest to newest', () => {
-      render(<BillCard {...testProps} />);
+      const { container } = render(<BillCard {...testProps} />);
       let tableRows = screen.getAllByTestId('bill-card-table-row');
       let firstDateString = tableRows[0].querySelector('.billCardTableRowDate')!.textContent!;
       let secondDateString = tableRows[1].querySelector('.billCardTableRowDate')!.textContent!;
@@ -83,8 +83,11 @@ describe('BillCard', () => {
       let secondDateNumber = parseInt(secondDateString.substring(10, secondDateString.length - 2));
       expect(firstDateNumber - secondDateNumber > 0).toBe(true);
 
-      const selectElement = screen.getByTestId('searchbar-dropdown-sort').querySelector('select');
-      fireEvent.change(selectElement!, { target: { value: 'oldest' } });
+      const dropdown = container.querySelector('.dropdownSort');
+      const selectElement = dropdown!.querySelector('.selectionMenu');
+      fireEvent.click(selectElement!);
+      const optionElement = screen.getByText('Oldest');
+      fireEvent.click(optionElement);
 
       tableRows = screen.getAllByTestId('bill-card-table-row');
       firstDateString = tableRows[0].querySelector('.billCardTableRowDate')!.textContent!;
@@ -95,9 +98,12 @@ describe('BillCard', () => {
     });
 
     it('sorts the bills from newest to oldest', () => {
-      render(<BillCard {...testProps} />);
-      let selectElement = screen.getByTestId('searchbar-dropdown-sort').querySelector('select');
-      fireEvent.change(selectElement!, { target: { value: 'oldest' } });
+      const { container } = render(<BillCard {...testProps} />);
+      let dropdown = container.querySelector('.dropdownSort');
+      let selectElement = dropdown!.querySelector('.selectionMenu');
+      fireEvent.click(selectElement!);
+      let optionElement = screen.getByText('Oldest');
+      fireEvent.click(optionElement);
       let tableRows = screen.getAllByTestId('bill-card-table-row');
       let firstDateString = tableRows[0].querySelector('.billCardTableRowDate')!.textContent!;
       let secondDateString = tableRows[1].querySelector('.billCardTableRowDate')!.textContent!;
@@ -105,8 +111,11 @@ describe('BillCard', () => {
       let secondDateNumber = parseInt(secondDateString.substring(10, secondDateString.length - 2));
       expect(firstDateNumber - secondDateNumber > 0).toBe(false);
 
-      selectElement = screen.getByTestId('searchbar-dropdown-sort').querySelector('select');
-      fireEvent.change(selectElement!, { target: { value: 'newest' } });
+      dropdown = container.querySelector('.dropdownSort');
+      selectElement = dropdown!.querySelector('.selectionMenu');
+      fireEvent.click(selectElement!);
+      optionElement = screen.getByText('Latest');
+      fireEvent.click(optionElement);
 
       tableRows = screen.getAllByTestId('bill-card-table-row');
       firstDateString = tableRows[0].querySelector('.billCardTableRowDate')!.textContent!;
@@ -117,10 +126,13 @@ describe('BillCard', () => {
     });
 
     it('sorts the bills from A to Z', () => {
-      render(<BillCard {...testProps} />);
+      const { container } = render(<BillCard {...testProps} />);
 
-      const selectElement = screen.getByTestId('searchbar-dropdown-sort').querySelector('select');
-      fireEvent.change(selectElement!, { target: { value: 'atoz' } });
+      const dropdown = container.querySelector('.dropdownSort');
+      const selectElement = dropdown!.querySelector('.selectionMenu');
+      fireEvent.click(selectElement!);
+      const optionElement = screen.getByText('A to Z');
+      fireEvent.click(optionElement);
 
       const tableRows = screen.getAllByTestId('bill-card-table-row');
       const firstName = tableRows[1].querySelector('.billCardTableRowNameLabel')!.textContent!;
@@ -129,10 +141,13 @@ describe('BillCard', () => {
     });
 
     it('sorts the bills from Z to A', () => {
-      render(<BillCard {...testProps} />);
+      const { container } = render(<BillCard {...testProps} />);
 
-      const selectElement = screen.getByTestId('searchbar-dropdown-sort').querySelector('select');
-      fireEvent.change(selectElement!, { target: { value: 'ztoa' } });
+      const dropdown = container.querySelector('.dropdownSort');
+      const selectElement = dropdown!.querySelector('.selectionMenu');
+      fireEvent.click(selectElement!);
+      const optionElement = screen.getByText('Z to A');
+      fireEvent.click(optionElement);
 
       const tableRows = screen.getAllByTestId('bill-card-table-row');
       const firstName = tableRows[1].querySelector('.billCardTableRowNameLabel')!.textContent!;
@@ -141,10 +156,13 @@ describe('BillCard', () => {
     });
 
     it('sorts the bills from highest to lowest', () => {
-      render(<BillCard {...testProps} />);
+      const { container } = render(<BillCard {...testProps} />);
 
-      const selectElement = screen.getByTestId('searchbar-dropdown-sort').querySelector('select');
-      fireEvent.change(selectElement!, { target: { value: 'highest' } });
+      const dropdown = container.querySelector('.dropdownSort');
+      const selectElement = dropdown!.querySelector('.selectionMenu');
+      fireEvent.click(selectElement!);
+      const optionElement = screen.getByText('Highest');
+      fireEvent.click(optionElement);
 
       const tableRows = screen.getAllByTestId('bill-card-table-row');
       const firstAmount = tableRows[0].querySelector('.billCardTableRowAmount')!.textContent!;
@@ -155,10 +173,13 @@ describe('BillCard', () => {
     });
 
     it('sorts the bills from lowest to highest', () => {
-      render(<BillCard {...testProps} />);
+      const { container } = render(<BillCard {...testProps} />);
 
-      const selectElement = screen.getByTestId('searchbar-dropdown-sort').querySelector('select');
-      fireEvent.change(selectElement!, { target: { value: 'lowest' } });
+      const dropdown = container.querySelector('.dropdownSort');
+      const selectElement = dropdown!.querySelector('.selectionMenu');
+      fireEvent.click(selectElement!);
+      const optionElement = screen.getByText('Lowest');
+      fireEvent.click(optionElement);
 
       const tableRows = screen.getAllByTestId('bill-card-table-row');
       const firstAmount = tableRows[0].querySelector('.billCardTableRowAmount')!.textContent!;
@@ -184,11 +205,12 @@ describe('BillCard', () => {
     });
 
     it('keeps sorting after searching', () => {
-      render(<BillCard {...testProps} />);
-      const selectSortElement = screen
-        .getByTestId('searchbar-dropdown-sort')
-        .querySelector('select');
-      fireEvent.change(selectSortElement!, { target: { value: SortOptionEnum.HIGHEST } });
+      const { container } = render(<BillCard {...testProps} />);
+      const dropdown = container.querySelector('.dropdownSort');
+      const selectElement = dropdown!.querySelector('.selectionMenu');
+      fireEvent.click(selectElement!);
+      const optionElement = screen.getByText('Highest');
+      fireEvent.click(optionElement);
 
       const inputElement = screen.getByTestId('searchbar-input').querySelector('input');
       fireEvent.change(inputElement!, { target: { value: `${testSearchbarInput}` } });
