@@ -76,11 +76,13 @@ export function SearchbarDropdownCategory({ onCategoryChange }: SearchbarDropdow
   };
 
   return (
-    <SelectionMenu
-      selectedItem={getCategoryName(selectedCategory)}
-      items={allCategories}
-      handleItemChange={handleCategoryChange}
-      mobileIcon="/images/icon-filter-mobile.svg"
-    />
+    <div className="dropdownCategory">
+      <SelectionMenu
+        selectedItem={getCategoryName(selectedCategory)}
+        items={allCategories}
+        handleItemChange={handleCategoryChange}
+        mobileIcon="/images/icon-filter-mobile.svg"
+      />
+    </div>
   );
 }

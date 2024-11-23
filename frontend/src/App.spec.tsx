@@ -3,14 +3,21 @@ import App from './App';
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import useIsSmallScreen from './globals/hooks/useIsSmallScreen';
+import useIsTabletScreen from './globals/hooks/useIsTabletScreen';
 
 jest.mock('./globals/hooks/useIsSmallScreen', () => ({
   __esModule: true,
   default: jest.fn(),
 }));
 
+jest.mock('./globals/hooks/useIsTabletScreen', () => ({
+  __esModule: true,
+  default: jest.fn(),
+}));
+
 describe('App', () => {
   beforeEach(() => {
+    (useIsTabletScreen as jest.Mock).mockReturnValue(false);
     (useIsSmallScreen as jest.Mock).mockReturnValue(false);
   });
 

@@ -38,12 +38,14 @@ export function SearchbarDropdownSort({ onSortChange }: SearchbarDropdownSortPro
   };
 
   return (
-    <SelectionMenu
-      selectedItem={getSortName(selectedOption)}
-      items={allSorts}
-      handleItemChange={handleSortChange}
-      mobileIcon="/images/icon-sort-mobile.svg"
-      hasSmallerWidth={true}
-    />
+    <div className="dropdownSort">
+      <SelectionMenu
+        selectedItem={getSortName(selectedOption)}
+        items={allSorts}
+        handleItemChange={handleSortChange}
+        mobileIcon="/images/icon-sort-mobile.svg"
+        hasSmallerWidth={true}
+      />
+    </div>
   );
 }
