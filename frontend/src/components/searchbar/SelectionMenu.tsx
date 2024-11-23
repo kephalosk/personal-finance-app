@@ -1,11 +1,11 @@
 import './SelectionMenu.scss';
-import { Category } from '../../model/Category';
+import { Item } from '../../model/Item';
 import React, { useEffect, useState } from 'react';
 import useIsSmallScreen from '../../globals/hooks/useIsSmallScreen';
 
 interface Props {
   selectedItem: string;
-  items: Category[];
+  items: Item[];
   handleItemChange: (item: string) => void;
   mobileIcon: string;
   hasSmallerWidth?: boolean;
@@ -49,10 +49,10 @@ function SelectionMenu({
       >
         {selectedItem}
         {showSelection && (
-          <div className="selectionMenuList">
+          <div className={`selectionMenuList ${hasSmallerWidth ? 'smallerWidth' : ''}`}>
             <label className={`${menuClass} selected`}>{selectedItem}</label>
-            {items.map((category: Category, index: number) => (
-              <div key={category.key}>
+            {items.map((category: Item, index: number) => (
+              <div key={index}>
                 {category.name !== selectedItem && (
                   <label className={`${menuClass}`} onClick={() => handleItemChange(category.key)}>
                     {category.name}
