@@ -1,7 +1,7 @@
 import { SidebarListEntry } from './SidebarListEntry';
 import { SidebarMinimizeProps } from '../../model/props/SidebarMinimizeProps';
 import PropTypes from 'prop-types';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './SidebarMinimize.scss';
 
 SidebarMinimize.propTypes = {
@@ -17,14 +17,29 @@ export function SidebarMinimize({ onMinimize }: SidebarMinimizeProps) {
   const handleMinimize = () => {
     setIsMinimized((prev) => !prev);
     onMinimize(!isMinimized);
+    const activeElement = document.activeElement;
+    if (activeElement instanceof HTMLElement) {
+      activeElement.blur();
+    }
   };
 
   useEffect(() => {
     localStorage.setItem('isMinimized', JSON.stringify(isMinimized));
   }, [isMinimized]);
 
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    if (event.key === 'Enter') {
+      handleMinimize();
+    }
+  };
+
   return (
-    <div className="sidebarMinimizeWrapper" onClick={handleMinimize}>
+    <div
+      className="sidebarMinimizeWrapper"
+      onClick={handleMinimize}
+      onKeyDown={handleKeyDown}
+      tabIndex={0}
+    >
       <SidebarListEntry
         isMinimized={isMinimized}
         name="Minimize Menu"
@@ -32,6 +47,7 @@ export function SidebarMinimize({ onMinimize }: SidebarMinimizeProps) {
         altImgSrc="/images/icon-maximize-menu.svg"
         imgAlt="minimize icon"
         className="sidebarMinimize"
+        hasTabIndex={false}
       />
     </div>
   );

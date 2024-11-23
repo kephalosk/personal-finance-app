@@ -12,6 +12,7 @@ SidebarListEntry.propTypes = {
   isActive: PropTypes.bool,
   className: PropTypes.string,
   isMinimized: PropTypes.bool,
+  hasTabIndex: PropTypes.bool,
 };
 
 export function SidebarListEntry({
@@ -23,6 +24,7 @@ export function SidebarListEntry({
   className = '',
   isActive = false,
   isMinimized = false,
+  hasTabIndex = true,
 }: SidebarListEntryProps) {
   const [content, setContent] = useState(() => {
     const savedState = localStorage.getItem('isMinimized');
@@ -58,16 +60,28 @@ export function SidebarListEntry({
     );
   }, [isMinimized]);
 
+  const blur = () => {
+    const activeElement = document.activeElement;
+    if (activeElement instanceof HTMLElement) {
+      activeElement.blur();
+    }
+  };
+
   const isLink = className !== 'sidebarMinimize';
   if (isLink) {
     return (
-      <Link to={linkTarget} className={`entryRow link ${isActive ? 'active' : ''}`} tabIndex={0}>
+      <Link
+        onClick={blur}
+        to={linkTarget}
+        className={`entryRow link ${isActive ? 'active' : ''}`}
+        tabIndex={hasTabIndex ? 0 : -1}
+      >
         {content}
       </Link>
     );
   } else {
     return (
-      <div className="entryRow div" tabIndex={0}>
+      <div onClick={blur} className="entryRow div" tabIndex={hasTabIndex ? 0 : -1}>
         {content}
       </div>
     );

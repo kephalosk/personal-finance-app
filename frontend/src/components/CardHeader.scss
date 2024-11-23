@@ -29,10 +29,17 @@
 }
 
 .cardHeaderEditIcon {
+  padding: 4px;
   cursor: pointer;
 }
 .cardHeaderEditIcon:hover {
   filter: invert(74%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(0%) contrast(100%);
+}
+.cardHeaderEditIcon:focus-visible {
+  border-radius: 4px;
+  box-shadow: 0 0 0 2px var(--component-background-dark);
+  filter: invert(74%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(0%) contrast(100%);
+  outline: none;
 }
 
 .cardHeaderTitle {

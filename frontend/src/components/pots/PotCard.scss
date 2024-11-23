@@ -24,6 +24,19 @@
   cursor: pointer;
   white-space: nowrap;
 }
+.potCardButton:hover {
+  background-color: var(--component-background-light);
+  color: var(--text-white);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+.potCardButton:focus-visible {
+  border-radius: 4px;
+  box-shadow: 0 0 0 2px var(--component-background-dark);
+  background-color: var(--component-background-light);
+  color: var(--text-white);
+  transition: background-color 0.2s ease, color 0.2s ease;
+  outline: none;
+}
 
 .potCardButtons {
   display: grid;

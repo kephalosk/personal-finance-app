@@ -19,6 +19,7 @@ export function CardHeader({ title, color }: BudgetCardHeaderProps) {
           alt="ellipsis icon"
           aria-hidden="true"
           src="/images/icon-ellipsis.svg"
+          tabIndex={0}
         />
       </div>
     </>

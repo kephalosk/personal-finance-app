@@ -27,6 +27,7 @@
 }
 
 .budgetCardListHeaderLink {
+  padding: 4px;
   font-size: 14px;
   text-decoration: none;
   color: var(--text-grey);
@@ -34,6 +35,12 @@
   @include mixins.phone() {
     font-size: 12px;
   }
+}
+.budgetCardListHeaderLink:focus-visible {
+  border-radius: 4px;
+  box-shadow: 0 0 0 2px var(--component-background-dark);
+  color: var(--text-dark);
+  outline: none;
 }
 
 .budgetCardListHeaderLinkCaret {
