@@ -1,9 +1,47 @@
 @use '../../styles/mixins';
 
+.categorySelection {
+  border-radius: 8px;
+  box-shadow: 0 5px 40px -25px var(--component-background-dark);
+  background-color: var(--component-background-bright);
+  height: auto;
+  width: 100%;
+  min-width: 180px;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  right: -1px;
+  z-index: 100;
+  color: var(--text-dark);
+
+  @include mixins.phone() {
+    top: -1px;
+    right: -1px;
+  }
+}
+
+.categorySelectionElement {
+  border-radius: 8px;
+  padding: 12px 20px;
+  display: block;
+  cursor: pointer;
+}
+.categorySelectionElement:hover, .categorySelectionElement.selected {
+  background-color: var(--component-background-grey);
+  color: var(--text-white);
+}
+
+.categorySelectionLine {
+  margin: 0 0;
+}
+
 .searchbarDropdownCategory {
   border-radius: 8px;
   border: 1px solid var(--searchbar-grey);
-  padding: 12px 48px 12px 16px;
+  padding: 12px 48px 12px 19px;
+  min-width: 180px;
+  font-size: 14px;
   color: var(--text-dark);
   appearance: none; /* Standard-Pfeil ausblenden */
   -webkit-appearance: none; /* Für Webkit-basierte Browser wie Chrome und Safari */
@@ -13,13 +51,16 @@
           border-color 0.3s ease,
           background-color 0.3s ease,
           box-shadow 0.3s ease;
+  position: relative;
 
   @include mixins.phone() {
     margin-left: 8px;
     border: 1px solid transparent;
-    padding: 12px;
+    padding: 0 12px;
     background: transparent;
+    min-height: 40px;
     width: 42px;
+    min-width: 42px;
     color: transparent;
   }
 }
@@ -37,6 +78,9 @@
 }
 .searchbarDropdownCategory:focus-visible ~ .searchbarDropdownCategoryIcon {
   --icon-filter: invert(74%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(300%) contrast(100%);
+}
+.searchbarDropdownCategory.smallerWidth {
+  min-width: 140px;
 }
 
 

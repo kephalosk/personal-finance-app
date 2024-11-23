@@ -6,13 +6,13 @@ import { EPTransaction } from '../../model/entrypoints/EPTransaction';
 import { getTransactions } from '../../globals/services/TransactionService';
 import { Category } from '../../model/Category';
 import useIsSmallScreen from '../../globals/hooks/useIsSmallScreen';
+import SelectionMenu from './SelectionMenu';
 
 SearchbarDropdownCategory.propTypes = {
   onCategoryChange: PropTypes.func.isRequired,
 };
 
 export function SearchbarDropdownCategory({ onCategoryChange }: SearchbarDropdownCategoryProps) {
-  const [selectedOption, setSelectedOption] = useState<string>('all');
   const [allTransactions, setAllTransactions] = useState<EPTransaction[]>([]);
   const isSmallScreen = useIsSmallScreen();
 
@@ -24,11 +24,9 @@ export function SearchbarDropdownCategory({ onCategoryChange }: SearchbarDropdow
     fetchTransactions().then();
   }, []);
 
-  const handleCategoryChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const selectedCategory = event.target.value;
-    setSelectedOption(selectedCategory);
-    onCategoryChange(selectedCategory);
-    event.target.blur();
+  const handleCategoryChange = (categoryKey: string) => {
+    onCategoryChange(categoryKey);
+    setSelectedCategory(categoryKey);
   };
 
   const haveSameKey = (key1: string, key2: string): boolean => {
@@ -67,22 +65,27 @@ export function SearchbarDropdownCategory({ onCategoryChange }: SearchbarDropdow
 
   const allCategories: Category[] = getAllCategories();
 
+  const [selectedCategory, setSelectedCategory] = useState<string>('all');
+
+  const getCategoryName = (category: string): string => {
+    let selectedCategory = '';
+    allCategories.forEach((cat) => {
+      if (cat.key === category) {
+        selectedCategory = cat.name;
+      }
+    });
+    return selectedCategory;
+  };
+
   return (
     <>
       {!isSmallScreen && (
         <div className="searchbarDropdownCategoryWrapper" data-testid="searchbar-dropdown-category">
-          <select
-            className="searchbarDropdownCategory"
-            value={selectedOption}
-            id="optionsBig"
-            onChange={handleCategoryChange}
-          >
-            {allCategories.map((category) => (
-              <option key={category.key} className={category.key} value={category.key}>
-                {category.name}
-              </option>
-            ))}
-          </select>
+          <SelectionMenu
+            selectedItem={getCategoryName(selectedCategory)}
+            items={allCategories}
+            handleItemChange={handleCategoryChange}
+          />
           <img
             className="searchbarDropdownCategoryIcon"
             alt="icon of caret down"
@@ -93,18 +96,11 @@ export function SearchbarDropdownCategory({ onCategoryChange }: SearchbarDropdow
       )}
       {isSmallScreen && (
         <div className="searchbarDropdownCategoryWrapper" data-testid="searchbar-dropdown-category">
-          <select
-            className="searchbarDropdownCategory"
-            value={selectedOption}
-            id="optionsSmall"
-            onChange={handleCategoryChange}
-          >
-            {allCategories.map((category) => (
-              <option key={category.key} className={category.key} value={category.key}>
-                {category.name}
-              </option>
-            ))}
-          </select>
+          <SelectionMenu
+            selectedItem={getCategoryName(selectedCategory)}
+            items={allCategories}
+            handleItemChange={handleCategoryChange}
+          />
           <img
             className="searchbarDropdownCategoryIcon"
             alt="category select icon"
