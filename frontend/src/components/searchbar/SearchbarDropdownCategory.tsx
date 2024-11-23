@@ -14,7 +14,6 @@ SearchbarDropdownCategory.propTypes = {
 
 export function SearchbarDropdownCategory({ onCategoryChange }: SearchbarDropdownCategoryProps) {
   const [allTransactions, setAllTransactions] = useState<EPTransaction[]>([]);
-  const isSmallScreen = useIsSmallScreen();
 
   useEffect(() => {
     const fetchTransactions = async () => {
@@ -78,37 +77,11 @@ export function SearchbarDropdownCategory({ onCategoryChange }: SearchbarDropdow
   };
 
   return (
-    <>
-      {!isSmallScreen && (
-        <div className="searchbarDropdownCategoryWrapper" data-testid="searchbar-dropdown-category">
-          <SelectionMenu
-            selectedItem={getCategoryName(selectedCategory)}
-            items={allCategories}
-            handleItemChange={handleCategoryChange}
-          />
-          <img
-            className="searchbarDropdownCategoryIcon"
-            alt="icon of caret down"
-            aria-hidden="true"
-            src="/images/icon-caret-down.svg"
-          />
-        </div>
-      )}
-      {isSmallScreen && (
-        <div className="searchbarDropdownCategoryWrapper" data-testid="searchbar-dropdown-category">
-          <SelectionMenu
-            selectedItem={getCategoryName(selectedCategory)}
-            items={allCategories}
-            handleItemChange={handleCategoryChange}
-          />
-          <img
-            className="searchbarDropdownCategoryIcon"
-            alt="category select icon"
-            aria-hidden="false"
-            src="/images/icon-filter-mobile.svg"
-          />
-        </div>
-      )}
-    </>
+    <SelectionMenu
+      selectedItem={getCategoryName(selectedCategory)}
+      items={allCategories}
+      handleItemChange={handleCategoryChange}
+      mobileIcon="/images/icon-filter-mobile.svg"
+    />
   );
 }
