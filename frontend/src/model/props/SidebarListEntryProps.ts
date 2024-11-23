@@ -8,4 +8,5 @@ export interface SidebarListEntryProps extends SidebarPage {
   className?: string;
   isActive?: boolean;
   isMinimized?: boolean;
+  hasTabIndex?: boolean;
 }
