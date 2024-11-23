@@ -1,6 +1,7 @@
 @use '../../styles/mixins';
 
 .entryRow {
+  border: 2px solid var(--text-dark);
   border-radius: 0 15px 15px 0;
   padding: 18px 0 18px 32px;
   align-items: center;
@@ -46,6 +47,18 @@
     border-left: 0;
     border-bottom: 5px solid var(--sidebar-entry-icon-selected);
     background-color: var(--sidebar-entry-selected-background);
+  }
+}
+.entryRow:focus-visible{
+  border: 2px solid var(--text-white);
+  outline: none;
+
+  img {
+    filter: invert(49%) sepia(22%) saturate(1093%) hue-rotate(126deg) brightness(95%) contrast(88%);
+  }
+
+  label {
+    color: var(--text-green);
   }
 }
 

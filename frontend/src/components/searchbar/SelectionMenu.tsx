@@ -41,8 +41,25 @@ function SelectionMenu({
     };
   }, []);
 
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    if (event.key === 'Enter') {
+      handleDropdownClick();
+    }
+  };
+
+  const handleItemKeyDown = (event: React.KeyboardEvent<HTMLLabelElement>, category: string) => {
+    if (event.key === 'Enter') {
+      handleItemChange(category);
+    }
+  };
+
   return (
-    <div className="selectionMenuWrapper" data-testid="selection-menu">
+    <div
+      className="selectionMenuWrapper"
+      data-testid="selection-menu"
+      tabIndex={0}
+      onKeyDown={handleKeyDown}
+    >
       <div
         className={`selectionMenu ${hasSmallerWidth ? 'smallerWidth' : ''}`}
         onClick={handleDropdownClick}
@@ -54,7 +71,12 @@ function SelectionMenu({
             {items.map((category: Item, index: number) => (
               <div key={index}>
                 {category.name !== selectedItem && (
-                  <label className={`${menuClass}`} onClick={() => handleItemChange(category.key)}>
+                  <label
+                    className={`${menuClass}`}
+                    onClick={() => handleItemChange(category.key)}
+                    onKeyDown={(event) => handleItemKeyDown(event, category.key)}
+                    tabIndex={0}
+                  >
                     {category.name}
                   </label>
                 )}
