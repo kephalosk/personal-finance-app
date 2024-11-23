@@ -13,11 +13,11 @@
   <key attr.name="description" attr.type="string" for="edge" id="d9"/>
   <key for="edge" id="d10" yfiles.type="edgegraphics"/>
   <graph edgedefault="directed" id="G">
-    <data key="d0"/>
+    <data key="d0" xml:space="preserve"/>
     <node id="n0">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
-          <y:Geometry height="27.67474471253172" width="175.5474740727891" x="441.3867799739792" y="421.32492923103575"/>
+          <y:Geometry height="27.67474471253172" width="175.5474740727891" x="0.0" y="-76.51257076896428"/>
           <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="l" textColor="#000000" verticalTextPosition="bottom" visible="true" width="175.5474740727891" x="4.0" xml:space="preserve" y="3.7709661062658597">Handout Web Development</y:NodeLabel>
@@ -27,18 +27,44 @@
     <node id="n1">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
-          <y:Geometry height="27.67474471253172" width="175.5474740727891" x="690.7735599479583" y="421.32492923103575"/>
+          <y:Geometry height="27.67474471253172" width="175.5474740727891" x="210.5474740727891" y="-105.35007076896427"/>
           <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="l" textColor="#000000" verticalTextPosition="bottom" visible="true" width="175.5474740727891" x="4.0" xml:space="preserve" y="3.7709661062658597">npm update</y:NodeLabel>
         </y:GenericNode>
       </data>
     </node>
+    <node id="n2">
+      <data key="d6">
+        <y:GenericNode configuration="com.yworks.flowchart.process">
+          <y:Geometry height="27.67474471253172" width="175.5474740727891" x="210.5474740727891" y="-47.675070768964275"/>
+          <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
+          <y:BorderStyle color="#000000" type="line" width="1.0"/>
+          <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="l" textColor="#000000" verticalTextPosition="bottom" visible="true" width="175.5474740727891" x="4.0" xml:space="preserve" y="3.7709661062658597">Dropdowns bauen</y:NodeLabel>
+        </y:GenericNode>
+      </data>
+    </node>
     <edge id="e0" source="n0" target="n1">
+      <data key="d10">
+        <y:PolyLineEdge>
+          <y:Path sx="87.77373703639455" sy="-6.91868617813293" tx="-87.77373703639455" ty="-0.0">
+            <y:Point x="195.0474740727891" y="-69.59388459083135"/>
+            <y:Point x="195.0474740727891" y="-91.51269841269841"/>
+          </y:Path>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e1" source="n0" target="n2">
       <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
-          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:Path sx="87.77373703639455" sy="6.91868617813293" tx="-87.77373703639455" ty="-0.0">
+            <y:Point x="195.0474740727891" y="-55.756512234565484"/>
+            <y:Point x="195.0474740727891" y="-33.837698412698415"/>
+          </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="standard"/>
           <y:BendStyle smoothed="false"/>

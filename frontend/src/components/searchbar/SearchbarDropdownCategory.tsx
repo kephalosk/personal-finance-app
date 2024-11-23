@@ -4,8 +4,7 @@ import PropTypes from 'prop-types';
 import { SearchbarDropdownCategoryProps } from '../../model/props/SearchbarDropdownCategoryProps';
 import { EPTransaction } from '../../model/entrypoints/EPTransaction';
 import { getTransactions } from '../../globals/services/TransactionService';
-import { Category } from '../../model/Category';
-import useIsSmallScreen from '../../globals/hooks/useIsSmallScreen';
+import { Item } from '../../model/Item';
 import SelectionMenu from './SelectionMenu';
 
 SearchbarDropdownCategory.propTypes = {
@@ -32,9 +31,9 @@ export function SearchbarDropdownCategory({ onCategoryChange }: SearchbarDropdow
     return key1 === key2;
   };
 
-  const hasNewKey = (transaction: EPTransaction, allCategories: Category[]) => {
+  const hasNewKey = (transaction: EPTransaction, allCategories: Item[]) => {
     let hasNewKey: boolean = true;
-    allCategories.forEach((category: Category) => {
+    allCategories.forEach((category: Item) => {
       if (haveSameKey(category.key, transaction.categoryKey)) {
         hasNewKey = false;
       }
@@ -42,8 +41,8 @@ export function SearchbarDropdownCategory({ onCategoryChange }: SearchbarDropdow
     return hasNewKey;
   };
 
-  const getAllCategories = (): Category[] => {
-    const allCategories: Category[] = [
+  const getAllCategories = (): Item[] => {
+    const allCategories: Item[] = [
       {
         key: 'all',
         name: 'All Transactions',
@@ -62,7 +61,7 @@ export function SearchbarDropdownCategory({ onCategoryChange }: SearchbarDropdow
     return allCategories;
   };
 
-  const allCategories: Category[] = getAllCategories();
+  const allCategories: Item[] = getAllCategories();
 
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
 

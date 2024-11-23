@@ -15,6 +15,9 @@
   z-index: 100;
   color: var(--text-dark);
 }
+.selectionMenuList.smallerWidth {
+  min-width: 125px;
+}
 
 .selectionMenuListElement {
   border-radius: 8px;
@@ -75,7 +78,7 @@
   --icon-filter: invert(74%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(300%) contrast(100%);
 }
 .selectionMenu.smallerWidth {
-  min-width: 140px;
+  min-width: 125px;
 }
 
 

@@ -1,4 +1,4 @@
-export interface Category {
+export interface Item {
   key: string;
   name: string;
 }
