@@ -1513,7 +1513,7 @@ Organisation<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel>
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
           <y:Geometry height="21.0" width="237.88677997397917" x="1632.8513165359195" y="-3246.068253968254"/>
-          <y:Fill color="#00FFFF" color2="#B7C9E3" transparent="false"/>
+          <y:Fill color="#00FF00" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="l" textColor="#000000" verticalTextPosition="bottom" visible="true" width="237.88677997397917" x="4.0" xml:space="preserve" y="0.43359375">fe-36-setup-visual-regression-tests</y:NodeLabel>
         </y:GenericNode>
@@ -2796,10 +2796,10 @@ in pipeline backend e2e-tests.</y:NodeLabel>
     <node id="n268">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
-          <y:Geometry height="50.0" width="254.70945476654288" x="2422.5598628539465" y="-3896.720238095238"/>
+          <y:Geometry height="72.77698412698419" width="254.70945476654288" x="2422.5598628539465" y="-3896.719841269841"/>
           <y:Fill color="#999999" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
-          <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.3984375" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="l" textColor="#000000" verticalTextPosition="bottom" visible="true" width="254.70945476654288" x="4.0" xml:space="preserve" y="0.80078125">Zurückgestellt: bleibt zu Demonstrationszwecken erstmal so bestehen</y:NodeLabel>
+          <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.53125" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="l" textColor="#000000" verticalTextPosition="bottom" visible="true" width="254.70945476654288" x="4.0" xml:space="preserve" y="5.122867063491867">Zurückgestellt: bleibt zu Demonstrationszwecken erstmal so bestehen, damit budgets im neuen Monat nicht alle auf 0 sind</y:NodeLabel>
         </y:GenericNode>
       </data>
     </node>
@@ -6052,7 +6052,7 @@ in pipeline backend e2e-tests.</y:NodeLabel>
         <y:PolyLineEdge>
           <y:Path sx="132.20137834546313" sy="5.25" tx="-127.35472738327144" ty="-0.0">
             <y:Point x="2221.640853200825" y="-3995.0777777777776"/>
-            <y:Point x="2221.640853200825" y="-3871.720238095238"/>
+            <y:Point x="2221.640853200825" y="-3860.331349206349"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="standard"/>

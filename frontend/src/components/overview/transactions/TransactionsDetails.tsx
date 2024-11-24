@@ -137,7 +137,6 @@ function TransactionsDetails({ isLoading, fetchedTransactions }: Props) {
 
   useEffect(() => {
     if (cat) {
-      console.log(cat);
       handleCategoryChange(cat, fetchedTransactions);
     }
   }, [cat, fetchedTransactions]);
