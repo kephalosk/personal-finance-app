@@ -1,6 +1,6 @@
 import './SelectionMenu.scss';
 import { Item } from '../../model/Item';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import useIsSmallScreen from '../../globals/hooks/useIsSmallScreen';
 
 interface Props {
@@ -47,9 +47,23 @@ function SelectionMenu({
     }
   };
 
-  const handleItemKeyDown = (event: React.KeyboardEvent<HTMLLabelElement>, category: string) => {
+  const visibleItems = items.filter((item) => item.name !== selectedItem);
+  const visibleRefs = useRef<(HTMLLabelElement | null)[]>([]);
+  useEffect(() => {
+    visibleRefs.current = visibleRefs.current.slice(0, visibleItems.length);
+  }, [visibleItems.length]);
+
+  const handleItemKeyDown = (
+    event: React.KeyboardEvent<HTMLLabelElement>,
+    category: string,
+    visibleIndex: number
+  ) => {
     if (event.key === 'Enter') {
       handleItemChange(category);
+    }
+    if (event.key === 'Tab' && !event.shiftKey && visibleIndex === visibleRefs.current.length - 1) {
+      event.preventDefault();
+      visibleRefs.current[0]?.focus();
     }
   };
 
@@ -68,18 +82,19 @@ function SelectionMenu({
         {showSelection && (
           <div className={`selectionMenuList ${hasSmallerWidth ? 'smallerWidth' : ''}`}>
             <label className={`${menuClass} selected`}>{selectedItem}</label>
-            {items.map((category: Item, index: number) => (
+            {visibleItems.map((category: Item, index: number) => (
               <div key={index}>
-                {category.name !== selectedItem && (
-                  <label
-                    className={`${menuClass}`}
-                    onClick={() => handleItemChange(category.key)}
-                    onKeyDown={(event) => handleItemKeyDown(event, category.key)}
-                    tabIndex={0}
-                  >
-                    {category.name}
-                  </label>
-                )}
+                <label
+                  className={`${menuClass}`}
+                  onClick={() => handleItemChange(category.key)}
+                  onKeyDown={(event) => handleItemKeyDown(event, category.key, index)}
+                  tabIndex={0}
+                  ref={(el) => {
+                    visibleRefs.current[index] = el;
+                  }}
+                >
+                  {category.name}
+                </label>
                 {index < items.length - 1 && <hr className="selectionMenuListLine" />}
               </div>
             ))}
