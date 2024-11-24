@@ -9,10 +9,19 @@ import SelectionMenu from './SelectionMenu';
 
 SearchbarDropdownCategory.propTypes = {
   onCategoryChange: PropTypes.func.isRequired,
+  currentCategory: PropTypes.string.isRequired,
 };
 
-export function SearchbarDropdownCategory({ onCategoryChange }: SearchbarDropdownCategoryProps) {
+export function SearchbarDropdownCategory({
+  onCategoryChange,
+  currentCategory,
+}: SearchbarDropdownCategoryProps) {
   const [allTransactions, setAllTransactions] = useState<EPTransaction[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState<string>(currentCategory);
+
+  useEffect(() => {
+    setSelectedCategory(currentCategory);
+  }, [currentCategory]);
 
   useEffect(() => {
     const fetchTransactions = async () => {
@@ -62,8 +71,6 @@ export function SearchbarDropdownCategory({ onCategoryChange }: SearchbarDropdow
   };
 
   const allCategories: Item[] = getAllCategories();
-
-  const [selectedCategory, setSelectedCategory] = useState<string>('all');
 
   const getCategoryName = (category: string): string => {
     let selectedCategory = '';
