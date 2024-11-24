@@ -60,9 +60,36 @@ const App: ({ Router, initialEntries }: AppProps) => React.ReactNode = ({
       </Router>
     );
 
+  const [isHidden, setIsHidden] = useState<boolean>(false);
+  const closeForm = () => {
+    setIsHidden(true);
+  };
+
   return (
     <>
-      <div className="webapp">{router}</div>
+      <div className="webapp">
+        {router}
+        <div className={`backgroundOverlay ${isHidden ? 'isHidden' : ''}`}></div>
+        <div className={`formOverlay ${isHidden ? 'isHidden' : ''}`}>
+          <header className="formOverlayHeader">
+            <div className="formOverlayHeaderBar">
+              <h2 className="formOverlayHeaderBarTitle">Add New Budget</h2>
+              <img
+                className="formOverlayHeaderBarIcon"
+                alt="closing icon"
+                aria-hidden="false"
+                src="/images/icon-close-modal.svg"
+                tabIndex={0}
+                onClick={closeForm}
+              />
+            </div>
+            <p className="formOverlayHeaderText">
+              Choose a category to set a spending budget. These categories can help you monitor
+              spending.
+            </p>
+          </header>
+        </div>
+      </div>
     </>
   );
 };
