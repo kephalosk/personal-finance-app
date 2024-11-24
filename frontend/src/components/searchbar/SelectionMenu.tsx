@@ -65,6 +65,13 @@ function SelectionMenu({
       event.preventDefault();
       visibleRefs.current[0]?.focus();
     }
+    if (event.key === 'Tab' && event.shiftKey && visibleIndex === 0) {
+      event.preventDefault();
+      visibleRefs.current[visibleRefs.current.length - 1]?.focus();
+    }
+    if (event.key === 'Escape') {
+      setShowSelection(false);
+    }
   };
 
   return (
