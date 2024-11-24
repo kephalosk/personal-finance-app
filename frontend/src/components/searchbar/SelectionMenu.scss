@@ -80,6 +80,10 @@
 }
 .selectionMenu.smallerWidth {
   min-width: 125px;
+
+  @include mixins.phone() {
+    min-width: 42px;
+  }
 }
 
 
