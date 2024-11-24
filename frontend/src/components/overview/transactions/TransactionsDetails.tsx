@@ -14,6 +14,7 @@ import { splitIntoChunks } from '../../../globals/utils/SplitIntoChunks';
 import { SearchbarInputHandle } from '../../../model/SearchbarInputHandle';
 import useIsSmallScreen from '../../../globals/hooks/useIsSmallScreen';
 import LoadingSpinner from '../../LoadingSpinner';
+import { useLocation } from 'react-router-dom';
 
 interface Props {
   isLoading: boolean;
@@ -21,9 +22,13 @@ interface Props {
 }
 
 function TransactionsDetails({ isLoading, fetchedTransactions }: Props) {
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const cat = queryParams.get('cat');
+
+  const [currentCategory, setCurrentCategory] = useState<string>('all');
   const [pageIndex, setPageIndex] = useState(0);
   const [currentSortOption, setCurrentSortOption] = useState<string>(SortOptionEnum.LATEST);
-  const [currentCategory, setCurrentCategory] = useState<string>('all');
 
   const [transactions, setTransactions] = useState<EPTransaction[]>([]);
   const [filteredTransactions, setFilteredTransactions] = useState(transactions);
@@ -129,6 +134,14 @@ function TransactionsDetails({ isLoading, fetchedTransactions }: Props) {
     }
     setPageIndex(newIndex);
   };
+
+  useEffect(() => {
+    if (cat) {
+      console.log(cat);
+      handleCategoryChange(cat, fetchedTransactions);
+    }
+  }, [cat, fetchedTransactions]);
+
   return (
     <>
       {isLoading ? (
@@ -142,13 +155,19 @@ function TransactionsDetails({ isLoading, fetchedTransactions }: Props) {
                 <label className="searchbarLabel sortBy">Sort by</label>
                 <SearchbarDropdownSort onSortChange={handleSortChange} />
                 <label className="searchbarLabel category">Category</label>
-                <SearchbarDropdownCategory onCategoryChange={handleCategoryChange} />
+                <SearchbarDropdownCategory
+                  onCategoryChange={handleCategoryChange}
+                  currentCategory={currentCategory}
+                />
               </div>
             )}
             {isSmallScreen && (
               <div className="searchbarSmall">
                 <SearchbarDropdownSort onSortChange={handleSortChange} />
-                <SearchbarDropdownCategory onCategoryChange={handleCategoryChange} />
+                <SearchbarDropdownCategory
+                  onCategoryChange={handleCategoryChange}
+                  currentCategory={currentCategory}
+                />
               </div>
             )}
           </div>

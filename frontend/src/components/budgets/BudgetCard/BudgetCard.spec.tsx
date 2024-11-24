@@ -218,7 +218,7 @@ describe('BudgetCard', () => {
 
     const component = screen.getByRole('link');
 
-    expect(component).toHaveAttribute('href', '/transactions');
+    expect(component).toHaveAttribute('href', '/transactions?cat=entertainment');
   });
 
   it('filters the transactions for the BudgetCardList', () => {

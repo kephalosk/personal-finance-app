@@ -18,6 +18,7 @@ const mockGetTransactions = getTransactions as jest.Mock;
 
 describe('searchbarDropdownCategory', () => {
   let mockOnCategoryChange: jest.Mock<() => void>;
+  const currentCategory = 'all';
 
   beforeEach(() => {
     mockGetTransactions.mockResolvedValue(mockedTransactions);
@@ -27,7 +28,12 @@ describe('searchbarDropdownCategory', () => {
 
   it('renders SelectionMenu', async () => {
     await act(async (): Promise<void> => {
-      render(<SearchbarDropdownCategory onCategoryChange={mockOnCategoryChange} />);
+      render(
+        <SearchbarDropdownCategory
+          onCategoryChange={mockOnCategoryChange}
+          currentCategory={currentCategory}
+        />
+      );
     });
 
     const component = screen.getByTestId('selection-menu');
@@ -38,7 +44,10 @@ describe('searchbarDropdownCategory', () => {
   it('renders div dropdownCategory', async () => {
     const cut = await act(async (): Promise<HTMLElement> => {
       const { container } = render(
-        <SearchbarDropdownCategory onCategoryChange={mockOnCategoryChange} />
+        <SearchbarDropdownCategory
+          onCategoryChange={mockOnCategoryChange}
+          currentCategory={currentCategory}
+        />
       );
       return container;
     });
@@ -50,15 +59,40 @@ describe('searchbarDropdownCategory', () => {
 
   it('calls onCategoryChange when a different option is selected', async () => {
     await act(async (): Promise<void> => {
-      render(<SearchbarDropdownCategory onCategoryChange={mockOnCategoryChange} />);
+      render(
+        <SearchbarDropdownCategory
+          onCategoryChange={mockOnCategoryChange}
+          currentCategory={currentCategory}
+        />
+      );
     });
 
     const dropdownWrapper = screen.getByTestId('selection-menu');
     const dropdownButton = dropdownWrapper.querySelector('.selectionMenu');
     fireEvent.click(dropdownButton!);
-    const optionElement = screen.getByText('General'); // Verwende den angezeigten Text der Option
-    fireEvent.click(optionElement);
+    const optionElements = screen.getAllByText('General'); // Verwende den angezeigten Text der Option
+    fireEvent.click(optionElements[0]);
 
     expect(mockOnCategoryChange).toHaveBeenCalledWith('general');
+  });
+
+  it('sets selectedCategory with passed currentCategory', async () => {
+    const cut = await act(async (): Promise<HTMLElement> => {
+      const { container } = render(
+        <SearchbarDropdownCategory
+          onCategoryChange={mockOnCategoryChange}
+          currentCategory="diningout"
+        />
+      );
+      return container;
+    });
+
+    const dropdownWrapper = screen.getByTestId('selection-menu');
+    const dropdownButton = dropdownWrapper.querySelector('.selectionMenu');
+    fireEvent.click(dropdownButton!);
+
+    const labels = cut.querySelectorAll('label');
+
+    expect(labels[0]).toHaveTextContent('Dining Out');
   });
 });

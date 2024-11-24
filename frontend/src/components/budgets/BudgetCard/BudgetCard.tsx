@@ -21,7 +21,7 @@ export function BudgetCard({ budget, transactions, isLoading }: BudgetCardProps)
     return transaction.categoryKey === budget.categoryKey;
   });
 
-  const link = '../transactions';
+  const link = `../transactions?cat=${budget.categoryKey}`;
 
   let spent: number = 0;
   budgetTransactions.forEach((transaction: EPTransaction) => {
