@@ -21,8 +21,8 @@
 .transactionsPage {
   padding: 32px 40px;
   height: 100%;
-  display: grid;
-  grid-template-rows: fit-content(100%) 1fr;
+  display: flex;
+  flex-direction: column;
   row-gap: 24px;
 
   @include mixins.phone() {
