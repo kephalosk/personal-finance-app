@@ -6,14 +6,6 @@ import { AppModule } from '../src/app.module';
 describe('AppController (e2e)', () => {
   let app: INestApplication;
 
-  beforeAll(() => {
-    console.log(process.env.DATABASE_HOST);
-    console.log(process.env.DATABASE_PORT);
-    console.log(process.env.DATABASE_USERNAME);
-    console.log(process.env.DATABASE_PASSWORD);
-    console.log(process.env.DATABASE_NAME);
-  });
-
   beforeEach(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
       imports: [AppModule],
