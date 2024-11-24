@@ -27,9 +27,75 @@
   background-color: var(--page-background);
   height: auto;
   min-height: calc(100vh - 14px);
+  position: relative;
 
   @include mixins.tablet-and-down() {
     grid-template-columns: 1fr;
     grid-template-rows: 1fr auto;
   }
+}
+
+
+//backgroundOverlay
+.backgroundOverlay{
+  background-color: rgb(0,0,0,0.5);
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  position: absolute;
+  z-index: 3;
+}
+.backgroundOverlay.isHidden {
+  display: none;
+}
+
+//formOverlay
+.formOverlay{
+  border-radius: 12px;
+  background-color: var(--component-background-bright);
+  padding: 32px;
+  height: 490px;
+  width: 560px;
+  bottom: calc(50% - 245px);
+  left: calc(50% - 280px);
+  position: fixed;
+  z-index: 4;
+}
+.formOverlay.isHidden {
+  display: none;
+}
+
+.formOverlayHeaderBar {
+  display: flex;
+  flex-direction: row;
+}
+
+.formOverlayHeaderBarIcon {
+  padding: 6px;
+  cursor: pointer;
+}
+.formOverlayHeaderBarIcon:hover {
+  filter: invert(74%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(0%) contrast(100%);
+}
+.formOverlayHeaderBarIcon:focus-visible {
+  border-radius: 8px;
+  border: 2px solid var(--text-dark);
+  padding: 4px;
+  filter: invert(74%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(0%) contrast(100%);
+  outline: none;
+}
+
+.formOverlayHeaderBarTitle{
+  margin: 0;
+  height: auto;
+  flex-grow: 1;
+  font-size: 32px;
+}
+
+.formOverlayHeaderText {
+  margin: 20px 0;
+  line-height: 1.5;
+  font-size: 14px;
+  color: var(--text-grey);
 }
