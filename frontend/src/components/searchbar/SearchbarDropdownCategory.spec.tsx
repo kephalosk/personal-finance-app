@@ -41,7 +41,7 @@ describe('searchbarDropdownCategory', () => {
     expect(component).toBeInTheDocument();
   });
 
-  it('renders div dropdownCategory', async () => {
+  it('renders div searchbarDropdownCategory', async () => {
     const cut = await act(async (): Promise<HTMLElement> => {
       const { container } = render(
         <SearchbarDropdownCategory
@@ -52,7 +52,7 @@ describe('searchbarDropdownCategory', () => {
       return container;
     });
 
-    const element = cut.querySelector('.dropdownCategory');
+    const element = cut.querySelector('.searchbarDropdownCategory');
 
     expect(element).toBeInTheDocument();
   });
