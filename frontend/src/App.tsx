@@ -16,7 +16,6 @@ import { PotsPage } from './pages/PotsPage';
 import BudgetsPage from './pages/BudgetsPage';
 import TransactionsPage from './pages/TransactionsPage';
 import ScrollToTop from './components/ScrollToTop';
-import { SearchbarDropdownCategory } from './components/searchbar/SearchbarDropdownCategory';
 
 interface AppProps {
   Router?: React.ComponentType<BrowserRouterProps | MemoryRouterProps>;

@@ -109,7 +109,7 @@ describe('TransactionsDetails', () => {
         return container;
       });
 
-      const htmlElement = cut.querySelector('.dropdownCategory');
+      const htmlElement = cut.querySelector('.searchbarDropdownCategory');
 
       expect(htmlElement).toBeInTheDocument();
     });
@@ -287,7 +287,7 @@ describe('TransactionsDetails', () => {
           return container;
         });
 
-        const dropdown = cut.querySelector('.dropdownCategory');
+        const dropdown = cut.querySelector('.searchbarDropdownCategory');
         const selectElement = dropdown!.querySelector('.selectionMenu');
         fireEvent.click(selectElement!);
         const optionElements = screen.getAllByText(testCategory);
@@ -311,7 +311,7 @@ describe('TransactionsDetails', () => {
         let activeButton = cut.querySelector('.isActive');
         expect(activeButton).toHaveTextContent('2');
 
-        const dropdown = cut.querySelector('.dropdownCategory');
+        const dropdown = cut.querySelector('.searchbarDropdownCategory');
         const selectElement = dropdown!.querySelector('.selectionMenu');
         fireEvent.click(selectElement!);
         const optionElements = screen.getAllByText(testCategory);
@@ -327,7 +327,7 @@ describe('TransactionsDetails', () => {
           await flushPromises();
           return container;
         });
-        const dropdown = cut.querySelector('.dropdownCategory');
+        const dropdown = cut.querySelector('.searchbarDropdownCategory');
         const selectElement = dropdown!.querySelector('.selectionMenu');
         fireEvent.click(selectElement!);
         const optionElements = screen.getAllByText(testCategory);
@@ -398,7 +398,7 @@ describe('TransactionsDetails', () => {
         fireEvent.click(selectElementSort!);
         const optionElement = screen.getByText('Highest');
         fireEvent.click(optionElement);
-        const dropdown = cut.querySelector('.dropdownCategory');
+        const dropdown = cut.querySelector('.searchbarDropdownCategory');
         const selectElement = dropdown!.querySelector('.selectionMenu');
         fireEvent.click(selectElement!);
         const optionElements = screen.getAllByText(testCategory);

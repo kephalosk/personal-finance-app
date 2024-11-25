@@ -4,6 +4,7 @@
 }
 
 .headerBarButton {
+  border: 0;
   border-radius: 8px;
   background-color: var(--component-background-dark);
   padding: 16px;
@@ -11,14 +12,8 @@
   color: var(--text-white);
   cursor: pointer;
 }
-.headerBarButton:hover, .headerBarButton:focus-visible {
-  border-radius: 8px;
-  border-color: var(--component-background-grey);;
+.headerBarButton:hover {
   background-color: var(--component-background-grey);
-  padding: 16px;
-  font-weight: 600;
-  color: var(--text-white);
-  cursor: pointer;
   transition: background-color 0.2s ease;
   outline: none;
 }
