@@ -83,7 +83,7 @@ export function SearchbarDropdownCategory({
   };
 
   return (
-    <div className="dropdownCategory">
+    <div className="searchbarDropdownCategory">
       <SelectionMenu
         selectedItem={getCategoryName(selectedCategory)}
         items={allCategories}
