@@ -6,7 +6,7 @@ import { getBudgets } from '../globals/services/BudgetService';
 import { EPBudget } from '../model/entrypoints/EPBudget';
 import { EPTransaction } from '../model/entrypoints/EPTransaction';
 import { getTransactions } from '../globals/services/TransactionService';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const BudgetsPage = () => {
   const [transactions, setTransactions] = useState<EPTransaction[]>([]);
@@ -31,6 +31,17 @@ const BudgetsPage = () => {
     fetchBudgets().then();
   }, []);
 
+  //New Component
+  const [isHidden, setIsHidden] = useState<boolean>(false);
+  const closeForm = () => {
+    setIsHidden(true);
+  };
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLImageElement>) => {
+    if (event.key === 'Enter') {
+      closeForm();
+    }
+  };
+
   return (
     <>
       <div className="budgetsPage" data-testid="budgets-page">
@@ -53,6 +64,58 @@ const BudgetsPage = () => {
               />
             ))}
           </div>
+        </div>
+        <div className={`backgroundOverlay ${isHidden ? 'isHidden' : ''}`}></div>
+        <div className={`formOverlay ${isHidden ? 'isHidden' : ''}`}>
+          <header className="formOverlayHeader">
+            <div className="formOverlayHeaderBar">
+              <h2 className="formOverlayHeaderBarTitle">Add New Budget</h2>
+              <img
+                className="formOverlayHeaderBarIcon"
+                alt="closing icon"
+                aria-hidden="false"
+                src="/images/icon-close-modal.svg"
+                tabIndex={0}
+                onClick={closeForm}
+                onKeyDown={handleKeyDown}
+              />
+            </div>
+            <p className="formOverlayHeaderText">
+              Choose a category to set a spending budget. These categories can help you monitor
+              spending.
+            </p>
+          </header>
+          <section className="formOverlayContent">
+            <label className="fieldTitle">Budget Category</label>
+            <div className="dropdownCategory" tabIndex={0}>
+              Entertainment
+              <img
+                className="dropdownCategoryIcon"
+                alt="caret icon"
+                aria-hidden="true"
+                src="/images/icon-caret-down.svg"
+              />
+              <div className="dropdownCategoryList" tabIndex={0}>
+                Entertainment
+              </div>
+            </div>
+            <label className="fieldTitle">Maximum Spend</label>
+            <input className="inputMoney" />
+            <label className="fieldTitle">Theme</label>
+            <div className="dropdownColor" tabIndex={0}>
+              <div className="dropdownColorCircle"></div>
+              Green
+              <img
+                className="dropdownCategoryIcon"
+                alt="caret icon"
+                aria-hidden="true"
+                src="/images/icon-caret-down.svg"
+              />
+            </div>
+          </section>
+          <button className="formOverlaySubmit" onClick={closeForm}>
+            Save Changes
+          </button>
         </div>
       </div>
     </>
