@@ -28,26 +28,15 @@ const OverlayCardBox: React.FC<Props> = ({
 
     if (overlayRef.current && !isHidden) {
       focusTrap = createFocusTrap(overlayRef.current, {
-        onDeactivate: onClose,
         escapeDeactivates: true,
       });
       focusTrap.activate();
     }
 
-    setTimeout(() => {
-      const keyboardEvent = new KeyboardEvent('keydown', {
-        key: 'Tab',
-        keyCode: 9,
-        code: 'Tab',
-        bubbles: true,
-      });
-      document.activeElement?.dispatchEvent(keyboardEvent);
-    }, 0);
-
     return () => {
       focusTrap?.deactivate();
     };
-  }, [isHidden, onClose]);
+  }, [isHidden]);
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLImageElement>) => {
     if (event.key === 'Enter') {
@@ -61,7 +50,7 @@ const OverlayCardBox: React.FC<Props> = ({
   };
 
   return (
-    <>
+    <div className="overlayCardBox" data-testid="overlay-card-box">
       <div className={`overlayBackground ${isHidden ? 'isHidden' : ''}`}></div>
       <div
         ref={overlayRef}
@@ -91,7 +80,7 @@ const OverlayCardBox: React.FC<Props> = ({
           {submitText}
         </button>
       </div>
-    </>
+    </div>
   );
 };
 

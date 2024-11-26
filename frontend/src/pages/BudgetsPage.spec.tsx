@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import BudgetsPage from './BudgetsPage';
 import { MemoryRouter } from 'react-router-dom';
 import useIsSmallScreen from '../globals/hooks/useIsSmallScreen';
@@ -128,5 +128,41 @@ describe('BudgetsPage', () => {
     const components = screen.getAllByTestId('budget-card');
 
     expect(components).toHaveLength(2);
+  });
+
+  it('renders component OverlayCardBox', async () => {
+    const cut = await act(async () => {
+      const { container } = render(
+        <MemoryRouter>
+          <BudgetsPage />
+        </MemoryRouter>
+      );
+      return container;
+    });
+
+    const button = cut.querySelector('.headerBarButton');
+    fireEvent.click(button!);
+
+    const component = screen.getByTestId('overlay-card-box');
+
+    expect(component).toBeInTheDocument();
+  });
+
+  it('renders component OverlayContentAddNewBudget', async () => {
+    const cut = await act(async () => {
+      const { container } = render(
+        <MemoryRouter>
+          <BudgetsPage />
+        </MemoryRouter>
+      );
+      return container;
+    });
+
+    const button = cut.querySelector('.headerBarButton');
+    fireEvent.click(button!);
+
+    const component = screen.getByTestId('overlay-content-add-new-budget');
+
+    expect(component).toBeInTheDocument();
   });
 });

@@ -22,7 +22,7 @@ export function PotsPage() {
   return (
     <>
       <div className="potsPage" data-testid="pots-page">
-        <HeaderBar h1Headline="Pots" buttonText="+ Add New Pot" />
+        <HeaderBar h1Headline="Pots" buttonText="+ Add New Pot" handleClick={() => {}} />
         <PotPageGrid pots={pots} isLoading={isLoading} />
       </div>
     </>
