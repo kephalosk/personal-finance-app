@@ -4,6 +4,7 @@ import { mockedPots } from '../../fixtures/MockedPots';
 import { getPots } from '../../globals/services/PotService';
 import { MemoryRouter } from 'react-router-dom';
 import PotPageGrid from './PotPageGrid';
+import { ReactFutureFlags } from '../../constants/ReactFutureFlags';
 
 jest.mock('../../globals/services/PotService', () => ({
   getPots: jest.fn(),
@@ -44,7 +45,7 @@ describe('PotPageGrid', () => {
 
   it('renders LoadingSpinner if isLoading is true', () => {
     const { container } = render(
-      <MemoryRouter>
+      <MemoryRouter future={ReactFutureFlags}>
         <PotPageGrid {...testProps} isLoading={true} />
       </MemoryRouter>
     );

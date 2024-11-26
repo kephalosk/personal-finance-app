@@ -4,6 +4,7 @@ import { SidebarListEntryProps } from '../../model/props/SidebarListEntryProps';
 import { MemoryRouter } from 'react-router-dom';
 import React from 'react';
 import { SidebarMinimizeProps } from '../../constants/SidebarMinimizeProps';
+import { ReactFutureFlags } from '../../constants/ReactFutureFlags';
 
 describe('SidebarListEntry', () => {
   const name: string = 'testName';
@@ -20,7 +21,7 @@ describe('SidebarListEntry', () => {
 
   it('does not render a link for SidebarMinimize with passed className', () => {
     const { container } = render(
-      <MemoryRouter>
+      <MemoryRouter future={ReactFutureFlags}>
         <SidebarListEntry {...testProps} className={SidebarMinimizeProps.className} />
       </MemoryRouter>
     );
@@ -34,7 +35,7 @@ describe('SidebarListEntry', () => {
 
   it('renders a link for normal SidebarListEntries', () => {
     const { container } = render(
-      <MemoryRouter>
+      <MemoryRouter future={ReactFutureFlags}>
         <SidebarListEntry {...testProps} className="" />
       </MemoryRouter>
     );
@@ -48,7 +49,7 @@ describe('SidebarListEntry', () => {
 
   it('sets entry isActive if passed prop isActive is true', () => {
     const { container } = render(
-      <MemoryRouter>
+      <MemoryRouter future={ReactFutureFlags}>
         <SidebarListEntry {...testProps} isActive={true} />
       </MemoryRouter>
     );
@@ -60,7 +61,7 @@ describe('SidebarListEntry', () => {
 
   it('does not set entry isActive if passed prop isActive is false', () => {
     const { container } = render(
-      <MemoryRouter>
+      <MemoryRouter future={ReactFutureFlags}>
         <SidebarListEntry {...testProps} isActive={false} />
       </MemoryRouter>
     );
@@ -72,7 +73,7 @@ describe('SidebarListEntry', () => {
 
   it('renders div entryRowImgWrapper', () => {
     const { container } = render(
-      <MemoryRouter>
+      <MemoryRouter future={ReactFutureFlags}>
         <SidebarListEntry {...testProps} />
       </MemoryRouter>
     );
@@ -84,7 +85,7 @@ describe('SidebarListEntry', () => {
 
   it('renders the passed icon', () => {
     render(
-      <MemoryRouter>
+      <MemoryRouter future={ReactFutureFlags}>
         <SidebarListEntry {...testProps} />
       </MemoryRouter>
     );
@@ -96,7 +97,7 @@ describe('SidebarListEntry', () => {
 
   it('renders label entryRowLabel with passed name', () => {
     const { container } = render(
-      <MemoryRouter>
+      <MemoryRouter future={ReactFutureFlags}>
         <SidebarListEntry {...testProps} />
       </MemoryRouter>
     );
@@ -108,7 +109,7 @@ describe('SidebarListEntry', () => {
 
   it('passes the linkTarget of a sidebarListEntry', () => {
     const { getByRole } = render(
-      <MemoryRouter>
+      <MemoryRouter future={ReactFutureFlags}>
         <SidebarListEntry {...testProps} />
       </MemoryRouter>
     );
@@ -120,7 +121,7 @@ describe('SidebarListEntry', () => {
 
   it('ignores the icon for assistive technologies', () => {
     render(
-      <MemoryRouter>
+      <MemoryRouter future={ReactFutureFlags}>
         <SidebarListEntry {...testProps} />
       </MemoryRouter>
     );
@@ -132,7 +133,7 @@ describe('SidebarListEntry', () => {
 
   it('sets entryRowLabel to minimized if isMinimized is true', () => {
     const { container } = render(
-      <MemoryRouter>
+      <MemoryRouter future={ReactFutureFlags}>
         <SidebarListEntry {...testProps} isMinimized={true} />
       </MemoryRouter>
     );
@@ -145,7 +146,7 @@ describe('SidebarListEntry', () => {
   it('sets altImgSrc if isMinimized is true', () => {
     const altImgSrc = 'testAltImgSrc';
     const { container } = render(
-      <MemoryRouter>
+      <MemoryRouter future={ReactFutureFlags}>
         <SidebarListEntry {...testProps} isMinimized={true} altImgSrc={altImgSrc} />
       </MemoryRouter>
     );
@@ -158,7 +159,7 @@ describe('SidebarListEntry', () => {
   it('sets class minimized by default with localStorage', () => {
     localStorage.setItem('isMinimized', JSON.stringify(true));
     const { container } = render(
-      <MemoryRouter>
+      <MemoryRouter future={ReactFutureFlags}>
         <SidebarListEntry {...testProps} isMinimized={true} />
       </MemoryRouter>
     );
@@ -172,7 +173,7 @@ describe('SidebarListEntry', () => {
   it('does not set class minimized by default without localStorage', () => {
     localStorage.clear();
     const { container } = render(
-      <MemoryRouter>
+      <MemoryRouter future={ReactFutureFlags}>
         <SidebarListEntry {...testProps} />
       </MemoryRouter>
     );
@@ -185,7 +186,7 @@ describe('SidebarListEntry', () => {
   it('changes class minimized when isMinimized changes', () => {
     localStorage.clear();
     const { container, rerender } = render(
-      <MemoryRouter>
+      <MemoryRouter future={ReactFutureFlags}>
         <SidebarListEntry {...testProps} isMinimized={false} />
       </MemoryRouter>
     );
@@ -193,7 +194,7 @@ describe('SidebarListEntry', () => {
     expect(labelElement).not.toHaveClass('minimized');
 
     rerender(
-      <MemoryRouter>
+      <MemoryRouter future={ReactFutureFlags}>
         <SidebarListEntry {...testProps} isMinimized={true} />
       </MemoryRouter>
     );

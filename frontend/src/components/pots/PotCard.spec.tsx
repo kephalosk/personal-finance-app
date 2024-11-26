@@ -2,6 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { mockedPot } from '../../fixtures/MockedPots';
 import { PotCard } from './PotCard';
 import { MemoryRouter } from 'react-router-dom';
+import { ReactFutureFlags } from '../../constants/ReactFutureFlags';
 
 describe('PotCard', () => {
   const testProps = {
@@ -60,7 +61,7 @@ describe('PotCard', () => {
 
   it('renders LoadingSpinner if isLoading is true', () => {
     const { container } = render(
-      <MemoryRouter>
+      <MemoryRouter future={ReactFutureFlags}>
         <PotCard {...testProps} isLoading={true} />
       </MemoryRouter>
     );

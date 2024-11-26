@@ -7,6 +7,7 @@ import { mockedTransactions } from '../fixtures/MockedTransactions';
 import { act } from 'react';
 import { getBudgets } from '../globals/services/BudgetService';
 import { mockedBudgets } from '../fixtures/MockedBudgets';
+import { ReactFutureFlags } from '../constants/ReactFutureFlags';
 
 jest.mock('../globals/services/TransactionService', () => ({
   getTransactions: jest.fn(),
@@ -31,7 +32,7 @@ describe('BudgetsPage', () => {
   it('renders div budgetsPage', async () => {
     const cut = await act(async () => {
       const { container } = render(
-        <MemoryRouter>
+        <MemoryRouter future={ReactFutureFlags}>
           <BudgetsPage />
         </MemoryRouter>
       );
@@ -46,7 +47,7 @@ describe('BudgetsPage', () => {
   it('renders component HeaderBar', async () => {
     await act(async () => {
       render(
-        <MemoryRouter>
+        <MemoryRouter future={ReactFutureFlags}>
           <BudgetsPage />
         </MemoryRouter>
       );
@@ -60,7 +61,7 @@ describe('BudgetsPage', () => {
   it('renders div budgetsDetails', async () => {
     const cut = await act(async () => {
       const { container } = render(
-        <MemoryRouter>
+        <MemoryRouter future={ReactFutureFlags}>
           <BudgetsPage />
         </MemoryRouter>
       );
@@ -75,7 +76,7 @@ describe('BudgetsPage', () => {
   it('renders div budgetsDetailsLeft', async () => {
     const cut = await act(async () => {
       const { container } = render(
-        <MemoryRouter>
+        <MemoryRouter future={ReactFutureFlags}>
           <BudgetsPage />
         </MemoryRouter>
       );
@@ -90,7 +91,7 @@ describe('BudgetsPage', () => {
   it('renders component HeaderBar', async () => {
     await act(async () => {
       render(
-        <MemoryRouter>
+        <MemoryRouter future={ReactFutureFlags}>
           <BudgetsPage />
         </MemoryRouter>
       );
@@ -104,7 +105,7 @@ describe('BudgetsPage', () => {
   it('renders div budgetsDetailsRight', async () => {
     const cut = await act(async () => {
       const { container } = render(
-        <MemoryRouter>
+        <MemoryRouter future={ReactFutureFlags}>
           <BudgetsPage />
         </MemoryRouter>
       );
@@ -119,7 +120,7 @@ describe('BudgetsPage', () => {
   it('renders component BudgetCard', async () => {
     await act(async () => {
       render(
-        <MemoryRouter>
+        <MemoryRouter future={ReactFutureFlags}>
           <BudgetsPage />
         </MemoryRouter>
       );
@@ -133,7 +134,7 @@ describe('BudgetsPage', () => {
   it('renders component OverlayCardBox', async () => {
     const cut = await act(async () => {
       const { container } = render(
-        <MemoryRouter>
+        <MemoryRouter future={ReactFutureFlags}>
           <BudgetsPage />
         </MemoryRouter>
       );
@@ -151,7 +152,7 @@ describe('BudgetsPage', () => {
   it('renders component OverlayContentAddNewBudget', async () => {
     const cut = await act(async () => {
       const { container } = render(
-        <MemoryRouter>
+        <MemoryRouter future={ReactFutureFlags}>
           <BudgetsPage />
         </MemoryRouter>
       );

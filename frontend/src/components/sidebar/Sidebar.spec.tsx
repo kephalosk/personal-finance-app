@@ -6,6 +6,7 @@ import { MemoryRouter, useLocation } from 'react-router-dom';
 import React from 'react';
 import { SidebarMinimize } from './SidebarMinimize';
 import useIsTabletScreen from '../../globals/hooks/useIsTabletScreen';
+import { ReactFutureFlags } from '../../constants/ReactFutureFlags';
 
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
@@ -27,7 +28,7 @@ function initializeComponent() {
     pathname: '/',
   });
   render(
-    <MemoryRouter>
+    <MemoryRouter future={ReactFutureFlags}>
       <Sidebar {...testProps} />
     </MemoryRouter>
   );
@@ -38,7 +39,7 @@ function getInitializedContainer(): HTMLElement {
     pathname: '/',
   });
   const { container } = render(
-    <MemoryRouter>
+    <MemoryRouter future={ReactFutureFlags}>
       <Sidebar {...testProps} />
     </MemoryRouter>
   );
