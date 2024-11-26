@@ -86,27 +86,27 @@ function SelectionMenu({
         onClick={handleDropdownClick}
       >
         {selectedItem}
-        {showSelection && (
-          <div className={`selectionMenuList ${hasSmallerWidth ? 'smallerWidth' : ''}`}>
-            <label className={menuClass}>{selectedItem}</label>
-            {visibleItems.map((category: Item, index: number) => (
-              <div key={index}>
-                <hr className="selectionMenuListLine" />
-                <label
-                  className={menuClass}
-                  onClick={() => handleItemChange(category.key)}
-                  onKeyDown={(event) => handleItemKeyDown(event, category.key, index)}
-                  tabIndex={0}
-                  ref={(el) => {
-                    visibleRefs.current[index] = el;
-                  }}
-                >
-                  {category.name}
-                </label>
-              </div>
-            ))}
-          </div>
-        )}
+        <div
+          className={`selectionMenuList ${hasSmallerWidth ? 'smallerWidth' : ''} ${showSelection ? 'isOpen' : ''}`}
+        >
+          <label className={menuClass}>{selectedItem}</label>
+          {visibleItems.map((category: Item, index: number) => (
+            <div key={index}>
+              <hr className="selectionMenuListLine" />
+              <label
+                className={menuClass}
+                onClick={() => handleItemChange(category.key)}
+                onKeyDown={(event) => handleItemKeyDown(event, category.key, index)}
+                tabIndex={0}
+                ref={(el) => {
+                  visibleRefs.current[index] = el;
+                }}
+              >
+                {category.name}
+              </label>
+            </div>
+          ))}
+        </div>
       </div>
       {!isSmallScreen && (
         <img
