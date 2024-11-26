@@ -228,11 +228,7 @@ describe('BillCard', () => {
   });
 
   it('renders LoadingSpinner if isLoading is true', () => {
-    const { container } = render(
-      <MemoryRouter>
-        <BillCard {...testProps} isLoading={true} />
-      </MemoryRouter>
-    );
+    const { container } = render(<BillCard {...testProps} isLoading={true} />);
 
     const htmlElement = container.querySelector('.loadingSpinner');
     const components = screen.queryAllByTestId('bill-card-table-row');

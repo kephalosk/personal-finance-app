@@ -3,6 +3,7 @@ import { MemoryRouter } from 'react-router-dom';
 import React from 'react';
 import OverlayDropdownCategory from './OverlayDropdownCategory';
 import { Categories, CategoriesMap } from '../../constants/Categories';
+import { ReactFutureFlags } from '../../constants/ReactFutureFlags';
 
 describe('OverlayDropdownCategory', () => {
   const selectedItem = 'General';
@@ -14,7 +15,7 @@ describe('OverlayDropdownCategory', () => {
 
   it('renders div dropdownCategory', async () => {
     const { container } = render(
-      <MemoryRouter>
+      <MemoryRouter future={ReactFutureFlags}>
         <OverlayDropdownCategory {...testProps} />
       </MemoryRouter>
     );
@@ -26,7 +27,7 @@ describe('OverlayDropdownCategory', () => {
 
   it('renders selectedItem', async () => {
     const { container } = render(
-      <MemoryRouter>
+      <MemoryRouter future={ReactFutureFlags}>
         <OverlayDropdownCategory {...testProps} />
       </MemoryRouter>
     );
@@ -38,7 +39,7 @@ describe('OverlayDropdownCategory', () => {
 
   it('renders img dropdownCategoryIcon', async () => {
     const { container } = render(
-      <MemoryRouter>
+      <MemoryRouter future={ReactFutureFlags}>
         <OverlayDropdownCategory {...testProps} />
       </MemoryRouter>
     );
@@ -53,7 +54,7 @@ describe('OverlayDropdownCategory', () => {
 
   it('renders div dropdownCategoryList', async () => {
     const { container } = render(
-      <MemoryRouter>
+      <MemoryRouter future={ReactFutureFlags}>
         <OverlayDropdownCategory {...testProps} />
       </MemoryRouter>
     );
@@ -65,7 +66,7 @@ describe('OverlayDropdownCategory', () => {
 
   it('renders all categorie labels', async () => {
     const { container } = render(
-      <MemoryRouter>
+      <MemoryRouter future={ReactFutureFlags}>
         <OverlayDropdownCategory {...testProps} />
       </MemoryRouter>
     );
@@ -83,7 +84,7 @@ describe('OverlayDropdownCategory', () => {
 
   it('renders labels - 1 horizontal lines', async () => {
     const { container } = render(
-      <MemoryRouter>
+      <MemoryRouter future={ReactFutureFlags}>
         <OverlayDropdownCategory {...testProps} />
       </MemoryRouter>
     );
@@ -96,7 +97,7 @@ describe('OverlayDropdownCategory', () => {
 
   it('adds class isOpen to dropdownCategoryList when dropdownCategory is clicked', async () => {
     const { container } = render(
-      <MemoryRouter>
+      <MemoryRouter future={ReactFutureFlags}>
         <OverlayDropdownCategory {...testProps} />
       </MemoryRouter>
     );
@@ -113,7 +114,7 @@ describe('OverlayDropdownCategory', () => {
 
   it('removes class isOpen from dropdownCategoryList when a dropdownCategoryListItem is clicked', async () => {
     const { container } = render(
-      <MemoryRouter>
+      <MemoryRouter future={ReactFutureFlags}>
         <OverlayDropdownCategory {...testProps} />
       </MemoryRouter>
     );
@@ -132,7 +133,7 @@ describe('OverlayDropdownCategory', () => {
 
   it('calls handleCategoryChange when a dropdownCategoryListItem is clicked', async () => {
     const { container } = render(
-      <MemoryRouter>
+      <MemoryRouter future={ReactFutureFlags}>
         <OverlayDropdownCategory {...testProps} />
       </MemoryRouter>
     );
@@ -145,7 +146,7 @@ describe('OverlayDropdownCategory', () => {
 
   it('sets passed selectedItem to top of the list', async () => {
     const { container } = render(
-      <MemoryRouter>
+      <MemoryRouter future={ReactFutureFlags}>
         <OverlayDropdownCategory {...testProps} />
       </MemoryRouter>
     );
