@@ -4,7 +4,7 @@
   border-radius: 8px;
   box-shadow: 0 5px 40px -25px var(--component-background-dark);
   background-color: var(--component-background-bright);
-  height: auto;
+  max-height: 40px;
   width: 100%;
   min-width: 180px;
   display: flex;
@@ -14,9 +14,15 @@
   right: -1px;
   z-index: 100;
   color: var(--text-dark);
+  visibility: hidden;
+  transition: max-height 0.1s ease, visibility 0.1s ease;
 }
 .selectionMenuList.smallerWidth {
   min-width: 125px;
+}
+.selectionMenuList.isOpen {
+  max-height: 600px;
+  visibility: visible;
 }
 
 .selectionMenuListElement {
