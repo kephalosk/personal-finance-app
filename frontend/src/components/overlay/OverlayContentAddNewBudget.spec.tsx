@@ -2,6 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import React from 'react';
 import OverlayContentAddNewBudget from './OverlayContentAddNewBudget';
+import { ReactFutureFlags } from '../../constants/ReactFutureFlags';
 
 describe('OverlayContentAddNewBudget', () => {
   const selectedItem = 'General';
@@ -12,7 +13,7 @@ describe('OverlayContentAddNewBudget', () => {
   };
   it('renders component OverlayDropdownCategory', async () => {
     render(
-      <MemoryRouter>
+      <MemoryRouter future={ReactFutureFlags}>
         <OverlayContentAddNewBudget {...testProps} />
       </MemoryRouter>
     );

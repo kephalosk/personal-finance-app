@@ -8,6 +8,7 @@ import {
 } from '../../../fixtures/MockedTransactions';
 import { mockedBudget } from '../../../fixtures/MockedBudgets';
 import useIsSmallScreen from '../../../globals/hooks/useIsSmallScreen';
+import { ReactFutureFlags } from '../../../constants/ReactFutureFlags';
 
 jest.mock('../../../globals/hooks/useIsSmallScreen', () => ({
   __esModule: true,
@@ -35,7 +36,7 @@ describe('BudgetCard', () => {
 
   it('renders div budgetCard', () => {
     const { container } = render(
-      <MemoryRouter>
+      <MemoryRouter future={ReactFutureFlags}>
         <BudgetCard {...testProps} />
       </MemoryRouter>
     );
@@ -47,7 +48,7 @@ describe('BudgetCard', () => {
 
   it('renders component CardHeader', () => {
     render(
-      <MemoryRouter>
+      <MemoryRouter future={ReactFutureFlags}>
         <BudgetCard {...testProps} />
       </MemoryRouter>
     );
@@ -59,7 +60,7 @@ describe('BudgetCard', () => {
 
   it('renders div budgetCardBar', () => {
     const { container } = render(
-      <MemoryRouter>
+      <MemoryRouter future={ReactFutureFlags}>
         <BudgetCard {...testProps} />
       </MemoryRouter>
     );
@@ -71,7 +72,7 @@ describe('BudgetCard', () => {
 
   it('renders label budgetCardBarLabel', () => {
     const { container } = render(
-      <MemoryRouter>
+      <MemoryRouter future={ReactFutureFlags}>
         <BudgetCard {...testProps} />
       </MemoryRouter>
     );
@@ -84,7 +85,7 @@ describe('BudgetCard', () => {
 
   it('renders div budgetCardBarMax', () => {
     const { container } = render(
-      <MemoryRouter>
+      <MemoryRouter future={ReactFutureFlags}>
         <BudgetCard {...testProps} />
       </MemoryRouter>
     );
@@ -96,7 +97,7 @@ describe('BudgetCard', () => {
 
   it('renders div budgetCardBarCurrent', () => {
     const { container } = render(
-      <MemoryRouter>
+      <MemoryRouter future={ReactFutureFlags}>
         <BudgetCard {...testProps} />
       </MemoryRouter>
     );
@@ -108,7 +109,7 @@ describe('BudgetCard', () => {
 
   it('renders div budgetCardBarValues', () => {
     const { container } = render(
-      <MemoryRouter>
+      <MemoryRouter future={ReactFutureFlags}>
         <BudgetCard {...testProps} />
       </MemoryRouter>
     );
@@ -120,7 +121,7 @@ describe('BudgetCard', () => {
 
   it('renders component ValueBox-spent with passed color', () => {
     render(
-      <MemoryRouter>
+      <MemoryRouter future={ReactFutureFlags}>
         <BudgetCard {...testProps} />
       </MemoryRouter>
     );
@@ -139,7 +140,7 @@ describe('BudgetCard', () => {
 
   it('renders component ValueBox-remaining', () => {
     render(
-      <MemoryRouter>
+      <MemoryRouter future={ReactFutureFlags}>
         <BudgetCard {...testProps} />
       </MemoryRouter>
     );
@@ -158,7 +159,7 @@ describe('BudgetCard', () => {
   it('renders component ValueBox-remaining with text Free in mobile view', () => {
     (useIsSmallScreen as jest.Mock).mockReturnValue(true);
     render(
-      <MemoryRouter>
+      <MemoryRouter future={ReactFutureFlags}>
         <BudgetCard {...testProps} />
       </MemoryRouter>
     );
@@ -181,7 +182,7 @@ describe('BudgetCard', () => {
       budget: { ...mockedBudget, maximum: 5 },
     };
     render(
-      <MemoryRouter>
+      <MemoryRouter future={ReactFutureFlags}>
         <BudgetCard {...propsWithOvermaxedSpending} />
       </MemoryRouter>
     );
@@ -199,7 +200,7 @@ describe('BudgetCard', () => {
 
   it('renders component BudgetCardList', () => {
     render(
-      <MemoryRouter>
+      <MemoryRouter future={ReactFutureFlags}>
         <BudgetCard {...testProps} />
       </MemoryRouter>
     );
@@ -211,7 +212,7 @@ describe('BudgetCard', () => {
 
   it('passes the link to the the BudgetCardList', () => {
     render(
-      <MemoryRouter>
+      <MemoryRouter future={ReactFutureFlags}>
         <BudgetCard {...testProps} />
       </MemoryRouter>
     );
@@ -227,7 +228,7 @@ describe('BudgetCard', () => {
       transactions: mockedTransactionsWithDifferentCategoriesAndCategoryAsNames,
     };
     const { container } = render(
-      <MemoryRouter>
+      <MemoryRouter future={ReactFutureFlags}>
         <BudgetCard {...propsWithTransactionsWithDifferentCategoriesAndCategoryAsNames} />
       </MemoryRouter>
     );
@@ -240,7 +241,7 @@ describe('BudgetCard', () => {
 
   it('renders LoadingSpinner if isLoading is true', () => {
     const { container } = render(
-      <MemoryRouter>
+      <MemoryRouter future={ReactFutureFlags}>
         <BudgetCard {...testProps} isLoading={true} />
       </MemoryRouter>
     );

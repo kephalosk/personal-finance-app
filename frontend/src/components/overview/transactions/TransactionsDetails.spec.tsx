@@ -620,11 +620,7 @@ describe('TransactionsDetails', () => {
   });
 
   it('renders LoadingSpinner if isLoading is true', () => {
-    const { container } = render(
-      <MemoryRouter>
-        <TransactionsDetails {...testProps} isLoading={true} />
-      </MemoryRouter>
-    );
+    const { container } = render(<TransactionsDetails {...testProps} isLoading={true} />);
 
     const htmlElement = container.querySelector('.loadingSpinner');
     const components = screen.queryAllByTestId('table-row');

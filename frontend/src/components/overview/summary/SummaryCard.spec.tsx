@@ -1,6 +1,7 @@
 import { SummaryCard } from './SummaryCard';
 import { render } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
+import { ReactFutureFlags } from '../../../constants/ReactFutureFlags';
 
 describe('SummaryCard', () => {
   const title: string = 'testTitle';
@@ -41,7 +42,7 @@ describe('SummaryCard', () => {
 
   it('renders LoadingSpinner if isLoading is true', () => {
     const { container } = render(
-      <MemoryRouter>
+      <MemoryRouter future={ReactFutureFlags}>
         <SummaryCard {...testProps} isLoading={true} />
       </MemoryRouter>
     );

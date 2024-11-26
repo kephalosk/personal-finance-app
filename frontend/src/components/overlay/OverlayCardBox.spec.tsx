@@ -2,6 +2,7 @@ import { render } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import OverlayCardBox from './OverlayCardBox';
 import React from 'react';
+import { ReactFutureFlags } from '../../constants/ReactFutureFlags';
 
 describe('OverlayCardBox', () => {
   const title = 'testTitle';
@@ -23,7 +24,7 @@ describe('OverlayCardBox', () => {
 
   it('renders div overlayCardBox', async () => {
     const { container } = render(
-      <MemoryRouter>
+      <MemoryRouter future={ReactFutureFlags}>
         <OverlayCardBox {...testProps} />
       </MemoryRouter>
     );

@@ -3,6 +3,7 @@ import { OverviewBudgets } from './OverviewBudgets';
 import { MemoryRouter } from 'react-router-dom';
 import { mockedBudget, mockedBudgets6 } from '../../../fixtures/MockedBudgets';
 import { mockedTransactions } from '../../../fixtures/MockedTransactions';
+import { ReactFutureFlags } from '../../../constants/ReactFutureFlags';
 
 describe('OverviewBudgets', () => {
   const budgets = mockedBudgets6;
@@ -16,7 +17,7 @@ describe('OverviewBudgets', () => {
 
   it('renders div overviewBudgets', () => {
     const { container } = render(
-      <MemoryRouter>
+      <MemoryRouter future={ReactFutureFlags}>
         <OverviewBudgets {...testProps} />
       </MemoryRouter>
     );
@@ -28,7 +29,7 @@ describe('OverviewBudgets', () => {
 
   it('renders react component OverviewHeader', () => {
     render(
-      <MemoryRouter>
+      <MemoryRouter future={ReactFutureFlags}>
         <OverviewBudgets {...testProps} />
       </MemoryRouter>
     );
@@ -40,7 +41,7 @@ describe('OverviewBudgets', () => {
 
   it('renders div overviewBudgetsContent', () => {
     const { container } = render(
-      <MemoryRouter>
+      <MemoryRouter future={ReactFutureFlags}>
         <OverviewBudgets {...testProps} />
       </MemoryRouter>
     );
@@ -52,7 +53,7 @@ describe('OverviewBudgets', () => {
 
   it('renders react component BudgetsDiagram', () => {
     render(
-      <MemoryRouter>
+      <MemoryRouter future={ReactFutureFlags}>
         <OverviewBudgets {...testProps} />
       </MemoryRouter>
     );
@@ -64,7 +65,7 @@ describe('OverviewBudgets', () => {
 
   it('renders div overviewBudgetsValues', () => {
     const { container } = render(
-      <MemoryRouter>
+      <MemoryRouter future={ReactFutureFlags}>
         <OverviewBudgets {...testProps} />
       </MemoryRouter>
     );
@@ -76,7 +77,7 @@ describe('OverviewBudgets', () => {
 
   it('renders react component ValueBox max 4 times', () => {
     render(
-      <MemoryRouter>
+      <MemoryRouter future={ReactFutureFlags}>
         <OverviewBudgets {...testProps} />
       </MemoryRouter>
     );
@@ -88,7 +89,7 @@ describe('OverviewBudgets', () => {
 
   it('renders react component ValueBox only once if only 1 budget is passed', () => {
     render(
-      <MemoryRouter>
+      <MemoryRouter future={ReactFutureFlags}>
         <OverviewBudgets {...testProps} budgets={[mockedBudget]} />
       </MemoryRouter>
     );
@@ -100,7 +101,7 @@ describe('OverviewBudgets', () => {
 
   it('renders LoadingSpinner if isLoading is true', () => {
     const { container } = render(
-      <MemoryRouter>
+      <MemoryRouter future={ReactFutureFlags}>
         <OverviewBudgets {...testProps} isLoading={true} />
       </MemoryRouter>
     );

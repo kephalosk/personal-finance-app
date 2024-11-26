@@ -13,6 +13,7 @@ import { getPots } from '../globals/services/PotService';
 import { mockedPots } from '../fixtures/MockedPots';
 import { getBudgets } from '../globals/services/BudgetService';
 import { mockedBudgets } from '../fixtures/MockedBudgets';
+import { ReactFutureFlags } from '../constants/ReactFutureFlags';
 
 jest.mock('../globals/services/TransactionService', () => ({
   getTransactions: jest.fn(),
@@ -48,7 +49,7 @@ describe('OverviewPage', () => {
   it('renders div overviewPage', async () => {
     const cut: HTMLElement = await act(async (): Promise<HTMLElement> => {
       const { container } = render(
-        <MemoryRouter>
+        <MemoryRouter future={ReactFutureFlags}>
           <OverviewPage />
         </MemoryRouter>
       );
@@ -63,7 +64,7 @@ describe('OverviewPage', () => {
   it('renders headline h1 Overview', async () => {
     const cut: HTMLElement = await act(async (): Promise<HTMLElement> => {
       const { container } = render(
-        <MemoryRouter>
+        <MemoryRouter future={ReactFutureFlags}>
           <OverviewPage />
         </MemoryRouter>
       );
@@ -79,7 +80,7 @@ describe('OverviewPage', () => {
   it('renders react component OverviewSummary', async () => {
     await act(async (): Promise<void> => {
       render(
-        <MemoryRouter>
+        <MemoryRouter future={ReactFutureFlags}>
           <OverviewPage />
         </MemoryRouter>
       );
@@ -93,7 +94,7 @@ describe('OverviewPage', () => {
   it('renders div overviewPageDetails', async () => {
     const cut: HTMLElement = await act(async (): Promise<HTMLElement> => {
       const { container } = render(
-        <MemoryRouter>
+        <MemoryRouter future={ReactFutureFlags}>
           <OverviewPage />
         </MemoryRouter>
       );
@@ -108,7 +109,7 @@ describe('OverviewPage', () => {
   it('renders div overviewPageDetailsLeft', async () => {
     const cut: HTMLElement = await act(async (): Promise<HTMLElement> => {
       const { container } = render(
-        <MemoryRouter>
+        <MemoryRouter future={ReactFutureFlags}>
           <OverviewPage />
         </MemoryRouter>
       );
@@ -123,7 +124,7 @@ describe('OverviewPage', () => {
   it('renders react component OverviewPots', async () => {
     await act(async (): Promise<void> => {
       render(
-        <MemoryRouter>
+        <MemoryRouter future={ReactFutureFlags}>
           <OverviewPage />
         </MemoryRouter>
       );
@@ -137,7 +138,7 @@ describe('OverviewPage', () => {
   it('renders react component OverviewTransactions', async () => {
     await act(async (): Promise<void> => {
       render(
-        <MemoryRouter>
+        <MemoryRouter future={ReactFutureFlags}>
           <OverviewPage />
         </MemoryRouter>
       );
@@ -151,7 +152,7 @@ describe('OverviewPage', () => {
   it('renders div overviewPageDetailsRight', async () => {
     const cut: HTMLElement = await act(async (): Promise<HTMLElement> => {
       const { container } = render(
-        <MemoryRouter>
+        <MemoryRouter future={ReactFutureFlags}>
           <OverviewPage />
         </MemoryRouter>
       );
@@ -166,7 +167,7 @@ describe('OverviewPage', () => {
   it('renders react component OverviewBudgets', async () => {
     await act(async (): Promise<void> => {
       render(
-        <MemoryRouter>
+        <MemoryRouter future={ReactFutureFlags}>
           <OverviewPage />
         </MemoryRouter>
       );
@@ -180,7 +181,7 @@ describe('OverviewPage', () => {
   it('renders react component OverviewBills', async () => {
     await act(async (): Promise<void> => {
       render(
-        <MemoryRouter>
+        <MemoryRouter future={ReactFutureFlags}>
           <OverviewPage />
         </MemoryRouter>
       );

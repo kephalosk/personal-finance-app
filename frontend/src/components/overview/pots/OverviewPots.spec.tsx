@@ -2,6 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { OverviewPots } from './OverviewPots';
 import { MemoryRouter } from 'react-router-dom';
 import { mockedPot, mockedPots } from '../../../fixtures/MockedPots';
+import { ReactFutureFlags } from '../../../constants/ReactFutureFlags';
 
 describe('OverviewPots', () => {
   const pots = mockedPots;
@@ -12,7 +13,7 @@ describe('OverviewPots', () => {
   };
   it('renders div overviewPots', () => {
     const { container } = render(
-      <MemoryRouter>
+      <MemoryRouter future={ReactFutureFlags}>
         <OverviewPots {...testProps} />
       </MemoryRouter>
     );
@@ -24,7 +25,7 @@ describe('OverviewPots', () => {
 
   it('renders react component OverviewHeader', () => {
     render(
-      <MemoryRouter>
+      <MemoryRouter future={ReactFutureFlags}>
         <OverviewPots {...testProps} />
       </MemoryRouter>
     );
@@ -36,7 +37,7 @@ describe('OverviewPots', () => {
 
   it('renders div overviewPotsContent', () => {
     const { container } = render(
-      <MemoryRouter>
+      <MemoryRouter future={ReactFutureFlags}>
         <OverviewPots {...testProps} />
       </MemoryRouter>
     );
@@ -48,7 +49,7 @@ describe('OverviewPots', () => {
 
   it('renders react component PotsSummary', () => {
     render(
-      <MemoryRouter>
+      <MemoryRouter future={ReactFutureFlags}>
         <OverviewPots {...testProps} />
       </MemoryRouter>
     );
@@ -60,7 +61,7 @@ describe('OverviewPots', () => {
 
   it('renders div overviewPotsValues', () => {
     const { container } = render(
-      <MemoryRouter>
+      <MemoryRouter future={ReactFutureFlags}>
         <OverviewPots {...testProps} />
       </MemoryRouter>
     );
@@ -72,7 +73,7 @@ describe('OverviewPots', () => {
 
   it('renders 2 divs overviewPotsValuesRow', () => {
     const { container } = render(
-      <MemoryRouter>
+      <MemoryRouter future={ReactFutureFlags}>
         <OverviewPots {...testProps} />
       </MemoryRouter>
     );
@@ -84,7 +85,7 @@ describe('OverviewPots', () => {
 
   it('renders react component ValueBox 4 times with passed pots', () => {
     render(
-      <MemoryRouter>
+      <MemoryRouter future={ReactFutureFlags}>
         <OverviewPots {...testProps} />
       </MemoryRouter>
     );
@@ -96,7 +97,7 @@ describe('OverviewPots', () => {
 
   it('renders react component ValueBox only 1 time if only 1 pot is passed', () => {
     render(
-      <MemoryRouter>
+      <MemoryRouter future={ReactFutureFlags}>
         <OverviewPots {...testProps} pots={[mockedPot]} />
       </MemoryRouter>
     );
@@ -108,7 +109,7 @@ describe('OverviewPots', () => {
 
   it('renders LoadingSpinner if isLoading is true', () => {
     const { container } = render(
-      <MemoryRouter>
+      <MemoryRouter future={ReactFutureFlags}>
         <OverviewPots {...testProps} isLoading={true} />
       </MemoryRouter>
     );

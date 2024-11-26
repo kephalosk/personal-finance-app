@@ -4,6 +4,7 @@ import { BudgetCardListProps } from '../../../model/props/BudgetCardListProps';
 import { MemoryRouter } from 'react-router-dom';
 import { mockedTransactions } from '../../../fixtures/MockedTransactions';
 import useIsSmallScreen from '../../../globals/hooks/useIsSmallScreen';
+import { ReactFutureFlags } from '../../../constants/ReactFutureFlags';
 
 jest.mock('../../../globals/hooks/useIsSmallScreen', () => ({
   __esModule: true,
@@ -24,7 +25,7 @@ describe('BudgetCardList', () => {
 
   it('renders div budgetCardList', () => {
     const { container } = render(
-      <MemoryRouter>
+      <MemoryRouter future={ReactFutureFlags}>
         <BudgetCardList {...testProps} />
       </MemoryRouter>
     );
@@ -36,7 +37,7 @@ describe('BudgetCardList', () => {
 
   it('renders div budgetCardListHeader', () => {
     const { container } = render(
-      <MemoryRouter>
+      <MemoryRouter future={ReactFutureFlags}>
         <BudgetCardList {...testProps} />
       </MemoryRouter>
     );
@@ -48,7 +49,7 @@ describe('BudgetCardList', () => {
 
   it('renders label budgetCardListHeaderLabel', () => {
     const { container } = render(
-      <MemoryRouter>
+      <MemoryRouter future={ReactFutureFlags}>
         <BudgetCardList {...testProps} />
       </MemoryRouter>
     );
@@ -60,7 +61,7 @@ describe('BudgetCardList', () => {
 
   it('renders passed link', () => {
     render(
-      <MemoryRouter>
+      <MemoryRouter future={ReactFutureFlags}>
         <BudgetCardList {...testProps} />
       </MemoryRouter>
     );
@@ -74,7 +75,7 @@ describe('BudgetCardList', () => {
 
   it('renders link icon', () => {
     render(
-      <MemoryRouter>
+      <MemoryRouter future={ReactFutureFlags}>
         <BudgetCardList {...testProps} />
       </MemoryRouter>
     );
@@ -87,7 +88,7 @@ describe('BudgetCardList', () => {
 
   it('renders div budgetCardListTransactions', () => {
     const { container } = render(
-      <MemoryRouter>
+      <MemoryRouter future={ReactFutureFlags}>
         <BudgetCardList {...testProps} />
       </MemoryRouter>
     );
@@ -100,7 +101,7 @@ describe('BudgetCardList', () => {
   it('renders a maximum of 3 transaction-rows with all passed transactions', () => {
     const moreThan3Transactions = [...mockedTransactions, ...mockedTransactions];
     render(
-      <MemoryRouter>
+      <MemoryRouter future={ReactFutureFlags}>
         <BudgetCardList transactions={moreThan3Transactions} link="/" />
       </MemoryRouter>
     );
@@ -112,7 +113,7 @@ describe('BudgetCardList', () => {
 
   it('renders transaction-rows with latest first', () => {
     render(
-      <MemoryRouter>
+      <MemoryRouter future={ReactFutureFlags}>
         <BudgetCardList {...testProps} />
       </MemoryRouter>
     );
@@ -132,7 +133,7 @@ describe('BudgetCardList', () => {
   it('renders transaction-rows-small in mobile view', () => {
     (useIsSmallScreen as jest.Mock).mockReturnValue(true);
     render(
-      <MemoryRouter>
+      <MemoryRouter future={ReactFutureFlags}>
         <BudgetCardList {...testProps} />
       </MemoryRouter>
     );

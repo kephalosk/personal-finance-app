@@ -16,6 +16,7 @@ import { PotsPage } from './pages/PotsPage';
 import BudgetsPage from './pages/BudgetsPage';
 import TransactionsPage from './pages/TransactionsPage';
 import ScrollToTop from './components/ScrollToTop';
+import { ReactFutureFlags } from './constants/ReactFutureFlags';
 
 interface AppProps {
   Router?: React.ComponentType<BrowserRouterProps | MemoryRouterProps>;
@@ -47,13 +48,13 @@ const App: ({ Router, initialEntries }: AppProps) => React.ReactNode = ({
 
   const router =
     Router === MemoryRouter ? (
-      <MemoryRouter initialEntries={initialEntries}>
+      <MemoryRouter initialEntries={initialEntries} future={ReactFutureFlags}>
         <Sidebar onMinimize={handleSidebarMinimize} />
         <ScrollToTop />
         <section className={`content ${isMinimized ? 'minimized' : ''}`}>{routes}</section>
       </MemoryRouter>
     ) : (
-      <Router>
+      <Router future={ReactFutureFlags}>
         <Sidebar onMinimize={handleSidebarMinimize} />
         <ScrollToTop />
         <section className={`content ${isMinimized ? 'minimized' : ''}`}>{routes}</section>

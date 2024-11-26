@@ -3,6 +3,7 @@ import { OverviewBills } from './OverviewBills';
 import { MemoryRouter } from 'react-router-dom';
 import { mockedBills } from '../../../fixtures/MockedBills';
 import { mockedTodayAugust3rd } from '../../../fixtures/MockedToday';
+import { ReactFutureFlags } from '../../../constants/ReactFutureFlags';
 
 describe('OverviewBills', () => {
   const bills = mockedBills;
@@ -20,7 +21,7 @@ describe('OverviewBills', () => {
 
   it('renders div overviewBills', () => {
     const { container } = render(
-      <MemoryRouter>
+      <MemoryRouter future={ReactFutureFlags}>
         <OverviewBills {...testProps} />
       </MemoryRouter>
     );
@@ -32,7 +33,7 @@ describe('OverviewBills', () => {
 
   it('renders react component OverviewHeader', () => {
     render(
-      <MemoryRouter>
+      <MemoryRouter future={ReactFutureFlags}>
         <OverviewBills {...testProps} />
       </MemoryRouter>
     );
@@ -44,7 +45,7 @@ describe('OverviewBills', () => {
 
   it('renders div overviewBillsContent', () => {
     const { container } = render(
-      <MemoryRouter>
+      <MemoryRouter future={ReactFutureFlags}>
         <OverviewBills {...testProps} />
       </MemoryRouter>
     );
@@ -56,7 +57,7 @@ describe('OverviewBills', () => {
 
   it('renders component BillRow with paid Bills sum with passed bills and today', () => {
     render(
-      <MemoryRouter>
+      <MemoryRouter future={ReactFutureFlags}>
         <OverviewBills {...testProps} />
       </MemoryRouter>
     );
@@ -69,7 +70,7 @@ describe('OverviewBills', () => {
 
   it('renders component BillRow with upcoming Bills sum with passed bills and today', () => {
     render(
-      <MemoryRouter>
+      <MemoryRouter future={ReactFutureFlags}>
         <OverviewBills {...testProps} />
       </MemoryRouter>
     );
@@ -82,7 +83,7 @@ describe('OverviewBills', () => {
 
   it('renders component BillRow with due Bills sum with passed bills and today', () => {
     render(
-      <MemoryRouter>
+      <MemoryRouter future={ReactFutureFlags}>
         <OverviewBills {...testProps} />
       </MemoryRouter>
     );
@@ -95,7 +96,7 @@ describe('OverviewBills', () => {
 
   it('renders LoadingSpinner if isLoading is true', () => {
     const { container } = render(
-      <MemoryRouter>
+      <MemoryRouter future={ReactFutureFlags}>
         <OverviewBills {...testProps} isLoading={true} />
       </MemoryRouter>
     );

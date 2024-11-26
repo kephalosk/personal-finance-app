@@ -1,6 +1,7 @@
 import { render } from '@testing-library/react';
 import { OverviewHeader } from './OverviewHeader';
 import { MemoryRouter } from 'react-router-dom';
+import { ReactFutureFlags } from '../../constants/ReactFutureFlags';
 
 describe('OverviewHeader', () => {
   const title = 'testTitle';
@@ -15,7 +16,7 @@ describe('OverviewHeader', () => {
 
   it('renders div overviewHeader', () => {
     const { container } = render(
-      <MemoryRouter>
+      <MemoryRouter future={ReactFutureFlags}>
         <OverviewHeader {...testProps} />
       </MemoryRouter>
     );
@@ -27,7 +28,7 @@ describe('OverviewHeader', () => {
 
   it('renders headline h2 with passed title', () => {
     const { container } = render(
-      <MemoryRouter>
+      <MemoryRouter future={ReactFutureFlags}>
         <OverviewHeader {...testProps} />
       </MemoryRouter>
     );
@@ -40,7 +41,7 @@ describe('OverviewHeader', () => {
 
   it('renders link with passed linkText', () => {
     const { container } = render(
-      <MemoryRouter>
+      <MemoryRouter future={ReactFutureFlags}>
         <OverviewHeader {...testProps} />
       </MemoryRouter>
     );
@@ -53,7 +54,7 @@ describe('OverviewHeader', () => {
 
   it('renders the triangle svg for the link', () => {
     const { container } = render(
-      <MemoryRouter>
+      <MemoryRouter future={ReactFutureFlags}>
         <OverviewHeader {...testProps} />
       </MemoryRouter>
     );
@@ -66,7 +67,7 @@ describe('OverviewHeader', () => {
 
   it('passes the prop linkTarget', () => {
     const { getByRole } = render(
-      <MemoryRouter>
+      <MemoryRouter future={ReactFutureFlags}>
         <OverviewHeader {...testProps} />
       </MemoryRouter>
     );
