@@ -1,23 +1,19 @@
 import './OverlayContentAddNewBudget.scss';
-import React from 'react';
+import OverlayDropdownCategory from './OverlayDropdownCategory';
 
-const OverlayContentAddNewBudget = () => {
+interface Props {
+  selectedItem: string;
+  handleCategoryChange: (category: string) => void;
+}
+
+const OverlayContentAddNewBudget = ({ selectedItem, handleCategoryChange }: Props) => {
   return (
-    <>
-      {' '}
+    <div className="overlayContentAddNewBudget" data-testid="overlay-content-add-new-budget">
       <label className="fieldTitle">Budget Category</label>
-      <div className="dropdownCategory" tabIndex={0}>
-        Entertainment
-        <img
-          className="dropdownCategoryIcon"
-          alt="caret icon"
-          aria-hidden="true"
-          src="/images/icon-caret-down.svg"
-        />
-        <div className="dropdownCategoryList" tabIndex={0}>
-          Entertainment
-        </div>
-      </div>
+      <OverlayDropdownCategory
+        selectedItem={selectedItem}
+        handleCategoryChange={handleCategoryChange}
+      />
       <label className="fieldTitle">Maximum Spend</label>
       <input className="inputMoney" />
       <label className="fieldTitle">Theme</label>
@@ -31,7 +27,7 @@ const OverlayContentAddNewBudget = () => {
           src="/images/icon-caret-down.svg"
         />
       </div>
-    </>
+    </div>
   );
 };
 

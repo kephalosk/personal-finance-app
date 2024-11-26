@@ -49,6 +49,12 @@ const BudgetsPage = () => {
     if (activeElement instanceof HTMLElement) {
       activeElement.blur();
     }
+    setSelecteditem('General');
+  };
+
+  const [selectedItem, setSelecteditem] = useState('General');
+  const handleCategoryChange = (category: string) => {
+    setSelecteditem(category);
   };
 
   return (
@@ -86,7 +92,10 @@ const BudgetsPage = () => {
           handleEvent={handleAddNewBudget}
           onClose={closeForm}
         >
-          <OverlayContentAddNewBudget />
+          <OverlayContentAddNewBudget
+            selectedItem={selectedItem}
+            handleCategoryChange={handleCategoryChange}
+          />
         </OverlayCardBox>
       </div>
     </>
