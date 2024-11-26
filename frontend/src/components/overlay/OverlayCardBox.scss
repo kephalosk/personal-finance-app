@@ -11,6 +11,11 @@
   display: none;
 }
 
+.overlayCardBox {
+  display: flex;
+  flex-direction: column;
+}
+
 .overlayForm{
   border-radius: 12px;
   background-color: var(--component-background-bright);

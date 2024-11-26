@@ -25,7 +25,7 @@
   display: block;
   cursor: pointer;
 }
-.selectionMenuListElement:hover, .selectionMenuListElement.selected, .selectionMenuListElement:focus-visible {
+.selectionMenuListElement:hover, .selectionMenuListElement:focus-visible {
   background-color: var(--component-background-grey);
   color: var(--text-white);
   outline: none;

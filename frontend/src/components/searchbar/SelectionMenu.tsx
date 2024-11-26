@@ -88,11 +88,12 @@ function SelectionMenu({
         {selectedItem}
         {showSelection && (
           <div className={`selectionMenuList ${hasSmallerWidth ? 'smallerWidth' : ''}`}>
-            <label className={`${menuClass} selected`}>{selectedItem}</label>
+            <label className={menuClass}>{selectedItem}</label>
             {visibleItems.map((category: Item, index: number) => (
               <div key={index}>
+                <hr className="selectionMenuListLine" />
                 <label
-                  className={`${menuClass}`}
+                  className={menuClass}
                   onClick={() => handleItemChange(category.key)}
                   onKeyDown={(event) => handleItemKeyDown(event, category.key, index)}
                   tabIndex={0}
@@ -102,7 +103,6 @@ function SelectionMenu({
                 >
                   {category.name}
                 </label>
-                {index < items.length - 1 && <hr className="selectionMenuListLine" />}
               </div>
             ))}
           </div>

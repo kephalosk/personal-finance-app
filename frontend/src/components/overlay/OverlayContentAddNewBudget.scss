@@ -1,43 +1,16 @@
 @use '../../styles/forms';
 
+.overlayContentAddNewBudget {
+  display: flex;
+  flex-direction: column;
+}
+
 //fieldTitle
 .fieldTitle {
   @include forms.form-field-title;
 }
 
-//dropdownCategory
-.dropdownCategory {
-  margin-bottom: 16px;
-  border: 1px solid var(--component-background-grey);
-  padding: 12px 20px;
-  border-radius: 8px;
-  height: auto;
-  font-size: 14px;
-  cursor: pointer;
-  position: relative;
-}
-.dropdownCategory:hover {
-  @include forms.form-field-outline;
-}
-.dropdownCategory:focus-visible {
-  @include forms.form-field-outline;
-}
 
-.dropdownCategoryIcon {
-  top: calc(50% - 3px);
-  right: 26px;
-  position: absolute;
-}
-
-.dropdownCategoryList {
-  top: 0;
-  left: 0;
-  position: absolute;
-  visibility: hidden;
-}
-.dropdownCategoryList.isOpen {
-  visibility: visible;
-}
 
 //inputMoney
 .inputMoney {
