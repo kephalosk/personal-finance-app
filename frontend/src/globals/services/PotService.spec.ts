@@ -12,7 +12,7 @@ describe('PotService', () => {
     name: 'Savings',
     target: 2000,
     total: 159,
-    color: ColorNameEnum.DARKGREEN,
+    color: ColorNameEnum.GREEN,
   };
 
   beforeEach(() => {

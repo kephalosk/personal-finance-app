@@ -87,7 +87,9 @@ const OverlayDropdownCategory: ({
     >
       {selectedItem}
       <div className={`dropdownCategoryList ${showCategories ? 'isOpen' : ''}`}>
-        <label className={itemClass}>{selectedItem}</label>
+        <label className={itemClass} tabIndex={0}>
+          {selectedItem}
+        </label>
         {visibleCategories.map((category: Category, index: number) => (
           <div key={index}>
             <hr className="dropdownCategoryListLine" />

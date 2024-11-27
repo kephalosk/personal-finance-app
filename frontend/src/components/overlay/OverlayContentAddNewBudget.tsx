@@ -1,32 +1,38 @@
 import './OverlayContentAddNewBudget.scss';
 import OverlayDropdownCategory from './OverlayDropdownCategory';
+import OverlayDropdownColor from './OverlayDropdownColor';
+import { Color } from '../../model/Color';
 
 interface Props {
-  selectedItem: string;
+  selectedCategoryItem: string;
   handleCategoryChange: (category: string) => void;
+  selectedColorItem: Color;
+  handleColorChange: (color: Color) => void;
+  colors: Color[];
 }
 
-const OverlayContentAddNewBudget = ({ selectedItem, handleCategoryChange }: Props) => {
+const OverlayContentAddNewBudget = ({
+  selectedCategoryItem,
+  handleCategoryChange,
+  selectedColorItem,
+  handleColorChange,
+  colors,
+}: Props) => {
   return (
     <div className="overlayContentAddNewBudget" data-testid="overlay-content-add-new-budget">
       <label className="fieldTitle">Budget Category</label>
       <OverlayDropdownCategory
-        selectedItem={selectedItem}
+        selectedItem={selectedCategoryItem}
         handleCategoryChange={handleCategoryChange}
       />
       <label className="fieldTitle">Maximum Spend</label>
       <input className="inputMoney" />
       <label className="fieldTitle">Theme</label>
-      <div className="dropdownColor" tabIndex={0}>
-        <div className="dropdownColorCircle"></div>
-        Green
-        <img
-          className="dropdownCategoryIcon"
-          alt="caret icon"
-          aria-hidden="true"
-          src="/images/icon-caret-down.svg"
-        />
-      </div>
+      <OverlayDropdownColor
+        selectedColor={selectedColorItem}
+        handleColorChange={handleColorChange}
+        colors={colors}
+      />
     </div>
   );
 };
