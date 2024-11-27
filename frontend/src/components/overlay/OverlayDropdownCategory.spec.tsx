@@ -155,4 +155,105 @@ describe('OverlayDropdownCategory', () => {
 
     expect(labels[0]).toHaveTextContent(selectedItem);
   });
+
+  it('handles a click outside of the list', () => {
+    const { container } = render(
+      <MemoryRouter future={ReactFutureFlags}>
+        <OverlayDropdownCategory {...testProps} />
+      </MemoryRouter>
+    );
+
+    const htmlElement = container.querySelector('.dropdownCategory');
+    fireEvent.mouseDown(htmlElement!);
+    const list = container.querySelector('.dropdownCategoryList');
+
+    expect(list).not.toHaveClass('isOpen');
+  });
+
+  it('handles keydown Enter on dropdownCategoryListItem', () => {
+    const { container } = render(
+      <MemoryRouter future={ReactFutureFlags}>
+        <OverlayDropdownCategory {...testProps} />
+      </MemoryRouter>
+    );
+
+    const htmlElements = container.querySelectorAll('.dropdownCategoryListItem');
+    fireEvent.keyDown(htmlElements[1]!, { key: 'Enter', code: 'Enter', keyCode: 13 });
+
+    expect(mockHandleCategoryChange).toHaveBeenCalledWith(htmlElements[1].textContent);
+  });
+
+  it('handles keydown Tab on last dropdownCategoryListItem to focus first listitem', () => {
+    const { container } = render(
+      <MemoryRouter future={ReactFutureFlags}>
+        <OverlayDropdownCategory {...testProps} />
+      </MemoryRouter>
+    );
+
+    const htmlElements = container.querySelectorAll('.dropdownCategoryListItem');
+    fireEvent.keyDown(htmlElements[htmlElements.length - 1]!, {
+      key: 'Tab',
+      code: 'Tab',
+      keyCode: 9,
+    });
+
+    expect(htmlElements[1]).toHaveFocus();
+  });
+
+  it('handles keydown Back Tab on first dropdownCategoryListItem to focus last listitem', () => {
+    const { container } = render(
+      <MemoryRouter future={ReactFutureFlags}>
+        <OverlayDropdownCategory {...testProps} />
+      </MemoryRouter>
+    );
+
+    const htmlElements = container.querySelectorAll('.dropdownCategoryListItem');
+    fireEvent.keyDown(htmlElements[1]!, {
+      key: 'Tab',
+      code: 'Tab',
+      keyCode: 9,
+      shiftKey: true,
+    });
+
+    expect(htmlElements[htmlElements.length - 1]).toHaveFocus();
+  });
+
+  it('handles keydown Escape on dropdownCategoryListItem', () => {
+    const { container } = render(
+      <MemoryRouter future={ReactFutureFlags}>
+        <OverlayDropdownCategory {...testProps} />
+      </MemoryRouter>
+    );
+
+    const htmlElements = container.querySelectorAll('.dropdownCategoryListItem');
+    fireEvent.keyDown(htmlElements[1]!, {
+      key: 'Escape',
+      code: 'Escape',
+      keyCode: 27,
+    });
+    const list = container.querySelector('.dropdownCategoryList');
+
+    expect(list).not.toHaveClass('isOpen');
+  });
+
+  it('handles keydown Enter on dropdownCategory', () => {
+    const { container } = render(
+      <MemoryRouter future={ReactFutureFlags}>
+        <OverlayDropdownCategory {...testProps} />
+      </MemoryRouter>
+    );
+    const htmlElement = container.querySelector('.dropdownCategory');
+    fireEvent.click(htmlElement!);
+    const list = container.querySelector('.dropdownCategoryList');
+    expect(list).toHaveClass('isOpen');
+
+    const htmlElements = container.querySelectorAll('.dropdownCategoryListItem');
+    fireEvent.keyDown(htmlElements[1]!, {
+      key: 'Enter',
+      code: 'Enter',
+      keyCode: 13,
+    });
+
+    expect(list).not.toHaveClass('isOpen');
+  });
 });

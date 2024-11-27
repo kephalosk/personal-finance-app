@@ -9,8 +9,11 @@ import { getTransactions } from '../globals/services/TransactionService';
 import React, { useEffect, useState } from 'react';
 import OverlayCardBox from '../components/overlay/OverlayCardBox';
 import OverlayContentAddNewBudget from '../components/overlay/OverlayContentAddNewBudget';
+import { Color } from '../model/Color';
+import Colors from '../constants/Colors';
 
 const BudgetsPage = () => {
+  const [colors, setColors] = useState<Color[]>(Colors);
   const [transactions, setTransactions] = useState<EPTransaction[]>([]);
   const [budgets, setBudgets] = useState<EPBudget[]>([]);
 
@@ -29,6 +32,17 @@ const BudgetsPage = () => {
       const fetchedBudgets: EPBudget[] = await getBudgets();
       setBudgets(fetchedBudgets);
       setIsLoadingBudgets(false);
+      const markedColors = colors.map((color) => {
+        const isColorUsed = fetchedBudgets.some((budget) => budget.color === color.name);
+        return { ...color, disabled: isColorUsed };
+      });
+      const enabledColors = markedColors.filter((color) => !color.disabled);
+      const disabledColors = markedColors.filter((color) => color.disabled);
+      const combinedColors = enabledColors.concat(disabledColors);
+
+      setColors(combinedColors);
+      const firstPossibleColor = markedColors.find((color) => !color.disabled);
+      setSelectedColorItem(firstPossibleColor ?? markedColors[0]);
     };
     fetchBudgets().then();
   }, []);
@@ -49,12 +63,17 @@ const BudgetsPage = () => {
     if (activeElement instanceof HTMLElement) {
       activeElement.blur();
     }
-    setSelecteditem('General');
+    setSelectedCategoryItem('General');
   };
 
-  const [selectedItem, setSelecteditem] = useState('General');
+  const [selectedCategoryItem, setSelectedCategoryItem] = useState('General');
   const handleCategoryChange = (category: string) => {
-    setSelecteditem(category);
+    setSelectedCategoryItem(category);
+  };
+
+  const [selectedColorItem, setSelectedColorItem] = useState(Colors[0]);
+  const handleColorChange = (color: Color) => {
+    setSelectedColorItem(color);
   };
 
   return (
@@ -93,8 +112,11 @@ const BudgetsPage = () => {
           onClose={closeForm}
         >
           <OverlayContentAddNewBudget
-            selectedItem={selectedItem}
+            selectedCategoryItem={selectedCategoryItem}
             handleCategoryChange={handleCategoryChange}
+            selectedColorItem={selectedColorItem}
+            handleColorChange={handleColorChange}
+            colors={colors}
           />
         </OverlayCardBox>
       </div>
