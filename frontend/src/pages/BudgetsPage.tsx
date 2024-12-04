@@ -8,7 +8,7 @@ import { EPTransaction } from '../model/entrypoints/EPTransaction';
 import { getTransactions } from '../globals/services/TransactionService';
 import { useEffect, useState } from 'react';
 
-export function BudgetsPage() {
+const BudgetsPage = () => {
   const [transactions, setTransactions] = useState<EPTransaction[]>([]);
   const [budgets, setBudgets] = useState<EPBudget[]>([]);
 
@@ -57,4 +57,6 @@ export function BudgetsPage() {
       </div>
     </>
   );
-}
+};
+
+export default BudgetsPage;

@@ -1,23 +1,31 @@
 import './App.scss';
 import { Sidebar } from './components/sidebar/Sidebar';
 import { OverviewPage } from './pages/OverviewPage';
-import { BrowserRouter, MemoryRouter, Route, Routes } from 'react-router-dom';
+import {
+  BrowserRouter,
+  BrowserRouterProps,
+  MemoryRouter,
+  MemoryRouterProps,
+  Route,
+  Routes,
+} from 'react-router-dom';
 import React, { useState } from 'react';
-import { NoPage } from './pages/NoPage';
+import NoPage from './pages/NoPage';
 import { BillsPage } from './pages/BillsPage';
 import { PotsPage } from './pages/PotsPage';
-import { BudgetsPage } from './pages/BudgetsPage';
-import { TransactionsPage } from './pages/TransactionsPage';
-import PropTypes from 'prop-types';
-import { AppProps } from './model/props/AppProps';
+import BudgetsPage from './pages/BudgetsPage';
+import TransactionsPage from './pages/TransactionsPage';
 import ScrollToTop from './components/ScrollToTop';
 
-App.propTypes = {
-  Router: PropTypes.elementType,
-  initialEntries: PropTypes.arrayOf(PropTypes.string),
-};
+interface AppProps {
+  Router?: React.ComponentType<BrowserRouterProps | MemoryRouterProps>;
+  initialEntries?: string[];
+}
 
-function App({ Router = BrowserRouter, initialEntries = ['/'] }: AppProps) {
+const App: ({ Router, initialEntries }: AppProps) => React.ReactNode = ({
+  Router = BrowserRouter,
+  initialEntries = ['/'],
+}: AppProps) => {
   const [isMinimized, setIsMinimized] = useState<boolean>(() => {
     return JSON.parse(localStorage.getItem('isMinimized') ?? 'false');
   });
@@ -57,6 +65,6 @@ function App({ Router = BrowserRouter, initialEntries = ['/'] }: AppProps) {
       <div className="webapp">{router}</div>
     </>
   );
-}
+};
 
 export default App;
