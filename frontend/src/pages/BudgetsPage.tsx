@@ -11,15 +11,11 @@ import OverlayCardBox from '../components/overlay/OverlayCardBox';
 import OverlayContentAddNewBudget from '../components/overlay/OverlayContentAddNewBudget';
 import { Color } from '../model/Color';
 import Colors from '../constants/Colors';
+import EnsureFirstPossibleColorIsDefined from '../globals/utils/EnsureFirstPossibleColorIsDefined';
 
 const BudgetsPage = () => {
-  const [colors, setColors] = useState<Color[]>(Colors);
   const [transactions, setTransactions] = useState<EPTransaction[]>([]);
-  const [budgets, setBudgets] = useState<EPBudget[]>([]);
-
   const [isLoadingTransactions, setIsLoadingTransactions] = useState<boolean>(true);
-  const [isLoadingBudgets, setIsLoadingBudgets] = useState<boolean>(true);
-
   useEffect(() => {
     const fetchTransactions = async (): Promise<void> => {
       const fetchedTransactions: EPTransaction[] = await getTransactions();
@@ -27,35 +23,44 @@ const BudgetsPage = () => {
       setIsLoadingTransactions(false);
     };
     fetchTransactions().then();
+  }, []);
 
+  const [budgets, setBudgets] = useState<EPBudget[]>([]);
+  const [isLoadingBudgets, setIsLoadingBudgets] = useState<boolean>(true);
+  useEffect(() => {
     const fetchBudgets = async (): Promise<void> => {
       const fetchedBudgets: EPBudget[] = await getBudgets();
       setBudgets(fetchedBudgets);
+      sortColors(fetchedBudgets);
       setIsLoadingBudgets(false);
-      const markedColors = colors.map((color) => {
-        const isColorUsed = fetchedBudgets.some((budget) => budget.color === color.name);
-        return { ...color, disabled: isColorUsed };
-      });
-      const enabledColors = markedColors.filter((color) => !color.disabled);
-      const disabledColors = markedColors.filter((color) => color.disabled);
-      const combinedColors = enabledColors.concat(disabledColors);
-
-      setColors(combinedColors);
-      const firstPossibleColor = markedColors.find((color) => !color.disabled);
-      setSelectedColorItem(firstPossibleColor ?? markedColors[0]);
     };
     fetchBudgets().then();
   }, []);
 
-  const addNewBudgetDescription =
-    'Choose a category to set a spending budget. These categories can help you monitor spending.';
+  const [colors, setColors] = useState<Color[]>(Colors);
+  const sortColors = (fetchedBudgets: EPBudget[]) => {
+    const markedColors = colors.map((color) => {
+      const isColorUsed = fetchedBudgets.some((budget) => budget.color === color.name);
+      return { ...color, disabled: isColorUsed };
+    });
+    const enabledColors = markedColors.filter((color) => !color.disabled);
+    const disabledColors = markedColors.filter((color) => color.disabled);
+    const combinedColors = enabledColors.concat(disabledColors);
+
+    setColors(combinedColors);
+
+    const firstPossibleColor = markedColors.find((color) => !color.disabled);
+    const definedFirstPossibleColor = EnsureFirstPossibleColorIsDefined(
+      firstPossibleColor,
+      markedColors[0]
+    );
+    setSelectedColorItem(definedFirstPossibleColor);
+  };
 
   const [isHidden, setIsHidden] = useState<boolean>(true);
   const handleShowForm = () => {
     setIsHidden(false);
   };
-
-  const handleAddNewBudget = () => {};
 
   const closeForm = () => {
     setIsHidden(true);
@@ -75,6 +80,11 @@ const BudgetsPage = () => {
   const handleColorChange = (color: Color) => {
     setSelectedColorItem(color);
   };
+
+  const handleAddNewBudget = () => {};
+
+  const addNewBudgetDescription =
+    'Choose a category to set a spending budget. These categories can help you monitor spending.';
 
   return (
     <>
