@@ -1,5 +1,5 @@
 import './BudgetCard.scss';
-import { CardHeader } from '../../CardHeader';
+import CardHeader from '../../CardHeader';
 import { ValueBox } from '../../overview/ValueBox';
 import { BudgetCardList } from './BudgetCardList';
 import { BudgetCardProps } from '../../../model/props/BudgetCardProps';

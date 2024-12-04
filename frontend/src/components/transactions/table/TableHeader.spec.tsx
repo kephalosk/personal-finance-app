@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 import React from 'react';
-import { TableHeader } from './TableHeader';
+import TableHeader from './TableHeader';
 
 describe('TableHeader', () => {
   it('renders div transactionsTableHeader', () => {

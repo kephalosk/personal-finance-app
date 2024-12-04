@@ -1,15 +1,18 @@
 import './PaginationPages.scss';
-import PropTypes from 'prop-types';
-import { PaginationPagesProps } from '../../../model/props/PaginationPagesProps';
 import useIsSmallScreen from '../../../globals/hooks/useIsSmallScreen';
+import { ReactNode } from 'react';
 
-PaginationPages.propTypes = {
-  onPageClick: PropTypes.func.isRequired,
-  indexMax: PropTypes.number.isRequired,
-  currentIndex: PropTypes.number.isRequired,
-};
+interface Props {
+  onPageClick: (newIndex: number) => void;
+  indexMax: number;
+  currentIndex: number;
+}
 
-export function PaginationPages({ onPageClick, indexMax, currentIndex }: PaginationPagesProps) {
+const PaginationPages: ({ onPageClick, indexMax, currentIndex }: Props) => ReactNode = ({
+  onPageClick,
+  indexMax,
+  currentIndex,
+}: Props): ReactNode => {
   const isSmallScreen = useIsSmallScreen();
   if (isSmallScreen && indexMax > 3) {
     return (
@@ -75,4 +78,6 @@ export function PaginationPages({ onPageClick, indexMax, currentIndex }: Paginat
       </>
     );
   }
-}
+};
+
+export default PaginationPages;

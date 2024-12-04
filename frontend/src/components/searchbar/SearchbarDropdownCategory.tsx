@@ -1,21 +1,19 @@
 import './SearchbarDropdownCategory.scss';
-import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
-import { SearchbarDropdownCategoryProps } from '../../model/props/SearchbarDropdownCategoryProps';
+import React, { ReactNode, useEffect, useState } from 'react';
 import { EPTransaction } from '../../model/entrypoints/EPTransaction';
 import { getTransactions } from '../../globals/services/TransactionService';
 import { Item } from '../../model/Item';
 import SelectionMenu from './SelectionMenu';
 
-SearchbarDropdownCategory.propTypes = {
-  onCategoryChange: PropTypes.func.isRequired,
-  currentCategory: PropTypes.string.isRequired,
-};
+export interface Props {
+  onCategoryChange: (category: string) => void;
+  currentCategory: string;
+}
 
-export function SearchbarDropdownCategory({
+const SearchbarDropdownCategory: ({ onCategoryChange, currentCategory }: Props) => ReactNode = ({
   onCategoryChange,
   currentCategory,
-}: SearchbarDropdownCategoryProps) {
+}: Props): ReactNode => {
   const [allTransactions, setAllTransactions] = useState<EPTransaction[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>(currentCategory);
 
@@ -92,4 +90,6 @@ export function SearchbarDropdownCategory({
       />
     </div>
   );
-}
+};
+
+export default SearchbarDropdownCategory;

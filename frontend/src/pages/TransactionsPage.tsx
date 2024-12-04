@@ -1,10 +1,10 @@
 import './TransactionsPage.scss';
 import TransactionsDetails from '../components/overview/transactions/TransactionsDetails';
-import { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { EPTransaction } from '../model/entrypoints/EPTransaction';
 import { getTransactions } from '../globals/services/TransactionService';
 
-const TransactionsPage = () => {
+const TransactionsPage: () => React.ReactNode = (): React.ReactNode => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const fetchedTransactions = useRef<EPTransaction[]>([]);
   useEffect((): void => {

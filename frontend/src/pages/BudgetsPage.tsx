@@ -1,5 +1,5 @@
 import './BudgetsPage.scss';
-import { HeaderBar } from '../components/HeaderBar';
+import HeaderBar from '../components/HeaderBar';
 import { BudgetsDiagramCard } from '../components/budgets/BudgetDiagrammCard/BudgetsDiagramCard';
 import { BudgetCard } from '../components/budgets/BudgetCard/BudgetCard';
 import { getBudgets } from '../globals/services/BudgetService';
@@ -13,7 +13,7 @@ import { Color } from '../model/Color';
 import Colors from '../constants/Colors';
 import EnsureFirstPossibleColorIsDefined from '../globals/utils/EnsureFirstPossibleColorIsDefined';
 
-const BudgetsPage: () => React.ReactNode = () => {
+const BudgetsPage: () => React.ReactNode = (): React.ReactNode => {
   const [transactions, setTransactions] = useState<EPTransaction[]>([]);
   const [isLoadingTransactions, setIsLoadingTransactions] = useState<boolean>(true);
   useEffect((): void => {

@@ -1,5 +1,5 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-import { PaginationButtonNext } from './PaginationButtonNext';
+import PaginationButtonNext from './PaginationButtonNext';
 import React from 'react';
 import useIsSmallScreen from '../../../globals/hooks/useIsSmallScreen';
 

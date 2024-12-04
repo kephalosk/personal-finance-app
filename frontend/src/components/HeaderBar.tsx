@@ -7,7 +7,11 @@ interface Props {
   handleClick: () => void;
 }
 
-export function HeaderBar({ h1Headline, buttonText, handleClick }: Props) {
+const HeaderBar: ({ h1Headline, buttonText, handleClick }: Props) => React.ReactNode = ({
+  h1Headline,
+  buttonText,
+  handleClick,
+}: Props): React.ReactNode => {
   const handleKeyDown = (event: React.KeyboardEvent<HTMLButtonElement>) => {
     if (event.key === 'Enter') {
       handleClick();
@@ -27,4 +31,6 @@ export function HeaderBar({ h1Headline, buttonText, handleClick }: Props) {
       </div>
     </>
   );
-}
+};
+
+export default HeaderBar;

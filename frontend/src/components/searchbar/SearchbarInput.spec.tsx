@@ -1,6 +1,7 @@
-import { fireEvent, render, screen } from '@testing-library/react';
-import React from 'react';
-import { SearchbarInput } from './SearchbarInput';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import React, { createRef } from 'react';
+import SearchbarInput, { SearchbarInputHandle } from './SearchbarInput';
+import { userEvent } from '@testing-library/user-event';
 
 const imgAlt: string = 'icon of search';
 const imgSrc: string = '/images/icon-search.svg';
@@ -43,5 +44,19 @@ describe('SearchbarInput', () => {
     fireEvent.change(selectElement!, { target: { value: 'a' } });
 
     expect(mockOnInputChange).toHaveBeenCalledWith('a');
+  });
+
+  it('clears input when clearInput is called', async () => {
+    const ref = createRef<SearchbarInputHandle>();
+    render(<SearchbarInput ref={ref} onInputChange={mockOnInputChange} />);
+    const inputElement = screen.getByPlaceholderText('Search transaction');
+    await userEvent.type(inputElement, 'Test input');
+    expect(inputElement).toHaveValue('Test input');
+
+    ref.current?.clearInput();
+
+    await waitFor(() => {
+      expect(inputElement).toHaveValue('');
+    });
   });
 });

@@ -3,12 +3,12 @@ import PotsPage from './PotsPage';
 import { getPots } from '../globals/services/PotService';
 import { mockedPots } from '../fixtures/MockedPots';
 import { act } from 'react';
-import { HeaderBar } from '../components/HeaderBar';
+import HeaderBar from '../components/HeaderBar';
 import PotPageGrid from '../components/pots/PotPageGrid';
 
-jest.mock('../components/HeaderBar', () => ({
-  HeaderBar: jest.fn((props) => <div data-testid="header-bar" onClick={props.handleClick}></div>),
-}));
+jest.mock('../components/HeaderBar', () =>
+  jest.fn((props) => <div data-testid="header-bar" onClick={props.handleClick}></div>)
+);
 jest.mock('../components/pots/PotPageGrid', () =>
   jest.fn(() => <div data-testid="pot-page-grid"></div>)
 );
