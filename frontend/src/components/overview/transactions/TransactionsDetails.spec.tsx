@@ -5,7 +5,7 @@ import { getTransactions } from '../../../globals/services/TransactionService';
 import useIsSmallScreen from '../../../globals/hooks/useIsSmallScreen';
 import { convertSignedDollarStringToNumber } from '../../../globals/utils/ConvertSignedDollarStringToNumber';
 import TransactionsDetails from './TransactionsDetails';
-import { MemoryRouter, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 jest.mock('../../../globals/services/TransactionService', () => ({
   getTransactions: jest.fn(),

@@ -13,18 +13,9 @@ import { getPots } from '../globals/services/PotService';
 import { EPBudget } from '../model/entrypoints/EPBudget';
 import { getBudgets } from '../globals/services/BudgetService';
 
-export function OverviewPage() {
-  const [bills, setBills] = useState<EPTransaction[]>([]);
+const OverviewPage = () => {
   const [transactions, setTransactions] = useState<EPTransaction[]>([]);
-  const [pots, setPots] = useState<EPPot[]>([]);
-  const [budgets, setBudgets] = useState<EPBudget[]>([]);
-  const today: Date = new Date();
-
   const [isLoadingTransactions, setIsLoadingTransactions] = useState<boolean>(true);
-  const [isLoadingBills, setIsLoadingBills] = useState<boolean>(true);
-  const [isLoadingPots, setIsLoadingPots] = useState<boolean>(true);
-  const [isLoadingBudgets, setIsLoadingBudgets] = useState<boolean>(true);
-
   useEffect(() => {
     const fetchTransactions = async (): Promise<void> => {
       const fetchedTransactions: EPTransaction[] = await getTransactions();
@@ -32,21 +23,33 @@ export function OverviewPage() {
       setIsLoadingTransactions(false);
     };
     fetchTransactions().then();
+  }, []);
 
+  const [bills, setBills] = useState<EPTransaction[]>([]);
+  const [isLoadingBills, setIsLoadingBills] = useState<boolean>(true);
+  useEffect(() => {
     const fetchBills = async (): Promise<void> => {
       const fetchedBills: EPTransaction[] = await BillsHelper.getRecurringBillsFromTransactions();
       setBills(fetchedBills);
       setIsLoadingBills(false);
     };
     fetchBills().then();
+  }, []);
 
+  const [pots, setPots] = useState<EPPot[]>([]);
+  const [isLoadingPots, setIsLoadingPots] = useState<boolean>(true);
+  useEffect(() => {
     const fetchPots = async (): Promise<void> => {
       const fetchedPots: EPPot[] = await getPots();
       setPots(fetchedPots);
       setIsLoadingPots(false);
     };
     fetchPots().then();
+  }, []);
 
+  const [budgets, setBudgets] = useState<EPBudget[]>([]);
+  const [isLoadingBudgets, setIsLoadingBudgets] = useState<boolean>(true);
+  useEffect(() => {
     const fetchBudgets = async () => {
       const fetchedBudgets: EPBudget[] = await getBudgets();
       setBudgets(fetchedBudgets);
@@ -54,6 +57,8 @@ export function OverviewPage() {
     };
     fetchBudgets().then();
   }, []);
+
+  const today: Date = new Date();
 
   return (
     <div className="overviewPage" data-testid="overview-page">
@@ -78,4 +83,6 @@ export function OverviewPage() {
       </div>
     </div>
   );
-}
+};
+
+export default OverviewPage;

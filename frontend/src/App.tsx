@@ -1,6 +1,6 @@
 import './App.scss';
 import { Sidebar } from './components/sidebar/Sidebar';
-import { OverviewPage } from './pages/OverviewPage';
+import OverviewPage from './pages/OverviewPage';
 import {
   BrowserRouter,
   BrowserRouterProps,
