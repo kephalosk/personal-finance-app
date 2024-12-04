@@ -11,8 +11,8 @@ import {
 } from 'react-router-dom';
 import React, { useState } from 'react';
 import NoPage from './pages/NoPage';
-import { BillsPage } from './pages/BillsPage';
-import { PotsPage } from './pages/PotsPage';
+import BillsPage from './pages/BillsPage';
+import PotsPage from './pages/PotsPage';
 import BudgetsPage from './pages/BudgetsPage';
 import TransactionsPage from './pages/TransactionsPage';
 import ScrollToTop from './components/ScrollToTop';

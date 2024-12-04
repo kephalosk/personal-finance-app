@@ -3,30 +3,25 @@ import { BillCard } from '../components/bills/BillCard';
 import { BillTotal } from '../components/bills/BillTotal';
 import { BillSummary } from '../components/bills/BillSummary';
 import { BillsHelper } from '../globals/helper/BillsHelper';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { EPTransaction } from '../model/entrypoints/EPTransaction';
+import getTotalAmount from '../globals/utils/getTotalAmount';
 
-export function BillsPage() {
+const BillsPage: () => React.ReactNode = () => {
   const [bills, setBills] = useState<EPTransaction[]>([]);
-
   const [isLoading, setIsLoading] = useState<boolean>(true);
-
-  useEffect(() => {
-    const fetchBills = async () => {
-      const fetchedBills = await BillsHelper.getRecurringBillsFromTransactions();
+  useEffect((): void => {
+    const fetchBills = async (): Promise<void> => {
+      const fetchedBills: EPTransaction[] = await BillsHelper.getRecurringBillsFromTransactions();
       setBills(fetchedBills);
       setIsLoading(false);
     };
     fetchBills().then();
   }, []);
 
-  let billsTotal = 0;
-  bills.forEach((bill) => {
-    billsTotal = billsTotal + bill.amount;
-  });
-  billsTotal = billsTotal * -1;
+  const billsTotal: number = getTotalAmount(bills);
 
-  const today = new Date();
+  const today: Date = new Date();
   return (
     <>
       <div className="billsPage" data-testid="bills-page">
@@ -41,4 +36,6 @@ export function BillsPage() {
       </div>
     </>
   );
-}
+};
+
+export default BillsPage;

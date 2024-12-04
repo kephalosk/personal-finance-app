@@ -1,7 +1,7 @@
 import './NoPage.scss';
 
 const NoPage = () => {
-  const msgNotFound = "The page you are looking for doesn't exist.";
+  const msgNotFound: string = "The page you are looking for doesn't exist.";
   return (
     <>
       <div className="noPage" data-testid="no-page">

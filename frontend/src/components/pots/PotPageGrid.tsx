@@ -2,13 +2,17 @@ import './PotPageGrid.scss';
 import { EPPot } from '../../model/entrypoints/EPPot';
 import { PotCard } from './PotCard';
 import LoadingSpinner from '../LoadingSpinner';
+import React from 'react';
 
 interface Props {
   pots: EPPot[];
   isLoading: boolean;
 }
 
-function PotPageGrid({ pots, isLoading }: Props) {
+const PotPageGrid: ({ pots, isLoading }: Props) => React.ReactNode = ({
+  pots,
+  isLoading,
+}: Props) => {
   return (
     <>
       {isLoading ? (
@@ -22,6 +26,6 @@ function PotPageGrid({ pots, isLoading }: Props) {
       )}
     </>
   );
-}
+};
 
 export default PotPageGrid;

@@ -14,12 +14,8 @@ jest.mock('./pages/TransactionsPage', () =>
   jest.fn(() => <div data-testid="transactions-page"></div>)
 );
 jest.mock('./pages/BudgetsPage', () => jest.fn(() => <div data-testid="budgets-page"></div>));
-jest.mock('./pages/PotsPage', () => ({
-  PotsPage: jest.fn(() => <div data-testid="pots-page"></div>),
-}));
-jest.mock('./pages/BillsPage', () => ({
-  BillsPage: jest.fn(() => <div data-testid="bills-page"></div>),
-}));
+jest.mock('./pages/PotsPage', () => jest.fn(() => <div data-testid="pots-page"></div>));
+jest.mock('./pages/BillsPage', () => jest.fn(() => <div data-testid="bills-page"></div>));
 jest.mock('./pages/NoPage', () => jest.fn(() => <div data-testid="no-page"></div>));
 
 describe('App', () => {
