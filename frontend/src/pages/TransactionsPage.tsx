@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { EPTransaction } from '../model/entrypoints/EPTransaction';
 import { getTransactions } from '../globals/services/TransactionService';
 
-export function TransactionsPage() {
+const TransactionsPage = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const fetchedTransactions = useRef<EPTransaction[]>([]);
 
@@ -27,4 +27,6 @@ export function TransactionsPage() {
       </div>
     </>
   );
-}
+};
+
+export default TransactionsPage;

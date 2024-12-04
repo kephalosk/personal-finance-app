@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import { BudgetsPage } from './BudgetsPage';
+import BudgetsPage from './BudgetsPage';
 import { MemoryRouter } from 'react-router-dom';
 import useIsSmallScreen from '../globals/hooks/useIsSmallScreen';
 import { getTransactions } from '../globals/services/TransactionService';

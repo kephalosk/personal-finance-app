@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import { TransactionsPage } from './TransactionsPage';
+import TransactionsPage from './TransactionsPage';
 import React, { act } from 'react';
 import { getTransactions } from '../globals/services/TransactionService';
 import useIsSmallScreen from '../globals/hooks/useIsSmallScreen';
