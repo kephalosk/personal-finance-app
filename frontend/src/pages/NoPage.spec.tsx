@@ -1,6 +1,8 @@
 import { render } from '@testing-library/react';
 import NoPage from './NoPage';
 
+const msgNotFound = "The page you are looking for doesn't exist.";
+
 describe('NoPage', () => {
   it('renders div noPage', () => {
     const { container } = render(<NoPage />);
@@ -25,6 +27,6 @@ describe('NoPage', () => {
     const htmlElement = container.querySelector('p');
 
     expect(htmlElement).toBeInTheDocument();
-    expect(htmlElement!.textContent).toEqual("The page you are looking for doesn't exist.");
+    expect(htmlElement!.textContent).toEqual(msgNotFound);
   });
 });

@@ -48,11 +48,13 @@ describe('TransactionsPage', () => {
     const reactComponent = screen.getByTestId('transactions-details');
 
     expect(reactComponent).toBeInTheDocument();
-    expect(TransactionsDetails).toHaveBeenCalledWith(
+    expect(TransactionsDetails).toHaveBeenNthCalledWith(
+      1,
       { isLoading: true, fetchedTransactions: [] },
       {}
     );
-    expect(TransactionsDetails).toHaveBeenCalledWith(
+    expect(TransactionsDetails).toHaveBeenNthCalledWith(
+      2,
       { isLoading: false, fetchedTransactions: mockedTransactions11Records },
       {}
     );

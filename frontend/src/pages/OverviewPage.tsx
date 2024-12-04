@@ -13,10 +13,10 @@ import { getPots } from '../globals/services/PotService';
 import { EPBudget } from '../model/entrypoints/EPBudget';
 import { getBudgets } from '../globals/services/BudgetService';
 
-const OverviewPage = () => {
+const OverviewPage: () => React.ReactNode = () => {
   const [transactions, setTransactions] = useState<EPTransaction[]>([]);
   const [isLoadingTransactions, setIsLoadingTransactions] = useState<boolean>(true);
-  useEffect(() => {
+  useEffect((): void => {
     const fetchTransactions = async (): Promise<void> => {
       const fetchedTransactions: EPTransaction[] = await getTransactions();
       setTransactions(fetchedTransactions);
@@ -27,7 +27,7 @@ const OverviewPage = () => {
 
   const [bills, setBills] = useState<EPTransaction[]>([]);
   const [isLoadingBills, setIsLoadingBills] = useState<boolean>(true);
-  useEffect(() => {
+  useEffect((): void => {
     const fetchBills = async (): Promise<void> => {
       const fetchedBills: EPTransaction[] = await BillsHelper.getRecurringBillsFromTransactions();
       setBills(fetchedBills);
@@ -38,7 +38,7 @@ const OverviewPage = () => {
 
   const [pots, setPots] = useState<EPPot[]>([]);
   const [isLoadingPots, setIsLoadingPots] = useState<boolean>(true);
-  useEffect(() => {
+  useEffect((): void => {
     const fetchPots = async (): Promise<void> => {
       const fetchedPots: EPPot[] = await getPots();
       setPots(fetchedPots);
@@ -49,7 +49,7 @@ const OverviewPage = () => {
 
   const [budgets, setBudgets] = useState<EPBudget[]>([]);
   const [isLoadingBudgets, setIsLoadingBudgets] = useState<boolean>(true);
-  useEffect(() => {
+  useEffect((): void => {
     const fetchBudgets = async () => {
       const fetchedBudgets: EPBudget[] = await getBudgets();
       setBudgets(fetchedBudgets);
