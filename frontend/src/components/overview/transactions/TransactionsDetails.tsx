@@ -21,7 +21,7 @@ interface Props {
   fetchedTransactions: EPTransaction[];
 }
 
-function TransactionsDetails({ isLoading, fetchedTransactions }: Props) {
+const TransactionsDetails = ({ isLoading, fetchedTransactions }: Props) => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const cat = queryParams.get('cat');
@@ -216,6 +216,6 @@ function TransactionsDetails({ isLoading, fetchedTransactions }: Props) {
       )}
     </>
   );
-}
+};
 
 export default TransactionsDetails;
