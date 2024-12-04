@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { BudgetCardList } from './BudgetCardList';
 import { BudgetCardListProps } from '../../../model/props/BudgetCardListProps';
 import { MemoryRouter } from 'react-router-dom';
-import { mockedTransactions } from '../../../fixtures/MockedTransactions';
+import { mockedTransactions2 } from '../../../fixtures/MockedTransactions';
 import useIsSmallScreen from '../../../globals/hooks/useIsSmallScreen';
 import { ReactFutureFlags } from '../../../constants/ReactFutureFlags';
 
@@ -15,7 +15,7 @@ describe('BudgetCardList', () => {
   const link: string = 'testLink';
 
   const testProps: BudgetCardListProps = {
-    transactions: mockedTransactions,
+    transactions: mockedTransactions2,
     link,
   };
 
@@ -99,7 +99,7 @@ describe('BudgetCardList', () => {
   });
 
   it('renders a maximum of 3 transaction-rows with all passed transactions', () => {
-    const moreThan3Transactions = [...mockedTransactions, ...mockedTransactions];
+    const moreThan3Transactions = [...mockedTransactions2, ...mockedTransactions2];
     render(
       <MemoryRouter future={ReactFutureFlags}>
         <BudgetCardList transactions={moreThan3Transactions} link="/" />

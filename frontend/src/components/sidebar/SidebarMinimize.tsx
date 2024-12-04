@@ -1,18 +1,22 @@
-import { SidebarListEntry } from './SidebarListEntry';
-import { SidebarMinimizeProps } from '../../model/props/SidebarMinimizeProps';
-import PropTypes from 'prop-types';
-import React, { useEffect, useState } from 'react';
+import SidebarListEntry from './SidebarListEntry';
+import React, { ReactNode, useEffect, useState } from 'react';
 import './SidebarMinimize.scss';
 
-SidebarMinimize.propTypes = {
-  onMinimize: PropTypes.func.isRequired,
-};
+interface Props {
+  onMinimize: (isMinimized: boolean) => void;
+}
 
-export function SidebarMinimize({ onMinimize }: SidebarMinimizeProps) {
+const SidebarMinimize: ({ onMinimize }: Props) => ReactNode = ({
+  onMinimize,
+}: Props): ReactNode => {
   const [isMinimized, setIsMinimized] = useState<boolean>(() => {
     const savedState = localStorage.getItem('isMinimized');
     return savedState ? JSON.parse(savedState) : false;
   });
+
+  useEffect(() => {
+    localStorage.setItem('isMinimized', JSON.stringify(isMinimized));
+  }, [isMinimized]);
 
   const handleMinimize = () => {
     setIsMinimized((prev) => !prev);
@@ -22,10 +26,6 @@ export function SidebarMinimize({ onMinimize }: SidebarMinimizeProps) {
       activeElement.blur();
     }
   };
-
-  useEffect(() => {
-    localStorage.setItem('isMinimized', JSON.stringify(isMinimized));
-  }, [isMinimized]);
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
     if (event.key === 'Enter') {
@@ -39,6 +39,7 @@ export function SidebarMinimize({ onMinimize }: SidebarMinimizeProps) {
       onClick={handleMinimize}
       onKeyDown={handleKeyDown}
       tabIndex={0}
+      data-testid="sidebar-minimize"
     >
       <SidebarListEntry
         isMinimized={isMinimized}
@@ -51,4 +52,6 @@ export function SidebarMinimize({ onMinimize }: SidebarMinimizeProps) {
       />
     </div>
   );
-}
+};
+
+export default SidebarMinimize;

@@ -2,10 +2,10 @@ import './BillCard.scss';
 import { EPTransaction } from '../../model/entrypoints/EPTransaction';
 import { BillCardTableRow } from './BillCardTableRow';
 import { BillCardProps } from '../../model/props/BillCardProps';
-import { SearchbarInput } from '../searchbar/SearchbarInput';
+import SearchbarInput from '../searchbar/SearchbarInput';
 import { useEffect, useRef, useState } from 'react';
 import { SearchbarInputHandle } from '../../model/SearchbarInputHandle';
-import { SearchbarDropdownSort } from '../searchbar/SearchbarDropdownSort';
+import SearchbarDropdownSort from '../searchbar/SearchbarDropdownSort';
 import { SortOptionEnum } from '../../constants/SortOptionEnum';
 import PropTypes from 'prop-types';
 import useIsSmallScreen from '../../globals/hooks/useIsSmallScreen';
@@ -28,7 +28,7 @@ export function BillCard({ bills, today, isLoading }: BillCardProps) {
 
   let shadowFilteredTransactions: EPTransaction[] = [...filteredTransactions];
 
-  const searchbarRef = useRef<SearchbarInputHandle>();
+  const searchbarRef = useRef<SearchbarInputHandle | null>(null);
 
   const isSmallScreen = useIsSmallScreen();
 

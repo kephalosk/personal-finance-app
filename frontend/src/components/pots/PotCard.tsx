@@ -1,5 +1,5 @@
 import './PotCard.scss';
-import { CardHeader } from '../CardHeader';
+import CardHeader from '../CardHeader';
 import { PotCardDetails } from './PotCardDetails';
 import { PotCardProps } from '../../model/props/PotCardProps';
 import PropTypes from 'prop-types';

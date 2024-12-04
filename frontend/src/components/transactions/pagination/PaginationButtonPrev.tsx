@@ -1,14 +1,16 @@
 import './PaginationButtonPrev.scss';
-import PropTypes from 'prop-types';
-import { PaginationButtonPrevProps } from '../../../model/props/PaginationButtonPrevProps';
 import useIsSmallScreen from '../../../globals/hooks/useIsSmallScreen';
+import { ReactNode } from 'react';
 
-PaginationButtonPrev.propTypes = {
-  onClick: PropTypes.func.isRequired,
-  currentIndex: PropTypes.number.isRequired,
-};
+interface Props {
+  onClick: () => void;
+  currentIndex: number;
+}
 
-export function PaginationButtonPrev({ onClick, currentIndex }: PaginationButtonPrevProps) {
+const PaginationButtonPrev: ({ onClick, currentIndex }: Props) => ReactNode = ({
+  onClick,
+  currentIndex,
+}: Props): ReactNode => {
   const isSmallScreen = useIsSmallScreen();
   return (
     <>
@@ -20,11 +22,13 @@ export function PaginationButtonPrev({ onClick, currentIndex }: PaginationButton
         <img
           className="paginationButtonPrevCaret"
           alt="icon of caret left"
-          aria-hidden="true"
+          aria-hidden="false"
           src="/images/icon-caret-left.svg"
         />
         {!isSmallScreen && 'Prev'}
       </button>
     </>
   );
-}
+};
+
+export default PaginationButtonPrev;

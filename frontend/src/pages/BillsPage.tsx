@@ -7,7 +7,7 @@ import React, { useEffect, useState } from 'react';
 import { EPTransaction } from '../model/entrypoints/EPTransaction';
 import getTotalAmount from '../globals/utils/getTotalAmount';
 
-const BillsPage: () => React.ReactNode = () => {
+const BillsPage: () => React.ReactNode = (): React.ReactNode => {
   const [bills, setBills] = useState<EPTransaction[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   useEffect((): void => {

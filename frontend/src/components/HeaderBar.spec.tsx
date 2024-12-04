@@ -1,5 +1,5 @@
 import { fireEvent, render } from '@testing-library/react';
-import { HeaderBar } from './HeaderBar';
+import HeaderBar from './HeaderBar';
 
 describe('HeaderBar', () => {
   let mockHandleClick: jest.Mock<() => void>;
@@ -45,6 +45,15 @@ describe('HeaderBar', () => {
 
     const button = container.querySelector('.headerBarButton');
     fireEvent.click(button!);
+
+    expect(mockHandleClick).toHaveBeenCalled();
+  });
+
+  it('handels KeyDown Enter when button is pressed', () => {
+    const { container } = render(<HeaderBar {...testProps} handleClick={mockHandleClick} />);
+
+    const button = container.querySelector('.headerBarButton');
+    fireEvent.keyDown(button!, { key: 'Enter', code: 'Enter', keyCode: 13 });
 
     expect(mockHandleClick).toHaveBeenCalled();
   });

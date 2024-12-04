@@ -1,13 +1,13 @@
-import { SearchbarInput } from '../../searchbar/SearchbarInput';
-import { SearchbarDropdownSort } from '../../searchbar/SearchbarDropdownSort';
-import { SearchbarDropdownCategory } from '../../searchbar/SearchbarDropdownCategory';
-import { TableHeader } from '../../transactions/table/TableHeader';
+import SearchbarInput from '../../searchbar/SearchbarInput';
+import SearchbarDropdownSort from '../../searchbar/SearchbarDropdownSort';
+import SearchbarDropdownCategory from '../../searchbar/SearchbarDropdownCategory';
+import TableHeader from '../../transactions/table/TableHeader';
 import { EPTransaction } from '../../../model/entrypoints/EPTransaction';
-import { TableRow } from '../../transactions/table/TableRow';
-import { TableRowSmall } from '../../transactions/table/TableRowSmall';
-import { PaginationButtonPrev } from '../../transactions/pagination/PaginationButtonPrev';
-import { PaginationPages } from '../../transactions/pagination/PaginationPages';
-import { PaginationButtonNext } from '../../transactions/pagination/PaginationButtonNext';
+import TableRow from '../../transactions/table/TableRow';
+import TableRowSmall from '../../transactions/table/TableRowSmall';
+import PaginationButtonPrev from '../../transactions/pagination/PaginationButtonPrev';
+import PaginationPages from '../../transactions/pagination/PaginationPages';
+import PaginationButtonNext from '../../transactions/pagination/PaginationButtonNext';
 import React, { useEffect, useRef, useState } from 'react';
 import { SortOptionEnum } from '../../../constants/SortOptionEnum';
 import { splitIntoChunks } from '../../../globals/utils/SplitIntoChunks';
@@ -45,7 +45,7 @@ const TransactionsDetails = ({ isLoading, fetchedTransactions }: Props) => {
 
   let shadowFilteredTransactions: EPTransaction[] = [...filteredTransactions];
 
-  const searchbarRef = useRef<SearchbarInputHandle>();
+  const searchbarRef = useRef<SearchbarInputHandle | null>(null);
 
   const isSmallScreen = useIsSmallScreen();
 

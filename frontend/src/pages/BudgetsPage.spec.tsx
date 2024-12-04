@@ -5,7 +5,7 @@ import { mockedTransactions } from '../fixtures/MockedTransactions';
 import { act } from 'react';
 import { getBudgets } from '../globals/services/BudgetService';
 import { mockedBudgets } from '../fixtures/MockedBudgets';
-import { HeaderBar } from '../components/HeaderBar';
+import HeaderBar from '../components/HeaderBar';
 import { BudgetsDiagramCard } from '../components/budgets/BudgetDiagrammCard/BudgetsDiagramCard';
 import { BudgetCard } from '../components/budgets/BudgetCard/BudgetCard';
 import OverlayCardBox from '../components/overlay/OverlayCardBox';
@@ -13,11 +13,9 @@ import OverlayContentAddNewBudget from '../components/overlay/OverlayContentAddN
 import EnsureFirstPossibleColorIsDefined from '../globals/utils/EnsureFirstPossibleColorIsDefined';
 import Colors from '../constants/Colors';
 
-jest.mock('../components/HeaderBar', () => ({
-  HeaderBar: jest.fn((props) => (
-    <div data-testid="header-bar" onClick={() => props.handleClick()}></div>
-  )),
-}));
+jest.mock('../components/HeaderBar', () =>
+  jest.fn((props) => <div data-testid="header-bar" onClick={() => props.handleClick()}></div>)
+);
 jest.mock('../components/budgets/BudgetDiagrammCard/BudgetsDiagramCard', () => ({
   BudgetsDiagramCard: jest.fn(() => <div data-testid="budgets-diagram-card"></div>),
 }));

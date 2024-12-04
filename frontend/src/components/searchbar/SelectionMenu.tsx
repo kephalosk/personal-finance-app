@@ -1,6 +1,6 @@
 import './SelectionMenu.scss';
 import { Item } from '../../model/Item';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { ReactNode, useEffect, useRef, useState } from 'react';
 import useIsSmallScreen from '../../globals/hooks/useIsSmallScreen';
 
 interface Props {
@@ -11,13 +11,19 @@ interface Props {
   hasSmallerWidth?: boolean;
 }
 
-function SelectionMenu({
+const SelectionMenu: ({
+  selectedItem,
+  items,
+  handleItemChange,
+  mobileIcon,
+  hasSmallerWidth,
+}: Props) => ReactNode = ({
   selectedItem,
   items,
   handleItemChange,
   mobileIcon,
   hasSmallerWidth = false,
-}: Props) {
+}: Props): ReactNode => {
   const [showSelection, setShowSelection] = useState<boolean>(false);
   const isSmallScreen = useIsSmallScreen();
   const menuClass = 'selectionMenuListElement';
@@ -121,6 +127,6 @@ function SelectionMenu({
       )}
     </div>
   );
-}
+};
 
 export default SelectionMenu;
