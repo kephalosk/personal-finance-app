@@ -1,11 +1,11 @@
 import './PotsPage.scss';
-import { HeaderBar } from '../components/HeaderBar';
+import HeaderBar from '../components/HeaderBar';
 import { EPPot } from '../model/entrypoints/EPPot';
 import { getPots } from '../globals/services/PotService';
 import React, { useEffect, useState } from 'react';
 import PotPageGrid from '../components/pots/PotPageGrid';
 
-const PotsPage: () => React.ReactNode = () => {
+const PotsPage: () => React.ReactNode = (): React.ReactNode => {
   const [pots, setPots] = useState<EPPot[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   useEffect((): void => {

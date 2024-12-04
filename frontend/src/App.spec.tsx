@@ -1,13 +1,11 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import App from './App';
 import { MemoryRouter } from 'react-router-dom';
-import { Sidebar } from './components/sidebar/Sidebar';
+import Sidebar from './components/sidebar/Sidebar';
 
-jest.mock('./components/sidebar/Sidebar', () => ({
-  Sidebar: jest.fn((props) => (
-    <div data-testid="sidebar" onClick={() => props.onMinimize(true)}></div>
-  )),
-}));
+jest.mock('./components/sidebar/Sidebar', () =>
+  jest.fn((props) => <div data-testid="sidebar" onClick={() => props.onMinimize(true)}></div>)
+);
 jest.mock('./components/ScrollToTop', () => jest.fn(() => <div data-testid="scroll-to-top"></div>));
 jest.mock('./pages/OverviewPage', () => jest.fn(() => <div data-testid="overview-page"></div>));
 jest.mock('./pages/TransactionsPage', () =>

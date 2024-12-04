@@ -1,6 +1,7 @@
 import './TableHeader.scss';
+import React from 'react';
 
-export function TableHeader() {
+const TableHeader: () => React.ReactNode = (): React.ReactNode => {
   return (
     <>
       <div className="transactionsTableHeader" data-testid="table-header">
@@ -11,4 +12,6 @@ export function TableHeader() {
       </div>
     </>
   );
-}
+};
+
+export default TableHeader;

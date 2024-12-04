@@ -1,5 +1,5 @@
 import './App.scss';
-import { Sidebar } from './components/sidebar/Sidebar';
+import Sidebar from './components/sidebar/Sidebar';
 import OverviewPage from './pages/OverviewPage';
 import {
   BrowserRouter,
@@ -26,7 +26,7 @@ interface AppProps {
 const App: ({ Router, initialEntries }: AppProps) => React.ReactNode = ({
   Router = BrowserRouter,
   initialEntries = ['/'],
-}: AppProps) => {
+}: AppProps): React.ReactNode => {
   const [isMinimized, setIsMinimized] = useState<boolean>(() => {
     return JSON.parse(localStorage.getItem('isMinimized') ?? 'false');
   });

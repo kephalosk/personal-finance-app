@@ -32,6 +32,39 @@ export const mockedTransactions: EPTransaction[] = [
     amount: -55.5,
     recurring: false,
   },
+  {
+    avatar: '/images/avatars/savory-bites-bistro.jpg',
+    name: 'Savory Bites Bistro',
+    category: 'Dining Out',
+    categoryKey: 'diningout',
+    date: '20 Aug 2024',
+    dateRaw: new Date('2024-08-20T14:00:37Z'),
+    amount: -55.5,
+    recurring: false,
+  },
+];
+
+export const mockedTransactions2: EPTransaction[] = [
+  {
+    avatar: '/images/avatars/emma-richardson.jpg',
+    name: 'Emma Richardson',
+    category: 'General',
+    categoryKey: 'general',
+    date: '19 Aug 2024',
+    dateRaw: new Date('2024-08-19T14:00:37Z'),
+    amount: 75.5,
+    recurring: false,
+  },
+  {
+    avatar: '/images/avatars/savory-bites-bistro.jpg',
+    name: 'Savory Bites Bistro',
+    category: 'Dining Out',
+    categoryKey: 'diningout',
+    date: '20 Aug 2024',
+    dateRaw: new Date('2024-08-20T14:00:37Z'),
+    amount: -55.5,
+    recurring: false,
+  },
 ];
 
 export const mockedTransactions11Records: EPTransaction[] = [

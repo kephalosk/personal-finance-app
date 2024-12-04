@@ -13,7 +13,7 @@ import { getPots } from '../globals/services/PotService';
 import { EPBudget } from '../model/entrypoints/EPBudget';
 import { getBudgets } from '../globals/services/BudgetService';
 
-const OverviewPage: () => React.ReactNode = () => {
+const OverviewPage: () => React.ReactNode = (): React.ReactNode => {
   const [transactions, setTransactions] = useState<EPTransaction[]>([]);
   const [isLoadingTransactions, setIsLoadingTransactions] = useState<boolean>(true);
   useEffect((): void => {

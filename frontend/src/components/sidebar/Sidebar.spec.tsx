@@ -1,12 +1,15 @@
-import { Sidebar } from './Sidebar';
+import Sidebar from './Sidebar';
 import { fireEvent, render, screen } from '@testing-library/react';
 import { SidebarPages } from '../../constants/SidebarPages';
-import { SidebarMinimizeProps } from '../../constants/SidebarMinimizeProps';
-import { MemoryRouter, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import React from 'react';
-import { SidebarMinimize } from './SidebarMinimize';
 import useIsTabletScreen from '../../globals/hooks/useIsTabletScreen';
-import { ReactFutureFlags } from '../../constants/ReactFutureFlags';
+import SidebarListEntry from './SidebarListEntry';
+
+jest.mock('./SidebarListEntry', () => jest.fn(() => <div data-testid="sidebar-list-entry"></div>));
+jest.mock('./SidebarMinimize', () =>
+  jest.fn((props) => <div data-testid="sidebar-minimize" onClick={props.onMinimize}></div>)
+);
 
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
@@ -18,58 +21,62 @@ jest.mock('../../globals/hooks/useIsTabletScreen', () => ({
   default: jest.fn(),
 }));
 
+const projectIconBig = '/images/project-big.png';
+const projectIconSmall = '/images/project-small.png';
+
 const mockOnMinimize = jest.fn();
 const testProps = {
   onMinimize: mockOnMinimize,
 };
 
-function initializeComponent() {
-  (useLocation as jest.Mock).mockReturnValue({
-    pathname: '/',
-  });
-  render(
-    <MemoryRouter future={ReactFutureFlags}>
-      <Sidebar {...testProps} />
-    </MemoryRouter>
-  );
-}
-
-function getInitializedContainer(): HTMLElement {
-  (useLocation as jest.Mock).mockReturnValue({
-    pathname: '/',
-  });
-  const { container } = render(
-    <MemoryRouter future={ReactFutureFlags}>
-      <Sidebar {...testProps} />
-    </MemoryRouter>
-  );
-  return container;
-}
-
 describe('Sidebar', () => {
   beforeEach(() => {
+    (useLocation as jest.Mock).mockReturnValue({
+      pathname: '/',
+    });
     (useIsTabletScreen as jest.Mock).mockReturnValue(false);
   });
 
-  it('renders section sidebarLeft', () => {
-    const container = getInitializedContainer();
+  it('renders div sidebarLeft', () => {
+    const { container } = render(<Sidebar {...testProps} />);
 
     const htmlElement = container.querySelector('.sidebarLeft');
 
     expect(htmlElement).toBeInTheDocument();
   });
 
+  it('sets class minimized for sidebarLeft when isMinimized is true', () => {
+    localStorage.setItem('isMinimized', JSON.stringify(true));
+    const { container } = render(<Sidebar {...testProps} />);
+
+    const htmlElement = container.querySelector('.sidebarLeft');
+
+    expect(htmlElement).toHaveClass('minimized');
+    localStorage.clear();
+  });
+
   it('renders div sidebarBottom', () => {
     (useIsTabletScreen as jest.Mock).mockReturnValue(true);
-    const container = getInitializedContainer();
+    const { container } = render(<Sidebar {...testProps} />);
 
     const htmlElement = container.querySelector('.sidebarBottom');
 
     expect(htmlElement).toBeInTheDocument();
   });
 
+  it('sets class minimized for sidebarBottom when isMinimized is true', () => {
+    (useIsTabletScreen as jest.Mock).mockReturnValue(true);
+    localStorage.setItem('isMinimized', JSON.stringify(true));
+    const { container } = render(<Sidebar {...testProps} />);
+
+    const htmlElement = container.querySelector('.sidebarBottom');
+
+    expect(htmlElement).toHaveClass('minimized');
+    localStorage.clear();
+  });
+
   it('renders the project icon', () => {
-    const container = getInitializedContainer();
+    const { container } = render(<Sidebar {...testProps} />);
 
     const icon = container.querySelector('.sidebarTitle');
     expect(icon).toBeInTheDocument();
@@ -78,7 +85,7 @@ describe('Sidebar', () => {
 
   it('renders the project icon small if isMinimized is true', () => {
     localStorage.setItem('isMinimized', JSON.stringify(true));
-    const container = getInitializedContainer();
+    const { container } = render(<Sidebar {...testProps} />);
 
     const icon = container.querySelector('.sidebarTitle');
 
@@ -87,43 +94,108 @@ describe('Sidebar', () => {
     localStorage.clear();
   });
 
-  describe('SidebarPages', () => {
+  describe('SidebarPages for Desktop', () => {
+    it('renders div sidebarList', () => {
+      const { container } = render(<Sidebar {...testProps} />);
+
+      const htmlElement = container.querySelector('.sidebarList');
+
+      expect(htmlElement).toBeInTheDocument();
+    });
+
     SidebarPages.forEach((entry) => {
       it(`renders link to page ${entry.name}`, () => {
-        initializeComponent();
-        const sidebarPage: HTMLElement = screen.getByText(entry.name);
-        expect(sidebarPage).toBeInTheDocument();
+        render(<Sidebar {...testProps} />);
+        expect(SidebarListEntry).toHaveBeenCalledWith(
+          {
+            imgAlt: expect.any(String),
+            imgSrc: expect.any(String),
+            isActive: expect.any(Boolean),
+            isMinimized: expect.any(Boolean),
+            linkTarget: expect.any(String),
+            name: entry.name,
+          },
+          {}
+        );
       });
     });
   });
 
-  it('renders the SidebarMinimize option', () => {
-    initializeComponent();
+  describe('SidebarPages for Tablet and Mobile', () => {
+    it('renders div sidebarList', () => {
+      (useIsTabletScreen as jest.Mock).mockReturnValue(true);
+      const { container } = render(<Sidebar {...testProps} />);
 
-    const sidebarMinimize: HTMLElement = screen.getByText(SidebarMinimizeProps.name);
+      const htmlElement = container.querySelector('.sidebarList');
 
-    expect(sidebarMinimize).toBeInTheDocument();
+      expect(htmlElement).toBeInTheDocument();
+    });
+
+    SidebarPages.forEach((entry) => {
+      it(`renders link to page ${entry.name}`, () => {
+        (useIsTabletScreen as jest.Mock).mockReturnValue(true);
+        render(<Sidebar {...testProps} />);
+        expect(SidebarListEntry).toHaveBeenCalledWith(
+          {
+            imgAlt: expect.any(String),
+            imgSrc: expect.any(String),
+            isActive: expect.any(Boolean),
+            isMinimized: expect.any(Boolean),
+            linkTarget: expect.any(String),
+            name: entry.name,
+          },
+          {}
+        );
+      });
+    });
+  });
+
+  it('renders the SidebarMinimize option on Desktop', () => {
+    render(<Sidebar {...testProps} />);
+
+    const minimize = screen.getByTestId('sidebar-minimize');
+
+    expect(minimize).toBeInTheDocument();
+  });
+
+  it('renders the SidebarMinimize option on Tablet or Phone', () => {
+    (useIsTabletScreen as jest.Mock).mockReturnValue(true);
+    render(<Sidebar {...testProps} />);
+
+    const minimize = screen.getByTestId('sidebar-minimize');
+
+    expect(minimize).toBeInTheDocument();
   });
 
   it('changes state isMinimized if sidebarMinimizeWrapper is clicked', () => {
     localStorage.setItem('isMinimized', JSON.stringify(false));
-    const container = getInitializedContainer();
-    const iconBeforeClick = container.querySelector('.sidebarTitle');
-    expect(iconBeforeClick).toHaveAttribute('src', '/images/project-big.png');
+    render(<Sidebar {...testProps} />);
+    const projectIcon = screen.getByAltText('project icon');
+    expect(projectIcon).toHaveAttribute('src', projectIconBig);
 
-    const button = container.querySelector('.sidebarMinimizeWrapper');
-    fireEvent.click(button!);
+    const minimize = screen.getByTestId('sidebar-minimize');
+    fireEvent.click(minimize!);
 
-    const iconAfterClick = container.querySelector('.sidebarTitle');
-    expect(iconAfterClick).toHaveAttribute('src', '/images/project-small.png');
+    const projectIcon2 = screen.getByAltText('project icon');
+    expect(projectIcon2).toHaveAttribute('src', projectIconSmall);
     localStorage.clear();
   });
 
-  it('calls callback function onMinimize when div sidebarMinimizeWrapper is clicked', () => {
-    const { container } = render(<SidebarMinimize {...testProps} />);
+  it('calls callback function onMinimize when SidebarMinimize is clicked on Desktop', () => {
+    render(<Sidebar {...testProps} />);
 
-    const divElement = container.querySelector('.sidebarMinimizeWrapper');
-    fireEvent.click(divElement!);
+    const minimize = screen.getByTestId('sidebar-minimize');
+    fireEvent.click(minimize!);
+
+    expect(mockOnMinimize).toHaveBeenCalled();
+  });
+
+  it('calls callback function onMinimize when SidebarMinimize is clicked on Tablet or Phone', () => {
+    (useIsTabletScreen as jest.Mock).mockReturnValue(true);
+    render(<Sidebar {...testProps} />);
+
+    const minimize = screen.getByTestId('sidebar-minimize');
+    fireEvent.click(minimize!);
 
     expect(mockOnMinimize).toHaveBeenCalled();
   });

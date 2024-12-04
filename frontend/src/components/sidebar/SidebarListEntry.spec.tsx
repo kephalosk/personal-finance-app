@@ -1,6 +1,5 @@
-import { render, screen } from '@testing-library/react';
-import { SidebarListEntry } from './SidebarListEntry';
-import { SidebarListEntryProps } from '../../model/props/SidebarListEntryProps';
+import { fireEvent, render, screen } from '@testing-library/react';
+import SidebarListEntry from './SidebarListEntry';
 import { MemoryRouter } from 'react-router-dom';
 import React from 'react';
 import { SidebarMinimizeProps } from '../../constants/SidebarMinimizeProps';
@@ -12,7 +11,7 @@ describe('SidebarListEntry', () => {
   const imgAlt: string = 'testImgAlt';
   const linkTarget: string = 'testLinkTarget';
 
-  const testProps: SidebarListEntryProps = {
+  const testProps = {
     name,
     imgSrc,
     imgAlt,
@@ -21,9 +20,7 @@ describe('SidebarListEntry', () => {
 
   it('does not render a link for SidebarMinimize with passed className', () => {
     const { container } = render(
-      <MemoryRouter future={ReactFutureFlags}>
-        <SidebarListEntry {...testProps} className={SidebarMinimizeProps.className} />
-      </MemoryRouter>
+      <SidebarListEntry {...testProps} className={SidebarMinimizeProps.className} />
     );
 
     const linkElement = container.querySelector('.link');
@@ -31,6 +28,17 @@ describe('SidebarListEntry', () => {
 
     expect(linkElement).not.toBeInTheDocument();
     expect(divElement).toBeInTheDocument();
+  });
+
+  it('blurs when SidebarMinimize is clicked', () => {
+    const { container } = render(
+      <SidebarListEntry {...testProps} className={SidebarMinimizeProps.className} />
+    );
+
+    const divElement = container.querySelector('.div');
+    fireEvent.click(divElement!);
+
+    expect(divElement).not.toHaveFocus();
   });
 
   it('renders a link for normal SidebarListEntries', () => {
@@ -45,6 +53,19 @@ describe('SidebarListEntry', () => {
 
     expect(linkElement).toBeInTheDocument();
     expect(divElement).not.toBeInTheDocument();
+  });
+
+  it('blurs when normal SidebarListEntry is clicked', () => {
+    const { container } = render(
+      <MemoryRouter future={ReactFutureFlags}>
+        <SidebarListEntry {...testProps} className="" />
+      </MemoryRouter>
+    );
+
+    const linkElement = container.querySelector('.link');
+    fireEvent.click(linkElement!);
+
+    expect(linkElement).not.toHaveFocus();
   });
 
   it('sets entry isActive if passed prop isActive is true', () => {
@@ -201,5 +222,43 @@ describe('SidebarListEntry', () => {
 
     labelElement = container.querySelector('.entryRowLabel');
     expect(labelElement).toHaveClass('minimized');
+  });
+
+  it('sets default link target', () => {
+    const { container } = render(
+      <MemoryRouter future={ReactFutureFlags}>
+        <SidebarListEntry {...testProps} linkTarget={undefined} />
+      </MemoryRouter>
+    );
+
+    const linkElement = container.querySelector('.link');
+
+    expect(linkElement).toHaveAttribute('href', '/');
+  });
+
+  it('sets tabindex to -1 when passed hasTabIndex is false for link', () => {
+    const { container } = render(
+      <MemoryRouter future={ReactFutureFlags}>
+        <SidebarListEntry {...testProps} className="" hasTabIndex={false} />
+      </MemoryRouter>
+    );
+
+    const linkElement = container.querySelector('.link');
+
+    expect(linkElement).toHaveAttribute('tabindex', '-1');
+  });
+
+  it('sets tabindex to -1 when passed hasTabIndex is false for div', () => {
+    const { container } = render(
+      <SidebarListEntry
+        {...testProps}
+        className={SidebarMinimizeProps.className}
+        hasTabIndex={false}
+      />
+    );
+
+    const divElement = container.querySelector('.div');
+
+    expect(divElement).toHaveAttribute('tabindex', '-1');
   });
 });

@@ -1,16 +1,21 @@
 import './TableRow.scss';
-import PropTypes from 'prop-types';
-import { TableRowProps } from '../../../model/props/TableRowProps';
+import React from 'react';
 
-TableRow.propTypes = {
-  name: PropTypes.string.isRequired,
-  imgSrc: PropTypes.string.isRequired,
-  category: PropTypes.string.isRequired,
-  date: PropTypes.string.isRequired,
-  value: PropTypes.number.isRequired,
-};
+interface Props {
+  name: string;
+  imgSrc: string;
+  category: string;
+  date: string;
+  value: number;
+}
 
-export function TableRow({ name, imgSrc, category, date, value }: TableRowProps) {
+const TableRow: ({ name, imgSrc, category, date, value }: Props) => React.ReactNode = ({
+  name,
+  imgSrc,
+  category,
+  date,
+  value,
+}: Props): React.ReactNode => {
   const isPositive: boolean = value > 0;
   const color = isPositive ? 'green' : 'dark';
   const sign = isPositive ? '+' : '-';
@@ -39,4 +44,6 @@ export function TableRow({ name, imgSrc, category, date, value }: TableRowProps)
       </div>
     </>
   );
-}
+};
+
+export default TableRow;
