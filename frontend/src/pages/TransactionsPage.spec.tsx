@@ -2,29 +2,20 @@ import { render, screen } from '@testing-library/react';
 import TransactionsPage from './TransactionsPage';
 import React, { act } from 'react';
 import { getTransactions } from '../globals/services/TransactionService';
-import useIsSmallScreen from '../globals/hooks/useIsSmallScreen';
 import { mockedTransactions11Records } from '../fixtures/MockedTransactions';
-import { useLocation } from 'react-router-dom';
+import TransactionsDetails from '../components/overview/transactions/TransactionsDetails';
+
+jest.mock('../components/overview/transactions/TransactionsDetails', () =>
+  jest.fn(() => <div data-testid="transactions-details"></div>)
+);
 
 jest.mock('../globals/services/TransactionService', () => ({
   getTransactions: jest.fn(),
 }));
 
-jest.mock('../globals/hooks/useIsSmallScreen', () => ({
-  __esModule: true,
-  default: jest.fn(),
-}));
-
-jest.mock('react-router-dom', () => ({
-  ...jest.requireActual('react-router-dom'),
-  useLocation: jest.fn(),
-}));
-
 describe('TransactionsPage', () => {
   beforeEach(() => {
     (getTransactions as jest.Mock).mockResolvedValue(mockedTransactions11Records);
-    (useIsSmallScreen as jest.Mock).mockReturnValue(false);
-    (useLocation as jest.Mock).mockReturnValue({ search: '?cat=' });
   });
 
   it('renders div transactionsPage', async () => {
@@ -57,5 +48,13 @@ describe('TransactionsPage', () => {
     const reactComponent = screen.getByTestId('transactions-details');
 
     expect(reactComponent).toBeInTheDocument();
+    expect(TransactionsDetails).toHaveBeenCalledWith(
+      { isLoading: true, fetchedTransactions: [] },
+      {}
+    );
+    expect(TransactionsDetails).toHaveBeenCalledWith(
+      { isLoading: false, fetchedTransactions: mockedTransactions11Records },
+      {}
+    );
   });
 });
