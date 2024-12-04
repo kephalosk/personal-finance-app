@@ -7,8 +7,7 @@ import { getTransactions } from '../globals/services/TransactionService';
 const TransactionsPage = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const fetchedTransactions = useRef<EPTransaction[]>([]);
-
-  useEffect(() => {
+  useEffect((): void => {
     const fetchTransactions = async (): Promise<void> => {
       fetchedTransactions.current = await getTransactions();
       setIsLoading(false);

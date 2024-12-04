@@ -128,11 +128,12 @@ describe('BudgetsPage', () => {
     const component = screen.getByTestId('budgets-diagram-card');
 
     expect(component).toBeInTheDocument();
-    expect(BudgetsDiagramCard).toHaveBeenCalledWith(
+    expect(BudgetsDiagramCard).toHaveBeenNthCalledWith(
+      1,
       { isLoading: true, budgets: [], transactions: [] },
       {}
     );
-    expect(BudgetsDiagramCard).toHaveBeenCalledWith(
+    expect(BudgetsDiagramCard).toHaveBeenLastCalledWith(
       { isLoading: false, budgets: mockedBudgets, transactions: mockedTransactions },
       {}
     );
@@ -157,11 +158,13 @@ describe('BudgetsPage', () => {
     const components = screen.getAllByTestId('budget-card');
 
     expect(components).toHaveLength(2);
-    expect(BudgetCard).toHaveBeenCalledWith(
+    expect(BudgetCard).toHaveBeenNthCalledWith(
+      1,
       { isLoading: false, budget: mockedBudgets[0], transactions: mockedTransactions },
       {}
     );
-    expect(BudgetCard).toHaveBeenCalledWith(
+    expect(BudgetCard).toHaveBeenNthCalledWith(
+      2,
       { isLoading: false, budget: mockedBudgets[1], transactions: mockedTransactions },
       {}
     );

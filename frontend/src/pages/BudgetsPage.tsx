@@ -13,10 +13,10 @@ import { Color } from '../model/Color';
 import Colors from '../constants/Colors';
 import EnsureFirstPossibleColorIsDefined from '../globals/utils/EnsureFirstPossibleColorIsDefined';
 
-const BudgetsPage = () => {
+const BudgetsPage: () => React.ReactNode = () => {
   const [transactions, setTransactions] = useState<EPTransaction[]>([]);
   const [isLoadingTransactions, setIsLoadingTransactions] = useState<boolean>(true);
-  useEffect(() => {
+  useEffect((): void => {
     const fetchTransactions = async (): Promise<void> => {
       const fetchedTransactions: EPTransaction[] = await getTransactions();
       setTransactions(fetchedTransactions);
@@ -27,7 +27,7 @@ const BudgetsPage = () => {
 
   const [budgets, setBudgets] = useState<EPBudget[]>([]);
   const [isLoadingBudgets, setIsLoadingBudgets] = useState<boolean>(true);
-  useEffect(() => {
+  useEffect((): void => {
     const fetchBudgets = async (): Promise<void> => {
       const fetchedBudgets: EPBudget[] = await getBudgets();
       setBudgets(fetchedBudgets);
@@ -38,19 +38,23 @@ const BudgetsPage = () => {
   }, []);
 
   const [colors, setColors] = useState<Color[]>(Colors);
-  const sortColors = (fetchedBudgets: EPBudget[]) => {
-    const markedColors = colors.map((color) => {
-      const isColorUsed = fetchedBudgets.some((budget) => budget.color === color.name);
+  const sortColors = (fetchedBudgets: EPBudget[]): void => {
+    const markedColors: Color[] = colors.map((color: Color): Color => {
+      const isColorUsed: boolean = fetchedBudgets.some(
+        (budget: EPBudget): boolean => budget.color === color.name
+      );
       return { ...color, disabled: isColorUsed };
     });
-    const enabledColors = markedColors.filter((color) => !color.disabled);
-    const disabledColors = markedColors.filter((color) => color.disabled);
-    const combinedColors = enabledColors.concat(disabledColors);
+    const enabledColors: Color[] = markedColors.filter((color: Color) => !color.disabled);
+    const disabledColors: Color[] = markedColors.filter((color: Color) => color.disabled);
+    const combinedColors: Color[] = enabledColors.concat(disabledColors);
 
     setColors(combinedColors);
 
-    const firstPossibleColor = markedColors.find((color) => !color.disabled);
-    const definedFirstPossibleColor = EnsureFirstPossibleColorIsDefined(
+    const firstPossibleColor: Color | undefined = markedColors.find(
+      (color: Color) => !color.disabled
+    );
+    const definedFirstPossibleColor: Color = EnsureFirstPossibleColorIsDefined(
       firstPossibleColor,
       markedColors[0]
     );
@@ -58,13 +62,13 @@ const BudgetsPage = () => {
   };
 
   const [isHidden, setIsHidden] = useState<boolean>(true);
-  const handleShowForm = () => {
+  const handleShowForm = (): void => {
     setIsHidden(false);
   };
 
-  const closeForm = () => {
+  const closeForm = (): void => {
     setIsHidden(true);
-    const activeElement = document.activeElement;
+    const activeElement: Element | null = document.activeElement;
     if (activeElement instanceof HTMLElement) {
       activeElement.blur();
     }
@@ -72,18 +76,18 @@ const BudgetsPage = () => {
   };
 
   const [selectedCategoryItem, setSelectedCategoryItem] = useState('General');
-  const handleCategoryChange = (category: string) => {
+  const handleCategoryChange = (category: string): void => {
     setSelectedCategoryItem(category);
   };
 
   const [selectedColorItem, setSelectedColorItem] = useState(Colors[0]);
-  const handleColorChange = (color: Color) => {
+  const handleColorChange = (color: Color): void => {
     setSelectedColorItem(color);
   };
 
-  const handleAddNewBudget = () => {};
+  const handleAddNewBudget = (): void => {};
 
-  const addNewBudgetDescription =
+  const addNewBudgetDescription: string =
     'Choose a category to set a spending budget. These categories can help you monitor spending.';
 
   return (
