@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react';
-import { NoPage } from './NoPage';
+import NoPage from './NoPage';
 
 describe('NoPage', () => {
   it('renders div noPage', () => {

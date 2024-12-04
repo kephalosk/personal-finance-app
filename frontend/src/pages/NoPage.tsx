@@ -1,6 +1,6 @@
 import './NoPage.scss';
 
-export function NoPage() {
+const NoPage = () => {
   const msgNotFound = "The page you are looking for doesn't exist.";
   return (
     <>
@@ -10,4 +10,6 @@ export function NoPage() {
       </div>
     </>
   );
-}
+};
+
+export default NoPage;
