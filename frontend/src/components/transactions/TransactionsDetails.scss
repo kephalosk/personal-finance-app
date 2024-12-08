@@ -1,34 +1,4 @@
-@use '../styles/mixins';
-
-.searchbarLabel {
-  margin-right: 8px;
-  margin-left: 24px;
-}
-
-.searchbarLabelWrapper {
-  display: flex;
-  flex-direction: row;
-  flex-grow: 1;
-  align-items: center;
-  justify-content: flex-end;
-}
-
-.searchbarSmall {
-  display: flex;
-  flex-direction: row;
-}
-
-.transactionsPage {
-  padding: 32px 40px;
-  height: 100%;
-  display: grid;
-  grid-template-rows: fit-content(100%) 1fr;
-  row-gap: 24px;
-
-  @include mixins.phone() {
-    padding: 24px 16px;
-  }
-}
+@use '../../styles/mixins';
 
 .transactionsDetails {
   border-radius: 12px;
@@ -42,30 +12,4 @@
   @include mixins.phone() {
     padding: 24px 20px;
   }
-}
-
-.transactionsPagination {
-  margin-top: 6px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
-.transactionsSearchbar {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-items: center;
-  font-size: 15px;
-  color: var(--text-grey);
-  row-gap: 16px;
-
-  @include mixins.phone() {
-    flex-wrap: nowrap;
-  }
-}
-
-.transactionsTableLine {
-  margin: 12px 0;
 }

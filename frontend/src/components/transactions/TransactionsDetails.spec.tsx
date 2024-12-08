@@ -1,11 +1,29 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import React, { act } from 'react';
-import { mockedTransactions11Records } from '../../fixtures/MockedTransactions';
+import {
+  mockedTransactions11Records,
+  mockedTransactions2,
+  mockedTransactions3,
+} from '../../fixtures/MockedTransactions';
 import { getTransactions } from '../../globals/services/TransactionService';
 import useIsSmallScreen from '../../globals/hooks/useIsSmallScreen';
-import { convertSignedDollarStringToNumber } from '../../globals/utils/ConvertSignedDollarStringToNumber';
 import TransactionsDetails from './TransactionsDetails';
 import { useLocation } from 'react-router-dom';
+import TransactionsPagination from './pagination/TransactionsPagination';
+import TransactionsTable from './table/TransactionsTable';
+
+jest.mock('./table/TransactionsTable', () =>
+  jest.fn(() => <div data-testid="transactions-table"></div>)
+);
+const changedPageIndex = 4;
+jest.mock('./pagination/TransactionsPagination', () =>
+  jest.fn(({ changePageIndex }) => (
+    <div
+      data-testid="transactions-pagination"
+      onClick={() => changePageIndex(changedPageIndex)}
+    ></div>
+  ))
+);
 
 jest.mock('../../globals/services/TransactionService', () => ({
   getTransactions: jest.fn(),
@@ -30,6 +48,30 @@ describe('TransactionsDetails', () => {
   const testProps = {
     fetchedTransactions,
     isLoading,
+  };
+
+  const flushPromises = (): Promise<void> => {
+    return new Promise((resolve) => process.nextTick(resolve));
+  };
+
+  const selectSortOption = async (container: HTMLElement, optionText: string) => {
+    await flushPromises();
+    const dropdown = container.querySelector('.dropdownSort')!;
+    const selectElement = dropdown.querySelector('.selectionMenu')!;
+    fireEvent.click(selectElement);
+
+    const optionElement = screen.getByText(optionText);
+    fireEvent.click(optionElement);
+  };
+
+  const selectCategoryOption = async (container: HTMLElement, testCategory: string) => {
+    await flushPromises();
+    const dropdown = container.querySelector('.searchbarDropdownCategory');
+    const selectElement = dropdown!.querySelector('.selectionMenu');
+    fireEvent.click(selectElement!);
+
+    const optionElements = screen.getAllByText(testCategory);
+    fireEvent.click(optionElements[0]);
   };
 
   beforeEach(() => {
@@ -103,494 +145,319 @@ describe('TransactionsDetails', () => {
       expect(htmlElement).toHaveTextContent('Category');
     });
 
-    it('renders react component SearchbarDropdownCategory', async () => {
-      const cut: HTMLElement = await act(async (): Promise<HTMLElement> => {
-        const { container } = render(<TransactionsDetails {...testProps} />);
-        return container;
-      });
+    it('renders react component SearchbarDropdownCategory', () => {
+      const { container } = render(<TransactionsDetails {...testProps} />);
 
-      const htmlElement = cut.querySelector('.searchbarDropdownCategory');
+      const htmlElement = container.querySelector('.searchbarDropdownCategory');
 
       expect(htmlElement).toBeInTheDocument();
     });
 
-    function flushPromises(): Promise<void> {
-      return new Promise((resolve) => process.nextTick(resolve));
-    }
-
     describe('Sorting', () => {
       it('sorts the transactions from oldest to newest', async () => {
-        const cut: HTMLElement = await act(async (): Promise<HTMLElement> => {
-          const { container } = render(<TransactionsDetails {...testProps} />);
-          await flushPromises();
-          return container;
-        });
-        let tableRows = await screen.findAllByTestId('table-row');
-        let secondDate = new Date(
-          tableRows[1].querySelector('.tableRowDate')!.textContent!
-        ).getTime();
-        let thirdDate = new Date(
-          tableRows[2].querySelector('.tableRowDate')!.textContent!
-        ).getTime();
-        expect(secondDate - thirdDate > 0).toBe(true);
+        const { container } = render(
+          <TransactionsDetails {...testProps} fetchedTransactions={mockedTransactions2} />
+        );
+        await selectSortOption(container, 'Z to A');
+        expect(TransactionsTable).toHaveBeenNthCalledWith(
+          3,
+          {
+            currentIndexedTransactions: [
+              expect.objectContaining({ date: '20 Aug 2024' }),
+              expect.objectContaining({ date: '19 Aug 2024' }),
+            ],
+          },
+          {}
+        );
 
-        const dropdown = cut.querySelector('.dropdownSort');
-        const selectElement = dropdown!.querySelector('.selectionMenu');
-        fireEvent.click(selectElement!);
-        const optionElement = screen.getByText('Oldest');
-        fireEvent.click(optionElement);
+        await selectSortOption(container, 'Oldest');
 
-        tableRows = screen.getAllByTestId('table-row');
-        secondDate = new Date(tableRows[1].querySelector('.tableRowDate')!.textContent!).getTime();
-        thirdDate = new Date(tableRows[2].querySelector('.tableRowDate')!.textContent!).getTime();
-        expect(secondDate - thirdDate > 0).toBe(false);
+        expect(TransactionsTable).toHaveBeenLastCalledWith(
+          {
+            currentIndexedTransactions: [
+              expect.objectContaining({ date: '19 Aug 2024' }),
+              expect.objectContaining({ date: '20 Aug 2024' }),
+            ],
+          },
+          {}
+        );
       });
 
       it('sorts the transactions from newest to oldest', async () => {
-        const cut: HTMLElement = await act(async (): Promise<HTMLElement> => {
-          const { container } = render(<TransactionsDetails {...testProps} />);
-          return container;
-        });
-        let dropdown = cut.querySelector('.dropdownSort');
-        let selectElement = dropdown!.querySelector('.selectionMenu');
-        fireEvent.click(selectElement!);
-        let optionElement = screen.getByText('Oldest');
-        fireEvent.click(optionElement);
-        let tableRows = screen.getAllByTestId('table-row');
-        let secondDate = new Date(
-          tableRows[1].querySelector('.tableRowDate')!.textContent!
-        ).getTime();
-        let thirdDate = new Date(
-          tableRows[2].querySelector('.tableRowDate')!.textContent!
-        ).getTime();
-        expect(secondDate - thirdDate > 0).toBe(false);
+        const { container } = render(
+          <TransactionsDetails {...testProps} fetchedTransactions={mockedTransactions2} />
+        );
+        await selectSortOption(container, 'Oldest');
+        expect(TransactionsTable).toHaveBeenNthCalledWith(
+          3,
+          {
+            currentIndexedTransactions: [
+              expect.objectContaining({ date: '19 Aug 2024' }),
+              expect.objectContaining({ date: '20 Aug 2024' }),
+            ],
+          },
+          {}
+        );
 
-        dropdown = cut.querySelector('.dropdownSort');
-        selectElement = dropdown!.querySelector('.selectionMenu');
-        fireEvent.click(selectElement!);
-        optionElement = screen.getByText('Latest');
-        fireEvent.click(optionElement);
+        await selectSortOption(container, 'Latest');
 
-        tableRows = screen.getAllByTestId('table-row');
-        thirdDate = new Date(tableRows[2].querySelector('.tableRowDate')!.textContent!).getTime();
-        secondDate = new Date(tableRows[1].querySelector('.tableRowDate')!.textContent!).getTime();
-        expect(secondDate - thirdDate > 0).toBe(true);
+        expect(TransactionsTable).toHaveBeenLastCalledWith(
+          {
+            currentIndexedTransactions: [
+              expect.objectContaining({ date: '20 Aug 2024' }),
+              expect.objectContaining({ date: '19 Aug 2024' }),
+            ],
+          },
+          {}
+        );
       });
 
       it('sorts the transactions from A to Z', async () => {
-        const cut: HTMLElement = await act(async (): Promise<HTMLElement> => {
-          const { container } = render(<TransactionsDetails {...testProps} />);
-          await flushPromises();
-          return container;
-        });
+        const { container } = render(
+          <TransactionsDetails {...testProps} fetchedTransactions={mockedTransactions2} />
+        );
 
-        const dropdown = cut.querySelector('.dropdownSort');
-        const selectElement = dropdown!.querySelector('.selectionMenu');
-        fireEvent.click(selectElement!);
-        const optionElement = screen.getByText('A to Z');
-        fireEvent.click(optionElement);
+        await selectSortOption(container, 'A to Z');
 
-        const tableRows = screen.getAllByTestId('table-row');
-        const secondName = tableRows[1].querySelector('.tableRowPartnerName')!.textContent!;
-        const thirdName = tableRows[2].querySelector('.tableRowPartnerName')!.textContent!;
-        expect(secondName.localeCompare(thirdName) < 0).toBe(true);
+        expect(TransactionsTable).toHaveBeenLastCalledWith(
+          {
+            currentIndexedTransactions: [
+              expect.objectContaining({ name: 'Emma Richardson' }),
+              expect.objectContaining({ name: 'Savory Bites Bistro' }),
+            ],
+          },
+          {}
+        );
       });
 
       it('sorts the transactions from Z to A', async () => {
-        const cut: HTMLElement = await act(async (): Promise<HTMLElement> => {
-          const { container } = render(<TransactionsDetails {...testProps} />);
-          await flushPromises();
-          return container;
-        });
+        const { container } = render(
+          <TransactionsDetails {...testProps} fetchedTransactions={mockedTransactions2} />
+        );
 
-        const dropdown = cut.querySelector('.dropdownSort');
-        const selectElement = dropdown!.querySelector('.selectionMenu');
-        fireEvent.click(selectElement!);
-        const optionElement = screen.getByText('Z to A');
-        fireEvent.click(optionElement);
+        await selectSortOption(container, 'Z to A');
 
-        const tableRows = screen.getAllByTestId('table-row');
-        const secondName = tableRows[1].querySelector('.tableRowPartnerName')!.textContent!;
-        const thirdName = tableRows[2].querySelector('.tableRowPartnerName')!.textContent!;
-        expect(secondName.localeCompare(thirdName) > 0).toBe(true);
+        expect(TransactionsTable).toHaveBeenLastCalledWith(
+          {
+            currentIndexedTransactions: [
+              expect.objectContaining({ name: 'Savory Bites Bistro' }),
+              expect.objectContaining({ name: 'Emma Richardson' }),
+            ],
+          },
+          {}
+        );
       });
 
       it('sorts the transactions from highest to lowest', async () => {
-        const cut: HTMLElement = await act(async (): Promise<HTMLElement> => {
-          const { container } = render(<TransactionsDetails {...testProps} />);
-          await flushPromises();
-          return container;
-        });
+        const { container } = render(
+          <TransactionsDetails {...testProps} fetchedTransactions={mockedTransactions2} />
+        );
 
-        const dropdown = cut.querySelector('.dropdownSort');
-        const selectElement = dropdown!.querySelector('.selectionMenu');
-        fireEvent.click(selectElement!);
-        const optionElement = screen.getByText('Highest');
-        fireEvent.click(optionElement);
+        await selectSortOption(container, 'Highest');
 
-        const tableRows = screen.getAllByTestId('table-row');
-        const thirdAmount = tableRows[2].querySelector('.tableRowValue')!.textContent!;
-        const thirdAmountValue = convertSignedDollarStringToNumber(thirdAmount);
-        const fourthAmount = tableRows[3].querySelector('.tableRowValue')!.textContent!;
-        const fourthAmountValue = convertSignedDollarStringToNumber(fourthAmount);
-        expect(thirdAmountValue - fourthAmountValue > 0).toBe(true);
+        expect(TransactionsTable).toHaveBeenLastCalledWith(
+          {
+            currentIndexedTransactions: [
+              expect.objectContaining({ amount: 75.5 }),
+              expect.objectContaining({ amount: -55.5 }),
+            ],
+          },
+          {}
+        );
       });
 
       it('sorts the transactions from lowest to highest', async () => {
-        const cut: HTMLElement = await act(async (): Promise<HTMLElement> => {
-          const { container } = render(<TransactionsDetails {...testProps} />);
-          await flushPromises();
-          return container;
-        });
+        const { container } = render(
+          <TransactionsDetails {...testProps} fetchedTransactions={mockedTransactions2} />
+        );
 
-        const dropdown = cut.querySelector('.dropdownSort');
-        const selectElement = dropdown!.querySelector('.selectionMenu');
-        fireEvent.click(selectElement!);
-        const optionElement = screen.getByText('Lowest');
-        fireEvent.click(optionElement);
+        await selectSortOption(container, 'Lowest');
 
-        const tableRows = screen.getAllByTestId('table-row');
-        const fourthAmount = tableRows[3].querySelector('.tableRowValue')!.textContent!;
-        const fourthAmountValue = convertSignedDollarStringToNumber(fourthAmount);
-        const thirdAmount = tableRows[2].querySelector('.tableRowValue')!.textContent!;
-        const thirdAmountValue = convertSignedDollarStringToNumber(thirdAmount);
-        expect(thirdAmountValue - fourthAmountValue < 0).toBe(true);
+        expect(TransactionsTable).toHaveBeenLastCalledWith(
+          {
+            currentIndexedTransactions: [
+              expect.objectContaining({ amount: -55.5 }),
+              expect.objectContaining({ amount: 75.5 }),
+            ],
+          },
+          {}
+        );
       });
 
       it('resets the pageIndex after sorting the transactions', async () => {
-        const cut: HTMLElement = await act(async (): Promise<HTMLElement> => {
-          const { container } = render(<TransactionsDetails {...testProps} />);
-          await flushPromises();
-          return container;
-        });
-        const buttons = cut.querySelectorAll('.paginationPagesButton');
-        fireEvent.click(buttons[1]);
-        let activeButton = cut.querySelector('.isActive');
-        expect(activeButton).toHaveTextContent('2');
+        const { container } = render(
+          <TransactionsDetails {...testProps} fetchedTransactions={mockedTransactions2} />
+        );
 
-        const dropdown = cut.querySelector('.dropdownSort');
-        const selectElement = dropdown!.querySelector('.selectionMenu');
-        fireEvent.click(selectElement!);
-        const optionElement = screen.getByText('Z to A');
-        fireEvent.click(optionElement);
-        activeButton = cut.querySelector('.isActive');
+        await selectSortOption(container, 'Lowest');
 
-        expect(activeButton).toHaveTextContent('1');
+        expect(TransactionsPagination).toHaveBeenLastCalledWith(
+          expect.objectContaining({ pageIndex: 0 }),
+          {}
+        );
       });
     });
 
     describe('Filtering', () => {
       it('filters the transactions correctly', async () => {
-        const cut: HTMLElement = await act(async (): Promise<HTMLElement> => {
-          const { container } = render(<TransactionsDetails {...testProps} />);
-          await flushPromises();
-          return container;
-        });
+        const { container } = render(
+          <TransactionsDetails {...testProps} fetchedTransactions={mockedTransactions2} />
+        );
 
-        const dropdown = cut.querySelector('.searchbarDropdownCategory');
-        const selectElement = dropdown!.querySelector('.selectionMenu');
-        fireEvent.click(selectElement!);
-        const optionElements = screen.getAllByText(testCategory);
-        fireEvent.click(optionElements[0]);
+        await selectCategoryOption(container, testCategory);
 
-        const tableRows = screen.getAllByTestId('table-row');
-        tableRows.forEach((row) => {
-          const rowCategory = row.querySelector('.tableRowCategory')!.textContent;
-          expect(rowCategory).toEqual(testCategory);
-        });
-      });
-
-      it('resets the pageIndex after filtering the transactions', async () => {
-        const cut: HTMLElement = await act(async (): Promise<HTMLElement> => {
-          const { container } = render(<TransactionsDetails {...testProps} />);
-          await flushPromises();
-          return container;
-        });
-        const buttons = cut.querySelectorAll('.paginationPagesButton');
-        fireEvent.click(buttons[1]);
-        let activeButton = cut.querySelector('.isActive');
-        expect(activeButton).toHaveTextContent('2');
-
-        const dropdown = cut.querySelector('.searchbarDropdownCategory');
-        const selectElement = dropdown!.querySelector('.selectionMenu');
-        fireEvent.click(selectElement!);
-        const optionElements = screen.getAllByText(testCategory);
-        fireEvent.click(optionElements[0]);
-        activeButton = cut.querySelector('.isActive');
-
-        expect(activeButton).toHaveTextContent('1');
+        expect(TransactionsTable).toHaveBeenLastCalledWith(
+          {
+            currentIndexedTransactions: [expect.objectContaining({ category: testCategory })],
+          },
+          {}
+        );
       });
 
       it('keeps filtered transactions after sorting', async () => {
-        const cut: HTMLElement = await act(async (): Promise<HTMLElement> => {
-          const { container } = render(<TransactionsDetails {...testProps} />);
-          await flushPromises();
-          return container;
-        });
-        const dropdown = cut.querySelector('.searchbarDropdownCategory');
-        const selectElement = dropdown!.querySelector('.selectionMenu');
-        fireEvent.click(selectElement!);
-        const optionElements = screen.getAllByText(testCategory);
-        fireEvent.click(optionElements[0]);
-        const filteredTableRowBeforeSorting = screen.getAllByTestId('table-row');
-        filteredTableRowBeforeSorting.forEach((row) => {
-          const rowCategory = row.querySelector('.tableRowCategory')!.textContent;
-          expect(rowCategory).toEqual(testCategory);
-        });
+        const { container } = render(
+          <TransactionsDetails {...testProps} fetchedTransactions={mockedTransactions2} />
+        );
 
-        const dropdownSort = cut.querySelector('.dropdownSort');
-        const selectElementSort = dropdownSort!.querySelector('.selectionMenu');
-        fireEvent.click(selectElementSort!);
-        const optionElement = screen.getByText('Lowest');
-        fireEvent.click(optionElement);
+        await selectCategoryOption(container, testCategory);
+        await selectSortOption(container, 'Lowest');
 
-        const filteredTableRowAfterSorting = screen.getAllByTestId('table-row');
-        filteredTableRowAfterSorting.forEach((row) => {
-          const rowCategory = row.querySelector('.tableRowCategory')!.textContent;
-          expect(rowCategory).toEqual(testCategory);
-        });
+        expect(TransactionsTable).toHaveBeenLastCalledWith(
+          {
+            currentIndexedTransactions: [expect.objectContaining({ category: testCategory })],
+          },
+          {}
+        );
+      });
+
+      it('resets the pageIndex after filtering the transactions', async () => {
+        const { container } = render(
+          <TransactionsDetails {...testProps} fetchedTransactions={mockedTransactions2} />
+        );
+
+        await selectCategoryOption(container, testCategory);
+
+        expect(TransactionsPagination).toHaveBeenLastCalledWith(
+          expect.objectContaining({ pageIndex: 0 }),
+          {}
+        );
       });
     });
 
     describe('Searching', () => {
       it('filters all transactions for content of current input of searchbar', async () => {
-        await act(async (): Promise<void> => {
-          render(<TransactionsDetails {...testProps} />);
-        });
+        render(<TransactionsDetails {...testProps} fetchedTransactions={mockedTransactions2} />);
 
         const inputElement = screen.getByTestId('searchbar-input').querySelector('input');
         fireEvent.change(inputElement!, { target: { value: `${testSearchbarInput}` } });
 
-        const filteredTableRowAfterSearching = screen.getAllByTestId('table-row');
-        filteredTableRowAfterSearching.forEach((row) => {
-          const rowName = row.querySelector('.tableRowPartnerName')!.textContent;
-          expect(rowName!.toLowerCase()).toContain(testSearchbarInput);
-        });
+        expect(TransactionsTable).toHaveBeenLastCalledWith(
+          {
+            currentIndexedTransactions: [expect.objectContaining({ name: 'Emma Richardson' })],
+          },
+          {}
+        );
       });
+    });
 
-      it('resets the pageIndex after input of searchbar changes', async () => {
-        const cut: HTMLElement = await act(async (): Promise<HTMLElement> => {
-          const { container } = render(<TransactionsDetails {...testProps} />);
-          await flushPromises();
-          return container;
-        });
-        const buttons = cut.querySelectorAll('.paginationPagesButton');
-        fireEvent.click(buttons[1]);
-        let activeButton = cut.querySelector('.isActive');
-        expect(activeButton).toHaveTextContent('2');
+    it('keeps sorting and filter after searching', async () => {
+      const { container } = render(
+        <TransactionsDetails {...testProps} fetchedTransactions={mockedTransactions3} />
+      );
+      await selectSortOption(container, 'Highest');
+      await selectCategoryOption(container, testCategory);
 
-        const inputElement = screen.getByTestId('searchbar-input').querySelector('input');
-        fireEvent.change(inputElement!, { target: { value: `${testSearchbarInput}` } });
-        activeButton = cut.querySelector('.isActive');
+      const inputElement = screen.getByTestId('searchbar-input').querySelector('input');
+      fireEvent.change(inputElement!, { target: { value: `${testSearchbarInput}` } });
 
-        expect(activeButton).toHaveTextContent('1');
-      });
+      expect(TransactionsTable).toHaveBeenLastCalledWith(
+        {
+          currentIndexedTransactions: [
+            expect.objectContaining({
+              name: 'Emma Richardson',
+              category: testCategory,
+              amount: 100,
+            }),
+            expect.objectContaining({
+              name: 'Emma Richardson',
+              category: testCategory,
+              amount: 75.5,
+            }),
+          ],
+        },
+        {}
+      );
+    });
 
-      it('keeps sorting and filter after searching', async () => {
-        const testCategoryKeyGeneral = 'general';
-        const cut: HTMLElement = await act(async (): Promise<HTMLElement> => {
-          const { container } = render(<TransactionsDetails {...testProps} />);
-          await flushPromises();
-          return container;
-        });
-        const dropdownSort = cut.querySelector('.dropdownSort');
-        const selectElementSort = dropdownSort!.querySelector('.selectionMenu');
-        fireEvent.click(selectElementSort!);
-        const optionElement = screen.getByText('Highest');
-        fireEvent.click(optionElement);
-        const dropdown = cut.querySelector('.searchbarDropdownCategory');
-        const selectElement = dropdown!.querySelector('.selectionMenu');
-        fireEvent.click(selectElement!);
-        const optionElements = screen.getAllByText(testCategory);
-        fireEvent.click(optionElements[0]);
+    it('resets the pageIndex after input of searchbar changes', async () => {
+      render(<TransactionsDetails {...testProps} fetchedTransactions={mockedTransactions2} />);
 
-        const inputElement = screen.getByTestId('searchbar-input').querySelector('input');
-        fireEvent.change(inputElement!, { target: { value: `${testSearchbarInput}` } });
-        const tableAfterSortingFilteringSearching = screen.getAllByTestId('table-row');
-        const firstRowValue =
-          tableAfterSortingFilteringSearching[0].querySelector('.tableRowValue');
-        const firstRowValueRaw = convertSignedDollarStringToNumber(firstRowValue!.textContent!);
-        const secondRowValue =
-          tableAfterSortingFilteringSearching[1].querySelector('.tableRowValue');
-        const secondRowValueRaw = convertSignedDollarStringToNumber(secondRowValue!.textContent!);
+      const inputElement = screen.getByTestId('searchbar-input').querySelector('input');
+      fireEvent.change(inputElement!, { target: { value: `${testSearchbarInput}` } });
 
-        expect(firstRowValueRaw > secondRowValueRaw).toBe(true);
-        tableAfterSortingFilteringSearching.forEach((row) => {
-          const rowCategory = row.querySelector('.tableRowCategory')!.textContent;
-          expect(rowCategory!.toLowerCase()).toEqual(testCategoryKeyGeneral);
-        });
-      });
+      expect(TransactionsPagination).toHaveBeenLastCalledWith(
+        expect.objectContaining({ pageIndex: 0 }),
+        {}
+      );
     });
   });
 
-  describe('transactionsTable', () => {
-    it('renders div transactionsTable', async () => {
-      const cut: HTMLElement = await act(async (): Promise<HTMLElement> => {
-        const { container } = render(<TransactionsDetails {...testProps} />);
-        return container;
-      });
-
-      const htmlElement = cut.querySelector('.transactionsTable');
-
-      expect(htmlElement).toBeInTheDocument();
+  it('renders component TransactionsTable', async () => {
+    await act(async (): Promise<HTMLElement> => {
+      const { container } = render(
+        <TransactionsDetails {...testProps} fetchedTransactions={mockedTransactions2} />
+      );
+      return container;
     });
 
-    it('renders react component TableHeader', async () => {
-      await act(async (): Promise<void> => {
-        render(<TransactionsDetails {...testProps} />);
-      });
+    const component = screen.getByTestId('transactions-table');
 
-      const reactComponent = screen.getByTestId('table-header');
-
-      expect(reactComponent).toBeInTheDocument();
-    });
-
-    it('renders react component TableRow 10 times', async () => {
-      await act(async (): Promise<void> => {
-        render(<TransactionsDetails {...testProps} />);
-      });
-
-      const reactComponents = screen.getAllByTestId('table-row');
-
-      expect(reactComponents).toHaveLength(10);
-    });
+    expect(component).toBeInTheDocument();
+    expect(TransactionsTable).toHaveBeenLastCalledWith(
+      {
+        currentIndexedTransactions: mockedTransactions2,
+      },
+      {}
+    );
   });
 
-  describe('transactionsPagination', () => {
-    it('renders div transactionsPagination', async () => {
-      const cut: HTMLElement = await act(async (): Promise<HTMLElement> => {
-        const { container } = render(<TransactionsDetails {...testProps} />);
-        return container;
-      });
-
-      const htmlElement = cut.querySelector('.transactionsPagination');
-
-      expect(htmlElement).toBeInTheDocument();
-    });
-
-    it('renders react component PaginationButtonPrev', async () => {
+  describe('TransactionsPagination', () => {
+    it('renders component TransactionsPagination', async () => {
       await act(async (): Promise<void> => {
         render(<TransactionsDetails {...testProps} />);
       });
 
-      const reactComponent = screen.getByTestId('pagination-button-prev');
+      const component = screen.getByTestId('transactions-pagination');
 
-      expect(reactComponent).toBeInTheDocument();
+      expect(component).toBeInTheDocument();
+      expect(TransactionsPagination).toHaveBeenCalledWith(
+        {
+          changePageIndex: expect.any(Function),
+          isMaxIndex: false,
+          pageIndex: 0,
+          transactionsPaged: [],
+        },
+        {}
+      );
     });
 
-    it('renders react component PaginationPages', async () => {
+    it('handles changePageIndex when TransactionsPagination is clicked', async () => {
       await act(async (): Promise<void> => {
         render(<TransactionsDetails {...testProps} />);
       });
 
-      const reactComponent = screen.getByTestId('pagination-pages');
+      const component = screen.getByTestId('transactions-pagination');
+      fireEvent.click(component);
 
-      expect(reactComponent).toBeInTheDocument();
-    });
-
-    it('renders react component PaginationButtonNext', async () => {
-      await act(async (): Promise<void> => {
-        render(<TransactionsDetails {...testProps} />);
-      });
-
-      const reactComponent = screen.getByTestId('pagination-button-next');
-
-      expect(reactComponent).toBeInTheDocument();
-    });
-
-    it('increases page Number when next button is clicked', async () => {
-      const cut: HTMLElement = await act(async (): Promise<HTMLElement> => {
-        const { container } = render(<TransactionsDetails {...testProps} />);
-        return container;
-      });
-      let activePageButton = cut.querySelector('.isActive');
-      expect(activePageButton).toHaveTextContent('1');
-
-      const button = screen.getByTestId('pagination-button-next');
-      fireEvent.click(button);
-
-      activePageButton = cut.querySelector('.isActive');
-      expect(activePageButton).toHaveTextContent('2');
-    });
-
-    it('does not increases page Number when isMaxIndex is true and next button is clicked', async () => {
-      const cut: HTMLElement = await act(async (): Promise<HTMLElement> => {
-        const { container } = render(<TransactionsDetails {...testProps} />);
-        return container;
-      });
-      const buttons = cut.querySelectorAll('.paginationPagesButton');
-      fireEvent.click(buttons[1]);
-      let activePageButton = cut.querySelector('.isActive');
-      expect(activePageButton).toHaveTextContent('2');
-
-      const button = screen.getByTestId('pagination-button-next');
-      fireEvent.click(button);
-
-      activePageButton = cut.querySelector('.isActive');
-      expect(activePageButton).toHaveTextContent('2');
-    });
-
-    it('decreases page Number when prev button is clicked', async () => {
-      const cut: HTMLElement = await act(async (): Promise<HTMLElement> => {
-        const { container } = render(<TransactionsDetails {...testProps} />);
-        return container;
-      });
-      const buttonNext = screen.getByTestId('pagination-button-next');
-      fireEvent.click(buttonNext);
-      let activePageButton = cut.querySelector('.isActive');
-      expect(activePageButton).toHaveTextContent('2');
-
-      const buttonPrev = screen.getByTestId('pagination-button-prev');
-      fireEvent.click(buttonPrev);
-
-      activePageButton = cut.querySelector('.isActive');
-      expect(activePageButton).toHaveTextContent('1');
-    });
-
-    it('does not decreases page Number when pageIndex is 0 and prev button is clicked', async () => {
-      const cut: HTMLElement = await act(async (): Promise<HTMLElement> => {
-        const { container } = render(<TransactionsDetails {...testProps} />);
-        return container;
-      });
-      let activePageButton = cut.querySelector('.isActive');
-      expect(activePageButton).toHaveTextContent('1');
-
-      const buttonPrev = screen.getByTestId('pagination-button-prev');
-      fireEvent.click(buttonPrev);
-
-      activePageButton = cut.querySelector('.isActive');
-      expect(activePageButton).toHaveTextContent('1');
-    });
-
-    it('changes page Number when a pageButton is clicked', async () => {
-      const cut: HTMLElement = await act(async (): Promise<HTMLElement> => {
-        const { container } = render(<TransactionsDetails {...testProps} />);
-        return container;
-      });
-      let activePageButton = cut.querySelector('.isActive');
-      expect(activePageButton).toHaveTextContent('1');
-
-      const buttons = cut.querySelectorAll('.paginationPagesButton');
-      fireEvent.click(buttons[1]);
-
-      activePageButton = cut.querySelector('.isActive');
-      expect(activePageButton).toHaveTextContent('2');
-    });
-
-    it('does not change page Number when same pageButton is clicked', async () => {
-      const cut: HTMLElement = await act(async (): Promise<HTMLElement> => {
-        const { container } = render(<TransactionsDetails {...testProps} />);
-        return container;
-      });
-      const buttons = cut.querySelectorAll('.paginationPagesButton');
-      fireEvent.click(buttons[1]);
-      let activePageButton = cut.querySelector('.isActive');
-      expect(activePageButton).toHaveTextContent('2');
-
-      fireEvent.click(buttons[1]);
-
-      activePageButton = cut.querySelector('.isActive');
-      expect(activePageButton).toHaveTextContent('2');
+      expect(TransactionsPagination).toHaveBeenLastCalledWith(
+        {
+          changePageIndex: expect.any(Function),
+          isMaxIndex: false,
+          pageIndex: changedPageIndex,
+          transactionsPaged: [expect.any(Array), expect.any(Array)],
+        },
+        {}
+      );
     });
   });
 
@@ -630,15 +497,19 @@ describe('TransactionsDetails', () => {
   });
 
   it('filters transactions with query param', async () => {
-    (useLocation as jest.Mock).mockReturnValue({ search: '?cat=entertainment' });
-    await act(async (): Promise<void> => {
-      render(<TransactionsDetails {...testProps} />);
-    });
+    (useLocation as jest.Mock).mockReturnValue({ search: '?cat=general' });
 
-    const tableRows = screen.getAllByTestId('table-row');
-    tableRows.forEach((row) => {
-      const rowCategory = row.querySelector('.tableRowCategory')!.textContent;
-      expect(rowCategory).toEqual('Entertainment');
-    });
+    render(<TransactionsDetails {...testProps} fetchedTransactions={mockedTransactions2} />);
+
+    expect(TransactionsTable).toHaveBeenLastCalledWith(
+      {
+        currentIndexedTransactions: [
+          expect.objectContaining({
+            category: testCategory,
+          }),
+        ],
+      },
+      {}
+    );
   });
 });
