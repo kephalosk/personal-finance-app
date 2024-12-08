@@ -1,15 +1,13 @@
 import './OverviewHeader.scss';
-import PropTypes from 'prop-types';
-import { OverviewHeaderProps } from '../../model/props/OverviewHeaderProps';
 import { Link } from 'react-router-dom';
 
-OverviewHeader.propTypes = {
-  title: PropTypes.string.isRequired,
-  linkText: PropTypes.string.isRequired,
-  linkTarget: PropTypes.string.isRequired,
-};
+export interface Props {
+  title: string;
+  linkText: string;
+  linkTarget: string;
+}
 
-export function OverviewHeader({ title, linkText, linkTarget }: OverviewHeaderProps) {
+const OverviewHeader = ({ title, linkText, linkTarget }: Props) => {
   return (
     <>
       <div className="overviewHeader" data-testid="overview-header">
@@ -32,4 +30,6 @@ export function OverviewHeader({ title, linkText, linkTarget }: OverviewHeaderPr
       </div>
     </>
   );
-}
+};
+
+export default OverviewHeader;
