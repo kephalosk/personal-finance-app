@@ -38,7 +38,7 @@ const SearchbarDropdownSort: ({ onSortChange }: Props) => ReactNode = ({
   };
 
   return (
-    <div className="dropdownSort">
+    <div className="dropdownSort" data-testid="dropdown-sort">
       <SelectionMenu
         selectedItem={getSortName(selectedOption)}
         items={allSorts}
