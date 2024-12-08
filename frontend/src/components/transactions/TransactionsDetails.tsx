@@ -1,19 +1,19 @@
-import SearchbarInput from '../../searchbar/SearchbarInput';
-import SearchbarDropdownSort from '../../searchbar/SearchbarDropdownSort';
-import SearchbarDropdownCategory from '../../searchbar/SearchbarDropdownCategory';
-import TableHeader from '../../transactions/table/TableHeader';
-import { EPTransaction } from '../../../model/entrypoints/EPTransaction';
-import TableRow from '../../transactions/table/TableRow';
-import TableRowSmall from '../../transactions/table/TableRowSmall';
-import PaginationButtonPrev from '../../transactions/pagination/PaginationButtonPrev';
-import PaginationPages from '../../transactions/pagination/PaginationPages';
-import PaginationButtonNext from '../../transactions/pagination/PaginationButtonNext';
+import SearchbarInput from '../searchbar/SearchbarInput';
+import SearchbarDropdownSort from '../searchbar/SearchbarDropdownSort';
+import SearchbarDropdownCategory from '../searchbar/SearchbarDropdownCategory';
+import TableHeader from './table/TableHeader';
+import { EPTransaction } from '../../model/entrypoints/EPTransaction';
+import TableRow from './table/TableRow';
+import TableRowSmall from './table/TableRowSmall';
+import PaginationButtonPrev from './pagination/PaginationButtonPrev';
+import PaginationPages from './pagination/PaginationPages';
+import PaginationButtonNext from './pagination/PaginationButtonNext';
 import React, { useEffect, useRef, useState } from 'react';
-import { SortOptionEnum } from '../../../constants/SortOptionEnum';
-import { splitIntoChunks } from '../../../globals/utils/SplitIntoChunks';
-import { SearchbarInputHandle } from '../../../model/SearchbarInputHandle';
-import useIsSmallScreen from '../../../globals/hooks/useIsSmallScreen';
-import LoadingSpinner from '../../LoadingSpinner';
+import { SortOptionEnum } from '../../constants/SortOptionEnum';
+import { splitIntoChunks } from '../../globals/utils/SplitIntoChunks';
+import { SearchbarInputHandle } from '../../model/SearchbarInputHandle';
+import useIsSmallScreen from '../../globals/hooks/useIsSmallScreen';
+import LoadingSpinner from '../LoadingSpinner';
 import { useLocation } from 'react-router-dom';
 
 interface Props {

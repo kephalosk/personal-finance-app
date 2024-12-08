@@ -1,17 +1,17 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import React, { act } from 'react';
-import { mockedTransactions11Records } from '../../../fixtures/MockedTransactions';
-import { getTransactions } from '../../../globals/services/TransactionService';
-import useIsSmallScreen from '../../../globals/hooks/useIsSmallScreen';
-import { convertSignedDollarStringToNumber } from '../../../globals/utils/ConvertSignedDollarStringToNumber';
+import { mockedTransactions11Records } from '../../fixtures/MockedTransactions';
+import { getTransactions } from '../../globals/services/TransactionService';
+import useIsSmallScreen from '../../globals/hooks/useIsSmallScreen';
+import { convertSignedDollarStringToNumber } from '../../globals/utils/ConvertSignedDollarStringToNumber';
 import TransactionsDetails from './TransactionsDetails';
 import { useLocation } from 'react-router-dom';
 
-jest.mock('../../../globals/services/TransactionService', () => ({
+jest.mock('../../globals/services/TransactionService', () => ({
   getTransactions: jest.fn(),
 }));
 
-jest.mock('../../../globals/hooks/useIsSmallScreen', () => ({
+jest.mock('../../globals/hooks/useIsSmallScreen', () => ({
   __esModule: true,
   default: jest.fn(),
 }));

@@ -3,9 +3,9 @@ import TransactionsPage from './TransactionsPage';
 import React, { act } from 'react';
 import { getTransactions } from '../globals/services/TransactionService';
 import { mockedTransactions11Records } from '../fixtures/MockedTransactions';
-import TransactionsDetails from '../components/overview/transactions/TransactionsDetails';
+import TransactionsDetails from '../components/transactions/TransactionsDetails';
 
-jest.mock('../components/overview/transactions/TransactionsDetails', () =>
+jest.mock('../components/transactions/TransactionsDetails', () =>
   jest.fn(() => <div data-testid="transactions-details"></div>)
 );
 
