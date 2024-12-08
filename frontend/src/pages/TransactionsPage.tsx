@@ -1,5 +1,5 @@
 import './TransactionsPage.scss';
-import TransactionsDetails from '../components/overview/transactions/TransactionsDetails';
+import TransactionsDetails from '../components/transactions/TransactionsDetails';
 import React, { useEffect, useRef, useState } from 'react';
 import { EPTransaction } from '../model/entrypoints/EPTransaction';
 import { getTransactions } from '../globals/services/TransactionService';

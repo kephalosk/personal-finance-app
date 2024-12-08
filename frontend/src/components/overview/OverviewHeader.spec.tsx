@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react';
-import { OverviewHeader } from './OverviewHeader';
+import OverviewHeader from './OverviewHeader';
 import { MemoryRouter } from 'react-router-dom';
 import { ReactFutureFlags } from '../../constants/ReactFutureFlags';
 

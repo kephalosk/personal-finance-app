@@ -1,16 +1,15 @@
 import './PotCard.scss';
 import CardHeader from '../CardHeader';
-import { PotCardDetails } from './PotCardDetails';
-import { PotCardProps } from '../../model/props/PotCardProps';
-import PropTypes from 'prop-types';
+import PotCardDetails from './PotCardDetails';
 import LoadingSpinner from '../LoadingSpinner';
+import { EPPot } from '../../model/entrypoints/EPPot';
 
-PotCard.propTypes = {
-  pot: PropTypes.object.isRequired,
-  isLoading: PropTypes.bool.isRequired,
-};
+interface Props {
+  pot: EPPot;
+  isLoading: boolean;
+}
 
-export function PotCard({ pot, isLoading }: PotCardProps) {
+const PotCard = ({ pot, isLoading }: Props) => {
   return (
     <>
       {isLoading ? (
@@ -27,4 +26,6 @@ export function PotCard({ pot, isLoading }: PotCardProps) {
       )}
     </>
   );
-}
+};
+
+export default PotCard;

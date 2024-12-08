@@ -1,6 +1,6 @@
 import './PotPageGrid.scss';
 import { EPPot } from '../../model/entrypoints/EPPot';
-import { PotCard } from './PotCard';
+import PotCard from './PotCard';
 import LoadingSpinner from '../LoadingSpinner';
 import React from 'react';
 

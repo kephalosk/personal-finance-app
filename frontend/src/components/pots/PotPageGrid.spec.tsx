@@ -5,9 +5,11 @@ import { getPots } from '../../globals/services/PotService';
 import { MemoryRouter } from 'react-router-dom';
 import PotPageGrid from './PotPageGrid';
 import { ReactFutureFlags } from '../../constants/ReactFutureFlags';
-import { PotCard } from './PotCard';
+import PotCard from './PotCard';
+import LoadingSpinner from '../LoadingSpinner';
 
-jest.mock('./PotCard', () => ({ PotCard: jest.fn(() => <div data-testid="pot-card"></div>) }));
+jest.mock('./PotCard', () => jest.fn(() => <div data-testid="pot-card"></div>));
+jest.mock('../LoadingSpinner', () => jest.fn(() => <div data-testid="loading-spinner"></div>));
 
 jest.mock('../../globals/services/PotService', () => ({
   getPots: jest.fn(),
@@ -62,16 +64,17 @@ describe('PotPageGrid', () => {
   });
 
   it('renders LoadingSpinner if prop isLoading is true', () => {
-    const { container } = render(
+    render(
       <MemoryRouter future={ReactFutureFlags}>
         <PotPageGrid {...testProps} isLoading={true} />
       </MemoryRouter>
     );
 
-    const htmlElement = container.querySelector('.loadingSpinner');
-    const components = screen.queryAllByTestId('value-box');
+    const spinner = screen.getByTestId('loading-spinner');
+    const components = screen.queryAllByTestId('pot-card');
 
-    expect(htmlElement).toBeInTheDocument();
+    expect(spinner).toBeInTheDocument();
+    expect(LoadingSpinner).toHaveBeenCalled();
     expect(components).toHaveLength(0);
   });
 });

@@ -1,5 +1,5 @@
 import './OverviewBills.scss';
-import { OverviewHeader } from '../OverviewHeader';
+import OverviewHeader from '../OverviewHeader';
 import { BillRow } from './BillRow';
 import { OverviewBillsProps } from '../../../model/props/OverviewBillsProps';
 import PropTypes from 'prop-types';
