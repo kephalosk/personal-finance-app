@@ -1,7 +1,9 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-import { SidebarMinimize } from './SidebarMinimize';
-import { SidebarMinimizeProps } from '../../constants/SidebarMinimizeProps';
+import SidebarMinimize from './SidebarMinimize';
 import React from 'react';
+import SidebarListEntry from './SidebarListEntry';
+
+jest.mock('./SidebarListEntry', () => jest.fn(() => <div data-testid="sidebar-list-entry"></div>));
 
 describe('SidebarMinimize', () => {
   const mockOnMinimize = jest.fn();
@@ -9,55 +11,113 @@ describe('SidebarMinimize', () => {
     onMinimize: mockOnMinimize,
   };
 
-  it('has the correct name of SidebarMinimize', () => {
+  it('renders div sidebarMinimizeWrapper', () => {
+    const { container } = render(<SidebarMinimize {...testProps} />);
+
+    const div = container.querySelector('.sidebarMinimizeWrapper');
+
+    expect(div).toBeInTheDocument();
+  });
+
+  it('renders component SidebarListEntry with correct props', () => {
     render(<SidebarMinimize {...testProps} />);
 
-    const labelElement: HTMLElement = screen.getByText(SidebarMinimizeProps.name);
+    const component = screen.getByTestId('sidebar-list-entry');
 
-    expect(labelElement).toBeInTheDocument();
+    expect(component).toBeInTheDocument();
+    expect(SidebarListEntry).toHaveBeenCalledWith(
+      {
+        altImgSrc: '/images/icon-maximize-menu.svg',
+        className: 'sidebarMinimize',
+        hasTabIndex: false,
+        imgAlt: 'minimize icon',
+        imgSrc: '/images/icon-minimize-menu.svg',
+        isMinimized: false,
+        name: 'Minimize Menu',
+      },
+      {}
+    );
   });
 
   it('passes the correct icon of SidebarMinimize if isMinimized is false', () => {
     localStorage.clear();
     render(<SidebarMinimize {...testProps} />);
 
-    const imgElement: HTMLElement = screen.getByAltText(SidebarMinimizeProps.imgAlt);
+    const component = screen.getByTestId('sidebar-list-entry');
 
-    expect(imgElement).toHaveAttribute('src', SidebarMinimizeProps.imgSrc);
+    expect(component).toBeInTheDocument();
+    expect(SidebarListEntry).toHaveBeenCalledWith(
+      {
+        altImgSrc: '/images/icon-maximize-menu.svg',
+        className: 'sidebarMinimize',
+        hasTabIndex: false,
+        imgAlt: 'minimize icon',
+        imgSrc: '/images/icon-minimize-menu.svg',
+        isMinimized: false,
+        name: 'Minimize Menu',
+      },
+      {}
+    );
   });
 
   it('sets the correct icon of SidebarMinimize if isMinimized is true in store', () => {
     localStorage.setItem('isMinimized', JSON.stringify(true));
     render(<SidebarMinimize {...testProps} />);
 
-    const imgElement: HTMLElement = screen.getByAltText(SidebarMinimizeProps.imgAlt);
+    const component = screen.getByTestId('sidebar-list-entry');
 
-    expect(imgElement).toHaveAttribute('src', SidebarMinimizeProps.altImgSrc);
+    expect(component).toBeInTheDocument();
+    expect(SidebarListEntry).toHaveBeenCalledWith(
+      {
+        altImgSrc: '/images/icon-maximize-menu.svg',
+        className: 'sidebarMinimize',
+        hasTabIndex: false,
+        imgAlt: 'minimize icon',
+        imgSrc: '/images/icon-minimize-menu.svg',
+        isMinimized: true,
+        name: 'Minimize Menu',
+      },
+      {}
+    );
     localStorage.clear();
   });
 
   it('sets the correct icon of SidebarMinimize if sidebarMinimizeWrapper is clicked', () => {
     localStorage.setItem('isMinimized', JSON.stringify(false));
     const { container } = render(<SidebarMinimize {...testProps} />);
-    const imgElementBeforeClick: HTMLElement = screen.getByAltText(SidebarMinimizeProps.imgAlt);
-    expect(imgElementBeforeClick).toHaveAttribute('src', SidebarMinimizeProps.imgSrc);
+    let component = screen.getByTestId('sidebar-list-entry');
+    expect(component).toBeInTheDocument();
+    expect(SidebarListEntry).toHaveBeenCalledWith(
+      {
+        altImgSrc: '/images/icon-maximize-menu.svg',
+        className: 'sidebarMinimize',
+        hasTabIndex: false,
+        imgAlt: 'minimize icon',
+        imgSrc: '/images/icon-minimize-menu.svg',
+        isMinimized: false,
+        name: 'Minimize Menu',
+      },
+      {}
+    );
 
     const minimizeDiv = container.querySelector('.sidebarMinimizeWrapper');
     fireEvent.click(minimizeDiv!);
 
-    const imgElementAfterClick: HTMLElement = screen.getByAltText(SidebarMinimizeProps.imgAlt);
-    expect(imgElementAfterClick).toHaveAttribute('src', SidebarMinimizeProps.altImgSrc);
+    component = screen.getByTestId('sidebar-list-entry');
+    expect(component).toBeInTheDocument();
+    expect(SidebarListEntry).toHaveBeenLastCalledWith(
+      {
+        altImgSrc: '/images/icon-maximize-menu.svg',
+        className: 'sidebarMinimize',
+        hasTabIndex: false,
+        imgAlt: 'minimize icon',
+        imgSrc: '/images/icon-minimize-menu.svg',
+        isMinimized: true,
+        name: 'Minimize Menu',
+      },
+      {}
+    );
     localStorage.clear();
-  });
-
-  it('does not render a link for SidebarMinimize', () => {
-    const { container } = render(<SidebarMinimize {...testProps} />);
-
-    const linkElement = container.querySelector('.link');
-    const divElement = container.querySelector('.div');
-
-    expect(linkElement).not.toBeInTheDocument();
-    expect(divElement).toBeInTheDocument();
   });
 
   it('calls callback function onMinimize when div sidebarMinimizeWrapper is clicked', () => {
@@ -65,6 +125,15 @@ describe('SidebarMinimize', () => {
 
     const divElement = container.querySelector('.sidebarMinimizeWrapper');
     fireEvent.click(divElement!);
+
+    expect(mockOnMinimize).toHaveBeenCalled();
+  });
+
+  it('handles keydown Enter of div sidebarMinimizeWrapper', () => {
+    const { container } = render(<SidebarMinimize {...testProps} />);
+
+    const divElement = container.querySelector('.sidebarMinimizeWrapper');
+    fireEvent.keyDown(divElement!, { key: 'Enter', code: 'Enter', keyCode: 13 });
 
     expect(mockOnMinimize).toHaveBeenCalled();
   });

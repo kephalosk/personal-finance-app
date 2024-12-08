@@ -1,0 +1,62 @@
+@use '../../styles/forms';
+
+.dropdownCategory {
+  margin-bottom: 16px;
+  border: 1px solid var(--component-background-grey);
+  padding: 11px 20px 13px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  position: relative;
+}
+.dropdownCategory:hover {
+  @include forms.form-field-outline;
+}
+.dropdownCategory:focus-visible {
+  @include forms.form-field-outline;
+}
+
+.dropdownCategoryIcon {
+  top: calc(50% - 3px);
+  right: 26px;
+  position: absolute;
+}
+
+.dropdownCategoryList {
+  border-radius: 8px;
+  box-shadow: 0 5px 40px -25px var(--component-background-dark);
+  background-color: var(--component-background-bright);
+  display: flex;
+  flex-direction: column;
+  max-height: 40px;
+  width: calc(100% + 2px);
+  top: -1px;
+  left: -1px;
+  position: absolute;
+  z-index: 4;
+  cursor: pointer;
+  visibility: hidden;
+  overflow: hidden;
+  transition: max-height 0.1s ease, visibility 0.1s ease;
+}
+.dropdownCategoryList.isOpen {
+  max-height: 414px;
+  visibility: visible;
+}
+
+.dropdownCategoryListItem {
+  border-radius: 8px;
+  padding: 12px 21px;
+  display: block;
+  cursor: pointer;
+}
+.dropdownCategoryListItem:hover, .dropdownCategoryListItem:focus {
+  background-color: var(--component-background-light);
+  color: var(--text-white);
+  outline: none;
+}
+
+.dropdownCategoryListLine {
+  margin: 0 20px;
+  width: calc(100% - 40px);
+}

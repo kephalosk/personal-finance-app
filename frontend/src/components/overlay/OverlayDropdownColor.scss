@@ -1,0 +1,56 @@
+@use '../../styles/forms';
+
+.dropdownColor {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.dropdownColorContainer {
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.dropdownColorWrapper {
+  border-radius: 8px;
+  border: 1px solid var(--component-background-grey);
+  padding: 11px 21px 13px 21px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: left;
+  height: auto;
+  font-size: 14px;
+  cursor: pointer;
+  position: relative;
+}
+.dropdownColorWrapper:hover {
+  @include forms.form-field-outline;
+}
+.dropdownColorWrapper:focus-visible {
+  @include forms.form-field-outline;
+}
+
+.dropDownColorList {
+  border-radius: 8px;
+  box-shadow: 0 5px 40px -25px var(--component-background-dark);
+  background-color: var(--component-background-bright);
+  display: flex;
+  flex-direction: column;
+  max-height: 42px;
+  width: 100%;
+  top: 0;
+  left: 0;
+  position: absolute;
+  z-index: 4;
+  cursor: pointer;
+  visibility: hidden;
+  overflow: hidden;
+  transition: max-height 0.1s ease, visibility 0.1s ease;
+}
+.dropDownColorList.isOpen {
+  max-height: 290px;
+  overflow-y: auto;
+  visibility: visible;
+}
+

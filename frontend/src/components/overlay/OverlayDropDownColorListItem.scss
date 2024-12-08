@@ -1,0 +1,91 @@
+.dropdownColorCircle {
+  margin-right: 12px;
+  border-radius: 50%;
+  background-color: var(--green);
+  height: 16px;
+  width: 16px;
+}
+.dropdownColorCircle {
+  margin-right: 12px;
+  border-radius: 50%;
+  height: 16px;
+  width: 16px;
+}
+.dropdownColorCircle.green {
+  background-color: var(--green);
+}
+.dropdownColorCircle.yellow {
+  background-color: var(--yellow);
+}
+.dropdownColorCircle.cyan {
+  background-color: var(--cyan);
+}
+.dropdownColorCircle.navy {
+  background-color: var(--navy);
+}
+.dropdownColorCircle.red {
+  background-color: var(--red);
+}
+.dropdownColorCircle.purple {
+  background-color: var(--purple);
+}
+.dropdownColorCircle.turquoise {
+  background-color: var(--turquoise);
+}
+.dropdownColorCircle.brown {
+  background-color: var(--brown);
+}
+.dropdownColorCircle.magenta {
+  background-color: var(--magenta);
+}
+.dropdownColorCircle.blue {
+  background-color: var(--blue);
+}
+.dropdownColorCircle.grey {
+  background-color: var(--grey);
+}
+.dropdownColorCircle.army {
+  background-color: var(--army);
+}
+.dropdownColorCircle.pink {
+  background-color: var(--pink);
+}
+.dropdownColorCircle.gold {
+  background-color: var(--gold);
+}
+.dropdownColorCircle.orange {
+  background-color: var(--orange);
+}
+.dropdownColorCircle.sepia {
+  background-color: var(--sepia);
+}
+
+.dropdownColorLabel {
+  flex-grow: 1;
+  cursor: pointer;
+}
+
+.dropDownColorListItem {
+  border-radius: 8px;
+  padding: 12px 22px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 14px;
+  cursor: pointer;
+}
+.dropDownColorListItem:hover, .dropDownColorListItem:focus {
+  background-color: var(--component-background-light);
+  color: var(--text-white);
+  outline: none;
+}
+.dropDownColorListItem.disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.dropDownColorListItemLine {
+  margin: 0 20px;
+  width: calc(100% - 40px);
+}

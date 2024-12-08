@@ -1,16 +1,20 @@
 import './HeaderBar.scss';
-import PropTypes from 'prop-types';
-import { HeaderBarProps } from '../model/props/HeaderBarProps';
 import React from 'react';
 
-HeaderBar.propTypes = {
-  h1Headline: PropTypes.string.isRequired,
-  buttonText: PropTypes.string.isRequired,
-};
+interface Props {
+  h1Headline: string;
+  buttonText: string;
+  handleClick: () => void;
+}
 
-export function HeaderBar({ h1Headline, buttonText }: HeaderBarProps) {
+const HeaderBar: ({ h1Headline, buttonText, handleClick }: Props) => React.ReactNode = ({
+  h1Headline,
+  buttonText,
+  handleClick,
+}: Props): React.ReactNode => {
   const handleKeyDown = (event: React.KeyboardEvent<HTMLButtonElement>) => {
     if (event.key === 'Enter') {
+      handleClick();
       const activeElement = document.activeElement;
       if (activeElement instanceof HTMLElement) {
         activeElement.blur();
@@ -21,10 +25,12 @@ export function HeaderBar({ h1Headline, buttonText }: HeaderBarProps) {
     <>
       <div className="headerBar" data-testid="header-bar">
         <h1 className="headerBarTitle">{h1Headline}</h1>
-        <button className="headerBarButton" onKeyDown={handleKeyDown}>
+        <button className="headerBarButton" onClick={handleClick} onKeyDown={handleKeyDown}>
           {buttonText}
         </button>
       </div>
     </>
   );
-}
+};
+
+export default HeaderBar;

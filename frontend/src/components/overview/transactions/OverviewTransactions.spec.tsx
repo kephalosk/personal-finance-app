@@ -5,6 +5,7 @@ import {
   mockedTransactions,
   mockedTransactionsLength6,
 } from '../../../fixtures/MockedTransactions';
+import { ReactFutureFlags } from '../../../constants/ReactFutureFlags';
 
 describe('OverviewTransactions', () => {
   const transactions = mockedTransactions;
@@ -16,7 +17,7 @@ describe('OverviewTransactions', () => {
 
   it('renders div overviewTransactions', () => {
     const { container } = render(
-      <MemoryRouter>
+      <MemoryRouter future={ReactFutureFlags}>
         <OverviewTransactions {...testProps} />
       </MemoryRouter>
     );
@@ -28,7 +29,7 @@ describe('OverviewTransactions', () => {
 
   it('renders the react component TransactionRowSmall max 5 times', () => {
     render(
-      <MemoryRouter>
+      <MemoryRouter future={ReactFutureFlags}>
         <OverviewTransactions {...testProps} transactions={mockedTransactionsLength6} />
       </MemoryRouter>
     );
@@ -40,7 +41,7 @@ describe('OverviewTransactions', () => {
 
   it('renders hr only between TransactionRows', () => {
     const { container } = render(
-      <MemoryRouter>
+      <MemoryRouter future={ReactFutureFlags}>
         <OverviewTransactions {...testProps} />
       </MemoryRouter>
     );
@@ -53,7 +54,7 @@ describe('OverviewTransactions', () => {
 
   it('renders LoadingSpinner if isLoading is true', () => {
     const { container } = render(
-      <MemoryRouter>
+      <MemoryRouter future={ReactFutureFlags}>
         <OverviewTransactions {...testProps} isLoading={true} />
       </MemoryRouter>
     );

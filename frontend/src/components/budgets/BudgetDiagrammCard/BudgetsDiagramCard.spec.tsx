@@ -94,11 +94,7 @@ describe('BudgetsDiagramCard', () => {
   });
 
   it('renders LoadingSpinner if isLoading is true', () => {
-    const { container } = render(
-      <MemoryRouter>
-        <BudgetsDiagramCard {...testProps} isLoading={true} />
-      </MemoryRouter>
-    );
+    const { container } = render(<BudgetsDiagramCard {...testProps} isLoading={true} />);
 
     const htmlElement = container.querySelector('.loadingSpinner');
     const components = screen.queryAllByTestId('budgets-diagram');

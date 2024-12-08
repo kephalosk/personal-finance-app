@@ -1,6 +1,6 @@
 import './App.scss';
-import { Sidebar } from './components/sidebar/Sidebar';
-import { OverviewPage } from './pages/OverviewPage';
+import Sidebar from './components/sidebar/Sidebar';
+import OverviewPage from './pages/OverviewPage';
 import {
   BrowserRouter,
   BrowserRouterProps,
@@ -11,11 +11,12 @@ import {
 } from 'react-router-dom';
 import React, { useState } from 'react';
 import NoPage from './pages/NoPage';
-import { BillsPage } from './pages/BillsPage';
-import { PotsPage } from './pages/PotsPage';
+import BillsPage from './pages/BillsPage';
+import PotsPage from './pages/PotsPage';
 import BudgetsPage from './pages/BudgetsPage';
 import TransactionsPage from './pages/TransactionsPage';
 import ScrollToTop from './components/ScrollToTop';
+import { ReactFutureFlags } from './constants/ReactFutureFlags';
 
 interface AppProps {
   Router?: React.ComponentType<BrowserRouterProps | MemoryRouterProps>;
@@ -25,7 +26,7 @@ interface AppProps {
 const App: ({ Router, initialEntries }: AppProps) => React.ReactNode = ({
   Router = BrowserRouter,
   initialEntries = ['/'],
-}: AppProps) => {
+}: AppProps): React.ReactNode => {
   const [isMinimized, setIsMinimized] = useState<boolean>(() => {
     return JSON.parse(localStorage.getItem('isMinimized') ?? 'false');
   });
@@ -47,13 +48,13 @@ const App: ({ Router, initialEntries }: AppProps) => React.ReactNode = ({
 
   const router =
     Router === MemoryRouter ? (
-      <MemoryRouter initialEntries={initialEntries}>
+      <MemoryRouter initialEntries={initialEntries} future={ReactFutureFlags}>
         <Sidebar onMinimize={handleSidebarMinimize} />
         <ScrollToTop />
         <section className={`content ${isMinimized ? 'minimized' : ''}`}>{routes}</section>
       </MemoryRouter>
     ) : (
-      <Router>
+      <Router future={ReactFutureFlags}>
         <Sidebar onMinimize={handleSidebarMinimize} />
         <ScrollToTop />
         <section className={`content ${isMinimized ? 'minimized' : ''}`}>{routes}</section>

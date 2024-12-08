@@ -27,6 +27,7 @@
   background-color: var(--page-background);
   height: auto;
   min-height: calc(100vh - 14px);
+  position: relative;
 
   @include mixins.tablet-and-down() {
     grid-template-columns: 1fr;

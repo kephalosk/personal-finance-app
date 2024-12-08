@@ -1,6 +1,17 @@
-import { SidebarListEntryProps } from '../model/props/SidebarListEntryProps';
+import { SidebarPage } from '../model/SidebarPage';
 
-export const SidebarMinimizeProps: SidebarListEntryProps = {
+interface Props extends SidebarPage {
+  imgSrc: string;
+  imgAlt: string;
+  altImgSrc?: string;
+  linkTarget?: string;
+  className?: string;
+  isActive?: boolean;
+  isMinimized?: boolean;
+  hasTabIndex?: boolean;
+}
+
+export const SidebarMinimizeProps: Props = {
   name: 'Minimize Menu',
   imgSrc: '/images/icon-minimize-menu.svg',
   altImgSrc: '/images/icon-maximize-menu.svg',

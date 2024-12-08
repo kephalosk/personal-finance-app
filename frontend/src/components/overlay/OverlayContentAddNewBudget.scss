@@ -1,0 +1,28 @@
+@use '../../styles/forms';
+
+.overlayContentAddNewBudget {
+  display: flex;
+  flex-direction: column;
+}
+
+//fieldTitle
+.fieldTitle {
+  @include forms.form-field-title;
+}
+
+
+
+//inputMoney
+.inputMoney {
+  margin-bottom: 16px;
+  border: 1px solid var(--component-background-grey);
+  padding: 12px 20px;
+  border-radius: 8px;
+}
+.inputMoney:hover {
+  @include forms.form-field-outline;
+}
+.inputMoney:focus {
+  @include forms.form-field-outline;
+}
+

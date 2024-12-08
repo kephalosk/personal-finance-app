@@ -1,16 +1,16 @@
 import './SearchbarDropdownSort.scss';
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import { SearchbarDropdownSortProps } from '../../model/props/SearchbarDropdownSortProps';
+import React, { ReactNode, useState } from 'react';
 import { SortOptionEnum } from '../../constants/SortOptionEnum';
 import SelectionMenu from './SelectionMenu';
 import { Item } from '../../model/Item';
 
-SearchbarDropdownSort.propTypes = {
-  omSortChange: PropTypes.func,
-};
+interface Props {
+  onSortChange: (newSortOption: string) => void;
+}
 
-export function SearchbarDropdownSort({ onSortChange }: SearchbarDropdownSortProps) {
+const SearchbarDropdownSort: ({ onSortChange }: Props) => ReactNode = ({
+  onSortChange,
+}: Props): ReactNode => {
   const [selectedOption, setSelectedOption] = useState<string>('latest');
 
   const allSorts: Item[] = [
@@ -48,4 +48,6 @@ export function SearchbarDropdownSort({ onSortChange }: SearchbarDropdownSortPro
       />
     </div>
   );
-}
+};
+
+export default SearchbarDropdownSort;

@@ -1,6 +1,6 @@
 import './OverviewBudgets.scss';
-import { OverviewHeader } from '../OverviewHeader';
-import { ValueBox } from '../ValueBox';
+import OverviewHeader from '../OverviewHeader';
+import ValueBox from '../ValueBox';
 import { BudgetsDiagram } from '../../budgets/BudgetsDiagram';
 import { EPBudget } from '../../../model/entrypoints/EPBudget';
 import { OverviewBudgetsProps } from '../../../model/props/OverviewBudgetsProps';

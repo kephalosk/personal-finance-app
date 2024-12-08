@@ -1,46 +1,22 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import App from './App';
 import { MemoryRouter } from 'react-router-dom';
-import useIsSmallScreen from './globals/hooks/useIsSmallScreen';
-import useIsTabletScreen from './globals/hooks/useIsTabletScreen';
-import { Sidebar } from './components/sidebar/Sidebar';
+import Sidebar from './components/sidebar/Sidebar';
 
-jest.mock('./components/sidebar/Sidebar', () => ({
-  Sidebar: jest.fn((props) => (
-    <div data-testid="sidebar" onClick={() => props.onMinimize(true)}></div>
-  )),
-}));
+jest.mock('./components/sidebar/Sidebar', () =>
+  jest.fn((props) => <div data-testid="sidebar" onClick={() => props.onMinimize(true)}></div>)
+);
 jest.mock('./components/ScrollToTop', () => jest.fn(() => <div data-testid="scroll-to-top"></div>));
-jest.mock('./pages/OverviewPage', () => ({
-  OverviewPage: jest.fn(() => <div data-testid="overview-page"></div>),
-}));
+jest.mock('./pages/OverviewPage', () => jest.fn(() => <div data-testid="overview-page"></div>));
 jest.mock('./pages/TransactionsPage', () =>
   jest.fn(() => <div data-testid="transactions-page"></div>)
 );
 jest.mock('./pages/BudgetsPage', () => jest.fn(() => <div data-testid="budgets-page"></div>));
-jest.mock('./pages/PotsPage', () => ({
-  PotsPage: jest.fn(() => <div data-testid="pots-page"></div>),
-}));
-jest.mock('./pages/BillsPage', () => ({
-  BillsPage: jest.fn(() => <div data-testid="bills-page"></div>),
-}));
+jest.mock('./pages/PotsPage', () => jest.fn(() => <div data-testid="pots-page"></div>));
+jest.mock('./pages/BillsPage', () => jest.fn(() => <div data-testid="bills-page"></div>));
 jest.mock('./pages/NoPage', () => jest.fn(() => <div data-testid="no-page"></div>));
 
-jest.mock('./globals/hooks/useIsSmallScreen', () => ({
-  __esModule: true,
-  default: jest.fn(),
-}));
-jest.mock('./globals/hooks/useIsTabletScreen', () => ({
-  __esModule: true,
-  default: jest.fn(),
-}));
-
 describe('App', () => {
-  beforeEach(() => {
-    (useIsTabletScreen as jest.Mock).mockReturnValue(false);
-    (useIsSmallScreen as jest.Mock).mockReturnValue(false);
-  });
-
   it('renders div webapp', () => {
     const { container } = render(<App />);
 

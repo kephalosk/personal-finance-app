@@ -1,8 +1,15 @@
 import './SearchbarInput.scss';
 import React, { forwardRef, useImperativeHandle, useState } from 'react';
-import { SearchbarInputProps } from '../../model/props/SearchbarInputProps';
 
-export const SearchbarInput = forwardRef(({ onInputChange }: SearchbarInputProps, ref) => {
+interface Props {
+  onInputChange: (currentInput: string) => void;
+}
+
+export interface SearchbarInputHandle {
+  clearInput: () => void;
+}
+
+const SearchbarInput = forwardRef<SearchbarInputHandle, Props>(({ onInputChange }: Props, ref) => {
   const [currentInput, setCurrentInput] = useState<string>('');
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -40,3 +47,5 @@ export const SearchbarInput = forwardRef(({ onInputChange }: SearchbarInputProps
 });
 
 SearchbarInput.displayName = 'SearchbarInput';
+
+export default SearchbarInput;

@@ -1,5 +1,5 @@
 import './OverviewTransactions.scss';
-import { OverviewHeader } from '../OverviewHeader';
+import OverviewHeader from '../OverviewHeader';
 import { TransactionRow } from './TransactionRow';
 import { EPTransaction } from '../../../model/entrypoints/EPTransaction';
 import { OverviewTransactionsProps } from '../../../model/props/OverviewTransactionsProps';

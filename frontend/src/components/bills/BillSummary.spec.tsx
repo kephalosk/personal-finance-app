@@ -4,6 +4,7 @@ import { BillSummary } from './BillSummary';
 import { mockedBills } from '../../fixtures/MockedBills';
 import { EPTransaction } from '../../model/entrypoints/EPTransaction';
 import { MemoryRouter } from 'react-router-dom';
+import { ReactFutureFlags } from '../../constants/ReactFutureFlags';
 
 describe('BillSummary', () => {
   const bills: EPTransaction[] = mockedBills;
@@ -112,7 +113,7 @@ describe('BillSummary', () => {
 
   it('renders LoadingSpinner if isLoading is true', () => {
     const { container } = render(
-      <MemoryRouter>
+      <MemoryRouter future={ReactFutureFlags}>
         <BillSummary {...testProps} isLoading={true} />
       </MemoryRouter>
     );

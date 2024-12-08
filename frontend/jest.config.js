@@ -8,6 +8,7 @@ export default {
   setupFilesAfterEnv: ['<rootDir>/src/setupTests.ts'],
   moduleNameMapper: {
     '\\.(css|scss)$': 'identity-obj-proxy',
+    '\\.html$': '<rootDir>/__mocks__/htmlMock.js',
   },
   testPathIgnorePatterns: ['<rootDir>/node_modules/', '<rootDir>/ui-tests/'],
   collectCoverage: true,

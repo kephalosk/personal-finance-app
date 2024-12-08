@@ -1,0 +1,15 @@
+@use '../../styles/mixins';
+
+.transactionsDetails {
+  border-radius: 12px;
+  background-color: var(--component-background-bright);
+  padding: 32px;
+  height: 100%;
+  display: grid;
+  grid-template-rows: fit-content(100%) 1fr fit-content(100%);
+  row-gap: 23px;
+
+  @include mixins.phone() {
+    padding: 24px 20px;
+  }
+}

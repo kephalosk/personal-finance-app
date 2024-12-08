@@ -10,7 +10,7 @@
   display: flex;
   flex-direction: column;
   transition: width 0.4s ease;
-  z-index: 10;
+  z-index: 2;
 }
 .sidebarLeft.minimized {
   width: 90px;
@@ -27,7 +27,7 @@
   flex-direction: column;
   position: fixed;
   bottom: 0;
-  z-index: 10;
+  z-index: 2;
 }
 
 .sidebarList {

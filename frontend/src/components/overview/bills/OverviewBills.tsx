@@ -1,5 +1,5 @@
 import './OverviewBills.scss';
-import { OverviewHeader } from '../OverviewHeader';
+import OverviewHeader from '../OverviewHeader';
 import { BillRow } from './BillRow';
 import { OverviewBillsProps } from '../../../model/props/OverviewBillsProps';
 import PropTypes from 'prop-types';
@@ -23,9 +23,9 @@ export function OverviewBills({ bills, today, isLoading }: OverviewBillsProps) {
           <LoadingSpinner />
         ) : (
           <div className="overviewBillsContent">
-            <BillRow title="Paid Bills" value={paidBillsSum} color="dark-green" />
-            <BillRow title="Total Upcoming" value={upcomingBillsSum} color="beige" />
-            <BillRow title="Due Soon" value={dueBillsSum} color="light-blue" />
+            <BillRow title="Paid Bills" value={paidBillsSum} color="green" />
+            <BillRow title="Total Upcoming" value={upcomingBillsSum} color="yellow" />
+            <BillRow title="Due Soon" value={dueBillsSum} color="cyan" />
           </div>
         )}
       </div>

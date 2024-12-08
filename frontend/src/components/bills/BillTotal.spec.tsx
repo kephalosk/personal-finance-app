@@ -2,6 +2,7 @@ import { render, screen } from '@testing-library/react';
 import React from 'react';
 import { BillTotal } from './BillTotal';
 import { MemoryRouter } from 'react-router-dom';
+import { ReactFutureFlags } from '../../constants/ReactFutureFlags';
 
 describe('BillTotal', () => {
   const sum = 100;
@@ -55,7 +56,7 @@ describe('BillTotal', () => {
 
   it('renders LoadingSpinner if isLoading is true', () => {
     const { container } = render(
-      <MemoryRouter>
+      <MemoryRouter future={ReactFutureFlags}>
         <BillTotal {...testProps} isLoading={true} />
       </MemoryRouter>
     );
