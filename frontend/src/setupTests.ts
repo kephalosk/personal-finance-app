@@ -10,3 +10,7 @@ jest.mock('focus-trap', () => ({
     deactivate: jest.fn(),
   }),
 }));
+
+beforeEach(() => {
+  jest.clearAllMocks();
+});
