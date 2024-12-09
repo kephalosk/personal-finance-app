@@ -1,14 +1,15 @@
 import './CardHeader.scss';
-import { BudgetCardHeaderProps } from '../model/props/BudgetCardHeaderProps';
-import PropTypes from 'prop-types';
 import React from 'react';
 
-CardHeader.propTypes = {
-  title: PropTypes.string.isRequired,
-  color: PropTypes.string.isRequired,
-};
+interface Props {
+  title: string;
+  color: string;
+}
 
-export function CardHeader({ title, color }: BudgetCardHeaderProps) {
+const CardHeader: ({ title, color }: Props) => React.ReactNode = ({
+  title,
+  color,
+}: Props): React.ReactNode => {
   return (
     <>
       <div className="cardHeader" data-testid="card-header">
@@ -24,4 +25,6 @@ export function CardHeader({ title, color }: BudgetCardHeaderProps) {
       </div>
     </>
   );
-}
+};
+
+export default CardHeader;

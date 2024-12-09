@@ -1,6 +1,6 @@
 import './OverviewPots.scss';
-import { OverviewHeader } from '../OverviewHeader';
-import { ValueBox } from '../ValueBox';
+import OverviewHeader from '../OverviewHeader';
+import ValueBox from '../ValueBox';
 import { PotsSummary } from './PotsSummary';
 import { OverviewPotsProps } from '../../../model/props/OverviewPotsProps';
 import PropTypes from 'prop-types';

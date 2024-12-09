@@ -68,12 +68,12 @@ export const mockedBudgets2: EPBudget[] = [
     category: 'Entertainment',
     categoryKey: 'entertainment',
     maximum: 50.0,
-    color: ColorNameEnum.DARKGREEN,
+    color: ColorNameEnum.GREEN,
   },
   {
     category: 'Bills',
     categoryKey: 'bills',
     maximum: 750.0,
-    color: ColorNameEnum.LIGHTBLUE,
+    color: ColorNameEnum.CYAN,
   },
 ];

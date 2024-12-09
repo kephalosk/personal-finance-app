@@ -17,4 +17,12 @@ export const mockedTransactionsDTO: APITransactionDTO[] = [
     amount: -55.5,
     recurring: false,
   },
+  {
+    avatar: '/images/avatars/savory-bites-bistro.jpg',
+    name: 'Savory Bites Bistro',
+    category: 'Dining Out',
+    date: '2024-08-20T14:00:37Z',
+    amount: -55.5,
+    recurring: false,
+  },
 ];

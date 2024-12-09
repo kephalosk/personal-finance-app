@@ -1,14 +1,16 @@
 import './PaginationButtonNext.scss';
-import PropTypes from 'prop-types';
-import { PaginationButtonNextProps } from '../../../model/props/PaginationButtonNextProps';
 import useIsSmallScreen from '../../../globals/hooks/useIsSmallScreen';
+import { ReactNode } from 'react';
 
-PaginationButtonNext.propTypes = {
-  onClick: PropTypes.func.isRequired,
-  isMaxIndex: PropTypes.bool.isRequired,
-};
+interface Props {
+  onClick: () => void;
+  isMaxIndex: boolean;
+}
 
-export function PaginationButtonNext({ onClick, isMaxIndex }: PaginationButtonNextProps) {
+const PaginationButtonNext: ({ onClick, isMaxIndex }: Props) => ReactNode = ({
+  onClick,
+  isMaxIndex,
+}: Props): ReactNode => {
   const isSmallScreen = useIsSmallScreen();
   return (
     <>
@@ -21,10 +23,12 @@ export function PaginationButtonNext({ onClick, isMaxIndex }: PaginationButtonNe
         <img
           className="paginationButtonNextCaret"
           alt="icon of caret right"
-          aria-hidden="true"
+          aria-hidden="false"
           src="/images/icon-caret-right.svg"
         />
       </button>
     </>
   );
-}
+};
+
+export default PaginationButtonNext;

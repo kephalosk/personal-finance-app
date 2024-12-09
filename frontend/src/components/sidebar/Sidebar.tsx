@@ -1,19 +1,17 @@
 import './Sidebar.scss';
 import { SidebarPages } from '../../constants/SidebarPages';
 import { SidebarPage } from '../../model/SidebarPage';
-import { SidebarListEntry } from './SidebarListEntry';
-import { SidebarMinimize } from './SidebarMinimize';
+import SidebarListEntry from './SidebarListEntry';
+import SidebarMinimize from './SidebarMinimize';
 import { useLocation } from 'react-router-dom';
-import { useState } from 'react';
-import { SidebarProps } from '../../model/props/SidebarProps';
-import PropTypes from 'prop-types';
+import { ReactNode, useState } from 'react';
 import useIsTabletScreen from '../../globals/hooks/useIsTabletScreen';
 
-SidebarMinimize.propTypes = {
-  onMinimize: PropTypes.func.isRequired,
-};
+interface Props {
+  onMinimize: (isMinimized: boolean) => void;
+}
 
-export function Sidebar({ onMinimize }: SidebarProps) {
+const Sidebar: ({ onMinimize }: Props) => ReactNode = ({ onMinimize }: Props): ReactNode => {
   const [isMinimized, setIsMinimized] = useState<boolean>(() => {
     return JSON.parse(localStorage.getItem('isMinimized') ?? 'false');
   });
@@ -38,11 +36,6 @@ export function Sidebar({ onMinimize }: SidebarProps) {
           className={`sidebarBottom ${isMinimized ? 'minimized' : ''}`}
           data-testid="sidebar"
         >
-          <img
-            className="sidebarTitle"
-            alt="project icon"
-            src={`${isMinimized ? projectIconSmall : projectIconBig}`}
-          />
           <div className="sidebarList">
             {SidebarPages.map((entry: SidebarPage) => (
               <SidebarListEntry
@@ -83,4 +76,6 @@ export function Sidebar({ onMinimize }: SidebarProps) {
       )}
     </>
   );
-}
+};
+
+export default Sidebar;

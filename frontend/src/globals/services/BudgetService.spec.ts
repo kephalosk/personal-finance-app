@@ -12,7 +12,7 @@ describe('BudgetService', () => {
     category: 'Entertainment',
     categoryKey: 'entertainment',
     maximum: 50.0,
-    color: ColorNameEnum.DARKGREEN,
+    color: ColorNameEnum.GREEN,
   };
 
   beforeEach(() => {

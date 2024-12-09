@@ -1,13 +1,12 @@
 import './PotCardDetails.scss';
-import { PotCardDetailsProps } from '../../model/props/PotCardDetailsProps';
-import PropTypes from 'prop-types';
 import React from 'react';
+import { EPPot } from '../../model/entrypoints/EPPot';
 
-PotCardDetails.propTypes = {
-  pot: PropTypes.object.isRequired,
-};
+interface Props {
+  pot: EPPot;
+}
 
-export function PotCardDetails({ pot }: PotCardDetailsProps) {
+const PotCardDetails = ({ pot }: Props) => {
   const currentPercent = (pot.total / pot.target) * 100;
   const currentPercentFormatted = currentPercent.toFixed(2);
   const totalFormatted = pot.total.toFixed(2);
@@ -36,4 +35,6 @@ export function PotCardDetails({ pot }: PotCardDetailsProps) {
       </div>
     </>
   );
-}
+};
+
+export default PotCardDetails;

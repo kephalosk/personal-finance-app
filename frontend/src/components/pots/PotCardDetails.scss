@@ -33,24 +33,24 @@
 
 .potCardBarCurrent {
   border-radius: 4px;
-  background-color: var(--dark-green);
+  background-color: var(--green);
   height: 8px;
   width: var(--barCurrentWidthPercent);
   max-width: 100%;
   top: calc(50% - 4px);
   position: absolute;
 }
-.potCardBarCurrent.dark-green{
-  background-color: var(--dark-green);
+.potCardBarCurrent.green{
+  background-color: var(--green);
 }
-.potCardBarCurrent.light-blue{
-  background-color: var(--light-blue);
+.potCardBarCurrent.cyan{
+  background-color: var(--cyan);
 }
-.potCardBarCurrent.beige{
-  background-color: var(--beige);
+.potCardBarCurrent.yellow{
+  background-color: var(--yellow);
 }
-.potCardBarCurrent.dark-grey{
-  background-color: var(--dark-grey);
+.potCardBarCurrent.navy{
+  background-color: var(--navy);
 }
 .potCardBarCurrent.purple{
   background-color: var(--purple);

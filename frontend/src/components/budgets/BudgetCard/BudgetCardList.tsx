@@ -1,6 +1,6 @@
 import './BudgetCardList.scss';
 import { Link } from 'react-router-dom';
-import { TransactionRow } from '../../overview/transactions/TransactionRow';
+import TransactionRow from '../../overview/transactions/TransactionRow';
 import { BudgetCardListProps } from '../../../model/props/BudgetCardListProps';
 import PropTypes from 'prop-types';
 import { EPTransaction } from '../../../model/entrypoints/EPTransaction';

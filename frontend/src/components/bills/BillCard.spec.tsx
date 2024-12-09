@@ -3,7 +3,6 @@ import { BillCard } from './BillCard';
 import { mockedBills } from '../../fixtures/MockedBills';
 import React from 'react';
 import useIsSmallScreen from '../../globals/hooks/useIsSmallScreen';
-import { MemoryRouter } from 'react-router-dom';
 
 jest.mock('../../globals/hooks/useIsSmallScreen', () => ({
   __esModule: true,
@@ -228,11 +227,7 @@ describe('BillCard', () => {
   });
 
   it('renders LoadingSpinner if isLoading is true', () => {
-    const { container } = render(
-      <MemoryRouter>
-        <BillCard {...testProps} isLoading={true} />
-      </MemoryRouter>
-    );
+    const { container } = render(<BillCard {...testProps} isLoading={true} />);
 
     const htmlElement = container.querySelector('.loadingSpinner');
     const components = screen.queryAllByTestId('bill-card-table-row');
@@ -240,4 +235,15 @@ describe('BillCard', () => {
     expect(htmlElement).toBeInTheDocument();
     expect(components).toHaveLength(0);
   });
+
+  //TODO wo-8-jest-mock-child-components
+  // it('filters multiple recurring bills only once', async () => {
+  //   await act(async (): Promise<void> => {
+  //     render(<BillsPage />);
+  //   });
+  //
+  //   const htmlElement = screen.getAllByTestId('bill-card-table-row');
+  //
+  //   expect(htmlElement).toHaveLength(4);
+  // });
 });
