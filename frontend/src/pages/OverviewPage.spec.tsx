@@ -11,27 +11,27 @@ import { getPots } from '../globals/services/PotService';
 import { mockedPots } from '../fixtures/MockedPots';
 import { getBudgets } from '../globals/services/BudgetService';
 import { mockedBudgets } from '../fixtures/MockedBudgets';
-import { OverviewPots } from '../components/overview/pots/OverviewPots';
-import { OverviewTransactions } from '../components/overview/transactions/OverviewTransactions';
-import { OverviewBudgets } from '../components/overview/budgets/OverviewBudgets';
-import { OverviewBills } from '../components/overview/bills/OverviewBills';
+import OverviewPots from '../components/overview/pots/OverviewPots';
+import OverviewTransactions from '../components/overview/transactions/OverviewTransactions';
+import OverviewBudgets from '../components/overview/budgets/OverviewBudgets';
+import OverviewBills from '../components/overview/bills/OverviewBills';
 import { mockedTodayAugust1st } from '../fixtures/MockedToday';
 
-jest.mock('../components/overview/summary/OverviewSummary', () => ({
-  OverviewSummary: jest.fn(() => <div data-testid="overview-summary"></div>),
-}));
-jest.mock('../components/overview/pots/OverviewPots', () => ({
-  OverviewPots: jest.fn(() => <div data-testid="overview-pots"></div>),
-}));
-jest.mock('../components/overview/transactions/OverviewTransactions', () => ({
-  OverviewTransactions: jest.fn(() => <div data-testid="overview-transactions"></div>),
-}));
-jest.mock('../components/overview/budgets/OverviewBudgets', () => ({
-  OverviewBudgets: jest.fn(() => <div data-testid="overview-budgets"></div>),
-}));
-jest.mock('../components/overview/bills/OverviewBills', () => ({
-  OverviewBills: jest.fn(() => <div data-testid="overview-bills"></div>),
-}));
+jest.mock('../components/overview/summary/OverviewSummary', () =>
+  jest.fn(() => <div data-testid="overview-summary"></div>)
+);
+jest.mock('../components/overview/pots/OverviewPots', () =>
+  jest.fn(() => <div data-testid="overview-pots"></div>)
+);
+jest.mock('../components/overview/transactions/OverviewTransactions', () =>
+  jest.fn(() => <div data-testid="overview-transactions"></div>)
+);
+jest.mock('../components/overview/budgets/OverviewBudgets', () =>
+  jest.fn(() => <div data-testid="overview-budgets"></div>)
+);
+jest.mock('../components/overview/bills/OverviewBills', () =>
+  jest.fn(() => <div data-testid="overview-bills"></div>)
+);
 
 jest.mock('../globals/services/TransactionService', () => ({
   getTransactions: jest.fn(),

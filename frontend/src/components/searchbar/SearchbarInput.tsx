@@ -25,24 +25,22 @@ const SearchbarInput = forwardRef<SearchbarInputHandle, Props>(({ onInputChange 
   }));
 
   return (
-    <>
-      <div className="searchbarInputContainer" data-testid="searchbar-input">
-        <div className="searchbarInputRelative">
-          <input
-            className="searchbarInput"
-            placeholder="Search transaction"
-            value={currentInput}
-            onChange={handleInputChange}
-          />
-          <img
-            className="searchbarInputLense"
-            alt="icon of search"
-            aria-hidden="true"
-            src="/images/icon-search.svg"
-          />
-        </div>
+    <div className="searchbarInputContainer" data-testid="searchbar-input">
+      <div className="searchbarInputRelative">
+        <input
+          className="searchbarInput"
+          placeholder="Search transaction"
+          value={currentInput}
+          onChange={handleInputChange}
+        />
+        <img
+          className="searchbarInputLense"
+          alt="icon of search"
+          aria-hidden="true"
+          src="/images/icon-search.svg"
+        />
       </div>
-    </>
+    </div>
   );
 });
 

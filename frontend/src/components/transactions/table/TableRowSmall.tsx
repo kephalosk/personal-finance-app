@@ -1,5 +1,7 @@
 import './TableRowSmall.scss';
 import React from 'react';
+import { ColorNameEnum } from '../../../model/enum/ColorNameEnum';
+import { VorzeichenEnum } from '../../../model/enum/VorzeichenEnum';
 
 interface Props {
   name: string;
@@ -17,8 +19,8 @@ const TableRowSmall: ({ name, imgSrc, category, date, value }: Props) => React.R
   value,
 }: Props): React.ReactNode => {
   const isPositive: boolean = value > 0;
-  const color = isPositive ? 'green' : 'dark';
-  const sign = isPositive ? '+' : '-';
+  const color: ColorNameEnum = isPositive ? ColorNameEnum.GREEN : ColorNameEnum.BLACK;
+  const sign: VorzeichenEnum = isPositive ? VorzeichenEnum.PLUS : VorzeichenEnum.MINUS;
 
   const valueNeutral = isPositive ? value : value * -1;
   const valueNeutralFormatted = valueNeutral.toFixed(2);

@@ -1,24 +1,27 @@
 import './BillCardTableRowSmall.scss';
-import { BillCardTableRowProps } from '../../model/props/BillCardTableRowProps';
-import PropTypes from 'prop-types';
 import { toOrdinal } from '../../globals/utils/ToOrdinal';
+import { EPTransaction } from '../../model/entrypoints/EPTransaction';
+import { ReactNode } from 'react';
 
-BillCardTableRowSmall.propTypes = {
-  transaction: PropTypes.object.isRequired,
-  today: PropTypes.object.isRequired,
-};
+interface Props {
+  transaction: EPTransaction;
+  today: Date;
+}
 
-export function BillCardTableRowSmall({ transaction, today }: BillCardTableRowProps) {
-  const amountNeutral = transaction.amount * -1;
-  const amountFormatted = amountNeutral.toFixed(2);
+const BillCardTableRowSmall: ({ transaction, today }: Props) => ReactNode = ({
+  transaction,
+  today,
+}: Props): ReactNode => {
+  const amountNeutral: number = transaction.amount * -1;
+  const amountFormatted: string = amountNeutral.toFixed(2);
 
   const transactionDay: number = transaction.dateRaw.getDate();
   const transactionDaySuffix: string = toOrdinal(transactionDay);
-  const todayDay = today.getDate();
-  const soonDay = todayDay + 5;
+  const todayDay: number = today.getDate();
+  const soonDay: number = todayDay + 5;
 
-  let isPaid = false;
-  let isDue = false;
+  let isPaid: boolean = false;
+  let isDue: boolean = false;
   if (transactionDay <= todayDay) {
     isPaid = true;
   } else if (transactionDay <= soonDay) {
@@ -30,7 +33,11 @@ export function BillCardTableRowSmall({ transaction, today }: BillCardTableRowPr
       <div className="billCardTableRowSmallWrapper" data-testid="bill-card-table-row-small">
         <div className="billCardTableRowSmall">
           <div className="billCardTableRowSmallName">
-            <img className="billCardTableRowSmallNamePicture" src={transaction.avatar} />
+            <img
+              className="billCardTableRowSmallNamePicture"
+              src={transaction.avatar}
+              alt="avatar picture"
+            />
             <label className="billCardTableRowSmallNameLabel">{transaction.name}</label>
           </div>
           <div className="billCardTableRowSmallDateAmount">
@@ -59,4 +66,6 @@ export function BillCardTableRowSmall({ transaction, today }: BillCardTableRowPr
       </div>
     </>
   );
-}
+};
+
+export default BillCardTableRowSmall;

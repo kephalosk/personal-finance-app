@@ -1,18 +1,22 @@
 import './OverviewBills.scss';
 import OverviewHeader from '../OverviewHeader';
-import { BillRow } from './BillRow';
-import { OverviewBillsProps } from '../../../model/props/OverviewBillsProps';
-import PropTypes from 'prop-types';
+import BillRow from './BillRow';
 import { BillsHelper } from '../../../globals/helper/BillsHelper';
 import LoadingSpinner from '../../LoadingSpinner';
+import { EPTransaction } from '../../../model/entrypoints/EPTransaction';
+import { ReactNode } from 'react';
 
-OverviewBills.propTypes = {
-  bills: PropTypes.array.isRequired,
-  today: PropTypes.object.isRequired,
-  isLoading: PropTypes.bool.isRequired,
-};
+interface Props {
+  bills: EPTransaction[];
+  today: Date;
+  isLoading: boolean;
+}
 
-export function OverviewBills({ bills, today, isLoading }: OverviewBillsProps) {
+const OverviewBills: ({ bills, today, isLoading }: Props) => ReactNode = ({
+  bills,
+  today,
+  isLoading,
+}: Props): ReactNode => {
   const { paidBillsSum, upcomingBillsSum, dueBillsSum } =
     BillsHelper.getPaidUpcomingAndDueBillsSumAndIndex(bills, today);
   return (
@@ -31,4 +35,6 @@ export function OverviewBills({ bills, today, isLoading }: OverviewBillsProps) {
       </div>
     </>
   );
-}
+};
+
+export default OverviewBills;

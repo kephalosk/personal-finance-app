@@ -2,6 +2,7 @@ import './OverlayContentAddNewBudget.scss';
 import OverlayDropdownCategory from './OverlayDropdownCategory';
 import OverlayDropdownColor from './OverlayDropdownColor';
 import { Color } from '../../model/Color';
+import { ReactNode } from 'react';
 
 interface Props {
   selectedCategoryItem: string;
@@ -11,13 +12,19 @@ interface Props {
   colors: Color[];
 }
 
-const OverlayContentAddNewBudget = ({
+const OverlayContentAddNewBudget: ({
   selectedCategoryItem,
   handleCategoryChange,
   selectedColorItem,
   handleColorChange,
   colors,
-}: Props) => {
+}: Props) => ReactNode = ({
+  selectedCategoryItem,
+  handleCategoryChange,
+  selectedColorItem,
+  handleColorChange,
+  colors,
+}: Props): ReactNode => {
   return (
     <div className="overlayContentAddNewBudget" data-testid="overlay-content-add-new-budget">
       <label className="fieldTitle">Budget Category</label>

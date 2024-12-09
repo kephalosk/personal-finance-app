@@ -1,27 +1,30 @@
 import './BudgetCard.scss';
 import CardHeader from '../../CardHeader';
 import ValueBox from '../../overview/ValueBox';
-import { BudgetCardList } from './BudgetCardList';
-import { BudgetCardProps } from '../../../model/props/BudgetCardProps';
-import React from 'react';
+import BudgetCardList from './BudgetCardList';
+import React, { ReactNode } from 'react';
 import { EPTransaction } from '../../../model/entrypoints/EPTransaction';
-import PropTypes from 'prop-types';
 import { ColorNameEnum } from '../../../model/enum/ColorNameEnum';
 import useIsSmallScreen from '../../../globals/hooks/useIsSmallScreen';
 import LoadingSpinner from '../../LoadingSpinner';
+import { EPBudget } from '../../../model/entrypoints/EPBudget';
 
-BudgetCard.propTypes = {
-  budget: PropTypes.object.isRequired,
-  transactions: PropTypes.array.isRequired,
-  isLoading: PropTypes.bool.isRequired,
-};
+interface Props {
+  budget: EPBudget;
+  transactions: EPTransaction[];
+  isLoading: boolean;
+}
 
-export function BudgetCard({ budget, transactions, isLoading }: BudgetCardProps) {
+const BudgetCard: ({ budget, transactions, isLoading }: Props) => ReactNode = ({
+  budget,
+  transactions,
+  isLoading,
+}: Props): ReactNode => {
   const budgetTransactions: EPTransaction[] = transactions.filter((transaction: EPTransaction) => {
     return transaction.categoryKey === budget.categoryKey;
   });
 
-  const link = `../transactions?cat=${budget.categoryKey}`;
+  const link: string = `../transactions?cat=${budget.categoryKey}`;
 
   let spent: number = 0;
   budgetTransactions.forEach((transaction: EPTransaction) => {
@@ -34,9 +37,9 @@ export function BudgetCard({ budget, transactions, isLoading }: BudgetCardProps)
 
   const spentPercent: number = (spent / budget.maximum) * 100;
 
-  const maximumFormatted = budget.maximum.toFixed(2);
+  const maximumFormatted: string = budget.maximum.toFixed(2);
 
-  const isSmallScreen = useIsSmallScreen();
+  const isSmallScreen: boolean = useIsSmallScreen();
   return (
     <>
       {isLoading ? (
@@ -70,4 +73,6 @@ export function BudgetCard({ budget, transactions, isLoading }: BudgetCardProps)
       )}
     </>
   );
-}
+};
+
+export default BudgetCard;

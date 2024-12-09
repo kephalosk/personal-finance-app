@@ -1,6 +1,6 @@
 import './OverlayCardBox.scss';
 import { createFocusTrap } from 'focus-trap';
-import React, { useEffect, useRef } from 'react';
+import React, { ReactNode, useEffect, useRef } from 'react';
 
 interface Props {
   title: string;
@@ -12,7 +12,7 @@ interface Props {
   children: React.ReactNode;
 }
 
-const OverlayCardBox: React.FC<Props> = ({
+const OverlayCardBox: ({
   title,
   description,
   submitText,
@@ -20,10 +20,18 @@ const OverlayCardBox: React.FC<Props> = ({
   handleEvent,
   onClose,
   children,
-}) => {
-  const overlayRef = useRef<HTMLDivElement>(null);
+}: Props) => ReactNode = ({
+  title,
+  description,
+  submitText,
+  isHidden,
+  handleEvent,
+  onClose,
+  children,
+}: Props): ReactNode => {
+  const overlayRef: React.RefObject<HTMLDivElement> = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
+  useEffect((): (() => void) => {
     let focusTrap: ReturnType<typeof createFocusTrap> | null = null;
 
     if (overlayRef.current && !isHidden) {
@@ -33,18 +41,20 @@ const OverlayCardBox: React.FC<Props> = ({
       focusTrap.activate();
     }
 
-    return () => {
+    return (): void => {
       focusTrap?.deactivate();
     };
   }, [isHidden]);
 
-  const handleKeyDown = (event: React.KeyboardEvent<HTMLImageElement>) => {
+  const handleKeyDown: (event: React.KeyboardEvent<HTMLImageElement>) => void = (
+    event: React.KeyboardEvent<HTMLImageElement>
+  ): void => {
     if (event.key === 'Enter') {
       onClose();
     }
   };
 
-  const handleSubmit = () => {
+  const handleSubmit: () => void = (): void => {
     handleEvent();
     onClose();
   };

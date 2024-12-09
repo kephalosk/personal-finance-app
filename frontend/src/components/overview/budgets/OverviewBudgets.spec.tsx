@@ -1,14 +1,24 @@
 import { render, screen } from '@testing-library/react';
-import { OverviewBudgets } from './OverviewBudgets';
-import { MemoryRouter } from 'react-router-dom';
-import { mockedBudget, mockedBudgets6 } from '../../../fixtures/MockedBudgets';
+import OverviewBudgets from './OverviewBudgets';
+import { mockedBudgets6 } from '../../../fixtures/MockedBudgets';
 import { mockedTransactions } from '../../../fixtures/MockedTransactions';
-import { ReactFutureFlags } from '../../../constants/ReactFutureFlags';
+import OverviewHeader from '../OverviewHeader';
+import LoadingSpinner from '../../LoadingSpinner';
+import BudgetsDiagram from '../../budgets/BudgetsDiagram';
+import ValueBox from '../ValueBox';
+
+jest.mock('../OverviewHeader', () => jest.fn(() => <div data-testid="overview-header"></div>));
+jest.mock('../../LoadingSpinner', () => jest.fn(() => <div data-testid="loading-spinner"></div>));
+jest.mock('../../budgets/BudgetsDiagram', () =>
+  jest.fn(() => <div data-testid="budgets-diagram"></div>)
+);
+jest.mock('../ValueBox', () => jest.fn(() => <div data-testid="value-box"></div>));
 
 describe('OverviewBudgets', () => {
   const budgets = mockedBudgets6;
   const transactions = mockedTransactions;
   const isLoading = false;
+
   const testProps = {
     budgets,
     transactions,
@@ -16,59 +26,65 @@ describe('OverviewBudgets', () => {
   };
 
   it('renders div overviewBudgets', () => {
-    const { container } = render(
-      <MemoryRouter future={ReactFutureFlags}>
-        <OverviewBudgets {...testProps} />
-      </MemoryRouter>
-    );
+    const { container } = render(<OverviewBudgets {...testProps} />);
 
     const htmlElement = container.querySelector('.overviewBudgets');
 
     expect(htmlElement).toBeInTheDocument();
   });
 
-  it('renders react component OverviewHeader', () => {
-    render(
-      <MemoryRouter future={ReactFutureFlags}>
-        <OverviewBudgets {...testProps} />
-      </MemoryRouter>
-    );
+  it('renders component OverviewHeader', () => {
+    render(<OverviewBudgets {...testProps} />);
 
     const reactComponent = screen.getByTestId('overview-header');
 
     expect(reactComponent).toBeInTheDocument();
+    expect(OverviewHeader).toHaveBeenCalledWith(
+      { linkTarget: '/budgets', linkText: 'See Details', title: 'Budgets' },
+      {}
+    );
+  });
+
+  it('renders component LoadingSpinner when passed prop isLoading is true', () => {
+    render(<OverviewBudgets {...testProps} isLoading={true} />);
+
+    const component = screen.getByTestId('loading-spinner');
+
+    expect(component).toBeInTheDocument();
+    expect(LoadingSpinner).toHaveBeenCalled();
+  });
+
+  it('does not render component LoadingSpinner when passed prop isLoading is false', () => {
+    render(<OverviewBudgets {...testProps} isLoading={false} />);
+
+    const component = screen.queryByTestId('loading-spinner');
+
+    expect(component).not.toBeInTheDocument();
+    expect(LoadingSpinner).not.toHaveBeenCalled();
   });
 
   it('renders div overviewBudgetsContent', () => {
-    const { container } = render(
-      <MemoryRouter future={ReactFutureFlags}>
-        <OverviewBudgets {...testProps} />
-      </MemoryRouter>
-    );
+    const { container } = render(<OverviewBudgets {...testProps} />);
 
     const htmlElement = container.querySelector('.overviewBudgetsContent');
 
     expect(htmlElement).toBeInTheDocument();
   });
 
-  it('renders react component BudgetsDiagram', () => {
-    render(
-      <MemoryRouter future={ReactFutureFlags}>
-        <OverviewBudgets {...testProps} />
-      </MemoryRouter>
+  it('renders component BudgetsDiagram', () => {
+    render(<OverviewBudgets {...testProps} />);
+
+    const component = screen.getByTestId('budgets-diagram');
+
+    expect(component).toBeInTheDocument();
+    expect(BudgetsDiagram).toHaveBeenCalledWith(
+      { budgets: mockedBudgets6, transactions: mockedTransactions },
+      {}
     );
-
-    const reactComponent = screen.getByTestId('budgets-diagram');
-
-    expect(reactComponent).toBeInTheDocument();
   });
 
   it('renders div overviewBudgetsValues', () => {
-    const { container } = render(
-      <MemoryRouter future={ReactFutureFlags}>
-        <OverviewBudgets {...testProps} />
-      </MemoryRouter>
-    );
+    const { container } = render(<OverviewBudgets {...testProps} />);
 
     const htmlElement = container.querySelector('.overviewBudgetsValues');
 
@@ -76,40 +92,21 @@ describe('OverviewBudgets', () => {
   });
 
   it('renders react component ValueBox max 4 times', () => {
-    render(
-      <MemoryRouter future={ReactFutureFlags}>
-        <OverviewBudgets {...testProps} />
-      </MemoryRouter>
-    );
+    render(<OverviewBudgets {...testProps} />);
 
-    const reactComponents = screen.getAllByTestId('value-box');
+    const components = screen.getAllByTestId('value-box');
 
-    expect(reactComponents).toHaveLength(4);
-  });
-
-  it('renders react component ValueBox only once if only 1 budget is passed', () => {
-    render(
-      <MemoryRouter future={ReactFutureFlags}>
-        <OverviewBudgets {...testProps} budgets={[mockedBudget]} />
-      </MemoryRouter>
-    );
-
-    const reactComponents = screen.getAllByTestId('value-box');
-
-    expect(reactComponents).toHaveLength(1);
-  });
-
-  it('renders LoadingSpinner if isLoading is true', () => {
-    const { container } = render(
-      <MemoryRouter future={ReactFutureFlags}>
-        <OverviewBudgets {...testProps} isLoading={true} />
-      </MemoryRouter>
-    );
-
-    const htmlElement = container.querySelector('.loadingSpinner');
-    const components = screen.queryAllByTestId('budgets-diagram');
-
-    expect(htmlElement).toBeInTheDocument();
-    expect(components).toHaveLength(0);
+    expect(components).toHaveLength(4);
+    components.forEach((valueBox, index) => {
+      expect(ValueBox).toHaveBeenNthCalledWith(
+        index + 1,
+        {
+          title: mockedBudgets6[index].category,
+          value: mockedBudgets6[index].maximum,
+          color: mockedBudgets6[index].color,
+        },
+        {}
+      );
+    });
   });
 });

@@ -1,23 +1,27 @@
 import './BudgetCardList.scss';
 import { Link } from 'react-router-dom';
-import { TransactionRow } from '../../overview/transactions/TransactionRow';
-import { BudgetCardListProps } from '../../../model/props/BudgetCardListProps';
-import PropTypes from 'prop-types';
+import TransactionRow from '../../overview/transactions/TransactionRow';
 import { EPTransaction } from '../../../model/entrypoints/EPTransaction';
 import useIsSmallScreen from '../../../globals/hooks/useIsSmallScreen';
-import { TransactionRowSmall } from './TransactionRowSmall';
+import TransactionRowSmall from './TransactionRowSmall';
+import { ReactNode } from 'react';
 
-BudgetCardList.propTypes = {
-  transactions: PropTypes.array.isRequired,
-  link: PropTypes.string.isRequired,
-};
+interface Props {
+  transactions: EPTransaction[];
+  link: string;
+}
 
-export function BudgetCardList({ transactions, link }: BudgetCardListProps) {
+const BudgetCardList: ({ transactions, link }: Props) => ReactNode = ({
+  transactions,
+  link,
+}: Props): ReactNode => {
   const latestTransactions: EPTransaction[] = [...transactions].sort(
-    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+    (a: EPTransaction, b: EPTransaction) => new Date(b.date).getTime() - new Date(a.date).getTime()
   );
   const renderedTransactions: EPTransaction[] = latestTransactions.slice(0, 3);
-  const isSmallScreen = useIsSmallScreen();
+
+  const isSmallScreen: boolean = useIsSmallScreen();
+
   return (
     <>
       <div className="budgetCardList" data-testid="budget-card-list">
@@ -64,4 +68,6 @@ export function BudgetCardList({ transactions, link }: BudgetCardListProps) {
       </div>
     </>
   );
-}
+};
+
+export default BudgetCardList;

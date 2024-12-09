@@ -1,21 +1,22 @@
 import './OverviewPots.scss';
 import OverviewHeader from '../OverviewHeader';
 import ValueBox from '../ValueBox';
-import { PotsSummary } from './PotsSummary';
-import { OverviewPotsProps } from '../../../model/props/OverviewPotsProps';
-import PropTypes from 'prop-types';
+import PotsSummary from './PotsSummary';
 import LoadingSpinner from '../../LoadingSpinner';
+import { EPPot } from '../../../model/entrypoints/EPPot';
+import { ReactNode } from 'react';
+import getTotalPotSum from '../../../globals/utils/getTotalPotSum';
 
-OverviewPots.propTypes = {
-  pots: PropTypes.array.isRequired,
-  isLoading: PropTypes.bool.isRequired,
-};
+interface Props {
+  pots: EPPot[];
+  isLoading: boolean;
+}
 
-export function OverviewPots({ pots, isLoading }: OverviewPotsProps) {
-  let potSum: number = 0;
-  pots.forEach((pot) => {
-    potSum = potSum + pot.total;
-  });
+const OverviewPots: ({ pots, isLoading }: Props) => ReactNode = ({
+  pots,
+  isLoading,
+}: Props): ReactNode => {
+  const potSum = getTotalPotSum(pots);
   return (
     <>
       <div className="overviewPots" data-testid="overview-pots">
@@ -48,4 +49,6 @@ export function OverviewPots({ pots, isLoading }: OverviewPotsProps) {
       </div>
     </>
   );
-}
+};
+
+export default OverviewPots;

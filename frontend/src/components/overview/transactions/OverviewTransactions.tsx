@@ -1,18 +1,20 @@
 import './OverviewTransactions.scss';
 import OverviewHeader from '../OverviewHeader';
-import { TransactionRow } from './TransactionRow';
+import TransactionRow from './TransactionRow';
 import { EPTransaction } from '../../../model/entrypoints/EPTransaction';
-import { OverviewTransactionsProps } from '../../../model/props/OverviewTransactionsProps';
-import PropTypes from 'prop-types';
 import LoadingSpinner from '../../LoadingSpinner';
+import { ReactNode } from 'react';
 
-OverviewTransactions.propTypes = {
-  transactions: PropTypes.array.isRequired,
-  isLoading: PropTypes.bool.isRequired,
-};
+interface Props {
+  transactions: EPTransaction[];
+  isLoading: boolean;
+}
 
-export function OverviewTransactions({ transactions, isLoading }: OverviewTransactionsProps) {
-  const latestTransactions = transactions.slice(0, 5);
+const OverviewTransactions: ({ transactions, isLoading }: Props) => ReactNode = ({
+  transactions,
+  isLoading,
+}: Props): ReactNode => {
+  const latestTransactions: EPTransaction[] = transactions.slice(0, 5);
 
   return (
     <>
@@ -38,4 +40,6 @@ export function OverviewTransactions({ transactions, isLoading }: OverviewTransa
       </div>
     </>
   );
-}
+};
+
+export default OverviewTransactions;

@@ -1,8 +1,6 @@
 import { render, screen } from '@testing-library/react';
-import { MemoryRouter } from 'react-router-dom';
 import React from 'react';
 import OverlayContentAddNewBudget from './OverlayContentAddNewBudget';
-import { ReactFutureFlags } from '../../constants/ReactFutureFlags';
 import { Color } from '../../model/Color';
 import Colors from '../../constants/Colors';
 import OverlayDropdownColor from './OverlayDropdownColor';
@@ -28,11 +26,7 @@ describe('OverlayContentAddNewBudget', () => {
   };
 
   it('renders component OverlayDropdownCategory', async () => {
-    render(
-      <MemoryRouter future={ReactFutureFlags}>
-        <OverlayContentAddNewBudget {...testProps} />
-      </MemoryRouter>
-    );
+    render(<OverlayContentAddNewBudget {...testProps} />);
 
     const component = screen.getByTestId('dropdown-category');
 
@@ -40,11 +34,7 @@ describe('OverlayContentAddNewBudget', () => {
   });
 
   it('passes selectedCategoryItem to OverlayDropdownCategory', async () => {
-    render(
-      <MemoryRouter future={ReactFutureFlags}>
-        <OverlayContentAddNewBudget {...testProps} />
-      </MemoryRouter>
-    );
+    render(<OverlayContentAddNewBudget {...testProps} />);
 
     expect(OverlayDropdownCategory).toHaveBeenCalledWith(
       expect.objectContaining({
@@ -55,11 +45,7 @@ describe('OverlayContentAddNewBudget', () => {
   });
 
   it('passes handleCategoryChange callback to OverlayDropdownCategory', async () => {
-    render(
-      <MemoryRouter future={ReactFutureFlags}>
-        <OverlayContentAddNewBudget {...testProps} />
-      </MemoryRouter>
-    );
+    render(<OverlayContentAddNewBudget {...testProps} />);
 
     expect(OverlayDropdownCategory).toHaveBeenCalledWith(
       expect.objectContaining({
@@ -70,11 +56,7 @@ describe('OverlayContentAddNewBudget', () => {
   });
 
   it('renders component OverlayDropdownColor', async () => {
-    render(
-      <MemoryRouter future={ReactFutureFlags}>
-        <OverlayContentAddNewBudget {...testProps} />
-      </MemoryRouter>
-    );
+    render(<OverlayContentAddNewBudget {...testProps} />);
 
     const component = screen.getByTestId('dropdown-color');
 
@@ -82,11 +64,7 @@ describe('OverlayContentAddNewBudget', () => {
   });
 
   it('passes selectedColorItem prop to OverlayDropdownColor', async () => {
-    render(
-      <MemoryRouter future={ReactFutureFlags}>
-        <OverlayContentAddNewBudget {...testProps} />
-      </MemoryRouter>
-    );
+    render(<OverlayContentAddNewBudget {...testProps} />);
 
     expect(OverlayDropdownColor).toHaveBeenCalledWith(
       expect.objectContaining({
@@ -97,11 +75,7 @@ describe('OverlayContentAddNewBudget', () => {
   });
 
   it('passes handleColorChange callback to OverlayDropdownColor', async () => {
-    render(
-      <MemoryRouter future={ReactFutureFlags}>
-        <OverlayContentAddNewBudget {...testProps} />
-      </MemoryRouter>
-    );
+    render(<OverlayContentAddNewBudget {...testProps} />);
 
     expect(OverlayDropdownColor).toHaveBeenCalledWith(
       expect.objectContaining({
@@ -112,11 +86,7 @@ describe('OverlayContentAddNewBudget', () => {
   });
 
   it('passes colors prop to OverlayDropdownColor', () => {
-    render(
-      <MemoryRouter future={ReactFutureFlags}>
-        <OverlayContentAddNewBudget {...testProps} />
-      </MemoryRouter>
-    );
+    render(<OverlayContentAddNewBudget {...testProps} />);
 
     expect(OverlayDropdownColor).toHaveBeenCalledWith(
       expect.objectContaining({

@@ -1,20 +1,24 @@
 import './BudgetsDiagramCard.scss';
-import { BudgetsDiagram } from '../BudgetsDiagram';
-import { BudgetsDiagramCardRow } from './BudgetsDiagramCardRow';
-import { BudgetsDiagramCardProps } from '../../../model/props/BudgetsDiagramCardProps';
-import PropTypes from 'prop-types';
+import BudgetsDiagram from '../BudgetsDiagram';
+import BudgetsDiagramCardRow from './BudgetsDiagramCardRow';
 import { EPBudget } from '../../../model/entrypoints/EPBudget';
 import LoadingSpinner from '../../LoadingSpinner';
+import { EPTransaction } from '../../../model/entrypoints/EPTransaction';
+import { ReactNode } from 'react';
 
-BudgetsDiagramCard.propTypes = {
-  budgets: PropTypes.array.isRequired,
-  transactions: PropTypes.array.isRequired,
-  isLoading: PropTypes.bool.isRequired,
-};
+interface Props {
+  budgets: EPBudget[];
+  transactions: EPTransaction[];
+  isLoading: boolean;
+}
 
-export function BudgetsDiagramCard({ budgets, transactions, isLoading }: BudgetsDiagramCardProps) {
-  const getCurrentAmount = (categoryKey: string): number => {
-    let spent = 0;
+const BudgetsDiagramCard: ({ budgets, transactions, isLoading }: Props) => ReactNode = ({
+  budgets,
+  transactions,
+  isLoading,
+}: Props): ReactNode => {
+  const getCurrentAmount: (categoryKey: string) => number = (categoryKey: string): number => {
+    let spent: number = 0;
     transactions.forEach((transaction) => {
       if (transaction.categoryKey === categoryKey) {
         spent = spent + transaction.amount;
@@ -23,7 +27,7 @@ export function BudgetsDiagramCard({ budgets, transactions, isLoading }: Budgets
     spent = spent * -1;
     return spent;
   };
-  budgets.sort((a, b) => b.maximum - a.maximum);
+  budgets.sort((a: EPBudget, b: EPBudget) => b.maximum - a.maximum);
 
   return (
     <>
@@ -54,4 +58,6 @@ export function BudgetsDiagramCard({ budgets, transactions, isLoading }: Budgets
       )}
     </>
   );
-}
+};
+
+export default BudgetsDiagramCard;

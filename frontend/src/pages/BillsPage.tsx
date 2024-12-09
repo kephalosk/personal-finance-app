@@ -1,7 +1,7 @@
 import './BillsPage.scss';
-import { BillCard } from '../components/bills/BillCard';
-import { BillTotal } from '../components/bills/BillTotal';
-import { BillSummary } from '../components/bills/BillSummary';
+import BillCard from '../components/bills/BillCard';
+import BillTotal from '../components/bills/BillTotal';
+import BillSummary from '../components/bills/BillSummary';
 import { BillsHelper } from '../globals/helper/BillsHelper';
 import React, { useEffect, useState } from 'react';
 import { EPTransaction } from '../model/entrypoints/EPTransaction';

@@ -1,5 +1,4 @@
 import { EPBudget } from '../model/entrypoints/EPBudget';
-import { APIBudgetDTO } from '../model/api/APIBudgetDTO';
 import { ColorNameEnum } from '../model/enum/ColorNameEnum';
 
 export const mockedBudgets: EPBudget[] = [

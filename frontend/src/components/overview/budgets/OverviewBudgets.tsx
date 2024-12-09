@@ -1,21 +1,25 @@
 import './OverviewBudgets.scss';
 import OverviewHeader from '../OverviewHeader';
 import ValueBox from '../ValueBox';
-import { BudgetsDiagram } from '../../budgets/BudgetsDiagram';
+import BudgetsDiagram from '../../budgets/BudgetsDiagram';
 import { EPBudget } from '../../../model/entrypoints/EPBudget';
-import { OverviewBudgetsProps } from '../../../model/props/OverviewBudgetsProps';
-import PropTypes from 'prop-types';
 import LoadingSpinner from '../../LoadingSpinner';
+import { EPTransaction } from '../../../model/entrypoints/EPTransaction';
+import { ReactNode } from 'react';
 
-OverviewBudgets.propTypes = {
-  budgets: PropTypes.array.isRequired,
-  transactions: PropTypes.array.isRequired,
-  isLoading: PropTypes.bool.isRequired,
-};
+interface Props {
+  budgets: EPBudget[];
+  transactions: EPTransaction[];
+  isLoading: boolean;
+}
 
-export function OverviewBudgets({ budgets, transactions, isLoading }: OverviewBudgetsProps) {
-  budgets.sort((a, b) => b.maximum - a.maximum);
-  const budgetsHighestFour = budgets.slice(0, 4);
+const OverviewBudgets: ({ budgets, transactions, isLoading }: Props) => ReactNode = ({
+  budgets,
+  transactions,
+  isLoading,
+}: Props): ReactNode => {
+  budgets.sort((a: EPBudget, b: EPBudget) => b.maximum - a.maximum);
+  const budgetsHighestFour: EPBudget[] = budgets.slice(0, 4);
 
   return (
     <>
@@ -41,4 +45,6 @@ export function OverviewBudgets({ budgets, transactions, isLoading }: OverviewBu
       </div>
     </>
   );
-}
+};
+
+export default OverviewBudgets;
