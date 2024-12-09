@@ -1,54 +1,93 @@
-import { SummaryCard } from './SummaryCard';
-import { render } from '@testing-library/react';
-import { MemoryRouter } from 'react-router-dom';
-import { ReactFutureFlags } from '../../../constants/ReactFutureFlags';
+import SummaryCard from './SummaryCard';
+import { render, screen } from '@testing-library/react';
+import LoadingSpinner from '../../LoadingSpinner';
+
+jest.mock('../../LoadingSpinner', () => jest.fn(() => <div data-testid="loading-spinner"></div>));
 
 describe('SummaryCard', () => {
   const title: string = 'testTitle';
   const value: number = 100;
   const isLoading = false;
+  const isInverted = false;
 
   const testProps = {
     title,
     value,
     isLoading,
+    isInverted,
   };
 
-  it('renders div overviewSummaryCard', () => {
-    const { container } = render(<SummaryCard {...testProps} />);
+  describe('isInverted === false', () => {
+    it('renders div overviewSummaryCard with passed prop isInverted === false', () => {
+      const { container } = render(<SummaryCard {...testProps} />);
 
-    const htmlElement = container.querySelector('.overviewSummaryCard');
+      const htmlElement = container.querySelector('.overviewSummaryCard');
 
-    expect(htmlElement).toBeInTheDocument();
+      expect(htmlElement).toBeInTheDocument();
+      expect(htmlElement).not.toHaveClass('inverted');
+    });
+
+    it('renders label overviewSummaryCardTitle with passed prop title', () => {
+      const { container } = render(<SummaryCard {...testProps} />);
+
+      const htmlElement = container.querySelector('.overviewSummaryCardTitle');
+
+      expect(htmlElement).toBeInTheDocument();
+      expect(htmlElement).toHaveTextContent(title);
+      expect(htmlElement).not.toHaveClass('inverted');
+    });
+
+    it('renders label overviewSummaryCardValue with passed prop value', () => {
+      const { container } = render(<SummaryCard {...testProps} />);
+
+      const htmlElement = container.querySelector('.overviewSummaryCardValue');
+
+      expect(htmlElement).toBeInTheDocument();
+      expect(htmlElement).toHaveTextContent(`${value}`);
+    });
   });
 
-  it('passes the prop title of a SummaryCard', () => {
-    const { container } = render(<SummaryCard {...testProps} />);
+  describe('isInverted === true', () => {
+    it('renders div overviewSummaryCard with passed prop isInverted === true', () => {
+      const { container } = render(<SummaryCard {...testProps} isInverted={true} />);
 
-    const htmlElement = container.querySelector('.overviewSummaryCardTitle');
+      const htmlElement = container.querySelector('.overviewSummaryCard');
 
-    expect(htmlElement).toBeInTheDocument();
-    expect(htmlElement).toHaveTextContent(title);
+      expect(htmlElement).toHaveClass('inverted');
+    });
+
+    it('renders label overviewSummaryCardTitle with passed prop isInverted === true', () => {
+      const { container } = render(<SummaryCard {...testProps} isInverted={true} />);
+
+      const htmlElement = container.querySelector('.overviewSummaryCardTitle');
+
+      expect(htmlElement).toHaveClass('inverted');
+    });
+
+    it('renders label overviewSummaryCardValue with passed prop isInverted === true', () => {
+      const { container } = render(<SummaryCard {...testProps} isInverted={true} />);
+
+      const htmlElement = container.querySelector('.overviewSummaryCardValue');
+
+      expect(htmlElement).toHaveClass('inverted');
+    });
   });
 
-  it('passes the prop value of a SummaryCard', () => {
-    const { container } = render(<SummaryCard {...testProps} />);
+  it('renders component LoadingSpinner if isLoading is true', () => {
+    render(<SummaryCard {...testProps} isLoading={true} />);
 
-    const htmlElement = container.querySelector('.overviewSummaryCardValue');
+    const component = screen.getByTestId('loading-spinner');
 
-    expect(htmlElement).toBeInTheDocument();
-    expect(htmlElement).toHaveTextContent(`${value}`);
+    expect(component).toBeInTheDocument();
+    expect(LoadingSpinner).toHaveBeenCalled();
   });
 
-  it('renders LoadingSpinner if isLoading is true', () => {
-    const { container } = render(
-      <MemoryRouter future={ReactFutureFlags}>
-        <SummaryCard {...testProps} isLoading={true} />
-      </MemoryRouter>
-    );
+  it('does not render component LoadingSpinner if isLoading is false', () => {
+    render(<SummaryCard {...testProps} isLoading={false} />);
 
-    const htmlElement = container.querySelector('.loadingSpinner');
+    const component = screen.queryByTestId('loading-spinner');
 
-    expect(htmlElement).toBeInTheDocument();
+    expect(component).not.toBeInTheDocument();
+    expect(LoadingSpinner).not.toHaveBeenCalled();
   });
 });

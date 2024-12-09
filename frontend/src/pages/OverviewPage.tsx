@@ -1,7 +1,7 @@
 import './OverviewPage.scss';
-import { OverviewSummary } from '../components/overview/summary/OverviewSummary';
+import OverviewSummary from '../components/overview/summary/OverviewSummary';
 import { OverviewPots } from '../components/overview/pots/OverviewPots';
-import { OverviewTransactions } from '../components/overview/transactions/OverviewTransactions';
+import OverviewTransactions from '../components/overview/transactions/OverviewTransactions';
 import { OverviewBudgets } from '../components/overview/budgets/OverviewBudgets';
 import { OverviewBills } from '../components/overview/bills/OverviewBills';
 import React, { useEffect, useState } from 'react';

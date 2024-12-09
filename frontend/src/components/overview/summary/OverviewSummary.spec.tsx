@@ -1,8 +1,11 @@
-import { OverviewSummary } from './OverviewSummary';
+import OverviewSummary from './OverviewSummary';
 import { render, screen } from '@testing-library/react';
 import { getBalance } from '../../../globals/services/BalanceService';
 import { mockedBalance } from '../../../fixtures/MockedBalance';
 import { act } from 'react';
+import SummaryCard from './SummaryCard';
+
+jest.mock('./SummaryCard', () => jest.fn(() => <div data-testid="summary-card"></div>));
 
 jest.mock('../../../globals/services/BalanceService', () => ({
   getBalance: jest.fn(),
@@ -24,14 +27,14 @@ describe('OverviewSummary', () => {
     expect(htmlElement).toBeInTheDocument();
   });
 
-  it('renders react component SummaryCard 3 times', async () => {
+  it('renders components SummaryCard 3 times', async () => {
     await act(async (): Promise<void> => {
       render(<OverviewSummary />);
     });
 
-    const reactComponents = screen.getAllByTestId('summary-card');
+    const components = screen.getAllByTestId('summary-card');
 
-    expect(reactComponents).toHaveLength(3);
+    expect(components).toHaveLength(3);
   });
 
   it('renders react component SummaryCard with title Current Balance', async () => {
@@ -39,9 +42,14 @@ describe('OverviewSummary', () => {
       render(<OverviewSummary />);
     });
 
-    const reactComponent = screen.getByText('Current Balance');
+    const components = screen.getAllByTestId('summary-card');
 
-    expect(reactComponent).toBeInTheDocument();
+    expect(components[0]).toBeInTheDocument();
+    expect(SummaryCard).toHaveBeenNthCalledWith(
+      1,
+      { isInverted: true, isLoading: true, title: 'Current Balance', value: 0 },
+      {}
+    );
   });
 
   it('renders react component SummaryCard with title Income', async () => {
@@ -49,9 +57,14 @@ describe('OverviewSummary', () => {
       render(<OverviewSummary />);
     });
 
-    const reactComponent = screen.getByText('Income');
+    const components = screen.getAllByTestId('summary-card');
 
-    expect(reactComponent).toBeInTheDocument();
+    expect(components[1]).toBeInTheDocument();
+    expect(SummaryCard).toHaveBeenNthCalledWith(
+      2,
+      { isLoading: true, title: 'Income', value: 0 },
+      {}
+    );
   });
 
   it('renders react component SummaryCard with title Expenses', async () => {
@@ -59,8 +72,13 @@ describe('OverviewSummary', () => {
       render(<OverviewSummary />);
     });
 
-    const reactComponent = screen.getByText('Expenses');
+    const components = screen.getAllByTestId('summary-card');
 
-    expect(reactComponent).toBeInTheDocument();
+    expect(components[2]).toBeInTheDocument();
+    expect(SummaryCard).toHaveBeenNthCalledWith(
+      3,
+      { isLoading: true, title: 'Expenses', value: 0 },
+      {}
+    );
   });
 });

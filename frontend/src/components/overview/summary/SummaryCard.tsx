@@ -1,17 +1,22 @@
 import './SummaryCard.scss';
-import PropTypes from 'prop-types';
-import { SummaryCardProps } from '../../../model/props/SummaryCardProps';
 import LoadingSpinner from '../../LoadingSpinner';
+import { ReactNode } from 'react';
 
-SummaryCard.propTypes = {
-  title: PropTypes.string.isRequired,
-  value: PropTypes.number.isRequired,
-  isLoading: PropTypes.bool.isRequired,
-  isInverted: PropTypes.bool,
-};
+interface Props {
+  title: string;
+  value: number;
+  isLoading: boolean;
+  isInverted?: boolean;
+}
 
-export function SummaryCard({ title, value, isLoading, isInverted }: SummaryCardProps) {
-  const valueFormatted = value.toFixed(2);
+const SummaryCard: ({ title, value, isLoading, isInverted }: Props) => ReactNode = ({
+  title,
+  value,
+  isLoading,
+  isInverted,
+}: Props): ReactNode => {
+  const valueFormatted: string = value.toFixed(2);
+
   return (
     <>
       <div
@@ -31,4 +36,6 @@ export function SummaryCard({ title, value, isLoading, isInverted }: SummaryCard
       </div>
     </>
   );
-}
+};
+
+export default SummaryCard;

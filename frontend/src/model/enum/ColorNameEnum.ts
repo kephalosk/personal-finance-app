@@ -16,4 +16,5 @@ export enum ColorNameEnum {
   ORANGE = 'orange',
   SEPIA = 'sepia',
   WHITE = 'white',
+  BLACK = 'black',
 }
