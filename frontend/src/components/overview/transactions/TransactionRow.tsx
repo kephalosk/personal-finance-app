@@ -1,21 +1,20 @@
 import './TransactionRow.scss';
-import PropTypes from 'prop-types';
-import { TransactionRowProps } from '../../../model/props/TransactionRowProps';
+import { ColorNameEnum } from '../../../model/enum/ColorNameEnum';
 
-TransactionRow.propTypes = {
-  name: PropTypes.string.isRequired,
-  value: PropTypes.number.isRequired,
-  date: PropTypes.string.isRequired,
-  imgSrc: PropTypes.string.isRequired,
-};
+interface Props {
+  name: string;
+  value: number;
+  date: string;
+  imgSrc: string;
+}
 
-export function TransactionRow({ name, value, date, imgSrc }: TransactionRowProps) {
+const TransactionRow = ({ name, value, date, imgSrc }: Props) => {
   const isPositive: boolean = value > 0;
-  const color = isPositive ? 'green' : 'dark';
-  const sign = isPositive ? '+' : '-';
+  const color: ColorNameEnum = isPositive ? ColorNameEnum.GREEN : ColorNameEnum.BLACK;
+  const sign: string = isPositive ? '+' : '-';
 
-  const valueNeutral = isPositive ? value : value * -1;
-  const valueNeutralFormatted = valueNeutral.toFixed(2);
+  const valueNeutral: number = isPositive ? value : value * -1;
+  const valueNeutralFormatted: string = valueNeutral.toFixed(2);
 
   return (
     <>
@@ -36,4 +35,6 @@ export function TransactionRow({ name, value, date, imgSrc }: TransactionRowProp
       </div>
     </>
   );
-}
+};
+
+export default TransactionRow;

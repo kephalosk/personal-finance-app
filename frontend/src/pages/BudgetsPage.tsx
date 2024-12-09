@@ -1,7 +1,7 @@
 import './BudgetsPage.scss';
 import HeaderBar from '../components/HeaderBar';
-import { BudgetsDiagramCard } from '../components/budgets/BudgetDiagrammCard/BudgetsDiagramCard';
-import { BudgetCard } from '../components/budgets/BudgetCard/BudgetCard';
+import BudgetsDiagramCard from '../components/budgets/BudgetDiagrammCard/BudgetsDiagramCard';
+import BudgetCard from '../components/budgets/BudgetCard/BudgetCard';
 import { getBudgets } from '../globals/services/BudgetService';
 import { EPBudget } from '../model/entrypoints/EPBudget';
 import { EPTransaction } from '../model/entrypoints/EPTransaction';

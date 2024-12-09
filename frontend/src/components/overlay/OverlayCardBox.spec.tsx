@@ -1,8 +1,6 @@
-import { fireEvent, render } from '@testing-library/react';
-import { MemoryRouter } from 'react-router-dom';
+import { fireEvent, render, screen } from '@testing-library/react';
 import OverlayCardBox from './OverlayCardBox';
 import React from 'react';
-import { ReactFutureFlags } from '../../constants/ReactFutureFlags';
 
 describe('OverlayCardBox', () => {
   const title = 'testTitle';
@@ -11,7 +9,8 @@ describe('OverlayCardBox', () => {
   const isHidden = true;
   const mockHandleEvent = jest.fn();
   const mockOnClose = jest.fn();
-  const children = <></>;
+  const children = <div data-testid="child-element"></div>;
+
   const testProps = {
     title,
     description,
@@ -23,23 +22,93 @@ describe('OverlayCardBox', () => {
   };
 
   it('renders div overlayCardBox', async () => {
-    const { container } = render(
-      <MemoryRouter future={ReactFutureFlags}>
-        <OverlayCardBox {...testProps} />
-      </MemoryRouter>
-    );
+    const { container } = render(<OverlayCardBox {...testProps} />);
 
     const htmlElement = container.querySelector('.overlayCardBox');
 
     expect(htmlElement).toBeInTheDocument();
   });
 
+  it('renders div overlayBackground with class isHidden when passed prop isHidden is true', async () => {
+    const { container } = render(<OverlayCardBox {...testProps} isHidden={true} />);
+
+    const htmlElement = container.querySelector('.overlayBackground');
+
+    expect(htmlElement).toBeInTheDocument();
+    expect(htmlElement).toHaveClass('isHidden');
+  });
+
+  it('renders div overlayBackground without class isHidden when passed prop isHidden is false', async () => {
+    const { container } = render(<OverlayCardBox {...testProps} isHidden={false} />);
+
+    const htmlElement = container.querySelector('.overlayBackground');
+
+    expect(htmlElement).toBeInTheDocument();
+    expect(htmlElement).not.toHaveClass('isHidden');
+  });
+
+  it('renders div overlayForm with class isHidden when passed prop isHidden is true', async () => {
+    const { container } = render(<OverlayCardBox {...testProps} isHidden={true} />);
+
+    const htmlElement = container.querySelector('.overlayForm');
+
+    expect(htmlElement).toBeInTheDocument();
+    expect(htmlElement).toHaveAttribute('role', 'dialog');
+    expect(htmlElement).toHaveAttribute('aria-hidden', 'true');
+    expect(htmlElement).toHaveAttribute('aria-labelledby', 'overlayTitle');
+    expect(htmlElement).toHaveAttribute('aria-describedby', 'overlayDescription');
+    expect(htmlElement).toHaveClass('isHidden');
+  });
+
+  it('renders div overlayForm without class isHidden when passed prop isHidden is false', async () => {
+    const { container } = render(<OverlayCardBox {...testProps} isHidden={false} />);
+
+    const htmlElement = container.querySelector('.overlayForm');
+
+    expect(htmlElement).toBeInTheDocument();
+    expect(htmlElement).toHaveAttribute('aria-hidden', 'false');
+    expect(htmlElement).not.toHaveClass('isHidden');
+  });
+
+  it('renders header overlayFormHeader', async () => {
+    const { container } = render(<OverlayCardBox {...testProps} />);
+
+    const htmlElement = container.querySelector('.overlayFormHeader');
+
+    expect(htmlElement).toBeInTheDocument();
+  });
+
+  it('renders div overlayFormHeaderBar', async () => {
+    const { container } = render(<OverlayCardBox {...testProps} />);
+
+    const htmlElement = container.querySelector('.overlayFormHeaderBar');
+
+    expect(htmlElement).toBeInTheDocument();
+  });
+
+  it('renders h2 overlayFormHeaderBarTitle with passed prop title', async () => {
+    const { container } = render(<OverlayCardBox {...testProps} />);
+
+    const htmlElement = container.querySelector('.overlayFormHeaderBarTitle');
+
+    expect(htmlElement).toBeInTheDocument();
+    expect(htmlElement).toHaveTextContent(title);
+  });
+
+  it('renders img overlayFormHeaderBarIcon', async () => {
+    const { container } = render(<OverlayCardBox {...testProps} />);
+
+    const htmlElement = container.querySelector('.overlayFormHeaderBarIcon');
+
+    expect(htmlElement).toBeInTheDocument();
+    expect(htmlElement).toHaveAttribute('alt', 'closing icon');
+    expect(htmlElement).toHaveAttribute('aria-hidden', 'false');
+    expect(htmlElement).toHaveAttribute('src', '/images/icon-close-modal.svg');
+    expect(htmlElement).toHaveAttribute('tabIndex', '0');
+  });
+
   it('handles keydown Enter on overlayFormHeaderBarIcon', async () => {
-    const { container } = render(
-      <MemoryRouter future={ReactFutureFlags}>
-        <OverlayCardBox {...testProps} />
-      </MemoryRouter>
-    );
+    const { container } = render(<OverlayCardBox {...testProps} />);
 
     const htmlElement = container.querySelector('.overlayFormHeaderBarIcon');
     fireEvent.keyDown(htmlElement!, { key: 'Enter', code: 'Enter', keyCode: 13 });
@@ -47,12 +116,45 @@ describe('OverlayCardBox', () => {
     expect(mockOnClose).toHaveBeenCalled();
   });
 
+  it('handles click on overlayFormHeaderBarIcon', async () => {
+    const { container } = render(<OverlayCardBox {...testProps} />);
+
+    const htmlElement = container.querySelector('.overlayFormHeaderBarIcon');
+    fireEvent.click(htmlElement!);
+
+    expect(mockOnClose).toHaveBeenCalled();
+  });
+
+  it('renders p overlayFormHeaderText with passed prop description', async () => {
+    const { container } = render(<OverlayCardBox {...testProps} />);
+
+    const htmlElement = container.querySelector('.overlayFormHeaderText');
+
+    expect(htmlElement).toBeInTheDocument();
+    expect(htmlElement).toHaveTextContent(description);
+  });
+
+  it('renders section overlayFormContent with passed prop children', async () => {
+    const { container } = render(<OverlayCardBox {...testProps} />);
+
+    const htmlElement = container.querySelector('.overlayFormContent');
+    const childElement = screen.getByTestId('child-element');
+
+    expect(htmlElement).toBeInTheDocument();
+    expect(htmlElement).toContainElement(childElement);
+  });
+
+  it('renders button overlayFormSubmit with passed prop submitText', async () => {
+    const { container } = render(<OverlayCardBox {...testProps} />);
+
+    const htmlElement = container.querySelector('.overlayFormSubmit');
+
+    expect(htmlElement).toBeInTheDocument();
+    expect(htmlElement).toHaveTextContent(submitText);
+  });
+
   it('handles button submit Enter on overlayFormSubmit', async () => {
-    const { container } = render(
-      <MemoryRouter future={ReactFutureFlags}>
-        <OverlayCardBox {...testProps} />
-      </MemoryRouter>
-    );
+    const { container } = render(<OverlayCardBox {...testProps} />);
 
     const htmlElement = container.querySelector('.overlayFormSubmit');
     fireEvent.click(htmlElement!);

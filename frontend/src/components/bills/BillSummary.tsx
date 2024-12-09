@@ -1,16 +1,20 @@
 import './BillSummary.scss';
-import { BillSummaryProps } from '../../model/props/BillSummaryProps';
-import PropTypes from 'prop-types';
 import { BillsHelper } from '../../globals/helper/BillsHelper';
 import LoadingSpinner from '../LoadingSpinner';
+import { EPTransaction } from '../../model/entrypoints/EPTransaction';
+import { ReactNode } from 'react';
 
-BillSummary.propTypes = {
-  bills: PropTypes.array.isRequired,
-  today: PropTypes.object.isRequired,
-  isLoading: PropTypes.bool.isRequired,
-};
+interface Props {
+  bills: EPTransaction[];
+  today: Date;
+  isLoading: boolean;
+}
 
-export function BillSummary({ bills, today, isLoading }: BillSummaryProps) {
+const BillSummary: ({ bills, today, isLoading }: Props) => ReactNode = ({
+  bills,
+  today,
+  isLoading,
+}: Props): ReactNode => {
   const {
     paidBillsSum,
     paidBillsIndex,
@@ -20,9 +24,9 @@ export function BillSummary({ bills, today, isLoading }: BillSummaryProps) {
     dueBillsIndex,
   } = BillsHelper.getPaidUpcomingAndDueBillsSumAndIndex(bills, today);
 
-  const paidBillsSumFormatted = paidBillsSum.toFixed(2);
-  const upcomingBillsSumFormatted = upcomingBillsSum.toFixed(2);
-  const dueBillsSumFormatted = dueBillsSum.toFixed(2);
+  const paidBillsSumFormatted: string = paidBillsSum.toFixed(2);
+  const upcomingBillsSumFormatted: string = upcomingBillsSum.toFixed(2);
+  const dueBillsSumFormatted: string = dueBillsSum.toFixed(2);
 
   return (
     <>
@@ -57,4 +61,6 @@ export function BillSummary({ bills, today, isLoading }: BillSummaryProps) {
       )}
     </>
   );
-}
+};
+
+export default BillSummary;

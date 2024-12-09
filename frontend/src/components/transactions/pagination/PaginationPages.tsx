@@ -21,7 +21,7 @@ const PaginationPages: ({ onPageClick, indexMax, currentIndex }: Props) => React
           {currentIndex === indexMax - 1 && (
             <button
               onClick={() => onPageClick(0)}
-              className={`paginationPagesButton ${0 === currentIndex ? 'isActive' : 'isNotActive'} pageOne`}
+              className="paginationPagesButton isNotActive pageOne"
             >
               {1}
             </button>

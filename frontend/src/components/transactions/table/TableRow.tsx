@@ -1,5 +1,6 @@
 import './TableRow.scss';
 import React from 'react';
+import { ColorNameEnum } from '../../../model/enum/ColorNameEnum';
 
 interface Props {
   name: string;
@@ -17,7 +18,7 @@ const TableRow: ({ name, imgSrc, category, date, value }: Props) => React.ReactN
   value,
 }: Props): React.ReactNode => {
   const isPositive: boolean = value > 0;
-  const color = isPositive ? 'green' : 'dark';
+  const color: ColorNameEnum = isPositive ? ColorNameEnum.GREEN : ColorNameEnum.BLACK;
   const sign = isPositive ? '+' : '-';
 
   const valueNeutral = isPositive ? value : value * -1;

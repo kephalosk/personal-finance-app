@@ -17,6 +17,7 @@ describe('OverlayDropDownColorListItem', () => {
     current: [document.createElement('div')],
   };
   const index: number = 1;
+
   const testProps = {
     itemClassContainer,
     color,
@@ -34,12 +35,23 @@ describe('OverlayDropDownColorListItem', () => {
     expect(div).toBeInTheDocument();
   });
 
-  it('renders div dropdownColorCircle', () => {
+  it('renders div itemClassContainer with class disabled when passep prop color.disabled is true', () => {
+    const { container } = render(
+      <OverlayDropDownColorListItem {...testProps} color={{ ...color, disabled: true }} />
+    );
+
+    const div = container.querySelector(`.${itemClassContainer}`);
+
+    expect(div).toHaveClass('disabled');
+  });
+
+  it('renders div dropdownColorCircle with passed prop color.name', () => {
     const { container } = render(<OverlayDropDownColorListItem {...testProps} />);
 
     const div = container.querySelector('.dropdownColorCircle');
 
     expect(div).toBeInTheDocument();
+    expect(div).toHaveClass(color.name);
   });
 
   it('renders label dropdownColorLabel', () => {
@@ -48,6 +60,7 @@ describe('OverlayDropDownColorListItem', () => {
     const div = container.querySelector('.dropdownColorLabel');
 
     expect(div).toBeInTheDocument();
+    expect(div).toHaveTextContent(color.displayName);
   });
 
   it('sets span Already used when color is disabled', () => {
@@ -79,47 +92,6 @@ describe('OverlayDropDownColorListItem', () => {
     const div = container.querySelector(`.${itemClassContainer}`);
     fireEvent.keyDown(div!, keyboardEvent);
 
-    expect(mockHandleCategoryKeyDown).toHaveBeenCalledWith(
-      expect.objectContaining({
-        _reactName: 'onKeyDown',
-        _targetInst: null,
-        altKey: false,
-        bubbles: true,
-        cancelable: true,
-        charCode: 0,
-        code: '',
-        ctrlKey: false,
-        currentTarget: null,
-        defaultPrevented: false,
-        detail: 0,
-        eventPhase: 3,
-        getModifierState: expect.any(Function), // expecting a function
-        isDefaultPrevented: expect.any(Function), // expecting a function
-        isPropagationStopped: expect.any(Function), // expecting a function
-        isTrusted: false,
-        key: 'Unidentified',
-        keyCode: 0,
-        locale: undefined,
-        location: 0,
-        metaKey: false,
-        nativeEvent: expect.objectContaining({
-          isTrusted: false,
-        }),
-        repeat: false,
-        shiftKey: false,
-        target: expect.any(Object),
-        timeStamp: expect.any(Number), // expect a number, ignore specific value
-        type: 'keydown',
-        view: null,
-        which: 0,
-      }),
-      expect.objectContaining({
-        code: '#277C78',
-        disabled: false,
-        displayName: 'Green',
-        name: 'green',
-      }),
-      expect.any(Number) // index, expecting a number
-    );
+    expect(mockHandleCategoryKeyDown).toHaveBeenCalledWith(expect.any(Object), color, index + 1);
   });
 });

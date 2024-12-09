@@ -1,23 +1,21 @@
 import { render, screen } from '@testing-library/react';
 import BillsPage from './BillsPage';
 import { act } from 'react';
-import { BillTotal } from '../components/bills/BillTotal';
-import { BillSummary } from '../components/bills/BillSummary';
-import { BillCard } from '../components/bills/BillCard';
+import BillTotal from '../components/bills/BillTotal';
+import BillSummary from '../components/bills/BillSummary';
+import BillCard from '../components/bills/BillCard';
 import { mockedTodayAugust1st } from '../fixtures/MockedToday';
 import { BillsHelper } from '../globals/helper/BillsHelper';
 import { mockedBills } from '../fixtures/MockedBills';
 import getTotalAmount from '../globals/utils/getTotalAmount';
 
-jest.mock('../components/bills/BillTotal', () => ({
-  BillTotal: jest.fn(() => <div data-testid="bill-total"></div>),
-}));
-jest.mock('../components/bills/BillSummary', () => ({
-  BillSummary: jest.fn(() => <div data-testid="bill-summary"></div>),
-}));
-jest.mock('../components/bills/BillCard', () => ({
-  BillCard: jest.fn(() => <div data-testid="bill-card"></div>),
-}));
+jest.mock('../components/bills/BillTotal', () =>
+  jest.fn(() => <div data-testid="bill-total"></div>)
+);
+jest.mock('../components/bills/BillSummary', () =>
+  jest.fn(() => <div data-testid="bill-summary"></div>)
+);
+jest.mock('../components/bills/BillCard', () => jest.fn(() => <div data-testid="bill-card"></div>));
 
 jest.mock('../globals/utils/getTotalAmount', () => jest.fn(() => 190));
 

@@ -1,9 +1,7 @@
 import { fireEvent, render } from '@testing-library/react';
-import { MemoryRouter } from 'react-router-dom';
 import React from 'react';
 import OverlayDropdownCategory from './OverlayDropdownCategory';
 import { Categories, CategoriesMap } from '../../constants/Categories';
-import { ReactFutureFlags } from '../../constants/ReactFutureFlags';
 
 describe('OverlayDropdownCategory', () => {
   const selectedItem = 'General';
@@ -14,11 +12,7 @@ describe('OverlayDropdownCategory', () => {
   };
 
   it('renders div dropdownCategory', async () => {
-    const { container } = render(
-      <MemoryRouter future={ReactFutureFlags}>
-        <OverlayDropdownCategory {...testProps} />
-      </MemoryRouter>
-    );
+    const { container } = render(<OverlayDropdownCategory {...testProps} />);
 
     const htmlElement = container.querySelector('.dropdownCategory');
 
@@ -26,11 +20,7 @@ describe('OverlayDropdownCategory', () => {
   });
 
   it('renders selectedItem', async () => {
-    const { container } = render(
-      <MemoryRouter future={ReactFutureFlags}>
-        <OverlayDropdownCategory {...testProps} />
-      </MemoryRouter>
-    );
+    const { container } = render(<OverlayDropdownCategory {...testProps} />);
 
     const htmlElement = container.querySelector('.dropdownCategory');
 
@@ -38,11 +28,7 @@ describe('OverlayDropdownCategory', () => {
   });
 
   it('renders img dropdownCategoryIcon', async () => {
-    const { container } = render(
-      <MemoryRouter future={ReactFutureFlags}>
-        <OverlayDropdownCategory {...testProps} />
-      </MemoryRouter>
-    );
+    const { container } = render(<OverlayDropdownCategory {...testProps} />);
 
     const htmlElement = container.querySelector('.dropdownCategoryIcon');
 
@@ -53,11 +39,7 @@ describe('OverlayDropdownCategory', () => {
   });
 
   it('renders div dropdownCategoryList', async () => {
-    const { container } = render(
-      <MemoryRouter future={ReactFutureFlags}>
-        <OverlayDropdownCategory {...testProps} />
-      </MemoryRouter>
-    );
+    const { container } = render(<OverlayDropdownCategory {...testProps} />);
 
     const htmlElement = container.querySelector('.dropdownCategoryList');
 
@@ -65,11 +47,7 @@ describe('OverlayDropdownCategory', () => {
   });
 
   it('renders all categorie labels', async () => {
-    const { container } = render(
-      <MemoryRouter future={ReactFutureFlags}>
-        <OverlayDropdownCategory {...testProps} />
-      </MemoryRouter>
-    );
+    const { container } = render(<OverlayDropdownCategory {...testProps} />);
 
     const htmlElements = container.querySelectorAll('.dropdownCategoryListItem');
     let countLabels = 0;
@@ -83,11 +61,7 @@ describe('OverlayDropdownCategory', () => {
   });
 
   it('renders labels - 1 horizontal lines', async () => {
-    const { container } = render(
-      <MemoryRouter future={ReactFutureFlags}>
-        <OverlayDropdownCategory {...testProps} />
-      </MemoryRouter>
-    );
+    const { container } = render(<OverlayDropdownCategory {...testProps} />);
 
     const labels = container.querySelectorAll('.dropdownCategoryListItem');
     const lines = container.querySelectorAll('.dropdownCategoryListLine');
@@ -96,11 +70,7 @@ describe('OverlayDropdownCategory', () => {
   });
 
   it('adds class isOpen to dropdownCategoryList when dropdownCategory is clicked', async () => {
-    const { container } = render(
-      <MemoryRouter future={ReactFutureFlags}>
-        <OverlayDropdownCategory {...testProps} />
-      </MemoryRouter>
-    );
+    const { container } = render(<OverlayDropdownCategory {...testProps} />);
 
     let htmlListElement = container.querySelector('.dropdownCategoryList');
     expect(htmlListElement).not.toHaveClass('isOpen');
@@ -113,11 +83,7 @@ describe('OverlayDropdownCategory', () => {
   });
 
   it('removes class isOpen from dropdownCategoryList when a dropdownCategoryListItem is clicked', async () => {
-    const { container } = render(
-      <MemoryRouter future={ReactFutureFlags}>
-        <OverlayDropdownCategory {...testProps} />
-      </MemoryRouter>
-    );
+    const { container } = render(<OverlayDropdownCategory {...testProps} />);
 
     const dropdown = container.querySelector('.dropdownCategory');
     fireEvent.click(dropdown!);
@@ -132,11 +98,7 @@ describe('OverlayDropdownCategory', () => {
   });
 
   it('calls handleCategoryChange when a dropdownCategoryListItem is clicked', async () => {
-    const { container } = render(
-      <MemoryRouter future={ReactFutureFlags}>
-        <OverlayDropdownCategory {...testProps} />
-      </MemoryRouter>
-    );
+    const { container } = render(<OverlayDropdownCategory {...testProps} />);
 
     const labels = container.querySelectorAll('.dropdownCategoryListItem');
     fireEvent.click(labels[1]!);
@@ -145,11 +107,7 @@ describe('OverlayDropdownCategory', () => {
   });
 
   it('sets passed selectedItem to top of the list', async () => {
-    const { container } = render(
-      <MemoryRouter future={ReactFutureFlags}>
-        <OverlayDropdownCategory {...testProps} />
-      </MemoryRouter>
-    );
+    const { container } = render(<OverlayDropdownCategory {...testProps} />);
 
     const labels = container.querySelectorAll('.dropdownCategoryListItem');
 
@@ -157,11 +115,7 @@ describe('OverlayDropdownCategory', () => {
   });
 
   it('handles a click outside of the list', () => {
-    const { container } = render(
-      <MemoryRouter future={ReactFutureFlags}>
-        <OverlayDropdownCategory {...testProps} />
-      </MemoryRouter>
-    );
+    const { container } = render(<OverlayDropdownCategory {...testProps} />);
 
     const htmlElement = container.querySelector('.dropdownCategory');
     fireEvent.mouseDown(htmlElement!);
@@ -171,11 +125,7 @@ describe('OverlayDropdownCategory', () => {
   });
 
   it('handles keydown Enter on dropdownCategoryListItem', () => {
-    const { container } = render(
-      <MemoryRouter future={ReactFutureFlags}>
-        <OverlayDropdownCategory {...testProps} />
-      </MemoryRouter>
-    );
+    const { container } = render(<OverlayDropdownCategory {...testProps} />);
 
     const htmlElements = container.querySelectorAll('.dropdownCategoryListItem');
     fireEvent.keyDown(htmlElements[1]!, { key: 'Enter', code: 'Enter', keyCode: 13 });
@@ -184,11 +134,7 @@ describe('OverlayDropdownCategory', () => {
   });
 
   it('handles keydown Tab on last dropdownCategoryListItem to focus first listitem', () => {
-    const { container } = render(
-      <MemoryRouter future={ReactFutureFlags}>
-        <OverlayDropdownCategory {...testProps} />
-      </MemoryRouter>
-    );
+    const { container } = render(<OverlayDropdownCategory {...testProps} />);
 
     const htmlElements = container.querySelectorAll('.dropdownCategoryListItem');
     fireEvent.keyDown(htmlElements[htmlElements.length - 1]!, {
@@ -201,11 +147,7 @@ describe('OverlayDropdownCategory', () => {
   });
 
   it('handles keydown Back Tab on first dropdownCategoryListItem to focus last listitem', () => {
-    const { container } = render(
-      <MemoryRouter future={ReactFutureFlags}>
-        <OverlayDropdownCategory {...testProps} />
-      </MemoryRouter>
-    );
+    const { container } = render(<OverlayDropdownCategory {...testProps} />);
 
     const htmlElements = container.querySelectorAll('.dropdownCategoryListItem');
     fireEvent.keyDown(htmlElements[1]!, {
@@ -219,11 +161,7 @@ describe('OverlayDropdownCategory', () => {
   });
 
   it('handles keydown Escape on dropdownCategoryListItem', () => {
-    const { container } = render(
-      <MemoryRouter future={ReactFutureFlags}>
-        <OverlayDropdownCategory {...testProps} />
-      </MemoryRouter>
-    );
+    const { container } = render(<OverlayDropdownCategory {...testProps} />);
 
     const htmlElements = container.querySelectorAll('.dropdownCategoryListItem');
     fireEvent.keyDown(htmlElements[1]!, {
@@ -237,11 +175,7 @@ describe('OverlayDropdownCategory', () => {
   });
 
   it('handles keydown Enter on dropdownCategory', () => {
-    const { container } = render(
-      <MemoryRouter future={ReactFutureFlags}>
-        <OverlayDropdownCategory {...testProps} />
-      </MemoryRouter>
-    );
+    const { container } = render(<OverlayDropdownCategory {...testProps} />);
     const htmlElement = container.querySelector('.dropdownCategory');
     fireEvent.click(htmlElement!);
     const list = container.querySelector('.dropdownCategoryList');

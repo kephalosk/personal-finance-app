@@ -1,10 +1,19 @@
 import { render, screen } from '@testing-library/react';
-import { BudgetCardList } from './BudgetCardList';
-import { BudgetCardListProps } from '../../../model/props/BudgetCardListProps';
+import BudgetCardList from './BudgetCardList';
 import { MemoryRouter } from 'react-router-dom';
 import { mockedTransactions2 } from '../../../fixtures/MockedTransactions';
 import useIsSmallScreen from '../../../globals/hooks/useIsSmallScreen';
 import { ReactFutureFlags } from '../../../constants/ReactFutureFlags';
+import TransactionRow from '../../overview/transactions/TransactionRow';
+import { EPTransaction } from '../../../model/entrypoints/EPTransaction';
+import TransactionRowSmall from './TransactionRowSmall';
+
+jest.mock('../../overview/transactions/TransactionRow', () =>
+  jest.fn(() => <div data-testid="transaction-row"></div>)
+);
+jest.mock('./TransactionRowSmall', () =>
+  jest.fn(() => <div data-testid="transaction-row-small"></div>)
+);
 
 jest.mock('../../../globals/hooks/useIsSmallScreen', () => ({
   __esModule: true,
@@ -12,12 +21,17 @@ jest.mock('../../../globals/hooks/useIsSmallScreen', () => ({
 }));
 
 describe('BudgetCardList', () => {
+  const transactions = mockedTransactions2;
   const link: string = 'testLink';
 
-  const testProps: BudgetCardListProps = {
-    transactions: mockedTransactions2,
+  const testProps = {
+    transactions,
     link,
   };
+
+  const latestTransactions: EPTransaction[] = [...transactions].sort(
+    (a: EPTransaction, b: EPTransaction) => new Date(b.date).getTime() - new Date(a.date).getTime()
+  );
 
   beforeEach(() => {
     (useIsSmallScreen as jest.Mock).mockReturnValue(false);
@@ -47,7 +61,7 @@ describe('BudgetCardList', () => {
     expect(htmlElement).toBeInTheDocument();
   });
 
-  it('renders label budgetCardListHeaderLabel', () => {
+  it('renders label budgetCardListHeaderLabel with correct text', () => {
     const { container } = render(
       <MemoryRouter future={ReactFutureFlags}>
         <BudgetCardList {...testProps} />
@@ -57,20 +71,21 @@ describe('BudgetCardList', () => {
     const htmlElement = container.querySelector('.budgetCardListHeaderLabel');
 
     expect(htmlElement).toBeInTheDocument();
+    expect(htmlElement).toHaveTextContent('Latest Spending');
   });
 
-  it('renders passed link', () => {
-    render(
+  it('renders Link budgetCardListHeaderLink with passed prop link', () => {
+    const { container } = render(
       <MemoryRouter future={ReactFutureFlags}>
-        <BudgetCardList {...testProps} />
+        <BudgetCardList {...testProps} link={link} />
       </MemoryRouter>
     );
 
-    const htmlElement = screen.getByRole('link');
+    const component = container.querySelector('.budgetCardListHeaderLink');
 
-    expect(htmlElement).toBeInTheDocument();
-    expect(htmlElement).toHaveTextContent('See All');
-    expect(htmlElement).toHaveAttribute('href', `/${link}`);
+    expect(component).toBeInTheDocument();
+    expect(component).toHaveTextContent('See All');
+    expect(component).toHaveAttribute('href', `/${link}`);
   });
 
   it('renders link icon', () => {
@@ -98,7 +113,7 @@ describe('BudgetCardList', () => {
     expect(htmlElement).toBeInTheDocument();
   });
 
-  it('renders a maximum of 3 transaction-rows with all passed transactions', () => {
+  it('renders a maximum of 3 transaction-rows with passed prop transactions', () => {
     const moreThan3Transactions = [...mockedTransactions2, ...mockedTransactions2];
     render(
       <MemoryRouter future={ReactFutureFlags}>
@@ -106,40 +121,67 @@ describe('BudgetCardList', () => {
       </MemoryRouter>
     );
 
-    const reactComponents = screen.getAllByTestId('transaction-row');
+    const components = screen.getAllByTestId('transaction-row');
 
-    expect(reactComponents).toHaveLength(3);
+    expect(components).toHaveLength(3);
   });
 
-  it('renders transaction-rows with latest first', () => {
+  it('renders components TransactionRow with latest first', () => {
     render(
       <MemoryRouter future={ReactFutureFlags}>
-        <BudgetCardList {...testProps} />
+        <BudgetCardList {...testProps} transactions={transactions} />
       </MemoryRouter>
     );
 
-    const reactComponents = screen.getAllByTestId('transaction-row');
+    const components = screen.getAllByTestId('transaction-row');
 
-    const firstTransactionDate = reactComponents[0].querySelector(
-      '.overviewTransactionRowInfoDate'
-    )!.textContent;
-    const secondTransactionDate = reactComponents[1].querySelector(
-      '.overviewTransactionRowInfoDate'
-    )!.textContent;
-
-    expect(firstTransactionDate! > secondTransactionDate!).toBe(true);
+    components.forEach((component, index) => {
+      expect(TransactionRow).toHaveBeenNthCalledWith(
+        index + 1,
+        {
+          date: latestTransactions[index].date,
+          imgSrc: latestTransactions[index].avatar,
+          name: latestTransactions[index].name,
+          value: latestTransactions[index].amount,
+        },
+        {}
+      );
+    });
   });
 
-  it('renders transaction-rows-small in mobile view', () => {
+  it('renders components TransactionRowSmall in mobile view', () => {
     (useIsSmallScreen as jest.Mock).mockReturnValue(true);
     render(
       <MemoryRouter future={ReactFutureFlags}>
+        <BudgetCardList {...testProps} transactions={transactions} />
+      </MemoryRouter>
+    );
+
+    const components = screen.getAllByTestId('transaction-row-small');
+
+    components.forEach((component, index) => {
+      expect(TransactionRowSmall).toHaveBeenNthCalledWith(
+        index + 1,
+        {
+          date: latestTransactions[index].date,
+          name: latestTransactions[index].name,
+          value: latestTransactions[index].amount,
+        },
+        {}
+      );
+    });
+  });
+
+  it('renders hr budgetCardListLine TransactionRows - 1 times', () => {
+    const { container } = render(
+      <MemoryRouter future={ReactFutureFlags}>
         <BudgetCardList {...testProps} />
       </MemoryRouter>
     );
 
-    const rowsSmall = screen.getAllByTestId('transaction-row-small');
+    const components = screen.getAllByTestId('transaction-row');
+    const htmlElement = container.querySelectorAll('.budgetCardListLine');
 
-    expect(rowsSmall.length).toBe(2);
+    expect(htmlElement).toHaveLength(components.length - 1);
   });
 });

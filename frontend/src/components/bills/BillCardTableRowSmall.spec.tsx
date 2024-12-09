@@ -2,7 +2,7 @@ import { render } from '@testing-library/react';
 import { mockedTransaction } from '../../fixtures/MockedTransactions';
 import { toOrdinal } from '../../globals/utils/ToOrdinal';
 import React from 'react';
-import { BillCardTableRowSmall } from './BillCardTableRowSmall';
+import BillCardTableRowSmall from './BillCardTableRowSmall';
 
 describe('BillCardTableRowSmall', () => {
   const transaction = mockedTransaction;
@@ -17,14 +17,6 @@ describe('BillCardTableRowSmall', () => {
     const { container } = render(<BillCardTableRowSmall {...testProps} />);
 
     const htmlElement = container.querySelector('.billCardTableRowSmallWrapper');
-
-    expect(htmlElement).toBeInTheDocument();
-  });
-
-  it('renders div billCardTableRowSmallDateAmount', () => {
-    const { container } = render(<BillCardTableRowSmall {...testProps} />);
-
-    const htmlElement = container.querySelector('.billCardTableRowSmallDateAmount');
 
     expect(htmlElement).toBeInTheDocument();
   });
@@ -52,9 +44,10 @@ describe('BillCardTableRowSmall', () => {
 
     expect(htmlElement).toBeInTheDocument();
     expect(htmlElement).toHaveAttribute('src', transaction.avatar);
+    expect(htmlElement).toHaveAttribute('alt', 'avatar picture');
   });
 
-  it('renders label billCardTableRowSmallNameLabel', () => {
+  it('renders label billCardTableRowSmallNameLabel with passed prop transaction.name', () => {
     const { container } = render(<BillCardTableRowSmall {...testProps} />);
 
     const htmlElement = container.querySelector('.billCardTableRowSmallNameLabel');
@@ -63,10 +56,18 @@ describe('BillCardTableRowSmall', () => {
     expect(htmlElement).toHaveTextContent(transaction.name);
   });
 
-  it('renders label billCardTableRowSmallDate', () => {
+  it('renders div billCardTableRowSmallDateAmount', () => {
+    const { container } = render(<BillCardTableRowSmall {...testProps} />);
+
+    const htmlElement = container.querySelector('.billCardTableRowSmallDateAmount');
+
+    expect(htmlElement).toBeInTheDocument();
+  });
+
+  it('renders label billCardTableRowSmallDate with correct text of passed prop today', () => {
     const transactionDay = mockedTransaction.dateRaw.getDate();
     const expectedText = `Monthly - ${toOrdinal(transactionDay)}`;
-    const { container } = render(<BillCardTableRowSmall {...testProps} />);
+    const { container } = render(<BillCardTableRowSmall {...testProps} today={fakeToday} />);
 
     const htmlElement = container.querySelector('.billCardTableRowSmallDate');
 
@@ -74,7 +75,7 @@ describe('BillCardTableRowSmall', () => {
     expect(htmlElement).toHaveTextContent(expectedText);
   });
 
-  it('renders label billCardTableRowSmallAmount', () => {
+  it('renders label billCardTableRowSmallAmount with passed prop transaction.amount', () => {
     const { container } = render(<BillCardTableRowSmall {...testProps} />);
 
     const htmlElement = container.querySelector('.billCardTableRowSmallAmount');

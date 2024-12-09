@@ -3,8 +3,6 @@ import Colors from '../../constants/Colors';
 import { Color } from '../../model/Color';
 import React from 'react';
 import OverlayDropdownColor from './OverlayDropdownColor';
-import { MemoryRouter } from 'react-router-dom';
-import { ReactFutureFlags } from '../../constants/ReactFutureFlags';
 import OverlayDropDownColorListItem from './OverlayDropDownColorListItem';
 
 jest.mock('./OverlayDropDownColorListItem', () =>
@@ -41,11 +39,7 @@ describe('OverlayDropDownColorListItem', () => {
   };
 
   it('renders div dropdownColorContainer', () => {
-    const { container } = render(
-      <MemoryRouter future={ReactFutureFlags}>
-        <OverlayDropdownColor {...testProps} />
-      </MemoryRouter>
-    );
+    const { container } = render(<OverlayDropdownColor {...testProps} />);
 
     const div = container.querySelector('.dropdownColorContainer');
 
@@ -53,11 +47,7 @@ describe('OverlayDropDownColorListItem', () => {
   });
 
   it('renders div dropdownColorWrapper', () => {
-    const { container } = render(
-      <MemoryRouter future={ReactFutureFlags}>
-        <OverlayDropdownColor {...testProps} />
-      </MemoryRouter>
-    );
+    const { container } = render(<OverlayDropdownColor {...testProps} />);
 
     const div = container.querySelector('.dropdownColorWrapper');
 
@@ -65,11 +55,7 @@ describe('OverlayDropDownColorListItem', () => {
   });
 
   it('renders div dropdownColor', () => {
-    const { container } = render(
-      <MemoryRouter future={ReactFutureFlags}>
-        <OverlayDropdownColor {...testProps} />
-      </MemoryRouter>
-    );
+    const { container } = render(<OverlayDropdownColor {...testProps} />);
 
     const div = container.querySelector('.dropdownColor');
 
@@ -77,11 +63,7 @@ describe('OverlayDropDownColorListItem', () => {
   });
 
   it('renders div dropdownColorCircle with passed selectedColor', () => {
-    const { container } = render(
-      <MemoryRouter future={ReactFutureFlags}>
-        <OverlayDropdownColor {...testProps} />
-      </MemoryRouter>
-    );
+    const { container } = render(<OverlayDropdownColor {...testProps} />);
 
     const div = container.querySelector('.dropdownColorCircle');
 
@@ -90,11 +72,7 @@ describe('OverlayDropDownColorListItem', () => {
   });
 
   it('renders closed div dropDownColorList', () => {
-    const { container } = render(
-      <MemoryRouter future={ReactFutureFlags}>
-        <OverlayDropdownColor {...testProps} />
-      </MemoryRouter>
-    );
+    const { container } = render(<OverlayDropdownColor {...testProps} />);
 
     const div = container.querySelector('.dropDownColorList');
 
@@ -103,11 +81,7 @@ describe('OverlayDropDownColorListItem', () => {
   });
 
   it('renders components OverlayDropDownColorListItem with correct Props and passed colors', () => {
-    render(
-      <MemoryRouter future={ReactFutureFlags}>
-        <OverlayDropdownColor {...testProps} />
-      </MemoryRouter>
-    );
+    render(<OverlayDropdownColor {...testProps} />);
 
     const components = screen.getAllByTestId('overlay-dropdown-color-list-item');
 
@@ -130,11 +104,7 @@ describe('OverlayDropDownColorListItem', () => {
   });
 
   it('renders hr dropDownColorListItemLine', () => {
-    const { container } = render(
-      <MemoryRouter future={ReactFutureFlags}>
-        <OverlayDropdownColor {...testProps} />
-      </MemoryRouter>
-    );
+    const { container } = render(<OverlayDropdownColor {...testProps} />);
 
     const hrs = container.querySelectorAll('.dropDownColorListItemLine');
 
@@ -143,11 +113,7 @@ describe('OverlayDropDownColorListItem', () => {
   });
 
   it('renders icon OverlayDropdownIcon', () => {
-    render(
-      <MemoryRouter future={ReactFutureFlags}>
-        <OverlayDropdownColor {...testProps} />
-      </MemoryRouter>
-    );
+    render(<OverlayDropdownColor {...testProps} />);
 
     const icon = screen.getByTestId('dropdown-color-icon');
 
@@ -155,11 +121,7 @@ describe('OverlayDropDownColorListItem', () => {
   });
 
   it('renders component ScrollToTop', () => {
-    render(
-      <MemoryRouter future={ReactFutureFlags}>
-        <OverlayDropdownColor {...testProps} />
-      </MemoryRouter>
-    );
+    render(<OverlayDropdownColor {...testProps} />);
 
     const icon = screen.getByTestId('scroll-to-top');
 
@@ -167,11 +129,7 @@ describe('OverlayDropDownColorListItem', () => {
   });
 
   it('opens dropDownColorList when dropdownColorWrapper is clicked', () => {
-    const { container } = render(
-      <MemoryRouter future={ReactFutureFlags}>
-        <OverlayDropdownColor {...testProps} />
-      </MemoryRouter>
-    );
+    const { container } = render(<OverlayDropdownColor {...testProps} />);
 
     const div = container.querySelector('.dropdownColorWrapper');
     fireEvent.click(div!);
@@ -181,11 +139,7 @@ describe('OverlayDropDownColorListItem', () => {
   });
 
   it('calls handleColorChange when a OverlayDropDownColorListItem is clicked', () => {
-    render(
-      <MemoryRouter future={ReactFutureFlags}>
-        <OverlayDropdownColor {...testProps} />
-      </MemoryRouter>
-    );
+    render(<OverlayDropdownColor {...testProps} />);
 
     const components = screen.getAllByTestId('overlay-dropdown-color-list-item');
     fireEvent.click(components[0]!);
@@ -194,11 +148,7 @@ describe('OverlayDropDownColorListItem', () => {
   });
 
   it('closes itemList when a OverlayDropDownColorListItem is clicked', () => {
-    const { container } = render(
-      <MemoryRouter future={ReactFutureFlags}>
-        <OverlayDropdownColor {...testProps} />
-      </MemoryRouter>
-    );
+    const { container } = render(<OverlayDropdownColor {...testProps} />);
     const div = container.querySelector('.dropdownColorWrapper');
     fireEvent.click(div!);
     const list = container.querySelector('.dropDownColorList');
@@ -211,11 +161,7 @@ describe('OverlayDropDownColorListItem', () => {
   });
 
   it('closes itemList when an outsideClick is performed', () => {
-    const { container } = render(
-      <MemoryRouter future={ReactFutureFlags}>
-        <OverlayDropdownColor {...testProps} />
-      </MemoryRouter>
-    );
+    const { container } = render(<OverlayDropdownColor {...testProps} />);
     const div = container.querySelector('.dropdownColorWrapper');
     fireEvent.click(div!);
     const list = container.querySelector('.dropDownColorList');
@@ -228,11 +174,7 @@ describe('OverlayDropDownColorListItem', () => {
   });
 
   it('handles keydown enter on dropdownColorWrapper', () => {
-    const { container } = render(
-      <MemoryRouter future={ReactFutureFlags}>
-        <OverlayDropdownColor {...testProps} />
-      </MemoryRouter>
-    );
+    const { container } = render(<OverlayDropdownColor {...testProps} />);
 
     const div = container.querySelector('.dropdownColorWrapper');
     fireEvent.keyDown(div!, { key: 'Enter', code: 'Enter', keyCode: 13 });
@@ -242,11 +184,7 @@ describe('OverlayDropDownColorListItem', () => {
   });
 
   it('handles keydown enter on OverlayDropDownColorListItem', () => {
-    const { container } = render(
-      <MemoryRouter future={ReactFutureFlags}>
-        <OverlayDropdownColor {...testProps} />
-      </MemoryRouter>
-    );
+    const { container } = render(<OverlayDropdownColor {...testProps} />);
     const div = container.querySelector('.dropdownColorWrapper');
     fireEvent.click(div!);
     const list = container.querySelector('.dropDownColorList');
@@ -259,11 +197,7 @@ describe('OverlayDropDownColorListItem', () => {
   });
 
   it('handles keydown tab on last OverlayDropDownColorListItem to jump back to first Item', () => {
-    const { container } = render(
-      <MemoryRouter future={ReactFutureFlags}>
-        <OverlayDropdownColor {...testProps} />
-      </MemoryRouter>
-    );
+    const { container } = render(<OverlayDropdownColor {...testProps} />);
     const div = container.querySelector('.dropdownColorWrapper');
     fireEvent.click(div!);
     const list = container.querySelector('.dropDownColorList');
@@ -277,11 +211,7 @@ describe('OverlayDropDownColorListItem', () => {
   });
 
   it('handles keydown back tab on first OverlayDropDownColorListItem to jump to last Item', () => {
-    const { container } = render(
-      <MemoryRouter future={ReactFutureFlags}>
-        <OverlayDropdownColor {...testProps} />
-      </MemoryRouter>
-    );
+    const { container } = render(<OverlayDropdownColor {...testProps} />);
     const div = container.querySelector('.dropdownColorWrapper');
     fireEvent.click(div!);
     const list = container.querySelector('.dropDownColorList');
@@ -295,11 +225,7 @@ describe('OverlayDropDownColorListItem', () => {
   });
 
   it('handles keydown Escape and closes list', () => {
-    const { container } = render(
-      <MemoryRouter future={ReactFutureFlags}>
-        <OverlayDropdownColor {...testProps} />
-      </MemoryRouter>
-    );
+    const { container } = render(<OverlayDropdownColor {...testProps} />);
     const div = container.querySelector('.dropdownColorWrapper');
     fireEvent.click(div!);
     const list = container.querySelector('.dropDownColorList');
