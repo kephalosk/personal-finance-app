@@ -1,14 +1,20 @@
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import { BudgetCard } from './BudgetCard';
-import { BudgetCardProps } from '../../../model/props/BudgetCardProps';
-import {
-  mockedTransactionsEntertainment,
-  mockedTransactionsWithDifferentCategoriesAndCategoryAsNames,
-} from '../../../fixtures/MockedTransactions';
+import BudgetCard from './BudgetCard';
+import { mockedTransactionsEntertainment } from '../../../fixtures/MockedTransactions';
 import { mockedBudget } from '../../../fixtures/MockedBudgets';
 import useIsSmallScreen from '../../../globals/hooks/useIsSmallScreen';
 import { ReactFutureFlags } from '../../../constants/ReactFutureFlags';
+import LoadingSpinner from '../../LoadingSpinner';
+import CardHeader from '../../CardHeader';
+import ValueBox from '../../overview/ValueBox';
+import BudgetCardList from './BudgetCardList';
+import { ColorNameEnum } from '../../../model/enum/ColorNameEnum';
+
+jest.mock('../../LoadingSpinner', () => jest.fn(() => <div data-testid="loading-spinner"></div>));
+jest.mock('../../CardHeader', () => jest.fn(() => <div data-testid="card-header"></div>));
+jest.mock('../../overview/ValueBox', () => jest.fn(() => <div data-testid="value-box"></div>));
+jest.mock('./BudgetCardList', () => jest.fn(() => <div data-testid="budget-card-list"></div>));
 
 jest.mock('../../../globals/hooks/useIsSmallScreen', () => ({
   __esModule: true,
@@ -16,10 +22,14 @@ jest.mock('../../../globals/hooks/useIsSmallScreen', () => ({
 }));
 
 describe('BudgetCard', () => {
-  const testProps: BudgetCardProps = {
-    budget: mockedBudget,
-    transactions: mockedTransactionsEntertainment,
-    isLoading: false,
+  const budget = mockedBudget;
+  const transactions = mockedTransactionsEntertainment;
+  const isLoading = false;
+
+  const testProps = {
+    budget,
+    transactions,
+    isLoading,
   };
 
   let spent: number = 0;
@@ -34,28 +44,51 @@ describe('BudgetCard', () => {
     (useIsSmallScreen as jest.Mock).mockReturnValue(false);
   });
 
-  it('renders div budgetCard', () => {
-    const { container } = render(
+  it('renders component LoadingSpinner when passed prop isLoading is true', () => {
+    render(
       <MemoryRouter future={ReactFutureFlags}>
-        <BudgetCard {...testProps} />
+        <BudgetCard {...testProps} isLoading={true} />
       </MemoryRouter>
     );
+
+    const component = screen.getByTestId('loading-spinner');
+
+    expect(component).toBeInTheDocument();
+    expect(LoadingSpinner).toHaveBeenCalled();
+  });
+
+  it('does not render component LoadingSpinner when passed prop isLoading is false', () => {
+    render(
+      <MemoryRouter future={ReactFutureFlags}>
+        <BudgetCard {...testProps} isLoading={false} />
+      </MemoryRouter>
+    );
+
+    const component = screen.queryByTestId('loading-spinner');
+
+    expect(component).not.toBeInTheDocument();
+    expect(LoadingSpinner).not.toHaveBeenCalled();
+  });
+
+  it('renders div budgetCard', () => {
+    const { container } = render(<BudgetCard {...testProps} />);
 
     const htmlElement = container.querySelector('.budgetCard');
 
     expect(htmlElement).toBeInTheDocument();
   });
 
-  it('renders component CardHeader', () => {
+  it('renders component CardHeader with passed prop budget', () => {
     render(
       <MemoryRouter future={ReactFutureFlags}>
-        <BudgetCard {...testProps} />
+        <BudgetCard {...testProps} budget={budget} />
       </MemoryRouter>
     );
 
     const component = screen.getByTestId('card-header');
 
     expect(component).toBeInTheDocument();
+    expect(CardHeader).toHaveBeenCalledWith({ color: budget.color, title: budget.category }, {});
   });
 
   it('renders div budgetCardBar', () => {
@@ -70,7 +103,7 @@ describe('BudgetCard', () => {
     expect(htmlElement).toBeInTheDocument();
   });
 
-  it('renders label budgetCardBarLabel', () => {
+  it('renders label budgetCardBarLabel with correct text', () => {
     const { container } = render(
       <MemoryRouter future={ReactFutureFlags}>
         <BudgetCard {...testProps} />
@@ -95,16 +128,18 @@ describe('BudgetCard', () => {
     expect(htmlElement).toBeInTheDocument();
   });
 
-  it('renders div budgetCardBarCurrent', () => {
+  it('renders div budgetCardBarCurrent with passed prop budget.color and percentage style', () => {
     const { container } = render(
       <MemoryRouter future={ReactFutureFlags}>
-        <BudgetCard {...testProps} />
+        <BudgetCard {...testProps} budget={budget} />
       </MemoryRouter>
     );
 
     const htmlElement = container.querySelector('.budgetCardBarCurrent');
 
     expect(htmlElement).toBeInTheDocument();
+    expect(htmlElement).toHaveClass(budget.color);
+    expect(htmlElement).toHaveAttribute('style', '--barCurrentWidthPercent: 25%;');
   });
 
   it('renders div budgetCardBarValues', () => {
@@ -119,7 +154,7 @@ describe('BudgetCard', () => {
     expect(htmlElement).toBeInTheDocument();
   });
 
-  it('renders component ValueBox-spent with passed color', () => {
+  it('renders components ValueBox with passed color and correct amounts', () => {
     render(
       <MemoryRouter future={ReactFutureFlags}>
         <BudgetCard {...testProps} />
@@ -128,35 +163,20 @@ describe('BudgetCard', () => {
 
     const components = screen.getAllByTestId('value-box');
 
-    components.forEach((component) => {
-      const title = component.querySelector('.valueBoxContentTitle')!.textContent;
-      if (title === 'Spent') {
-        expect(component.querySelector('.valueBoxBorder')).toHaveClass(mockedBudget.color);
-        const value = component.querySelector('.valueBoxContentValue')!.textContent;
-        expect(value).toEqual(`$${spent.toFixed(2)}`);
-      }
-    });
-  });
-
-  it('renders component ValueBox-remaining', () => {
-    render(
-      <MemoryRouter future={ReactFutureFlags}>
-        <BudgetCard {...testProps} />
-      </MemoryRouter>
+    expect(components).toHaveLength(2);
+    expect(ValueBox).toHaveBeenNthCalledWith(
+      1,
+      { color: budget.color, title: 'Spent', value: spent },
+      {}
     );
-
-    const components = screen.getAllByTestId('value-box');
-
-    components.forEach((component) => {
-      const title = component.querySelector('.valueBoxContentTitle')!.textContent;
-      if (title === 'Remaining') {
-        const value = component.querySelector('.valueBoxContentValue')!.textContent;
-        expect(value).toEqual(`$${remaining.toFixed(2)}`);
-      }
-    });
+    expect(ValueBox).toHaveBeenNthCalledWith(
+      2,
+      { color: ColorNameEnum.SEPIA, title: 'Remaining', value: remaining },
+      {}
+    );
   });
 
-  it('renders component ValueBox-remaining with text Free in mobile view', () => {
+  it('renders component ValueBox-Remaining with correct title for mobile', () => {
     (useIsSmallScreen as jest.Mock).mockReturnValue(true);
     render(
       <MemoryRouter future={ReactFutureFlags}>
@@ -164,92 +184,33 @@ describe('BudgetCard', () => {
       </MemoryRouter>
     );
 
-    const components = screen.getAllByTestId('value-box');
-
-    let hasTitleFree = false;
-    components.forEach((component) => {
-      const title = component.querySelector('.valueBoxContentTitle')!.textContent;
-      if (title === 'Free') {
-        hasTitleFree = true;
-      }
-    });
-    expect(hasTitleFree).toBe(true);
+    expect(ValueBox).toHaveBeenNthCalledWith(2, expect.objectContaining({ title: 'Free' }), {});
   });
 
-  it('resets negative remaining to 0', () => {
-    const propsWithOvermaxedSpending = {
-      ...testProps,
-      budget: { ...mockedBudget, maximum: 5 },
-    };
+  it('renders component ValueBox-Remaining with value 0 when spent amount is higher than maximum', () => {
+    (useIsSmallScreen as jest.Mock).mockReturnValue(true);
     render(
       <MemoryRouter future={ReactFutureFlags}>
-        <BudgetCard {...propsWithOvermaxedSpending} />
+        <BudgetCard {...testProps} budget={{ ...budget, maximum: 5 }} />
       </MemoryRouter>
     );
 
-    const components = screen.getAllByTestId('value-box');
-
-    components.forEach((component) => {
-      const title = component.querySelector('.valueBoxContentTitle')!.textContent;
-      if (title === 'Remaining') {
-        const value = component.querySelector('.valueBoxContentValue')!.textContent;
-        expect(value).toEqual('$0.00');
-      }
-    });
+    expect(ValueBox).toHaveBeenNthCalledWith(2, expect.objectContaining({ value: 0 }), {});
   });
 
-  it('renders component BudgetCardList', () => {
+  it('renders component BudgetCardList with passed prop transactions', () => {
     render(
       <MemoryRouter future={ReactFutureFlags}>
-        <BudgetCard {...testProps} />
+        <BudgetCard {...testProps} transactions={transactions} />
       </MemoryRouter>
     );
 
     const component = screen.getByTestId('budget-card-list');
 
     expect(component).toBeInTheDocument();
-  });
-
-  it('passes the link to the the BudgetCardList', () => {
-    render(
-      <MemoryRouter future={ReactFutureFlags}>
-        <BudgetCard {...testProps} />
-      </MemoryRouter>
+    expect(BudgetCardList).toHaveBeenCalledWith(
+      { link: '../transactions?cat=entertainment', transactions },
+      {}
     );
-
-    const component = screen.getByRole('link');
-
-    expect(component).toHaveAttribute('href', '/transactions?cat=entertainment');
-  });
-
-  it('filters the transactions for the BudgetCardList', () => {
-    const propsWithTransactionsWithDifferentCategoriesAndCategoryAsNames = {
-      ...testProps,
-      transactions: mockedTransactionsWithDifferentCategoriesAndCategoryAsNames,
-    };
-    const { container } = render(
-      <MemoryRouter future={ReactFutureFlags}>
-        <BudgetCard {...propsWithTransactionsWithDifferentCategoriesAndCategoryAsNames} />
-      </MemoryRouter>
-    );
-
-    const htmlElements = container.querySelectorAll('.overviewTransactionRowName');
-    htmlElements.forEach((category) => {
-      expect(category.textContent).toEqual(mockedBudget.category);
-    });
-  });
-
-  it('renders LoadingSpinner if isLoading is true', () => {
-    const { container } = render(
-      <MemoryRouter future={ReactFutureFlags}>
-        <BudgetCard {...testProps} isLoading={true} />
-      </MemoryRouter>
-    );
-
-    const htmlElement = container.querySelector('.loadingSpinner');
-    const components = screen.queryAllByTestId('value-box');
-
-    expect(htmlElement).toBeInTheDocument();
-    expect(components).toHaveLength(0);
   });
 });

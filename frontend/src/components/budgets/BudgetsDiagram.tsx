@@ -1,23 +1,30 @@
 import './BudgetsDiagram.scss';
-import React from 'react';
-import { BudgetsDiagramProps } from '../../model/props/BudgetsDiagramProps';
+import React, { ReactNode } from 'react';
 import { EPBudget } from '../../model/entrypoints/EPBudget';
 import { EPTransaction } from '../../model/entrypoints/EPTransaction';
 
-export function BudgetsDiagram({ budgets, transactions }: BudgetsDiagramProps) {
-  let spentTotal = 0;
-  budgets.forEach((budget) => {
-    transactions.forEach((transaction) => {
+interface Props {
+  budgets: EPBudget[];
+  transactions: EPTransaction[];
+}
+
+const BudgetsDiagram: ({ budgets, transactions }: Props) => ReactNode = ({
+  budgets,
+  transactions,
+}: Props): ReactNode => {
+  let spentTotal: number = 0;
+  budgets.forEach((budget: EPBudget): void => {
+    transactions.forEach((transaction: EPTransaction): void => {
       if (budget.categoryKey === transaction.categoryKey) {
         spentTotal = spentTotal + transaction.amount;
       }
     });
   });
   spentTotal = spentTotal * -1;
-  const spentTotalFormatted = spentTotal.toFixed(0);
+  const spentTotalFormatted: string = spentTotal.toFixed(0);
 
-  let budgetTotal = 0;
-  budgets.forEach((budget) => {
+  let budgetTotal: number = 0;
+  budgets.forEach((budget: EPBudget): void => {
     budgetTotal = budgetTotal + budget.maximum;
   });
 
@@ -26,17 +33,17 @@ export function BudgetsDiagram({ budgets, transactions }: BudgetsDiagramProps) {
   let currentAngle: number = 0;
   let colors: string[] = [];
   let colorsLightened: string[] = [];
-  budgets.forEach((budget: EPBudget, index: number) => {
+  budgets.forEach((budget: EPBudget, index: number): void => {
     if (index < budgets.length - 1) {
-      let budgetSpent = 0;
-      transactions.forEach((transaction: EPTransaction) => {
+      let budgetSpent: number = 0;
+      transactions.forEach((transaction: EPTransaction): void => {
         if (transaction.categoryKey === budget.categoryKey) {
           budgetSpent = budgetSpent + transaction.amount;
         }
       });
-      const budgetSpentPositive = budgetSpent * -1;
-      const budgetPercent = budgetSpentPositive / spentTotal;
-      const budgetAngle = budgetPercent * fullCircle;
+      const budgetSpentPositive: number = budgetSpent * -1;
+      const budgetPercent: number = budgetSpentPositive / spentTotal;
+      const budgetAngle: number = budgetPercent * fullCircle;
       currentAngle = currentAngle + budgetAngle;
       angles.push(currentAngle);
     }
@@ -44,12 +51,12 @@ export function BudgetsDiagram({ budgets, transactions }: BudgetsDiagramProps) {
     colorsLightened.push(`var(--${budget.color}-lightened)`);
   });
 
-  const generateConicGradientBig = () => {
-    let gradientString = 'conic-gradient(';
+  const generateConicGradientBig: () => string = (): string => {
+    let gradientString: string = 'conic-gradient(';
     gradientString += colors
-      .map((color, index) => {
-        const startAngle = index === 0 ? 0 : angles[index - 1];
-        const endAngle = angles[index] || fullCircle; // Letzter Wert auf 360 setzen
+      .map((color: string, index: number): string => {
+        const startAngle: number = index === 0 ? 0 : angles[index - 1];
+        const endAngle: number = angles[index] || fullCircle;
         return `${color} ${startAngle}deg ${endAngle}deg`;
       })
       .join(', ');
@@ -57,12 +64,12 @@ export function BudgetsDiagram({ budgets, transactions }: BudgetsDiagramProps) {
     return gradientString;
   };
 
-  const generateConicGradientSmall = () => {
-    let gradientString = 'conic-gradient(';
+  const generateConicGradientSmall: () => string = (): string => {
+    let gradientString: string = 'conic-gradient(';
     gradientString += colorsLightened
-      .map((color, index) => {
-        const startAngle = index === 0 ? 0 : angles[index - 1];
-        const endAngle = angles[index] || fullCircle; // Letzter Wert auf 360 setzen
+      .map((color: string, index: number) => {
+        const startAngle: number = index === 0 ? 0 : angles[index - 1];
+        const endAngle: number = angles[index] || fullCircle;
         return `${color} ${startAngle}deg ${endAngle}deg`;
       })
       .join(', ');
@@ -92,4 +99,6 @@ export function BudgetsDiagram({ budgets, transactions }: BudgetsDiagramProps) {
       </div>
     </>
   );
-}
+};
+
+export default BudgetsDiagram;

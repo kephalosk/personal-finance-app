@@ -1,10 +1,10 @@
 import './OverviewSummary.scss';
-import { SummaryCard } from './SummaryCard';
+import SummaryCard from './SummaryCard';
 import { getBalance } from '../../../globals/services/BalanceService';
-import { useEffect, useState } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 import { EPBalance } from '../../../model/entrypoints/EPBalance';
 
-export function OverviewSummary() {
+const OverviewSummary: () => ReactNode = (): ReactNode => {
   const [balance, setBalance] = useState<{
     current: number;
     income: number;
@@ -16,9 +16,8 @@ export function OverviewSummary() {
   });
 
   const [isLoading, setIsLoading] = useState<boolean>(true);
-
   useEffect(() => {
-    const fetchBalance = async () => {
+    const fetchBalance: () => Promise<void> = async (): Promise<void> => {
       const balanceData: EPBalance = await getBalance();
       setBalance(balanceData);
       setIsLoading(false);
@@ -26,22 +25,20 @@ export function OverviewSummary() {
     fetchBalance().then();
   }, []);
 
-  if (!balance) {
-    return <></>;
-  }
-
   return (
     <>
       <div className="overviewSummary" data-testid="overview-summary">
         <SummaryCard
           title="Current Balance"
-          value={balance.current ?? 0}
+          value={balance.current}
           isInverted={true}
           isLoading={isLoading}
         />
-        <SummaryCard title="Income" value={balance.income ?? 0} isLoading={isLoading} />
-        <SummaryCard title="Expenses" value={balance.expenses ?? 0} isLoading={isLoading} />
+        <SummaryCard title="Income" value={balance.income} isLoading={isLoading} />
+        <SummaryCard title="Expenses" value={balance.expenses} isLoading={isLoading} />
       </div>
     </>
   );
-}
+};
+
+export default OverviewSummary;

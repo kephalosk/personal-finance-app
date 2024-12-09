@@ -1,8 +1,7 @@
 import { render } from '@testing-library/react';
-import { BudgetsDiagram } from './BudgetsDiagram';
-import { BudgetsDiagramProps } from '../../model/props/BudgetsDiagramProps';
+import BudgetsDiagram from './BudgetsDiagram';
 import { mockedTransactionsEntertainment } from '../../fixtures/MockedTransactions';
-import { mockedBudgets } from '../../fixtures/MockedBudgets';
+import { mockedBudgets2 } from '../../fixtures/MockedBudgets';
 
 describe('BudgetsDiagram', () => {
   let totalSpend = 0;
@@ -12,14 +11,15 @@ describe('BudgetsDiagram', () => {
   totalSpend = totalSpend * -1;
 
   let totalBudget = 0;
-  mockedBudgets.forEach((budget) => {
+  mockedBudgets2.forEach((budget) => {
     totalBudget = totalBudget + budget.maximum;
   });
 
-  const testProps: BudgetsDiagramProps = {
-    budgets: mockedBudgets,
+  const testProps = {
+    budgets: mockedBudgets2,
     transactions: mockedTransactionsEntertainment,
   };
+
   it('renders div overviewBudgetsDiagram', () => {
     const { container } = render(<BudgetsDiagram {...testProps} />);
 

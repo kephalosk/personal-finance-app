@@ -1,15 +1,18 @@
 import './BillTotal.scss';
-import PropTypes from 'prop-types';
-import { BillTotalProps } from '../../model/props/BillTotalProps';
 import LoadingSpinner from '../LoadingSpinner';
+import { ReactNode } from 'react';
 
-BillTotal.propTypes = {
-  sum: PropTypes.number.isRequired,
-  isLoading: PropTypes.bool.isRequired,
-};
+interface Props {
+  sum: number;
+  isLoading: boolean;
+}
 
-export function BillTotal({ sum, isLoading }: BillTotalProps) {
-  const sumFormatted = sum.toFixed(2);
+const BillTotal: ({ sum, isLoading }: Props) => ReactNode = ({
+  sum,
+  isLoading,
+}: Props): ReactNode => {
+  const sumFormatted: string = sum.toFixed(2);
+
   return (
     <>
       {isLoading ? (
@@ -31,4 +34,6 @@ export function BillTotal({ sum, isLoading }: BillTotalProps) {
       )}
     </>
   );
-}
+};
+
+export default BillTotal;
