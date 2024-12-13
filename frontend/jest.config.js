@@ -11,5 +11,5 @@ export default {
     '\\.html$': '<rootDir>/__mocks__/htmlMock.js',
   },
   testPathIgnorePatterns: ['<rootDir>/node_modules/', '<rootDir>/ui-tests/'],
-  collectCoverage: true,
+  // collectCoverage: true,
 };

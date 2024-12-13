@@ -31,21 +31,23 @@ const OverlayDropDownColorListItem: ({
   index,
 }: Props) => {
   return (
-    <div
-      className={`${itemClassContainer} ${color.disabled ? 'disabled' : ''}`}
-      data-testid="overlay-dropdown-color-list-item"
-      onClick={() => onItemClick(color)}
-      onKeyDown={(event) => handleCategoryKeyDown(event, color, index + 1)}
-      tabIndex={color.disabled ? -1 : 0}
-      ref={(el) => {
-        if (!color.disabled) {
-          clickableRefs.current[index + 1] = el;
-        }
-      }}
-    >
-      <div className={`dropdownColorCircle ${color.name}`}></div>
-      <label className="dropdownColorLabel">{color.displayName}</label>
-      {color.disabled && <span>Already used</span>}
+    <div className={`dropDownColorListItemContainer ${color.disabled ? 'disabled' : ''}`}>
+      <div
+        className={`${itemClassContainer} ${color.disabled ? 'disabled' : ''}`}
+        data-testid="overlay-dropdown-color-list-item"
+        onClick={() => onItemClick(color)}
+        onKeyDown={(event) => handleCategoryKeyDown(event, color, index + 1)}
+        tabIndex={color.disabled ? -1 : 0}
+        ref={(el) => {
+          if (!color.disabled) {
+            clickableRefs.current[index + 1] = el;
+          }
+        }}
+      >
+        <div className={`dropdownColorCircle ${color.name}`}></div>
+        <label className="dropdownColorLabel">{color.displayName}</label>
+        {color.disabled && <span>Already used</span>}
+      </div>
     </div>
   );
 };
