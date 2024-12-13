@@ -131,6 +131,7 @@ const BudgetsPage: () => React.ReactNode = (): React.ReactNode => {
             selectedColorItem={selectedColorItem}
             handleColorChange={handleColorChange}
             colors={colors}
+            isHidden={isHidden}
           />
         </OverlayCardBox>
       </div>
