@@ -47,6 +47,7 @@ const OverlayDropdownColor: ({
       if (
         target &&
         !target.classList.contains(itemClassContainer) &&
+        !target.classList.contains('dropDownColorListItemContainer') &&
         !target.classList.contains(itemClassCircle) &&
         !target.classList.contains(itemClassLabel) &&
         target.classList.value !== ''
@@ -126,7 +127,7 @@ const OverlayDropdownColor: ({
       <div ref={dropdownRef} className={`dropDownColorList ${showColors ? 'isOpen' : ''}`}>
         <OverlayDropDownColorListItem
           key={0}
-          itemClassContainer={`itemClassContainer ${0}`}
+          itemClassContainer={`${itemClassContainer} ${0}`}
           color={selectedColor}
           onItemClick={onItemClick}
           handleCategoryKeyDown={handleCategoryKeyDown}
@@ -138,7 +139,7 @@ const OverlayDropdownColor: ({
             <hr className="dropDownColorListItemLine" />
             <OverlayDropDownColorListItem
               key={index + 1}
-              itemClassContainer={`itemClassContainer ${index + 1}`}
+              itemClassContainer={`${itemClassContainer} ${index + 1}`}
               color={color}
               onItemClick={onItemClick}
               handleCategoryKeyDown={handleCategoryKeyDown}

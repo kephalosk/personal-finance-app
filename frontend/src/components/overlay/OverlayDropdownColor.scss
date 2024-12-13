@@ -43,7 +43,6 @@
   left: 0;
   position: absolute;
   z-index: 4;
-  cursor: pointer;
   visibility: hidden;
   overflow: hidden;
   transition: max-height 0.1s ease, visibility 0.1s ease;
@@ -53,4 +52,3 @@
   overflow-y: auto;
   visibility: visible;
 }
-

@@ -81,8 +81,11 @@
 }
 .dropDownColorListItem.disabled {
   opacity: 0.4;
-  cursor: not-allowed;
   pointer-events: none;
+}
+
+.dropDownColorListItemContainer.disabled {
+  cursor: not-allowed;
 }
 
 .dropDownColorListItemLine {
