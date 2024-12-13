@@ -1,0 +1,33 @@
+@use '../../styles/forms';
+
+.inputMoney {
+  margin-bottom: 16px;
+  position: relative;
+}
+
+.inputMoneyIcon {
+  position: absolute;
+  top: calc(50% - 9px);
+  left: 20px;
+  font-size: 14px;
+  color: var(--sidebar-entry-text-default);
+}
+.inputMoneyIcon.active {
+  color: var(--text-dark);
+}
+
+.inputMoneyInput {
+  border: 1px solid var(--component-background-grey);
+  padding: 12px 20px 12px 40px;
+  border-radius: 8px;
+  width: 100%;
+}
+.inputMoneyInput:hover {
+  @include forms.form-field-outline;
+}
+.inputMoneyInput:focus {
+  @include forms.form-field-outline;
+}
+.inputMoneyInput::placeholder {
+  color: var(--sidebar-entry-text-default);
+}
