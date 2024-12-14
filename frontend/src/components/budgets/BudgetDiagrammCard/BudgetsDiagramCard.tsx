@@ -21,7 +21,8 @@ const BudgetsDiagramCard: ({ budgets, transactions, isLoading }: Props) => React
     let spent: number = 0;
     transactions.forEach((transaction) => {
       if (transaction.categoryKey === categoryKey) {
-        spent = spent + transaction.amount;
+        const amountToAdd: number = transaction.amount < 0 ? transaction.amount : 0;
+        spent = spent + amountToAdd;
       }
     });
     spent = spent * -1;

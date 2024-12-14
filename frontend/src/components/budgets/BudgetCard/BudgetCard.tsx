@@ -27,8 +27,9 @@ const BudgetCard: ({ budget, transactions, isLoading }: Props) => ReactNode = ({
   const link: string = `../transactions?cat=${budget.categoryKey}`;
 
   let spent: number = 0;
-  budgetTransactions.forEach((transaction: EPTransaction) => {
-    spent = spent + transaction.amount;
+  budgetTransactions.forEach((transaction: EPTransaction): void => {
+    const amountToAdd: number = transaction.amount < 0 ? transaction.amount : 0;
+    spent = spent + amountToAdd;
   });
   spent = spent * -1;
 
