@@ -62,6 +62,8 @@ describe('BudgetService', () => {
   beforeEach(async () => {
     const mockRepository = {
       find: jest.fn().mockResolvedValue(mockedBudgetsEntity),
+      create: jest.fn().mockReturnValue(mockedBudgetsEntity[0]),
+      save: jest.fn().mockResolvedValue(mockedBudgetsEntity[0]),
     };
 
     jest
@@ -104,5 +106,24 @@ describe('BudgetService', () => {
 
     expect(result).toEqual(mockedBudgets);
     expect(result).not.toEqual(mockedBudgetsEntityMapped);
+  });
+
+  it('adds new budget to repository', async () => {
+    await service.addNewBudget(mockedBudgetsEntityMapped[0]);
+
+    expect(repository.create).toHaveBeenCalledWith(
+      mockedBudgetsEntityMapped[0],
+    );
+    expect(repository.save).toHaveBeenCalledWith(mockedBudgetsEntity[0]);
+  });
+
+  it('throws error if adding new Budget to repository fails', async () => {
+    jest
+      .spyOn(repository, 'save')
+      .mockRejectedValue(new Error('Database error'));
+
+    await expect(() =>
+      service.addNewBudget(mockedBudgetsEntityMapped[0]),
+    ).rejects.toThrow('Could not save budget');
   });
 });

@@ -1,16 +1,14 @@
-import InputMoney from './InputMoney';
+import InputMoney, { InputMoneyRef } from './InputMoney';
 import { fireEvent, render, waitFor } from '@testing-library/react';
 import React from 'react';
 
-interface InputMoneyRef {
-  reset: () => void;
-}
-
 describe('InputMoney', () => {
   const mockHandleInputChange: jest.Mock = jest.fn();
+  const hasValidInput: boolean = false;
 
-  const testProps: { handleInputChange: jest.Mock } = {
+  const testProps: { handleInputChange: jest.Mock; hasValidInput: boolean } = {
     handleInputChange: mockHandleInputChange,
+    hasValidInput,
   };
 
   let inputMoneyRef: React.RefObject<InputMoneyRef>;
@@ -48,12 +46,13 @@ describe('InputMoney', () => {
 
   it('calls callback handleInputChange with input value', () => {
     const inputValue: string = '12345';
+    const inputValueNumber: number = 12345;
     const { container } = render(<InputMoney {...testProps} />);
 
     const input: Element | null = container.querySelector('.inputMoneyInput');
     fireEvent.change(input!, { target: { value: inputValue } });
 
-    expect(mockHandleInputChange).toHaveBeenCalledWith(inputValue);
+    expect(mockHandleInputChange).toHaveBeenCalledWith(inputValueNumber);
   });
 
   it('only accepts numbers as input', () => {
@@ -108,13 +107,28 @@ describe('InputMoney', () => {
     const input: Element | null = container.querySelector('.inputMoneyInput');
     fireEvent.change(input!, { target: { value: '12345' } });
     expect(input).toHaveAttribute('value', '12,345');
-    expect(mockHandleInputChange).toHaveBeenCalledWith('12345');
+    expect(mockHandleInputChange).toHaveBeenCalledWith(12345);
 
     inputMoneyRef.current?.reset();
 
     await waitFor(() => {
       expect(input).toHaveAttribute('value', '');
     });
-    expect(mockHandleInputChange).toHaveBeenCalledWith('');
+  });
+
+  it('renders label inputMoneyValidation when passed prop hasValidInput is false', () => {
+    const { container } = render(<InputMoney {...testProps} hasValidInput={false} />);
+
+    const element: Element | null = container.querySelector('.inputMoneyValidation');
+
+    expect(element).toHaveClass('visible');
+  });
+
+  it('does not render label inputMoneyValidation when passed prop hasValidInput is true', () => {
+    const { container } = render(<InputMoney {...testProps} hasValidInput={true} />);
+
+    const element: Element | null = container.querySelector('.inputMoneyValidation');
+
+    expect(element).not.toHaveClass('visible');
   });
 });

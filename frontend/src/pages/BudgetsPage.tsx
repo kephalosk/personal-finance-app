@@ -2,7 +2,7 @@ import './BudgetsPage.scss';
 import HeaderBar from '../components/HeaderBar';
 import BudgetsDiagramCard from '../components/budgets/BudgetDiagrammCard/BudgetsDiagramCard';
 import BudgetCard from '../components/budgets/BudgetCard/BudgetCard';
-import { getBudgets } from '../globals/services/BudgetService';
+import { addNewBudget, getBudgets } from '../globals/services/BudgetService';
 import { EPBudget } from '../model/entrypoints/EPBudget';
 import { EPTransaction } from '../model/entrypoints/EPTransaction';
 import { getTransactions } from '../globals/services/TransactionService';
@@ -12,6 +12,7 @@ import OverlayContentAddNewBudget from '../components/overlay/OverlayContentAddN
 import { Color } from '../model/Color';
 import Colors from '../constants/Colors';
 import EnsureFirstPossibleColorIsDefined from '../globals/utils/EnsureFirstPossibleColorIsDefined';
+import { toLowerCaseWithoutWhitespace } from '../globals/utils/ToLowerCaseWithoutWhitespace';
 
 const BudgetsPage: () => React.ReactNode = (): React.ReactNode => {
   const [transactions, setTransactions] = useState<EPTransaction[]>([]);
@@ -73,6 +74,7 @@ const BudgetsPage: () => React.ReactNode = (): React.ReactNode => {
       activeElement.blur();
     }
     setSelectedCategoryItem('General');
+    setHasValidInput(true);
   };
 
   const [selectedCategoryItem, setSelectedCategoryItem] = useState('General');
@@ -85,7 +87,35 @@ const BudgetsPage: () => React.ReactNode = (): React.ReactNode => {
     setSelectedColorItem(color);
   };
 
-  const handleAddNewBudget = (): void => {};
+  const [spendAmount, setSpendAmount] = useState<number>(0);
+  const handleInputChange = (input: number): void => {
+    if (input === 0) {
+      setHasValidInput(false);
+    } else {
+      setHasValidInput(true);
+    }
+    setSpendAmount(input);
+  };
+
+  const [hasValidInput, setHasValidInput] = useState<boolean>(true);
+  const handleAddNewBudget = async (): Promise<void> => {
+    if (spendAmount === 0) {
+      setHasValidInput(false);
+      return;
+    }
+    setHasValidInput(true);
+
+    const newBudget: EPBudget = {
+      category: selectedCategoryItem,
+      categoryKey: toLowerCaseWithoutWhitespace(selectedCategoryItem),
+      maximum: spendAmount,
+      color: selectedColorItem.name,
+    };
+    await addNewBudget(newBudget);
+    const fetchedBudgets: EPBudget[] = await getBudgets();
+    setBudgets(fetchedBudgets);
+    closeForm();
+  };
 
   const addNewBudgetDescription: string =
     'Choose a category to set a spending budget. These categories can help you monitor spending.';
@@ -130,8 +160,10 @@ const BudgetsPage: () => React.ReactNode = (): React.ReactNode => {
             handleCategoryChange={handleCategoryChange}
             selectedColorItem={selectedColorItem}
             handleColorChange={handleColorChange}
+            handleInputChange={handleInputChange}
             colors={colors}
             isHidden={isHidden}
+            hasValidInput={hasValidInput}
           />
         </OverlayCardBox>
       </div>

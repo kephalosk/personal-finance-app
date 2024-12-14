@@ -11,13 +11,21 @@ jest.mock('./OverlayDropdownCategory', () =>
 );
 const mockReset = jest.fn();
 jest.mock('../atoms/InputMoney', () => {
-  const MockInputMoney = forwardRef((props, ref) => {
-    useImperativeHandle(ref, () => ({
-      reset: mockReset,
-    }));
+  const MockInputMoney = forwardRef(
+    (props: { handleInputChange: (input: string) => void }, ref) => {
+      const { handleInputChange, ...rest } = props;
 
-    return <input {...props} data-testid="input-money" />;
-  });
+      useImperativeHandle(ref, () => ({
+        reset: mockReset,
+      }));
+
+      const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        handleInputChange(event.target.value);
+      };
+
+      return <input {...rest} data-testid="input-money" onChange={handleChange} />;
+    }
+  );
 
   MockInputMoney.displayName = 'InputMoney';
 
@@ -30,16 +38,20 @@ describe('OverlayContentAddNewBudget', () => {
   const mockHandleCategoryChange = jest.fn();
   const selectedColorItem: Color = Colors[0];
   const mockHandleColorChange = jest.fn();
+  const mockHandleInputChange = jest.fn();
   const colors = Colors;
   const isHidden = false;
+  const hasValidInput = true;
 
   const testProps = {
     selectedCategoryItem,
     handleCategoryChange: mockHandleCategoryChange,
     selectedColorItem,
     handleColorChange: mockHandleColorChange,
+    handleInputChange: mockHandleInputChange,
     colors,
     isHidden,
+    hasValidInput,
   };
 
   it('renders component OverlayDropdownCategory', async () => {
@@ -86,7 +98,7 @@ describe('OverlayContentAddNewBudget', () => {
     const component = screen.getByTestId('input-money');
     fireEvent.change(component, { target: { value: '1000' } });
 
-    //TODO fe-23-add-new-budget-part2: expect(component)...
+    expect(mockHandleInputChange).toHaveBeenCalledWith('1000');
   });
 
   it('resets InputMoney when passed prop isHidden changes', async () => {

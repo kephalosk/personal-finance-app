@@ -2,7 +2,7 @@ import './OverlayContentAddNewBudget.scss';
 import OverlayDropdownCategory from './OverlayDropdownCategory';
 import OverlayDropdownColor from './OverlayDropdownColor';
 import { Color } from '../../model/Color';
-import { ReactNode, useEffect, useRef, useState } from 'react';
+import { ReactNode, useEffect, useRef } from 'react';
 import InputMoney, { InputMoneyRef } from '../atoms/InputMoney';
 
 interface Props {
@@ -10,8 +10,10 @@ interface Props {
   handleCategoryChange: (category: string) => void;
   selectedColorItem: Color;
   handleColorChange: (color: Color) => void;
+  handleInputChange: (input: number) => void;
   colors: Color[];
   isHidden: boolean;
+  hasValidInput: boolean;
 }
 
 const OverlayContentAddNewBudget: ({
@@ -19,15 +21,19 @@ const OverlayContentAddNewBudget: ({
   handleCategoryChange,
   selectedColorItem,
   handleColorChange,
+  handleInputChange,
   colors,
   isHidden,
+  hasValidInput,
 }: Props) => ReactNode = ({
   selectedCategoryItem,
   handleCategoryChange,
   selectedColorItem,
   handleColorChange,
+  handleInputChange,
   colors,
   isHidden,
+  hasValidInput,
 }: Props): ReactNode => {
   const inputMoneyRef = useRef<InputMoneyRef>(null);
 
@@ -37,10 +43,6 @@ const OverlayContentAddNewBudget: ({
     }
   }, [isHidden]);
 
-  const handleInputChange = (input: string) => {
-    //TODO fe-23-add-new-budget-part2
-  };
-
   return (
     <div className="overlayContentAddNewBudget" data-testid="overlay-content-add-new-budget">
       <label className="fieldTitle">Budget Category</label>
@@ -49,7 +51,11 @@ const OverlayContentAddNewBudget: ({
         handleCategoryChange={handleCategoryChange}
       />
       <label className="fieldTitle">Maximum Spend</label>
-      <InputMoney ref={inputMoneyRef} handleInputChange={handleInputChange} />
+      <InputMoney
+        ref={inputMoneyRef}
+        handleInputChange={handleInputChange}
+        hasValidInput={hasValidInput}
+      />
       <label className="fieldTitle">Theme</label>
       <OverlayDropdownColor
         selectedColor={selectedColorItem}
