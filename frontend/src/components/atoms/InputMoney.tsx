@@ -11,22 +11,23 @@ import {
 } from 'react';
 
 interface Props {
-  handleInputChange: (input: string) => void;
+  handleInputChange: (input: number) => void;
+  hasValidInput: boolean;
 }
 
-interface InputMoneyRef {
+export interface InputMoneyRef {
   reset: () => void;
 }
 
 const InputMoney: ForwardRefExoticComponent<Props & RefAttributes<InputMoneyRef>> = forwardRef<
   InputMoneyRef,
   Props
->(({ handleInputChange }: Props, ref: ForwardedRef<InputMoneyRef>): ReactNode => {
+>(({ handleInputChange, hasValidInput }: Props, ref: ForwardedRef<InputMoneyRef>): ReactNode => {
   const [value, setValue] = useState<string>('');
 
   useImperativeHandle(ref, (): { reset: () => void } => ({
     reset: (): void => {
-      resetInput();
+      setValue('');
     },
   }));
 
@@ -56,7 +57,7 @@ const InputMoney: ForwardRefExoticComponent<Props & RefAttributes<InputMoneyRef>
     if (numericValue) {
       const formattedValue: string = numericValue.toLocaleString('en-US');
       setValue(formattedValue);
-      handleInputChange(numericValue.toString());
+      handleInputChange(numericValue);
     } else {
       resetInput();
     }
@@ -64,19 +65,24 @@ const InputMoney: ForwardRefExoticComponent<Props & RefAttributes<InputMoneyRef>
 
   const resetInput: () => void = (): void => {
     setValue('');
-    handleInputChange('');
+    handleInputChange(0);
   };
 
   return (
-    <div className="inputMoney" data-testid="input-money">
-      <input
-        className="inputMoneyInput"
-        placeholder="e.g. 2000"
-        value={value}
-        onChange={handleChange}
-        type="text"
-      />
-      <label className={`inputMoneyIcon ${value ? 'active' : ''}`}>$</label>
+    <div className="inputMoneyContainer">
+      <div className="inputMoney" data-testid="input-money">
+        <input
+          className="inputMoneyInput"
+          placeholder="e.g. 2000"
+          value={value}
+          onChange={handleChange}
+          type="text"
+        />
+        <label className={`inputMoneyIcon ${value ? 'active' : ''}`}>$</label>
+      </div>
+      <label className={`inputMoneyValidation ${hasValidInput ? '' : 'visible'}`}>
+        Please enter a spending limit!
+      </label>
     </div>
   );
 });

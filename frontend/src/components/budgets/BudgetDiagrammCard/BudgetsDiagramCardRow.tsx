@@ -21,7 +21,7 @@ const BudgetsDiagramCardRow: ({ title, currentAmount, maxAmount, color }: Props)
       <div className="budgetsDiagramCardRow" data-testid="budgets-diagramm-card-row">
         <div className={`cardRowLeftBorder ${color}`}></div>
         <label className="cardRowTitle">{title}</label>
-        <label className="cardRowTitleCurrentAmount">${currentAmountFormatted}</label>
+        <label className=" cardRowTitleCurrentAmount">${currentAmountFormatted}</label>
         <label className="cardRowTitleMaxAmount">of ${maxAmountFormatted}</label>
       </div>
     </>

@@ -1,8 +1,11 @@
 @use '../../styles/forms';
 
 .inputMoney {
-  margin-bottom: 16px;
   position: relative;
+}
+
+.inputMoneyContainer {
+  margin-bottom: 16px;
 }
 
 .inputMoneyIcon {
@@ -30,4 +33,14 @@
 }
 .inputMoneyInput::placeholder {
   color: var(--sidebar-entry-text-default);
+}
+
+.inputMoneyValidation {
+  margin-left: 8px;
+  font-size: 12px;
+  color: var(--text-red);
+  display: none;
+}
+.inputMoneyValidation.visible {
+  display: block;
 }

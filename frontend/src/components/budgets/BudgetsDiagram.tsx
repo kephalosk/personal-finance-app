@@ -16,7 +16,8 @@ const BudgetsDiagram: ({ budgets, transactions }: Props) => ReactNode = ({
   budgets.forEach((budget: EPBudget): void => {
     transactions.forEach((transaction: EPTransaction): void => {
       if (budget.categoryKey === transaction.categoryKey) {
-        spentTotal = spentTotal + transaction.amount;
+        const amountToAdd: number = transaction.amount < 0 ? transaction.amount : 0;
+        spentTotal = spentTotal + amountToAdd;
       }
     });
   });
@@ -38,7 +39,8 @@ const BudgetsDiagram: ({ budgets, transactions }: Props) => ReactNode = ({
       let budgetSpent: number = 0;
       transactions.forEach((transaction: EPTransaction): void => {
         if (transaction.categoryKey === budget.categoryKey) {
-          budgetSpent = budgetSpent + transaction.amount;
+          const amountToAdd: number = transaction.amount < 0 ? transaction.amount : 0;
+          budgetSpent = budgetSpent + amountToAdd;
         }
       });
       const budgetSpentPositive: number = budgetSpent * -1;

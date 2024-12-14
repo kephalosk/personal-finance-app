@@ -56,7 +56,6 @@ const OverlayCardBox: ({
 
   const handleSubmit: () => void = (): void => {
     handleEvent();
-    onClose();
   };
 
   return (

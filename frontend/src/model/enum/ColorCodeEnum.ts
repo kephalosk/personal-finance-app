@@ -16,4 +16,5 @@ export enum ColorCodeEnum {
   ORANGE = '#BE6C49',
   SEPIA = '#F8F4F0',
   WHITE = '#FFFFFF',
+  BLACK = '#000000',
 }

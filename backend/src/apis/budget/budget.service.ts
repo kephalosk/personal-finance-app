@@ -15,11 +15,25 @@ export class BudgetService {
 
   async findAll(): Promise<APIBudgetDTO[]> {
     try {
-      const budgets = await this.budgetsRepository.find();
+      const budgets: Budgets[] = await this.budgetsRepository.find();
       return this.mapBudgetEntities(budgets);
     } catch (error) {
       console.error('Failed to read budgets from database', error);
       return this.getBudget();
+    }
+  }
+
+  async addNewBudget(newBudget: APIBudgetDTO): Promise<void> {
+    try {
+      const newBudgetRecord: Budgets = this.budgetsRepository.create({
+        category: newBudget.category,
+        maximum: newBudget.maximum,
+        theme: newBudget.theme,
+      });
+      await this.budgetsRepository.save(newBudgetRecord);
+    } catch (error) {
+      console.error('Failed to save new budget to database', error);
+      throw new Error('Could not save budget');
     }
   }
 
