@@ -6,7 +6,7 @@ interface Props {
   itemClassContainer: string;
   color: Color;
   onItemClick: (color: Color) => void;
-  handleCategoryKeyDown: (
+  handleColorKeyDown: (
     event: React.KeyboardEvent<HTMLDivElement>,
     color: Color,
     index: number
@@ -19,14 +19,14 @@ const OverlayDropDownColorListItem: ({
   itemClassContainer,
   color,
   onItemClick,
-  handleCategoryKeyDown,
+  handleColorKeyDown,
   clickableRefs,
   index,
 }: Props) => React.ReactNode = ({
   itemClassContainer,
   color,
   onItemClick,
-  handleCategoryKeyDown,
+  handleColorKeyDown,
   clickableRefs,
   index,
 }: Props) => {
@@ -36,7 +36,7 @@ const OverlayDropDownColorListItem: ({
         className={`${itemClassContainer} ${color.disabled ? 'disabled' : ''}`}
         data-testid="overlay-dropdown-color-list-item"
         onClick={() => onItemClick(color)}
-        onKeyDown={(event) => handleCategoryKeyDown(event, color, index + 1)}
+        onKeyDown={(event) => handleColorKeyDown(event, color, index + 1)}
         tabIndex={color.disabled ? -1 : 0}
         ref={(el) => {
           if (!color.disabled) {

@@ -1,7 +1,7 @@
 import { fireEvent, render } from '@testing-library/react';
 import React from 'react';
 import OverlayDropdownCategory from './OverlayDropdownCategory';
-import { Categories, CategoriesMap } from '../../constants/Categories';
+import { Categories, CategoriesMap } from '../../../constants/Categories';
 
 describe('OverlayDropdownCategory', () => {
   const selectedItem = 'General';

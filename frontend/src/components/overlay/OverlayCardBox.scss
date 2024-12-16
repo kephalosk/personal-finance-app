@@ -80,14 +80,24 @@
   color: var(--text-white);
   cursor: pointer;
 }
-.overlayFormSubmit:hover {
+.overlayFormSubmit.isEnabled:hover {
   background-color: var(--component-background-grey);
   transition: background-color 0.1s ease;
 }
-.overlayFormSubmit:focus-visible {
+.overlayFormSubmit.isEnabled:focus-visible {
   border: 2px solid var(--text-dark);
   padding: 14px;
   background-color: var(--component-background-grey);
   transition: background-color 0.1s ease;
   outline: none;
+}
+.overlayFormSubmit.disabled {
+  border: 1px solid var(--component-background-disabled);
+  background-color: var(--component-background-disabled);
+  color: var(--text-grey);
+  pointer-events: none;
+}
+
+.overlayFormSubmitContainer.disabled {
+  cursor: not-allowed;
 }

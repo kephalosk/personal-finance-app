@@ -9,7 +9,7 @@ CREATE TABLE budgets (
 
 INSERT INTO budgets (id, category, maximum, theme)
 VALUES
-    (1, 'Entertainment', 50.00, '#277C78'),
-    (2, 'Bills', 750.00, '#82C9D7'),
-    (3, 'Dining Out', 75.00, '#F2CDAC'),
-    (4, 'Personal Care', 100.00, '#626070');
+    ('Entertainment', 50.00, '#277C78'),
+    ('Bills', 750.00, '#82C9D7'),
+    ('Dining Out', 75.00, '#F2CDAC'),
+    ('Personal Care', 100.00, '#626070');

@@ -1,17 +1,19 @@
 import './OverlayContentAddNewBudget.scss';
-import OverlayDropdownCategory from './OverlayDropdownCategory';
+import OverlayDropdownCategory from './dropdownCategory/OverlayDropdownCategory';
 import OverlayDropdownColor from './OverlayDropdownColor';
 import { Color } from '../../model/Color';
-import { ReactNode, useEffect, useRef } from 'react';
+import { ReactNode, RefObject, useEffect, useRef } from 'react';
 import InputMoney, { InputMoneyRef } from '../atoms/InputMoney';
+import { BudgetCategory } from '../../model/BudgetCategory';
 
 interface Props {
-  selectedCategoryItem: string;
-  handleCategoryChange: (category: string) => void;
+  selectedCategoryItem: BudgetCategory;
+  handleCategoryChange: (category: BudgetCategory) => void;
   selectedColorItem: Color;
   handleColorChange: (color: Color) => void;
   handleInputChange: (input: number) => void;
   colors: Color[];
+  budgetCategories: BudgetCategory[];
   isHidden: boolean;
   hasValidInput: boolean;
 }
@@ -23,6 +25,7 @@ const OverlayContentAddNewBudget: ({
   handleColorChange,
   handleInputChange,
   colors,
+  budgetCategories,
   isHidden,
   hasValidInput,
 }: Props) => ReactNode = ({
@@ -32,12 +35,13 @@ const OverlayContentAddNewBudget: ({
   handleColorChange,
   handleInputChange,
   colors,
+  budgetCategories,
   isHidden,
   hasValidInput,
 }: Props): ReactNode => {
-  const inputMoneyRef = useRef<InputMoneyRef>(null);
+  const inputMoneyRef: RefObject<InputMoneyRef> = useRef<InputMoneyRef>(null);
 
-  useEffect(() => {
+  useEffect((): void => {
     if (isHidden) {
       inputMoneyRef.current?.reset(); // Reset auslösen
     }
@@ -49,6 +53,7 @@ const OverlayContentAddNewBudget: ({
       <OverlayDropdownCategory
         selectedItem={selectedCategoryItem}
         handleCategoryChange={handleCategoryChange}
+        budgetCategories={budgetCategories}
       />
       <label className="fieldTitle">Maximum Spend</label>
       <InputMoney
