@@ -68,8 +68,7 @@
 .dropDownColorListItem {
   border-radius: 8px;
   padding: 12px 22px;
-  display: flex;
-  flex-direction: row;
+  width: 100%;
   align-items: center;
   font-size: 14px;
   cursor: pointer;
@@ -84,6 +83,10 @@
   pointer-events: none;
 }
 
+.dropdownCategoryListItemContainer {
+  display: flex;
+  width: 100%;
+}
 .dropDownColorListItemContainer.disabled {
   cursor: not-allowed;
 }

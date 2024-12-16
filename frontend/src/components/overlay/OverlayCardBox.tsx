@@ -10,6 +10,7 @@ interface Props {
   handleEvent: () => void;
   onClose: () => void;
   children: React.ReactNode;
+  isButtonDisabled: boolean;
 }
 
 const OverlayCardBox: ({
@@ -20,6 +21,7 @@ const OverlayCardBox: ({
   handleEvent,
   onClose,
   children,
+  isButtonDisabled,
 }: Props) => ReactNode = ({
   title,
   description,
@@ -28,6 +30,7 @@ const OverlayCardBox: ({
   handleEvent,
   onClose,
   children,
+  isButtonDisabled,
 }: Props): ReactNode => {
   const overlayRef: React.RefObject<HTMLDivElement> = useRef<HTMLDivElement>(null);
 
@@ -85,9 +88,17 @@ const OverlayCardBox: ({
           <p className="overlayFormHeaderText">{description}</p>
         </header>
         <section className="overlayFormContent">{children}</section>
-        <button className="overlayFormSubmit" onClick={handleSubmit}>
-          {submitText}
-        </button>
+        <div
+          className={`overlayFormSubmitContainer ${isButtonDisabled ? 'disabled' : 'isEnabled'}`}
+        >
+          <button
+            className={`overlayFormSubmit ${isButtonDisabled ? 'disabled' : 'isEnabled'}`}
+            onClick={handleSubmit}
+            tabIndex={isButtonDisabled ? -1 : 0}
+          >
+            {submitText}
+          </button>
+        </div>
       </div>
     </div>
   );

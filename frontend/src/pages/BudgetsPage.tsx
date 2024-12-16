@@ -13,6 +13,9 @@ import { Color } from '../model/Color';
 import Colors from '../constants/Colors';
 import EnsureFirstPossibleColorIsDefined from '../globals/utils/EnsureFirstPossibleColorIsDefined';
 import { toLowerCaseWithoutWhitespace } from '../globals/utils/ToLowerCaseWithoutWhitespace';
+import { BudgetCategory } from '../model/BudgetCategory';
+import { BudgetCategories } from '../constants/BudgetCategories';
+import EnsureFirstPossibleItemIsDefined from '../globals/utils/EnsureFirstPossibleItemIsDefined';
 
 const BudgetsPage: () => React.ReactNode = (): React.ReactNode => {
   const [transactions, setTransactions] = useState<EPTransaction[]>([]);
@@ -30,13 +33,19 @@ const BudgetsPage: () => React.ReactNode = (): React.ReactNode => {
   const [isLoadingBudgets, setIsLoadingBudgets] = useState<boolean>(true);
   useEffect((): void => {
     const fetchBudgets = async (): Promise<void> => {
-      const fetchedBudgets: EPBudget[] = await getBudgets();
-      setBudgets(fetchedBudgets);
-      sortColors(fetchedBudgets);
-      setIsLoadingBudgets(false);
+      await updatePage();
     };
     fetchBudgets().then();
   }, []);
+
+  const updatePage: () => Promise<void> = async (): Promise<void> => {
+    setIsLoadingBudgets(true);
+    const fetchedBudgets: EPBudget[] = await getBudgets();
+    setBudgets(fetchedBudgets);
+    sortColors(fetchedBudgets);
+    sortCategories(fetchedBudgets);
+    setIsLoadingBudgets(false);
+  };
 
   const [colors, setColors] = useState<Color[]>(Colors);
   const sortColors = (fetchedBudgets: EPBudget[]): void => {
@@ -62,6 +71,36 @@ const BudgetsPage: () => React.ReactNode = (): React.ReactNode => {
     setSelectedColorItem(definedFirstPossibleColor);
   };
 
+  const [budgetCategories, setBudgetCategories] = useState<BudgetCategory[]>(BudgetCategories);
+  const sortCategories = (fetchedBudgets: EPBudget[]): void => {
+    const markedCategories: BudgetCategory[] = budgetCategories.map(
+      (category: BudgetCategory): BudgetCategory => {
+        const isCategoryUsed: boolean = fetchedBudgets.some(
+          (budget: EPBudget): boolean => budget.categoryKey === category.key
+        );
+        return { ...category, disabled: isCategoryUsed };
+      }
+    );
+    const enabledCategories: BudgetCategory[] = markedCategories.filter(
+      (category: BudgetCategory) => !category.disabled
+    );
+    const disabledCategories: BudgetCategory[] = markedCategories.filter(
+      (category: BudgetCategory) => category.disabled
+    );
+    const combinedCategories: BudgetCategory[] = [...enabledCategories, ...disabledCategories];
+
+    setBudgetCategories(combinedCategories);
+
+    const firstPossibleCategory: BudgetCategory | undefined = markedCategories.find(
+      (category: BudgetCategory) => !category.disabled
+    );
+    const definedFirstPossibleCategory: BudgetCategory = EnsureFirstPossibleItemIsDefined(
+      firstPossibleCategory,
+      markedCategories[0]
+    );
+    setSelectedCategoryItem(definedFirstPossibleCategory);
+  };
+
   const [isHidden, setIsHidden] = useState<boolean>(true);
   const handleShowForm = (): void => {
     setIsHidden(false);
@@ -73,12 +112,14 @@ const BudgetsPage: () => React.ReactNode = (): React.ReactNode => {
     if (activeElement instanceof HTMLElement) {
       activeElement.blur();
     }
-    setSelectedCategoryItem('General');
     setHasValidInput(true);
+    setSpendAmount(0);
   };
 
-  const [selectedCategoryItem, setSelectedCategoryItem] = useState('General');
-  const handleCategoryChange = (category: string): void => {
+  const [selectedCategoryItem, setSelectedCategoryItem] = useState<BudgetCategory>(
+    BudgetCategories[0]
+  );
+  const handleCategoryChange = (category: BudgetCategory): void => {
     setSelectedCategoryItem(category);
   };
 
@@ -103,17 +144,19 @@ const BudgetsPage: () => React.ReactNode = (): React.ReactNode => {
       setHasValidInput(false);
       return;
     }
+    if (selectedCategoryItem.disabled) {
+      return;
+    }
     setHasValidInput(true);
 
     const newBudget: EPBudget = {
-      category: selectedCategoryItem,
-      categoryKey: toLowerCaseWithoutWhitespace(selectedCategoryItem),
+      category: selectedCategoryItem.name,
+      categoryKey: selectedCategoryItem.key,
       maximum: spendAmount,
       color: selectedColorItem.name,
     };
     await addNewBudget(newBudget);
-    const fetchedBudgets: EPBudget[] = await getBudgets();
-    setBudgets(fetchedBudgets);
+    await updatePage();
     closeForm();
   };
 
@@ -150,10 +193,11 @@ const BudgetsPage: () => React.ReactNode = (): React.ReactNode => {
         <OverlayCardBox
           title="Add New Budget"
           description={addNewBudgetDescription}
-          submitText="Save Changes"
+          submitText="Add Budget"
           isHidden={isHidden}
           handleEvent={handleAddNewBudget}
           onClose={closeForm}
+          isButtonDisabled={selectedCategoryItem.disabled}
         >
           <OverlayContentAddNewBudget
             selectedCategoryItem={selectedCategoryItem}
@@ -162,6 +206,7 @@ const BudgetsPage: () => React.ReactNode = (): React.ReactNode => {
             handleColorChange={handleColorChange}
             handleInputChange={handleInputChange}
             colors={colors}
+            budgetCategories={budgetCategories}
             isHidden={isHidden}
             hasValidInput={hasValidInput}
           />

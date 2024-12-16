@@ -4,9 +4,9 @@ import OverlayContentAddNewBudget from './OverlayContentAddNewBudget';
 import { Color } from '../../model/Color';
 import Colors from '../../constants/Colors';
 import OverlayDropdownColor from './OverlayDropdownColor';
-import OverlayDropdownCategory from './OverlayDropdownCategory';
+import OverlayDropdownCategory from './dropdownCategory/OverlayDropdownCategory';
 
-jest.mock('./OverlayDropdownCategory', () =>
+jest.mock('./dropdownCategory/OverlayDropdownCategory', () =>
   jest.fn(() => <div data-testid="dropdown-category"></div>)
 );
 const mockReset = jest.fn();
