@@ -11,6 +11,11 @@
   position: relative;
 }
 
+.dropDownColorListItem {
+  display: flex;
+  flex-direction: row;
+}
+
 .dropdownColorWrapper {
   border-radius: 8px;
   border: 1px solid var(--component-background-grey);

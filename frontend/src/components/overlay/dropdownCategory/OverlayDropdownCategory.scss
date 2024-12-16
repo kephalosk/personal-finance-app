@@ -1,0 +1,36 @@
+@use '../../../styles/forms';
+
+.dropdownCategoryList {
+  border-radius: 8px;
+  box-shadow: 0 5px 40px -25px var(--component-background-dark);
+  background-color: var(--component-background-bright);
+  display: flex;
+  flex-direction: column;
+  max-height: 40px;
+  width: calc(100% + 2px);
+  top: -1px;
+  left: -1px;
+  position: absolute;
+  z-index: 4;
+  cursor: pointer;
+  visibility: hidden;
+  overflow: hidden;
+  transition: max-height 0.1s ease, visibility 0.1s ease;
+}
+.dropdownCategoryList.isOpen {
+  max-height: 460px;
+  visibility: visible;
+}
+
+.dropdownCategoryListEntry {
+  display: flex;
+  flex-direction: column;
+}
+
+.dropdownCategoryListLine {
+  margin: 0 20px;
+  width: calc(100% - 40px);
+}
+.dropdownCategoryListLine.disabled {
+   cursor: not-allowed;
+}

@@ -29,7 +29,7 @@ const OverlayDropdownColor: ({
   const clickableRefs: React.MutableRefObject<(HTMLDivElement | null)[]> = useRef<
     (HTMLDivElement | null)[]
   >([]);
-  const clickableColors: Color[] = colors.filter((color) => !color.disabled);
+  const clickableColors: Color[] = colors.filter((color: Color) => !color.disabled);
 
   useEffect((): void => {
     clickableRefs.current = clickableRefs.current.slice(0, clickableColors.length);
@@ -81,7 +81,7 @@ const OverlayDropdownColor: ({
     }
   };
 
-  const handleCategoryKeyDown: (
+  const handleColorKeyDown: (
     event: React.KeyboardEvent<HTMLDivElement>,
     color: Color,
     visibleIndex: number
@@ -130,7 +130,7 @@ const OverlayDropdownColor: ({
           itemClassContainer={`${itemClassContainer} ${0}`}
           color={selectedColor}
           onItemClick={onItemClick}
-          handleCategoryKeyDown={handleCategoryKeyDown}
+          handleColorKeyDown={handleColorKeyDown}
           clickableRefs={clickableRefs}
           index={-1}
         />
@@ -142,7 +142,7 @@ const OverlayDropdownColor: ({
               itemClassContainer={`${itemClassContainer} ${index + 1}`}
               color={color}
               onItemClick={onItemClick}
-              handleCategoryKeyDown={handleCategoryKeyDown}
+              handleColorKeyDown={handleColorKeyDown}
               clickableRefs={clickableRefs}
               index={index}
             />
