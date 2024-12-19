@@ -5,6 +5,7 @@ import { getTransactions } from '../../globals/services/TransactionService';
 import { mockedTransactions } from '../../fixtures/MockedTransactions';
 import useIsSmallScreen from '../../globals/hooks/useIsSmallScreen';
 import SelectionMenu from './SelectionMenu';
+import { Categories } from '../../constants/Categories';
 
 jest.mock('./SelectionMenu', () =>
   jest.fn((props) => <div data-testid="selection-menu" onClick={props.handleItemChange}></div>)
@@ -63,11 +64,7 @@ describe('searchbarDropdownCategory', () => {
     expect(SelectionMenu).toHaveBeenCalledWith(
       {
         handleItemChange: expect.any(Function),
-        items: [
-          { key: 'all', name: 'All Transactions' },
-          { key: 'general', name: 'General' },
-          { key: 'diningout', name: 'Dining Out' },
-        ],
+        items: [{ key: 'all', name: 'All Transactions' }, ...Categories],
         mobileIcon: '/images/icon-filter-mobile.svg',
         selectedItem: 'All Transactions',
       },
