@@ -23,6 +23,10 @@
   cursor: not-allowed;
 }
 
+.DropdownCategoryBarContainer {
+  margin-bottom: 16px;
+}
+
 .dropdownCategoryBarItem.disabled {
   opacity: 0.4;
   pointer-events: none;

@@ -1,5 +1,5 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-import React from 'react';
+import React, { Fragment } from 'react';
 import {
   mockedTransactions11Records,
   mockedTransactions2,
@@ -14,12 +14,20 @@ import { EPTransaction } from '../../model/entrypoints/EPTransaction';
 jest.mock('../LoadingSpinner', () => jest.fn(() => <div data-testid="loading-spinner"></div>));
 jest.mock('../searchbar/TransactionsSearchbar', () =>
   jest.fn((props) => (
-    <div
-      data-testid="transactions-searchbar"
-      onClick={() => {
-        props.updateTransactions(mockedTransactions2);
-      }}
-    ></div>
+    <Fragment>
+      <div
+        data-testid="transactions-searchbar"
+        onClick={() => {
+          props.updateTransactions(mockedTransactions2);
+        }}
+      ></div>
+      <div
+        data-testid="transactions-searchbar-empty"
+        onClick={() => {
+          props.updateTransactions([]);
+        }}
+      ></div>
+    </Fragment>
   ))
 );
 jest.mock('./table/TransactionsTable', () =>
@@ -31,12 +39,12 @@ jest.mock('./table/TransactionsTable', () =>
     </div>
   ))
 );
-const changedPageIndex = 4;
+const changedPageIndex = 0;
 jest.mock('./pagination/TransactionsPagination', () =>
   jest.fn(({ changePageIndex }) => (
     <div
       data-testid="transactions-pagination"
-      onClick={() => changePageIndex(changedPageIndex)}
+      onClick={() => changePageIndex && changePageIndex(changedPageIndex)}
     ></div>
   ))
 );
@@ -49,6 +57,10 @@ describe('TransactionsDetails', () => {
     fetchedTransactions,
     isLoading,
   };
+
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
 
   it('renders component LoadingSpinner if passed prop isLoading is true', () => {
     render(<TransactionsDetails {...testProps} isLoading={true} />);
@@ -133,13 +145,30 @@ describe('TransactionsDetails', () => {
   it('updates pageIndex if changePageIndex of TransactionsPagination is triggered', () => {
     render(<TransactionsDetails {...testProps} />);
 
+    const searchbar = screen.getByTestId('transactions-searchbar');
+    fireEvent.click(searchbar);
     const component = screen.getByTestId('transactions-pagination');
     fireEvent.click(component);
 
     expect(component).toBeInTheDocument();
-    expect(TransactionsPagination).toHaveBeenLastCalledWith(
-      expect.objectContaining({ pageIndex: 4 }),
+    expect(TransactionsPagination).not.toHaveBeenLastCalledWith(
+      {
+        changePageIndex: expect.any(Function),
+        isMaxIndex: true,
+        pageIndex: 0,
+        transactionsPaged: mockedTransactions2,
+      },
       {}
     );
+  });
+
+  it('updates transactions with empty transactions', () => {
+    render(<TransactionsDetails {...testProps} />);
+
+    const component = screen.getByTestId('transactions-searchbar-empty');
+    fireEvent.click(component);
+
+    expect(component).toBeInTheDocument();
+    expect(TransactionsTable).toHaveBeenLastCalledWith({ currentIndexedTransactions: [] }, {});
   });
 });

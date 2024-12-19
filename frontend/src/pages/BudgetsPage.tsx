@@ -6,22 +6,21 @@ import { addNewBudget, getBudgets } from '../globals/services/BudgetService';
 import { EPBudget } from '../model/entrypoints/EPBudget';
 import { EPTransaction } from '../model/entrypoints/EPTransaction';
 import { getTransactions } from '../globals/services/TransactionService';
-import React, { useEffect, useState } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 import OverlayCardBox from '../components/overlay/OverlayCardBox';
 import OverlayContentAddNewBudget from '../components/overlay/OverlayContentAddNewBudget';
 import { Color } from '../model/Color';
 import Colors from '../constants/Colors';
 import EnsureFirstPossibleColorIsDefined from '../globals/utils/EnsureFirstPossibleColorIsDefined';
-import { toLowerCaseWithoutWhitespace } from '../globals/utils/ToLowerCaseWithoutWhitespace';
 import { BudgetCategory } from '../model/BudgetCategory';
 import { BudgetCategories } from '../constants/BudgetCategories';
 import EnsureFirstPossibleItemIsDefined from '../globals/utils/EnsureFirstPossibleItemIsDefined';
 
-const BudgetsPage: () => React.ReactNode = (): React.ReactNode => {
+const BudgetsPage: () => ReactNode = (): ReactNode => {
   const [transactions, setTransactions] = useState<EPTransaction[]>([]);
   const [isLoadingTransactions, setIsLoadingTransactions] = useState<boolean>(true);
   useEffect((): void => {
-    const fetchTransactions = async (): Promise<void> => {
+    const fetchTransactions: () => Promise<void> = async (): Promise<void> => {
       const fetchedTransactions: EPTransaction[] = await getTransactions();
       setTransactions(fetchedTransactions);
       setIsLoadingTransactions(false);
@@ -32,10 +31,12 @@ const BudgetsPage: () => React.ReactNode = (): React.ReactNode => {
   const [budgets, setBudgets] = useState<EPBudget[]>([]);
   const [isLoadingBudgets, setIsLoadingBudgets] = useState<boolean>(true);
   useEffect((): void => {
-    const fetchBudgets = async (): Promise<void> => {
+    const fetchBudgets: () => Promise<void> = async (): Promise<void> => {
       await updatePage();
     };
     fetchBudgets().then();
+    // updatePage is used only for initialization here
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const updatePage: () => Promise<void> = async (): Promise<void> => {
@@ -48,7 +49,7 @@ const BudgetsPage: () => React.ReactNode = (): React.ReactNode => {
   };
 
   const [colors, setColors] = useState<Color[]>(Colors);
-  const sortColors = (fetchedBudgets: EPBudget[]): void => {
+  const sortColors: (fetchedBudgets: EPBudget[]) => void = (fetchedBudgets: EPBudget[]): void => {
     const markedColors: Color[] = colors.map((color: Color): Color => {
       const isColorUsed: boolean = fetchedBudgets.some(
         (budget: EPBudget): boolean => budget.color === color.name
@@ -72,7 +73,9 @@ const BudgetsPage: () => React.ReactNode = (): React.ReactNode => {
   };
 
   const [budgetCategories, setBudgetCategories] = useState<BudgetCategory[]>(BudgetCategories);
-  const sortCategories = (fetchedBudgets: EPBudget[]): void => {
+  const sortCategories: (fetchedBudgets: EPBudget[]) => void = (
+    fetchedBudgets: EPBudget[]
+  ): void => {
     const markedCategories: BudgetCategory[] = budgetCategories.map(
       (category: BudgetCategory): BudgetCategory => {
         const isCategoryUsed: boolean = fetchedBudgets.some(
@@ -102,11 +105,11 @@ const BudgetsPage: () => React.ReactNode = (): React.ReactNode => {
   };
 
   const [isHidden, setIsHidden] = useState<boolean>(true);
-  const handleShowForm = (): void => {
+  const handleShowForm: () => void = (): void => {
     setIsHidden(false);
   };
 
-  const closeForm = (): void => {
+  const closeForm: () => void = (): void => {
     setIsHidden(true);
     const activeElement: Element | null = document.activeElement;
     if (activeElement instanceof HTMLElement) {
@@ -119,17 +122,19 @@ const BudgetsPage: () => React.ReactNode = (): React.ReactNode => {
   const [selectedCategoryItem, setSelectedCategoryItem] = useState<BudgetCategory>(
     BudgetCategories[0]
   );
-  const handleCategoryChange = (category: BudgetCategory): void => {
+  const handleCategoryChange: (category: BudgetCategory) => void = (
+    category: BudgetCategory
+  ): void => {
     setSelectedCategoryItem(category);
   };
 
   const [selectedColorItem, setSelectedColorItem] = useState(Colors[0]);
-  const handleColorChange = (color: Color): void => {
+  const handleColorChange: (color: Color) => void = (color: Color): void => {
     setSelectedColorItem(color);
   };
 
   const [spendAmount, setSpendAmount] = useState<number>(0);
-  const handleInputChange = (input: number): void => {
+  const handleInputChange: (input: number) => void = (input: number): void => {
     if (input === 0) {
       setHasValidInput(false);
     } else {
@@ -139,7 +144,7 @@ const BudgetsPage: () => React.ReactNode = (): React.ReactNode => {
   };
 
   const [hasValidInput, setHasValidInput] = useState<boolean>(true);
-  const handleAddNewBudget = async (): Promise<void> => {
+  const handleAddNewBudget: () => Promise<void> = async (): Promise<void> => {
     if (spendAmount === 0) {
       setHasValidInput(false);
       return;

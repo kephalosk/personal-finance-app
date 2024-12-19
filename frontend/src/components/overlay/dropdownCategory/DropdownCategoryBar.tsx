@@ -6,27 +6,39 @@ interface Props {
   selectedItem: BudgetCategory;
   handleClick: () => void;
   handleKeyDown: (event: React.KeyboardEvent<HTMLDivElement>) => void;
+  dropdownCategoryBarClass: string;
+  dropdownCategoryIconClass: string;
 }
 
-const DropdownCategoryBar: ({ selectedItem, handleClick, handleKeyDown }: Props) => ReactNode = ({
+const DropdownCategoryBar: ({
   selectedItem,
   handleClick,
   handleKeyDown,
+  dropdownCategoryBarClass,
+  dropdownCategoryIconClass,
+}: Props) => ReactNode = ({
+  selectedItem,
+  handleClick,
+  handleKeyDown,
+  dropdownCategoryBarClass,
+  dropdownCategoryIconClass,
 }: Props): ReactNode => {
   return (
-    <div className="DropdownCategoryBarContainer">
+    <div className="DropdownCategoryBarContainer" data-testid="dropdown-category-bar">
       <div
-        className={`dropdownCategoryBar ${selectedItem.disabled ? 'disabled' : ''}`}
+        className={`${dropdownCategoryBarClass} ${selectedItem.disabled ? 'disabled' : ''}`}
         tabIndex={0}
         onClick={handleClick}
         onKeyDown={handleKeyDown}
       >
         <div className={`dropdownCategoryBarItem ${selectedItem.disabled ? 'disabled' : ''}`}>
           <label className="dropdownCategoryBarItemLabel">{selectedItem.name}</label>
-          {selectedItem.disabled && <span>Already used</span>}
+          {selectedItem.disabled && (
+            <span className="dropdownCategoryBarItemInfo">Already used</span>
+          )}
         </div>
         <img
-          className="dropdownCategoryIcon"
+          className={dropdownCategoryIconClass}
           alt="caret icon"
           aria-hidden="true"
           src="/images/icon-caret-down.svg"
