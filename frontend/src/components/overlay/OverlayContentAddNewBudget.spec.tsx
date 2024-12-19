@@ -1,13 +1,17 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-import React, { forwardRef, ReactNode, useImperativeHandle } from 'react';
+import React, { forwardRef, useImperativeHandle } from 'react';
 import OverlayContentAddNewBudget from './OverlayContentAddNewBudget';
 import { Color } from '../../model/Color';
 import Colors from '../../constants/Colors';
 import OverlayDropdownColor from './OverlayDropdownColor';
 import OverlayDropdownCategory from './dropdownCategory/OverlayDropdownCategory';
+import { mockedBudgetCategories } from '../../fixtures/MockedBudgetCategory';
+import { BudgetCategory } from '../../model/BudgetCategory';
 
 jest.mock('./dropdownCategory/OverlayDropdownCategory', () =>
-  jest.fn(() => <div data-testid="dropdown-category"></div>)
+  jest.fn((props) => (
+    <div data-testid="dropdown-category" onClick={props.handleCategoryChange}></div>
+  ))
 );
 const mockReset = jest.fn();
 jest.mock('../atoms/InputMoney', () => {
@@ -34,12 +38,13 @@ jest.mock('../atoms/InputMoney', () => {
 jest.mock('./OverlayDropdownColor', () => jest.fn(() => <div data-testid="dropdown-color"></div>));
 
 describe('OverlayContentAddNewBudget', () => {
-  const selectedCategoryItem = 'General';
+  const selectedCategoryItem = mockedBudgetCategories[0];
   const mockHandleCategoryChange = jest.fn();
   const selectedColorItem: Color = Colors[0];
   const mockHandleColorChange = jest.fn();
   const mockHandleInputChange = jest.fn();
   const colors = Colors;
+  const budgetCategories: BudgetCategory[] = mockedBudgetCategories;
   const isHidden = false;
   const hasValidInput = true;
 
@@ -50,6 +55,7 @@ describe('OverlayContentAddNewBudget', () => {
     handleColorChange: mockHandleColorChange,
     handleInputChange: mockHandleInputChange,
     colors,
+    budgetCategories,
     isHidden,
     hasValidInput,
   };
@@ -60,28 +66,23 @@ describe('OverlayContentAddNewBudget', () => {
     const component = screen.getByTestId('dropdown-category');
 
     expect(component).toBeInTheDocument();
-  });
-
-  it('passes selectedCategoryItem to OverlayDropdownCategory', async () => {
-    render(<OverlayContentAddNewBudget {...testProps} />);
-
     expect(OverlayDropdownCategory).toHaveBeenCalledWith(
-      expect.objectContaining({
-        selectedItem: selectedCategoryItem,
-      }),
+      {
+        budgetCategories: mockedBudgetCategories,
+        handleCategoryChange: expect.any(Function),
+        selectedItem: mockedBudgetCategories[0],
+      },
       {}
     );
   });
 
-  it('passes handleCategoryChange callback to OverlayDropdownCategory', async () => {
+  it('calls handleCategoryChange when OverlayDropdownCategory handleCategoryChange is triggered', async () => {
     render(<OverlayContentAddNewBudget {...testProps} />);
 
-    expect(OverlayDropdownCategory).toHaveBeenCalledWith(
-      expect.objectContaining({
-        handleCategoryChange: mockHandleCategoryChange,
-      }),
-      {}
-    );
+    const component = screen.getByTestId('dropdown-category');
+    fireEvent.click(component);
+
+    expect(mockHandleCategoryChange).toHaveBeenCalled();
   });
 
   it('renders component InputMoney', async () => {

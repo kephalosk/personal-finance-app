@@ -2,9 +2,9 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import BudgetsPage from './BudgetsPage';
 import { getTransactions } from '../globals/services/TransactionService';
 import { mockedTransactions } from '../fixtures/MockedTransactions';
-import { act } from 'react';
+import { act, Fragment } from 'react';
 import { addNewBudget, getBudgets } from '../globals/services/BudgetService';
-import { mockedBudgets } from '../fixtures/MockedBudgets';
+import { mockedBudgets, mockedBudgetsWithEveryCategory } from '../fixtures/MockedBudgets';
 import HeaderBar from '../components/HeaderBar';
 import BudgetsDiagramCard from '../components/budgets/BudgetDiagrammCard/BudgetsDiagramCard';
 import BudgetCard from '../components/budgets/BudgetCard/BudgetCard';
@@ -13,6 +13,8 @@ import OverlayContentAddNewBudget from '../components/overlay/OverlayContentAddN
 import EnsureFirstPossibleColorIsDefined from '../globals/utils/EnsureFirstPossibleColorIsDefined';
 import Colors from '../constants/Colors';
 import { ColorNameEnum } from '../model/enum/ColorNameEnum';
+import { mockedBudgetCategory } from '../fixtures/MockedBudgetCategory';
+import EnsureFirstPossibleItemIsDefined from '../globals/utils/EnsureFirstPossibleItemIsDefined';
 
 jest.mock('../components/HeaderBar', () =>
   jest.fn((props) => <div data-testid="header-bar" onClick={() => props.handleClick()}></div>)
@@ -27,24 +29,28 @@ jest.mock('../components/overlay/OverlayCardBox', () =>
   jest.fn((props) => (
     <div
       data-testid="overlay-card-box"
-      onClick={() => {
-        if (props.onClose) props.onClose();
-        if (props.handleEvent) props.handleEvent();
+      onClick={(e) => {
+        if (e.target === e.currentTarget) {
+          if (props.onClose) props.onClose();
+          if (props.handleEvent) props.handleEvent();
+        }
       }}
     >
       {props.children}
     </div>
   ))
 );
-const newCategory = 'General';
+const newCategory = mockedBudgetCategory;
 const newColor = Colors[4];
 const newInput = 100;
+const newInputInvalid = 0;
 jest.mock('../components/overlay/OverlayContentAddNewBudget', () =>
   jest.fn((props) => (
-    <div
-      data-testid="overlay-content-add-new-budget"
-      onClick={() => props.handleCategoryChange(newCategory)}
-    >
+    <Fragment>
+      <div
+        data-testid="overlay-content-add-new-budget"
+        onClick={() => props.handleCategoryChange(newCategory)}
+      ></div>
       <div
         data-testid="overlay-content-add-new-budget-second"
         onClick={() => props.handleColorChange(newColor)}
@@ -53,7 +59,11 @@ jest.mock('../components/overlay/OverlayContentAddNewBudget', () =>
         data-testid="overlay-content-add-new-budget-input"
         onClick={() => props.handleInputChange(newInput)}
       ></div>
-    </div>
+      <div
+        data-testid="overlay-content-add-new-budget-input-invalid"
+        onClick={() => props.handleInputChange(newInputInvalid)}
+      ></div>
+    </Fragment>
   ))
 );
 
@@ -70,14 +80,40 @@ jest.mock('../globals/utils/EnsureFirstPossibleColorIsDefined', () => ({
   __esModule: true,
   default: jest.fn(),
 }));
+jest.mock('../globals/utils/EnsureFirstPossibleItemIsDefined', () => ({
+  __esModule: true,
+  default: jest.fn(),
+}));
 
 describe('BudgetsPage', () => {
+  const overlayCardBoxProps = {
+    title: 'Add New Budget',
+    description:
+      'Choose a category to set a spending budget. These categories can help you monitor spending.',
+    submitText: 'Add Budget',
+    isHidden: false,
+    handleEvent: expect.any(Function),
+    onClose: expect.any(Function),
+    children: expect.any(Object),
+    isButtonDisabled: false,
+  };
+
+  const triggerAddNewBudget = () => {
+    const headerBar = screen.getByTestId('header-bar');
+    fireEvent.click(headerBar!);
+    const input = screen.getByTestId('overlay-content-add-new-budget-input');
+    fireEvent.click(input!);
+    const component = screen.getByTestId('overlay-card-box');
+    fireEvent.click(component!);
+  };
+
   beforeEach(() => {
     jest.clearAllMocks();
     (getTransactions as jest.Mock).mockResolvedValue(mockedTransactions);
     (getBudgets as jest.Mock).mockResolvedValue(mockedBudgets);
     (addNewBudget as jest.Mock).mockResolvedValue(undefined);
     (EnsureFirstPossibleColorIsDefined as jest.Mock).mockReturnValue(Colors[0]);
+    (EnsureFirstPossibleItemIsDefined as jest.Mock).mockReturnValue(mockedBudgetCategory);
   });
 
   it('renders div budgetsPage', async () => {
@@ -181,37 +217,14 @@ describe('BudgetsPage', () => {
     await act(async () => {
       render(<BudgetsPage />);
     });
-    expect(OverlayCardBox).not.toHaveBeenCalledWith(
-      {
-        children: expect.any(Object),
-        description: expect.any(String),
-        handleEvent: expect.any(Function),
-        isHidden: false,
-        onClose: expect.any(Function),
-        submitText: expect.any(String),
-        title: expect.any(String),
-      },
-      {}
-    );
+    expect(OverlayCardBox).not.toHaveBeenCalledWith();
 
     const headerBar = screen.getByTestId('header-bar');
     fireEvent.click(headerBar!);
     const component = screen.getByTestId('overlay-card-box');
 
     expect(component).toBeInTheDocument();
-    expect(OverlayCardBox).toHaveBeenCalledWith(
-      {
-        children: expect.any(Object),
-        description:
-          'Choose a category to set a spending budget. These categories can help you monitor spending.',
-        handleEvent: expect.any(Function),
-        isHidden: false,
-        onClose: expect.any(Function),
-        submitText: 'Save Changes',
-        title: 'Add New Budget',
-      },
-      {}
-    );
+    expect(OverlayCardBox).toHaveBeenCalledWith(overlayCardBoxProps, {});
   });
 
   it('sets status of OverlayCardBox back to hidden when component is closed', async () => {
@@ -222,36 +235,12 @@ describe('BudgetsPage', () => {
     fireEvent.click(headerBar!);
     const component = screen.getByTestId('overlay-card-box');
     expect(component).toBeInTheDocument();
-    expect(OverlayCardBox).toHaveBeenLastCalledWith(
-      {
-        children: expect.any(Object),
-        description:
-          'Choose a category to set a spending budget. These categories can help you monitor spending.',
-        handleEvent: expect.any(Function),
-        isHidden: false,
-        onClose: expect.any(Function),
-        submitText: 'Save Changes',
-        title: 'Add New Budget',
-      },
-      {}
-    );
+    expect(OverlayCardBox).toHaveBeenLastCalledWith(overlayCardBoxProps, {});
 
     const cardBox = screen.getByTestId('overlay-card-box');
     fireEvent.click(cardBox!);
 
-    expect(OverlayCardBox).toHaveBeenLastCalledWith(
-      {
-        children: expect.any(Object),
-        description:
-          'Choose a category to set a spending budget. These categories can help you monitor spending.',
-        handleEvent: expect.any(Function),
-        isHidden: true,
-        onClose: expect.any(Function),
-        submitText: 'Save Changes',
-        title: 'Add New Budget',
-      },
-      {}
-    );
+    expect(OverlayCardBox).toHaveBeenLastCalledWith({ ...overlayCardBoxProps, isHidden: true }, {});
   });
 
   it('renders component OverlayContentAddNewBudget', async () => {
@@ -265,7 +254,7 @@ describe('BudgetsPage', () => {
 
     expect(component).toBeInTheDocument();
     expect(OverlayContentAddNewBudget).toHaveBeenLastCalledWith(
-      expect.objectContaining({ selectedCategoryItem: 'General' }),
+      expect.objectContaining({ selectedCategoryItem: mockedBudgetCategory }),
       {}
     );
   });
@@ -310,12 +299,12 @@ describe('BudgetsPage', () => {
     });
     const headerBar = screen.getByTestId('header-bar');
     fireEvent.click(headerBar!);
-    const component = screen.getByTestId('overlay-content-add-new-budget-input');
     expect(OverlayContentAddNewBudget).toHaveBeenLastCalledWith(
       expect.objectContaining({ hasValidInput: true }),
       {}
     );
 
+    const component = screen.getByTestId('overlay-content-add-new-budget-input-invalid');
     fireEvent.click(component!);
 
     expect(component).toBeInTheDocument();
@@ -330,19 +319,28 @@ describe('BudgetsPage', () => {
       render(<BudgetsPage />);
     });
 
-    const headerBar = screen.getByTestId('header-bar');
-    fireEvent.click(headerBar!);
-    const input = screen.getByTestId('overlay-content-add-new-budget-input');
-    fireEvent.click(input!);
-    const component = screen.getByTestId('overlay-card-box');
-    fireEvent.click(component!);
+    triggerAddNewBudget();
 
-    expect(component).toBeInTheDocument();
     expect(addNewBudget).toHaveBeenCalledWith({
       category: 'General',
       categoryKey: 'general',
       color: ColorNameEnum.GREEN,
       maximum: 100,
     });
+  });
+
+  it('does not add new Budget, when no category is left', async () => {
+    (getBudgets as jest.Mock).mockResolvedValue(mockedBudgetsWithEveryCategory);
+    (EnsureFirstPossibleItemIsDefined as jest.Mock).mockReturnValue({
+      ...mockedBudgetCategory,
+      disabled: true,
+    });
+    await act(async () => {
+      render(<BudgetsPage />);
+    });
+
+    triggerAddNewBudget();
+
+    expect(addNewBudget).not.toHaveBeenCalled();
   });
 });

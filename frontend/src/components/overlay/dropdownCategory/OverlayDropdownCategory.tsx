@@ -10,14 +10,6 @@ interface Props {
   selectedItem: BudgetCategory;
   handleCategoryChange: (category: BudgetCategory) => void;
   budgetCategories: BudgetCategory[];
-  onItemClick: (category: Category) => void;
-  handleColorKeyDown: (
-    event: React.KeyboardEvent<HTMLDivElement>,
-    category: Category,
-    index: number
-  ) => void;
-  clickableRefs: React.MutableRefObject<(HTMLDivElement | null)[]>;
-  index: number;
 }
 
 const OverlayDropdownCategory: ({
@@ -46,32 +38,24 @@ const OverlayDropdownCategory: ({
     clickableRefs.current = clickableRefs.current.slice(0, clickableCategories.length);
   }, [clickableCategories.length]);
 
-  const dropdownCategoryContainer: string = 'dropdownCategoryContainer';
-  const dropdownCategoryBar: string = 'dropdownCategoryBar';
-  const dropdownCategoryIcon: string = 'dropdownCategoryIcon';
-  const dropdownCategoryItemContainer: string = 'dropdownCategoryItemContainer';
-  const dropdownCategoryItem: string = 'dropdownCategoryItem';
-  const dropdownCategoryItemLabel: string = 'dropdownCategoryItemLabel';
-  const dropdownCategoryListLine: string = 'dropdownCategoryListLine';
+  const dropdownCategoryBarClass: string = 'dropdownCategoryBar';
+  const dropdownCategoryIconClass: string = 'dropdownCategoryIcon';
+  const dropdownCategoryListItemContainerClass: string = 'dropdownCategoryListItemContainer';
+  const dropdownCategoryListItemClass: string = 'dropdownCategoryListItem';
+  const dropdownCategoryListItemLabelClass: string = 'dropdownCategoryListItemLabel';
+  const dropdownCategoryListLineClass: string = 'dropdownCategoryListLine';
   useEffect((): (() => void) => {
     const handleOutsideClick: (event: MouseEvent) => void = (event: MouseEvent): void => {
       const target: HTMLElement | null = event.target as HTMLElement;
       if (
         target &&
-        !target.classList.contains(dropdownCategoryContainer) &&
-        !target.classList.contains(dropdownCategoryBar) &&
-        !target.classList.contains(dropdownCategoryIcon) &&
-        !target.classList.contains(dropdownCategoryItemContainer) &&
-        !target.classList.contains(dropdownCategoryItem) &&
-        !target.classList.contains(dropdownCategoryItemLabel) &&
-        !target.classList.contains(dropdownCategoryListLine) &&
-        !target.classList.contains('dropdownCategoryListItem') &&
-        !target.classList.contains('dropdownCategoryListItemContainer') &&
-        !target.classList.contains('dropdownCategoryListItemLabel')
+        !target.classList.contains(dropdownCategoryBarClass) &&
+        !target.classList.contains(dropdownCategoryIconClass) &&
+        !target.classList.contains(dropdownCategoryListItemContainerClass) &&
+        !target.classList.contains(dropdownCategoryListItemClass) &&
+        !target.classList.contains(dropdownCategoryListItemLabelClass) &&
+        !target.classList.contains(dropdownCategoryListLineClass)
       ) {
-        console.log('handleOutsideClick');
-        console.log('target.classList', target.classList);
-        console.log('showCategories', showCategories);
         setShowCategories(false);
       }
     };
@@ -83,8 +67,6 @@ const OverlayDropdownCategory: ({
   }, []);
 
   const handleClick: () => void = (): void => {
-    console.log('handleClick');
-    console.log('!showCategories', !showCategories);
     setShowCategories(!showCategories);
   };
 
@@ -136,11 +118,13 @@ const OverlayDropdownCategory: ({
   };
 
   return (
-    <div className={`${dropdownCategoryContainer}`} data-testid="dropdown-category">
+    <div className="dropdownCategoryContainer" data-testid="dropdown-category">
       <DropdownCategoryBar
         selectedItem={selectedItem}
         handleClick={handleClick}
         handleKeyDown={handleKeyDown}
+        dropdownCategoryBarClass={dropdownCategoryBarClass}
+        dropdownCategoryIconClass={dropdownCategoryIconClass}
       />
       <div className={`dropdownCategoryList ${showCategories ? 'isOpen' : ''}`}>
         <DropdownCategoryListItem
@@ -149,19 +133,27 @@ const OverlayDropdownCategory: ({
           handleCategoryKeyDown={handleCategoryKeyDown}
           clickableRefs={clickableRefs}
           index={-1}
+          dropdownCategoryListItemContainerClass={dropdownCategoryListItemContainerClass}
+          dropdownCategoryListItemClass={dropdownCategoryListItemClass}
+          dropdownCategoryListItemLabelClass={dropdownCategoryListItemLabelClass}
         />
         {visibleCategories.map((category: BudgetCategory, index: number) => (
           <div
             key={index}
             className={`dropdownCategoryListEntry ${category.disabled ? 'disabled' : ''}`}
           >
-            <hr className={`${dropdownCategoryListLine} ${category.disabled ? 'disabled' : ''}`} />
+            <hr
+              className={`${dropdownCategoryListLineClass} ${category.disabled ? 'disabled' : ''}`}
+            />
             <DropdownCategoryListItem
               category={category}
               onItemClick={onItemClick}
               handleCategoryKeyDown={handleCategoryKeyDown}
               clickableRefs={clickableRefs}
               index={index}
+              dropdownCategoryListItemContainerClass={dropdownCategoryListItemContainerClass}
+              dropdownCategoryListItemClass={dropdownCategoryListItemClass}
+              dropdownCategoryListItemLabelClass={dropdownCategoryListItemLabelClass}
             />
           </div>
         ))}

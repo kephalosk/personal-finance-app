@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import React from 'react';
 import BudgetsDiagramCard from './BudgetsDiagramCard';
 import { mockedBudgets } from '../../../fixtures/MockedBudgets';
-import { mockedTransactionsEntertainment } from '../../../fixtures/MockedTransactions';
+import { mockedTransactionsEntertainmentWithPositiveAmounts } from '../../../fixtures/MockedTransactions';
 import LoadingSpinner from '../../LoadingSpinner';
 import BudgetsDiagram from '../BudgetsDiagram';
 import BudgetsDiagramCardRow from './BudgetsDiagramCardRow';
@@ -15,7 +15,7 @@ jest.mock('./BudgetsDiagramCardRow', () =>
 
 describe('BudgetsDiagramCard', () => {
   const budgets = mockedBudgets;
-  const transactions = mockedTransactionsEntertainment;
+  const transactions = mockedTransactionsEntertainmentWithPositiveAmounts;
   const isLoading = false;
 
   const testProps = {
@@ -28,7 +28,8 @@ describe('BudgetsDiagramCard', () => {
     let spent: number = 0;
     transactions.forEach((transaction) => {
       if (transaction.categoryKey === categoryKey) {
-        spent = spent + transaction.amount;
+        const amountToAdd: number = transaction.amount < 0 ? transaction.amount : 0;
+        spent = spent + amountToAdd;
       }
     });
     spent = spent * -1;

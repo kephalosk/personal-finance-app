@@ -1,12 +1,13 @@
 import { render } from '@testing-library/react';
 import BudgetsDiagram from './BudgetsDiagram';
-import { mockedTransactionsEntertainment } from '../../fixtures/MockedTransactions';
+import { mockedTransactionsEntertainmentWithPositiveAmounts } from '../../fixtures/MockedTransactions';
 import { mockedBudgets2 } from '../../fixtures/MockedBudgets';
 
 describe('BudgetsDiagram', () => {
   let totalSpend = 0;
-  mockedTransactionsEntertainment.forEach((transaction) => {
-    totalSpend = totalSpend + transaction.amount;
+  mockedTransactionsEntertainmentWithPositiveAmounts.forEach((transaction) => {
+    const amountToAdd: number = transaction.amount < 0 ? transaction.amount : 0;
+    totalSpend = totalSpend + amountToAdd;
   });
   totalSpend = totalSpend * -1;
 
@@ -17,7 +18,7 @@ describe('BudgetsDiagram', () => {
 
   const testProps = {
     budgets: mockedBudgets2,
-    transactions: mockedTransactionsEntertainment,
+    transactions: mockedTransactionsEntertainmentWithPositiveAmounts,
   };
 
   it('renders div overviewBudgetsDiagram', () => {
@@ -73,6 +74,6 @@ describe('BudgetsDiagram', () => {
 
     const htmlElement = container.querySelector('.overviewBudgetsDiagramSpend');
 
-    expect(htmlElement).toHaveTextContent(`${totalSpend}`);
+    expect(htmlElement).toHaveTextContent(`$${totalSpend}`);
   });
 });

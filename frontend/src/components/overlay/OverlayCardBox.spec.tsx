@@ -10,6 +10,7 @@ describe('OverlayCardBox', () => {
   const mockHandleEvent = jest.fn();
   const mockOnClose = jest.fn();
   const children = <div data-testid="child-element"></div>;
+  const isButtonDisabled = false;
 
   const testProps = {
     title,
@@ -19,6 +20,7 @@ describe('OverlayCardBox', () => {
     handleEvent: mockHandleEvent,
     onClose: mockOnClose,
     children,
+    isButtonDisabled,
   };
 
   it('renders div overlayCardBox', async () => {
@@ -144,13 +146,48 @@ describe('OverlayCardBox', () => {
     expect(htmlElement).toContainElement(childElement);
   });
 
-  it('renders button overlayFormSubmit with passed prop submitText', async () => {
-    const { container } = render(<OverlayCardBox {...testProps} />);
+  it('renders div overlayFormSubmitContainer with passed prop isButtonDisabled is false', async () => {
+    const { container } = render(<OverlayCardBox {...testProps} isButtonDisabled={false} />);
+
+    const htmlElement = container.querySelector('.overlayFormSubmitContainer');
+
+    expect(htmlElement).toBeInTheDocument();
+    expect(htmlElement).not.toHaveClass('disabled');
+    expect(htmlElement).toHaveClass('isEnabled');
+  });
+
+  it('renders div overlayFormSubmitContainer with passed prop isButtonDisabled is true', async () => {
+    const { container } = render(<OverlayCardBox {...testProps} isButtonDisabled={true} />);
+
+    const htmlElement = container.querySelector('.overlayFormSubmitContainer');
+
+    expect(htmlElement).toBeInTheDocument();
+    expect(htmlElement).toHaveClass('disabled');
+    expect(htmlElement).not.toHaveClass('isEnabled');
+  });
+
+  it('renders button overlayFormSubmit with passed props submitText and isButtonDisabled', async () => {
+    const { container } = render(
+      <OverlayCardBox {...testProps} submitText={submitText} isButtonDisabled={false} />
+    );
 
     const htmlElement = container.querySelector('.overlayFormSubmit');
 
     expect(htmlElement).toBeInTheDocument();
     expect(htmlElement).toHaveTextContent(submitText);
+    expect(htmlElement).not.toHaveClass('disabled');
+    expect(htmlElement).toHaveClass('isEnabled');
+  });
+
+  it('renders button overlayFormSubmit with passed prop isButtonDisabled is true', async () => {
+    const { container } = render(
+      <OverlayCardBox {...testProps} submitText={submitText} isButtonDisabled={true} />
+    );
+
+    const htmlElement = container.querySelector('.overlayFormSubmit');
+
+    expect(htmlElement).toHaveClass('disabled');
+    expect(htmlElement).not.toHaveClass('isEnabled');
   });
 
   it('handles button submit Enter on overlayFormSubmit', async () => {
@@ -160,6 +197,5 @@ describe('OverlayCardBox', () => {
     fireEvent.click(htmlElement!);
 
     expect(mockHandleEvent).toHaveBeenCalled();
-    expect(mockOnClose).toHaveBeenCalled();
   });
 });

@@ -6,7 +6,7 @@ import OverlayDropdownColor from './OverlayDropdownColor';
 import OverlayDropDownColorListItem from './OverlayDropDownColorListItem';
 
 jest.mock('./OverlayDropDownColorListItem', () =>
-  jest.fn(({ onItemClick, handleCategoryKeyDown, color, index, clickableRefs }) => (
+  jest.fn(({ onItemClick, handleColorKeyDown, color, index, clickableRefs }) => (
     <div
       className={`${index + 1}`}
       data-testid="overlay-dropdown-color-list-item"
@@ -16,7 +16,7 @@ jest.mock('./OverlayDropDownColorListItem', () =>
         }
       }}
       onClick={onItemClick}
-      onKeyDown={(event) => handleCategoryKeyDown(event, color, index + 1)}
+      onKeyDown={(event) => handleColorKeyDown(event, color, index + 1)}
       tabIndex={0}
     ></div>
   ))
@@ -93,9 +93,9 @@ describe('OverlayDropDownColorListItem', () => {
             current: expect.any(Array),
           },
           color: color,
-          handleCategoryKeyDown: expect.any(Function),
+          handleColorKeyDown: expect.any(Function),
           index: index - 1,
-          itemClassContainer: `itemClassContainer ${index}`,
+          itemClassContainer: `dropDownColorListItem ${index}`,
           onItemClick: expect.any(Function),
         }),
         {}
