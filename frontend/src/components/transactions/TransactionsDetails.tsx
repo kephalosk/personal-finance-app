@@ -24,16 +24,18 @@ const TransactionsDetails = ({ isLoading, fetchedTransactions }: Props) => {
       filteredTransactions,
       pageEntrySize
     );
-    setPageIndex(0);
+
     setTransactionsPaged(newTransactionsPaged);
+
     const validValues: EPTransaction[] = newTransactionsPaged.at(pageIndex) as EPTransaction[];
-    setCurrentIndexedTransactions(validValues);
+    setPageIndex(0);
+    setCurrentIndexedTransactions(validValues ?? []);
     setIsMaxIndex(pageIndex === newTransactionsPaged.length - 1);
   };
 
   const changePageIndex = (newIndex: number) => {
-    setPageIndex(newIndex);
     const validValues: EPTransaction[] = transactionsPaged.at(newIndex) as EPTransaction[];
+    setPageIndex(newIndex);
     setCurrentIndexedTransactions(validValues);
     setIsMaxIndex(newIndex === transactionsPaged.length - 1);
   };

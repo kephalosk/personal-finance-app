@@ -246,6 +246,49 @@ export const mockedTransactionsEntertainment: EPTransaction[] = [
   },
 ];
 
+export const mockedTransactionsEntertainmentWithPositiveAmounts: EPTransaction[] = [
+  {
+    avatar: '/images/avatars/james-thompson.jpg',
+    name: 'James Thompson',
+    category: 'Entertainment',
+    categoryKey: 'entertainment',
+    date: '11 Aug 2024',
+    dateRaw: new Date('2024-08-11T14:00:37Z'),
+    amount: -5,
+    recurring: false,
+  },
+  {
+    avatar: '/images/avatars/pixel-playground.jpg',
+    name: 'Pixel Playground',
+    category: 'Entertainment',
+    categoryKey: 'entertainment',
+    date: '15 Aug 2024',
+    dateRaw: new Date('2024-08-15T14:00:37Z'),
+    amount: -10,
+    recurring: true,
+  },
+  {
+    avatar: '/images/avatars/rina-sato.jpg',
+    name: 'Rina Sato',
+    category: 'Entertainment',
+    categoryKey: 'entertainment',
+    date: '13 Jul 2024',
+    dateRaw: new Date('2024-07-13T14:00:37Z'),
+    amount: -10,
+    recurring: false,
+  },
+  {
+    avatar: '/images/avatars/rina-sato.jpg',
+    name: 'Rina Sato',
+    category: 'Entertainment',
+    categoryKey: 'entertainment',
+    date: '13 Jul 2024',
+    dateRaw: new Date('2024-07-13T14:00:37Z'),
+    amount: 10,
+    recurring: false,
+  },
+];
+
 export const mockedTransactionsWithDifferentCategoriesAndCategoryAsNames: EPTransaction[] = [
   {
     avatar: '/images/avatars/james-thompson.jpg',

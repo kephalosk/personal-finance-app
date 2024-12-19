@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import BudgetCard from './BudgetCard';
-import { mockedTransactionsEntertainment } from '../../../fixtures/MockedTransactions';
+import { mockedTransactionsEntertainmentWithPositiveAmounts } from '../../../fixtures/MockedTransactions';
 import { mockedBudget } from '../../../fixtures/MockedBudgets';
 import useIsSmallScreen from '../../../globals/hooks/useIsSmallScreen';
 import { ReactFutureFlags } from '../../../constants/ReactFutureFlags';
@@ -23,7 +23,7 @@ jest.mock('../../../globals/hooks/useIsSmallScreen', () => ({
 
 describe('BudgetCard', () => {
   const budget = mockedBudget;
-  const transactions = mockedTransactionsEntertainment;
+  const transactions = mockedTransactionsEntertainmentWithPositiveAmounts;
   const isLoading = false;
 
   const testProps = {
@@ -33,8 +33,9 @@ describe('BudgetCard', () => {
   };
 
   let spent: number = 0;
-  mockedTransactionsEntertainment.forEach((transaction) => {
-    spent = spent + transaction.amount;
+  mockedTransactionsEntertainmentWithPositiveAmounts.forEach((transaction) => {
+    const amountToAdd: number = transaction.amount < 0 ? transaction.amount : 0;
+    spent = spent + amountToAdd;
   });
   spent = spent * -1;
 

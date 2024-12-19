@@ -8,7 +8,7 @@ describe('OverlayDropDownColorListItem', () => {
   const itemClassContainer: string = 'dropDownColorListItem';
   const color: Color = Colors[0];
   const mockOnItemClick: (color: Color) => void = jest.fn();
-  const mockHandleCategoryKeyDown: (
+  const mockHandleColorKeyDown: (
     event: React.KeyboardEvent<HTMLDivElement>,
     color: Color,
     index: number
@@ -22,7 +22,7 @@ describe('OverlayDropDownColorListItem', () => {
     itemClassContainer,
     color,
     onItemClick: mockOnItemClick,
-    handleCategoryKeyDown: mockHandleCategoryKeyDown,
+    handleColorKeyDown: mockHandleColorKeyDown,
     clickableRefs,
     index,
   };
@@ -82,7 +82,7 @@ describe('OverlayDropDownColorListItem', () => {
     expect(mockOnItemClick).toHaveBeenCalledWith(color);
   });
 
-  it('calls mockHandleCategoryKeyDown with passed color when item is tipped', () => {
+  it('calls mockHandleColorKeyDown with passed color when item is tipped', () => {
     const { container } = render(<OverlayDropDownColorListItem {...testProps} />);
 
     const keyboardEvent = new KeyboardEvent('keydown', {
@@ -92,6 +92,6 @@ describe('OverlayDropDownColorListItem', () => {
     const div = container.querySelector(`.${itemClassContainer}`);
     fireEvent.keyDown(div!, keyboardEvent);
 
-    expect(mockHandleCategoryKeyDown).toHaveBeenCalledWith(expect.any(Object), color, index + 1);
+    expect(mockHandleColorKeyDown).toHaveBeenCalledWith(expect.any(Object), color, index + 1);
   });
 });
