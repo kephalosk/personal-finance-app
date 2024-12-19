@@ -4,6 +4,12 @@ import { mockedPots } from '../../fixtures/MockedPots';
 import { getPots } from '../../globals/services/PotService';
 import { MemoryRouter } from 'react-router-dom';
 import PotPageGrid from './PotPageGrid';
+import { ReactFutureFlags } from '../../constants/ReactFutureFlags';
+import PotCard from './PotCard';
+import LoadingSpinner from '../LoadingSpinner';
+
+jest.mock('./PotCard', () => jest.fn(() => <div data-testid="pot-card"></div>));
+jest.mock('../LoadingSpinner', () => jest.fn(() => <div data-testid="loading-spinner"></div>));
 
 jest.mock('../../globals/services/PotService', () => ({
   getPots: jest.fn(),
@@ -32,7 +38,7 @@ describe('PotPageGrid', () => {
     expect(htmlElement).toBeInTheDocument();
   });
 
-  it('renders components PotCard', async () => {
+  it('renders components PotCard with passed prop pots', async () => {
     await act(async (): Promise<void> => {
       render(<PotPageGrid {...testProps} />);
     });
@@ -40,19 +46,35 @@ describe('PotPageGrid', () => {
     const components = screen.getAllByTestId('pot-card');
 
     expect(components).toHaveLength(4);
+    mockedPots.forEach((pot, index) => {
+      expect(PotCard).toHaveBeenNthCalledWith(
+        index + 1,
+        {
+          isLoading: false,
+          pot: {
+            color: pot.color,
+            name: pot.name,
+            target: pot.target,
+            total: pot.total,
+          },
+        },
+        {}
+      );
+    });
   });
 
-  it('renders LoadingSpinner if isLoading is true', () => {
-    const { container } = render(
-      <MemoryRouter>
+  it('renders LoadingSpinner if prop isLoading is true', () => {
+    render(
+      <MemoryRouter future={ReactFutureFlags}>
         <PotPageGrid {...testProps} isLoading={true} />
       </MemoryRouter>
     );
 
-    const htmlElement = container.querySelector('.loadingSpinner');
-    const components = screen.queryAllByTestId('value-box');
+    const spinner = screen.getByTestId('loading-spinner');
+    const components = screen.queryAllByTestId('pot-card');
 
-    expect(htmlElement).toBeInTheDocument();
+    expect(spinner).toBeInTheDocument();
+    expect(LoadingSpinner).toHaveBeenCalled();
     expect(components).toHaveLength(0);
   });
 });

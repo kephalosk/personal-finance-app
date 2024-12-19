@@ -32,6 +32,72 @@ export const mockedTransactions: EPTransaction[] = [
     amount: -55.5,
     recurring: false,
   },
+  {
+    avatar: '/images/avatars/savory-bites-bistro.jpg',
+    name: 'Savory Bites Bistro',
+    category: 'Dining Out',
+    categoryKey: 'diningout',
+    date: '20 Aug 2024',
+    dateRaw: new Date('2024-08-20T14:00:37Z'),
+    amount: -55.5,
+    recurring: false,
+  },
+];
+
+export const mockedTransactions2: EPTransaction[] = [
+  {
+    avatar: '/images/avatars/emma-richardson.jpg',
+    name: 'Emma Richardson',
+    category: 'General',
+    categoryKey: 'general',
+    date: '19 Aug 2024',
+    dateRaw: new Date('2024-08-19T14:00:37Z'),
+    amount: 75.5,
+    recurring: false,
+  },
+  {
+    avatar: '/images/avatars/savory-bites-bistro.jpg',
+    name: 'Savory Bites Bistro',
+    category: 'Dining Out',
+    categoryKey: 'diningout',
+    date: '20 Aug 2024',
+    dateRaw: new Date('2024-08-20T14:00:37Z'),
+    amount: -55.5,
+    recurring: false,
+  },
+];
+
+export const mockedTransactions3: EPTransaction[] = [
+  {
+    avatar: '/images/avatars/emma-richardson.jpg',
+    name: 'Emma Richardson',
+    category: 'General',
+    categoryKey: 'general',
+    date: '19 Aug 2024',
+    dateRaw: new Date('2024-08-19T14:00:37Z'),
+    amount: 75.5,
+    recurring: false,
+  },
+  {
+    avatar: '/images/avatars/emma-richardson.jpg',
+    name: 'Emma Richardson',
+    category: 'General',
+    categoryKey: 'general',
+    date: '19 Aug 2024',
+    dateRaw: new Date('2024-08-19T14:00:37Z'),
+    amount: 100,
+    recurring: false,
+  },
+  {
+    avatar: '/images/avatars/savory-bites-bistro.jpg',
+    name: 'Savory Bites Bistro',
+    category: 'Dining Out',
+    categoryKey: 'diningout',
+    date: '20 Aug 2024',
+    dateRaw: new Date('2024-08-20T14:00:37Z'),
+    amount: -55.5,
+    recurring: false,
+  },
 ];
 
 export const mockedTransactions11Records: EPTransaction[] = [
@@ -176,6 +242,49 @@ export const mockedTransactionsEntertainment: EPTransaction[] = [
     date: '13 Jul 2024',
     dateRaw: new Date('2024-07-13T14:00:37Z'),
     amount: -10,
+    recurring: false,
+  },
+];
+
+export const mockedTransactionsEntertainmentWithPositiveAmounts: EPTransaction[] = [
+  {
+    avatar: '/images/avatars/james-thompson.jpg',
+    name: 'James Thompson',
+    category: 'Entertainment',
+    categoryKey: 'entertainment',
+    date: '11 Aug 2024',
+    dateRaw: new Date('2024-08-11T14:00:37Z'),
+    amount: -5,
+    recurring: false,
+  },
+  {
+    avatar: '/images/avatars/pixel-playground.jpg',
+    name: 'Pixel Playground',
+    category: 'Entertainment',
+    categoryKey: 'entertainment',
+    date: '15 Aug 2024',
+    dateRaw: new Date('2024-08-15T14:00:37Z'),
+    amount: -10,
+    recurring: true,
+  },
+  {
+    avatar: '/images/avatars/rina-sato.jpg',
+    name: 'Rina Sato',
+    category: 'Entertainment',
+    categoryKey: 'entertainment',
+    date: '13 Jul 2024',
+    dateRaw: new Date('2024-07-13T14:00:37Z'),
+    amount: -10,
+    recurring: false,
+  },
+  {
+    avatar: '/images/avatars/rina-sato.jpg',
+    name: 'Rina Sato',
+    category: 'Entertainment',
+    categoryKey: 'entertainment',
+    date: '13 Jul 2024',
+    dateRaw: new Date('2024-07-13T14:00:37Z'),
+    amount: 10,
     recurring: false,
   },
 ];

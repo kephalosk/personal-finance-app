@@ -1,6 +1,6 @@
 import './SelectionMenu.scss';
 import { Item } from '../../model/Item';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { ReactNode, useEffect, useRef, useState } from 'react';
 import useIsSmallScreen from '../../globals/hooks/useIsSmallScreen';
 
 interface Props {
@@ -11,13 +11,19 @@ interface Props {
   hasSmallerWidth?: boolean;
 }
 
-function SelectionMenu({
+const SelectionMenu: ({
+  selectedItem,
+  items,
+  handleItemChange,
+  mobileIcon,
+  hasSmallerWidth,
+}: Props) => ReactNode = ({
   selectedItem,
   items,
   handleItemChange,
   mobileIcon,
   hasSmallerWidth = false,
-}: Props) {
+}: Props): ReactNode => {
   const [showSelection, setShowSelection] = useState<boolean>(false);
   const isSmallScreen = useIsSmallScreen();
   const menuClass = 'selectionMenuListElement';
@@ -86,27 +92,27 @@ function SelectionMenu({
         onClick={handleDropdownClick}
       >
         {selectedItem}
-        {showSelection && (
-          <div className={`selectionMenuList ${hasSmallerWidth ? 'smallerWidth' : ''}`}>
-            <label className={`${menuClass} selected`}>{selectedItem}</label>
-            {visibleItems.map((category: Item, index: number) => (
-              <div key={index}>
-                <label
-                  className={`${menuClass}`}
-                  onClick={() => handleItemChange(category.key)}
-                  onKeyDown={(event) => handleItemKeyDown(event, category.key, index)}
-                  tabIndex={0}
-                  ref={(el) => {
-                    visibleRefs.current[index] = el;
-                  }}
-                >
-                  {category.name}
-                </label>
-                {index < items.length - 1 && <hr className="selectionMenuListLine" />}
-              </div>
-            ))}
-          </div>
-        )}
+        <div
+          className={`selectionMenuList ${hasSmallerWidth ? 'smallerWidth' : ''} ${showSelection ? 'isOpen' : ''}`}
+        >
+          <label className={menuClass}>{selectedItem}</label>
+          {visibleItems.map((category: Item, index: number) => (
+            <div key={index}>
+              <hr className="selectionMenuListLine" />
+              <label
+                className={menuClass}
+                onClick={() => handleItemChange(category.key)}
+                onKeyDown={(event) => handleItemKeyDown(event, category.key, index)}
+                tabIndex={0}
+                ref={(el) => {
+                  visibleRefs.current[index] = el;
+                }}
+              >
+                {category.name}
+              </label>
+            </div>
+          ))}
+        </div>
       </div>
       {!isSmallScreen && (
         <img
@@ -121,6 +127,6 @@ function SelectionMenu({
       )}
     </div>
   );
-}
+};
 
 export default SelectionMenu;

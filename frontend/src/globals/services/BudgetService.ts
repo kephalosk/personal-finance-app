@@ -5,9 +5,10 @@ import { toLowerCaseWithoutWhitespace } from '../utils/ToLowerCaseWithoutWhitesp
 import { fromColorCodeToName } from '../utils/FromColorCodeToName';
 import axios, { AxiosResponse } from 'axios';
 import { AppConfig } from '../../config';
+import { fromColorNameToCode } from '../utils/FromColorNameToCode';
 
 export async function getBudgets(): Promise<EPBudget[]> {
-  const apiUrl = `${AppConfig.API_BACKEND_HOST}/budget`;
+  const apiUrl: string = `${AppConfig.API_BACKEND_HOST}/budget`;
 
   try {
     const response: AxiosResponse<APIBudgetDTO[]> = await axios.get<APIBudgetDTO[]>(apiUrl);
@@ -34,4 +35,35 @@ function fromAPIBudgetDTOMapper(budgets: APIBudgetDTO[]): EPBudget[] {
     epBudgets.push(newBudget);
   });
   return epBudgets;
+}
+
+export async function addNewBudget(newBudget: EPBudget): Promise<void> {
+  const apiUrl: string = `${AppConfig.API_BACKEND_HOST}/budget/addNewBudget`;
+
+  try {
+    const newBudgetDTO: APIBudgetDTO = fromEPBudgetMapper(newBudget);
+
+    const response: AxiosResponse<APIBudgetDTO, unknown> = await axios.post<APIBudgetDTO>(
+      apiUrl,
+      newBudgetDTO,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+    if (response.status === 201) {
+      console.log('Budget successfully created');
+    }
+  } catch (error) {
+    console.error(`Unable to add new Budget: ${error}`);
+  }
+}
+
+function fromEPBudgetMapper(budget: EPBudget): APIBudgetDTO {
+  return {
+    category: budget.category,
+    maximum: budget.maximum,
+    theme: fromColorNameToCode(budget.color),
+  };
 }

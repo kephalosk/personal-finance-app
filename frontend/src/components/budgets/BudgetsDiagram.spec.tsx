@@ -1,25 +1,26 @@
 import { render } from '@testing-library/react';
-import { BudgetsDiagram } from './BudgetsDiagram';
-import { BudgetsDiagramProps } from '../../model/props/BudgetsDiagramProps';
-import { mockedTransactionsEntertainment } from '../../fixtures/MockedTransactions';
-import { mockedBudgets } from '../../fixtures/MockedBudgets';
+import BudgetsDiagram from './BudgetsDiagram';
+import { mockedTransactionsEntertainmentWithPositiveAmounts } from '../../fixtures/MockedTransactions';
+import { mockedBudgets2 } from '../../fixtures/MockedBudgets';
 
 describe('BudgetsDiagram', () => {
   let totalSpend = 0;
-  mockedTransactionsEntertainment.forEach((transaction) => {
-    totalSpend = totalSpend + transaction.amount;
+  mockedTransactionsEntertainmentWithPositiveAmounts.forEach((transaction) => {
+    const amountToAdd: number = transaction.amount < 0 ? transaction.amount : 0;
+    totalSpend = totalSpend + amountToAdd;
   });
   totalSpend = totalSpend * -1;
 
   let totalBudget = 0;
-  mockedBudgets.forEach((budget) => {
+  mockedBudgets2.forEach((budget) => {
     totalBudget = totalBudget + budget.maximum;
   });
 
-  const testProps: BudgetsDiagramProps = {
-    budgets: mockedBudgets,
-    transactions: mockedTransactionsEntertainment,
+  const testProps = {
+    budgets: mockedBudgets2,
+    transactions: mockedTransactionsEntertainmentWithPositiveAmounts,
   };
+
   it('renders div overviewBudgetsDiagram', () => {
     const { container } = render(<BudgetsDiagram {...testProps} />);
 
@@ -73,6 +74,6 @@ describe('BudgetsDiagram', () => {
 
     const htmlElement = container.querySelector('.overviewBudgetsDiagramSpend');
 
-    expect(htmlElement).toHaveTextContent(`${totalSpend}`);
+    expect(htmlElement).toHaveTextContent(`$${totalSpend}`);
   });
 });

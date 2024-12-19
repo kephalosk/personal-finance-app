@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react';
-import { ValueBox } from './ValueBox';
+import ValueBox from './ValueBox';
 
 describe('ValueBox', () => {
   const title: string = 'testTitle';
@@ -20,7 +20,7 @@ describe('ValueBox', () => {
     expect(htmlElement).toBeInTheDocument();
   });
 
-  it('renders div valueBoxBorder with passed color', () => {
+  it('renders div valueBoxBorder with passed prop color', () => {
     const { container } = render(<ValueBox {...testProps} />);
 
     const htmlElement = container.querySelector('.valueBoxBorder');
@@ -37,7 +37,7 @@ describe('ValueBox', () => {
     expect(htmlElement).toBeInTheDocument();
   });
 
-  it('renders the label valueBoxContentTitle with passed title', () => {
+  it('renders the label valueBoxContentTitle with passed prop title', () => {
     const { container } = render(<ValueBox {...testProps} />);
 
     const htmlElement = container.querySelector('.valueBoxContentTitle');
@@ -46,7 +46,7 @@ describe('ValueBox', () => {
     expect(htmlElement!.textContent).toEqual(title);
   });
 
-  it('renders the label valueBoxContentValue with passed value', () => {
+  it('renders the label valueBoxContentValue with passed prop value', () => {
     const { container } = render(<ValueBox {...testProps} />);
 
     const htmlElement = container.querySelector('.valueBoxContentValue');

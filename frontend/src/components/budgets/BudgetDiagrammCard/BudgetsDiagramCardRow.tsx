@@ -1,30 +1,31 @@
 import './BudgetsDiagramCardRow.scss';
-import PropTypes from 'prop-types';
-import { BudgetsDiagramCardRowProps } from '../../../model/props/BudgetsDiagramCardRowProps';
+import { ReactNode } from 'react';
 
-BudgetsDiagramCardRow.propTypes = {
-  title: PropTypes.string.isRequired,
-  currentAmount: PropTypes.number.isRequired,
-  maxAmount: PropTypes.number.isRequired,
-  color: PropTypes.string.isRequired,
-};
+interface Props {
+  title: string;
+  currentAmount: number;
+  maxAmount: number;
+  color: string;
+}
 
-export function BudgetsDiagramCardRow({
+const BudgetsDiagramCardRow: ({ title, currentAmount, maxAmount, color }: Props) => ReactNode = ({
   title,
   currentAmount,
   maxAmount,
   color,
-}: BudgetsDiagramCardRowProps) {
-  const currentAmountFormatted = currentAmount.toFixed(2);
-  const maxAmountFormatted = maxAmount.toFixed(0);
+}: Props): ReactNode => {
+  const currentAmountFormatted: string = currentAmount.toFixed(2);
+  const maxAmountFormatted: string = maxAmount.toFixed(0);
   return (
     <>
       <div className="budgetsDiagramCardRow" data-testid="budgets-diagramm-card-row">
         <div className={`cardRowLeftBorder ${color}`}></div>
         <label className="cardRowTitle">{title}</label>
-        <label className="cardRowTitleCurrentAmount">${currentAmountFormatted}</label>
+        <label className=" cardRowTitleCurrentAmount">${currentAmountFormatted}</label>
         <label className="cardRowTitleMaxAmount">of ${maxAmountFormatted}</label>
       </div>
     </>
   );
-}
+};
+
+export default BudgetsDiagramCardRow;

@@ -1,15 +1,19 @@
 import './BillRow.scss';
-import PropTypes from 'prop-types';
-import { BillRowProps } from '../../../model/props/BillRowProps';
+import { ReactNode } from 'react';
 
-BillRow.propTypes = {
-  title: PropTypes.string.isRequired,
-  value: PropTypes.number.isRequired,
-  color: PropTypes.string.isRequired,
-};
+interface Props {
+  title: string;
+  value: number;
+  color: string;
+}
 
-export function BillRow({ title, value, color }: BillRowProps) {
-  const valueFormatted = value.toFixed(2);
+const BillRow: ({ title, value, color }: Props) => ReactNode = ({
+  title,
+  value,
+  color,
+}: Props): ReactNode => {
+  const valueFormatted: string = value.toFixed(2);
+
   return (
     <>
       <div className={`overviewBillsRow ${color}`} data-testid="bill-row">
@@ -18,4 +22,6 @@ export function BillRow({ title, value, color }: BillRowProps) {
       </div>
     </>
   );
-}
+};
+
+export default BillRow;

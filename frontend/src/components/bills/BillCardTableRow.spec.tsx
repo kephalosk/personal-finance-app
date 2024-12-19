@@ -1,7 +1,8 @@
 import { render } from '@testing-library/react';
 import { mockedTransaction } from '../../fixtures/MockedTransactions';
-import { BillCardTableRow } from './BillCardTableRow';
+import BillCardTableRow from './BillCardTableRow';
 import { toOrdinal } from '../../globals/utils/ToOrdinal';
+import React from 'react';
 
 describe('BillCardTableRow', () => {
   const transaction = mockedTransaction;
@@ -51,9 +52,10 @@ describe('BillCardTableRow', () => {
 
     expect(htmlElement).toBeInTheDocument();
     expect(htmlElement).toHaveAttribute('src', transaction.avatar);
+    expect(htmlElement).toHaveAttribute('alt', 'avatar picture');
   });
 
-  it('renders label billCardTableRowNameLabel', () => {
+  it('renders label billCardTableRowNameLabel with passed prop transaction.name', () => {
     const { container } = render(<BillCardTableRow {...testProps} />);
 
     const htmlElement = container.querySelector('.billCardTableRowNameLabel');
@@ -62,7 +64,7 @@ describe('BillCardTableRow', () => {
     expect(htmlElement).toHaveTextContent(transaction.name);
   });
 
-  it('renders label billCardTableRowDate', () => {
+  it('renders label billCardTableRowDate with passed prop today', () => {
     const transactionDay = mockedTransaction.dateRaw.getDate();
     const expectedText = `Monthly - ${toOrdinal(transactionDay)}`;
     const { container } = render(<BillCardTableRow {...testProps} />);
@@ -73,7 +75,7 @@ describe('BillCardTableRow', () => {
     expect(htmlElement).toHaveTextContent(expectedText);
   });
 
-  it('renders label billCardTableRowAmount', () => {
+  it('renders div billCardTableRowAmount', () => {
     const { container } = render(<BillCardTableRow {...testProps} />);
 
     const htmlElement = container.querySelector('.billCardTableRowAmount');

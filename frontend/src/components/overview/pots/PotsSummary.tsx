@@ -1,8 +1,12 @@
 import './PotsSummary.scss';
-import { PotsSummaryProps } from '../../../model/props/PotsSummaryProps';
+import { ReactNode } from 'react';
 
-export function PotsSummary({ potSum }: PotsSummaryProps) {
-  const potFormatted = potSum.toFixed(0);
+interface Props {
+  potSum: number;
+}
+
+const PotsSummary: ({ potSum }: Props) => ReactNode = ({ potSum }: Props): ReactNode => {
+  const potFormatted: string = potSum.toFixed(0);
   return (
     <>
       <div className="overviewPotsSummary" data-testid="pots-summary">
@@ -19,4 +23,6 @@ export function PotsSummary({ potSum }: PotsSummaryProps) {
       </div>
     </>
   );
-}
+};
+
+export default PotsSummary;

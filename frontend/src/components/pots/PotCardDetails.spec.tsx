@@ -1,10 +1,9 @@
-import { PotCardDetailsProps } from '../../model/props/PotCardDetailsProps';
 import { render } from '@testing-library/react';
-import { PotCardDetails } from './PotCardDetails';
+import PotCardDetails from './PotCardDetails';
 import { mockedPot } from '../../fixtures/MockedPots';
 
 describe('PotCardDetails', () => {
-  const testProps: PotCardDetailsProps = {
+  const testProps = {
     pot: mockedPot,
   };
 

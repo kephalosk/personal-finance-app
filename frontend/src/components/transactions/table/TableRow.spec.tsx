@@ -1,7 +1,8 @@
 import { render, screen } from '@testing-library/react';
 import React from 'react';
-import { TableRow } from './TableRow';
-import { TableRowProps } from '../../../model/props/TableRowProps';
+import TableRow from './TableRow';
+import { VorzeichenEnum } from '../../../model/enum/VorzeichenEnum';
+import { ColorNameEnum } from '../../../model/enum/ColorNameEnum';
 
 describe('TableRow', () => {
   const name: string = 'testName';
@@ -10,7 +11,7 @@ describe('TableRow', () => {
   const date: string = 'testDate';
   const value: number = 100.21;
 
-  const testProps: TableRowProps = {
+  const testProps = {
     name,
     imgSrc,
     category,
@@ -71,13 +72,24 @@ describe('TableRow', () => {
     expect(htmlElement).toHaveTextContent(date);
   });
 
-  it('passes prop value', () => {
+  it('passes positive prop value', () => {
     const { container } = render(<TableRow {...testProps} />);
 
     const htmlElement = container.querySelector('.tableRowValue');
 
     expect(htmlElement).toBeInTheDocument();
-    expect(htmlElement).toHaveTextContent(`+$${value}`);
+    expect(htmlElement).toHaveTextContent(`${VorzeichenEnum.PLUS}$${value}`);
+    expect(htmlElement).toHaveClass(ColorNameEnum.GREEN);
+  });
+
+  it('passes negative prop value', () => {
+    const { container } = render(<TableRow {...testProps} value={-value} />);
+
+    const htmlElement = container.querySelector('.tableRowValue');
+
+    expect(htmlElement).toBeInTheDocument();
+    expect(htmlElement).toHaveTextContent(`${VorzeichenEnum.MINUS}$${value}`);
+    expect(htmlElement).toHaveClass(ColorNameEnum.BLACK);
   });
 
   it('passes prop imgSrc', () => {

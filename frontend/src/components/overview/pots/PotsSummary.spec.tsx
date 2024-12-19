@@ -1,11 +1,13 @@
 import { render, screen } from '@testing-library/react';
-import { PotsSummary } from './PotsSummary';
+import PotsSummary from './PotsSummary';
 
 describe('PotsSummary', () => {
   const potSum: number = 100;
+
   const testProps = {
     potSum,
   };
+
   it('renders div overviewPotsSummary', () => {
     const { container } = render(<PotsSummary {...testProps} />);
 
@@ -20,6 +22,8 @@ describe('PotsSummary', () => {
     const imgElement: HTMLElement = screen.getByAltText('pot icon');
 
     expect(imgElement).toHaveAttribute('src', '/images/icon-pot.svg');
+    expect(imgElement).toHaveAttribute('aria-hidden', 'true');
+    expect(imgElement).toHaveClass('overviewPotsSummaryIcon');
   });
 
   it('renders div overviewPotsSummaryContent', () => {
@@ -39,7 +43,7 @@ describe('PotsSummary', () => {
     expect(htmlElement).toHaveTextContent('Total Saved');
   });
 
-  it('renders the label div overviewPotsSummaryContentValue with passed potSum', () => {
+  it('renders the label overviewPotsSummaryContentValue with passed prop potSum', () => {
     const { container } = render(<PotsSummary {...testProps} />);
 
     const htmlElement = container.querySelector('.overviewPotsSummaryContentValue');

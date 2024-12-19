@@ -3,7 +3,12 @@ import React, { act } from 'react';
 import { getTransactions } from '../../globals/services/TransactionService';
 import { mockedTransactions } from '../../fixtures/MockedTransactions';
 import useIsSmallScreen from '../../globals/hooks/useIsSmallScreen';
-import { SearchbarDropdownSort } from './SearchbarDropdownSort';
+import SearchbarDropdownSort from './SearchbarDropdownSort';
+import SelectionMenu from './SelectionMenu';
+
+jest.mock('./SelectionMenu', () =>
+  jest.fn((props) => <div data-testid="selection-menu" onClick={props.handleItemChange}></div>)
+);
 
 jest.mock('../../globals/services/TransactionService', () => ({
   getTransactions: jest.fn(),
@@ -44,19 +49,33 @@ describe('SearchbarDropdownSort', () => {
     const component = screen.getByTestId('selection-menu');
 
     expect(component).toBeInTheDocument();
+    expect(SelectionMenu).toHaveBeenCalledWith(
+      {
+        handleItemChange: expect.any(Function),
+        hasSmallerWidth: true,
+        items: [
+          { key: 'latest', name: 'Latest' },
+          { key: 'oldest', name: 'Oldest' },
+          { key: 'atoz', name: 'A to Z' },
+          { key: 'ztoa', name: 'Z to A' },
+          { key: 'highest', name: 'Highest' },
+          { key: 'lowest', name: 'Lowest' },
+        ],
+        mobileIcon: '/images/icon-sort-mobile.svg',
+        selectedItem: 'Latest',
+      },
+      {}
+    );
   });
 
-  it('calls onCategoryChange when a different option is selected', async () => {
+  it('calls onSortChange when a different option is selected', async () => {
     await act(async (): Promise<void> => {
       render(<SearchbarDropdownSort onSortChange={mockOnSortChange} />);
     });
 
-    const dropdownWrapper = screen.getByTestId('selection-menu');
-    const dropdownButton = dropdownWrapper.querySelector('.selectionMenu');
-    fireEvent.click(dropdownButton!);
-    const optionElement = screen.getByText('Oldest');
-    fireEvent.click(optionElement);
+    const component = screen.getByTestId('selection-menu');
+    fireEvent.click(component!);
 
-    expect(mockOnSortChange).toHaveBeenCalledWith('oldest');
+    expect(mockOnSortChange).toHaveBeenCalled();
   });
 });

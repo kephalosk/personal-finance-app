@@ -1,14 +1,12 @@
 import './ValueBox.scss';
-import { ValueBoxProps } from '../../model/props/ValueBoxProps';
-import PropTypes from 'prop-types';
 
-ValueBox.propTypes = {
-  title: PropTypes.string.isRequired,
-  value: PropTypes.number.isRequired,
-  color: PropTypes.string.isRequired,
-};
+export interface Props {
+  title: string;
+  value: number;
+  color: string;
+}
 
-export function ValueBox({ title, value, color }: ValueBoxProps) {
+const ValueBox = ({ title, value, color }: Props) => {
   const valueFormatted = value.toFixed(2);
   return (
     <>
@@ -21,4 +19,6 @@ export function ValueBox({ title, value, color }: ValueBoxProps) {
       </div>
     </>
   );
-}
+};
+
+export default ValueBox;

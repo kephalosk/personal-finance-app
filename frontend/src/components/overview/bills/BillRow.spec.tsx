@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react';
-import { BillRow } from './BillRow';
+import BillRow from './BillRow';
 
 describe('BillRow', () => {
   const title: string = 'testTitle';

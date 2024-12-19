@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Module, ValidationPipe } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { BalanceModule } from './apis/balance/balance.module';
@@ -11,6 +11,7 @@ import { Pots } from './model/entities/Pots';
 import { Budgets } from './model/entities/Budgets';
 import { Balance } from './model/entities/Balance';
 import { Transactions } from './model/entities/Transactions';
+import { APP_PIPE } from '@nestjs/core';
 
 @Module({
   imports: [
@@ -39,8 +40,15 @@ import { Transactions } from './model/entities/Transactions';
     TransactionsModule,
     PotsModule,
     BudgetModule,
+    TypeOrmModule.forFeature([Balance]),
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    {
+      provide: APP_PIPE,
+      useClass: ValidationPipe,
+    },
+  ],
 })
 export class AppModule {}

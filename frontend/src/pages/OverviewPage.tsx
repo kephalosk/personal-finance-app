@@ -1,9 +1,9 @@
 import './OverviewPage.scss';
-import { OverviewSummary } from '../components/overview/summary/OverviewSummary';
-import { OverviewPots } from '../components/overview/pots/OverviewPots';
-import { OverviewTransactions } from '../components/overview/transactions/OverviewTransactions';
-import { OverviewBudgets } from '../components/overview/budgets/OverviewBudgets';
-import { OverviewBills } from '../components/overview/bills/OverviewBills';
+import OverviewSummary from '../components/overview/summary/OverviewSummary';
+import OverviewPots from '../components/overview/pots/OverviewPots';
+import OverviewTransactions from '../components/overview/transactions/OverviewTransactions';
+import OverviewBudgets from '../components/overview/budgets/OverviewBudgets';
+import OverviewBills from '../components/overview/bills/OverviewBills';
 import React, { useEffect, useState } from 'react';
 import { getTransactions } from '../globals/services/TransactionService';
 import { EPTransaction } from '../model/entrypoints/EPTransaction';
@@ -13,40 +13,43 @@ import { getPots } from '../globals/services/PotService';
 import { EPBudget } from '../model/entrypoints/EPBudget';
 import { getBudgets } from '../globals/services/BudgetService';
 
-export function OverviewPage() {
-  const [bills, setBills] = useState<EPTransaction[]>([]);
+const OverviewPage: () => React.ReactNode = (): React.ReactNode => {
   const [transactions, setTransactions] = useState<EPTransaction[]>([]);
-  const [pots, setPots] = useState<EPPot[]>([]);
-  const [budgets, setBudgets] = useState<EPBudget[]>([]);
-  const today: Date = new Date();
-
   const [isLoadingTransactions, setIsLoadingTransactions] = useState<boolean>(true);
-  const [isLoadingBills, setIsLoadingBills] = useState<boolean>(true);
-  const [isLoadingPots, setIsLoadingPots] = useState<boolean>(true);
-  const [isLoadingBudgets, setIsLoadingBudgets] = useState<boolean>(true);
-
-  useEffect(() => {
+  useEffect((): void => {
     const fetchTransactions = async (): Promise<void> => {
       const fetchedTransactions: EPTransaction[] = await getTransactions();
       setTransactions(fetchedTransactions);
       setIsLoadingTransactions(false);
     };
     fetchTransactions().then();
+  }, []);
 
+  const [bills, setBills] = useState<EPTransaction[]>([]);
+  const [isLoadingBills, setIsLoadingBills] = useState<boolean>(true);
+  useEffect((): void => {
     const fetchBills = async (): Promise<void> => {
       const fetchedBills: EPTransaction[] = await BillsHelper.getRecurringBillsFromTransactions();
       setBills(fetchedBills);
       setIsLoadingBills(false);
     };
     fetchBills().then();
+  }, []);
 
+  const [pots, setPots] = useState<EPPot[]>([]);
+  const [isLoadingPots, setIsLoadingPots] = useState<boolean>(true);
+  useEffect((): void => {
     const fetchPots = async (): Promise<void> => {
       const fetchedPots: EPPot[] = await getPots();
       setPots(fetchedPots);
       setIsLoadingPots(false);
     };
     fetchPots().then();
+  }, []);
 
+  const [budgets, setBudgets] = useState<EPBudget[]>([]);
+  const [isLoadingBudgets, setIsLoadingBudgets] = useState<boolean>(true);
+  useEffect((): void => {
     const fetchBudgets = async () => {
       const fetchedBudgets: EPBudget[] = await getBudgets();
       setBudgets(fetchedBudgets);
@@ -54,6 +57,8 @@ export function OverviewPage() {
     };
     fetchBudgets().then();
   }, []);
+
+  const today: Date = new Date();
 
   return (
     <div className="overviewPage" data-testid="overview-page">
@@ -78,4 +83,6 @@ export function OverviewPage() {
       </div>
     </div>
   );
-}
+};
+
+export default OverviewPage;

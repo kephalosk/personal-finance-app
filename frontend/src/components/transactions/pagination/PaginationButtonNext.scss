@@ -39,7 +39,7 @@
   border: 1px solid var(--component-background-disabled);
   background-color: var(--component-background-disabled);
   color: var(--text-grey);
-  cursor: default;
+  cursor: not-allowed;
 }
 .paginationButtonNext.isDisabled:focus-visible {
   border: 1px solid var(--component-background-light);

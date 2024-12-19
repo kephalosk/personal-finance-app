@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 import React from 'react';
-import { CardHeader } from './CardHeader';
+import CardHeader from './CardHeader';
 
 describe('CardHeader', () => {
   const title = 'testTitle';
@@ -43,5 +43,9 @@ describe('CardHeader', () => {
     const htmlElement = container.querySelector('.cardHeaderEditIcon');
 
     expect(htmlElement).toBeInTheDocument();
+    expect(htmlElement).toHaveAttribute('alt', 'ellipsis icon');
+    expect(htmlElement).toHaveAttribute('aria-hidden', 'true');
+    expect(htmlElement).toHaveAttribute('src', '/images/icon-ellipsis.svg');
+    expect(htmlElement).toHaveAttribute('tabIndex', '0');
   });
 });

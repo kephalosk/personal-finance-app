@@ -1,32 +1,37 @@
 import './TransactionRowSmall.scss';
-import PropTypes from 'prop-types';
-import { TransactionRowSmallProps } from '../../../model/props/TransactionRowSmallProps';
+import { VorzeichenEnum } from '../../../model/enum/VorzeichenEnum';
+import { ColorNameEnum } from '../../../model/enum/ColorNameEnum';
+import { ReactNode } from 'react';
 
-TransactionRowSmall.propTypes = {
-  name: PropTypes.string.isRequired,
-  value: PropTypes.number.isRequired,
-  date: PropTypes.string.isRequired,
-};
+interface Props {
+  name: string;
+  value: number;
+  date: string;
+}
 
-export function TransactionRowSmall({ name, value, date }: TransactionRowSmallProps) {
+const TransactionRowSmall: ({ name, value, date }: Props) => ReactNode = ({
+  name,
+  value,
+  date,
+}: Props): ReactNode => {
   const isPositive: boolean = value > 0;
-  const color = isPositive ? 'green' : 'dark';
-  const sign = isPositive ? '+' : '-';
+  const color: ColorNameEnum = isPositive ? ColorNameEnum.GREEN : ColorNameEnum.BLACK;
+  const sign: VorzeichenEnum = isPositive ? VorzeichenEnum.PLUS : VorzeichenEnum.MINUS;
 
-  const valueNeutral = isPositive ? value : value * -1;
-  const valueNeutralFormatted = valueNeutral.toFixed(2);
+  const valueNeutral: number = isPositive ? value : value * -1;
+  const valueNeutralFormatted: string = valueNeutral.toFixed(2);
 
   return (
-    <>
-      <div className="overviewTransactionRowSmall" data-testid="transaction-row-small">
-        <label className="overviewTransactionRowSmallName">{name}</label>
-        <div className="overviewTransactionRowSmallInfo">
-          <label className={`overviewTransactionRowSmallInfoValue ${color}`}>
-            {sign}${valueNeutralFormatted}
-          </label>
-          <label className="overviewTransactionRowSmallInfoDate">{date}</label>
-        </div>
+    <div className="overviewTransactionRowSmall" data-testid="transaction-row-small">
+      <label className="overviewTransactionRowSmallName">{name}</label>
+      <div className="overviewTransactionRowSmallInfo">
+        <label className={`overviewTransactionRowSmallInfoValue ${color}`}>
+          {sign}${valueNeutralFormatted}
+        </label>
+        <label className="overviewTransactionRowSmallInfoDate">{date}</label>
       </div>
-    </>
+    </div>
   );
-}
+};
+
+export default TransactionRowSmall;

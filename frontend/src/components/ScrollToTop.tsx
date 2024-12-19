@@ -1,12 +1,13 @@
+import './ScrollToTop.scss';
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
-const ScrollToTop = () => {
+const ScrollToTop: () => null = (): null => {
   const { pathname } = useLocation();
 
-  useEffect(() => {
-    window.scrollTo(0, 0); // Scrollt zum oberen Rand des Bildschirms
-  }, [pathname]); // Abhängig von Änderungen in der Route
+  useEffect((): void => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
   return null;
 };

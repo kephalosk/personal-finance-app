@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 import React from 'react';
-import { BudgetsDiagramCardRow } from './BudgetsDiagramCardRow';
+import BudgetsDiagramCardRow from './BudgetsDiagramCardRow';
 
 describe('BudgetsDiagramCardRow', () => {
   const title = 'testTitle';

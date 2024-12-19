@@ -1,5 +1,5 @@
 import { fireEvent, render } from '@testing-library/react';
-import { PaginationPages } from './PaginationPages';
+import PaginationPages from './PaginationPages';
 import React from 'react';
 import useIsSmallScreen from '../../../globals/hooks/useIsSmallScreen';
 
@@ -151,6 +151,54 @@ describe('PaginationPages', () => {
       const htmlElement = container.querySelector('.pageLast');
 
       expect(htmlElement).toBeInTheDocument();
+    });
+
+    it('triggers onPageClick when button with condition currentIndex === indexMax - 1 is clicked', () => {
+      (useIsSmallScreen as jest.Mock).mockReturnValue(true);
+      const { container } = render(
+        <PaginationPages onPageClick={mockOnClick} currentIndex={3} indexMax={4} />
+      );
+
+      const button = container.querySelector('.pageOne');
+      fireEvent.click(button!);
+
+      expect(mockOnClick).toHaveBeenCalled();
+    });
+
+    it('triggers onPageClick when button with condition currentIndex < indexMax - 2 is clicked', () => {
+      (useIsSmallScreen as jest.Mock).mockReturnValue(true);
+      const { container } = render(
+        <PaginationPages onPageClick={mockOnClick} currentIndex={1} indexMax={4} />
+      );
+
+      const button = container.querySelector('.pageBetween');
+      fireEvent.click(button!);
+
+      expect(mockOnClick).toHaveBeenCalled();
+    });
+
+    it('triggers onPageClick when button with condition currentIndex === indexMax - 2 is clicked', () => {
+      (useIsSmallScreen as jest.Mock).mockReturnValue(true);
+      const { container } = render(
+        <PaginationPages onPageClick={mockOnClick} currentIndex={2} indexMax={4} />
+      );
+
+      const button = container.querySelector('.pagePenultimate');
+      fireEvent.click(button!);
+
+      expect(mockOnClick).toHaveBeenCalled();
+    });
+
+    it('triggers onPageClick when pageLast button is clicked', () => {
+      (useIsSmallScreen as jest.Mock).mockReturnValue(true);
+      const { container } = render(
+        <PaginationPages onPageClick={mockOnClick} currentIndex={3} indexMax={4} />
+      );
+
+      const button = container.querySelector('.pageLast');
+      fireEvent.click(button!);
+
+      expect(mockOnClick).toHaveBeenCalled();
     });
   });
 });

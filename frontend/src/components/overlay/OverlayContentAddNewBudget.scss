@@ -1,0 +1,16 @@
+@use '../../styles/forms';
+
+.overlayContentAddNewBudget {
+  display: flex;
+  flex-direction: column;
+}
+
+//fieldTitle
+.fieldTitle {
+  @include forms.form-field-title;
+}
+
+
+
+
+
