@@ -62,8 +62,10 @@ describe('BudgetService', () => {
   beforeEach(async () => {
     const mockRepository = {
       find: jest.fn().mockResolvedValue(mockedBudgetsEntity),
+      findOne: jest.fn().mockResolvedValue(mockedBudgetsEntity[0]),
       create: jest.fn().mockReturnValue(mockedBudgetsEntity[0]),
       save: jest.fn().mockResolvedValue(mockedBudgetsEntity[0]),
+      update: jest.fn().mockResolvedValue(mockedBudgetsEntity[0]),
     };
 
     jest
@@ -125,5 +127,28 @@ describe('BudgetService', () => {
     await expect(() =>
       service.addNewBudget(mockedBudgetsEntityMapped[0]),
     ).rejects.toThrow('Could not save budget');
+  });
+
+  it('updates budget in repository', async () => {
+    await service.updateBudget(mockedBudgetsEntityMapped[0]);
+
+    expect(repository.findOne).toHaveBeenCalledWith({
+      where: { category: mockedBudgetsEntityMapped[0].category },
+    });
+
+    expect(repository.update).toHaveBeenCalledWith(1, {
+      maximum: mockedBudgetsEntityMapped[0].maximum,
+      theme: mockedBudgetsEntityMapped[0].theme,
+    });
+  });
+
+  it('throws error if updating Budget in repository fails', async () => {
+    jest
+      .spyOn(repository, 'findOne')
+      .mockRejectedValue(new Error('Database error'));
+
+    await expect(() =>
+      service.updateBudget(mockedBudgetsEntityMapped[0]),
+    ).rejects.toThrow('Database error');
   });
 });
