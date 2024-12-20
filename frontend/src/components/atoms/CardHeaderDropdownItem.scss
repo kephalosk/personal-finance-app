@@ -1,0 +1,10 @@
+.cardHeaderDropdownItem {
+  border-radius: 8px;
+  padding: 12px 20px;
+  font-size: 14px;
+}
+.cardHeaderDropdownItem:hover, .cardHeaderDropdownItem:focus {
+  background-color: var(--component-background-light);
+  color: var(--text-white);
+  outline: none;
+}
