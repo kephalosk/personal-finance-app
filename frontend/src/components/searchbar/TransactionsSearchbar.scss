@@ -29,6 +29,6 @@
   row-gap: 16px;
 
   @include mixins.phone() {
-    flex-wrap: nowrap;
+    justify-content: center;
   }
 }
