@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import App from './App';
-import { MemoryRouter } from 'react-router-dom';
+import { MemoryRouter, useLocation } from 'react-router-dom';
 import Sidebar from './components/sidebar/Sidebar';
 
 jest.mock('./components/sidebar/Sidebar', () =>
@@ -15,8 +15,20 @@ jest.mock('./pages/BudgetsPage', () => jest.fn(() => <div data-testid="budgets-p
 jest.mock('./pages/PotsPage', () => jest.fn(() => <div data-testid="pots-page"></div>));
 jest.mock('./pages/BillsPage', () => jest.fn(() => <div data-testid="bills-page"></div>));
 jest.mock('./pages/NoPage', () => jest.fn(() => <div data-testid="no-page"></div>));
+jest.mock('./pages/Showcase', () => jest.fn(() => <div data-testid="showcase"></div>));
+
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useLocation: jest.fn(),
+}));
 
 describe('App', () => {
+  beforeEach(() => {
+    (useLocation as jest.Mock).mockReturnValue({
+      pathname: '/',
+    });
+  });
+
   it('renders div webapp', () => {
     const { container } = render(<App />);
 
@@ -108,44 +120,18 @@ describe('App', () => {
       expect(getByTestId('overview-page')).toBeInTheDocument();
     });
 
-    it('renders OverviewPage on empty path /', () => {
-      const { getByTestId } = render(<App Router={MemoryRouter} initialEntries={['/']} />);
+    it.each([
+      ['OverviewPage', '/', 'overview-page'],
+      ['TransactionsPage', '/transactions', 'transactions-page'],
+      ['BudgetsPage', '/budgets', 'budgets-page'],
+      ['PotsPage', '/pots', 'pots-page'],
+      ['BillsPage', '/bills', 'bills-page'],
+      ['NoPage', '/undefinedURL', 'no-page'],
+      ['Showcase', '/showcase', 'showcase'],
+    ])('renders %s on path %s', (title: string, path: string, testid: string) => {
+      const { getByTestId } = render(<App Router={MemoryRouter} initialEntries={[path]} />);
 
-      expect(getByTestId('overview-page')).toBeInTheDocument();
-    });
-
-    it('renders TransactionsPage on path /transactions', () => {
-      const { getByTestId } = render(
-        <App Router={MemoryRouter} initialEntries={['/transactions']} />
-      );
-
-      expect(getByTestId('transactions-page')).toBeInTheDocument();
-    });
-
-    it('renders BudgetsPage on path /budgets', () => {
-      const { getByTestId } = render(<App Router={MemoryRouter} initialEntries={['/budgets']} />);
-
-      expect(getByTestId('budgets-page')).toBeInTheDocument();
-    });
-
-    it('renders PotsPage on path /pots', () => {
-      const { getByTestId } = render(<App Router={MemoryRouter} initialEntries={['/pots']} />);
-
-      expect(getByTestId('pots-page')).toBeInTheDocument();
-    });
-
-    it('renders BillsPage on path /bills', () => {
-      const { getByTestId } = render(<App Router={MemoryRouter} initialEntries={['/bills']} />);
-
-      expect(getByTestId('bills-page')).toBeInTheDocument();
-    });
-
-    it('renders NoPage on undefined paths', () => {
-      const { getByTestId } = render(
-        <App Router={MemoryRouter} initialEntries={['/undefinedURL']} />
-      );
-
-      expect(getByTestId('no-page')).toBeInTheDocument();
+      expect(getByTestId(testid)).toBeInTheDocument();
     });
   });
 });
