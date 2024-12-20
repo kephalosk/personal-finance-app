@@ -1,0 +1,56 @@
+import './CardHeaderDropdownItem.scss';
+import React, { ReactNode } from 'react';
+import { CardHeaderItemOperationEnum } from '../../model/enum/CardHeaderItemOperationEnum';
+import { CardHeaderItemNameEnum } from '../../model/enum/CardHeaderItemNameEnum';
+import { ColorNameEnum } from '../../model/enum/ColorNameEnum';
+
+interface Props {
+  itemOperation: CardHeaderItemOperationEnum;
+  itemName: CardHeaderItemNameEnum;
+  itemColor: ColorNameEnum.BLACK | ColorNameEnum.RED;
+  handleDropdownClick: () => void;
+  handleDropdownKeyDown: (
+    event: React.KeyboardEvent<HTMLDivElement>,
+    itemName: CardHeaderItemNameEnum,
+    index: number
+  ) => void;
+  index: number;
+  clickableRefs: React.MutableRefObject<(HTMLDivElement | null)[]>;
+}
+
+const CardHeaderDropdownItem: ({
+  itemOperation,
+  itemName,
+  itemColor,
+  handleDropdownClick,
+  handleDropdownKeyDown,
+  index,
+  clickableRefs,
+}: Props) => ReactNode = ({
+  itemOperation,
+  itemName,
+  itemColor,
+  handleDropdownClick,
+  handleDropdownKeyDown,
+  index,
+  clickableRefs,
+}: Props): ReactNode => {
+  return (
+    <div
+      className="cardHeaderDropdownItem"
+      data-testid="card-header-dropdown-item"
+      tabIndex={0}
+      onClick={handleDropdownClick}
+      onKeyDown={(event) => handleDropdownKeyDown(event, itemName, index)}
+      ref={(el) => {
+        clickableRefs.current[index + 1] = el;
+      }}
+    >
+      <label className={`cardHeaderDropdownItemLabel ${itemColor}`}>
+        {itemOperation} {itemName}
+      </label>
+    </div>
+  );
+};
+
+export default CardHeaderDropdownItem;
