@@ -492,7 +492,7 @@ describe('AppController (e2e)', () => {
     const updatedBudget = {
       category: 'Personal Care',
       maximum: 100.0,
-      theme: '#FF5733',
+      theme: '#626070',
     };
 
     return request(app.getHttpServer())
