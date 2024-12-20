@@ -1,4 +1,12 @@
-import { Body, Controller, Get, HttpStatus, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  HttpStatus,
+  Patch,
+  Post,
+  Put,
+} from '@nestjs/common';
 import { BudgetService } from './budget.service';
 import { APIBudgetDTO } from '../../model/apis/APIBudgetDTO';
 import { ApiOperation, ApiResponse } from '@nestjs/swagger';
@@ -33,6 +41,24 @@ export class BudgetController {
       await this.budgetService.addNewBudget(newBudget);
     } catch (error) {
       throw new Error(`Fehler beim Anlegen des neuen Budgets: ${error}`);
+    }
+  }
+
+  @Put('editBudget')
+  @ApiOperation({ summary: 'Edit an existing budget' })
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'Budget successfully updated',
+  })
+  @ApiResponse({
+    status: HttpStatus.NOT_FOUND,
+    description: 'Budget not found',
+  })
+  async editBudget(@Body() editedBudget: APIBudgetDTO): Promise<void> {
+    try {
+      await this.budgetService.updateBudget(editedBudget);
+    } catch (error) {
+      throw new Error(`Fehler beim Bearbeiten des Budgets: ${error}`);
     }
   }
 }
