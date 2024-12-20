@@ -10,6 +10,15 @@ export default {
     '\\.(css|scss)$': 'identity-obj-proxy',
     '\\.html$': '<rootDir>/__mocks__/htmlMock.js',
   },
-  testPathIgnorePatterns: ['<rootDir>/node_modules/', '<rootDir>/ui-tests/'],
+  testPathIgnorePatterns: [
+    '<rootDir>/node_modules/',
+    '<rootDir>/ui-tests/',
+    '<rootDir>/src/pages/Showcase.tsx',
+  ],
+  coveragePathIgnorePatterns: [
+    '<rootDir>/node_modules/',
+    '<rootDir>/ui-tests/',
+    '<rootDir>/src/pages/Showcase.tsx',
+  ],
   collectCoverage: true,
 };

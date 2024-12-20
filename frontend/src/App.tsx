@@ -17,6 +17,7 @@ import BudgetsPage from './pages/BudgetsPage';
 import TransactionsPage from './pages/TransactionsPage';
 import ScrollToTop from './components/ScrollToTop';
 import { ReactFutureFlags } from './constants/ReactFutureFlags';
+import Showcase from './pages/Showcase';
 
 interface AppProps {
   Router?: React.ComponentType<BrowserRouterProps | MemoryRouterProps>;
@@ -31,6 +32,10 @@ const App: ({ Router, initialEntries }: AppProps) => React.ReactNode = ({
     return JSON.parse(localStorage.getItem('isMinimized') ?? 'false');
   });
 
+  const handleSidebarMinimize = (minimized: boolean) => {
+    setIsMinimized(minimized);
+  };
+
   const routes = (
     <Routes>
       <Route path="/" element={<OverviewPage />} />
@@ -38,13 +43,10 @@ const App: ({ Router, initialEntries }: AppProps) => React.ReactNode = ({
       <Route path="budgets" element={<BudgetsPage />} />
       <Route path="pots" element={<PotsPage />} />
       <Route path="bills" element={<BillsPage />} />
+      <Route path="showcase" element={<Showcase />} />
       <Route path="*" element={<NoPage />} />
     </Routes>
   );
-
-  const handleSidebarMinimize = (minimized: boolean) => {
-    setIsMinimized(minimized);
-  };
 
   const router =
     Router === MemoryRouter ? (
