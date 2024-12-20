@@ -75,15 +75,17 @@ const OverlayCardBox: ({
         <header className="overlayFormHeader">
           <div className="overlayFormHeaderBar">
             <h2 className="overlayFormHeaderBarTitle">{title}</h2>
-            <img
-              className="overlayFormHeaderBarIcon"
-              alt="closing icon"
-              aria-hidden="false"
-              src="/images/icon-close-modal.svg"
-              tabIndex={0}
-              onClick={onClose}
-              onKeyDown={handleKeyDown}
-            />
+            <div className="overlayFormHeaderBarIconContainer">
+              <img
+                className="overlayFormHeaderBarIcon"
+                alt="closing icon"
+                aria-hidden="false"
+                src="/images/icon-close-modal.svg"
+                tabIndex={0}
+                onClick={onClose}
+                onKeyDown={handleKeyDown}
+              />
+            </div>
           </div>
           <p className="overlayFormHeaderText">{description}</p>
         </header>
