@@ -18,7 +18,7 @@
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
           <y:Geometry height="25.999999999999545" width="237.88677997397917" x="0.0" y="-1147.856349206349"/>
-          <y:Fill color="#00FFFF" color2="#B7C9E3" transparent="false"/>
+          <y:Fill color="#00FF00" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="l" textColor="#000000" verticalTextPosition="bottom" visible="true" width="237.88677997397917" x="4.0" xml:space="preserve" y="2.9335937499997726">fe-23-add-new-budget-part2</y:NodeLabel>
         </y:GenericNode>
@@ -98,7 +98,7 @@
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
           <y:Geometry height="199.3176282716995" width="515.1907828110734" x="257.8867799739792" y="-1234.515163342199"/>
-          <y:Fill color="#00FFFF" color2="#B7C9E3" transparent="false"/>
+          <y:Fill color="#00FF00" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="189.7265625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="515.1907828110734" x="0.0" xml:space="preserve" y="4.795532885849752">Part 1:
 WENN ein Nutzer auf der BudgetsPage auf den Button "+ Add New Budget" klickt,
@@ -1579,7 +1579,7 @@ export class AppModule {}
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
           <y:Geometry height="23.012500124880034" width="178.6543257077676" x="1981.7069709700813" y="-1122.3530754592653"/>
-          <y:Fill color="#00FFFF" color2="#B7C9E3" transparent="false"/>
+          <y:Fill color="#00FF00" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="178.6543257077676" x="0.0" xml:space="preserve" y="1.4398438124399036">integrate cdc  in Frontend<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
         </y:GenericNode>
@@ -1589,7 +1589,7 @@ export class AppModule {}
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
           <y:Geometry height="23.012500124880034" width="178.6543257077676" x="856.7503999311688" y="-997.0808532370432"/>
-          <y:Fill color="#00FFFF" color2="#B7C9E3" transparent="false"/>
+          <y:Fill color="#00FF00" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="178.6543257077676" x="0.0" xml:space="preserve" y="1.4398438124400172">fix broken unit tests<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
         </y:GenericNode>

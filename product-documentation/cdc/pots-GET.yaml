@@ -1,0 +1,49 @@
+openapi: 3.0.0
+info:
+  title: GetAllPots API
+  version: 1.0.0
+  description: API zum Abrufen aller Pots.
+
+paths:
+  /pots:
+    get:
+      summary: Get all pots
+      description: Ruft alle Pots ab.
+      responses:
+        '200':
+          description: Erfolgreiches Abrufen aller Pots
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/APIPotDTO'
+        '500':
+          description: Interner Serverfehler, wenn ein Fehler beim Abrufen der Pots auftritt.
+
+components:
+  schemas:
+    APIPotDTO:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Der Name des Pots (z. B. "Laptop")
+          example: "Laptop"
+        target:
+          type: integer
+          description: Der Zielbetrag des Pots (z. B. 2400)
+          example: 2400
+        total:
+          type: integer
+          description: Der aktuelle Betrag im Pot (z. B. 2000)
+          example: 2000
+        theme:
+          type: string
+          description: Das Farbthema des Pots im Hex-Format (z. B. "#FFFFFF")
+          example: "#FFFFFF"
+      required:
+        - name
+        - target
+        - total
+        - theme

@@ -1,0 +1,60 @@
+openapi: 3.0.0
+info:
+  title: GetAllTransactions API
+  version: 1.0.0
+  description: API zum Abrufen aller Transaktionen.
+
+paths:
+  /transactions:
+    get:
+      summary: Get all transactions
+      description: Ruft alle Transaktionen ab.
+      responses:
+        '200':
+          description: Erfolgreiches Abrufen aller Transaktionen
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/APITransactionDTO'
+        '500':
+          description: Interner Serverfehler, wenn ein Fehler beim Abrufen der Transaktionen auftritt.
+
+components:
+  schemas:
+    APITransactionDTO:
+      type: object
+      properties:
+        avatar:
+          type: string
+          description: Die Bildquelle des Transaktionspartners (z. B. ein Avatar-Bild)
+          example: "/images/avatars/emma-richardson.jpg"
+        name:
+          type: string
+          description: Der Name des Transaktionspartners (z. B. "Emma Richardson")
+          example: "Emma Richardson"
+        category:
+          type: string
+          description: Die Kategorie der Transaktion (z. B. "General")
+          example: "General"
+        date:
+          type: string
+          format: date-time
+          description: Das Datum der Transaktion im ISO-8601-Format
+          example: "2024-08-19T14:23:11Z"
+        amount:
+          type: integer
+          description: Der Betrag der Transaktion (z. B. 100)
+          example: 100
+        recurring:
+          type: boolean
+          description: Gibt an, ob die Transaktion wiederkehrend ist (z. B. false)
+          example: false
+      required:
+        - avatar
+        - name
+        - category
+        - date
+        - amount
+        - recurring
