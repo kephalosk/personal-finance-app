@@ -15,13 +15,19 @@ const CardHeader: ({ title, color }: Props) => React.ReactNode = ({
       <div className="cardHeader" data-testid="card-header">
         <div className={`cardHeaderCircle ${color}`}></div>
         <label className="cardHeaderTitle">{title}</label>
-        <img
-          className="cardHeaderEditIcon"
-          alt="ellipsis icon"
-          aria-hidden="true"
-          src="/images/icon-ellipsis.svg"
-          tabIndex={0}
-        />
+        <div className="cardHeaderEditIconContainer">
+          <img
+            className="cardHeaderEditIcon"
+            alt="ellipsis icon"
+            aria-hidden="true"
+            src="/images/icon-ellipsis.svg"
+            tabIndex={0}
+          />
+          <div className="cardHeaderEditDropdown">
+            <div className="cardHeaderEditDropdownEdit dropdownItem"></div>
+            <div className="cardHeaderEditDropdownDelete dropdownItem"></div>
+          </div>
+        </div>
       </div>
     </>
   );
