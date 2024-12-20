@@ -473,4 +473,32 @@ describe('AppController (e2e)', () => {
         { category: 'Personal Care', maximum: '100.00', theme: '#626070' },
       ]);
   });
+
+  it('/budget/addNewBudget (POST)', async () => {
+    const newBudget = {
+      category: 'Transportation',
+      maximum: 50.0,
+      theme: '#277C78',
+    };
+
+    return request(app.getHttpServer())
+      .post('/budget/addNewBudget')
+      .send(newBudget)
+      .expect(201)
+      .expect({});
+  });
+
+  it('/budget/editBudget (PUT)', async () => {
+    const updatedBudget = {
+      category: 'Personal Care',
+      maximum: 100.0,
+      theme: '#FF5733',
+    };
+
+    return request(app.getHttpServer())
+      .put('/budget/editBudget')
+      .send(updatedBudget)
+      .expect(200)
+      .expect({});
+  });
 });
