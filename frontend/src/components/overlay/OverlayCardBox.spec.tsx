@@ -97,6 +97,14 @@ describe('OverlayCardBox', () => {
     expect(htmlElement).toHaveTextContent(title);
   });
 
+  it('renders div overlayFormHeaderBarIconContainer', async () => {
+    const { container } = render(<OverlayCardBox {...testProps} />);
+
+    const htmlElement = container.querySelector('.overlayFormHeaderBarIconContainer');
+
+    expect(htmlElement).toBeInTheDocument();
+  });
+
   it('renders img overlayFormHeaderBarIcon', async () => {
     const { container } = render(<OverlayCardBox {...testProps} />);
 
