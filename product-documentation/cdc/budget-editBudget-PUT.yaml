@@ -1,0 +1,41 @@
+openapi: 3.0.0
+info:
+  title: Budget API
+  version: 1.0.0
+  description: API for managing budgets
+paths:
+  /budget/editBudget:
+    put:
+      summary: "Edit an existing budget"
+      description: "Updates the color and amount of an existing budget."
+      operationId: "editBudget"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                category:
+                  type: string
+                  description: "The category of the budget to edit"
+                  example: "General"
+                maximum:
+                  type: integer
+                  description: "The new maximum amount for the budget"
+                  example: 100
+                theme:
+                  type: string
+                  description: "The new theme color for the budget"
+                  example: "#000000"
+              required:
+                - category
+                - maximum
+                - theme
+      responses:
+        '200':
+          description: "Budget successfully updated"
+        '404':
+          description: "Budget not found"
+        '500':
+          description: "Error occurred while updating the budget"

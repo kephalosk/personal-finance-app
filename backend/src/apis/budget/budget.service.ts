@@ -5,6 +5,7 @@ import * as fs from 'node:fs';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Budgets } from '../../model/entities/Budgets';
 import { Repository } from 'typeorm';
+import e from 'express';
 
 @Injectable()
 export class BudgetService {
@@ -34,6 +35,29 @@ export class BudgetService {
     } catch (error) {
       console.error('Failed to save new budget to database', error);
       throw new Error('Could not save budget');
+    }
+  }
+
+  async updateBudget(editedBudget: APIBudgetDTO): Promise<void> {
+    try {
+      const budgetToUpdate: Budgets = await this.budgetsRepository.findOne({
+        where: { category: editedBudget.category },
+      });
+
+      if (!budgetToUpdate) {
+        console.error('No budget found with category ${editedBudget.category}');
+        return;
+      }
+
+      const update: Partial<APIBudgetDTO> = {
+        maximum: editedBudget.maximum,
+        theme: editedBudget.theme,
+      };
+
+      await this.budgetsRepository.update(budgetToUpdate.id, update);
+    } catch (error) {
+      console.error('Failed to update budget in database', error);
+      throw error;
     }
   }
 
