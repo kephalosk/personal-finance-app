@@ -1,8 +1,6 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import React, { act } from 'react';
 import SearchbarDropdownCategory from './SearchbarDropdownCategory';
-import { getTransactions } from '../../globals/services/TransactionService';
-import { mockedTransactions } from '../../fixtures/MockedTransactions';
 import useIsSmallScreen from '../../globals/hooks/useIsSmallScreen';
 import SelectionMenu from './SelectionMenu';
 import { Categories } from '../../constants/Categories';
@@ -11,23 +9,16 @@ jest.mock('./SelectionMenu', () =>
   jest.fn((props) => <div data-testid="selection-menu" onClick={props.handleItemChange}></div>)
 );
 
-jest.mock('../../globals/services/TransactionService', () => ({
-  getTransactions: jest.fn(),
-}));
-
 jest.mock('../../globals/hooks/useIsSmallScreen', () => ({
   __esModule: true,
   default: jest.fn(),
 }));
-
-const mockGetTransactions = getTransactions as jest.Mock;
 
 describe('searchbarDropdownCategory', () => {
   let mockOnCategoryChange: jest.Mock<() => void>;
   const currentCategory = 'all';
 
   beforeEach(() => {
-    mockGetTransactions.mockResolvedValue(mockedTransactions);
     mockOnCategoryChange = jest.fn();
     (useIsSmallScreen as jest.Mock).mockReturnValue(false);
   });
