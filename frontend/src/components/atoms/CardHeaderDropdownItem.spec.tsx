@@ -40,7 +40,7 @@ describe('CardHeaderDropdownItem', () => {
     fireEvent.click(element!);
 
     expect(element).toBeInTheDocument();
-    expect(mockHandleDropdownClick).toHaveBeenCalled();
+    expect(mockHandleDropdownClick).toHaveBeenCalledWith(itemOperation, itemName);
   });
 
   it('calls handleDropdownKeyDown with passed props itemName and index when div cardHeaderDropdownItem is pressed', () => {
@@ -50,7 +50,12 @@ describe('CardHeaderDropdownItem', () => {
     fireEvent.keyDown(element!);
 
     expect(element).toBeInTheDocument();
-    expect(mockHandleDropdownKeyDown).toHaveBeenCalledWith(expect.any(Object), itemName, index);
+    expect(mockHandleDropdownKeyDown).toHaveBeenCalledWith(
+      expect.any(Object),
+      itemOperation,
+      itemName,
+      index
+    );
   });
 
   it('renders label cardHeaderDropdownItemLabel with passed props itemColor, itemOperation and itemName', () => {
