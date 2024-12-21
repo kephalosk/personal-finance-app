@@ -1,7 +1,5 @@
 import './SearchbarDropdownCategory.scss';
 import React, { ReactNode, useEffect, useState } from 'react';
-import { EPTransaction } from '../../model/entrypoints/EPTransaction';
-import { getTransactions } from '../../globals/services/TransactionService';
 import { Item } from '../../model/Item';
 import SelectionMenu from './SelectionMenu';
 import { Categories } from '../../constants/Categories';
@@ -16,20 +14,11 @@ const SearchbarDropdownCategory: ({ onCategoryChange, currentCategory }: Props) 
   onCategoryChange,
   currentCategory,
 }: Props): ReactNode => {
-  const [allTransactions, setAllTransactions] = useState<EPTransaction[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>(currentCategory);
 
   useEffect(() => {
     setSelectedCategory(currentCategory);
   }, [currentCategory]);
-
-  useEffect(() => {
-    const fetchTransactions = async () => {
-      const transactions: EPTransaction[] = await getTransactions();
-      setAllTransactions(transactions);
-    };
-    fetchTransactions().then();
-  }, []);
 
   const handleCategoryChange = (categoryKey: string) => {
     onCategoryChange(categoryKey);

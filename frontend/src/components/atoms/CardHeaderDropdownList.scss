@@ -1,0 +1,14 @@
+.cardHeaderDropdownList {
+  border-radius: 8px;
+  display: none;
+  top: 0;
+  right: 0;
+  position: absolute;
+}
+.cardHeaderDropdownList.isVisible {
+  display: block;
+}
+
+.cardHeaderDropdownListLine {
+  margin: 0 20px;
+}
