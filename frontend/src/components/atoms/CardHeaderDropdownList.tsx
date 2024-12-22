@@ -92,7 +92,10 @@ const CardHeaderDropdownList: ({
   };
 
   return (
-    <div className={`cardHeaderDropdownList ${isDropdownVisible ? 'isVisible' : ''}`}>
+    <div
+      className={`cardHeaderDropdownList ${isDropdownVisible ? 'isVisible' : ''}`}
+      data-testid="card-header-dropdown-list"
+    >
       <CardHeaderDropdownItem
         itemOperation={CardHeaderItemOperationEnum.EDIT}
         itemName={itemName}

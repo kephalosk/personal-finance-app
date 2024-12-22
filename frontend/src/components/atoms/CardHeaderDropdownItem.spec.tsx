@@ -24,12 +24,13 @@ describe('CardHeaderDropdownItem', () => {
     clickableRefs,
   };
 
-  it('renders tabable div cardHeaderDropdownItem', () => {
+  it('renders tabable div cardHeaderDropdownItem with passed prop itemColor', () => {
     const { container } = render(<CardHeaderDropdownItem {...testProps} />);
 
     const element = container.querySelector('.cardHeaderDropdownItem');
 
     expect(element).toBeInTheDocument();
+    expect(element).toHaveClass(itemColor);
     expect(element).toHaveAttribute('tabIndex', '0');
   });
 
@@ -58,13 +59,12 @@ describe('CardHeaderDropdownItem', () => {
     );
   });
 
-  it('renders label cardHeaderDropdownItemLabel with passed props itemColor, itemOperation and itemName', () => {
+  it('renders label cardHeaderDropdownItemLabel with passed props itemOperation and itemName', () => {
     const { container } = render(<CardHeaderDropdownItem {...testProps} />);
 
     const element = container.querySelector('.cardHeaderDropdownItemLabel');
 
     expect(element).toBeInTheDocument();
-    expect(element).toHaveClass(itemColor);
     expect(element).toHaveTextContent(`${itemOperation} ${itemName}`);
   });
 
