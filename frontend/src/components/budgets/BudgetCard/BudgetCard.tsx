@@ -8,6 +8,7 @@ import { ColorNameEnum } from '../../../model/enum/ColorNameEnum';
 import useIsSmallScreen from '../../../globals/hooks/useIsSmallScreen';
 import LoadingSpinner from '../../LoadingSpinner';
 import { EPBudget } from '../../../model/entrypoints/EPBudget';
+import { CardHeaderItemNameEnum } from '../../../model/enum/CardHeaderItemNameEnum';
 
 interface Props {
   budget: EPBudget;
@@ -41,13 +42,21 @@ const BudgetCard: ({ budget, transactions, isLoading }: Props) => ReactNode = ({
   const maximumFormatted: string = budget.maximum.toFixed(2);
 
   const isSmallScreen: boolean = useIsSmallScreen();
+
+  const handleSelection = () => {};
+
   return (
     <>
       {isLoading ? (
         <LoadingSpinner />
       ) : (
         <div className="budgetCard" data-testid="budget-card">
-          <CardHeader title={budget.category} color={budget.color} />
+          <CardHeader
+            title={budget.category}
+            color={budget.color}
+            itemName={CardHeaderItemNameEnum.BUDGET}
+            handleSelection={handleSelection}
+          />
           <div className="budgetCardBar">
             <label className="budgetCardBarLabel">Maximum of ${maximumFormatted}</label>
             <div className="budgetCardBarMax">

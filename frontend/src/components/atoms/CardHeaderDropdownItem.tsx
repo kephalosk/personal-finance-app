@@ -41,16 +41,16 @@ const CardHeaderDropdownItem: ({
 }: Props): ReactNode => {
   return (
     <div
-      className="cardHeaderDropdownItem"
+      className={`cardHeaderDropdownItem ${itemColor}`}
       data-testid="card-header-dropdown-item"
       tabIndex={0}
       onClick={() => handleDropdownClick(itemOperation, itemName)}
       onKeyDown={(event) => handleDropdownKeyDown(event, itemOperation, itemName, index)}
       ref={(el) => {
-        clickableRefs.current[index + 1] = el;
+        clickableRefs.current[index] = el;
       }}
     >
-      <label className={`cardHeaderDropdownItemLabel ${itemColor}`}>
+      <label className={'cardHeaderDropdownItemLabel'}>
         {itemOperation} {itemName}
       </label>
     </div>
