@@ -16,4 +16,5 @@ export enum ColorDisplayNameEnum {
   ORANGE = 'Orange',
   SEPIA = 'Sepia',
   WHITE = 'White',
+  BLACK = 'Black',
 }

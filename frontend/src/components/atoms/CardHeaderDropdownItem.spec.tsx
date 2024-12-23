@@ -41,7 +41,7 @@ describe('CardHeaderDropdownItem', () => {
     fireEvent.click(element!);
 
     expect(element).toBeInTheDocument();
-    expect(mockHandleDropdownClick).toHaveBeenCalledWith(itemOperation, itemName);
+    expect(mockHandleDropdownClick).toHaveBeenCalledWith(itemOperation);
   });
 
   it('calls handleDropdownKeyDown with passed props itemName and index when div cardHeaderDropdownItem is pressed', () => {
@@ -54,7 +54,6 @@ describe('CardHeaderDropdownItem', () => {
     expect(mockHandleDropdownKeyDown).toHaveBeenCalledWith(
       expect.any(Object),
       itemOperation,
-      itemName,
       index
     );
   });
@@ -73,7 +72,7 @@ describe('CardHeaderDropdownItem', () => {
 
     render(<CardHeaderDropdownItem {...testProps} clickableRefs={clickableRefs} />);
 
-    expect(clickableRefs.current[testProps.index + 1]).not.toBeNull();
-    expect(clickableRefs.current[testProps.index + 1]).toBeInstanceOf(HTMLDivElement);
+    expect(clickableRefs.current[testProps.index]).not.toBeNull();
+    expect(clickableRefs.current[testProps.index]).toBeInstanceOf(HTMLDivElement);
   });
 });

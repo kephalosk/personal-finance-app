@@ -1,0 +1,5 @@
+@use '../../styles/forms';
+
+.overlayContentLabel {
+  @include forms.form-field-title;
+}

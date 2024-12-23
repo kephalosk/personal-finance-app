@@ -48,30 +48,6 @@ const BudgetsPage: () => ReactNode = (): ReactNode => {
     setIsLoadingBudgets(false);
   };
 
-  const [colors, setColors] = useState<Color[]>(Colors);
-  const sortColors: (fetchedBudgets: EPBudget[]) => void = (fetchedBudgets: EPBudget[]): void => {
-    const markedColors: Color[] = colors.map((color: Color): Color => {
-      const isColorUsed: boolean = fetchedBudgets.some(
-        (budget: EPBudget): boolean => budget.color === color.name
-      );
-      return { ...color, disabled: isColorUsed };
-    });
-    const enabledColors: Color[] = markedColors.filter((color: Color) => !color.disabled);
-    const disabledColors: Color[] = markedColors.filter((color: Color) => color.disabled);
-    const combinedColors: Color[] = enabledColors.concat(disabledColors);
-
-    setColors(combinedColors);
-
-    const firstPossibleColor: Color | undefined = markedColors.find(
-      (color: Color) => !color.disabled
-    );
-    const definedFirstPossibleColor: Color = EnsureFirstPossibleColorIsDefined(
-      firstPossibleColor,
-      markedColors[0]
-    );
-    setSelectedColorItem(definedFirstPossibleColor);
-  };
-
   const [budgetCategories, setBudgetCategories] = useState<BudgetCategory[]>(BudgetCategories);
   const sortCategories: (fetchedBudgets: EPBudget[]) => void = (
     fetchedBudgets: EPBudget[]
@@ -133,6 +109,30 @@ const BudgetsPage: () => ReactNode = (): ReactNode => {
     setSelectedColorItem(color);
   };
 
+  const [colors, setColors] = useState<Color[]>(Colors);
+  const sortColors: (fetchedBudgets: EPBudget[]) => void = (fetchedBudgets: EPBudget[]): void => {
+    const markedColors: Color[] = colors.map((color: Color): Color => {
+      const isColorUsed: boolean = fetchedBudgets.some(
+        (budget: EPBudget): boolean => budget.color === color.name
+      );
+      return { ...color, disabled: isColorUsed };
+    });
+    const enabledColors: Color[] = markedColors.filter((color: Color) => !color.disabled);
+    const disabledColors: Color[] = markedColors.filter((color: Color) => color.disabled);
+    const combinedColors: Color[] = enabledColors.concat(disabledColors);
+
+    setColors(combinedColors);
+
+    const firstPossibleColor: Color | undefined = markedColors.find(
+      (color: Color) => !color.disabled
+    );
+    const definedFirstPossibleColor: Color = EnsureFirstPossibleColorIsDefined(
+      firstPossibleColor,
+      markedColors[0]
+    );
+    setSelectedColorItem(definedFirstPossibleColor);
+  };
+
   const [spendAmount, setSpendAmount] = useState<number>(0);
   const handleInputChange: (input: number) => void = (input: number): void => {
     if (input === 0) {
@@ -191,6 +191,8 @@ const BudgetsPage: () => ReactNode = (): ReactNode => {
                 budget={budget}
                 transactions={transactions}
                 isLoading={isLoadingTransactions || isLoadingBudgets}
+                updatePage={updatePage}
+                fetchedBudgets={budgets}
               />
             ))}
           </div>
@@ -207,9 +209,9 @@ const BudgetsPage: () => ReactNode = (): ReactNode => {
           <OverlayContentAddNewBudget
             selectedCategoryItem={selectedCategoryItem}
             handleCategoryChange={handleCategoryChange}
+            handleInputChange={handleInputChange}
             selectedColorItem={selectedColorItem}
             handleColorChange={handleColorChange}
-            handleInputChange={handleInputChange}
             colors={colors}
             budgetCategories={budgetCategories}
             isHidden={isHidden}

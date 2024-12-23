@@ -10,16 +10,19 @@ interface Props {
   selectedItem: BudgetCategory;
   handleCategoryChange: (category: BudgetCategory) => void;
   budgetCategories: BudgetCategory[];
+  isDisabled?: boolean;
 }
 
 const OverlayDropdownCategory: ({
   selectedItem,
   handleCategoryChange,
   budgetCategories,
+  isDisabled,
 }: Props) => React.ReactNode = ({
   selectedItem,
   handleCategoryChange,
   budgetCategories,
+  isDisabled = false,
 }: Props) => {
   const [showCategories, setShowCategories] = useState<boolean>(false);
   const visibleCategories: BudgetCategory[] = budgetCategories.filter(
@@ -125,6 +128,7 @@ const OverlayDropdownCategory: ({
         handleKeyDown={handleKeyDown}
         dropdownCategoryBarClass={dropdownCategoryBarClass}
         dropdownCategoryIconClass={dropdownCategoryIconClass}
+        isDisabled={isDisabled}
       />
       <div className={`dropdownCategoryList ${showCategories ? 'isOpen' : ''}`}>
         <DropdownCategoryListItem

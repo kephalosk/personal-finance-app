@@ -8,10 +8,7 @@ interface Props {
   title: string;
   color: string;
   itemName: CardHeaderItemNameEnum;
-  handleSelection: (
-    itemOperation: CardHeaderItemOperationEnum,
-    itemName: CardHeaderItemNameEnum
-  ) => void;
+  handleSelection: (itemOperation: CardHeaderItemOperationEnum) => void;
 }
 
 const CardHeader: ({ title, color, itemName }: Props) => React.ReactNode = ({
@@ -45,7 +42,6 @@ const CardHeader: ({ title, color, itemName }: Props) => React.ReactNode = ({
           <img
             className="cardHeaderEditIcon"
             alt="ellipsis icon"
-            aria-hidden="true"
             src="/images/icon-ellipsis.svg"
             tabIndex={0}
             onClick={handleClick}
