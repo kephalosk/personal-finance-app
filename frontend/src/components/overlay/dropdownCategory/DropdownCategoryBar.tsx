@@ -8,6 +8,7 @@ interface Props {
   handleKeyDown: (event: React.KeyboardEvent<HTMLDivElement>) => void;
   dropdownCategoryBarClass: string;
   dropdownCategoryIconClass: string;
+  isDisabled: boolean;
 }
 
 const DropdownCategoryBar: ({
@@ -16,18 +17,20 @@ const DropdownCategoryBar: ({
   handleKeyDown,
   dropdownCategoryBarClass,
   dropdownCategoryIconClass,
+  isDisabled,
 }: Props) => ReactNode = ({
   selectedItem,
   handleClick,
   handleKeyDown,
   dropdownCategoryBarClass,
   dropdownCategoryIconClass,
+  isDisabled,
 }: Props): ReactNode => {
   return (
     <div className="DropdownCategoryBarContainer" data-testid="dropdown-category-bar">
       <div
         className={`${dropdownCategoryBarClass} ${selectedItem.disabled ? 'disabled' : ''}`}
-        tabIndex={0}
+        tabIndex={isDisabled ? -1 : 0}
         onClick={handleClick}
         onKeyDown={handleKeyDown}
       >

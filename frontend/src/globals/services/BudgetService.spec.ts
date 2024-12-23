@@ -1,6 +1,6 @@
 import { EPBudget } from '../../model/entrypoints/EPBudget';
 import { ColorNameEnum } from '../../model/enum/ColorNameEnum';
-import { addNewBudget, getBudgets } from './BudgetService';
+import { addNewBudget, editBudget, getBudgets } from './BudgetService';
 import axios from 'axios';
 import { mockedBudgets2 } from '../../fixtures/MockedBudgets';
 import { mockedBudgetsDTO } from '../../fixtures/MockedBudgetsDTO';
@@ -23,8 +23,10 @@ describe('BudgetService', () => {
   };
 
   beforeEach(() => {
+    jest.clearAllMocks();
     (axios.get as jest.Mock).mockResolvedValue({ data: mockedBudgetsDTO });
     (axios.post as jest.Mock).mockResolvedValue({ status: 201 });
+    (axios.put as jest.Mock).mockResolvedValue({ status: 201 });
   });
 
   it('maps array ApibudgetDto to array EPBudget correctly', async () => {
@@ -59,7 +61,7 @@ describe('BudgetService', () => {
     );
   });
 
-  it('returns fallback values if posting new budget fails', async () => {
+  it('returns error if posting new budget fails', async () => {
     const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation();
     (axios.post as jest.Mock).mockRejectedValue(new Error('Network Error'));
 
@@ -67,6 +69,31 @@ describe('BudgetService', () => {
 
     expect(consoleErrorSpy).toHaveBeenCalledWith(
       expect.stringContaining('Unable to add new Budget: Error: Network Error')
+    );
+  });
+
+  it('sends a PUT request and resolves successfully', async () => {
+    await editBudget(firstEPBudget);
+
+    expect(axios.put).toHaveBeenCalledWith(
+      'https://backend.philippkraatz.com/api/budget/editBudget',
+      mappedFirstEPBudget,
+      expect.objectContaining({
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+    );
+  });
+
+  it('returns error if posting new budget fails', async () => {
+    const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation();
+    (axios.put as jest.Mock).mockRejectedValue(new Error('Network Error'));
+
+    await editBudget(firstEPBudget);
+
+    expect(consoleErrorSpy).toHaveBeenCalledWith(
+      expect.stringContaining('Unable to edit Budget: Error: Network Error')
     );
   });
 });

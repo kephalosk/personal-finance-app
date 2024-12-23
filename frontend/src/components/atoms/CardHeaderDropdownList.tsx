@@ -8,10 +8,7 @@ import React, { ReactNode, useEffect, useRef } from 'react';
 interface Props {
   itemName: CardHeaderItemNameEnum;
   isDropdownVisible: boolean;
-  handleSelection: (
-    itemOperation: CardHeaderItemOperationEnum,
-    itemName: CardHeaderItemNameEnum
-  ) => void;
+  handleSelection: (itemOperation: CardHeaderItemOperationEnum) => void;
   hideDropdown: () => void;
 }
 
@@ -52,30 +49,24 @@ const CardHeaderDropdownList: ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const handleDropdownClick: (
-    itemOperation: CardHeaderItemOperationEnum,
-    itemName: CardHeaderItemNameEnum
-  ) => void = (
-    itemOperation: CardHeaderItemOperationEnum,
-    itemName: CardHeaderItemNameEnum
+  const handleDropdownClick: (itemOperation: CardHeaderItemOperationEnum) => void = (
+    itemOperation: CardHeaderItemOperationEnum
   ): void => {
-    handleSelection(itemOperation, itemName);
+    handleSelection(itemOperation);
     hideDropdown();
   };
 
   const handleDropdownKeyDown: (
     event: React.KeyboardEvent<HTMLDivElement>,
     itemOperation: CardHeaderItemOperationEnum,
-    itemName: CardHeaderItemNameEnum,
     index: number
   ) => void = (
     event: React.KeyboardEvent<HTMLDivElement>,
     itemOperation: CardHeaderItemOperationEnum,
-    itemName: CardHeaderItemNameEnum,
     index: number
   ): void => {
     if (event.key === 'Enter') {
-      handleSelection(itemOperation, itemName);
+      handleSelection(itemOperation);
       hideDropdown();
     }
     if (event.key === 'Tab' && !event.shiftKey && index === clickableRefs.current.length - 1) {

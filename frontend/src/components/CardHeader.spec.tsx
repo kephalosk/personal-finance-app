@@ -6,7 +6,6 @@ import CardHeaderDropdownList from './atoms/CardHeaderDropdownList';
 import { CardHeaderItemOperationEnum } from '../model/enum/CardHeaderItemOperationEnum';
 
 const itemOperation = CardHeaderItemNameEnum.BUDGET;
-const itemName = CardHeaderItemNameEnum.BUDGET;
 jest.mock(
   './atoms/CardHeaderDropdownList',
   (): jest.Mock =>
@@ -14,7 +13,7 @@ jest.mock(
       (props): ReactNode => (
         <div
           data-testid="card-header-dropdown-list"
-          onClick={props.handleSelection(itemOperation, itemName)}
+          onClick={props.handleSelection(itemOperation)}
         ></div>
       )
     )
@@ -23,16 +22,14 @@ jest.mock(
 describe('CardHeader', () => {
   const title = 'testTitle';
   const color = 'testColor';
+  const itemName = CardHeaderItemNameEnum.BUDGET;
   const mockHandleSelection = jest.fn();
 
   const testProps: {
     title: string;
     color: string;
     itemName: CardHeaderItemNameEnum;
-    handleSelection: (
-      itemOperation: CardHeaderItemOperationEnum,
-      itemName: CardHeaderItemNameEnum
-    ) => void;
+    handleSelection: (itemOperation: CardHeaderItemOperationEnum) => void;
   } = {
     title,
     color,
@@ -100,6 +97,6 @@ describe('CardHeader', () => {
     const component = screen.getByTestId('card-header-dropdown-list');
     fireEvent.click(component);
 
-    expect(mockHandleSelection).toHaveBeenCalledWith(itemOperation, itemName);
+    expect(mockHandleSelection).toHaveBeenCalledWith(itemOperation);
   });
 });

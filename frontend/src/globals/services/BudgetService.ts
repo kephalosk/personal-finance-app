@@ -52,11 +52,31 @@ export async function addNewBudget(newBudget: EPBudget): Promise<void> {
         },
       }
     );
-    if (response.status === 201) {
-      console.log('Budget successfully created');
-    }
   } catch (error) {
     console.error(`Unable to add new Budget: ${error}`);
+  }
+}
+
+export async function editBudget(editedBudget: EPBudget): Promise<void> {
+  const apiUrl: string = `${AppConfig.API_BACKEND_HOST}/budget/editBudget`;
+
+  try {
+    const newBudgetDTO: APIBudgetDTO = fromEPBudgetMapper(editedBudget);
+
+    const response: AxiosResponse<APIBudgetDTO, unknown> = await axios.put<APIBudgetDTO>(
+      apiUrl,
+      newBudgetDTO,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+    if (response.status === 200) {
+      console.log('Budget successfully edited');
+    }
+  } catch (error) {
+    console.error(`Unable to edit Budget: ${error}`);
   }
 }
 

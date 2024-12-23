@@ -1,0 +1,13 @@
+.overlayContentEditBudget {
+  display: flex;
+  flex-direction: column;
+}
+
+.overlayContentEditBudgetNotAllowed {
+  cursor: not-allowed;
+  color: var(--text-grey);
+}
+
+.overlayContentEditBudgetNoEvents {
+  pointer-events: none;
+}
