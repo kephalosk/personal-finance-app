@@ -24,16 +24,9 @@ jest.mock(
         <div
           data-testid="card-header-dropdown-item"
           ref={mockRef}
-          onClick={(): void =>
-            props.handleDropdownClick(CardHeaderItemOperationEnum.EDIT, itemName)
-          }
+          onClick={(): void => props.handleDropdownClick(CardHeaderItemOperationEnum.EDIT)}
           onKeyDown={(event: KeyboardEvent<HTMLDivElement>): void =>
-            props.handleDropdownKeyDown(
-              event,
-              CardHeaderItemOperationEnum.EDIT,
-              itemName,
-              props.index
-            )
+            props.handleDropdownKeyDown(event, CardHeaderItemOperationEnum.EDIT, props.index)
           }
         ></div>
       );
@@ -48,10 +41,7 @@ describe('CardHeaderDropdownList', () => {
   const testProps: {
     itemName: CardHeaderItemNameEnum;
     isDropdownVisible: boolean;
-    handleSelection: (
-      itemOperation: CardHeaderItemOperationEnum,
-      itemName: CardHeaderItemNameEnum
-    ) => void;
+    handleSelection: (itemOperation: CardHeaderItemOperationEnum) => void;
     hideDropdown: () => void;
   } = {
     itemName,
@@ -137,10 +127,7 @@ describe('CardHeaderDropdownList', () => {
     fireEvent.click(components[0]);
 
     expect(mockHandleSelection).toHaveBeenCalledTimes(1);
-    expect(mockHandleSelection).toHaveBeenCalledWith(
-      CardHeaderItemOperationEnum.EDIT,
-      CardHeaderItemNameEnum.BUDGET
-    );
+    expect(mockHandleSelection).toHaveBeenCalledWith(CardHeaderItemOperationEnum.EDIT);
     expect(mockHideDropdown).toHaveBeenCalledTimes(1);
   });
 
@@ -151,10 +138,7 @@ describe('CardHeaderDropdownList', () => {
     fireEvent.keyDown(components[0], { key: 'Enter', name: 'Enter', code: 13 });
 
     expect(mockHandleSelection).toHaveBeenCalledTimes(1);
-    expect(mockHandleSelection).toHaveBeenCalledWith(
-      CardHeaderItemOperationEnum.EDIT,
-      CardHeaderItemNameEnum.BUDGET
-    );
+    expect(mockHandleSelection).toHaveBeenCalledWith(CardHeaderItemOperationEnum.EDIT);
     expect(mockHideDropdown).toHaveBeenCalledTimes(1);
   });
 

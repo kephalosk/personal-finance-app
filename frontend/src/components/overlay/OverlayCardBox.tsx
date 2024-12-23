@@ -10,7 +10,7 @@ interface Props {
   handleEvent: () => void;
   onClose: () => void;
   children: React.ReactNode;
-  isButtonDisabled: boolean;
+  isButtonDisabled?: boolean;
 }
 
 const OverlayCardBox: ({
@@ -30,7 +30,7 @@ const OverlayCardBox: ({
   handleEvent,
   onClose,
   children,
-  isButtonDisabled,
+  isButtonDisabled = false,
 }: Props): ReactNode => {
   const overlayRef: React.RefObject<HTMLDivElement> = useRef<HTMLDivElement>(null);
 

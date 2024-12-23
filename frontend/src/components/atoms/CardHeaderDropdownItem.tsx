@@ -8,14 +8,10 @@ interface Props {
   itemOperation: CardHeaderItemOperationEnum;
   itemName: CardHeaderItemNameEnum;
   itemColor: ColorNameEnum.BLACK | ColorNameEnum.RED;
-  handleDropdownClick: (
-    itemOperation: CardHeaderItemOperationEnum,
-    itemName: CardHeaderItemNameEnum
-  ) => void;
+  handleDropdownClick: (itemOperation: CardHeaderItemOperationEnum) => void;
   handleDropdownKeyDown: (
     event: React.KeyboardEvent<HTMLDivElement>,
     itemOperation: CardHeaderItemOperationEnum,
-    itemName: CardHeaderItemNameEnum,
     index: number
   ) => void;
   index: number;
@@ -44,8 +40,8 @@ const CardHeaderDropdownItem: ({
       className={`cardHeaderDropdownItem ${itemColor}`}
       data-testid="card-header-dropdown-item"
       tabIndex={0}
-      onClick={() => handleDropdownClick(itemOperation, itemName)}
-      onKeyDown={(event) => handleDropdownKeyDown(event, itemOperation, itemName, index)}
+      onClick={() => handleDropdownClick(itemOperation)}
+      onKeyDown={(event) => handleDropdownKeyDown(event, itemOperation, index)}
       ref={(el) => {
         clickableRefs.current[index] = el;
       }}

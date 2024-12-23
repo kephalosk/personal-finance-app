@@ -43,7 +43,7 @@ const OverlayContentAddNewBudget: ({
 
   useEffect((): void => {
     if (isHidden) {
-      inputMoneyRef.current?.reset(); // Reset auslösen
+      inputMoneyRef.current?.reset();
     }
   }, [isHidden]);
 
