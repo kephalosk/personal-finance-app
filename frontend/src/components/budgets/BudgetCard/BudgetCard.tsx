@@ -1,42 +1,41 @@
 import './BudgetCard.scss';
+import React, { ReactNode, useState } from 'react';
+import { EPTransaction } from '../../../model/entrypoints/EPTransaction';
+import { ColorNameEnum } from '../../../model/enum/ColorNameEnum';
+import { EPBudget } from '../../../model/entrypoints/EPBudget';
+import { CardHeaderItemNameEnum } from '../../../model/enum/CardHeaderItemNameEnum';
+import { CardHeaderItemOperationEnum } from '../../../model/enum/CardHeaderItemOperationEnum';
+import { Color } from '../../../model/Color';
 import CardHeader from '../../CardHeader';
 import ValueBox from '../../overview/ValueBox';
 import BudgetCardList from './BudgetCardList';
-import React, { ReactNode, useEffect, useState } from 'react';
-import { EPTransaction } from '../../../model/entrypoints/EPTransaction';
-import { ColorNameEnum } from '../../../model/enum/ColorNameEnum';
-import useIsSmallScreen from '../../../globals/hooks/useIsSmallScreen';
 import LoadingSpinner from '../../LoadingSpinner';
-import { EPBudget } from '../../../model/entrypoints/EPBudget';
-import { CardHeaderItemNameEnum } from '../../../model/enum/CardHeaderItemNameEnum';
 import OverlayCardBox from '../../overlay/OverlayCardBox';
-import { CardHeaderItemOperationEnum } from '../../../model/enum/CardHeaderItemOperationEnum';
-import { editBudget } from '../../../globals/services/BudgetService';
 import OverlayContentEditBudget from '../../overlay/OverlayContentEditBudget';
-import { Color } from '../../../model/Color';
-import Colors from '../../../constants/Colors';
-import { getColorObject } from '../../../globals/utils/getColorObject';
+import useIsSmallScreen from '../../../globals/hooks/useIsSmallScreen';
+import getColorObject from '../../../globals/utils/getColorObject';
+import { editBudget } from '../../../globals/services/BudgetService';
 
 interface Props {
-  budget: EPBudget;
   transactions: EPTransaction[];
-  isLoading: boolean;
-  updatePage: () => Promise<void>;
   fetchedBudgets: EPBudget[];
+  budget: EPBudget;
+  updatePage: () => Promise<void>;
+  isLoading: boolean;
 }
 
 const BudgetCard: ({
-  budget,
   transactions,
-  isLoading,
-  updatePage,
   fetchedBudgets,
+  budget,
+  updatePage,
+  isLoading,
 }: Props) => ReactNode = ({
-  budget,
   transactions,
-  isLoading,
-  updatePage,
   fetchedBudgets,
+  budget,
+  updatePage,
+  isLoading,
 }: Props): ReactNode => {
   const budgetTransactions: EPTransaction[] = transactions.filter((transaction: EPTransaction) => {
     return transaction.categoryKey === budget.categoryKey;
@@ -67,6 +66,7 @@ const BudgetCard: ({
     }
   };
 
+  const [hasFormToGetAReset, setHasFormToGetAReset] = useState<boolean>(false);
   const closeForm: () => void = (): void => {
     setIsEditBudgetHidden(true);
     const activeElement: Element | null = document.activeElement;
@@ -75,6 +75,7 @@ const BudgetCard: ({
     }
     setHasValidInput(true);
     setSpendAmount(0);
+    setHasFormToGetAReset(true);
   };
 
   const [spendAmount, setSpendAmount] = useState<number>(0);
@@ -88,7 +89,7 @@ const BudgetCard: ({
   };
 
   const [hasValidInput, setHasValidInput] = useState<boolean>(true);
-  const handleEditBudget = async () => {
+  const handleEditBudget = async (): Promise<void> => {
     if (spendAmount === 0) {
       setHasValidInput(false);
       return;
@@ -99,45 +100,19 @@ const BudgetCard: ({
       category: budget.category,
       categoryKey: budget.categoryKey,
       maximum: spendAmount,
-      color: budget.color,
+      color: selectedColorItem.name,
     };
     await editBudget(editedBudget);
     await updatePage();
     closeForm();
   };
 
-  const colorObject: Color = getColorObject(budget.color);
-  const [selectedColorItem, setSelectedColorItem] = useState(colorObject);
-  const handleColorChange: (color: Color) => void = (color: Color): void => {
+  const initialBudgetColorObject: Color = getColorObject(budget.color);
+  const [selectedColorItem, setSelectedColorItem] = useState(initialBudgetColorObject);
+  const propagateColorChange: (color: Color) => void = (color: Color): void => {
     setSelectedColorItem(color);
+    setHasFormToGetAReset(false);
   };
-
-  const [colors, setColors] = useState<Color[]>(Colors);
-  const sortColors: (fetchedBudgets: EPBudget[]) => void = (fetchedBudgets: EPBudget[]): void => {
-    const markedColors: Color[] = colors.map((color: Color): Color => {
-      const isColorUsed: boolean = fetchedBudgets.some(
-        (budgetFetched: EPBudget): boolean =>
-          budgetFetched.color === color.name && color.name !== budget.color
-      );
-      return { ...color, disabled: isColorUsed };
-    });
-    const enabledColors: Color[] = markedColors.filter((color: Color) => !color.disabled);
-    const updatedColors: Color[] = enabledColors.filter((color: Color) => color !== colorObject);
-    const disabledColors: Color[] = markedColors.filter((color: Color) => color.disabled);
-    const combinedColors: Color[] = [colorObject, ...updatedColors, ...disabledColors];
-
-    setColors(combinedColors);
-    setSelectedColorItem(colorObject);
-    console.log('colorObject.displayName', colorObject.displayName);
-    console.log('budget.color', budget.color);
-    console.log('-----------');
-  };
-
-  useEffect((): void => {
-    sortColors(fetchedBudgets);
-    // sortColors should sort all colors when fetched budgets have changed
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [fetchedBudgets]);
 
   return (
     <>
@@ -182,13 +157,13 @@ const BudgetCard: ({
             onClose={closeForm}
           >
             <OverlayContentEditBudget
+              fetchedBudgets={fetchedBudgets}
               budget={budget}
-              isHidden={isEditBudgetHidden}
               handleInputChange={handleInputChange}
+              propagateColorChange={propagateColorChange}
+              isHidden={isEditBudgetHidden}
               hasValidInput={hasValidInput}
-              selectedColorItem={selectedColorItem}
-              handleColorChange={handleColorChange}
-              colors={colors}
+              hasFormToGetAReset={hasFormToGetAReset}
             />
           </OverlayCardBox>
         </div>

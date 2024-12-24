@@ -43,15 +43,11 @@ export async function addNewBudget(newBudget: EPBudget): Promise<void> {
   try {
     const newBudgetDTO: APIBudgetDTO = fromEPBudgetMapper(newBudget);
 
-    const response: AxiosResponse<APIBudgetDTO, unknown> = await axios.post<APIBudgetDTO>(
-      apiUrl,
-      newBudgetDTO,
-      {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      }
-    );
+    await axios.post<APIBudgetDTO>(apiUrl, newBudgetDTO, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
   } catch (error) {
     console.error(`Unable to add new Budget: ${error}`);
   }

@@ -3,7 +3,7 @@ import { Color } from '../../model/Color';
 import { fromColorNameToCode } from './FromColorNameToCode';
 import { fromColorNameToDisplayName } from './FromColorNameToDisplayName';
 
-export const getColorObject = (color: ColorNameEnum): Color => {
+const getColorObject = (color: ColorNameEnum): Color => {
   return {
     name: color,
     code: fromColorNameToCode(color),
@@ -11,3 +11,5 @@ export const getColorObject = (color: ColorNameEnum): Color => {
     disabled: false,
   };
 };
+
+export default getColorObject;
