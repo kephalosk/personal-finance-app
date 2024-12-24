@@ -15,7 +15,9 @@ jest.mock('./pages/BudgetsPage', () => jest.fn(() => <div data-testid="budgets-p
 jest.mock('./pages/PotsPage', () => jest.fn(() => <div data-testid="pots-page"></div>));
 jest.mock('./pages/BillsPage', () => jest.fn(() => <div data-testid="bills-page"></div>));
 jest.mock('./pages/NoPage', () => jest.fn(() => <div data-testid="no-page"></div>));
-jest.mock('./pages/Showcase', () => jest.fn(() => <div data-testid="showcase"></div>));
+jest.mock('./showcase/ShowcaseAddNewBudgetForm', () =>
+  jest.fn(() => <div data-testid="showcase"></div>)
+);
 
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),

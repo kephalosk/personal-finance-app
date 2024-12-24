@@ -1,8 +1,8 @@
 import { test, expect } from '@playwright/test';
 
-const BASE_PATH: string = 'http://localhost:5173/showcase/AddNewBudgetForm';
+const BASE_PATH: string = 'http://localhost:5173/showcase/EditBudgetForm';
 
-test('AddNewBudgetForm-Desktop', async ({ page }): Promise<void> => {
+test('EditBudgetForm-Desktop', async ({ page }): Promise<void> => {
   await page.setViewportSize({ width: 1440, height: 600 });
   await page.goto(BASE_PATH);
   await page.evaluate(() => document.fonts.ready);
@@ -15,7 +15,7 @@ test('AddNewBudgetForm-Desktop', async ({ page }): Promise<void> => {
   await expect(page).toHaveScreenshot();
 });
 
-test('AddNewBudgetForm-Tablet', async ({ page }): Promise<void> => {
+test('EditBudgetForm-Tablet', async ({ page }): Promise<void> => {
   await page.setViewportSize({ width: 768, height: 600 });
   await page.goto(BASE_PATH);
   await page.evaluate(() => document.fonts.ready);
@@ -28,7 +28,7 @@ test('AddNewBudgetForm-Tablet', async ({ page }): Promise<void> => {
   await expect(page).toHaveScreenshot();
 });
 
-test('AddNewBudgetForm-Mobile', async ({ page }): Promise<void> => {
+test('EditBudgetForm-Mobile', async ({ page }): Promise<void> => {
   await page.setViewportSize({ width: 375, height: 600 });
   await page.goto(BASE_PATH);
   await page.evaluate(() => document.fonts.ready);
