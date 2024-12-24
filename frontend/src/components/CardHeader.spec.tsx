@@ -1,5 +1,5 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-import React, { ReactNode } from 'react';
+import React, { Fragment, ReactNode } from 'react';
 import CardHeader from './CardHeader';
 import { CardHeaderItemNameEnum } from '../model/enum/CardHeaderItemNameEnum';
 import CardHeaderDropdownList from './atoms/CardHeaderDropdownList';
@@ -11,10 +11,16 @@ jest.mock(
   (): jest.Mock =>
     jest.fn(
       (props): ReactNode => (
-        <div
-          data-testid="card-header-dropdown-list"
-          onClick={props.handleSelection(itemOperation)}
-        ></div>
+        <Fragment>
+          <div
+            data-testid="card-header-dropdown-list"
+            onClick={() => props.handleSelection(itemOperation)}
+          ></div>
+          <div
+            data-testid="card-header-dropdown-list-hide"
+            onClick={() => props.hideDropdown()}
+          ></div>
+        </Fragment>
       )
     )
 );
@@ -62,16 +68,47 @@ describe('CardHeader', () => {
     expect(htmlElement).toHaveTextContent(title);
   });
 
-  it('renders select CardHeaderEditIcon', () => {
+  it('renders image CardHeaderEditIcon', () => {
     const { container } = render(<CardHeader {...testProps} />);
 
     const htmlElement = container.querySelector('.cardHeaderEditIcon');
 
     expect(htmlElement).toBeInTheDocument();
     expect(htmlElement).toHaveAttribute('alt', 'ellipsis icon');
-    expect(htmlElement).toHaveAttribute('aria-hidden', 'true');
     expect(htmlElement).toHaveAttribute('src', '/images/icon-ellipsis.svg');
     expect(htmlElement).toHaveAttribute('tabIndex', '0');
+  });
+
+  it('sets CardHeaderDropdownList visible when image CardHeaderEditIcon is clicked', () => {
+    const { container } = render(<CardHeader {...testProps} />);
+    expect(CardHeaderDropdownList).toHaveBeenLastCalledWith(
+      expect.objectContaining({ isDropdownVisible: false }),
+      {}
+    );
+
+    const htmlElement = container.querySelector('.cardHeaderEditIcon');
+    fireEvent.click(htmlElement!);
+
+    expect(CardHeaderDropdownList).toHaveBeenLastCalledWith(
+      expect.objectContaining({ isDropdownVisible: true }),
+      {}
+    );
+  });
+
+  it('sets CardHeaderDropdownList visible when image CardHeaderEditIcon is pressed', () => {
+    const { container } = render(<CardHeader {...testProps} />);
+    expect(CardHeaderDropdownList).toHaveBeenLastCalledWith(
+      expect.objectContaining({ isDropdownVisible: false }),
+      {}
+    );
+
+    const htmlElement = container.querySelector('.cardHeaderEditIcon');
+    fireEvent.keyDown(htmlElement!, { name: 'Enter', key: 'Enter', code: '13' });
+
+    expect(CardHeaderDropdownList).toHaveBeenLastCalledWith(
+      expect.objectContaining({ isDropdownVisible: true }),
+      {}
+    );
   });
 
   it('renders component CardHeaderDropdownList', () => {
@@ -98,5 +135,23 @@ describe('CardHeader', () => {
     fireEvent.click(component);
 
     expect(mockHandleSelection).toHaveBeenCalledWith(itemOperation);
+  });
+
+  it('calls hideDropdown when component CardHeaderDropdownList is clicked', () => {
+    const { container } = render(<CardHeader {...testProps} />);
+    const htmlElement = container.querySelector('.cardHeaderEditIcon');
+    fireEvent.click(htmlElement!);
+    expect(CardHeaderDropdownList).toHaveBeenLastCalledWith(
+      expect.objectContaining({ isDropdownVisible: true }),
+      {}
+    );
+
+    const component = screen.getByTestId('card-header-dropdown-list-hide');
+    fireEvent.click(component);
+
+    expect(CardHeaderDropdownList).toHaveBeenLastCalledWith(
+      expect.objectContaining({ isDropdownVisible: false }),
+      {}
+    );
   });
 });

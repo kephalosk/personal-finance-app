@@ -35,6 +35,15 @@ describe('InputMoney', () => {
     expect(element).toHaveAttribute('type', 'text');
   });
 
+  it('renders input inputMoneyInput with passed prop initialValue', () => {
+    const initValue = '1111';
+    const { container } = render(<InputMoney {...testProps} initialValue={initValue} />);
+
+    const element: Element | null = container.querySelector('.inputMoneyInput');
+
+    expect(element).toHaveAttribute('value', initValue);
+  });
+
   it('renders label inputMoneyIcon with $ sign', () => {
     const { container } = render(<InputMoney {...testProps} />);
 
@@ -102,8 +111,11 @@ describe('InputMoney', () => {
     expect(element).not.toHaveClass('active');
   });
 
-  it('calls reset and clears the input value', async () => {
-    const { container } = render(<InputMoney {...testProps} ref={inputMoneyRef} />);
+  it('calls reset and resets the input value', async () => {
+    const initValue = '1111';
+    const { container } = render(
+      <InputMoney {...testProps} ref={inputMoneyRef} initialValue={initValue} />
+    );
     const input: Element | null = container.querySelector('.inputMoneyInput');
     fireEvent.change(input!, { target: { value: '12345' } });
     expect(input).toHaveAttribute('value', '12,345');
@@ -112,7 +124,7 @@ describe('InputMoney', () => {
     inputMoneyRef.current?.reset();
 
     await waitFor(() => {
-      expect(input).toHaveAttribute('value', '');
+      expect(input).toHaveAttribute('value', initValue);
     });
   });
 

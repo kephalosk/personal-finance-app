@@ -122,12 +122,15 @@ describe('OverlayDropdownCategory', (): void => {
     );
   });
 
-  it.each([false, true])(
+  it.each([false, true, undefined])(
     'renders component DropdownCategoryBar with passed prop isDisabled === %s',
-    (isDisabled: boolean): void => {
+    (isDisabled: boolean | undefined): void => {
       render(<OverlayDropdownCategory {...testProps} isDisabled={isDisabled} />);
 
-      expect(DropdownCategoryBar).toHaveBeenCalledWith(expect.objectContaining({ isDisabled }), {});
+      expect(DropdownCategoryBar).toHaveBeenCalledWith(
+        expect.objectContaining({ isDisabled: isDisabled ?? false }),
+        {}
+      );
     }
   );
 

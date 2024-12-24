@@ -1,5 +1,5 @@
 import { ColorNameEnum } from '../../model/enum/ColorNameEnum';
-import { getColorObject } from './getColorObject';
+import getColorObject from './getColorObject';
 import { fromColorNameToCode } from './FromColorNameToCode';
 import { fromColorNameToDisplayName } from './FromColorNameToDisplayName';
 import { Color } from '../../model/Color';

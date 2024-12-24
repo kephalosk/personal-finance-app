@@ -85,7 +85,7 @@ describe('OverlayDropDownColorListItem', () => {
 
     const components = screen.getAllByTestId('overlay-dropdown-color-list-item');
 
-    expect(components).toHaveLength(16);
+    expect(components).toHaveLength(18);
     colors.forEach((color, index) => {
       expect(OverlayDropDownColorListItem).toHaveBeenCalledWith(
         expect.objectContaining({
