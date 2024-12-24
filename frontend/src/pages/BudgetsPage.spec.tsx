@@ -204,20 +204,22 @@ describe('BudgetsPage', () => {
     expect(BudgetCard).toHaveBeenNthCalledWith(
       1,
       {
-        isLoading: false,
-        budget: mockedBudgets[0],
         transactions: mockedTransactions,
+        fetchedBudgets: mockedBudgets,
+        budget: mockedBudgets[0],
         updatePage: expect.any(Function),
+        isLoading: false,
       },
       {}
     );
     expect(BudgetCard).toHaveBeenNthCalledWith(
       2,
       {
-        isLoading: false,
-        budget: mockedBudgets[1],
         transactions: mockedTransactions,
+        fetchedBudgets: mockedBudgets,
+        budget: mockedBudgets[1],
         updatePage: expect.any(Function),
+        isLoading: false,
       },
       {}
     );

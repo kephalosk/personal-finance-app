@@ -59,18 +59,11 @@ export async function editBudget(editedBudget: EPBudget): Promise<void> {
   try {
     const newBudgetDTO: APIBudgetDTO = fromEPBudgetMapper(editedBudget);
 
-    const response: AxiosResponse<APIBudgetDTO, unknown> = await axios.put<APIBudgetDTO>(
-      apiUrl,
-      newBudgetDTO,
-      {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      }
-    );
-    if (response.status === 200) {
-      console.log('Budget successfully edited');
-    }
+    await axios.put<APIBudgetDTO>(apiUrl, newBudgetDTO, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
   } catch (error) {
     console.error(`Unable to edit Budget: ${error}`);
   }

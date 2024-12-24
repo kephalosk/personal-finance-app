@@ -164,6 +164,16 @@ describe('OverlayCardBox', () => {
     expect(htmlElement).toHaveClass('isEnabled');
   });
 
+  it('renders div overlayFormSubmitContainer with passed prop isButtonDisabled is undefined', async () => {
+    const { container } = render(<OverlayCardBox {...testProps} isButtonDisabled={undefined} />);
+
+    const htmlElement = container.querySelector('.overlayFormSubmitContainer');
+
+    expect(htmlElement).toBeInTheDocument();
+    expect(htmlElement).not.toHaveClass('disabled');
+    expect(htmlElement).toHaveClass('isEnabled');
+  });
+
   it('renders div overlayFormSubmitContainer with passed prop isButtonDisabled is true', async () => {
     const { container } = render(<OverlayCardBox {...testProps} isButtonDisabled={true} />);
 
