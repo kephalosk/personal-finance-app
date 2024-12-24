@@ -4,14 +4,18 @@ import PotCardDetails from './PotCardDetails';
 import LoadingSpinner from '../LoadingSpinner';
 import { EPPot } from '../../model/entrypoints/EPPot';
 import { CardHeaderItemNameEnum } from '../../model/enum/CardHeaderItemNameEnum';
+import { ReactNode } from 'react';
 
 interface Props {
   pot: EPPot;
   isLoading: boolean;
 }
 
-const PotCard = ({ pot, isLoading }: Props) => {
-  const handleSelection = () => {};
+const PotCard: ({ pot, isLoading }: Props) => ReactNode = ({
+  pot,
+  isLoading,
+}: Props): ReactNode => {
+  const handleSelection = (): void => {};
 
   return (
     <>
