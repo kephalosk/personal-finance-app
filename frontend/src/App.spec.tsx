@@ -16,7 +16,10 @@ jest.mock('./pages/PotsPage', () => jest.fn(() => <div data-testid="pots-page"><
 jest.mock('./pages/BillsPage', () => jest.fn(() => <div data-testid="bills-page"></div>));
 jest.mock('./pages/NoPage', () => jest.fn(() => <div data-testid="no-page"></div>));
 jest.mock('./showcase/ShowcaseAddNewBudgetForm', () =>
-  jest.fn(() => <div data-testid="showcase"></div>)
+  jest.fn(() => <div data-testid="showcase-add-new-budget-form"></div>)
+);
+jest.mock('./showcase/ShowcaseEditBudgetForm', () =>
+  jest.fn(() => <div data-testid="showcase-edit-budget-form"></div>)
 );
 
 jest.mock('react-router-dom', () => ({
@@ -129,7 +132,8 @@ describe('App', () => {
       ['PotsPage', '/pots', 'pots-page'],
       ['BillsPage', '/bills', 'bills-page'],
       ['NoPage', '/undefinedURL', 'no-page'],
-      ['Showcase', '/showcase', 'showcase'],
+      ['ShowcaseAddNewBudgetForm', '/showcase/AddNewBudgetForm', 'showcase-add-new-budget-form'],
+      ['ShowcaseEditBudgetForm', '/showcase/EditBudgetForm', 'showcase-edit-budget-form'],
     ])('renders %s on path %s', (title: string, path: string, testid: string) => {
       const { getByTestId } = render(<App Router={MemoryRouter} initialEntries={[path]} />);
 
