@@ -1,5 +1,5 @@
 import './DropdownCategoryListItem.scss';
-import React, { ReactNode } from 'react';
+import React, { KeyboardEvent, ReactNode } from 'react';
 import { BudgetCategory } from '../../../model/BudgetCategory';
 
 interface Props {
@@ -44,9 +44,11 @@ const DropdownCategoryListItem: ({
       <div
         className={`${dropdownCategoryListItemClass} ${category.disabled ? 'disabled' : ''}`}
         onClick={() => onItemClick(category)}
-        onKeyDown={(event) => handleCategoryKeyDown(event, category, index + 1)}
+        onKeyDown={(event: KeyboardEvent<HTMLDivElement>) =>
+          handleCategoryKeyDown(event, category, index + 1)
+        }
         tabIndex={category.disabled ? -1 : 0}
-        ref={(el) => {
+        ref={(el: HTMLDivElement) => {
           if (!category.disabled) {
             clickableRefs.current[index + 1] = el;
           }
