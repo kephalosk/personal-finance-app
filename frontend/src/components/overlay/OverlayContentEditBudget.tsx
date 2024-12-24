@@ -1,36 +1,45 @@
 import './OverlayContentEditBudget.scss';
+import { ReactNode, RefObject, useEffect, useRef, useState } from 'react';
+import { Color } from '../../model/Color';
+import { EPBudget } from '../../model/entrypoints/EPBudget';
+import Colors from '../../constants/Colors';
 import OverlayContentLabel from '../atoms/OverlayContentLabel';
 import OverlayDropdownCategory from './dropdownCategory/OverlayDropdownCategory';
-import { EPBudget } from '../../model/entrypoints/EPBudget';
-import InputMoney, { InputMoneyRef } from '../atoms/InputMoney';
-import { RefObject, useEffect, useRef, useState } from 'react';
 import OverlayDropdownColor from './OverlayDropdownColor';
-import { Color } from '../../model/Color';
+import InputMoney, { InputMoneyRef } from '../atoms/InputMoney';
 import getColorObject from '../../globals/utils/getColorObject';
-import Colors from '../../constants/Colors';
+import { BudgetCategory } from '../../model/BudgetCategory';
 
 interface Props {
   fetchedBudgets: EPBudget[];
   budget: EPBudget;
-  isHidden: boolean;
   handleInputChange: (input: number) => void;
-  hasValidInput: boolean;
   propagateColorChange: (color: Color) => void;
+  isHidden: boolean;
+  hasValidInput: boolean;
   hasFormToGetAReset: boolean;
 }
 
-const OverlayContentEditBudget = ({
+const OverlayContentEditBudget: ({
   fetchedBudgets,
   budget,
-  isHidden,
   handleInputChange,
-  hasValidInput,
   propagateColorChange,
+  isHidden,
+  hasValidInput,
   hasFormToGetAReset,
-}: Props) => {
+}: Props) => ReactNode = ({
+  fetchedBudgets,
+  budget,
+  handleInputChange,
+  propagateColorChange,
+  isHidden,
+  hasValidInput,
+  hasFormToGetAReset,
+}: Props): ReactNode => {
   const inputMoneyRef: RefObject<InputMoneyRef> = useRef<InputMoneyRef>(null);
 
-  const budgetCategory = {
+  const budgetCategory: BudgetCategory = {
     name: budget.category,
     key: budget.categoryKey,
     disabled: false,
@@ -44,9 +53,11 @@ const OverlayContentEditBudget = ({
 
   const [colorList, setColorList] = useState<Color[]>(Colors);
   const [selectedColorItem, setSelectedColorItem] = useState<Color>(getColorObject(budget.color));
-  useEffect(() => {
-    const sortedColors = sortColors();
-    const filteredColors: Color[] = sortedColors.filter((color) => color.name !== budget.category);
+  useEffect((): void => {
+    const sortedColors: Color[] = sortColors();
+    const filteredColors: Color[] = sortedColors.filter(
+      (color: Color): boolean => color.name !== budget.category
+    );
     const updatedColors: Color[] = [getColorObject(budget.color), ...filteredColors];
     setColorList(updatedColors);
     setSelectedColorItem(getColorObject(budget.color));
@@ -78,7 +89,7 @@ const OverlayContentEditBudget = ({
         <div className="overlayContentEditBudgetNoEvents">
           <OverlayDropdownCategory
             selectedItem={budgetCategory}
-            handleCategoryChange={() => {}}
+            handleCategoryChange={(): void => {}}
             budgetCategories={[]}
             isDisabled={true}
           />

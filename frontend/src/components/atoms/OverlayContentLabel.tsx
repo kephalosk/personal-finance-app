@@ -5,7 +5,11 @@ interface Props {
 }
 
 const OverlayContentLabel = ({ title }: Props) => {
-  return <label className="overlayContentLabel">{title}</label>;
+  return (
+    <label className="overlayContentLabel" data-testid="overlay-content-label">
+      {title}
+    </label>
+  );
 };
 
 export default OverlayContentLabel;
