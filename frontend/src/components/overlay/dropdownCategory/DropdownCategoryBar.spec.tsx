@@ -9,6 +9,7 @@ describe('DropdownCategoryBar', () => {
   const mockHandleKeyDown: jest.Mock = jest.fn();
   const dropdownCategoryBarClass: string = 'dropdownCategoryBar';
   const dropdownCategoryIconClass: string = 'dropdownCategoryIconClass';
+  const isDisabled: boolean = false;
 
   const testProps = {
     selectedItem,
@@ -16,6 +17,7 @@ describe('DropdownCategoryBar', () => {
     handleKeyDown: mockHandleKeyDown,
     dropdownCategoryBarClass,
     dropdownCategoryIconClass,
+    isDisabled,
   };
 
   it('renders div DropdownCategoryBarContainer', () => {
@@ -47,6 +49,22 @@ describe('DropdownCategoryBar', () => {
 
     expect(element).toBeInTheDocument();
     expect(element).not.toHaveClass('disabled');
+  });
+
+  it(`renders div ${dropdownCategoryBarClass} with passed prop isDisabled === false`, () => {
+    const { container } = render(<DropdownCategoryBar {...testProps} isDisabled={false} />);
+
+    const element = container.querySelector(`.${dropdownCategoryBarClass}`);
+
+    expect(element).toHaveAttribute('tabIndex', '0');
+  });
+
+  it(`renders div ${dropdownCategoryBarClass} with passed prop isDisabled === true`, () => {
+    const { container } = render(<DropdownCategoryBar {...testProps} isDisabled={true} />);
+
+    const element = container.querySelector(`.${dropdownCategoryBarClass}`);
+
+    expect(element).toHaveAttribute('tabIndex', '-1');
   });
 
   it(`calls handleClick when div ${dropdownCategoryBarClass} is clicked`, () => {
