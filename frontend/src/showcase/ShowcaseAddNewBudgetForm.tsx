@@ -1,4 +1,3 @@
-import './Showcase.scss';
 import OverlayCardBox from '../components/overlay/OverlayCardBox';
 import OverlayContentAddNewBudget from '../components/overlay/OverlayContentAddNewBudget';
 import { mockedBudgetCategory } from '../fixtures/MockedBudgetCategory';
@@ -7,7 +6,7 @@ import Colors from '../constants/Colors';
 import { Color } from '../model/Color';
 import { BudgetCategories } from '../constants/BudgetCategories';
 
-const Showcase = () => {
+const ShowcaseAddNewBudgetForm = () => {
   const addNewBudgetDescription: string =
     'Choose a category to set a spending budget. These categories can help you monitor spending.';
   const isHidden: boolean = false;
@@ -47,4 +46,4 @@ const Showcase = () => {
   );
 };
 
-export default Showcase;
+export default ShowcaseAddNewBudgetForm;
