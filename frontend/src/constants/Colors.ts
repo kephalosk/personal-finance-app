@@ -100,6 +100,18 @@ const Colors: Color[] = [
     displayName: ColorDisplayNameEnum.SEPIA,
     disabled: false,
   },
+  {
+    name: ColorNameEnum.WHITE,
+    code: ColorCodeEnum.WHITE,
+    displayName: ColorDisplayNameEnum.WHITE,
+    disabled: false,
+  },
+  {
+    name: ColorNameEnum.BLACK,
+    code: ColorCodeEnum.BLACK,
+    displayName: ColorDisplayNameEnum.BLACK,
+    disabled: false,
+  },
 ];
 
 export default Colors;
