@@ -1,0 +1,23 @@
+.overlayContentDeleteBudget {
+  margin-bottom: 8px;
+  border: 0;
+  border-radius: 8px;
+  background-color: var(--red);
+  padding: 16px;
+  font-weight: 600;
+  color: var(--text-white);
+  cursor: pointer;
+}
+.overlayContentDeleteBudget:hover {
+  background-color: var(--component-background-grey);
+  transition: background-color 0.1s ease;
+  color: var(--text-white);
+}
+.overlayContentDeleteBudget:focus-visible {
+  border: 2px solid var(--text-dark);
+  padding: 14px;
+  background-color: var(--component-background-grey);
+  transition: background-color 0.1s ease;
+  color: var(--text-white);
+  outline: none;
+}

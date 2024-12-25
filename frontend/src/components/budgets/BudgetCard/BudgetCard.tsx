@@ -15,6 +15,8 @@ import OverlayContentEditBudget from '../../overlay/OverlayContentEditBudget';
 import useIsSmallScreen from '../../../globals/hooks/useIsSmallScreen';
 import getColorObject from '../../../globals/utils/getColorObject';
 import { editBudget } from '../../../globals/services/BudgetService';
+import OverlayContentDeleteBudget from '../../overlay/OverlayContentDeleteBudget';
+import { OverlayCardBoxButtonTypeEnum } from '../../../model/enum/OverlayCardBoxButtonTypeEnum';
 
 interface Props {
   transactions: EPTransaction[];
@@ -60,15 +62,20 @@ const BudgetCard: ({
   const isSmallScreen: boolean = useIsSmallScreen();
 
   const [isEditBudgetHidden, setIsEditBudgetHidden] = useState<boolean>(true);
+  const [isDeleteBudgetHidden, setIsDeleteBudgetHidden] = useState<boolean>(true);
   const handleSelection = (itemOperation: CardHeaderItemOperationEnum) => {
     if (itemOperation === CardHeaderItemOperationEnum.EDIT) {
       setIsEditBudgetHidden(false);
+    }
+    if (itemOperation === CardHeaderItemOperationEnum.DELETE) {
+      setIsDeleteBudgetHidden(false);
     }
   };
 
   const [hasFormToGetAReset, setHasFormToGetAReset] = useState<boolean>(false);
   const closeForm: () => void = (): void => {
     setIsEditBudgetHidden(true);
+    setIsDeleteBudgetHidden(true);
     const activeElement: Element | null = document.activeElement;
     if (activeElement instanceof HTMLElement) {
       activeElement.blur();
@@ -107,12 +114,22 @@ const BudgetCard: ({
     closeForm();
   };
 
+  const handleDeleteBudget = async (): Promise<void> => {
+    console.log('delete');
+    // await deleteBudget(budget);
+    await updatePage();
+    closeForm();
+  };
+
   const initialBudgetColorObject: Color = getColorObject(budget.color);
   const [selectedColorItem, setSelectedColorItem] = useState(initialBudgetColorObject);
   const propagateColorChange: (color: Color) => void = (color: Color): void => {
     setSelectedColorItem(color);
     setHasFormToGetAReset(false);
   };
+
+  const descriptionDeleteBudget: string =
+    'Are you sure you want to delete this budget? This action cannot be reversed, and all the data inside it will be removed forever.';
 
   return (
     <>
@@ -165,6 +182,17 @@ const BudgetCard: ({
               hasValidInput={hasValidInput}
               hasFormToGetAReset={hasFormToGetAReset}
             />
+          </OverlayCardBox>
+          <OverlayCardBox
+            title={`Delete '${budget.category}'`}
+            description={descriptionDeleteBudget}
+            submitText="No, Go Back"
+            isHidden={isDeleteBudgetHidden}
+            handleEvent={closeForm}
+            onClose={closeForm}
+            buttonType={OverlayCardBoxButtonTypeEnum.ABORT}
+          >
+            <OverlayContentDeleteBudget handleClick={handleDeleteBudget} />
           </OverlayCardBox>
         </div>
       )}
