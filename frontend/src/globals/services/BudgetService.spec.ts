@@ -1,11 +1,12 @@
 import { EPBudget } from '../../model/entrypoints/EPBudget';
 import { ColorNameEnum } from '../../model/enum/ColorNameEnum';
-import { addNewBudget, editBudget, getBudgets } from './BudgetService';
+import { addNewBudget, deleteBudget, editBudget, getBudgets } from './BudgetService';
 import axios from 'axios';
 import { mockedBudgets2 } from '../../fixtures/MockedBudgets';
 import { mockedBudgetsDTO } from '../../fixtures/MockedBudgetsDTO';
 import { APIBudgetDTO } from '../../model/api/APIBudgetDTO';
 import { ColorCodeEnum } from '../../model/enum/ColorCodeEnum';
+import { APICategoryDTO } from '../../model/api/APICategoryDTO';
 
 jest.mock('axios');
 
@@ -21,12 +22,16 @@ describe('BudgetService', () => {
     maximum: 50.0,
     theme: ColorCodeEnum.GREEN,
   };
+  const categoryBudget: APICategoryDTO = {
+    category: firstEPBudget.category,
+  };
 
   beforeEach(() => {
     jest.clearAllMocks();
     (axios.get as jest.Mock).mockResolvedValue({ data: mockedBudgetsDTO });
     (axios.post as jest.Mock).mockResolvedValue({ status: 201 });
-    (axios.put as jest.Mock).mockResolvedValue({ status: 201 });
+    (axios.put as jest.Mock).mockResolvedValue({ status: 200 });
+    (axios.delete as jest.Mock).mockResolvedValue({ status: 204 });
   });
 
   it('maps array ApibudgetDto to array EPBudget correctly', async () => {
@@ -86,7 +91,7 @@ describe('BudgetService', () => {
     );
   });
 
-  it('returns error if posting new budget fails', async () => {
+  it('returns error if editing budget fails', async () => {
     const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation();
     (axios.put as jest.Mock).mockRejectedValue(new Error('Network Error'));
 
@@ -94,6 +99,31 @@ describe('BudgetService', () => {
 
     expect(consoleErrorSpy).toHaveBeenCalledWith(
       expect.stringContaining('Unable to edit Budget: Error: Network Error')
+    );
+  });
+
+  it('sends a DELETE request and resolves successfully', async () => {
+    await deleteBudget(firstEPBudget);
+
+    expect(axios.delete).toHaveBeenCalledWith(
+      'https://backend.philippkraatz.com/api/budget/deleteBudget',
+      expect.objectContaining({
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        data: categoryBudget,
+      })
+    );
+  });
+
+  it('returns error if deleting budget fails', async () => {
+    const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation();
+    (axios.delete as jest.Mock).mockRejectedValue(new Error('Network Error'));
+
+    await deleteBudget(firstEPBudget);
+
+    expect(consoleErrorSpy).toHaveBeenCalledWith(
+      expect.stringContaining('Unable to delete Budget: Error: Network Error')
     );
   });
 });

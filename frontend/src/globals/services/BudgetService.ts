@@ -6,6 +6,7 @@ import { fromColorCodeToName } from '../utils/FromColorCodeToName';
 import axios, { AxiosResponse } from 'axios';
 import { AppConfig } from '../../config';
 import { fromColorNameToCode } from '../utils/FromColorNameToCode';
+import { APICategoryDTO } from '../../model/api/APICategoryDTO';
 
 export async function getBudgets(): Promise<EPBudget[]> {
   const apiUrl: string = `${AppConfig.API_BACKEND_HOST}/budget`;
@@ -66,6 +67,23 @@ export async function editBudget(editedBudget: EPBudget): Promise<void> {
     });
   } catch (error) {
     console.error(`Unable to edit Budget: ${error}`);
+  }
+}
+
+export async function deleteBudget(budget: EPBudget): Promise<void> {
+  const apiUrl: string = `${AppConfig.API_BACKEND_HOST}/budget/deleteBudget`;
+
+  try {
+    const categoryDTO: APICategoryDTO = { category: budget.category };
+
+    await axios.delete<APIBudgetDTO>(apiUrl, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      data: categoryDTO,
+    });
+  } catch (error) {
+    console.error(`Unable to delete Budget: ${error}`);
   }
 }
 

@@ -4,6 +4,8 @@ import {
   Delete,
   Get,
   HttpStatus,
+  InternalServerErrorException,
+  NotFoundException,
   Post,
   Put,
 } from '@nestjs/common';
@@ -66,18 +68,27 @@ export class BudgetController {
   @Delete('deleteBudget')
   @ApiOperation({ summary: 'Delete an existing budget' })
   @ApiResponse({
-    status: HttpStatus.OK,
-    description: 'Budget successfully deleted',
+    status: HttpStatus.NO_CONTENT,
+    description: 'Budget successfully deleted. No content returned.',
   })
   @ApiResponse({
     status: HttpStatus.NOT_FOUND,
-    description: 'Budget not found',
+    description: 'Budget not found.',
+  })
+  @ApiResponse({
+    status: HttpStatus.INTERNAL_SERVER_ERROR,
+    description: 'Server error occurred while deleting the budget.',
   })
   async deleteBudget(@Body() category: APICategoryDTO): Promise<void> {
     try {
       await this.budgetService.deleteBudget(category.category);
     } catch (error) {
-      throw new Error(`Fehler beim Löschen des Budgets: ${error}`);
+      if (error instanceof NotFoundException) {
+        throw new NotFoundException('Budget not found.');
+      }
+      throw new InternalServerErrorException(
+        `Error deleting budget: ${error.message}`,
+      );
     }
   }
 }

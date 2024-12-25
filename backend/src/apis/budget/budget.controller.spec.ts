@@ -119,7 +119,7 @@ describe('BudgetController', () => {
     });
 
     await expect(() => controller.deleteBudget(mockedCategory)).rejects.toThrow(
-      'Fehler beim Löschen des Budgets: Error: Service failure',
+      'Error deleting budget: Service failure',
     );
   });
 });
