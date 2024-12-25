@@ -45,7 +45,7 @@ export class BudgetService {
       });
 
       if (!budgetToUpdate) {
-        console.error('No budget found with category ${editedBudget.category}');
+        console.error(`No budget found with category ${editedBudget.category}`);
         return;
       }
 
@@ -57,6 +57,26 @@ export class BudgetService {
       await this.budgetsRepository.update(budgetToUpdate.id, update);
     } catch (error) {
       console.error('Failed to update budget in database', error);
+      throw error;
+    }
+  }
+
+  async deleteBudget(budget: APIBudgetDTO): Promise<void> {
+    try {
+      const budgetToDelete: Budgets = await this.budgetsRepository.findOne({
+        where: { category: budget.category },
+      });
+
+      if (!budgetToDelete) {
+        console.error(
+          `No budget found with category ${budgetToDelete.category}`,
+        );
+        return;
+      }
+
+      await this.budgetsRepository.remove(budgetToDelete);
+    } catch (error) {
+      console.error('Failed to delete budget in database', error);
       throw error;
     }
   }

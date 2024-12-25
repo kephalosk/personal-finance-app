@@ -7,6 +7,7 @@ jest.mock('./budget.service', () => ({
     findAll: jest.fn(),
     addNewBudget: jest.fn(),
     updateBudget: jest.fn(),
+    deleteBudget: jest.fn(),
   })),
 }));
 
@@ -37,6 +38,7 @@ describe('BudgetController', () => {
     (budgetService.findAll as jest.Mock).mockResolvedValue(mockedBudgets);
     (budgetService.addNewBudget as jest.Mock).mockResolvedValue(undefined);
     (budgetService.updateBudget as jest.Mock).mockResolvedValue(undefined);
+    (budgetService.deleteBudget as jest.Mock).mockResolvedValue(undefined);
 
     controller = module.get<BudgetController>(BudgetController);
   });
@@ -94,6 +96,25 @@ describe('BudgetController', () => {
 
     await expect(() => controller.editBudget(mockedBudgets[0])).rejects.toThrow(
       'Fehler beim Bearbeiten des Budgets: Error: Service failure',
+    );
+  });
+
+  it('deletes a budget', async () => {
+    const result = await controller.deleteBudget(mockedBudgets[0]);
+
+    expect(result).toBeUndefined();
+    expect(budgetService.deleteBudget).toHaveBeenCalledWith(mockedBudgets[0]);
+  });
+
+  it('throws if deleteBudget call fails', async () => {
+    (budgetService.deleteBudget as jest.Mock).mockImplementation(() => {
+      throw new Error('Service failure');
+    });
+
+    await expect(() =>
+      controller.deleteBudget(mockedBudgets[0]),
+    ).rejects.toThrow(
+      'Fehler beim Löschen des Budgets: Error: Service failure',
     );
   });
 });
