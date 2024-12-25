@@ -13,12 +13,12 @@ export default {
   testPathIgnorePatterns: [
     '<rootDir>/node_modules/',
     '<rootDir>/ui-tests/',
-    '<rootDir>/src/pages/ShowcaseAddNewBudgetForm.tsx',
+    '<rootDir>/src/showcase',
   ],
   coveragePathIgnorePatterns: [
     '<rootDir>/node_modules/',
     '<rootDir>/ui-tests/',
-    '<rootDir>/src/pages/ShowcaseAddNewBudgetForm.tsx',
+    '<rootDir>/src/showcase',
   ],
   collectCoverage: true,
 };
