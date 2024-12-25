@@ -1,6 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { BudgetController } from './budget.controller';
 import { BudgetService } from './budget.service';
+import { APICategoryDTO } from '../../model/apis/APICategoryDTO';
 
 jest.mock('./budget.service', () => ({
   BudgetService: jest.fn().mockImplementation(() => ({
@@ -23,6 +24,10 @@ const mockedBudgets = [
     theme: '#82C9D7',
   },
 ];
+
+const mockedCategory: APICategoryDTO = {
+  category: 'Entertainment',
+};
 
 describe('BudgetController', () => {
   let controller: BudgetController;
@@ -100,10 +105,12 @@ describe('BudgetController', () => {
   });
 
   it('deletes a budget', async () => {
-    const result = await controller.deleteBudget(mockedBudgets[0]);
+    const result = await controller.deleteBudget(mockedCategory);
 
     expect(result).toBeUndefined();
-    expect(budgetService.deleteBudget).toHaveBeenCalledWith(mockedBudgets[0]);
+    expect(budgetService.deleteBudget).toHaveBeenCalledWith(
+      mockedCategory.category,
+    );
   });
 
   it('throws if deleteBudget call fails', async () => {
@@ -111,9 +118,7 @@ describe('BudgetController', () => {
       throw new Error('Service failure');
     });
 
-    await expect(() =>
-      controller.deleteBudget(mockedBudgets[0]),
-    ).rejects.toThrow(
+    await expect(() => controller.deleteBudget(mockedCategory)).rejects.toThrow(
       'Fehler beim Löschen des Budgets: Error: Service failure',
     );
   });

@@ -154,7 +154,7 @@ describe('BudgetService', () => {
   });
 
   it('deletes budget in repository', async () => {
-    await service.deleteBudget(mockedBudgetsEntityMapped[0]);
+    await service.deleteBudget(mockedBudgetsEntityMapped[0].category);
 
     expect(repository.findOne).toHaveBeenCalledWith({
       where: { category: mockedBudgetsEntityMapped[0].category },
@@ -169,7 +169,7 @@ describe('BudgetService', () => {
       .mockRejectedValue(new Error('Database error'));
 
     await expect(() =>
-      service.deleteBudget(mockedBudgetsEntityMapped[0]),
+      service.deleteBudget(mockedBudgetsEntityMapped[0].category),
     ).rejects.toThrow('Database error');
   });
 });
