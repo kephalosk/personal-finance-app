@@ -6,6 +6,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Budgets } from '../../model/entities/Budgets';
 import { Repository } from 'typeorm';
 import e from 'express';
+import { APICategoryDTO } from '../../model/apis/APICategoryDTO';
 
 @Injectable()
 export class BudgetService {
@@ -61,10 +62,10 @@ export class BudgetService {
     }
   }
 
-  async deleteBudget(budget: APIBudgetDTO): Promise<void> {
+  async deleteBudget(category: string): Promise<void> {
     try {
       const budgetToDelete: Budgets = await this.budgetsRepository.findOne({
-        where: { category: budget.category },
+        where: { category },
       });
 
       if (!budgetToDelete) {

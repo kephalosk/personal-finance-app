@@ -1,0 +1,62 @@
+penapi: 3.0.0
+info:
+  title: Budget API
+  version: 1.0.0
+  description: API zum Verwalten von Budgets
+
+paths:
+  /deleteBudget:
+    delete:
+      summary: Delete an existing budget
+      description: Löscht ein bestehendes Budget basierend auf der angegebenen Kategorie.
+      operationId: deleteBudget
+      requestBody:
+        description: Details der zu löschenden Budget-Kategorie
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/APICategoryDTO'
+      responses:
+        '200':
+          description: Budget erfolgreich gelöscht.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: 'Budget erfolgreich gelöscht.'
+        '404':
+          description: Budget nicht gefunden.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: 'Budget nicht gefunden.'
+        '500':
+          description: Serverfehler beim Löschen des Budgets.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: 'Fehler beim Löschen des Budgets: [Fehlerdetails]'
+
+components:
+  schemas:
+    APICategoryDTO:
+      type: object
+      required:
+        - category
+      properties:
+        category:
+          type: string
+          description: Die Kategorie des Budgets, das gelöscht werden soll.
+          example: 'General'
