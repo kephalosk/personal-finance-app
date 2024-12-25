@@ -10,6 +10,7 @@ import {
 import { BudgetService } from './budget.service';
 import { APIBudgetDTO } from '../../model/apis/APIBudgetDTO';
 import { ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { APICategoryDTO } from '../../model/apis/APICategoryDTO';
 
 @Controller('budget')
 export class BudgetController {
@@ -72,9 +73,9 @@ export class BudgetController {
     status: HttpStatus.NOT_FOUND,
     description: 'Budget not found',
   })
-  async deleteBudget(@Body() budget: APIBudgetDTO): Promise<void> {
+  async deleteBudget(@Body() category: APICategoryDTO): Promise<void> {
     try {
-      await this.budgetService.deleteBudget(budget);
+      await this.budgetService.deleteBudget(category.category);
     } catch (error) {
       throw new Error(`Fehler beim Löschen des Budgets: ${error}`);
     }
