@@ -66,6 +66,7 @@ describe('BudgetService', () => {
       create: jest.fn().mockReturnValue(mockedBudgetsEntity[0]),
       save: jest.fn().mockResolvedValue(mockedBudgetsEntity[0]),
       update: jest.fn().mockResolvedValue(mockedBudgetsEntity[0]),
+      remove: jest.fn().mockResolvedValue(mockedBudgetsEntity[0]),
     };
 
     jest
@@ -149,6 +150,26 @@ describe('BudgetService', () => {
 
     await expect(() =>
       service.updateBudget(mockedBudgetsEntityMapped[0]),
+    ).rejects.toThrow('Database error');
+  });
+
+  it('deletes budget in repository', async () => {
+    await service.deleteBudget(mockedBudgetsEntityMapped[0]);
+
+    expect(repository.findOne).toHaveBeenCalledWith({
+      where: { category: mockedBudgetsEntityMapped[0].category },
+    });
+
+    expect(repository.remove).toHaveBeenCalledWith(mockedBudgetsEntity[0]);
+  });
+
+  it('throws error if deleting Budget in repository fails', async () => {
+    jest
+      .spyOn(repository, 'findOne')
+      .mockRejectedValue(new Error('Database error'));
+
+    await expect(() =>
+      service.deleteBudget(mockedBudgetsEntityMapped[0]),
     ).rejects.toThrow('Database error');
   });
 });
