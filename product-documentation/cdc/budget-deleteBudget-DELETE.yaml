@@ -18,16 +18,8 @@ paths:
             schema:
               $ref: '#/components/schemas/APICategoryDTO'
       responses:
-        '200':
-          description: Budget erfolgreich gelöscht.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                    example: 'Budget erfolgreich gelöscht.'
+        '204':
+          description: Budget erfolgreich gelöscht. Kein Inhalt zurückgegeben.
         '404':
           description: Budget nicht gefunden.
           content:

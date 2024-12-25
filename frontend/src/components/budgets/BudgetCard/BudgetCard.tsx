@@ -14,7 +14,7 @@ import OverlayCardBox from '../../overlay/OverlayCardBox';
 import OverlayContentEditBudget from '../../overlay/OverlayContentEditBudget';
 import useIsSmallScreen from '../../../globals/hooks/useIsSmallScreen';
 import getColorObject from '../../../globals/utils/getColorObject';
-import { editBudget } from '../../../globals/services/BudgetService';
+import { deleteBudget, editBudget } from '../../../globals/services/BudgetService';
 import OverlayContentDeleteBudget from '../../overlay/OverlayContentDeleteBudget';
 import { OverlayCardBoxButtonTypeEnum } from '../../../model/enum/OverlayCardBoxButtonTypeEnum';
 
@@ -116,7 +116,7 @@ const BudgetCard: ({
 
   const handleDeleteBudget = async (): Promise<void> => {
     console.log('delete');
-    // await deleteBudget(budget);
+    await deleteBudget(budget);
     await updatePage();
     closeForm();
   };
