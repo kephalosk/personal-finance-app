@@ -2,9 +2,9 @@ import { test, expect } from '@playwright/test';
 import openPage from '../utils/openPage';
 import { DeviceHeightEnum, DeviceWidthEnum } from '../constants';
 
-const BASE_PATH: string = 'http://localhost:5173/showcase/EditBudgetForm';
+const BASE_PATH: string = 'http://localhost:5173/showcase/DeleteBudgetForm';
 
-test('EditBudgetForm-Desktop', async ({ page }): Promise<void> => {
+test('DeleteBudgetForm-Desktop', async ({ page }): Promise<void> => {
   await openPage(page, BASE_PATH, DeviceHeightEnum.DEFAULT, DeviceWidthEnum.DESKTOP);
 
   await page.evaluate(() => {
@@ -15,7 +15,7 @@ test('EditBudgetForm-Desktop', async ({ page }): Promise<void> => {
   await expect(page).toHaveScreenshot();
 });
 
-test('EditBudgetForm-Tablet', async ({ page }): Promise<void> => {
+test('DeleteBudgetForm-Tablet', async ({ page }): Promise<void> => {
   await openPage(page, BASE_PATH, DeviceHeightEnum.DEFAULT, DeviceWidthEnum.TABLET);
 
   await page.evaluate(() => {
@@ -26,7 +26,7 @@ test('EditBudgetForm-Tablet', async ({ page }): Promise<void> => {
   await expect(page).toHaveScreenshot();
 });
 
-test('EditBudgetForm-Mobile', async ({ page }): Promise<void> => {
+test('DeleteBudgetForm-Mobile', async ({ page }): Promise<void> => {
   await openPage(page, BASE_PATH, DeviceHeightEnum.DEFAULT, DeviceWidthEnum.MOBILE);
 
   await page.evaluate(() => {

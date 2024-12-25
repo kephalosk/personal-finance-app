@@ -8,6 +8,8 @@ import NoPage from './pages/NoPage';
 import React, { ReactNode } from 'react';
 import ShowcaseAddNewBudgetForm from './showcase/ShowcaseAddNewBudgetForm';
 import ShowcaseEditBudgetForm from './showcase/ShowcaseEditBudgetForm';
+import ShowcaseDeleteBudgetForm from './showcase/ShowcaseDeleteBudgetForm';
+import Showcase from './showcase/Showcase';
 
 export const getAppRoutes = () => {
   return (
@@ -25,7 +27,9 @@ export const getAppRoutes = () => {
 export const getShowcaseRoutes = (): ReactNode => {
   return (
     <>
+      <Route path="showcase" element={<Showcase />} />
       <Route path="showcase/AddNewBudgetForm" element={<ShowcaseAddNewBudgetForm />} />
+      <Route path="showcase/DeleteBudgetForm" element={<ShowcaseDeleteBudgetForm />} />
       <Route path="showcase/EditBudgetForm" element={<ShowcaseEditBudgetForm />} />
     </>
   );

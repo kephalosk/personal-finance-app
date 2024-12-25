@@ -3,6 +3,8 @@ import getBalance from '../mocks/balanceMock';
 import getTransactions from '../mocks/transactionMock';
 import getBudgets from '../mocks/budgetMock';
 import getPots from '../mocks/potMock';
+import openPage from '../utils/openPage';
+import { DeviceWidthEnum } from '../constants';
 
 const BASE_PATH: string = 'http://localhost:5173/';
 
@@ -15,25 +17,19 @@ test.beforeEach(async ({ page }) => {
 });
 
 test('OverviewPage-Desktop', async ({ page }): Promise<void> => {
-  await page.setViewportSize({ width: 1440, height: 1015 });
-  await page.goto(BASE_PATH);
-  await page.evaluate(() => document.fonts.ready);
+  await openPage(page, BASE_PATH, 1015, DeviceWidthEnum.DESKTOP);
 
   await expect(page).toHaveScreenshot();
 });
 
 test('OverviewPage-Tablet', async ({ page }): Promise<void> => {
-  await page.setViewportSize({ width: 768, height: 1970 });
-  await page.goto(BASE_PATH);
-  await page.evaluate(() => document.fonts.ready);
+  await openPage(page, BASE_PATH, 1970, DeviceWidthEnum.DESKTOP);
 
   await expect(page).toHaveScreenshot();
 });
 
 test('OverviewPage-Mobile', async ({ page }): Promise<void> => {
-  await page.setViewportSize({ width: 375, height: 2241 });
-  await page.goto(BASE_PATH);
-  await page.evaluate(() => document.fonts.ready);
+  await openPage(page, BASE_PATH, 2241, DeviceWidthEnum.DESKTOP);
 
   await expect(page).toHaveScreenshot();
 });

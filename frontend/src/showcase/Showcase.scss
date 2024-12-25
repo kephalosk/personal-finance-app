@@ -1,0 +1,20 @@
+.showcase {
+  padding: 32px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.showcaseContent {
+  padding-left: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.showcaseContentLink  {
+  color: inherit;
+}
+.showcaseContentLink:hover  {
+  color: var(--text-grey);
+}
