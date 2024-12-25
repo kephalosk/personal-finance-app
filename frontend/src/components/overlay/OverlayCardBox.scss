@@ -38,6 +38,9 @@
 .overlayForm.isHidden {
   display: none;
 }
+.overlayForm.abort {
+  padding-bottom: 16px;
+}
 
 .overlayFormContent {
   display: flex;
@@ -88,15 +91,17 @@
   color: var(--text-white);
   cursor: pointer;
 }
-.overlayFormSubmit.isEnabled:hover {
+.overlayFormSubmit.isEnabled:hover, .overlayFormSubmit.abort:hover {
   background-color: var(--component-background-grey);
   transition: background-color 0.1s ease;
+  color: var(--text-white);
 }
-.overlayFormSubmit.isEnabled:focus-visible {
+.overlayFormSubmit.isEnabled:focus-visible, .overlayFormSubmit.abort:focus-visible {
   border: 2px solid var(--text-dark);
   padding: 14px;
   background-color: var(--component-background-grey);
   transition: background-color 0.1s ease;
+  color: var(--text-white);
   outline: none;
 }
 .overlayFormSubmit.disabled {
@@ -104,6 +109,11 @@
   background-color: var(--component-background-disabled);
   color: var(--text-grey);
   pointer-events: none;
+}
+.overlayFormSubmit.abort {
+  background-color: transparent;
+  font-weight: 500;
+  color: var(--text-grey);
 }
 
 .overlayFormSubmitContainer.disabled {
