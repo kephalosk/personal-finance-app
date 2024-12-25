@@ -115,7 +115,6 @@ const BudgetCard: ({
   };
 
   const handleDeleteBudget = async (): Promise<void> => {
-    console.log('delete');
     await deleteBudget(budget);
     await updatePage();
     closeForm();
