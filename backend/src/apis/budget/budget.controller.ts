@@ -1,9 +1,9 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   HttpStatus,
-  Patch,
   Post,
   Put,
 } from '@nestjs/common';
@@ -59,6 +59,24 @@ export class BudgetController {
       await this.budgetService.updateBudget(editedBudget);
     } catch (error) {
       throw new Error(`Fehler beim Bearbeiten des Budgets: ${error}`);
+    }
+  }
+
+  @Delete('deleteBudget')
+  @ApiOperation({ summary: 'Delete an existing budget' })
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'Budget successfully deleted',
+  })
+  @ApiResponse({
+    status: HttpStatus.NOT_FOUND,
+    description: 'Budget not found',
+  })
+  async deleteBudget(@Body() budget: APIBudgetDTO): Promise<void> {
+    try {
+      await this.budgetService.deleteBudget(budget);
+    } catch (error) {
+      throw new Error(`Fehler beim Löschen des Budgets: ${error}`);
     }
   }
 }
