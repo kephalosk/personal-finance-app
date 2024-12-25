@@ -2,6 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import { AppModule } from '../src/app.module';
+import { APICategoryDTO } from '../src/model/apis/APICategoryDTO';
 
 describe('AppController (e2e)', () => {
   let app: INestApplication;
@@ -490,14 +491,26 @@ describe('AppController (e2e)', () => {
 
   it('/budget/editBudget (PUT)', async () => {
     const updatedBudget = {
-      category: 'Personal Care',
+      category: 'Transportation',
       maximum: 100.0,
-      theme: '#626070',
+      theme: '#FFFFFF',
     };
 
     return request(app.getHttpServer())
       .put('/budget/editBudget')
       .send(updatedBudget)
+      .expect(200)
+      .expect({});
+  });
+
+  it('/budget/deleteBudget (DELETE)', async () => {
+    const category: APICategoryDTO = {
+      category: 'Transportation',
+    };
+
+    return request(app.getHttpServer())
+      .delete('/budget/deleteBudget')
+      .send(category)
       .expect(200)
       .expect({});
   });
