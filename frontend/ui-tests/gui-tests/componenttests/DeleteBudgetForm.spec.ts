@@ -1,11 +1,11 @@
 import { test, expect } from '@playwright/test';
 import openPage from '../utils/openPage';
-import { DeviceHeightEnum, DeviceWidthEnum } from '../constants';
+import { DeviceHeight, DeviceWidth } from '../constants';
 
 const BASE_PATH: string = 'http://localhost:5173/showcase/DeleteBudgetForm';
 
 test('DeleteBudgetForm-Desktop', async ({ page }): Promise<void> => {
-  await openPage(page, BASE_PATH, DeviceHeightEnum.DEFAULT, DeviceWidthEnum.DESKTOP);
+  await openPage(page, BASE_PATH, DeviceHeight.Default, DeviceWidth.Desktop);
 
   await page.evaluate(() => {
     const activeElement = document.activeElement as HTMLElement;
@@ -16,7 +16,7 @@ test('DeleteBudgetForm-Desktop', async ({ page }): Promise<void> => {
 });
 
 test('DeleteBudgetForm-Tablet', async ({ page }): Promise<void> => {
-  await openPage(page, BASE_PATH, DeviceHeightEnum.DEFAULT, DeviceWidthEnum.TABLET);
+  await openPage(page, BASE_PATH, DeviceHeight.Default, DeviceWidth.Tablet);
 
   await page.evaluate(() => {
     const activeElement = document.activeElement as HTMLElement;
@@ -27,7 +27,7 @@ test('DeleteBudgetForm-Tablet', async ({ page }): Promise<void> => {
 });
 
 test('DeleteBudgetForm-Mobile', async ({ page }): Promise<void> => {
-  await openPage(page, BASE_PATH, DeviceHeightEnum.DEFAULT, DeviceWidthEnum.MOBILE);
+  await openPage(page, BASE_PATH, DeviceHeight.Default, DeviceWidth.Mobile);
 
   await page.evaluate(() => {
     const activeElement = document.activeElement as HTMLElement;
