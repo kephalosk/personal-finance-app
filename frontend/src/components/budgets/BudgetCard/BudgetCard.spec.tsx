@@ -12,7 +12,7 @@ import getColorObject from '../../../globals/utils/getColorObject';
 import { Color } from '../../../model/Color';
 import { fromColorNameToCode } from '../../../globals/utils/FromColorNameToCode';
 import { fromColorNameToDisplayName } from '../../../globals/utils/FromColorNameToDisplayName';
-import { editBudget } from '../../../globals/services/BudgetService';
+import { deleteBudget, editBudget } from '../../../globals/services/BudgetService';
 import { EPTransaction } from '../../../model/entrypoints/EPTransaction';
 import { EPBudget } from '../../../model/entrypoints/EPBudget';
 import { CardHeaderItemNameEnum } from '../../../model/enum/CardHeaderItemNameEnum';
@@ -21,6 +21,8 @@ import OverlayCardBox from '../../overlay/OverlayCardBox';
 import OverlayContentEditBudget from '../../overlay/OverlayContentEditBudget';
 import { Fragment, ReactNode, MouseEvent } from 'react';
 import Colors from '../../../constants/Colors';
+import { OverlayCardBoxButtonTypeEnum } from '../../../model/enum/OverlayCardBoxButtonTypeEnum';
+import OverlayContentDeleteBudget from '../../overlay/OverlayContentDeleteBudget';
 
 jest.mock(
   '../../LoadingSpinner',
@@ -31,10 +33,16 @@ jest.mock(
   (): jest.Mock =>
     jest.fn(
       (props): ReactNode => (
-        <div
-          data-testid="card-header"
-          onClick={(): void => props.handleSelection(CardHeaderItemOperationEnum.EDIT)}
-        ></div>
+        <Fragment>
+          <div
+            data-testid="card-header"
+            onClick={(): void => props.handleSelection(CardHeaderItemOperationEnum.EDIT)}
+          ></div>
+          <div
+            data-testid="card-header-delete"
+            onClick={(): void => props.handleSelection(CardHeaderItemOperationEnum.DELETE)}
+          ></div>
+        </Fragment>
       )
     )
 );
@@ -96,6 +104,21 @@ jest.mock(
       )
     )
 );
+jest.mock(
+  '../../overlay/OverlayContentDeleteBudget',
+  (): jest.Mock =>
+    jest.fn(
+      (props): ReactNode => (
+        <div
+          data-testid="overlay-content-delete-budget"
+          onClick={(e: MouseEvent): void => {
+            e.stopPropagation();
+            props.handleClick();
+          }}
+        ></div>
+      )
+    )
+);
 
 jest.mock('../../../globals/hooks/useIsSmallScreen', () => ({
   __esModule: true,
@@ -108,6 +131,7 @@ jest.mock('../../../globals/utils/getColorObject', () => ({
 jest.mock('../../../globals/services/BudgetService', () => ({
   __esModule: true,
   editBudget: jest.fn(),
+  deleteBudget: jest.fn(),
 }));
 
 describe('BudgetCard', () => {
@@ -151,6 +175,7 @@ describe('BudgetCard', () => {
     (useIsSmallScreen as jest.Mock).mockReturnValue(false);
     (getColorObject as jest.Mock).mockReturnValue(budgetColor);
     (editBudget as jest.Mock).mockReturnValue(undefined);
+    (deleteBudget as jest.Mock).mockReturnValue(undefined);
   });
 
   it('renders component LoadingSpinner when passed prop isLoading is true', () => {
@@ -198,7 +223,8 @@ describe('BudgetCard', () => {
 
   it('sets OverlayCardBox visible when handleSelection of CardHeader is triggered', async () => {
     render(<BudgetCard {...testProps} />);
-    expect(OverlayCardBox).toHaveBeenLastCalledWith(
+    expect(OverlayCardBox).toHaveBeenNthCalledWith(
+      1,
       expect.objectContaining({ isHidden: true }),
       {}
     );
@@ -206,7 +232,8 @@ describe('BudgetCard', () => {
     const component: HTMLElement = screen.getByTestId('card-header');
     fireEvent.click(component);
 
-    expect(OverlayCardBox).toHaveBeenLastCalledWith(
+    expect(OverlayCardBox).toHaveBeenNthCalledWith(
+      3,
       expect.objectContaining({ isHidden: false }),
       {}
     );
@@ -299,13 +326,14 @@ describe('BudgetCard', () => {
     );
   });
 
-  it('renders component OverlayCardBox', () => {
+  it('renders components OverlayCardBox', () => {
     render(<BudgetCard {...testProps} />);
 
-    const component: HTMLElement = screen.getByTestId('overlay-card-box');
+    const components: HTMLElement[] = screen.getAllByTestId('overlay-card-box');
 
-    expect(component).toBeInTheDocument();
-    expect(OverlayCardBox).toHaveBeenCalledWith(
+    expect(components).toHaveLength(2);
+    expect(OverlayCardBox).toHaveBeenNthCalledWith(
+      1,
       {
         children: expect.any(Object),
         description: 'As your budgets change, feel free to update your spending limits.',
@@ -317,17 +345,32 @@ describe('BudgetCard', () => {
       },
       {}
     );
+    expect(OverlayCardBox).toHaveBeenNthCalledWith(
+      2,
+      {
+        children: expect.any(Object),
+        description:
+          'Are you sure you want to delete this budget? This action cannot be reversed, and all the data inside it will be removed forever.',
+        handleEvent: expect.any(Function),
+        isHidden: true,
+        onClose: expect.any(Function),
+        submitText: 'No, Go Back',
+        title: `Delete '${budget.category}'`,
+        buttonType: OverlayCardBoxButtonTypeEnum.ABORT,
+      },
+      {}
+    );
   });
 
   it('calls editBudget when handleEvent of OverlayCardBox is triggered', () => {
     render(<BudgetCard {...testProps} />);
-    const editComponent = screen.getByTestId('overlay-content-edit-budget');
+    const editComponent: HTMLElement = screen.getByTestId('overlay-content-edit-budget');
     fireEvent.click(editComponent);
 
-    const component: HTMLElement = screen.getByTestId('overlay-card-box');
-    fireEvent.click(component);
+    const components: HTMLElement[] = screen.getAllByTestId('overlay-card-box');
+    fireEvent.click(components[0]);
 
-    expect(component).toBeInTheDocument();
+    expect(components[0]).toBeInTheDocument();
     expect(editBudget).toHaveBeenCalledTimes(1);
     expect(editBudget).toHaveBeenCalledWith({
       ...budget,
@@ -338,30 +381,66 @@ describe('BudgetCard', () => {
   it('does not call editBudget when spendAmount is still 0', () => {
     render(<BudgetCard {...testProps} />);
 
-    const component: HTMLElement = screen.getByTestId('overlay-card-box');
-    fireEvent.click(component);
+    const components: HTMLElement[] = screen.getAllByTestId('overlay-card-box');
+    fireEvent.click(components[0]);
 
-    expect(component).toBeInTheDocument();
+    expect(components[0]).toBeInTheDocument();
     expect(editBudget).not.toHaveBeenCalled();
   });
 
-  it('sets OverlayCardBox invisible when closeForm() of OverlayCardBox is triggered', async () => {
+  it('calls deleteBudget when handleClick of OverlayContentDeleteBudget is triggered', () => {
+    render(<BudgetCard {...testProps} />);
+    const deleteComponent: HTMLElement = screen.getByTestId('overlay-content-delete-budget');
+    fireEvent.click(deleteComponent);
+
+    expect(deleteBudget).toHaveBeenCalledTimes(1);
+  });
+
+  it('sets edit OverlayCardBox invisible when closeForm() of edit OverlayCardBox is triggered', async () => {
     render(<BudgetCard {...testProps} />);
     const header: HTMLElement = screen.getByTestId('card-header');
     fireEvent.click(header);
-    expect(OverlayCardBox).toHaveBeenLastCalledWith(
+    expect(OverlayCardBox).toHaveBeenNthCalledWith(
+      3,
       expect.objectContaining({ isHidden: false }),
       {}
     );
 
-    const component: HTMLElement = screen.getByTestId('overlay-card-box-close-form');
-    fireEvent.click(component);
+    const components: HTMLElement[] = screen.getAllByTestId('overlay-card-box-close-form');
+    fireEvent.click(components[0]);
 
-    expect(OverlayCardBox).toHaveBeenLastCalledWith(
+    expect(OverlayCardBox).toHaveBeenNthCalledWith(
+      5,
       expect.objectContaining({ isHidden: true }),
       {}
     );
   });
+
+  it.each([
+    ['closeForm', 'overlay-card-box-close-form'],
+    ['handleEvent', 'overlay-card-box'],
+  ])(
+    'sets delete OverlayCardBox invisible when %s() of delete OverlayCardBox is triggered',
+    async (method: string, className: string) => {
+      render(<BudgetCard {...testProps} />);
+      const header: HTMLElement = screen.getByTestId('card-header-delete');
+      fireEvent.click(header);
+      expect(OverlayCardBox).toHaveBeenNthCalledWith(
+        4,
+        expect.objectContaining({ isHidden: false }),
+        {}
+      );
+
+      const components: HTMLElement[] = screen.getAllByTestId(className);
+      fireEvent.click(components[1]);
+
+      expect(OverlayCardBox).toHaveBeenNthCalledWith(
+        5,
+        expect.objectContaining({ isHidden: true }),
+        {}
+      );
+    }
+  );
 
   it('renders component OverlayContentEditBudget', () => {
     render(<BudgetCard {...testProps} />);
@@ -412,8 +491,8 @@ describe('BudgetCard', () => {
     const editComponent: HTMLElement = screen.getByTestId('overlay-content-edit-budget');
     fireEvent.click(editComponent);
 
-    const component: HTMLElement = screen.getByTestId('overlay-card-box');
-    fireEvent.click(component);
+    const components: HTMLElement[] = screen.getAllByTestId('overlay-card-box');
+    fireEvent.click(components[0]);
 
     expect(editBudget).not.toHaveBeenCalledWith({
       ...budget,
@@ -423,5 +502,28 @@ describe('BudgetCard', () => {
       ...budget,
       color: newColorGreen.name,
     });
+  });
+
+  it('renders component OverlayContentDeleteBudget', () => {
+    render(<BudgetCard {...testProps} />);
+
+    const component: HTMLElement = screen.getByTestId('overlay-content-delete-budget');
+
+    expect(component).toBeInTheDocument();
+    expect(OverlayContentDeleteBudget).toHaveBeenCalledWith(
+      {
+        handleClick: expect.any(Function),
+      },
+      {}
+    );
+  });
+
+  it('calls deleteBudget when handleClick of OverlayContentDeleteBudget is triggered', () => {
+    render(<BudgetCard {...testProps} />);
+
+    const component: HTMLElement = screen.getByTestId('overlay-content-delete-budget');
+    fireEvent.click(component);
+
+    expect(deleteBudget).toHaveBeenCalledTimes(1);
   });
 });
