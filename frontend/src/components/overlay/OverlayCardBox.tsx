@@ -1,6 +1,7 @@
 import './OverlayCardBox.scss';
 import { createFocusTrap } from 'focus-trap';
 import React, { ReactNode, useEffect, useRef } from 'react';
+import { OverlayCardBoxButtonTypeEnum } from '../../model/enum/OverlayCardBoxButtonTypeEnum';
 
 interface Props {
   title: string;
@@ -11,6 +12,7 @@ interface Props {
   onClose: () => void;
   children: React.ReactNode;
   isButtonDisabled?: boolean;
+  buttonType?: OverlayCardBoxButtonTypeEnum;
 }
 
 const OverlayCardBox: ({
@@ -22,6 +24,7 @@ const OverlayCardBox: ({
   onClose,
   children,
   isButtonDisabled,
+  buttonType,
 }: Props) => ReactNode = ({
   title,
   description,
@@ -31,6 +34,7 @@ const OverlayCardBox: ({
   onClose,
   children,
   isButtonDisabled = false,
+  buttonType = OverlayCardBoxButtonTypeEnum.CONFIRM,
 }: Props): ReactNode => {
   const overlayRef: React.RefObject<HTMLDivElement> = useRef<HTMLDivElement>(null);
 
@@ -66,7 +70,7 @@ const OverlayCardBox: ({
       <div className={`overlayBackground ${isHidden ? 'isHidden' : ''}`}></div>
       <div
         ref={overlayRef}
-        className={`overlayForm ${isHidden ? 'isHidden' : ''}`}
+        className={`overlayForm ${isHidden ? 'isHidden' : ''} ${buttonType}`}
         role="dialog"
         aria-hidden={isHidden}
         aria-labelledby="overlayTitle"
@@ -94,7 +98,7 @@ const OverlayCardBox: ({
           className={`overlayFormSubmitContainer ${isButtonDisabled ? 'disabled' : 'isEnabled'}`}
         >
           <button
-            className={`overlayFormSubmit ${isButtonDisabled ? 'disabled' : 'isEnabled'}`}
+            className={`overlayFormSubmit ${isButtonDisabled ? 'disabled' : 'isEnabled'} ${buttonType}`}
             onClick={handleSubmit}
             tabIndex={isButtonDisabled ? -1 : 0}
           >

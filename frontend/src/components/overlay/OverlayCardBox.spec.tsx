@@ -1,6 +1,7 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import OverlayCardBox from './OverlayCardBox';
 import React from 'react';
+import { OverlayCardBoxButtonTypeEnum } from '../../model/enum/OverlayCardBoxButtonTypeEnum';
 
 describe('OverlayCardBox', () => {
   const title = 'testTitle';
@@ -11,6 +12,7 @@ describe('OverlayCardBox', () => {
   const mockOnClose = jest.fn();
   const children = <div data-testid="child-element"></div>;
   const isButtonDisabled = false;
+  const buttonType = OverlayCardBoxButtonTypeEnum.CONFIRM;
 
   const testProps = {
     title,
@@ -21,6 +23,7 @@ describe('OverlayCardBox', () => {
     onClose: mockOnClose,
     children,
     isButtonDisabled,
+    buttonType,
   };
 
   it('renders div overlayCardBox', async () => {
@@ -49,8 +52,14 @@ describe('OverlayCardBox', () => {
     expect(htmlElement).not.toHaveClass('isHidden');
   });
 
-  it('renders div overlayForm with class isHidden when passed prop isHidden is true', async () => {
-    const { container } = render(<OverlayCardBox {...testProps} isHidden={true} />);
+  it('renders div overlayForm with class isHidden when passed prop isHidden is true with passed prop buttonType', async () => {
+    const { container } = render(
+      <OverlayCardBox
+        {...testProps}
+        isHidden={true}
+        buttonType={OverlayCardBoxButtonTypeEnum.CONFIRM}
+      />
+    );
 
     const htmlElement = container.querySelector('.overlayForm');
 
@@ -60,6 +69,25 @@ describe('OverlayCardBox', () => {
     expect(htmlElement).toHaveAttribute('aria-labelledby', 'overlayTitle');
     expect(htmlElement).toHaveAttribute('aria-describedby', 'overlayDescription');
     expect(htmlElement).toHaveClass('isHidden');
+    expect(htmlElement).toHaveClass(OverlayCardBoxButtonTypeEnum.CONFIRM);
+  });
+
+  it('renders div overlayForm with passed prop buttonType === abort', async () => {
+    const { container } = render(
+      <OverlayCardBox {...testProps} buttonType={OverlayCardBoxButtonTypeEnum.ABORT} />
+    );
+
+    const htmlElement = container.querySelector('.overlayForm');
+
+    expect(htmlElement).toHaveClass(OverlayCardBoxButtonTypeEnum.ABORT);
+  });
+
+  it('renders div overlayForm with passed prop buttonType === undefined', async () => {
+    const { container } = render(<OverlayCardBox {...testProps} buttonType={undefined} />);
+
+    const htmlElement = container.querySelector('.overlayForm');
+
+    expect(htmlElement).toHaveClass(OverlayCardBoxButtonTypeEnum.CONFIRM);
   });
 
   it('renders div overlayForm without class isHidden when passed prop isHidden is false', async () => {
@@ -195,6 +223,23 @@ describe('OverlayCardBox', () => {
     expect(htmlElement).toHaveTextContent(submitText);
     expect(htmlElement).not.toHaveClass('disabled');
     expect(htmlElement).toHaveClass('isEnabled');
+  });
+
+  it('renders button overlayFormSubmit with passed props isButtonDisabled is true and buttonType', async () => {
+    const { container } = render(
+      <OverlayCardBox
+        {...testProps}
+        submitText={submitText}
+        isButtonDisabled={true}
+        buttonType={OverlayCardBoxButtonTypeEnum.CONFIRM}
+      />
+    );
+
+    const htmlElement = container.querySelector('.overlayFormSubmit');
+
+    expect(htmlElement).toHaveClass('disabled');
+    expect(htmlElement).toHaveClass(OverlayCardBoxButtonTypeEnum.CONFIRM);
+    expect(htmlElement).not.toHaveClass('isEnabled');
   });
 
   it('renders button overlayFormSubmit with passed prop isButtonDisabled is true', async () => {
