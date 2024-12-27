@@ -5,8 +5,6 @@ import * as fs from 'node:fs';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Budgets } from '../../model/entities/Budgets';
 import { Repository } from 'typeorm';
-import e from 'express';
-import { APICategoryDTO } from '../../model/apis/APICategoryDTO';
 
 @Injectable()
 export class BudgetService {
