@@ -1,0 +1,48 @@
+openapi: 3.0.3
+info:
+  title: Pots API
+  description: API for managing financial pots
+  version: 1.0.0
+paths:
+  /addNewPot:
+    post:
+      summary: Add new pot
+      description: Adds a new financial pot with the provided details.
+      operationId: addNewPot
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/APIPotDTO'
+            example:
+              name: "Laptop"
+              target: 2400
+              total: 2000
+              theme: "#FFFFFF"
+      responses:
+        '201':
+          description: New pot successfully added.
+        '500':
+          description: Server error occurred while adding new pot.
+components:
+  schemas:
+    APIPotDTO:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the pot.
+          example: "Laptop"
+        target:
+          type: integer
+          description: The target amount of the pot.
+          example: 2400
+        total:
+          type: integer
+          description: The current amount of the pot.
+          example: 2000
+        theme:
+          type: string
+          description: The color theme of the pot.
+          example: "#FFFFFF"
