@@ -33,19 +33,26 @@ jest.mock('../searchbar/TransactionsSearchbar', () =>
 jest.mock('./table/TransactionsTable', () =>
   jest.fn(({ currentIndexedTransactions }) => (
     <div data-testid="transactions-table">
-      {currentIndexedTransactions.map((transaction: EPTransaction, index: number) => (
-        <div key={index}>{transaction.name}</div>
-      ))}
+      {currentIndexedTransactions &&
+        currentIndexedTransactions.map((transaction: EPTransaction, index: number) => (
+          <div key={index}>{transaction.name}</div>
+        ))}
     </div>
   ))
 );
 const changedPageIndex = 0;
 jest.mock('./pagination/TransactionsPagination', () =>
   jest.fn(({ changePageIndex }) => (
-    <div
-      data-testid="transactions-pagination"
-      onClick={() => changePageIndex && changePageIndex(changedPageIndex)}
-    ></div>
+    <Fragment>
+      <div
+        data-testid="transactions-pagination"
+        onClick={() => changePageIndex && changePageIndex(changedPageIndex)}
+      ></div>
+      <div
+        data-testid="transactions-pagination-page2"
+        onClick={() => changePageIndex && changePageIndex(1)}
+      ></div>
+    </Fragment>
   ))
 );
 
@@ -170,5 +177,21 @@ describe('TransactionsDetails', () => {
 
     expect(component).toBeInTheDocument();
     expect(TransactionsTable).toHaveBeenLastCalledWith({ currentIndexedTransactions: [] }, {});
+  });
+
+  it('sets pageIndex to 0 if transactions are updated', () => {
+    render(
+      <TransactionsDetails {...testProps} fetchedTransactions={mockedTransactions11Records} />
+    );
+    const goToPage2 = screen.getByTestId('transactions-pagination-page2');
+    fireEvent.click(goToPage2);
+
+    const component = screen.getByTestId('transactions-searchbar');
+    fireEvent.click(component);
+
+    expect(TransactionsPagination).toHaveBeenLastCalledWith(
+      expect.objectContaining({ pageIndex: 0 }),
+      {}
+    );
   });
 });
