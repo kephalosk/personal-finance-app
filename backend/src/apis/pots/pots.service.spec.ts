@@ -68,6 +68,8 @@ describe('PotsService', () => {
   beforeEach(async () => {
     const mockRepository = {
       find: jest.fn().mockResolvedValue(mockedPotsEntity),
+      create: jest.fn().mockReturnValue(mockedPotsEntity[0]),
+      save: jest.fn().mockResolvedValue(mockedPotsEntity[0]),
     };
 
     jest
@@ -93,7 +95,7 @@ describe('PotsService', () => {
     expect(service).toBeDefined();
   });
 
-  it('returns balance from repository', async () => {
+  it('returns pots from repository', async () => {
     const result = await service.findAll();
 
     expect(repository.find).toHaveBeenCalled();
@@ -101,7 +103,7 @@ describe('PotsService', () => {
     expect(result).not.toEqual(mockedPots);
   });
 
-  it('returns balance from file if repository fails', async () => {
+  it('returns pots from file if repository fails', async () => {
     jest
       .spyOn(repository, 'find')
       .mockRejectedValue(new Error('Database error'));
@@ -110,5 +112,23 @@ describe('PotsService', () => {
 
     expect(result).toEqual(mockedPots);
     expect(result).not.toEqual(mockedPotsEntityMapped);
+  });
+
+  it('saves new pot to repository', async () => {
+    await service.addNewPot(mockedPotsEntityMapped[0]);
+
+    expect(repository.create).toHaveBeenCalledWith(mockedPotsEntityMapped[0]);
+
+    expect(repository.save).toHaveBeenCalledWith(mockedPotsEntity[0]);
+  });
+
+  it('returns pots from file if repository fails', async () => {
+    jest
+      .spyOn(repository, 'save')
+      .mockRejectedValue(new Error('Database error'));
+
+    await expect(() =>
+      service.addNewPot(mockedPotsEntityMapped[0]),
+    ).rejects.toThrow('Could not add pot.');
   });
 });

@@ -23,6 +23,21 @@ export class PotsService {
     }
   }
 
+  async addNewPot(newPot: APIPotDTO): Promise<void> {
+    try {
+      const newPotRecord: Pots = this.potsRepository.create({
+        name: newPot.name,
+        target: newPot.target,
+        total: newPot.total,
+        theme: newPot.theme,
+      });
+      await this.potsRepository.save(newPotRecord);
+    } catch (error) {
+      console.error('Failed to save new pot to database.', error.message);
+      throw new Error('Could not add pot.');
+    }
+  }
+
   mapPotEntities(pots: Pots[]): APIPotDTO[] {
     let mappedPots: APIPotDTO[] = [];
     pots.forEach((pot: Pots): void => {
