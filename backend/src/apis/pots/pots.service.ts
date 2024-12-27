@@ -25,12 +25,14 @@ export class PotsService {
 
   async addNewPot(newPot: APIPotDTO): Promise<void> {
     try {
+      console.log('start adding', newPot);
       const newPotRecord: Pots = this.potsRepository.create({
         name: newPot.name,
         target: newPot.target,
         total: newPot.total,
         theme: newPot.theme,
       });
+      console.log('Entity created');
       await this.potsRepository.save(newPotRecord);
     } catch (error) {
       console.error('Failed to save new pot to database.', error.message);

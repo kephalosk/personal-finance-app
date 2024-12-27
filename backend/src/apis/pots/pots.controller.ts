@@ -1,4 +1,5 @@
 import {
+  Body,
   Controller,
   Get,
   HttpStatus,
@@ -44,8 +45,9 @@ export class PotsController {
     status: HttpStatus.INTERNAL_SERVER_ERROR,
     description: 'Server error occurred while adding new pot.',
   })
-  async addNewPot(newPot: APIPotDTO): Promise<void> {
+  async addNewPot(@Body() newPot: APIPotDTO): Promise<void> {
     try {
+      console.log('callservice with', newPot);
       await this.potsService.addNewPot(newPot);
     } catch (error) {
       throw new InternalServerErrorException(
