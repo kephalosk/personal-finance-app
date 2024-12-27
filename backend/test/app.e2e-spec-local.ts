@@ -463,6 +463,21 @@ describe('AppController (e2e)', () => {
       ]);
   });
 
+  it('/pots/addNewPot (POST)', async () => {
+    const newPot = {
+      name: 'Move',
+      target: 300000,
+      total: 60000,
+      theme: '#FFFFFF',
+    };
+
+    return request(app.getHttpServer())
+      .post('/pots/addNewPot')
+      .send(newPot)
+      .expect(201)
+      .expect({});
+  });
+
   it('/budget (GET)', async () => {
     return request(app.getHttpServer())
       .get('/budget')
