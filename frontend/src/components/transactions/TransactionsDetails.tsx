@@ -16,7 +16,9 @@ const TransactionsDetails = ({ isLoading, fetchedTransactions }: Props) => {
   const pageEntrySize: number = 10;
   const [pageIndex, setPageIndex] = useState<number>(0);
   const [transactionsPaged, setTransactionsPaged] = useState<EPTransaction[][]>([]);
-  const [currentIndexedTransactions, setCurrentIndexedTransactions] = useState<EPTransaction[]>([]);
+  const [currentIndexedTransactions, setCurrentIndexedTransactions] = useState<EPTransaction[]>(
+    fetchedTransactions.slice(0, 10)
+  );
   const [isMaxIndex, setIsMaxIndex] = useState<boolean>(false);
 
   const updateTransactions = (filteredTransactions: EPTransaction[]) => {
@@ -24,11 +26,10 @@ const TransactionsDetails = ({ isLoading, fetchedTransactions }: Props) => {
       filteredTransactions,
       pageEntrySize
     );
-    console.log('newTransactionsPaged', newTransactionsPaged);
     setTransactionsPaged(newTransactionsPaged);
 
     setPageIndex(0);
-    const validValues: EPTransaction[] = newTransactionsPaged.at(pageIndex) as EPTransaction[];
+    const validValues: EPTransaction[] = newTransactionsPaged.at(0) as EPTransaction[];
     setCurrentIndexedTransactions(validValues ?? []);
     setIsMaxIndex(pageIndex === newTransactionsPaged.length - 1);
   };
