@@ -24,7 +24,7 @@ const TransactionsDetails = ({ isLoading, fetchedTransactions }: Props) => {
       filteredTransactions,
       pageEntrySize
     );
-
+    console.log('newTransactionsPaged', newTransactionsPaged);
     setTransactionsPaged(newTransactionsPaged);
 
     setPageIndex(0);
