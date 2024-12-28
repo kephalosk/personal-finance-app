@@ -78,6 +78,7 @@ describe('PotsService', () => {
       save: jest.fn().mockResolvedValue(mockedPotsEntity[0]),
       findOne: jest.fn().mockResolvedValue(mockedPotsEntity[0]),
       update: jest.fn().mockResolvedValue({}),
+      remove: jest.fn().mockResolvedValue({}),
     };
 
     jest
@@ -171,5 +172,35 @@ describe('PotsService', () => {
     await expect(() =>
       service.editPot(mockedEditedPotEntityMapped),
     ).rejects.toThrow('Could not edit pot.');
+  });
+
+  it('deletes a pot in repository', async () => {
+    await service.deletePot(mockedPots[0].name);
+
+    expect(repository.findOne).toHaveBeenCalledWith({
+      where: { name: mockedPots[0].name },
+    });
+
+    expect(repository.remove).toHaveBeenCalledWith(mockedPotsEntity[0]);
+  });
+
+  it('throws an error if deleting pot fails', async () => {
+    jest
+      .spyOn(repository, 'remove')
+      .mockRejectedValue(new Error('Database error'));
+
+    await expect(() => service.deletePot(mockedPots[0].name)).rejects.toThrow(
+      'Could not delete pot.',
+    );
+  });
+
+  it('throws an error if finding pot to delete fails', async () => {
+    jest
+      .spyOn(repository, 'findOne')
+      .mockRejectedValue(new Error('Database error'));
+
+    await expect(() => service.deletePot(mockedPots[0].name)).rejects.toThrow(
+      'Could not delete pot.',
+    );
   });
 });
