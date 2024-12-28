@@ -13,6 +13,7 @@ import { PotsService } from './pots.service';
 import { APIPotDTO } from '../../model/apis/APIPotDTO';
 import { ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { APIEditedPotDTO } from '../../model/apis/APIEditedPotDTO';
+import { APIPotNameDTO } from '../../model/apis/APIPotNameDTO';
 
 @Controller('pots')
 export class PotsController {
@@ -107,9 +108,9 @@ export class PotsController {
     status: HttpStatus.INTERNAL_SERVER_ERROR,
     description: 'Server error occurred while deleting the pot.',
   })
-  async deletePot(@Body() potToDelete: string): Promise<void> {
+  async deletePot(@Body() potToDelete: APIPotNameDTO): Promise<void> {
     try {
-      await this.potsService.deletePot(potToDelete);
+      await this.potsService.deletePot(potToDelete.potName);
     } catch (error) {
       if (error instanceof NotFoundException) {
         throw new NotFoundException('Pot not found.');
