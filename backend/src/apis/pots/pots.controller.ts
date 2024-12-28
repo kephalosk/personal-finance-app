@@ -5,6 +5,7 @@ import {
   HttpStatus,
   InternalServerErrorException,
   Post,
+  Put,
 } from '@nestjs/common';
 import { PotsService } from './pots.service';
 import { APIPotDTO } from '../../model/apis/APIPotDTO';
@@ -47,11 +48,34 @@ export class PotsController {
   })
   async addNewPot(@Body() newPot: APIPotDTO): Promise<void> {
     try {
-      console.log('callservice with', newPot);
       await this.potsService.addNewPot(newPot);
     } catch (error) {
       throw new InternalServerErrorException(
         `Error adding new pot: ${error.message}`,
+      );
+    }
+  }
+
+  @Put('editPot')
+  @ApiOperation({ summary: 'Edit an existing pot' })
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'Pot successfully updated.',
+  })
+  @ApiResponse({
+    status: HttpStatus.NOT_FOUND,
+    description: 'Pot not found',
+  })
+  @ApiResponse({
+    status: HttpStatus.INTERNAL_SERVER_ERROR,
+    description: 'Server error occurred while editing pot.',
+  })
+  async editPot(@Body() editedPot: APIPotDTO): Promise<void> {
+    try {
+      await this.potsService.editPot(editedPot);
+    } catch (error) {
+      throw new InternalServerErrorException(
+        `Error while editing pot: ${error.message}`,
       );
     }
   }
