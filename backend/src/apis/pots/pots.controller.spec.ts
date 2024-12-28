@@ -1,11 +1,13 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { PotsController } from './pots.controller';
 import { PotsService } from './pots.service';
+import { APIEditedPotDTO } from '../../model/apis/APIEditedPotDTO';
 
 jest.mock('./pots.service', () => ({
   PotsService: jest.fn().mockImplementation(() => ({
     findAll: jest.fn(),
     addNewPot: jest.fn(),
+    editPot: jest.fn(),
   })),
 }));
 
@@ -24,6 +26,11 @@ const mockedPots = [
   },
 ];
 
+const mockedEditedPot: APIEditedPotDTO = {
+  ...mockedPots[0],
+  oldName: mockedPots[0].name,
+};
+
 describe('PotsController', () => {
   let controller: PotsController;
   let potsService: PotsService;
@@ -37,6 +44,7 @@ describe('PotsController', () => {
     potsService = module.get<PotsService>(PotsService);
     (potsService.findAll as jest.Mock).mockResolvedValue(mockedPots);
     (potsService.addNewPot as jest.Mock).mockResolvedValue(undefined);
+    (potsService.editPot as jest.Mock).mockResolvedValue(undefined);
 
     controller = module.get<PotsController>(PotsController);
   });
@@ -74,6 +82,22 @@ describe('PotsController', () => {
 
     await expect(() => controller.addNewPot(mockedPots[0])).rejects.toThrow(
       'Error adding new pot: Service failure',
+    );
+  });
+
+  it('edits an existing pot', async () => {
+    await controller.editPot(mockedEditedPot);
+
+    expect(potsService.editPot).toHaveBeenCalledWith(mockedEditedPot);
+  });
+
+  it('throws if editing pot call fails', async () => {
+    (potsService.editPot as jest.Mock).mockImplementation(() => {
+      throw new Error('Service failure');
+    });
+
+    await expect(() => controller.editPot(mockedEditedPot)).rejects.toThrow(
+      'Error while editing pot: Service failure',
     );
   });
 });
