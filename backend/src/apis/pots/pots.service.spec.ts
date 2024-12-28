@@ -6,6 +6,7 @@ import { Repository } from 'typeorm';
 import { Pots } from '../../model/entities/Pots';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { APIPotDTO } from '../../model/apis/APIPotDTO';
+import { APIEditedPotDTO } from '../../model/apis/APIEditedPotDTO';
 
 jest.spyOn(console, 'error').mockImplementation(() => {});
 
@@ -45,6 +46,11 @@ describe('PotsService', () => {
     },
   ];
 
+  const mockedEditedPotEntityMapped: APIEditedPotDTO = {
+    ...mockedPotsEntityMapped[0],
+    oldName: 'Holiday',
+  };
+
   const mockedPots = [
     {
       name: 'Savings',
@@ -70,6 +76,8 @@ describe('PotsService', () => {
       find: jest.fn().mockResolvedValue(mockedPotsEntity),
       create: jest.fn().mockReturnValue(mockedPotsEntity[0]),
       save: jest.fn().mockResolvedValue(mockedPotsEntity[0]),
+      findOne: jest.fn().mockResolvedValue(mockedPotsEntity[0]),
+      update: jest.fn().mockResolvedValue({}),
     };
 
     jest
@@ -130,5 +138,38 @@ describe('PotsService', () => {
     await expect(() =>
       service.addNewPot(mockedPotsEntityMapped[0]),
     ).rejects.toThrow('Could not add pot.');
+  });
+
+  it('updates a pot in repository', async () => {
+    await service.editPot(mockedEditedPotEntityMapped);
+
+    expect(repository.findOne).toHaveBeenCalledWith({
+      where: { name: 'Holiday' },
+    });
+
+    expect(repository.update).toHaveBeenCalledWith(
+      mockedPotsEntity[0].id,
+      mockedPotsEntityMapped[0],
+    );
+  });
+
+  it('throws an error if editing pot fails', async () => {
+    jest
+      .spyOn(repository, 'update')
+      .mockRejectedValue(new Error('Database error'));
+
+    await expect(() =>
+      service.editPot(mockedEditedPotEntityMapped),
+    ).rejects.toThrow('Could not edit pot.');
+  });
+
+  it('throws an error if finding pot fails', async () => {
+    jest
+      .spyOn(repository, 'findOne')
+      .mockRejectedValue(new Error('Database error'));
+
+    await expect(() =>
+      service.editPot(mockedEditedPotEntityMapped),
+    ).rejects.toThrow('Could not edit pot.');
   });
 });
