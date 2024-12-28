@@ -116,7 +116,10 @@ describe('TransactionsDetails', () => {
     const component = screen.getByTestId('transactions-table');
 
     expect(component).toBeInTheDocument();
-    expect(TransactionsTable).toHaveBeenCalledWith({ currentIndexedTransactions: [] }, {});
+    expect(TransactionsTable).toHaveBeenCalledWith(
+      { currentIndexedTransactions: fetchedTransactions.slice(0, 10) },
+      {}
+    );
   });
 
   it('renders component TransactionsPagination', () => {
