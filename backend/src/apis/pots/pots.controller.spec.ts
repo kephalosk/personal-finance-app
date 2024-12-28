@@ -9,6 +9,7 @@ jest.mock('./pots.service', () => ({
     findAll: jest.fn(),
     addNewPot: jest.fn(),
     editPot: jest.fn(),
+    deletePot: jest.fn(),
   })),
 }));
 
@@ -46,6 +47,7 @@ describe('PotsController', () => {
     (potsService.findAll as jest.Mock).mockResolvedValue(mockedPots);
     (potsService.addNewPot as jest.Mock).mockResolvedValue(undefined);
     (potsService.editPot as jest.Mock).mockResolvedValue(undefined);
+    (potsService.deletePot as jest.Mock).mockResolvedValue(undefined);
 
     controller = module.get<PotsController>(PotsController);
   });
@@ -118,5 +120,31 @@ describe('PotsController', () => {
     await expect(() => controller.editPot(mockedEditedPot)).rejects.toThrow(
       'Pot not found.',
     );
+  });
+
+  it('deletes an existing pot', async () => {
+    await controller.deletePot(mockedPots[0].name);
+
+    expect(potsService.deletePot).toHaveBeenCalledWith(mockedPots[0].name);
+  });
+
+  it('throws if deleting pot call fails', async () => {
+    (potsService.deletePot as jest.Mock).mockImplementation(() => {
+      throw new Error('Service failure');
+    });
+
+    await expect(() =>
+      controller.deletePot(mockedPots[0].name),
+    ).rejects.toThrow('Error while deleting pot: Service failure');
+  });
+
+  it('throws NotFoundException if finding pot to delete fails', async () => {
+    (potsService.deletePot as jest.Mock).mockImplementation(() => {
+      throw new NotFoundException('Service failure');
+    });
+
+    await expect(() =>
+      controller.deletePot(mockedPots[0].name),
+    ).rejects.toThrow('Pot not found.');
   });
 });

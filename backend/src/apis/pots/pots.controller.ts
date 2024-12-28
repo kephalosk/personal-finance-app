@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   HttpStatus,
   InternalServerErrorException,
@@ -88,6 +89,33 @@ export class PotsController {
       }
       throw new InternalServerErrorException(
         `Error while editing pot: ${error.message}`,
+      );
+    }
+  }
+
+  @Delete('deletePot')
+  @ApiOperation({ summary: 'Delete an existing budget' })
+  @ApiResponse({
+    status: HttpStatus.NO_CONTENT,
+    description: 'Pot successfully deleted. No content returned.',
+  })
+  @ApiResponse({
+    status: HttpStatus.NOT_FOUND,
+    description: 'Pot not found.',
+  })
+  @ApiResponse({
+    status: HttpStatus.INTERNAL_SERVER_ERROR,
+    description: 'Server error occurred while deleting the pot.',
+  })
+  async deletePot(@Body() potToDelete: string): Promise<void> {
+    try {
+      await this.potsService.deletePot(potToDelete);
+    } catch (error) {
+      if (error instanceof NotFoundException) {
+        throw new NotFoundException('Pot not found.');
+      }
+      throw new InternalServerErrorException(
+        `Error while deleting pot: ${error.message}`,
       );
     }
   }
