@@ -67,9 +67,7 @@ export class BudgetService {
       });
 
       if (!budgetToDelete) {
-        console.error(
-          `No budget found with category ${budgetToDelete.category}`,
-        );
+        console.error(`No budget found with category ${category}`);
         return;
       }
 

@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { APIPotDTO } from '../../model/apis/APIPotDTO';
 import * as path from 'node:path';
 import * as fs from 'node:fs';
@@ -61,6 +61,23 @@ export class PotsService {
     } catch (error) {
       console.error('Failed to edit pot in database.', error.message);
       throw new Error('Could not edit pot.');
+    }
+  }
+
+  async deletePot(name: string): Promise<void> {
+    try {
+      const potToDelete: Pots = await this.potsRepository.findOne({
+        where: { name },
+      });
+
+      if (!potToDelete) {
+        console.error(`No pot found with name ${name}`);
+      }
+
+      await this.potsRepository.remove(potToDelete);
+    } catch (error) {
+      console.error('Failed to delete pot in database', error);
+      throw new Error('Could not delete pot.');
     }
   }
 
