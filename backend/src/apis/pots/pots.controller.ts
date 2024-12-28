@@ -10,6 +10,7 @@ import {
 import { PotsService } from './pots.service';
 import { APIPotDTO } from '../../model/apis/APIPotDTO';
 import { ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { APIEditedPotDTO } from '../../model/apis/APIEditedPotDTO';
 
 @Controller('pots')
 export class PotsController {
@@ -70,9 +71,9 @@ export class PotsController {
     status: HttpStatus.INTERNAL_SERVER_ERROR,
     description: 'Server error occurred while editing pot.',
   })
-  async editPot(@Body() editedPot: APIPotDTO): Promise<void> {
+  async editPot(@Body() editedPot: APIEditedPotDTO): Promise<void> {
     try {
-      // await this.potsService.editPot(editedPot);
+      await this.potsService.editPot(editedPot);
     } catch (error) {
       throw new InternalServerErrorException(
         `Error while editing pot: ${error.message}`,
