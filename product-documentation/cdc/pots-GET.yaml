@@ -18,6 +18,8 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/APIPotDTO'
+        '404':
+          description: Pots not found.
         '500':
           description: Interner Serverfehler, wenn ein Fehler beim Abrufen der Pots auftritt.
 

@@ -1,0 +1,61 @@
+openapi: 3.0.0
+info:
+  title: Pots API
+  version: 1.0.0
+  description: API zur Verwaltung von Pots (z.B. Sparziele)
+
+paths:
+  /pots/editPot:
+    put:
+      summary: Edit an existing pot
+      operationId: editPot
+      tags:
+        - Pots
+      requestBody:
+        description: Details des zu bearbeitenden Pots
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/APIEditedPotDTO'
+      responses:
+        '200':
+          description: Pot successfully updated.
+        '404':
+          description: Pot not found.
+        '500':
+          description: Server error occurred while editing pot.
+
+components:
+  schemas:
+    APIEditedPotDTO:
+      type: object
+      required:
+        - id
+        - name
+        - target
+        - total
+        - theme
+      properties:
+        id:
+          type: integer
+          example: 1
+          description: Die eindeutige ID des Pots.
+        name:
+          type: string
+          example: "Holiday"
+          description: Der Name des Pots.
+        target:
+          type: number
+          format: float
+          example: 3000.0
+          description: Das Zielguthaben des Pots.
+        total:
+          type: number
+          format: float
+          example: 2000.0
+          description: Der aktuelle Kontostand des Pots.
+        theme:
+          type: string
+          example: "#277C78"
+          description: Die Farbthematik des Pots.

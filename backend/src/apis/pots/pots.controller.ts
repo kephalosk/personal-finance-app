@@ -4,6 +4,7 @@ import {
   Get,
   HttpStatus,
   InternalServerErrorException,
+  NotFoundException,
   Post,
   Put,
 } from '@nestjs/common';
@@ -24,6 +25,10 @@ export class PotsController {
     type: [APIPotDTO],
   })
   @ApiResponse({
+    status: HttpStatus.NOT_FOUND,
+    description: 'Pots not found',
+  })
+  @ApiResponse({
     status: HttpStatus.INTERNAL_SERVER_ERROR,
     description: 'Server error occurred while getting pots.',
   })
@@ -31,6 +36,9 @@ export class PotsController {
     try {
       return await this.potsService.findAll();
     } catch (error) {
+      if (error instanceof NotFoundException) {
+        throw new NotFoundException('Pots not found.');
+      }
       throw new InternalServerErrorException(
         `Error getting pots: ${error.message}`,
       );
@@ -75,6 +83,9 @@ export class PotsController {
     try {
       await this.potsService.editPot(editedPot);
     } catch (error) {
+      if (error instanceof NotFoundException) {
+        throw new NotFoundException('Pot not found.');
+      }
       throw new InternalServerErrorException(
         `Error while editing pot: ${error.message}`,
       );
