@@ -1,0 +1,57 @@
+openapi: 3.0.0
+info:
+  title: Pots API
+  version: 1.0.0
+  description: API zur Verwaltung von Budget-Pots
+
+paths:
+  /deletePot:
+    delete:
+      summary: Delete an existing budget
+      description: Löscht einen bestehenden Pot basierend auf seinem Namen.
+      operationId: deletePot
+      requestBody:
+        description: Der Name des Pots, der gelöscht werden soll.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/APIPotNameDTO'
+      responses:
+        '204':
+          description: Pot erfolgreich gelöscht. Kein Inhalt wird zurückgegeben.
+        '404':
+          description: Pot nicht gefunden.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Serverfehler beim Löschen des Pots.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+components:
+  schemas:
+    APIPotNameDTO:
+      type: object
+      properties:
+        potName:
+          type: string
+          description: Der Name des zu löschenden Pots.
+          example: 'Holiday'
+
+    ErrorResponse:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          example: 500
+        message:
+          type: string
+          example: Error while deleting pot: Database error
+        error:
+          type: string
+          example: Internal Server Error

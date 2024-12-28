@@ -3,6 +3,7 @@ import { PotsController } from './pots.controller';
 import { PotsService } from './pots.service';
 import { APIEditedPotDTO } from '../../model/apis/APIEditedPotDTO';
 import { NotFoundException } from '@nestjs/common';
+import { APIPotNameDTO } from '../../model/apis/APIPotNameDTO';
 
 jest.mock('./pots.service', () => ({
   PotsService: jest.fn().mockImplementation(() => ({
@@ -31,6 +32,10 @@ const mockedPots = [
 const mockedEditedPot: APIEditedPotDTO = {
   ...mockedPots[0],
   oldName: mockedPots[0].name,
+};
+
+const mockedPotName: APIPotNameDTO = {
+  potName: mockedPots[0].name,
 };
 
 describe('PotsController', () => {
@@ -123,7 +128,7 @@ describe('PotsController', () => {
   });
 
   it('deletes an existing pot', async () => {
-    await controller.deletePot(mockedPots[0].name);
+    await controller.deletePot(mockedPotName);
 
     expect(potsService.deletePot).toHaveBeenCalledWith(mockedPots[0].name);
   });
@@ -133,9 +138,9 @@ describe('PotsController', () => {
       throw new Error('Service failure');
     });
 
-    await expect(() =>
-      controller.deletePot(mockedPots[0].name),
-    ).rejects.toThrow('Error while deleting pot: Service failure');
+    await expect(() => controller.deletePot(mockedPotName)).rejects.toThrow(
+      'Error while deleting pot: Service failure',
+    );
   });
 
   it('throws NotFoundException if finding pot to delete fails', async () => {
@@ -143,8 +148,8 @@ describe('PotsController', () => {
       throw new NotFoundException('Service failure');
     });
 
-    await expect(() =>
-      controller.deletePot(mockedPots[0].name),
-    ).rejects.toThrow('Pot not found.');
+    await expect(() => controller.deletePot(mockedPotName)).rejects.toThrow(
+      'Pot not found.',
+    );
   });
 });
