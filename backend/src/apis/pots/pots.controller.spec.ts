@@ -2,6 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { PotsController } from './pots.controller';
 import { PotsService } from './pots.service';
 import { APIEditedPotDTO } from '../../model/apis/APIEditedPotDTO';
+import { NotFoundException } from '@nestjs/common';
 
 jest.mock('./pots.service', () => ({
   PotsService: jest.fn().mockImplementation(() => ({
@@ -65,8 +66,16 @@ describe('PotsController', () => {
     });
 
     await expect(() => controller.getPots()).rejects.toThrow(
-      'Fehler beim Abrufen der Pots: Error: Service failure',
+      'Error getting pots: Service failure',
     );
+  });
+
+  it('throws NotFoundException if no pot is found', async () => {
+    (potsService.findAll as jest.Mock).mockImplementation(() => {
+      throw new NotFoundException('Service failure');
+    });
+
+    await expect(() => controller.getPots()).rejects.toThrow('Pots not found.');
   });
 
   it('adds new pot', async () => {
@@ -98,6 +107,16 @@ describe('PotsController', () => {
 
     await expect(() => controller.editPot(mockedEditedPot)).rejects.toThrow(
       'Error while editing pot: Service failure',
+    );
+  });
+
+  it('throws NotFoundException if finding pot fails', async () => {
+    (potsService.editPot as jest.Mock).mockImplementation(() => {
+      throw new NotFoundException('Service failure');
+    });
+
+    await expect(() => controller.editPot(mockedEditedPot)).rejects.toThrow(
+      'Pot not found.',
     );
   });
 });
