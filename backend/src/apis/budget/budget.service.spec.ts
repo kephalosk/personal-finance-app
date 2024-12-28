@@ -65,7 +65,7 @@ describe('BudgetService', () => {
       findOne: jest.fn().mockResolvedValue(mockedBudgetsEntity[0]),
       create: jest.fn().mockReturnValue(mockedBudgetsEntity[0]),
       save: jest.fn().mockResolvedValue(mockedBudgetsEntity[0]),
-      update: jest.fn().mockResolvedValue(mockedBudgetsEntity[0]),
+      update: jest.fn().mockResolvedValue({}),
       remove: jest.fn().mockResolvedValue(mockedBudgetsEntity[0]),
     };
 

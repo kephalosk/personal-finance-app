@@ -5,6 +5,7 @@ import * as fs from 'node:fs';
 import { Pots } from '../../model/entities/Pots';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
+import { APIEditedPotDTO } from '../../model/apis/APIEditedPotDTO';
 
 @Injectable()
 export class PotsService {
@@ -35,6 +36,31 @@ export class PotsService {
     } catch (error) {
       console.error('Failed to save new pot to database.', error.message);
       throw new Error('Could not add pot.');
+    }
+  }
+
+  async editPot(editedPot: APIEditedPotDTO): Promise<void> {
+    try {
+      const potToUpdate: Pots = await this.potsRepository.findOne({
+        where: { name: editedPot.oldName },
+      });
+
+      if (!potToUpdate) {
+        console.error(`No pot found with name ${editedPot.oldName}`);
+        return;
+      }
+
+      const update: Partial<APIPotDTO> = {
+        name: editedPot.name,
+        target: editedPot.target,
+        total: editedPot.total,
+        theme: editedPot.theme,
+      };
+
+      await this.potsRepository.update(potToUpdate.id, update);
+    } catch (error) {
+      console.error('Failed to edit pot in database.', error.message);
+      throw new Error('Could not edit pot.');
     }
   }
 

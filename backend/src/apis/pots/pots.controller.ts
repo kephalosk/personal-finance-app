@@ -72,7 +72,7 @@ export class PotsController {
   })
   async editPot(@Body() editedPot: APIPotDTO): Promise<void> {
     try {
-      await this.potsService.editPot(editedPot);
+      // await this.potsService.editPot(editedPot);
     } catch (error) {
       throw new InternalServerErrorException(
         `Error while editing pot: ${error.message}`,
