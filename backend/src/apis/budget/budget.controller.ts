@@ -57,6 +57,10 @@ export class BudgetController {
     status: HttpStatus.NOT_FOUND,
     description: 'Budget not found',
   })
+  @ApiResponse({
+    status: HttpStatus.INTERNAL_SERVER_ERROR,
+    description: 'Server error occurred while editing pot.',
+  })
   async editBudget(@Body() editedBudget: APIBudgetDTO): Promise<void> {
     try {
       await this.budgetService.updateBudget(editedBudget);
