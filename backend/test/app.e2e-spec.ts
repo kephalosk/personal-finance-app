@@ -3,6 +3,8 @@ import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import { AppModule } from '../src/app.module';
 import { APICategoryDTO } from '../src/model/apis/APICategoryDTO';
+import { APIPotAdditionDTO } from '../src/model/apis/APIPotAdditionDTO';
+import { APIPotNameDTO } from '../src/model/apis/APIPotNameDTO';
 
 describe('AppController (e2e)', () => {
   let app: INestApplication;
@@ -499,6 +501,31 @@ describe('AppController (e2e)', () => {
       .put('/pots/editPot')
       .send(editedPot)
       .expect(200)
+      .expect({});
+  });
+
+  it('/pots/addMoneyToPot (PUT)', async () => {
+    const potAddition: APIPotAdditionDTO = {
+      potName: 'NewMove',
+      amountToAdd: 100000,
+    };
+
+    return request(app.getHttpServer())
+      .put('/pots/addMoneyToPot')
+      .send(potAddition)
+      .expect(200)
+      .expect({});
+  });
+
+  it('/pots/deletePot (DELETE)', async () => {
+    const potNameToDelete: APIPotNameDTO = {
+      potName: 'NewMove',
+    };
+
+    return request(app.getHttpServer())
+      .delete('/pots/deletePot')
+      .send(potNameToDelete)
+      .expect(204)
       .expect({});
   });
 
