@@ -15,6 +15,7 @@ import { APIPotDTO } from '../../model/apis/APIPotDTO';
 import { ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { APIEditedPotDTO } from '../../model/apis/APIEditedPotDTO';
 import { APIPotNameDTO } from '../../model/apis/APIPotNameDTO';
+import { APIPotAdditionDTO } from '../../model/apis/APIPotAdditionDTO';
 
 @Controller('pots')
 export class PotsController {
@@ -119,6 +120,33 @@ export class PotsController {
       }
       throw new InternalServerErrorException(
         `Error while deleting pot: ${error.message}`,
+      );
+    }
+  }
+
+  @Put('addMoneyToPot')
+  @ApiOperation({ summary: 'Add Money to an existing pot' })
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'Money successfully added to Pot.',
+  })
+  @ApiResponse({
+    status: HttpStatus.NOT_FOUND,
+    description: 'Pot not found',
+  })
+  @ApiResponse({
+    status: HttpStatus.INTERNAL_SERVER_ERROR,
+    description: 'Server error occurred while adding money to pot.',
+  })
+  async addMoneyToPot(@Body() potAddition: APIPotAdditionDTO): Promise<void> {
+    try {
+      await this.potsService.addMoneyToPot(potAddition);
+    } catch (error) {
+      if (error instanceof NotFoundException) {
+        throw new NotFoundException('Pot not found.');
+      }
+      throw new InternalServerErrorException(
+        `Error while adding money to pot: ${error.message}`,
       );
     }
   }
