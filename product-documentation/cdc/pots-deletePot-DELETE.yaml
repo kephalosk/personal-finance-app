@@ -51,7 +51,7 @@ components:
           example: 500
         message:
           type: string
-          example: Error while deleting pot: Database error
+          example: 'Error while deleting pot: Database error'
         error:
           type: string
           example: Internal Server Error
