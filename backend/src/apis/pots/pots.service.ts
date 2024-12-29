@@ -6,6 +6,7 @@ import { Pots } from '../../model/entities/Pots';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { APIEditedPotDTO } from '../../model/apis/APIEditedPotDTO';
+import { APIPotAdditionDTO } from '../../model/apis/APIPotAdditionDTO';
 
 @Injectable()
 export class PotsService {
@@ -16,7 +17,7 @@ export class PotsService {
 
   async findAll(): Promise<APIPotDTO[]> {
     try {
-      const pots = await this.potsRepository.find();
+      const pots: Pots[] = await this.potsRepository.find();
       return this.mapPotEntities(pots);
     } catch (error) {
       console.error('Failed to read pots from database', error);
@@ -81,6 +82,29 @@ export class PotsService {
     }
   }
 
+  async addMoneyToPot(potAddition: APIPotAdditionDTO): Promise<void> {
+    try {
+      const potToAddMoneyTo: Pots = await this.potsRepository.findOne({
+        where: { name: potAddition.potName },
+      });
+
+      if (!potToAddMoneyTo) {
+        console.error(`No pot found with name ${potAddition.potName}`);
+      }
+
+      const newTotal = potToAddMoneyTo.total + potAddition.amountToAdd;
+
+      const update: Partial<APIPotDTO> = {
+        total: newTotal,
+      };
+
+      await this.potsRepository.update(potToAddMoneyTo.id, update);
+    } catch (error) {
+      console.error('Failed to add money to pot in database', error);
+      throw new Error('Could not add money to pot.');
+    }
+  }
+
   mapPotEntities(pots: Pots[]): APIPotDTO[] {
     let mappedPots: APIPotDTO[] = [];
     pots.forEach((pot: Pots): void => {
@@ -96,8 +120,10 @@ export class PotsService {
   }
 
   getPots(): APIPotDTO[] {
-    const filePath = path.join(__dirname, '../pots/pots.data.json');
-    const data = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+    const filePath: string = path.join(__dirname, '../pots/pots.data.json');
+    const data: { pots: APIPotDTO[] } = JSON.parse(
+      fs.readFileSync(filePath, 'utf8'),
+    );
     const { pots } = data;
     return pots;
   }
