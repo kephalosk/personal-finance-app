@@ -7,6 +7,8 @@ import { APICategoryDTO } from '../src/model/apis/APICategoryDTO';
 describe('AppController (e2e)', () => {
   let app: INestApplication;
 
+  let server: INestApplication;
+
   beforeEach(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
       imports: [AppModule],
@@ -14,6 +16,12 @@ describe('AppController (e2e)', () => {
 
     app = moduleFixture.createNestApplication();
     await app.init();
+    server = app.getHttpServer();
+  });
+
+  afterAll(async () => {
+    await app.close();
+    await server.close();
   });
 
   it('/ (GET)', async () => {

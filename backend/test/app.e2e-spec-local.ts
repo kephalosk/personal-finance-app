@@ -3,9 +3,12 @@ import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import { AppModule } from '../src/app.module';
 import { APICategoryDTO } from '../src/model/apis/APICategoryDTO';
+import { APIPotNameDTO } from '../src/model/apis/APIPotNameDTO';
 
 describe('AppController (e2e)', () => {
   let app: INestApplication;
+
+  let server: INestApplication;
 
   beforeEach(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
@@ -14,6 +17,12 @@ describe('AppController (e2e)', () => {
 
     app = moduleFixture.createNestApplication();
     await app.init();
+    server = app.getHttpServer();
+  });
+
+  afterAll(async () => {
+    await app.close();
+    await server.close();
   });
 
   it('/ (GET)', async () => {
@@ -481,8 +490,8 @@ describe('AppController (e2e)', () => {
   it('/pots/editPot (PUT)', async () => {
     const editedPot = {
       oldName: 'Move',
-      name: 'Move',
-      target: 300000,
+      name: 'NewMove',
+      target: 300001,
       total: 100000,
       theme: '#31FFFF',
     };
@@ -491,6 +500,18 @@ describe('AppController (e2e)', () => {
       .put('/pots/editPot')
       .send(editedPot)
       .expect(200)
+      .expect({});
+  });
+
+  it('/pots/deletePot (DELETE)', async () => {
+    const potNameToDelete: APIPotNameDTO = {
+      potName: 'NewMove',
+    };
+
+    return request(app.getHttpServer())
+      .delete('/pots/deletePot')
+      .send(potNameToDelete)
+      .expect(204)
       .expect({});
   });
 

@@ -3,6 +3,7 @@ import {
   Controller,
   Delete,
   Get,
+  HttpCode,
   HttpStatus,
   InternalServerErrorException,
   NotFoundException,
@@ -108,6 +109,7 @@ export class PotsController {
     status: HttpStatus.INTERNAL_SERVER_ERROR,
     description: 'Server error occurred while deleting the pot.',
   })
+  @HttpCode(HttpStatus.NO_CONTENT)
   async deletePot(@Body() potToDelete: APIPotNameDTO): Promise<void> {
     try {
       await this.potsService.deletePot(potToDelete.potName);
