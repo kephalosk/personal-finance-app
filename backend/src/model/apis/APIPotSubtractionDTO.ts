@@ -14,5 +14,5 @@ export class APIPotSubtractionDTO {
     example: 1000,
   })
   @IsInt()
-  amountToSubstract: number;
+  amountToSubtract: number;
 }

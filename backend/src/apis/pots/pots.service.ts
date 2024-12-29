@@ -7,6 +7,7 @@ import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { APIEditedPotDTO } from '../../model/apis/APIEditedPotDTO';
 import { APIPotAdditionDTO } from '../../model/apis/APIPotAdditionDTO';
+import { APIPotSubtractionDTO } from '../../model/apis/APIPotSubtractionDTO';
 
 @Injectable()
 export class PotsService {
@@ -102,6 +103,36 @@ export class PotsService {
     } catch (error) {
       console.error('Failed to add money to pot in database', error);
       throw new Error('Could not add money to pot.');
+    }
+  }
+
+  async withdrawMoneyFromPot(
+    potSubtraction: APIPotSubtractionDTO,
+  ): Promise<void> {
+    try {
+      const potToWithdrawFrom: Pots = await this.potsRepository.findOne({
+        where: { name: potSubtraction.potName },
+      });
+
+      if (!potToWithdrawFrom) {
+        console.error(`No pot found with name ${potSubtraction.potName}`);
+      }
+
+      let newTotal: number =
+        potToWithdrawFrom.total - potSubtraction.amountToSubtract;
+
+      if (newTotal < 0) {
+        newTotal = 0;
+      }
+
+      const update: Partial<APIPotDTO> = {
+        total: newTotal,
+      };
+
+      await this.potsRepository.update(potToWithdrawFrom.id, update);
+    } catch (error) {
+      console.error('Failed to withdraw money from pot in database', error);
+      throw new Error('Could not withdraw money from pot.');
     }
   }
 

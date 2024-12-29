@@ -8,6 +8,7 @@ import { getRepositoryToken } from '@nestjs/typeorm';
 import { APIPotDTO } from '../../model/apis/APIPotDTO';
 import { APIEditedPotDTO } from '../../model/apis/APIEditedPotDTO';
 import { APIPotAdditionDTO } from '../../model/apis/APIPotAdditionDTO';
+import { APIPotSubtractionDTO } from '../../model/apis/APIPotSubtractionDTO';
 
 jest.spyOn(console, 'error').mockImplementation(() => {});
 
@@ -56,6 +57,18 @@ describe('PotsService', () => {
   const mockedPotAdditionEntityMapped: APIPotAdditionDTO = {
     potName: mockedPotsEntityMapped[0].name,
     amountToAdd,
+  };
+
+  const amountToSubtract: number = 1000;
+  const mockedPotSubtractionEntityMapped: APIPotSubtractionDTO = {
+    potName: mockedPotsEntityMapped[0].name,
+    amountToSubtract,
+  };
+
+  const bigAmountToSubtract: number = 10000;
+  const mockedPotSubtractionEntityMappedWithBigAmount: APIPotSubtractionDTO = {
+    potName: mockedPotsEntityMapped[0].name,
+    amountToSubtract: bigAmountToSubtract,
   };
 
   const mockedPots: APIPotDTO[] = [
@@ -248,5 +261,47 @@ describe('PotsService', () => {
     await expect(() =>
       service.addMoneyToPot(mockedPotAdditionEntityMapped),
     ).rejects.toThrow('Could not add money to pot.');
+  });
+
+  it('withdraws money from a pot in repository', async (): Promise<void> => {
+    await service.withdrawMoneyFromPot(mockedPotSubtractionEntityMapped);
+
+    expect(repository.findOne).toHaveBeenLastCalledWith({
+      where: { name: mockedPotSubtractionEntityMapped.potName },
+    });
+
+    expect(repository.update).toHaveBeenLastCalledWith(1, { total: 1000 });
+  });
+
+  it('sets new total to 0 if current pot total is less than amount to subtract', async (): Promise<void> => {
+    await service.withdrawMoneyFromPot(
+      mockedPotSubtractionEntityMappedWithBigAmount,
+    );
+
+    expect(repository.findOne).toHaveBeenLastCalledWith({
+      where: { name: mockedPotSubtractionEntityMapped.potName },
+    });
+
+    expect(repository.update).toHaveBeenLastCalledWith(1, { total: 0 });
+  });
+
+  it('throws an error if withdrawing money from pot fails', async (): Promise<void> => {
+    jest
+      .spyOn(repository, 'update')
+      .mockRejectedValue(new Error('Database error'));
+
+    await expect(() =>
+      service.withdrawMoneyFromPot(mockedPotSubtractionEntityMapped),
+    ).rejects.toThrow('Could not withdraw money from pot.');
+  });
+
+  it('throws an error if finding pot to delete fails', async (): Promise<void> => {
+    jest
+      .spyOn(repository, 'findOne')
+      .mockRejectedValue(new Error('Database error'));
+
+    await expect(() =>
+      service.withdrawMoneyFromPot(mockedPotSubtractionEntityMapped),
+    ).rejects.toThrow('Could not withdraw money from pot.');
   });
 });
