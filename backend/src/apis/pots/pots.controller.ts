@@ -16,6 +16,7 @@ import { ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { APIEditedPotDTO } from '../../model/apis/APIEditedPotDTO';
 import { APIPotNameDTO } from '../../model/apis/APIPotNameDTO';
 import { APIPotAdditionDTO } from '../../model/apis/APIPotAdditionDTO';
+import { APIPotSubtractionDTO } from '../../model/apis/APIPotSubtractionDTO';
 
 @Controller('pots')
 export class PotsController {
@@ -125,14 +126,14 @@ export class PotsController {
   }
 
   @Put('addMoneyToPot')
-  @ApiOperation({ summary: 'Add Money to an existing pot' })
+  @ApiOperation({ summary: 'Add money to an existing pot' })
   @ApiResponse({
     status: HttpStatus.OK,
     description: 'Money successfully added to Pot.',
   })
   @ApiResponse({
     status: HttpStatus.NOT_FOUND,
-    description: 'Pot not found',
+    description: 'Pot not found.',
   })
   @ApiResponse({
     status: HttpStatus.INTERNAL_SERVER_ERROR,
@@ -147,6 +148,32 @@ export class PotsController {
       }
       throw new InternalServerErrorException(
         `Error while adding money to pot: ${error.message}`,
+      );
+    }
+  }
+
+  @Put('withdrawMoneyFromPot')
+  @ApiOperation({ summary: 'Withdraw money from an existing pot' })
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'Money successfully withdrawned from Pot.',
+  })
+  @ApiResponse({ status: HttpStatus.NOT_FOUND, description: 'Pot not found.' })
+  @ApiResponse({
+    status: HttpStatus.INTERNAL_SERVER_ERROR,
+    description: 'Server error occurred while withdrawing money from pot.',
+  })
+  async withdrawMoneyFromPot(
+    @Body() potSubtraction: APIPotSubtractionDTO,
+  ): Promise<void> {
+    try {
+      await this.potsService.withdrawMoneyFromPot(potSubtraction);
+    } catch (error) {
+      if (error instanceof NotFoundException) {
+        throw new NotFoundException('Pot not found.');
+      }
+      throw new InternalServerErrorException(
+        `Error while withdrawing money from pot: ${error.message}`,
       );
     }
   }

@@ -6,6 +6,7 @@ import { NotFoundException } from '@nestjs/common';
 import { APIPotNameDTO } from '../../model/apis/APIPotNameDTO';
 import { APIPotAdditionDTO } from '../../model/apis/APIPotAdditionDTO';
 import { APIPotDTO } from '../../model/apis/APIPotDTO';
+import { APIPotSubtractionDTO } from '../../model/apis/APIPotSubtractionDTO';
 
 jest.mock('./pots.service', (): { PotsService: jest.Mock } => ({
   PotsService: jest.fn().mockImplementation(
@@ -15,12 +16,14 @@ jest.mock('./pots.service', (): { PotsService: jest.Mock } => ({
       editPot: jest.Mock;
       deletePot: jest.Mock;
       addMoneyToPot: jest.Mock;
+      withdrawMoneyFromPot: jest.Mock;
     } => ({
       findAll: jest.fn(),
       addNewPot: jest.fn(),
       editPot: jest.fn(),
       deletePot: jest.fn(),
       addMoneyToPot: jest.fn(),
+      withdrawMoneyFromPot: jest.fn(),
     }),
   ),
 }));
@@ -51,6 +54,12 @@ const mockedPotAddition: APIPotAdditionDTO = {
   amountToAdd,
 };
 
+const amountToSubtract: number = 1000;
+const mockedPotSubtraction: APIPotSubtractionDTO = {
+  potName: mockedPots[0].name,
+  amountToSubtract,
+};
+
 const mockedPotName: APIPotNameDTO = {
   potName: mockedPots[0].name,
 };
@@ -70,6 +79,10 @@ describe('PotsController', (): void => {
     (potsService.addNewPot as jest.Mock).mockResolvedValue(undefined);
     (potsService.editPot as jest.Mock).mockResolvedValue(undefined);
     (potsService.deletePot as jest.Mock).mockResolvedValue(undefined);
+    (potsService.addMoneyToPot as jest.Mock).mockResolvedValue(undefined);
+    (potsService.withdrawMoneyFromPot as jest.Mock).mockResolvedValue(
+      undefined,
+    );
 
     controller = module.get<PotsController>(PotsController);
   });
@@ -176,7 +189,7 @@ describe('PotsController', (): void => {
     expect(potsService.addMoneyToPot).toHaveBeenCalledWith(mockedPotAddition);
   });
 
-  it('throws if editing pot call fails', async (): Promise<void> => {
+  it('throws if adding pot call fails', async (): Promise<void> => {
     (potsService.addMoneyToPot as jest.Mock).mockImplementation((): void => {
       throw new Error('Service failure');
     });
@@ -186,13 +199,47 @@ describe('PotsController', (): void => {
     ).rejects.toThrow('Error while adding money to pot: Service failure');
   });
 
-  it('throws NotFoundException if finding pot fails', async (): Promise<void> => {
+  it('throws NotFoundException if finding pot to add to fails', async (): Promise<void> => {
     (potsService.addMoneyToPot as jest.Mock).mockImplementation((): void => {
       throw new NotFoundException('Service failure');
     });
 
     await expect(() =>
       controller.addMoneyToPot(mockedPotAddition),
+    ).rejects.toThrow('Pot not found.');
+  });
+
+  it('withdraws money from an existing pot', async (): Promise<void> => {
+    await controller.withdrawMoneyFromPot(mockedPotSubtraction);
+
+    expect(potsService.withdrawMoneyFromPot).toHaveBeenCalledWith(
+      mockedPotSubtraction,
+    );
+  });
+
+  it('throws if withdrawing pot call fails', async (): Promise<void> => {
+    (potsService.withdrawMoneyFromPot as jest.Mock).mockImplementation(
+      (): void => {
+        throw new Error('Service failure');
+      },
+    );
+
+    await expect(() =>
+      controller.withdrawMoneyFromPot(mockedPotSubtraction),
+    ).rejects.toThrow(
+      'Error while withdrawing money from pot: Service failure',
+    );
+  });
+
+  it('throws NotFoundException if finding pot to withdraw from fails', async (): Promise<void> => {
+    (potsService.withdrawMoneyFromPot as jest.Mock).mockImplementation(
+      (): void => {
+        throw new NotFoundException('Service failure');
+      },
+    );
+
+    await expect(() =>
+      controller.withdrawMoneyFromPot(mockedPotSubtraction),
     ).rejects.toThrow('Pot not found.');
   });
 });
