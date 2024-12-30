@@ -2,16 +2,17 @@ openapi: 3.0.0
 info:
   title: GetAllPots API
   version: 1.0.0
-  description: API zum Abrufen aller Pots.
+  description: API to retrieve all pots.
 
 paths:
   /pots:
     get:
-      summary: Get all pots
-      description: Ruft alle Pots ab.
+      summary: "Get all pots"
+      description: "Retrieves all pots, including their target amount, current amount, and color theme."
+      operationId: "getPots"
       responses:
         '200':
-          description: Erfolgreiches Abrufen aller Pots
+          description: "Successfully retrieved all pots"
           content:
             application/json:
               schema:
@@ -19,9 +20,35 @@ paths:
                 items:
                   $ref: '#/components/schemas/APIPotDTO'
         '404':
-          description: Pots not found.
+          description: "Pots not found."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Pots not found."
         '500':
-          description: Interner Serverfehler, wenn ein Fehler beim Abrufen der Pots auftritt.
+          description: "Internal server error when retrieving pots."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Error getting pots: [Error details]"
+        '503':
+          description: "Failed to connect to the database."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Database connection error: [Error details]"
 
 components:
   schemas:
@@ -30,19 +57,19 @@ components:
       properties:
         name:
           type: string
-          description: Der Name des Pots (z. B. "Laptop")
+          description: "The name of the pot (e.g., 'Laptop')"
           example: "Laptop"
         target:
           type: integer
-          description: Der Zielbetrag des Pots (z. B. 2400)
+          description: "The target amount of the pot (e.g., 2400)"
           example: 2400
         total:
           type: integer
-          description: Der aktuelle Betrag im Pot (z. B. 2000)
+          description: "The current amount in the pot (e.g., 2000)"
           example: 2000
         theme:
           type: string
-          description: Das Farbthema des Pots im Hex-Format (z. B. "#FFFFFF")
+          description: "The color theme of the pot in hex format (e.g., '#FFFFFF')"
           example: "#FFFFFF"
       required:
         - name

@@ -2,24 +2,28 @@ openapi: 3.0.0
 info:
   title: GetAllBudgets API
   version: 1.0.0
-  description: API zum Abrufen aller Budgets.
+  description: API for retrieving all budgets.
 
 paths:
   /budget:
     get:
       summary: Get all budgets
-      description: Ruft alle Budgets ab.
+      description: Retrieves all budgets.
       responses:
         '200':
-          description: Alle Budgets erfolgreich abgerufen
+          description: All budgets successfully retrieved
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/APIBudgetDTO'
+        '404':
+          description: Budgets not found.
         '500':
-          description: Interner Serverfehler, wenn ein Fehler beim Abrufen der Budgets auftritt.
+          description: Internal server error occurred while retrieving the budgets.
+        '503':
+          description: Database connection error.
 
 components:
   schemas:
@@ -28,15 +32,15 @@ components:
       properties:
         category:
           type: string
-          description: Die Kategorie des Budgets
+          description: The category of the budget.
           example: "General"
         maximum:
           type: integer
-          description: Der maximale Betrag des Budgets
+          description: The maximum amount of the budget.
           example: 100
         theme:
           type: string
-          description: Die Themenfarbe des Budgets im Hex-Format
+          description: The theme color of the budget in hex format.
           example: "#000000"
       required:
         - category

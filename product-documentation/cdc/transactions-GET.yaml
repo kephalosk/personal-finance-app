@@ -2,24 +2,31 @@ openapi: 3.0.0
 info:
   title: GetAllTransactions API
   version: 1.0.0
-  description: API zum Abrufen aller Transaktionen.
+  description: API to retrieve all transactions.
 
 paths:
   /transactions:
     get:
-      summary: Get all transactions
-      description: Ruft alle Transaktionen ab.
+      summary: "Get all transactions"
+      description: "Retrieves all transactions."
+      operationId: getBalance
       responses:
         '200':
-          description: Erfolgreiches Abrufen aller Transaktionen
+          description: "Successfully retrieved all transactions"
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/APITransactionDTO'
+        '404':
+          description: "Transactions not found."
         '500':
-          description: Interner Serverfehler, wenn ein Fehler beim Abrufen der Transaktionen auftritt.
+          description: "Internal server error occurred while retrieving transactions."
+        '503':
+          description: "Failed to connect to the database."
+      tags:
+        - Transactions
 
 components:
   schemas:
@@ -28,28 +35,28 @@ components:
       properties:
         avatar:
           type: string
-          description: Die Bildquelle des Transaktionspartners (z. B. ein Avatar-Bild)
+          description: "The image source of the transaction partner (e.g., an avatar image)"
           example: "/images/avatars/emma-richardson.jpg"
         name:
           type: string
-          description: Der Name des Transaktionspartners (z. B. "Emma Richardson")
+          description: "The name of the transaction partner (e.g., 'Emma Richardson')"
           example: "Emma Richardson"
         category:
           type: string
-          description: Die Kategorie der Transaktion (z. B. "General")
+          description: "The category of the transaction (e.g., 'General')"
           example: "General"
         date:
           type: string
           format: date-time
-          description: Das Datum der Transaktion im ISO-8601-Format
+          description: "The date of the transaction in ISO-8601 format"
           example: "2024-08-19T14:23:11Z"
         amount:
           type: integer
-          description: Der Betrag der Transaktion (z. B. 100)
+          description: "The amount of the transaction (e.g., 100)"
           example: 100
         recurring:
           type: boolean
-          description: Gibt an, ob die Transaktion wiederkehrend ist (z. B. false)
+          description: "Indicates if the transaction is recurring (e.g., false)"
           example: false
       required:
         - avatar

@@ -1,14 +1,14 @@
-openapi: 3.0.3
+openapi: 3.0.0
 info:
   title: Pots API
-  description: API for managing financial pots
+  description: API for managing financial pots.
   version: 1.0.0
 paths:
-  /addNewPot:
+  /pots/addNewPot:
     post:
-      summary: Add new pot
-      description: Adds a new financial pot with the provided details.
-      operationId: addNewPot
+      summary: "Add new pot"
+      description: "Adds a new financial pot with the specified details."
+      operationId: "addNewPot"
       requestBody:
         required: true
         content:
@@ -22,9 +22,14 @@ paths:
               theme: "#FFFFFF"
       responses:
         '201':
-          description: New pot successfully added.
+          description: "New pot successfully added."
+        '400':
+          description: "Bad request, if the input data is invalid or incomplete."
         '500':
-          description: Server error occurred while adding new pot.
+          description: "Server error occurred while adding the new pot."
+        '503':
+          description: "Error connecting to the database."
+
 components:
   schemas:
     APIPotDTO:
@@ -32,17 +37,22 @@ components:
       properties:
         name:
           type: string
-          description: The name of the pot.
+          description: "The name of the pot (e.g., 'Laptop')."
           example: "Laptop"
         target:
           type: integer
-          description: The target amount of the pot.
+          description: "The target amount for the pot (e.g., 2400)."
           example: 2400
         total:
           type: integer
-          description: The current amount of the pot.
+          description: "The current amount in the pot (e.g., 2000)."
           example: 2000
         theme:
           type: string
-          description: The color theme of the pot.
+          description: "The theme color of the pot in hex format (e.g., '#FFFFFF')."
           example: "#FFFFFF"
+      required:
+        - name
+        - target
+        - total
+        - theme

@@ -2,16 +2,16 @@ openapi: 3.0.0
 info:
   title: Budget API
   version: 1.0.0
-  description: API zum Verwalten von Budgets
+  description: API for managing budgets.
 
 paths:
-  /deleteBudget:
+  /budget/deleteBudget:
     delete:
-      summary: Delete an existing budget
-      description: Löscht ein bestehendes Budget basierend auf der angegebenen Kategorie.
-      operationId: deleteBudget
+      summary: "Delete an existing budget"
+      description: "Deletes an existing budget based on the specified category."
+      operationId: "deleteBudget"
       requestBody:
-        description: Details der zu löschenden Budget-Kategorie
+        description: "Details of the budget category to be deleted"
         required: true
         content:
           application/json:
@@ -19,9 +19,9 @@ paths:
               $ref: '#/components/schemas/APICategoryDTO'
       responses:
         '204':
-          description: Budget erfolgreich gelöscht. Kein Inhalt zurückgegeben.
+          description: "Budget successfully deleted. No content returned."
         '404':
-          description: Budget nicht gefunden.
+          description: "Budget not found."
           content:
             application/json:
               schema:
@@ -29,9 +29,9 @@ paths:
                 properties:
                   message:
                     type: string
-                    example: 'Budget nicht gefunden.'
+                    example: 'Budget not found.'
         '500':
-          description: Serverfehler beim Löschen des Budgets.
+          description: "Server error occurred while deleting the budget."
           content:
             application/json:
               schema:
@@ -39,7 +39,17 @@ paths:
                 properties:
                   message:
                     type: string
-                    example: 'Fehler beim Löschen des Budgets: [Fehlerdetails]'
+                    example: 'Error while deleting the budget: [Error details]'
+        '503':
+          description: "Database connection error."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: 'Database connection error: [Error details]'
 
 components:
   schemas:
@@ -50,5 +60,5 @@ components:
       properties:
         category:
           type: string
-          description: Die Kategorie des Budgets, das gelöscht werden soll.
-          example: 'General'
+          description: "The category of the budget to be deleted."
+          example: "General"
