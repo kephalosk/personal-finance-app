@@ -7,7 +7,7 @@ info:
 paths:
   /pots/addMoneyToPot:
     put:
-      summary: Add Money to an existing pot
+      summary: Add money to an existing pot
       description: Adds a specified amount of money to an existing pot.
       operationId: addMoneyToPot
       requestBody:
