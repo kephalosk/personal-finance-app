@@ -36,3 +36,6 @@ lerna-debug.log*
 
 # secrets
 .env
+
+# jest coverage
+/src/coverage

@@ -8,6 +8,7 @@ import {
   NotFoundException,
   Post,
   Put,
+  ServiceUnavailableException,
 } from '@nestjs/common';
 import { BudgetService } from './budget.service';
 import { APIBudgetDTO } from '../../model/apis/APIBudgetDTO';
@@ -35,12 +36,21 @@ export class BudgetController {
     description:
       'Server error occurred while retrieving budgets from database.',
   })
+  @ApiResponse({
+    status: HttpStatus.SERVICE_UNAVAILABLE,
+    description: 'Failed to connect to the database.',
+  })
   async getBudget(): Promise<APIBudgetDTO[]> {
     try {
       return await this.budgetService.findAll();
     } catch (error) {
       if (error instanceof NotFoundException) {
         throw new NotFoundException('Budgets not found.');
+      }
+      if (error instanceof ServiceUnavailableException) {
+        throw new ServiceUnavailableException(
+          `Database connection error: ${getErrorMessage(error)}`,
+        );
       }
       throw new InternalServerErrorException(
         `Error while retrieving budgets from database: ${getErrorMessage(error)}`,
@@ -58,10 +68,19 @@ export class BudgetController {
     status: HttpStatus.INTERNAL_SERVER_ERROR,
     description: 'Server error occurred while adding new budget to database.',
   })
+  @ApiResponse({
+    status: HttpStatus.SERVICE_UNAVAILABLE,
+    description: 'Failed to connect to the database.',
+  })
   async addNewBudget(@Body() newBudget: APIBudgetDTO): Promise<void> {
     try {
       await this.budgetService.addNewBudget(newBudget);
     } catch (error) {
+      if (error instanceof ServiceUnavailableException) {
+        throw new ServiceUnavailableException(
+          `Database connection error: ${getErrorMessage(error)}`,
+        );
+      }
       throw new InternalServerErrorException(
         `Error while adding budget to database: ${getErrorMessage(error)}`,
       );
@@ -82,12 +101,21 @@ export class BudgetController {
     status: HttpStatus.INTERNAL_SERVER_ERROR,
     description: 'Server error occurred while updating budget.',
   })
+  @ApiResponse({
+    status: HttpStatus.SERVICE_UNAVAILABLE,
+    description: 'Failed to connect to the database.',
+  })
   async editBudget(@Body() editedBudget: APIBudgetDTO): Promise<void> {
     try {
       await this.budgetService.updateBudget(editedBudget);
     } catch (error) {
       if (error instanceof NotFoundException) {
         throw new NotFoundException('Budgets not found.');
+      }
+      if (error instanceof ServiceUnavailableException) {
+        throw new ServiceUnavailableException(
+          `Database connection error: ${getErrorMessage(error)}`,
+        );
       }
       throw new InternalServerErrorException(
         `Error while updating budget in database: ${getErrorMessage(error)}`,
@@ -109,12 +137,21 @@ export class BudgetController {
     status: HttpStatus.INTERNAL_SERVER_ERROR,
     description: 'Server error occurred while deleting the budget.',
   })
+  @ApiResponse({
+    status: HttpStatus.SERVICE_UNAVAILABLE,
+    description: 'Failed to connect to the database.',
+  })
   async deleteBudget(@Body() category: APICategoryDTO): Promise<void> {
     try {
       await this.budgetService.deleteBudget(category.category);
     } catch (error) {
       if (error instanceof NotFoundException) {
         throw new NotFoundException('Budget not found.');
+      }
+      if (error instanceof ServiceUnavailableException) {
+        throw new ServiceUnavailableException(
+          `Database connection error: ${getErrorMessage(error)}`,
+        );
       }
       throw new InternalServerErrorException(
         `Error deleting budget: ${getErrorMessage(error)}`,

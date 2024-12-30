@@ -1,7 +1,5 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { APIBalanceDTO } from '../../model/apis/APIBalanceDTO';
-import * as path from 'node:path';
-import * as fs from 'node:fs';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Balance } from '../../model/entities/Balance';
 import { Repository } from 'typeorm';
@@ -14,13 +12,13 @@ export class BalanceService {
   ) {}
 
   async findBalance(): Promise<APIBalanceDTO> {
-    try {
-      const balance: Balance[] = await this.balanceRepository.find();
-      return this.mapBalanceEntity(balance.at(0));
-    } catch (error) {
-      console.error('Failed to read balance from database', error);
-      return this.getBalance();
+    const balance: Balance[] = await this.balanceRepository.find();
+
+    if (!balance.length) {
+      throw new NotFoundException('No balance found.');
     }
+
+    return this.mapBalanceEntity(balance.at(0));
   }
 
   mapBalanceEntity(balance: Balance): APIBalanceDTO {
@@ -29,12 +27,5 @@ export class BalanceService {
       income: balance.income,
       expenses: balance.expenses,
     };
-  }
-
-  private getBalance(): APIBalanceDTO {
-    const filePath = path.join(__dirname, '../balance/balance.data.json');
-    const data = JSON.parse(fs.readFileSync(filePath, 'utf8'));
-    const { balance } = data;
-    return balance;
   }
 }

@@ -1,18 +1,15 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { PotsService } from './pots.service';
-import * as path from 'node:path';
-import * as fs from 'node:fs';
-import { Repository } from 'typeorm';
+import { Repository, UpdateResult } from 'typeorm';
 import { Pots } from '../../model/entities/Pots';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { APIPotDTO } from '../../model/apis/APIPotDTO';
 import { APIEditedPotDTO } from '../../model/apis/APIEditedPotDTO';
 import { APIPotAdditionDTO } from '../../model/apis/APIPotAdditionDTO';
 import { APIPotSubtractionDTO } from '../../model/apis/APIPotSubtractionDTO';
+import { NotFoundException, ServiceUnavailableException } from '@nestjs/common';
 
-jest.spyOn(console, 'error').mockImplementation(() => {});
-
-describe('PotsService', () => {
+describe('PotsService', (): void => {
   let service: PotsService;
   let repository: Repository<Pots>;
 
@@ -86,13 +83,6 @@ describe('PotsService', () => {
     },
   ];
 
-  const mockedPotsDTO: {
-    pots: APIPotDTO[];
-  } = {
-    pots: mockedPots,
-  };
-  const mockedPotsDTOJson: string = JSON.stringify(mockedPotsDTO);
-
   beforeEach(async (): Promise<void> => {
     const mockRepository: {
       find: jest.Mock;
@@ -109,12 +99,6 @@ describe('PotsService', () => {
       update: jest.fn().mockResolvedValue({}),
       remove: jest.fn().mockResolvedValue({}),
     };
-
-    jest
-      .spyOn(path, 'join')
-      .mockReturnValue('/mocked/path/to/transactions.data.json');
-    jest.spyOn(fs, 'readFileSync').mockReturnValue(mockedPotsDTOJson);
-
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         PotsService,
@@ -129,7 +113,7 @@ describe('PotsService', () => {
     repository = module.get<Repository<Pots>>(getRepositoryToken(Pots));
   });
 
-  it('should be defined', (): void => {
+  it('is defined', (): void => {
     expect(service).toBeDefined();
   });
 
@@ -141,15 +125,28 @@ describe('PotsService', () => {
     expect(result).not.toEqual(mockedPots);
   });
 
-  it('returns pots from file if repository fails', async (): Promise<void> => {
-    jest
-      .spyOn(repository, 'find')
-      .mockRejectedValue(new Error('Database error'));
+  it('throws if pots not found', async (): Promise<void> => {
+    jest.spyOn(repository, 'find').mockResolvedValue([]);
 
-    const result: APIPotDTO[] = await service.findAll();
+    await expect((): Promise<APIPotDTO[]> => service.findAll()).rejects.toThrow(
+      NotFoundException,
+    );
+    await expect((): Promise<APIPotDTO[]> => service.findAll()).rejects.toThrow(
+      'No pots found.',
+    );
+  });
 
-    expect(result).toEqual(mockedPots);
-    expect(result).not.toEqual(mockedPotsEntityMapped);
+  it('throws when database connection fails', async (): Promise<void> => {
+    jest.spyOn(repository, 'find').mockImplementation((): Promise<Pots[]> => {
+      throw new ServiceUnavailableException('Connection failed');
+    });
+
+    await expect((): Promise<APIPotDTO[]> => service.findAll()).rejects.toThrow(
+      ServiceUnavailableException,
+    );
+    await expect((): Promise<APIPotDTO[]> => service.findAll()).rejects.toThrow(
+      'Connection failed',
+    );
   });
 
   it('saves new pot to repository', async (): Promise<void> => {
@@ -160,14 +157,17 @@ describe('PotsService', () => {
     expect(repository.save).toHaveBeenCalledWith(mockedPotsEntity[0]);
   });
 
-  it('returns pots from file if repository fails', async (): Promise<void> => {
+  it('throws when database connection to add new pot fails', async (): Promise<void> => {
     jest
       .spyOn(repository, 'save')
-      .mockRejectedValue(new Error('Database error'));
+      .mockRejectedValue(new ServiceUnavailableException('Connection failed'));
 
-    await expect(() =>
-      service.addNewPot(mockedPotsEntityMapped[0]),
-    ).rejects.toThrow('Could not add pot.');
+    await expect(
+      (): Promise<void> => service.addNewPot(mockedPotsEntityMapped[0]),
+    ).rejects.toThrow(ServiceUnavailableException);
+    await expect(
+      (): Promise<void> => service.addNewPot(mockedPotsEntityMapped[0]),
+    ).rejects.toThrow('Connection failed');
   });
 
   it('updates a pot in repository', async (): Promise<void> => {
@@ -183,24 +183,30 @@ describe('PotsService', () => {
     );
   });
 
-  it('throws an error if editing pot fails', async (): Promise<void> => {
-    jest
-      .spyOn(repository, 'update')
-      .mockRejectedValue(new Error('Database error'));
+  it('throws if pot to update not found', async (): Promise<void> => {
+    jest.spyOn(repository, 'findOne').mockResolvedValue(undefined);
 
-    await expect(() =>
-      service.editPot(mockedEditedPotEntityMapped),
-    ).rejects.toThrow('Could not edit pot.');
+    await expect(
+      (): Promise<void> => service.editPot(mockedEditedPotEntityMapped),
+    ).rejects.toThrow(NotFoundException);
+    await expect(
+      (): Promise<void> => service.editPot(mockedEditedPotEntityMapped),
+    ).rejects.toThrow(
+      `No pot found with name ${mockedEditedPotEntityMapped.oldName}.`,
+    );
   });
 
-  it('throws an error if finding pot fails', async (): Promise<void> => {
-    jest
-      .spyOn(repository, 'findOne')
-      .mockRejectedValue(new Error('Database error'));
+  it('throws if database connection to update pot fails', async (): Promise<void> => {
+    jest.spyOn(repository, 'findOne').mockImplementation((): Promise<Pots> => {
+      throw new ServiceUnavailableException('Connection failed');
+    });
 
-    await expect(() =>
-      service.editPot(mockedEditedPotEntityMapped),
-    ).rejects.toThrow('Could not edit pot.');
+    await expect(
+      (): Promise<void> => service.editPot(mockedEditedPotEntityMapped),
+    ).rejects.toThrow(ServiceUnavailableException);
+    await expect(
+      (): Promise<void> => service.editPot(mockedEditedPotEntityMapped),
+    ).rejects.toThrow('Connection failed');
   });
 
   it('deletes a pot in repository', async (): Promise<void> => {
@@ -213,24 +219,28 @@ describe('PotsService', () => {
     expect(repository.remove).toHaveBeenCalledWith(mockedPotsEntity[0]);
   });
 
-  it('throws an error if deleting pot fails', async (): Promise<void> => {
-    jest
-      .spyOn(repository, 'remove')
-      .mockRejectedValue(new Error('Database error'));
+  it('throws if pot to delete not found', async (): Promise<void> => {
+    jest.spyOn(repository, 'findOne').mockResolvedValue(undefined);
 
-    await expect(() => service.deletePot(mockedPots[0].name)).rejects.toThrow(
-      'Could not delete pot.',
-    );
+    await expect(
+      (): Promise<void> => service.deletePot(mockedPots[0].name),
+    ).rejects.toThrow(NotFoundException);
+    await expect(
+      (): Promise<void> => service.deletePot(mockedPots[0].name),
+    ).rejects.toThrow(`No pot found with name ${mockedPots[0].name}.`);
   });
 
-  it('throws an error if finding pot to delete fails', async (): Promise<void> => {
-    jest
-      .spyOn(repository, 'findOne')
-      .mockRejectedValue(new Error('Database error'));
+  it('throws an error if database connection for deleting pot fails', async (): Promise<void> => {
+    jest.spyOn(repository, 'remove').mockImplementation((): Promise<Pots> => {
+      throw new ServiceUnavailableException('Connection failed');
+    });
 
-    await expect(() => service.deletePot(mockedPots[0].name)).rejects.toThrow(
-      'Could not delete pot.',
-    );
+    await expect(
+      (): Promise<void> => service.deletePot(mockedPots[0].name),
+    ).rejects.toThrow(ServiceUnavailableException);
+    await expect(
+      (): Promise<void> => service.deletePot(mockedPots[0].name),
+    ).rejects.toThrow('Connection failed');
   });
 
   it('adds money to a pot in repository', async (): Promise<void> => {
@@ -243,24 +253,32 @@ describe('PotsService', () => {
     expect(repository.update).toHaveBeenLastCalledWith(1, { total: 3000 });
   });
 
-  it('throws an error if adding money to pot fails', async (): Promise<void> => {
-    jest
-      .spyOn(repository, 'update')
-      .mockRejectedValue(new Error('Database error'));
+  it('throws if pot to add to not found', async (): Promise<void> => {
+    jest.spyOn(repository, 'findOne').mockResolvedValue(undefined);
 
-    await expect(() =>
-      service.addMoneyToPot(mockedPotAdditionEntityMapped),
-    ).rejects.toThrow('Could not add money to pot.');
+    await expect(
+      (): Promise<void> => service.addMoneyToPot(mockedPotAdditionEntityMapped),
+    ).rejects.toThrow(NotFoundException);
+    await expect(
+      (): Promise<void> => service.addMoneyToPot(mockedPotAdditionEntityMapped),
+    ).rejects.toThrow(
+      `No pot found with name ${mockedPotAdditionEntityMapped.potName}.`,
+    );
   });
 
-  it('throws an error if finding pot to delete fails', async (): Promise<void> => {
+  it('throws an error if database connection for adding money to pot fails', async (): Promise<void> => {
     jest
-      .spyOn(repository, 'findOne')
-      .mockRejectedValue(new Error('Database error'));
+      .spyOn(repository, 'update')
+      .mockImplementation((): Promise<UpdateResult> => {
+        throw new ServiceUnavailableException('Connection failed');
+      });
 
-    await expect(() =>
-      service.addMoneyToPot(mockedPotAdditionEntityMapped),
-    ).rejects.toThrow('Could not add money to pot.');
+    await expect(
+      (): Promise<void> => service.addMoneyToPot(mockedPotAdditionEntityMapped),
+    ).rejects.toThrow(ServiceUnavailableException);
+    await expect(
+      (): Promise<void> => service.addMoneyToPot(mockedPotAdditionEntityMapped),
+    ).rejects.toThrow('Connection failed');
   });
 
   it('withdraws money from a pot in repository', async (): Promise<void> => {
@@ -285,23 +303,35 @@ describe('PotsService', () => {
     expect(repository.update).toHaveBeenLastCalledWith(1, { total: 0 });
   });
 
-  it('throws an error if withdrawing money from pot fails', async (): Promise<void> => {
+  it('throws an error if database connection for adding money to pot fails', async (): Promise<void> => {
     jest
       .spyOn(repository, 'update')
-      .mockRejectedValue(new Error('Database error'));
+      .mockImplementation((): Promise<UpdateResult> => {
+        throw new ServiceUnavailableException('Connection failed');
+      });
 
-    await expect(() =>
-      service.withdrawMoneyFromPot(mockedPotSubtractionEntityMapped),
-    ).rejects.toThrow('Could not withdraw money from pot.');
+    await expect(
+      (): Promise<void> =>
+        service.withdrawMoneyFromPot(mockedPotSubtractionEntityMapped),
+    ).rejects.toThrow(ServiceUnavailableException);
+    await expect(
+      (): Promise<void> =>
+        service.withdrawMoneyFromPot(mockedPotSubtractionEntityMapped),
+    ).rejects.toThrow('Connection failed');
   });
 
-  it('throws an error if finding pot to withdraw from fails', async (): Promise<void> => {
-    jest
-      .spyOn(repository, 'findOne')
-      .mockRejectedValue(new Error('Database error'));
+  it('throws if pot to withdraw from not found', async (): Promise<void> => {
+    jest.spyOn(repository, 'findOne').mockResolvedValue(undefined);
 
-    await expect(() =>
-      service.withdrawMoneyFromPot(mockedPotSubtractionEntityMapped),
-    ).rejects.toThrow('Could not withdraw money from pot.');
+    await expect(
+      (): Promise<void> =>
+        service.withdrawMoneyFromPot(mockedPotSubtractionEntityMapped),
+    ).rejects.toThrow(NotFoundException);
+    await expect(
+      (): Promise<void> =>
+        service.withdrawMoneyFromPot(mockedPotSubtractionEntityMapped),
+    ).rejects.toThrow(
+      `No pot found with name ${mockedPotSubtractionEntityMapped.potName}.`,
+    );
   });
 });

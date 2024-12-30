@@ -5,6 +5,7 @@ import { APIEditedPotDTO } from '../../model/apis/APIEditedPotDTO';
 import {
   InternalServerErrorException,
   NotFoundException,
+  ServiceUnavailableException,
 } from '@nestjs/common';
 import { APIPotNameDTO } from '../../model/apis/APIPotNameDTO';
 import { APIPotAdditionDTO } from '../../model/apis/APIPotAdditionDTO';
@@ -126,6 +127,19 @@ describe('PotsController', (): void => {
     ).rejects.toThrow('Pots not found.');
   });
 
+  it('throws if database connection fails', async (): Promise<void> => {
+    (potsService.findAll as jest.Mock).mockImplementation((): void => {
+      throw new ServiceUnavailableException('Connection failed');
+    });
+
+    await expect(
+      (): Promise<APIPotDTO[]> => controller.getPots(),
+    ).rejects.toThrow(ServiceUnavailableException);
+    await expect(
+      (): Promise<APIPotDTO[]> => controller.getPots(),
+    ).rejects.toThrow('Database connection error: Connection failed');
+  });
+
   it('adds new pot', async (): Promise<void> => {
     await controller.addNewPot(mockedPots[0]);
 
@@ -143,6 +157,19 @@ describe('PotsController', (): void => {
     await expect(
       (): Promise<void> => controller.addNewPot(mockedPots[0]),
     ).rejects.toThrow('Error adding new pot: Service failure');
+  });
+
+  it('throws if database connection to edit pot fails', async (): Promise<void> => {
+    (potsService.addNewPot as jest.Mock).mockImplementation((): void => {
+      throw new ServiceUnavailableException('Connection failed');
+    });
+
+    await expect(
+      (): Promise<void> => controller.addNewPot(mockedPots[0]),
+    ).rejects.toThrow(ServiceUnavailableException);
+    await expect(
+      (): Promise<void> => controller.addNewPot(mockedPots[0]),
+    ).rejects.toThrow('Database connection error: Connection failed');
   });
 
   it('edits an existing pot', async (): Promise<void> => {
@@ -174,6 +201,19 @@ describe('PotsController', (): void => {
     await expect(
       (): Promise<void> => controller.editPot(mockedEditedPot),
     ).rejects.toThrow('Pot not found.');
+  });
+
+  it('throws if database connection to edit pot fails', async (): Promise<void> => {
+    (potsService.editPot as jest.Mock).mockImplementation((): void => {
+      throw new ServiceUnavailableException('Connection failed');
+    });
+
+    await expect(
+      (): Promise<void> => controller.editPot(mockedEditedPot),
+    ).rejects.toThrow(ServiceUnavailableException);
+    await expect(
+      (): Promise<void> => controller.editPot(mockedEditedPot),
+    ).rejects.toThrow('Database connection error: Connection failed');
   });
 
   it('deletes an existing pot', async (): Promise<void> => {
@@ -208,6 +248,19 @@ describe('PotsController', (): void => {
     ).rejects.toThrow('Pot not found.');
   });
 
+  it('throws if database connection to delete pot fails', async (): Promise<void> => {
+    (potsService.deletePot as jest.Mock).mockImplementation((): void => {
+      throw new ServiceUnavailableException('Connection failed');
+    });
+
+    await expect(
+      (): Promise<void> => controller.deletePot(mockedPotName),
+    ).rejects.toThrow(ServiceUnavailableException);
+    await expect(
+      (): Promise<void> => controller.deletePot(mockedPotName),
+    ).rejects.toThrow('Database connection error: Connection failed');
+  });
+
   it('adds money to an existing pot', async (): Promise<void> => {
     await controller.addMoneyToPot(mockedPotAddition);
 
@@ -238,6 +291,19 @@ describe('PotsController', (): void => {
     await expect(
       (): Promise<void> => controller.addMoneyToPot(mockedPotAddition),
     ).rejects.toThrow('Pot not found.');
+  });
+
+  it('throws if database connection to add to pot fails', async (): Promise<void> => {
+    (potsService.addMoneyToPot as jest.Mock).mockImplementation((): void => {
+      throw new ServiceUnavailableException('Connection failed');
+    });
+
+    await expect(
+      (): Promise<void> => controller.addMoneyToPot(mockedPotAddition),
+    ).rejects.toThrow(ServiceUnavailableException);
+    await expect(
+      (): Promise<void> => controller.addMoneyToPot(mockedPotAddition),
+    ).rejects.toThrow('Database connection error: Connection failed');
   });
 
   it('withdraws money from an existing pot', async (): Promise<void> => {
@@ -282,5 +348,22 @@ describe('PotsController', (): void => {
       (): Promise<void> =>
         controller.withdrawMoneyFromPot(mockedPotSubtraction),
     ).rejects.toThrow('Pot not found.');
+  });
+
+  it('throws if database connection to withdraw from pot fails', async (): Promise<void> => {
+    (potsService.withdrawMoneyFromPot as jest.Mock).mockImplementation(
+      (): void => {
+        throw new ServiceUnavailableException('Connection failed');
+      },
+    );
+
+    await expect(
+      (): Promise<void> =>
+        controller.withdrawMoneyFromPot(mockedPotSubtraction),
+    ).rejects.toThrow(ServiceUnavailableException);
+    await expect(
+      (): Promise<void> =>
+        controller.withdrawMoneyFromPot(mockedPotSubtraction),
+    ).rejects.toThrow('Database connection error: Connection failed');
   });
 });
