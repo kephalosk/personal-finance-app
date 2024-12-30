@@ -36,6 +36,8 @@ paths:
         '200':
           description: "Budget successfully updated"
         '404':
-          description: "Budget not found"
+          description: "Budget not found. The specified budget category does not exist."
         '500':
-          description: "Error occurred while updating the budget"
+          description: "Server error occurred while updating the budget. This could be due to a failure in database operations."
+        '503':
+          description: "Failed to connect to the database. Please check the database connection."

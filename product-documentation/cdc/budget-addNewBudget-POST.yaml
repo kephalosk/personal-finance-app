@@ -2,11 +2,13 @@ openapi: 3.0.0
 info:
   title: AddNewBudget API
   version: 1.0.0
+  description: API for adding a new budget.
+
 paths:
   /budget/addNewBudget:
     post:
       summary: Add a new budget
-      description: Creates a new budget with the given category, maximum amount, and theme color.
+      description: Creates a new budget with the specified category, maximum amount, and theme color.
       requestBody:
         required: true
         content:
@@ -29,8 +31,10 @@ paths:
                 - theme
       responses:
         '201':
-          description: Budget successfully created
+          description: Budget successfully created.
         '400':
-          description: Fehlerhafte Anfrage, wenn die Eingabedaten unvollständig oder ungültig sind.
+          description: Bad request, if the input data is incomplete or invalid.
         '500':
-          description: Interner Serverfehler, wenn ein Fehler beim Erstellen des Budgets auftritt.
+          description: Internal server error when creating the budget.
+        '503':
+          description: Database connection error.

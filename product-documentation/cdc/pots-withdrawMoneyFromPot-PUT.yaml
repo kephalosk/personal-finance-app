@@ -1,4 +1,4 @@
-openapi: 3.0.1
+openapi: 3.0.0
 info:
   title: Pots API
   description: API for managing pots and withdrawing money from them
@@ -7,11 +7,11 @@ info:
 paths:
   /pots/withdrawMoneyFromPot:
     put:
-      summary: Withdraw money from an existing pot
-      description: Withdraws a specified amount of money from an existing pot.
+      summary: "Withdraw money from an existing pot"
+      description: "Withdraws a specified amount of money from an existing pot."
       operationId: withdrawMoneyFromPot
       requestBody:
-        description: Details of the pot and the amount to be withdrawn
+        description: "Details of the pot and the amount to be withdrawn"
         required: true
         content:
           application/json:
@@ -20,21 +20,40 @@ paths:
               properties:
                 potName:
                   type: string
-                  description: The name of the pot
+                  description: "The name of the pot"
                   example: "Holiday"
                 amountToWithdraw:
                   type: integer
-                  description: The amount of money to withdraw from the pot
+                  description: "The amount of money to withdraw from the pot"
                   example: 500
               required:
                 - potName
                 - amountToWithdraw
       responses:
         '200':
-          description: Money successfully withdrawned from Pot.
+          description: "Money successfully withdrawn from Pot."
         '404':
-          description: Pot not found.
+          description: "Pot not found."
         '500':
-          description: Server error occurred while withdrawing money from pot.
+          description: "Server error occurred while withdrawing money from pot."
+        '503':
+          description: "Failed to connect to the database."
       tags:
         - Pots
+
+components:
+  schemas:
+    APIPotSubtractionDTO:
+      type: object
+      required:
+        - potName
+        - amountToWithdraw
+      properties:
+        potName:
+          type: string
+          description: "The name of the pot from which money will be withdrawn."
+          example: "Holiday"
+        amountToWithdraw:
+          type: integer
+          description: "The amount of money to be withdrawn from the pot."
+          example: 500

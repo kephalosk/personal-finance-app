@@ -2,22 +2,26 @@ openapi: 3.0.0
 info:
   title: GetCurrentBalance API
   version: 1.0.0
-  description: API zum Abrufen des aktuellen Kontostands.
+  description: API for retrieving the current balance, including income and expenses.
 
 paths:
   /balance:
     get:
       summary: Get current balance
-      description: Ruft den aktuellen Kontostand ab, einschließlich Einkommen und Ausgaben.
+      description: Retrieves the current balance, including income and expenses.
       responses:
         '200':
-          description: Erfolgreiches Abrufen des aktuellen Kontostands
+          description: Successfully retrieved the current balance
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/APIBalanceDTO'
+        '404':
+          description: Balances not found.
         '500':
-          description: Interner Serverfehler, wenn ein Fehler beim Abrufen des Kontostands auftritt.
+          description: Internal server error when retrieving the balance.
+        '503':
+          description: Database connection error.
 
 components:
   schemas:
@@ -26,15 +30,15 @@ components:
       properties:
         current:
           type: integer
-          description: Der aktuelle Kontostand
+          description: The current balance
           example: 10000
         income:
           type: integer
-          description: Das aktuelle Einkommen
+          description: The current income
           example: 4000
         expenses:
           type: integer
-          description: Die aktuellen Ausgaben
+          description: The current expenses
           example: 2000
       required:
         - current
