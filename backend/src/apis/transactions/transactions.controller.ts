@@ -1,7 +1,14 @@
-import { Controller, Get, HttpStatus } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  HttpStatus,
+  InternalServerErrorException,
+  NotFoundException,
+} from '@nestjs/common';
 import { TransactionsService } from './transactions.service';
 import { APITransactionDTO } from '../../model/apis/APITransactionDTO';
 import { ApiOperation, ApiResponse } from '@nestjs/swagger';
+import getErrorMessage from '../../utils/getErrorMessage';
 
 @Controller('transactions')
 export class TransactionsController {
@@ -14,11 +21,25 @@ export class TransactionsController {
     description: 'Successfully retrieved all transactions',
     type: [APITransactionDTO],
   })
+  @ApiResponse({
+    status: HttpStatus.NOT_FOUND,
+    description: 'Transactions not found.',
+  })
+  @ApiResponse({
+    status: HttpStatus.INTERNAL_SERVER_ERROR,
+    description:
+      'Server error occurred while retrieving transactions from database.',
+  })
   async getBalance(): Promise<APITransactionDTO[]> {
     try {
       return await this.transactionsService.findAll();
     } catch (error) {
-      throw new Error(`Fehler beim Abrufen der Transaktionen: ${error}`);
+      if (error instanceof NotFoundException) {
+        throw new NotFoundException('Transactions not found.');
+      }
+      throw new InternalServerErrorException(
+        `Error while retrieving transactions from database: ${getErrorMessage(error)}`,
+      );
     }
   }
 }

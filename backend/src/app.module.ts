@@ -12,10 +12,15 @@ import { Budgets } from './model/entities/Budgets';
 import { Balance } from './model/entities/Balance';
 import { Transactions } from './model/entities/Transactions';
 import { APP_PIPE } from '@nestjs/core';
+import { configValidationSchema } from './config.schema';
 
 @Module({
   imports: [
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot({
+      isGlobal: true,
+      envFilePath: process.env.NODE_ENV === 'production' ? '.env.prod' : '.env',
+      validationSchema: configValidationSchema,
+    }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],

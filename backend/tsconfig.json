@@ -14,6 +14,8 @@
     "incremental": true,
     "skipLibCheck": true,
     "strictNullChecks": false,
+    "strict": true,
+    "esModuleInterop": true,
     "noImplicitAny": false,
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,

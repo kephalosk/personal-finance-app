@@ -17,6 +17,7 @@ import { APIEditedPotDTO } from '../../model/apis/APIEditedPotDTO';
 import { APIPotNameDTO } from '../../model/apis/APIPotNameDTO';
 import { APIPotAdditionDTO } from '../../model/apis/APIPotAdditionDTO';
 import { APIPotSubtractionDTO } from '../../model/apis/APIPotSubtractionDTO';
+import getErrorMessage from '../../utils/getErrorMessage';
 
 @Controller('pots')
 export class PotsController {
@@ -45,7 +46,7 @@ export class PotsController {
         throw new NotFoundException('Pots not found.');
       }
       throw new InternalServerErrorException(
-        `Error getting pots: ${error.message}`,
+        `Error getting pots: ${getErrorMessage(error)}`,
       );
     }
   }
@@ -65,7 +66,7 @@ export class PotsController {
       await this.potsService.addNewPot(newPot);
     } catch (error) {
       throw new InternalServerErrorException(
-        `Error adding new pot: ${error.message}`,
+        `Error adding new pot: ${getErrorMessage(error)}`,
       );
     }
   }
@@ -92,7 +93,7 @@ export class PotsController {
         throw new NotFoundException('Pot not found.');
       }
       throw new InternalServerErrorException(
-        `Error while editing pot: ${error.message}`,
+        `Error while editing pot: ${getErrorMessage(error)}`,
       );
     }
   }
@@ -120,7 +121,7 @@ export class PotsController {
         throw new NotFoundException('Pot not found.');
       }
       throw new InternalServerErrorException(
-        `Error while deleting pot: ${error.message}`,
+        `Error while deleting pot: ${getErrorMessage(error)}`,
       );
     }
   }
@@ -147,7 +148,7 @@ export class PotsController {
         throw new NotFoundException('Pot not found.');
       }
       throw new InternalServerErrorException(
-        `Error while adding money to pot: ${error.message}`,
+        `Error while adding money to pot: ${getErrorMessage(error)}`,
       );
     }
   }
@@ -173,7 +174,7 @@ export class PotsController {
         throw new NotFoundException('Pot not found.');
       }
       throw new InternalServerErrorException(
-        `Error while withdrawing money from pot: ${error.message}`,
+        `Error while withdrawing money from pot: ${getErrorMessage(error)}`,
       );
     }
   }
