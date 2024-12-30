@@ -5,6 +5,7 @@ import { AppModule } from '../src/app.module';
 import { APICategoryDTO } from '../src/model/apis/APICategoryDTO';
 import { APIPotAdditionDTO } from '../src/model/apis/APIPotAdditionDTO';
 import { APIPotNameDTO } from '../src/model/apis/APIPotNameDTO';
+import { APIPotSubtractionDTO } from '../src/model/apis/APIPotSubtractionDTO';
 
 describe('AppController (e2e)', () => {
   let app: INestApplication;
@@ -513,6 +514,19 @@ describe('AppController (e2e)', () => {
     return request(app.getHttpServer())
       .put('/pots/addMoneyToPot')
       .send(potAddition)
+      .expect(200)
+      .expect({});
+  });
+
+  it('/pots/withdrawMoneyFromPot (PUT)', async () => {
+    const potSubtraction: APIPotSubtractionDTO = {
+      potName: 'NewMove',
+      amountToSubtract: 10000,
+    };
+
+    return request(app.getHttpServer())
+      .put('/pots/withdrawMoneyFromPot')
+      .send(potSubtraction)
       .expect(200)
       .expect({});
   });
