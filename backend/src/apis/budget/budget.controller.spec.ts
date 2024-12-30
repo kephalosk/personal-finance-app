@@ -5,9 +5,9 @@ import { APICategoryDTO } from '../../model/apis/APICategoryDTO';
 import {
   InternalServerErrorException,
   NotFoundException,
+  ServiceUnavailableException,
 } from '@nestjs/common';
 import { APIBudgetDTO } from '../../model/apis/APIBudgetDTO';
-import { APIBalanceDTO } from '../../model/apis/APIBalanceDTO';
 
 jest.mock('./budget.service', (): { BudgetService: jest.Mock } => ({
   BudgetService: jest.fn().mockImplementation(
@@ -99,6 +99,19 @@ describe('BudgetController', (): void => {
     ).rejects.toThrow('Budgets not found.');
   });
 
+  it('throws if database connection fails', async (): Promise<void> => {
+    (budgetService.findAll as jest.Mock).mockImplementation((): void => {
+      throw new ServiceUnavailableException('Connection failed');
+    });
+
+    await expect(
+      (): Promise<APIBudgetDTO[]> => controller.getBudget(),
+    ).rejects.toThrow(ServiceUnavailableException);
+    await expect(
+      (): Promise<APIBudgetDTO[]> => controller.getBudget(),
+    ).rejects.toThrow('Database connection error: Connection failed');
+  });
+
   it('adds new budget', async (): Promise<void> => {
     const result: void = await controller.addNewBudget(mockedBudgets[0]);
 
@@ -119,6 +132,19 @@ describe('BudgetController', (): void => {
     ).rejects.toThrow('Error while adding budget to database: Service failure');
   });
 
+  it('throws if database connection fails for adding new budget', async (): Promise<void> => {
+    (budgetService.addNewBudget as jest.Mock).mockImplementation((): void => {
+      throw new ServiceUnavailableException('Connection failed');
+    });
+
+    await expect(
+      (): Promise<void> => controller.addNewBudget(mockedBudgets[0]),
+    ).rejects.toThrow(ServiceUnavailableException);
+    await expect(
+      (): Promise<void> => controller.addNewBudget(mockedBudgets[0]),
+    ).rejects.toThrow('Database connection error: Connection failed');
+  });
+
   it('updates a budget', async (): Promise<void> => {
     const result: void = await controller.editBudget(mockedBudgets[0]);
 
@@ -137,7 +163,7 @@ describe('BudgetController', (): void => {
     await expect(
       (): Promise<void> => controller.editBudget(mockedBudgets[0]),
     ).rejects.toThrow(
-      'Fehler beim Bearbeiten des Budgets: Error: Service failure',
+      'Error while updating budget in database: Service failure',
     );
   });
 
@@ -152,6 +178,19 @@ describe('BudgetController', (): void => {
     await expect(
       (): Promise<void> => controller.editBudget(mockedBudgets[0]),
     ).rejects.toThrow('Budgets not found.');
+  });
+
+  it('throws if database connection fails for updating a budget', async (): Promise<void> => {
+    (budgetService.updateBudget as jest.Mock).mockImplementation((): void => {
+      throw new ServiceUnavailableException('Connection failed');
+    });
+
+    await expect(
+      (): Promise<void> => controller.editBudget(mockedBudgets[0]),
+    ).rejects.toThrow(ServiceUnavailableException);
+    await expect(
+      (): Promise<void> => controller.editBudget(mockedBudgets[0]),
+    ).rejects.toThrow('Database connection error: Connection failed');
   });
 
   it('deletes a budget', async (): Promise<void> => {
@@ -187,5 +226,18 @@ describe('BudgetController', (): void => {
     await expect(
       (): Promise<void> => controller.deleteBudget(mockedCategory),
     ).rejects.toThrow('Budget not found.');
+  });
+
+  it('throws if database connection fails for deleting a budget', async (): Promise<void> => {
+    (budgetService.deleteBudget as jest.Mock).mockImplementation((): void => {
+      throw new ServiceUnavailableException('Connection failed');
+    });
+
+    await expect(
+      (): Promise<void> => controller.deleteBudget(mockedCategory),
+    ).rejects.toThrow(ServiceUnavailableException);
+    await expect(
+      (): Promise<void> => controller.deleteBudget(mockedCategory),
+    ).rejects.toThrow('Database connection error: Connection failed');
   });
 });

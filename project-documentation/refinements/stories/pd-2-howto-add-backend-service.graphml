@@ -27,7 +27,7 @@
     <node id="n1">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.cloud">
-          <y:Geometry height="50.0" width="178.65432570776773" x="414.655008525632" y="-423.3333333333333"/>
+          <y:Geometry height="50.0" width="178.65432570776773" x="414.655008525632" y="-443.0626984126984"/>
           <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="178.65432570776773" x="0.0" xml:space="preserve" y="14.93359375">Acceptance Criteria<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
@@ -37,7 +37,7 @@
     <node id="n2">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.cloud">
-          <y:Geometry height="50.0" width="178.65432570776773" x="817.7503999311687" y="-520.2083333333333"/>
+          <y:Geometry height="50.0" width="178.65432570776773" x="817.7503999311687" y="-538.1404761904762"/>
           <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="178.65432570776773" x="0.0" xml:space="preserve" y="14.93359375">Task-Breakdown<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
@@ -47,7 +47,7 @@
     <node id="n3">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.cloud">
-          <y:Geometry height="50.0" width="178.65432570776773" x="1068.7503999311687" y="-520.2083333333333"/>
+          <y:Geometry height="50.0" width="178.65432570776773" x="1068.7503999311687" y="-538.1404761904762"/>
           <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="178.65432570776773" x="0.0" xml:space="preserve" y="14.93359375">Action Steps<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
@@ -107,18 +107,20 @@
     <node id="n9">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
-          <y:Geometry height="57.6662908355496" width="492.1907828110734" x="257.8867799739792" y="-343.3331454177748"/>
+          <y:Geometry height="97.12481208444126" width="492.1907828110734" x="257.8867799739792" y="-363.06240604222063"/>
           <y:Fill color="#00FFFF" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
-          <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.3984375" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="492.1907828110734" x="0.0" xml:space="preserve" y="4.6339266677748014">WENN ein neuer Backend Service erstellt werden soll
-DANN steht dem Entwickler zu diesem Zweck eine Schritt-Für-Schritt-Anleitung zur Verfügung<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="90.796875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="492.1907828110734" x="0.0" xml:space="preserve" y="3.16396854222063">WENN ein neuer Backend Service erstellt werden soll
+DANN steht dem Entwickler zu diesem Zweck eine Schritt-Für-Schritt-Anleitung zur Verfügung
+
+PLUS: Fehlerhandling für ServiceUnavailable ist bereitgestellt und Fehlerführung ist konsistent zwischen services, controllern und cdcs<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
         </y:GenericNode>
       </data>
     </node>
     <node id="n10">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
-          <y:Geometry height="25.999999999999545" width="220.0" x="797.0775627850526" y="-216.20833333333312"/>
+          <y:Geometry height="25.999999999999545" width="220.0" x="797.0775627850526" y="-221.14047619047597"/>
           <y:Fill color="#00FFFF" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="220.0" x="0.0" xml:space="preserve" y="2.9335937499997726">CDCs updaten<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
@@ -128,7 +130,7 @@ DANN steht dem Entwickler zu diesem Zweck eine Schritt-Für-Schritt-Anleitung zu
     <node id="n11">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
-          <y:Geometry height="25.999999999999545" width="220.0" x="797.0775627850526" y="-440.2083333333331"/>
+          <y:Geometry height="25.999999999999545" width="220.0" x="797.0775627850526" y="-458.14047619047597"/>
           <y:Fill color="#00FF00" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="220.0" x="0.0" xml:space="preserve" y="2.9335937499997726">HowTo Anleitung erstellen<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
@@ -138,7 +140,7 @@ DANN steht dem Entwickler zu diesem Zweck eine Schritt-Für-Schritt-Anleitung zu
     <node id="n12">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
-          <y:Geometry height="25.999999999999545" width="220.0" x="797.0775627850526" y="-272.2083333333331"/>
+          <y:Geometry height="25.999999999999545" width="220.0" x="797.0775627850526" y="-277.14047619047597"/>
           <y:Fill color="#00FFFF" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="220.0" x="0.0" xml:space="preserve" y="2.9335937499997726">CDCs auf Error-Responses prüfen<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
@@ -148,8 +150,8 @@ DANN steht dem Entwickler zu diesem Zweck eine Schritt-Für-Schritt-Anleitung zu
     <node id="n13">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
-          <y:Geometry height="25.999999999999545" width="220.0" x="797.0775627850526" y="-334.7083333333331"/>
-          <y:Fill color="#00FFFF" color2="#B7C9E3" transparent="false"/>
+          <y:Geometry height="25.999999999999545" width="220.0" x="797.0775627850526" y="-339.64047619047597"/>
+          <y:Fill color="#00FF00" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="220.0" x="0.0" xml:space="preserve" y="2.9335937499997726">Error-Handling überprüfen<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
         </y:GenericNode>
@@ -158,7 +160,7 @@ DANN steht dem Entwickler zu diesem Zweck eine Schritt-Für-Schritt-Anleitung zu
     <node id="n14">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
-          <y:Geometry height="25.999999999999545" width="220.0" x="1048.0775627850526" y="-216.20833333333312"/>
+          <y:Geometry height="25.999999999999545" width="220.0" x="1048.0775627850526" y="-221.14047619047597"/>
           <y:Fill color="#00FFFF" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="220.0" x="0.0" xml:space="preserve" y="2.9335937499997726">CDCs updaten<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
@@ -168,7 +170,7 @@ DANN steht dem Entwickler zu diesem Zweck eine Schritt-Für-Schritt-Anleitung zu
     <node id="n15">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
-          <y:Geometry height="25.999999999999545" width="220.0" x="1048.0775627850526" y="-440.2083333333331"/>
+          <y:Geometry height="25.999999999999545" width="220.0" x="1048.0775627850526" y="-458.14047619047597"/>
           <y:Fill color="#00FF00" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="220.0" x="0.0" xml:space="preserve" y="2.9335937499997726">HowTo Anleitung erstellen<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
@@ -178,7 +180,7 @@ DANN steht dem Entwickler zu diesem Zweck eine Schritt-Für-Schritt-Anleitung zu
     <node id="n16">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
-          <y:Geometry height="25.999999999999545" width="220.0" x="1048.0775627850526" y="-272.2083333333331"/>
+          <y:Geometry height="25.999999999999545" width="220.0" x="1048.0775627850526" y="-277.14047619047597"/>
           <y:Fill color="#00FFFF" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="220.0" x="0.0" xml:space="preserve" y="2.9335937499997726">CDCs auf Error-Responses prüfen<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
@@ -188,7 +190,7 @@ DANN steht dem Entwickler zu diesem Zweck eine Schritt-Für-Schritt-Anleitung zu
     <node id="n17">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
-          <y:Geometry height="25.999999999999545" width="220.0" x="1048.0775627850526" y="-384.2083333333331"/>
+          <y:Geometry height="25.999999999999545" width="220.0" x="1048.0775627850526" y="-402.14047619047597"/>
           <y:Fill color="#00FF00" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="220.0" x="0.0" xml:space="preserve" y="2.9335937499997726">Controller überprüfen<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
@@ -198,8 +200,8 @@ DANN steht dem Entwickler zu diesem Zweck eine Schritt-Für-Schritt-Anleitung zu
     <node id="n18">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
-          <y:Geometry height="25.999999999999545" width="220.0" x="1048.0775627850526" y="-328.2083333333331"/>
-          <y:Fill color="#00FFFF" color2="#B7C9E3" transparent="false"/>
+          <y:Geometry height="25.999999999999545" width="220.0" x="1048.0775627850526" y="-333.14047619047597"/>
+          <y:Fill color="#00FF00" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="220.0" x="0.0" xml:space="preserve" y="2.9335937499997726">Services überprüfen<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
         </y:GenericNode>
@@ -208,7 +210,7 @@ DANN steht dem Entwickler zu diesem Zweck eine Schritt-Für-Schritt-Anleitung zu
     <node id="n19">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
-          <y:Geometry height="25.999999999999545" width="220.0" x="1299.0775627850526" y="-412.2083333333331"/>
+          <y:Geometry height="25.999999999999545" width="220.0" x="1299.0775627850526" y="-451.64047619047597"/>
           <y:Fill color="#00FF00" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="220.0" x="0.0" xml:space="preserve" y="2.9335937499997726">Swagger Annotation<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
@@ -218,7 +220,7 @@ DANN steht dem Entwickler zu diesem Zweck eine Schritt-Für-Schritt-Anleitung zu
     <node id="n20">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
-          <y:Geometry height="25.999999999999545" width="220.0" x="1299.0775627850526" y="-356.2083333333331"/>
+          <y:Geometry height="25.999999999999545" width="220.0" x="1299.0775627850526" y="-395.64047619047597"/>
           <y:Fill color="#00FF00" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="220.0" x="0.0" xml:space="preserve" y="2.9335937499997726">catch block<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
@@ -228,19 +230,39 @@ DANN steht dem Entwickler zu diesem Zweck eine Schritt-Für-Schritt-Anleitung zu
     <node id="n21">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
-          <y:Geometry height="25.999999999999545" width="220.0" x="1539.0775627850526" y="-356.2083333333331"/>
+          <y:Geometry height="25.999999999999545" width="220.0" x="1539.0775627850526" y="-395.64047619047597"/>
           <y:Fill color="#00FF00" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="220.0" x="0.0" xml:space="preserve" y="2.9335937499997726">errortyp testen<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
         </y:GenericNode>
       </data>
     </node>
+    <node id="n22">
+      <data key="d6">
+        <y:GenericNode configuration="com.yworks.flowchart.process">
+          <y:Geometry height="25.999999999999545" width="220.0" x="1299.0775627850526" y="-339.64047619047597"/>
+          <y:Fill color="#00FF00" color2="#B7C9E3" transparent="false"/>
+          <y:BorderStyle color="#000000" type="line" width="1.0"/>
+          <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="220.0" x="0.0" xml:space="preserve" y="2.9335937499997726">remove try/catch<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+        </y:GenericNode>
+      </data>
+    </node>
+    <node id="n23">
+      <data key="d6">
+        <y:GenericNode configuration="com.yworks.flowchart.process">
+          <y:Geometry height="36.12002526847709" width="220.0" x="1299.0775627850526" y="-283.6401713643973"/>
+          <y:Fill color="#00FF00" color2="#B7C9E3" transparent="false"/>
+          <y:BorderStyle color="#000000" type="line" width="1.0"/>
+          <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="34.265625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="220.0" x="0.0" xml:space="preserve" y="0.9272001342385465">add error test for ServiceUnavailableException<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+        </y:GenericNode>
+      </data>
+    </node>
     <edge id="e0" source="n9" target="n11">
       <data key="d10">
         <y:PolyLineEdge>
-          <y:Path sx="246.0953914055367" sy="-21.6248590633311" tx="-110.0" ty="-0.0">
-            <y:Point x="765.5775627850526" y="-336.1248590633311"/>
-            <y:Point x="765.5775627850526" y="-427.2083333333333"/>
+          <y:Path sx="246.0953914055367" sy="-36.42180453166547" tx="-110.0" ty="-0.0">
+            <y:Point x="765.5775627850526" y="-350.9218045316655"/>
+            <y:Point x="765.5775627850526" y="-445.1404761904762"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="standard"/>
@@ -251,9 +273,9 @@ DANN steht dem Entwickler zu diesem Zweck eine Schritt-Für-Schritt-Anleitung zu
     <edge id="e1" source="n9" target="n12">
       <data key="d10">
         <y:PolyLineEdge>
-          <y:Path sx="246.0953914055367" sy="7.2082863544437" tx="-110.0" ty="-0.0">
-            <y:Point x="781.5775627850526" y="-307.2917136455563"/>
-            <y:Point x="781.5775627850526" y="-259.2083333333333"/>
+          <y:Path sx="246.0953914055367" sy="12.140601510555157" tx="-110.0" ty="-0.0">
+            <y:Point x="781.5775627850526" y="-302.35939848944486"/>
+            <y:Point x="781.5775627850526" y="-264.1404761904762"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="standard"/>
@@ -264,9 +286,9 @@ DANN steht dem Entwickler zu diesem Zweck eine Schritt-Für-Schritt-Anleitung zu
     <edge id="e2" source="n9" target="n10">
       <data key="d10">
         <y:PolyLineEdge>
-          <y:Path sx="246.0953914055367" sy="21.6248590633311" tx="-110.0" ty="-0.0">
-            <y:Point x="765.5775627850526" y="-292.8751409366689"/>
-            <y:Point x="765.5775627850526" y="-203.20833333333334"/>
+          <y:Path sx="246.0953914055367" sy="36.42180453166547" tx="-110.0" ty="-0.0">
+            <y:Point x="765.5775627850526" y="-278.0781954683345"/>
+            <y:Point x="765.5775627850526" y="-208.1404761904762"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="standard"/>
@@ -289,7 +311,7 @@ DANN steht dem Entwickler zu diesem Zweck eine Schritt-Für-Schritt-Anleitung zu
       <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
-          <y:Path sx="246.0953914055367" sy="-7.2082863544437" tx="-110.0" ty="-0.0"/>
+          <y:Path sx="246.0953914055367" sy="-12.140601510555157" tx="-110.0" ty="-0.0"/>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="standard"/>
           <y:BendStyle smoothed="false"/>
@@ -312,8 +334,8 @@ DANN steht dem Entwickler zu diesem Zweck eine Schritt-Für-Schritt-Anleitung zu
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="110.0" sy="-6.499999999999886" tx="-110.0" ty="-0.0">
-            <y:Point x="1032.5775627850526" y="-328.2083333333332"/>
-            <y:Point x="1032.5775627850526" y="-371.2083333333333"/>
+            <y:Point x="1032.5775627850526" y="-333.1404761904761"/>
+            <y:Point x="1032.5775627850526" y="-389.1404761904762"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="standard"/>
@@ -359,8 +381,8 @@ DANN steht dem Entwickler zu diesem Zweck eine Schritt-Für-Schritt-Anleitung zu
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="110.0" sy="-6.499999999999886" tx="-110.0" ty="-0.0">
-            <y:Point x="1283.5775627850526" y="-377.7083333333332"/>
-            <y:Point x="1283.5775627850526" y="-399.2083333333333"/>
+            <y:Point x="1283.5775627850526" y="-395.6404761904761"/>
+            <y:Point x="1283.5775627850526" y="-438.6404761904762"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="standard"/>
@@ -372,10 +394,7 @@ DANN steht dem Entwickler zu diesem Zweck eine Schritt-Für-Schritt-Anleitung zu
       <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
-          <y:Path sx="110.0" sy="6.499999999999886" tx="-110.0" ty="-0.0">
-            <y:Point x="1283.5775627850526" y="-364.7083333333334"/>
-            <y:Point x="1283.5775627850526" y="-343.2083333333333"/>
-          </y:Path>
+          <y:Path sx="110.0" sy="6.499999999999886" tx="-110.0" ty="-0.0"/>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="standard"/>
           <y:BendStyle smoothed="false"/>
@@ -387,6 +406,31 @@ DANN steht dem Entwickler zu diesem Zweck eine Schritt-Für-Schritt-Anleitung zu
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="110.0" sy="-0.0" tx="-110.0" ty="-0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e13" source="n18" target="n22">
+      <data key="d9"/>
+      <data key="d10">
+        <y:PolyLineEdge>
+          <y:Path sx="110.0" sy="-6.499999999999886" tx="-110.0" ty="-0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e14" source="n18" target="n23">
+      <data key="d9"/>
+      <data key="d10">
+        <y:PolyLineEdge>
+          <y:Path sx="110.0" sy="6.499999999999886" tx="-110.0" ty="-0.0">
+            <y:Point x="1283.5775627850526" y="-313.6404761904763"/>
+            <y:Point x="1283.5775627850526" y="-265.58015873015876"/>
+          </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="standard"/>
           <y:BendStyle smoothed="false"/>

@@ -1,15 +1,12 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { BudgetService } from './budget.service';
-import * as path from 'node:path';
-import * as fs from 'node:fs';
 import { Budgets } from '../../model/entities/Budgets';
-import { Repository } from 'typeorm';
+import { DeepPartial, Repository } from 'typeorm';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { APIBudgetDTO } from '../../model/apis/APIBudgetDTO';
+import { NotFoundException, ServiceUnavailableException } from '@nestjs/common';
 
-jest.spyOn(console, 'error').mockImplementation(() => {});
-
-describe('BudgetService', () => {
+describe('BudgetService', (): void => {
   let service: BudgetService;
   let repository: Repository<Budgets>;
 
@@ -41,7 +38,7 @@ describe('BudgetService', () => {
     },
   ];
 
-  const mockedBudgets = [
+  const mockedBudgets: APIBudgetDTO[] = [
     {
       category: 'Entertainment',
       maximum: 50.0,
@@ -54,13 +51,15 @@ describe('BudgetService', () => {
     },
   ];
 
-  const mockedBudgetDTO = {
-    budgets: mockedBudgets,
-  };
-  const mockedBudgetDTOJson = JSON.stringify(mockedBudgetDTO);
-
-  beforeEach(async () => {
-    const mockRepository = {
+  beforeEach(async (): Promise<void> => {
+    const mockRepository: {
+      find: jest.Mock;
+      findOne: jest.Mock;
+      create: jest.Mock;
+      save: jest.Mock;
+      update: jest.Mock;
+      remove: jest.Mock;
+    } = {
       find: jest.fn().mockResolvedValue(mockedBudgetsEntity),
       findOne: jest.fn().mockResolvedValue(mockedBudgetsEntity[0]),
       create: jest.fn().mockReturnValue(mockedBudgetsEntity[0]),
@@ -68,11 +67,6 @@ describe('BudgetService', () => {
       update: jest.fn().mockResolvedValue({}),
       remove: jest.fn().mockResolvedValue(mockedBudgetsEntity[0]),
     };
-
-    jest
-      .spyOn(path, 'join')
-      .mockReturnValue('/mocked/path/to/transactions.data.json');
-    jest.spyOn(fs, 'readFileSync').mockReturnValue(mockedBudgetDTOJson);
 
     const module: TestingModule = await Test.createTestingModule({
       providers: [
@@ -88,30 +82,45 @@ describe('BudgetService', () => {
     repository = module.get<Repository<Budgets>>(getRepositoryToken(Budgets));
   });
 
-  it('should be defined', () => {
+  it('is defined', (): void => {
     expect(service).toBeDefined();
   });
 
-  it('returns budgets from repository', async () => {
-    const result = await service.findAll();
+  it('returns budgets from repository', async (): Promise<void> => {
+    const result: APIBudgetDTO[] = await service.findAll();
 
     expect(repository.find).toHaveBeenCalled();
     expect(result).toEqual(mockedBudgetsEntityMapped);
     expect(result).not.toEqual(mockedBudgets);
   });
 
-  it('returns budgets from file if repository fails', async () => {
-    jest
-      .spyOn(repository, 'find')
-      .mockRejectedValue(new Error('Database error'));
+  it('throws when budgets not found', async (): Promise<void> => {
+    jest.spyOn(repository, 'find').mockResolvedValue([]);
 
-    const result = await service.findAll();
-
-    expect(result).toEqual(mockedBudgets);
-    expect(result).not.toEqual(mockedBudgetsEntityMapped);
+    await expect(
+      (): Promise<APIBudgetDTO[]> => service.findAll(),
+    ).rejects.toThrow(NotFoundException);
+    await expect(
+      (): Promise<APIBudgetDTO[]> => service.findAll(),
+    ).rejects.toThrow('No budgets found.');
   });
 
-  it('adds new budget to repository', async () => {
+  it('throws when database connection fails', async (): Promise<void> => {
+    jest
+      .spyOn(repository, 'find')
+      .mockImplementation((): Promise<Budgets[]> => {
+        throw new ServiceUnavailableException('Connection failed');
+      });
+
+    await expect(
+      (): Promise<APIBudgetDTO[]> => service.findAll(),
+    ).rejects.toThrow(ServiceUnavailableException);
+    await expect(
+      (): Promise<APIBudgetDTO[]> => service.findAll(),
+    ).rejects.toThrow('Connection failed');
+  });
+
+  it('adds new budget to repository', async (): Promise<void> => {
     await service.addNewBudget(mockedBudgetsEntityMapped[0]);
 
     expect(repository.create).toHaveBeenCalledWith(
@@ -123,14 +132,19 @@ describe('BudgetService', () => {
   it('throws error if adding new Budget to repository fails', async () => {
     jest
       .spyOn(repository, 'save')
-      .mockRejectedValue(new Error('Database error'));
+      .mockImplementation((): Promise<DeepPartial<Budgets> & Budgets> => {
+        throw new ServiceUnavailableException('Connection failed');
+      });
 
-    await expect(() =>
-      service.addNewBudget(mockedBudgetsEntityMapped[0]),
-    ).rejects.toThrow('Could not save budget');
+    await expect(
+      (): Promise<void> => service.addNewBudget(mockedBudgetsEntityMapped[0]),
+    ).rejects.toThrow(ServiceUnavailableException);
+    await expect(
+      (): Promise<void> => service.addNewBudget(mockedBudgetsEntityMapped[0]),
+    ).rejects.toThrow('Connection failed');
   });
 
-  it('updates budget in repository', async () => {
+  it('updates budget in repository', async (): Promise<void> => {
     await service.updateBudget(mockedBudgetsEntityMapped[0]);
 
     expect(repository.findOne).toHaveBeenCalledWith({
@@ -143,17 +157,35 @@ describe('BudgetService', () => {
     });
   });
 
+  it('throws if budget to update is not found', async () => {
+    jest.spyOn(repository, 'findOne').mockResolvedValue(undefined);
+
+    await expect(
+      (): Promise<void> => service.updateBudget(mockedBudgetsEntityMapped[0]),
+    ).rejects.toThrow(NotFoundException);
+    await expect(
+      (): Promise<void> => service.updateBudget(mockedBudgetsEntityMapped[0]),
+    ).rejects.toThrow(
+      `No budget found with category ${mockedBudgetsEntityMapped[0].category}.`,
+    );
+  });
+
   it('throws error if updating Budget in repository fails', async () => {
     jest
       .spyOn(repository, 'findOne')
-      .mockRejectedValue(new Error('Database error'));
+      .mockImplementation((): Promise<DeepPartial<Budgets> & Budgets> => {
+        throw new ServiceUnavailableException('Connection failed');
+      });
 
-    await expect(() =>
-      service.updateBudget(mockedBudgetsEntityMapped[0]),
-    ).rejects.toThrow('Database error');
+    await expect(
+      (): Promise<void> => service.updateBudget(mockedBudgetsEntityMapped[0]),
+    ).rejects.toThrow(ServiceUnavailableException);
+    await expect(
+      (): Promise<void> => service.updateBudget(mockedBudgetsEntityMapped[0]),
+    ).rejects.toThrow('Connection failed');
   });
 
-  it('deletes budget in repository', async () => {
+  it('deletes budget in repository', async (): Promise<void> => {
     await service.deleteBudget(mockedBudgetsEntityMapped[0].category);
 
     expect(repository.findOne).toHaveBeenCalledWith({
@@ -163,13 +195,35 @@ describe('BudgetService', () => {
     expect(repository.remove).toHaveBeenCalledWith(mockedBudgetsEntity[0]);
   });
 
-  it('throws error if deleting Budget in repository fails', async () => {
+  it('throws if budget to delete is not found', async () => {
+    jest.spyOn(repository, 'findOne').mockResolvedValue(undefined);
+
+    await expect(
+      (): Promise<void> =>
+        service.deleteBudget(mockedBudgetsEntityMapped[0].category),
+    ).rejects.toThrow(NotFoundException);
+    await expect(
+      (): Promise<void> =>
+        service.deleteBudget(mockedBudgetsEntityMapped[0].category),
+    ).rejects.toThrow(
+      `No budget found with category ${mockedBudgetsEntityMapped[0].category}.`,
+    );
+  });
+
+  it('throws error if deleting Budget in repository fails', async (): Promise<void> => {
     jest
       .spyOn(repository, 'findOne')
-      .mockRejectedValue(new Error('Database error'));
+      .mockImplementation((): Promise<DeepPartial<Budgets> & Budgets> => {
+        throw new ServiceUnavailableException('Connection failed');
+      });
 
-    await expect(() =>
-      service.deleteBudget(mockedBudgetsEntityMapped[0].category),
-    ).rejects.toThrow('Database error');
+    await expect(
+      (): Promise<void> =>
+        service.deleteBudget(mockedBudgetsEntityMapped[0].category),
+    ).rejects.toThrow(ServiceUnavailableException);
+    await expect(
+      (): Promise<void> =>
+        service.deleteBudget(mockedBudgetsEntityMapped[0].category),
+    ).rejects.toThrow('Connection failed');
   });
 });

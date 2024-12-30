@@ -4,16 +4,16 @@ import { getRepositoryToken } from '@nestjs/typeorm';
 import { AppService } from './app.service';
 import { Balance } from './model/entities/Balance';
 
-jest.spyOn(console, 'error').mockImplementation(() => {});
+jest.spyOn(console, 'error').mockImplementation((): void => {});
 
-describe('AppService', () => {
+describe('AppService', (): void => {
   let service: AppService;
   let repository: Repository<Balance>;
 
-  const mockedAnswer = { '?column?': 1 };
+  const mockedAnswer: { '?column?': number } = { '?column?': 1 };
 
-  beforeEach(async () => {
-    const mockRepository = {
+  beforeEach(async (): Promise<void> => {
+    const mockRepository: { query: jest.Mock } = {
       query: jest.fn().mockResolvedValue([mockedAnswer]),
     };
 
@@ -31,17 +31,17 @@ describe('AppService', () => {
     repository = module.get<Repository<Balance>>(getRepositoryToken(Balance));
   });
 
-  it('should be defined', () => {
+  it('should be defined', (): void => {
     expect(service).toBeDefined();
   });
 
-  it('calls repository for Health Check', async () => {
+  it('calls repository for Health Check', async (): Promise<void> => {
     await service.isDatabaseHealthy();
 
     expect(repository.query).toHaveBeenCalled();
   });
 
-  it('returns balance from file if repository fails', async () => {
+  it('returns balance from file if repository fails', async (): Promise<void> => {
     jest
       .spyOn(repository, 'query')
       .mockRejectedValue(new Error('Database error'));

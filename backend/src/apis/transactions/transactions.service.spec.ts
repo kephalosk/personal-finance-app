@@ -1,15 +1,14 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { TransactionsService } from './transactions.service';
-import * as path from 'node:path';
-import * as fs from 'node:fs';
 import { Repository } from 'typeorm';
 import { Transactions } from '../../model/entities/Transactions';
 import { APITransactionDTO } from '../../model/apis/APITransactionDTO';
 import { getRepositoryToken } from '@nestjs/typeorm';
+import { NotFoundException, ServiceUnavailableException } from '@nestjs/common';
 
-jest.spyOn(console, 'error').mockImplementation(() => {});
+jest.spyOn(console, 'error').mockImplementation((): void => {});
 
-describe('TransactionsService', () => {
+describe('TransactionsService', (): void => {
   let service: TransactionsService;
   let repository: Repository<Transactions>;
 
@@ -53,7 +52,7 @@ describe('TransactionsService', () => {
     },
   ];
 
-  const mockedTransactions = [
+  const mockedTransactions: APITransactionDTO[] = [
     {
       amount: 75.5,
       avatar: '/images/avatars/emma-richardson.jpg',
@@ -72,20 +71,10 @@ describe('TransactionsService', () => {
     },
   ];
 
-  const mockedTransactionsDTO = {
-    transactions: mockedTransactions,
-  };
-  const mockedTransactionsDTOJson = JSON.stringify(mockedTransactionsDTO);
-
-  beforeEach(async () => {
-    const mockRepository = {
+  beforeEach(async (): Promise<void> => {
+    const mockRepository: { find: jest.Mock } = {
       find: jest.fn().mockResolvedValue(mockedTransactionsEntity),
     };
-
-    jest
-      .spyOn(path, 'join')
-      .mockReturnValue('/mocked/path/to/transactions.data.json');
-    jest.spyOn(fs, 'readFileSync').mockReturnValue(mockedTransactionsDTOJson);
 
     const module: TestingModule = await Test.createTestingModule({
       providers: [
@@ -103,26 +92,41 @@ describe('TransactionsService', () => {
     );
   });
 
-  it('should be defined', () => {
+  it('is defined', (): void => {
     expect(service).toBeDefined();
   });
 
-  it('returns transactions from repository', async () => {
-    const result = await service.findAll();
+  it('returns transactions from repository', async (): Promise<void> => {
+    const result: APITransactionDTO[] = await service.findAll();
 
     expect(repository.find).toHaveBeenCalled();
     expect(result).toEqual(mockedTransactionsEntityMapped);
     expect(result).not.toEqual(mockedTransactions);
   });
 
-  it('returns balance from file if repository fails', async () => {
+  it('throws if balance is not found', async (): Promise<void> => {
+    jest.spyOn(repository, 'find').mockResolvedValue([]);
+
+    await expect(
+      (): Promise<APITransactionDTO[]> => service.findAll(),
+    ).rejects.toThrow(NotFoundException);
+    await expect(
+      (): Promise<APITransactionDTO[]> => service.findAll(),
+    ).rejects.toThrow('No transactions found.');
+  });
+
+  it('throws if database connection fails', async (): Promise<void> => {
     jest
       .spyOn(repository, 'find')
-      .mockRejectedValue(new Error('Database error'));
+      .mockImplementation((): Promise<Transactions[]> => {
+        throw new ServiceUnavailableException('Connection failed');
+      });
 
-    const result = await service.findAll();
-
-    expect(result).toEqual(mockedTransactions);
-    expect(result).not.toEqual(mockedTransactionsEntityMapped);
+    await expect(
+      (): Promise<APITransactionDTO[]> => service.findAll(),
+    ).rejects.toThrow(ServiceUnavailableException);
+    await expect(
+      (): Promise<APITransactionDTO[]> => service.findAll(),
+    ).rejects.toThrow('Connection failed');
   });
 });

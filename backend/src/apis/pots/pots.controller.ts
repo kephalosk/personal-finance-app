@@ -9,6 +9,7 @@ import {
   NotFoundException,
   Post,
   Put,
+  ServiceUnavailableException,
 } from '@nestjs/common';
 import { PotsService } from './pots.service';
 import { APIPotDTO } from '../../model/apis/APIPotDTO';
@@ -38,12 +39,21 @@ export class PotsController {
     status: HttpStatus.INTERNAL_SERVER_ERROR,
     description: 'Server error occurred while getting pots.',
   })
+  @ApiResponse({
+    status: HttpStatus.SERVICE_UNAVAILABLE,
+    description: 'Failed to connect to the database.',
+  })
   async getPots(): Promise<APIPotDTO[]> {
     try {
       return await this.potsService.findAll();
     } catch (error) {
       if (error instanceof NotFoundException) {
         throw new NotFoundException('Pots not found.');
+      }
+      if (error instanceof ServiceUnavailableException) {
+        throw new ServiceUnavailableException(
+          `Database connection error: ${getErrorMessage(error)}`,
+        );
       }
       throw new InternalServerErrorException(
         `Error getting pots: ${getErrorMessage(error)}`,
@@ -61,10 +71,19 @@ export class PotsController {
     status: HttpStatus.INTERNAL_SERVER_ERROR,
     description: 'Server error occurred while adding new pot.',
   })
+  @ApiResponse({
+    status: HttpStatus.SERVICE_UNAVAILABLE,
+    description: 'Failed to connect to the database.',
+  })
   async addNewPot(@Body() newPot: APIPotDTO): Promise<void> {
     try {
       await this.potsService.addNewPot(newPot);
     } catch (error) {
+      if (error instanceof ServiceUnavailableException) {
+        throw new ServiceUnavailableException(
+          `Database connection error: ${getErrorMessage(error)}`,
+        );
+      }
       throw new InternalServerErrorException(
         `Error adding new pot: ${getErrorMessage(error)}`,
       );
@@ -85,12 +104,21 @@ export class PotsController {
     status: HttpStatus.INTERNAL_SERVER_ERROR,
     description: 'Server error occurred while editing pot.',
   })
+  @ApiResponse({
+    status: HttpStatus.SERVICE_UNAVAILABLE,
+    description: 'Failed to connect to the database.',
+  })
   async editPot(@Body() editedPot: APIEditedPotDTO): Promise<void> {
     try {
       await this.potsService.editPot(editedPot);
     } catch (error) {
       if (error instanceof NotFoundException) {
         throw new NotFoundException('Pot not found.');
+      }
+      if (error instanceof ServiceUnavailableException) {
+        throw new ServiceUnavailableException(
+          `Database connection error: ${getErrorMessage(error)}`,
+        );
       }
       throw new InternalServerErrorException(
         `Error while editing pot: ${getErrorMessage(error)}`,
@@ -112,6 +140,10 @@ export class PotsController {
     status: HttpStatus.INTERNAL_SERVER_ERROR,
     description: 'Server error occurred while deleting the pot.',
   })
+  @ApiResponse({
+    status: HttpStatus.SERVICE_UNAVAILABLE,
+    description: 'Failed to connect to the database.',
+  })
   @HttpCode(HttpStatus.NO_CONTENT)
   async deletePot(@Body() potToDelete: APIPotNameDTO): Promise<void> {
     try {
@@ -119,6 +151,11 @@ export class PotsController {
     } catch (error) {
       if (error instanceof NotFoundException) {
         throw new NotFoundException('Pot not found.');
+      }
+      if (error instanceof ServiceUnavailableException) {
+        throw new ServiceUnavailableException(
+          `Database connection error: ${getErrorMessage(error)}`,
+        );
       }
       throw new InternalServerErrorException(
         `Error while deleting pot: ${getErrorMessage(error)}`,
@@ -140,12 +177,21 @@ export class PotsController {
     status: HttpStatus.INTERNAL_SERVER_ERROR,
     description: 'Server error occurred while adding money to pot.',
   })
+  @ApiResponse({
+    status: HttpStatus.SERVICE_UNAVAILABLE,
+    description: 'Failed to connect to the database.',
+  })
   async addMoneyToPot(@Body() potAddition: APIPotAdditionDTO): Promise<void> {
     try {
       await this.potsService.addMoneyToPot(potAddition);
     } catch (error) {
       if (error instanceof NotFoundException) {
         throw new NotFoundException('Pot not found.');
+      }
+      if (error instanceof ServiceUnavailableException) {
+        throw new ServiceUnavailableException(
+          `Database connection error: ${getErrorMessage(error)}`,
+        );
       }
       throw new InternalServerErrorException(
         `Error while adding money to pot: ${getErrorMessage(error)}`,
@@ -164,6 +210,10 @@ export class PotsController {
     status: HttpStatus.INTERNAL_SERVER_ERROR,
     description: 'Server error occurred while withdrawing money from pot.',
   })
+  @ApiResponse({
+    status: HttpStatus.SERVICE_UNAVAILABLE,
+    description: 'Failed to connect to the database.',
+  })
   async withdrawMoneyFromPot(
     @Body() potSubtraction: APIPotSubtractionDTO,
   ): Promise<void> {
@@ -172,6 +222,11 @@ export class PotsController {
     } catch (error) {
       if (error instanceof NotFoundException) {
         throw new NotFoundException('Pot not found.');
+      }
+      if (error instanceof ServiceUnavailableException) {
+        throw new ServiceUnavailableException(
+          `Database connection error: ${getErrorMessage(error)}`,
+        );
       }
       throw new InternalServerErrorException(
         `Error while withdrawing money from pot: ${getErrorMessage(error)}`,

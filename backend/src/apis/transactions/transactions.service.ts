@@ -1,6 +1,4 @@
-import { Injectable } from '@nestjs/common';
-import * as path from 'node:path';
-import * as fs from 'node:fs';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { APITransactionDTO } from '../../model/apis/APITransactionDTO';
 import { Transactions } from '../../model/entities/Transactions';
 import { Repository } from 'typeorm';
@@ -14,14 +12,14 @@ export class TransactionsService {
   ) {}
 
   async findAll(): Promise<APITransactionDTO[]> {
-    try {
-      const transactions: Transactions[] =
-        await this.transactionsRepository.find();
-      return this.mapTransactionsEntity(transactions);
-    } catch (error) {
-      console.error('Failed to read transactions from database', error);
-      return this.getTransactions();
+    const transactions: Transactions[] =
+      await this.transactionsRepository.find();
+
+    if (!transactions.length) {
+      throw new NotFoundException('No transactions found.');
     }
+
+    return this.mapTransactionsEntity(transactions);
   }
 
   private mapTransactionsEntity(
@@ -40,15 +38,5 @@ export class TransactionsService {
       mappedTransactions.push(newTransaction);
     });
     return mappedTransactions;
-  }
-
-  getTransactions(): APITransactionDTO[] {
-    const filePath = path.join(
-      __dirname,
-      '../transactions/transactions.data.json',
-    );
-    const data = JSON.parse(fs.readFileSync(filePath, 'utf8'));
-    const { transactions } = data;
-    return transactions;
   }
 }

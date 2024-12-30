@@ -4,6 +4,7 @@ import { TransactionsService } from './transactions.service';
 import {
   InternalServerErrorException,
   NotFoundException,
+  ServiceUnavailableException,
 } from '@nestjs/common';
 import { APITransactionDTO } from '../../model/apis/APITransactionDTO';
 
@@ -88,5 +89,18 @@ describe('TransactionsController', (): void => {
     await expect(
       (): Promise<APITransactionDTO[]> => controller.getBalance(),
     ).rejects.toThrow('Transactions not found.');
+  });
+
+  it('throws if database connection fails', async (): Promise<void> => {
+    (transactionsService.findAll as jest.Mock).mockImplementation((): void => {
+      throw new ServiceUnavailableException('Connection failed');
+    });
+
+    await expect(
+      (): Promise<APITransactionDTO[]> => controller.getBalance(),
+    ).rejects.toThrow(ServiceUnavailableException);
+    await expect(
+      (): Promise<APITransactionDTO[]> => controller.getBalance(),
+    ).rejects.toThrow('Database connection error: Connection failed');
   });
 });

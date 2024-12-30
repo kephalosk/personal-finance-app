@@ -4,6 +4,7 @@ import { BalanceService } from './balance.service';
 import {
   InternalServerErrorException,
   NotFoundException,
+  ServiceUnavailableException,
 } from '@nestjs/common';
 import { APIBalanceDTO } from '../../model/apis/APIBalanceDTO';
 
@@ -72,6 +73,19 @@ describe('BalanceController', (): void => {
     ).rejects.toThrow(NotFoundException);
     await expect(
       (): Promise<APIBalanceDTO> => controller.getBalance(),
-    ).rejects.toThrow('Balances not found.');
+    ).rejects.toThrow('Balances not found: Not Found');
+  });
+
+  it('throws if database connection fails', async (): Promise<void> => {
+    (balanceService.findBalance as jest.Mock).mockImplementation((): void => {
+      throw new ServiceUnavailableException('Connection failed');
+    });
+
+    await expect(
+      (): Promise<APIBalanceDTO> => controller.getBalance(),
+    ).rejects.toThrow(ServiceUnavailableException);
+    await expect(
+      (): Promise<APIBalanceDTO> => controller.getBalance(),
+    ).rejects.toThrow('Database connection error: Connection failed');
   });
 });
