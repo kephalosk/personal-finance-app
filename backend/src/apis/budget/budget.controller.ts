@@ -13,6 +13,7 @@ import { BudgetService } from './budget.service';
 import { APIBudgetDTO } from '../../model/apis/APIBudgetDTO';
 import { ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { APICategoryDTO } from '../../model/apis/APICategoryDTO';
+import getErrorMessage from '../../utils/getErrorMessage';
 
 @Controller('budget')
 export class BudgetController {
@@ -25,11 +26,25 @@ export class BudgetController {
     description: 'Successfully retrieved all budgets',
     type: [APIBudgetDTO],
   })
+  @ApiResponse({
+    status: HttpStatus.NOT_FOUND,
+    description: 'Budgets not found.',
+  })
+  @ApiResponse({
+    status: HttpStatus.INTERNAL_SERVER_ERROR,
+    description:
+      'Server error occurred while retrieving budgets from database.',
+  })
   async getBudget(): Promise<APIBudgetDTO[]> {
     try {
       return await this.budgetService.findAll();
     } catch (error) {
-      throw new Error(`Fehler beim Abrufen der Budgets: ${error}`);
+      if (error instanceof NotFoundException) {
+        throw new NotFoundException('Budgets not found.');
+      }
+      throw new InternalServerErrorException(
+        `Error while retrieving budgets from database: ${getErrorMessage(error)}`,
+      );
     }
   }
 
@@ -39,11 +54,17 @@ export class BudgetController {
     status: HttpStatus.CREATED,
     description: 'Budget successfully created',
   })
+  @ApiResponse({
+    status: HttpStatus.INTERNAL_SERVER_ERROR,
+    description: 'Server error occurred while adding new budget to database.',
+  })
   async addNewBudget(@Body() newBudget: APIBudgetDTO): Promise<void> {
     try {
       await this.budgetService.addNewBudget(newBudget);
     } catch (error) {
-      throw new Error(`Fehler beim Anlegen des neuen Budgets: ${error}`);
+      throw new InternalServerErrorException(
+        `Error while adding budget to database: ${getErrorMessage(error)}`,
+      );
     }
   }
 
@@ -59,13 +80,18 @@ export class BudgetController {
   })
   @ApiResponse({
     status: HttpStatus.INTERNAL_SERVER_ERROR,
-    description: 'Server error occurred while editing pot.',
+    description: 'Server error occurred while updating budget.',
   })
   async editBudget(@Body() editedBudget: APIBudgetDTO): Promise<void> {
     try {
       await this.budgetService.updateBudget(editedBudget);
     } catch (error) {
-      throw new Error(`Fehler beim Bearbeiten des Budgets: ${error}`);
+      if (error instanceof NotFoundException) {
+        throw new NotFoundException('Budgets not found.');
+      }
+      throw new InternalServerErrorException(
+        `Error while updating budget in database: ${getErrorMessage(error)}`,
+      );
     }
   }
 
@@ -91,7 +117,7 @@ export class BudgetController {
         throw new NotFoundException('Budget not found.');
       }
       throw new InternalServerErrorException(
-        `Error deleting budget: ${error.message}`,
+        `Error deleting budget: ${getErrorMessage(error)}`,
       );
     }
   }

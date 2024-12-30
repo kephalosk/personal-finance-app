@@ -167,11 +167,11 @@ jobs:
 
       - name: Run Backend E2E Tests
         env:
-          DATABASE_HOST: "postgresql-database-do-user-16267792-0.m.db.ondigitalocean.com"
-          DATABASE_PORT: "25060"
-          DATABASE_USERNAME: "doadmin"
+          DATABASE_HOST: ${{ secrets.DATABASE_HOST }}
+          DATABASE_PORT: ${{ secrets.DATABASE_PORT }}
+          DATABASE_USERNAME: ${{ secrets.DATABASE_USERNAME }}
           DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
-          DATABASE_NAME: "defaultdb"
+          DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
         run: |
           cd backend
           npm run test:e2e

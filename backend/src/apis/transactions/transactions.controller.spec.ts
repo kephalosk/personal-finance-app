@@ -1,14 +1,21 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { TransactionsController } from './transactions.controller';
 import { TransactionsService } from './transactions.service';
+import {
+  InternalServerErrorException,
+  NotFoundException,
+} from '@nestjs/common';
+import { APITransactionDTO } from '../../model/apis/APITransactionDTO';
 
-jest.mock('./transactions.service', () => ({
-  TransactionsService: jest.fn().mockImplementation(() => ({
-    findAll: jest.fn(),
-  })),
+jest.mock('./transactions.service', (): { TransactionsService: jest.Mock } => ({
+  TransactionsService: jest
+    .fn()
+    .mockImplementation((): { findAll: jest.Mock } => ({
+      findAll: jest.fn(),
+    })),
 }));
 
-const mockedTransactions = [
+const mockedTransactions: APITransactionDTO[] = [
   {
     avatar: '/images/avatars/emma-richardson.jpg',
     name: 'Emma Richardson',
@@ -27,11 +34,11 @@ const mockedTransactions = [
   },
 ];
 
-describe('TransactionsController', () => {
+describe('TransactionsController', (): void => {
   let controller: TransactionsController;
   let transactionsService: TransactionsService;
 
-  beforeEach(async () => {
+  beforeEach(async (): Promise<void> => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [TransactionsController],
       providers: [TransactionsService],
@@ -45,23 +52,41 @@ describe('TransactionsController', () => {
     controller = module.get<TransactionsController>(TransactionsController);
   });
 
-  it('should be defined', () => {
+  it('is defined', (): void => {
     expect(controller).toBeDefined();
   });
 
-  it('returns transactions', async () => {
-    const result = await controller.getBalance();
+  it('returns transactions', async (): Promise<void> => {
+    const result: APITransactionDTO[] = await controller.getBalance();
 
     expect(result).toEqual(mockedTransactions);
   });
 
-  it('throws if service call fails', async () => {
+  it('throws if service call fails', async (): Promise<void> => {
     (transactionsService.findAll as jest.Mock).mockImplementation(() => {
-      throw new Error('Service failure');
+      throw new InternalServerErrorException('Service failure');
     });
 
-    await expect(() => controller.getBalance()).rejects.toThrow(
-      'Fehler beim Abrufen der Transaktionen: Error: Service failure',
+    await expect(
+      (): Promise<APITransactionDTO[]> => controller.getBalance(),
+    ).rejects.toThrow(InternalServerErrorException);
+    await expect(
+      (): Promise<APITransactionDTO[]> => controller.getBalance(),
+    ).rejects.toThrow(
+      'Error while retrieving transactions from database: Service failure',
     );
+  });
+
+  it('throws if transactions not found', async (): Promise<void> => {
+    (transactionsService.findAll as jest.Mock).mockImplementation(() => {
+      throw new NotFoundException();
+    });
+
+    await expect(
+      (): Promise<APITransactionDTO[]> => controller.getBalance(),
+    ).rejects.toThrow(NotFoundException);
+    await expect(
+      (): Promise<APITransactionDTO[]> => controller.getBalance(),
+    ).rejects.toThrow('Transactions not found.');
   });
 });

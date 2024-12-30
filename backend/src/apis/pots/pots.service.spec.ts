@@ -295,7 +295,7 @@ describe('PotsService', () => {
     ).rejects.toThrow('Could not withdraw money from pot.');
   });
 
-  it('throws an error if finding pot to delete fails', async (): Promise<void> => {
+  it('throws an error if finding pot to withdraw from fails', async (): Promise<void> => {
     jest
       .spyOn(repository, 'findOne')
       .mockRejectedValue(new Error('Database error'));
