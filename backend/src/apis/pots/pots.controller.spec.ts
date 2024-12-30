@@ -2,7 +2,10 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { PotsController } from './pots.controller';
 import { PotsService } from './pots.service';
 import { APIEditedPotDTO } from '../../model/apis/APIEditedPotDTO';
-import { NotFoundException } from '@nestjs/common';
+import {
+  InternalServerErrorException,
+  NotFoundException,
+} from '@nestjs/common';
 import { APIPotNameDTO } from '../../model/apis/APIPotNameDTO';
 import { APIPotAdditionDTO } from '../../model/apis/APIPotAdditionDTO';
 import { APIPotDTO } from '../../model/apis/APIPotDTO';
@@ -87,32 +90,40 @@ describe('PotsController', (): void => {
     controller = module.get<PotsController>(PotsController);
   });
 
-  it('should be defined', (): void => {
+  it('is defined', (): void => {
     expect(controller).toBeDefined();
   });
 
-  it('returns transactions', async (): Promise<void> => {
-    const result = await controller.getPots();
+  it('returns pots', async (): Promise<void> => {
+    const result: APIPotDTO[] = await controller.getPots();
 
     expect(result).toEqual(mockedPots);
   });
 
   it('throws if service call fails', async (): Promise<void> => {
     (potsService.findAll as jest.Mock).mockImplementation((): void => {
-      throw new Error('Service failure');
+      throw new InternalServerErrorException('Service failure');
     });
 
-    await expect(() => controller.getPots()).rejects.toThrow(
-      'Error getting pots: Service failure',
-    );
+    await expect(
+      (): Promise<APIPotDTO[]> => controller.getPots(),
+    ).rejects.toThrow(InternalServerErrorException);
+    await expect(
+      (): Promise<APIPotDTO[]> => controller.getPots(),
+    ).rejects.toThrow('Error getting pots: Service failure');
   });
 
-  it('throws NotFoundException if no pot is found', async (): Promise<void> => {
+  it('throws NotFoundException if no pots are found', async (): Promise<void> => {
     (potsService.findAll as jest.Mock).mockImplementation((): void => {
-      throw new NotFoundException('Service failure');
+      throw new NotFoundException();
     });
 
-    await expect(() => controller.getPots()).rejects.toThrow('Pots not found.');
+    await expect(
+      (): Promise<APIPotDTO[]> => controller.getPots(),
+    ).rejects.toThrow(NotFoundException);
+    await expect(
+      (): Promise<APIPotDTO[]> => controller.getPots(),
+    ).rejects.toThrow('Pots not found.');
   });
 
   it('adds new pot', async (): Promise<void> => {
@@ -123,12 +134,15 @@ describe('PotsController', (): void => {
 
   it('throws if adding new pot call fails', async (): Promise<void> => {
     (potsService.addNewPot as jest.Mock).mockImplementation((): void => {
-      throw new Error('Service failure');
+      throw new InternalServerErrorException('Service failure');
     });
 
-    await expect(() => controller.addNewPot(mockedPots[0])).rejects.toThrow(
-      'Error adding new pot: Service failure',
-    );
+    await expect(
+      (): Promise<void> => controller.addNewPot(mockedPots[0]),
+    ).rejects.toThrow(InternalServerErrorException);
+    await expect(
+      (): Promise<void> => controller.addNewPot(mockedPots[0]),
+    ).rejects.toThrow('Error adding new pot: Service failure');
   });
 
   it('edits an existing pot', async (): Promise<void> => {
@@ -139,22 +153,27 @@ describe('PotsController', (): void => {
 
   it('throws if editing pot call fails', async (): Promise<void> => {
     (potsService.editPot as jest.Mock).mockImplementation((): void => {
-      throw new Error('Service failure');
+      throw new InternalServerErrorException('Service failure');
     });
 
-    await expect(() => controller.editPot(mockedEditedPot)).rejects.toThrow(
-      'Error while editing pot: Service failure',
-    );
+    await expect(
+      (): Promise<void> => controller.editPot(mockedEditedPot),
+    ).rejects.toThrow(InternalServerErrorException);
+    await expect(
+      (): Promise<void> => controller.editPot(mockedEditedPot),
+    ).rejects.toThrow('Error while editing pot: Service failure');
   });
 
   it('throws NotFoundException if finding pot fails', async (): Promise<void> => {
     (potsService.editPot as jest.Mock).mockImplementation((): void => {
-      throw new NotFoundException('Service failure');
+      throw new NotFoundException();
     });
-
-    await expect(() => controller.editPot(mockedEditedPot)).rejects.toThrow(
-      'Pot not found.',
-    );
+    await expect(
+      (): Promise<void> => controller.editPot(mockedEditedPot),
+    ).rejects.toThrow(NotFoundException);
+    await expect(
+      (): Promise<void> => controller.editPot(mockedEditedPot),
+    ).rejects.toThrow('Pot not found.');
   });
 
   it('deletes an existing pot', async (): Promise<void> => {
@@ -165,22 +184,28 @@ describe('PotsController', (): void => {
 
   it('throws if deleting pot call fails', async (): Promise<void> => {
     (potsService.deletePot as jest.Mock).mockImplementation((): void => {
-      throw new Error('Service failure');
+      throw new InternalServerErrorException('Service failure');
     });
 
-    await expect(() => controller.deletePot(mockedPotName)).rejects.toThrow(
-      'Error while deleting pot: Service failure',
-    );
+    await expect(
+      (): Promise<void> => controller.deletePot(mockedPotName),
+    ).rejects.toThrow(InternalServerErrorException);
+    await expect(
+      (): Promise<void> => controller.deletePot(mockedPotName),
+    ).rejects.toThrow('Error while deleting pot: Service failure');
   });
 
   it('throws NotFoundException if finding pot to delete fails', async (): Promise<void> => {
     (potsService.deletePot as jest.Mock).mockImplementation((): void => {
-      throw new NotFoundException('Service failure');
+      throw new NotFoundException();
     });
 
-    await expect(() => controller.deletePot(mockedPotName)).rejects.toThrow(
-      'Pot not found.',
-    );
+    await expect(
+      (): Promise<void> => controller.deletePot(mockedPotName),
+    ).rejects.toThrow(NotFoundException);
+    await expect(
+      (): Promise<void> => controller.deletePot(mockedPotName),
+    ).rejects.toThrow('Pot not found.');
   });
 
   it('adds money to an existing pot', async (): Promise<void> => {
@@ -191,21 +216,27 @@ describe('PotsController', (): void => {
 
   it('throws if adding pot call fails', async (): Promise<void> => {
     (potsService.addMoneyToPot as jest.Mock).mockImplementation((): void => {
-      throw new Error('Service failure');
+      throw new InternalServerErrorException('Service failure');
     });
 
-    await expect(() =>
-      controller.addMoneyToPot(mockedPotAddition),
+    await expect(
+      (): Promise<void> => controller.addMoneyToPot(mockedPotAddition),
+    ).rejects.toThrow(InternalServerErrorException);
+    await expect(
+      (): Promise<void> => controller.addMoneyToPot(mockedPotAddition),
     ).rejects.toThrow('Error while adding money to pot: Service failure');
   });
 
   it('throws NotFoundException if finding pot to add to fails', async (): Promise<void> => {
     (potsService.addMoneyToPot as jest.Mock).mockImplementation((): void => {
-      throw new NotFoundException('Service failure');
+      throw new NotFoundException();
     });
 
-    await expect(() =>
-      controller.addMoneyToPot(mockedPotAddition),
+    await expect(
+      (): Promise<void> => controller.addMoneyToPot(mockedPotAddition),
+    ).rejects.toThrow(NotFoundException);
+    await expect(
+      (): Promise<void> => controller.addMoneyToPot(mockedPotAddition),
     ).rejects.toThrow('Pot not found.');
   });
 
@@ -220,12 +251,17 @@ describe('PotsController', (): void => {
   it('throws if withdrawing pot call fails', async (): Promise<void> => {
     (potsService.withdrawMoneyFromPot as jest.Mock).mockImplementation(
       (): void => {
-        throw new Error('Service failure');
+        throw new InternalServerErrorException('Service failure');
       },
     );
 
-    await expect(() =>
-      controller.withdrawMoneyFromPot(mockedPotSubtraction),
+    await expect(
+      (): Promise<void> =>
+        controller.withdrawMoneyFromPot(mockedPotSubtraction),
+    ).rejects.toThrow(InternalServerErrorException);
+    await expect(
+      (): Promise<void> =>
+        controller.withdrawMoneyFromPot(mockedPotSubtraction),
     ).rejects.toThrow(
       'Error while withdrawing money from pot: Service failure',
     );
@@ -234,12 +270,17 @@ describe('PotsController', (): void => {
   it('throws NotFoundException if finding pot to withdraw from fails', async (): Promise<void> => {
     (potsService.withdrawMoneyFromPot as jest.Mock).mockImplementation(
       (): void => {
-        throw new NotFoundException('Service failure');
+        throw new NotFoundException();
       },
     );
 
-    await expect(() =>
-      controller.withdrawMoneyFromPot(mockedPotSubtraction),
+    await expect(
+      (): Promise<void> =>
+        controller.withdrawMoneyFromPot(mockedPotSubtraction),
+    ).rejects.toThrow(NotFoundException);
+    await expect(
+      (): Promise<void> =>
+        controller.withdrawMoneyFromPot(mockedPotSubtraction),
     ).rejects.toThrow('Pot not found.');
   });
 });

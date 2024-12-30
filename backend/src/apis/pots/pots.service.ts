@@ -8,6 +8,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { APIEditedPotDTO } from '../../model/apis/APIEditedPotDTO';
 import { APIPotAdditionDTO } from '../../model/apis/APIPotAdditionDTO';
 import { APIPotSubtractionDTO } from '../../model/apis/APIPotSubtractionDTO';
+import getErrorMessage from '../../utils/getErrorMessage';
 
 @Injectable()
 export class PotsService {
@@ -36,7 +37,10 @@ export class PotsService {
       });
       await this.potsRepository.save(newPotRecord);
     } catch (error) {
-      console.error('Failed to save new pot to database.', error.message);
+      console.error(
+        'Failed to save new pot to database.',
+        getErrorMessage(error),
+      );
       throw new Error('Could not add pot.');
     }
   }
@@ -61,7 +65,7 @@ export class PotsService {
 
       await this.potsRepository.update(potToUpdate.id, update);
     } catch (error) {
-      console.error('Failed to edit pot in database.', error.message);
+      console.error('Failed to edit pot in database.', getErrorMessage(error));
       throw new Error('Could not edit pot.');
     }
   }
