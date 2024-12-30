@@ -4,6 +4,7 @@ import {
   HttpStatus,
   InternalServerErrorException,
   NotFoundException,
+  ServiceUnavailableException,
 } from '@nestjs/common';
 import { TransactionsService } from './transactions.service';
 import { APITransactionDTO } from '../../model/apis/APITransactionDTO';
@@ -30,12 +31,21 @@ export class TransactionsController {
     description:
       'Server error occurred while retrieving transactions from database.',
   })
+  @ApiResponse({
+    status: HttpStatus.SERVICE_UNAVAILABLE,
+    description: 'Failed to connect to the database.',
+  })
   async getBalance(): Promise<APITransactionDTO[]> {
     try {
       return await this.transactionsService.findAll();
     } catch (error) {
       if (error instanceof NotFoundException) {
         throw new NotFoundException('Transactions not found.');
+      }
+      if (error instanceof ServiceUnavailableException) {
+        throw new ServiceUnavailableException(
+          `Database connection error: ${getErrorMessage(error)}`,
+        );
       }
       throw new InternalServerErrorException(
         `Error while retrieving transactions from database: ${getErrorMessage(error)}`,

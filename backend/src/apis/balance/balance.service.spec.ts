@@ -1,11 +1,10 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { BalanceService } from './balance.service';
-import * as path from 'node:path';
-import * as fs from 'node:fs';
 import { Repository } from 'typeorm';
 import { Balance } from '../../model/entities/Balance';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { APIBalanceDTO } from '../../model/apis/APIBalanceDTO';
+import { NotFoundException, ServiceUnavailableException } from '@nestjs/common';
 
 jest.spyOn(console, 'error').mockImplementation(() => {});
 
@@ -26,26 +25,16 @@ describe('BalanceService', () => {
     expenses: 2222,
   };
 
-  const mockedBalance = {
+  const mockedBalance: APIBalanceDTO = {
     current: 1000,
     income: 5000,
     expenses: 2000,
   };
 
-  const mockedBalanceDTO = {
-    balance: mockedBalance,
-  };
-  const mockedBalanceDTOJson = JSON.stringify(mockedBalanceDTO);
-
-  beforeEach(async () => {
-    const mockRepository = {
+  beforeEach(async (): Promise<void> => {
+    const mockRepository: { find: jest.Mock } = {
       find: jest.fn().mockResolvedValue([mockedBalanceEntity]),
     };
-
-    jest
-      .spyOn(path, 'join')
-      .mockReturnValue('/mocked/path/to/balance.data.json');
-    jest.spyOn(fs, 'readFileSync').mockReturnValue(mockedBalanceDTOJson);
 
     const module: TestingModule = await Test.createTestingModule({
       providers: [
@@ -61,26 +50,41 @@ describe('BalanceService', () => {
     repository = module.get<Repository<Balance>>(getRepositoryToken(Balance));
   });
 
-  it('should be defined', () => {
+  it('is defined', (): void => {
     expect(service).toBeDefined();
   });
 
-  it('returns balance from repository', async () => {
-    const result = await service.findBalance();
+  it('returns balance from repository', async (): Promise<void> => {
+    const result: APIBalanceDTO = await service.findBalance();
 
     expect(repository.find).toHaveBeenCalled();
     expect(result).toEqual(mockedBalanceEntityMapped);
     expect(result).not.toEqual(mockedBalance);
   });
 
-  it('returns balance from file if repository fails', async () => {
+  it('throws if balance is not found', async (): Promise<void> => {
+    jest.spyOn(repository, 'find').mockResolvedValue([]);
+
+    await expect(
+      (): Promise<APIBalanceDTO> => service.findBalance(),
+    ).rejects.toThrow(NotFoundException);
+    await expect(
+      (): Promise<APIBalanceDTO> => service.findBalance(),
+    ).rejects.toThrow('No balance found.');
+  });
+
+  it('throws if database connection fails', async (): Promise<void> => {
     jest
       .spyOn(repository, 'find')
-      .mockRejectedValue(new Error('Database error'));
+      .mockImplementation((): Promise<Balance[]> => {
+        throw new ServiceUnavailableException('Connection failed');
+      });
 
-    const result = await service.findBalance();
-
-    expect(result).toEqual(mockedBalance);
-    expect(result).not.toEqual(mockedBalanceEntityMapped);
+    await expect(
+      (): Promise<APIBalanceDTO> => service.findBalance(),
+    ).rejects.toThrow(ServiceUnavailableException);
+    await expect(
+      (): Promise<APIBalanceDTO> => service.findBalance(),
+    ).rejects.toThrow('Connection failed');
   });
 });

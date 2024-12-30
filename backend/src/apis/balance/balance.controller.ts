@@ -4,6 +4,7 @@ import {
   HttpStatus,
   InternalServerErrorException,
   NotFoundException,
+  ServiceUnavailableException,
 } from '@nestjs/common';
 import { BalanceService } from './balance.service';
 import { APIBalanceDTO } from '../../model/apis/APIBalanceDTO';
@@ -30,12 +31,23 @@ export class BalanceController {
     description:
       'Server error occurred while retrieving balances from database.',
   })
+  @ApiResponse({
+    status: HttpStatus.SERVICE_UNAVAILABLE,
+    description: 'Failed to connect to the database.',
+  })
   async getBalance(): Promise<APIBalanceDTO> {
     try {
       return this.balanceService.findBalance();
     } catch (error) {
       if (error instanceof NotFoundException) {
-        throw new NotFoundException('Balances not found.');
+        throw new NotFoundException(
+          `Balances not found: ${getErrorMessage(error)}`,
+        );
+      }
+      if (error instanceof ServiceUnavailableException) {
+        throw new ServiceUnavailableException(
+          `Database connection error: ${getErrorMessage(error)}`,
+        );
       }
       throw new InternalServerErrorException(
         `Error while retrieving balances from database: ${getErrorMessage(error)}`,
