@@ -23,8 +23,6 @@ paths:
       responses:
         '201':
           description: "New pot successfully added."
-        '400':
-          description: "Bad request, if the input data is invalid or incomplete."
         '500':
           description: "Server error occurred while adding the new pot."
         '503':
