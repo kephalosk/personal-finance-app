@@ -67,7 +67,7 @@ describe('BudgetService', () => {
   });
 
   it('returns error if posting new budget fails', async () => {
-    const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation();
+    const consoleErrorSpy: jest.SpyInstance = jest.spyOn(console, 'error').mockImplementation();
     (axios.post as jest.Mock).mockRejectedValue(new Error('Network Error'));
 
     await addNewBudget(firstEPBudget);
