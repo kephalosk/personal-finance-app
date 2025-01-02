@@ -6,21 +6,23 @@ interface Props {
   children: ReactNode;
 }
 
+const SidebarContext: Context<ISidebarContext | undefined> = createContext<
+  ISidebarContext | undefined
+>(undefined);
+
 const SidebarProvider: ({ children }: Props) => ReactNode = ({ children }: Props): ReactNode => {
   const [isHidden, setIsHidden] = useState(false);
 
-  const SidebarContext: Context<ISidebarContext | undefined> = createContext<
-    ISidebarContext | undefined
-  >(undefined);
+  const value = {
+    isHidden,
+    setIsHidden,
+  };
 
   return (
-    <SidebarContext.Provider
-      data-testid="sidebar-context-provider"
-      value={{ isHidden, setIsHidden }}
-    >
+    <SidebarContext.Provider data-testid="sidebar-context-provider" value={value}>
       {children}
     </SidebarContext.Provider>
   );
 };
 
-export default SidebarProvider;
+export { SidebarProvider, SidebarContext };

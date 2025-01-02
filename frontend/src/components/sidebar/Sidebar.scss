@@ -16,6 +16,9 @@
   width: 90px;
   padding: 32px 18px 70px 0;
 }
+.sidebarLeft.hidden {
+  display: none;
+}
 
 .sidebarBottom {
   border-radius: 16px 16px 0 0;
