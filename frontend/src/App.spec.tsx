@@ -134,6 +134,8 @@ describe('App', () => {
       ['NoPage', '/undefinedURL', 'no-page'],
       ['ShowcaseAddNewBudgetForm', '/showcase/AddNewBudgetForm', 'showcase-add-new-budget-form'],
       ['ShowcaseEditBudgetForm', '/showcase/EditBudgetForm', 'showcase-edit-budget-form'],
+      ['ShowcaseDeleteBudgetForm', '/showcase/DeleteBudgetForm', 'showcase-delete-budget-form'],
+      ['ShowcaseAddNewPotForm', '/showcase/AddNewPotForm', 'showcase-add-new-pot-form'],
     ])('renders %s on path %s', (title: string, path: string, testid: string) => {
       const { getByTestId } = render(<App Router={MemoryRouter} initialEntries={[path]} />);
 
