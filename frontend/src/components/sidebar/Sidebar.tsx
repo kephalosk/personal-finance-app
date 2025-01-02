@@ -6,6 +6,7 @@ import SidebarMinimize from './SidebarMinimize';
 import { useLocation } from 'react-router-dom';
 import { ReactNode, useState } from 'react';
 import useIsTabletScreen from '../../globals/hooks/useIsTabletScreen';
+import { useSidebar } from '../../globals/hooks/useSidebar';
 
 interface Props {
   onMinimize: (isMinimized: boolean) => void;
@@ -15,6 +16,7 @@ const Sidebar: ({ onMinimize }: Props) => ReactNode = ({ onMinimize }: Props): R
   const [isMinimized, setIsMinimized] = useState<boolean>(() => {
     return JSON.parse(localStorage.getItem('isMinimized') ?? 'false');
   });
+  const { isHidden } = useSidebar();
 
   const location = useLocation();
   const currentPath = location.pathname;
@@ -29,48 +31,43 @@ const Sidebar: ({ onMinimize }: Props) => ReactNode = ({ onMinimize }: Props): R
 
   const isTabletScreen = useIsTabletScreen();
 
+  const SidebarList = () => (
+    <div className="sidebarList">
+      {SidebarPages.map((entry: SidebarPage) => (
+        <SidebarListEntry
+          key={entry.name}
+          name={entry.name}
+          imgSrc={entry.imgSrc}
+          imgAlt={entry.imgAlt}
+          linkTarget={entry.linkTarget}
+          isActive={currentPath === entry.linkTarget}
+          isMinimized={isMinimized}
+        />
+      ))}
+    </div>
+  );
+
   return (
     <>
       {isTabletScreen ? (
         <section
-          className={`sidebarBottom ${isMinimized ? 'minimized' : ''}`}
+          className={`sidebarBottom ${isMinimized ? 'minimized' : ''} ${isHidden ? 'hidden' : ''}`}
           data-testid="sidebar"
         >
-          <div className="sidebarList">
-            {SidebarPages.map((entry: SidebarPage) => (
-              <SidebarListEntry
-                key={entry.name}
-                name={entry.name}
-                imgSrc={entry.imgSrc}
-                imgAlt={entry.imgAlt}
-                linkTarget={entry.linkTarget}
-                isActive={currentPath === entry.linkTarget}
-                isMinimized={isMinimized}
-              />
-            ))}
-          </div>
+          <SidebarList />
           <SidebarMinimize onMinimize={handleSidebarMinimize} />
         </section>
       ) : (
-        <div className={`sidebarLeft ${isMinimized ? 'minimized' : ''}`} data-testid="sidebar">
+        <div
+          className={`sidebarLeft ${isMinimized ? 'minimized' : ''} ${isHidden ? 'hidden' : ''}`}
+          data-testid="sidebar"
+        >
           <img
             className="sidebarTitle"
             alt="project icon"
             src={`${isMinimized ? projectIconSmall : projectIconBig}`}
           />
-          <div className="sidebarList">
-            {SidebarPages.map((entry: SidebarPage) => (
-              <SidebarListEntry
-                key={entry.name}
-                name={entry.name}
-                imgSrc={entry.imgSrc}
-                imgAlt={entry.imgAlt}
-                linkTarget={entry.linkTarget}
-                isActive={currentPath === entry.linkTarget}
-                isMinimized={isMinimized}
-              />
-            ))}
-          </div>
+          <SidebarList />
           <SidebarMinimize onMinimize={handleSidebarMinimize} />
         </div>
       )}

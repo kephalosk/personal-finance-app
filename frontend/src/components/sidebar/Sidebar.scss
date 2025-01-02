@@ -29,6 +29,9 @@
   bottom: 0;
   z-index: 2;
 }
+.sidebarBottom.hidden {
+  display: none;
+}
 
 .sidebarList {
   flex-grow: 1;
