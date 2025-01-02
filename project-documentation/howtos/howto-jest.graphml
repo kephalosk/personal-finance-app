@@ -882,7 +882,7 @@ jest.mock('../components/overlay/OverlayContentAddNewBudget', () =&gt;
           <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.53125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="541.6372677408491" x="0.0" xml:space="preserve" y="6.269890873015811">jest.mock('../globals/utils/EnsureFirstPossibleColorIsDefined', () =&gt; ({
   __esModule: true,
   default: jest.fn(),
-}));<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+})); // overwrite the whole module<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
         </y:GenericNode>
       </data>
     </node>
@@ -1059,7 +1059,7 @@ expect(window.scrollTo).toHaveBeenCalledWith(0, 0);<y:LabelModel><y:SmartNodeLab
           <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.53125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="541.6372677408491" x="0.0" xml:space="preserve" y="6.269890873015811">jest.mock('react-router-dom', () =&gt; ({
   ...jest.requireActual('react-router-dom'),
   useLocation: jest.fn(),
-}));<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+})); //overwrite only useLocation<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
         </y:GenericNode>
       </data>
     </node>
@@ -2971,7 +2971,6 @@ jest.mock('../../overlay/OverlayContentEditBudget', () =&gt;
       </data>
     </edge>
     <edge id="e112" source="n111" target="n114">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="84.81863387042449" sy="5.25" tx="-312.8569158867081" ty="-0.0">
@@ -2985,7 +2984,6 @@ jest.mock('../../overlay/OverlayContentEditBudget', () =&gt;
       </data>
     </edge>
     <edge id="e113" source="n40" target="n115">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="84.81863387042449" sy="-1.9090909090909083" tx="-193.9097367749979" ty="-0.0">
@@ -2999,7 +2997,6 @@ jest.mock('../../overlay/OverlayContentEditBudget', () =&gt;
       </data>
     </edge>
     <edge id="e114" source="n45" target="n116">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="84.81863387042449" sy="-4.59375" tx="-161.3186338704245" ty="-0.0">
@@ -3013,7 +3010,6 @@ jest.mock('../../overlay/OverlayContentEditBudget', () =&gt;
       </data>
     </edge>
     <edge id="e115" source="n116" target="n117">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="161.3186338704245" sy="-0.0" tx="-233.17382793754365" ty="-0.0"/>
@@ -3024,7 +3020,6 @@ jest.mock('../../overlay/OverlayContentEditBudget', () =&gt;
       </data>
     </edge>
     <edge id="e116" source="n0" target="n119">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="84.81863387042449" sy="8.75" tx="-84.81863387042449" ty="-0.0">
@@ -3038,7 +3033,6 @@ jest.mock('../../overlay/OverlayContentEditBudget', () =&gt;
       </data>
     </edge>
     <edge id="e117" source="n119" target="n118">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="84.81863387042449" sy="-0.0" tx="-180.50543245466406" ty="-0.0"/>
@@ -3049,7 +3043,6 @@ jest.mock('../../overlay/OverlayContentEditBudget', () =&gt;
       </data>
     </edge>
     <edge id="e118" source="n33" target="n120">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="84.81863387042449" sy="-8.4" tx="-312.8569158867081" ty="-0.0">
@@ -3063,7 +3056,6 @@ jest.mock('../../overlay/OverlayContentEditBudget', () =&gt;
       </data>
     </edge>
     <edge id="e119" source="n55" target="n121">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="161.3186338704245" sy="5.25" tx="-161.3186338704245" ty="-0.0">
@@ -3077,7 +3069,6 @@ jest.mock('../../overlay/OverlayContentEditBudget', () =&gt;
       </data>
     </edge>
     <edge id="e120" source="n121" target="n122">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="161.3186338704245" sy="-7.875" tx="-223.9970748665712" ty="-0.0">
@@ -3091,7 +3082,6 @@ jest.mock('../../overlay/OverlayContentEditBudget', () =&gt;
       </data>
     </edge>
     <edge id="e121" source="n121" target="n123">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="161.3186338704245" sy="-2.625" tx="-223.9970748665712" ty="-0.0">
@@ -3105,7 +3095,6 @@ jest.mock('../../overlay/OverlayContentEditBudget', () =&gt;
       </data>
     </edge>
     <edge id="e122" source="n121" target="n124">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="161.3186338704245" sy="2.625" tx="-223.9970748665712" ty="-0.0">
@@ -3119,7 +3108,6 @@ jest.mock('../../overlay/OverlayContentEditBudget', () =&gt;
       </data>
     </edge>
     <edge id="e123" source="n121" target="n125">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="161.3186338704245" sy="7.875" tx="-223.9970748665712" ty="-0.0">
@@ -3133,7 +3121,6 @@ jest.mock('../../overlay/OverlayContentEditBudget', () =&gt;
       </data>
     </edge>
     <edge id="e124" source="n106" target="n105">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="84.81863387042449" sy="-0.0" tx="-176.7498845029122" ty="-0.0"/>
@@ -3144,7 +3131,6 @@ jest.mock('../../overlay/OverlayContentEditBudget', () =&gt;
       </data>
     </edge>
     <edge id="e125" source="n5" target="n127">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="84.81863387042449" sy="7.875" tx="-84.81863387042449" ty="-0.0">
@@ -3158,7 +3144,6 @@ jest.mock('../../overlay/OverlayContentEditBudget', () =&gt;
       </data>
     </edge>
     <edge id="e126" source="n127" target="n126">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="84.81863387042449" sy="-5.25" tx="-239.63883027077145" ty="-0.0"/>
@@ -3169,7 +3154,6 @@ jest.mock('../../overlay/OverlayContentEditBudget', () =&gt;
       </data>
     </edge>
     <edge id="e127" source="n127" target="n128">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="84.81863387042449" sy="5.25" tx="-239.63883027077145" ty="-0.0">
