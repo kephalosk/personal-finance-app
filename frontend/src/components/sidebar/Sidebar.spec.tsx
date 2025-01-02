@@ -5,6 +5,7 @@ import { useLocation } from 'react-router-dom';
 import React from 'react';
 import useIsTabletScreen from '../../globals/hooks/useIsTabletScreen';
 import SidebarListEntry from './SidebarListEntry';
+import { useSidebar } from '../../globals/hooks/useSidebar';
 
 jest.mock('./SidebarListEntry', () => jest.fn(() => <div data-testid="sidebar-list-entry"></div>));
 jest.mock('./SidebarMinimize', () =>
@@ -19,6 +20,10 @@ jest.mock('react-router-dom', () => ({
 jest.mock('../../globals/hooks/useIsTabletScreen', () => ({
   __esModule: true,
   default: jest.fn(),
+}));
+jest.mock('../../globals/hooks/useSidebar', () => ({
+  __esModule: true,
+  useSidebar: jest.fn(),
 }));
 
 const projectIconBig = '/images/project-big.png';
@@ -35,6 +40,7 @@ describe('Sidebar', () => {
       pathname: '/',
     });
     (useIsTabletScreen as jest.Mock).mockReturnValue(false);
+    (useSidebar as jest.Mock).mockReturnValue(false);
   });
 
   it('renders div sidebarLeft', () => {
@@ -55,6 +61,28 @@ describe('Sidebar', () => {
     localStorage.clear();
   });
 
+  it('sets class hidden for sidebarLeft when isHidden is true', () => {
+    (useSidebar as jest.Mock).mockReturnValue({ isHidden: true });
+    (useIsTabletScreen as jest.Mock).mockReturnValue(false);
+    const { container } = render(<Sidebar {...testProps} />);
+
+    const htmlElement: HTMLElement | null = container.querySelector('.sidebarLeft');
+
+    expect(htmlElement).toHaveClass('hidden');
+    localStorage.clear();
+  });
+
+  it('does not set class hidden for sidebarLeft when isHidden is false', () => {
+    (useSidebar as jest.Mock).mockReturnValue({ isHidden: false });
+    (useIsTabletScreen as jest.Mock).mockReturnValue(false);
+    const { container } = render(<Sidebar {...testProps} />);
+
+    const htmlElement: HTMLElement | null = container.querySelector('.sidebarLeft');
+
+    expect(htmlElement).not.toHaveClass('hidden');
+    localStorage.clear();
+  });
+
   it('renders div sidebarBottom', () => {
     (useIsTabletScreen as jest.Mock).mockReturnValue(true);
     const { container } = render(<Sidebar {...testProps} />);
@@ -72,6 +100,28 @@ describe('Sidebar', () => {
     const htmlElement = container.querySelector('.sidebarBottom');
 
     expect(htmlElement).toHaveClass('minimized');
+    localStorage.clear();
+  });
+
+  it('sets class hidden for sidebarBottom when isHidden is true', () => {
+    (useSidebar as jest.Mock).mockReturnValue({ isHidden: true });
+    (useIsTabletScreen as jest.Mock).mockReturnValue(true);
+    const { container } = render(<Sidebar {...testProps} />);
+
+    const htmlElement: HTMLElement | null = container.querySelector('.sidebarBottom');
+
+    expect(htmlElement).toHaveClass('hidden');
+    localStorage.clear();
+  });
+
+  it('does not set class hidden for sidebarBottom when isHidden is false', () => {
+    (useSidebar as jest.Mock).mockReturnValue({ isHidden: false });
+    (useIsTabletScreen as jest.Mock).mockReturnValue(true);
+    const { container } = render(<Sidebar {...testProps} />);
+
+    const htmlElement: HTMLElement | null = container.querySelector('.sidebarBottom');
+
+    expect(htmlElement).not.toHaveClass('hidden');
     localStorage.clear();
   });
 
