@@ -22,6 +22,10 @@
     padding-left: 0;
   }
 }
+.content.hidden {
+  padding: 0;
+  transition: none;
+}
 
 .webapp {
   background-color: var(--page-background);

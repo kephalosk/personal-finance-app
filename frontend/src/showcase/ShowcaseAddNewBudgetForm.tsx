@@ -5,6 +5,7 @@ import { BudgetCategory } from '../model/BudgetCategory';
 import Colors from '../constants/Colors';
 import { Color } from '../model/Color';
 import { BudgetCategories } from '../constants/BudgetCategories';
+import ShowcaseWrapper from './ShowcaseWrapper';
 
 const ShowcaseAddNewBudgetForm = () => {
   const addNewBudgetDescription: string =
@@ -22,27 +23,29 @@ const ShowcaseAddNewBudgetForm = () => {
   const hasValidInput = true;
 
   return (
-    <OverlayCardBox
-      title="Add New Budget"
-      description={addNewBudgetDescription}
-      submitText="Add Budget"
-      isHidden={isHidden}
-      handleEvent={handleAddNewBudget}
-      onClose={closeForm}
-      isButtonDisabled={selectedCategoryItem.disabled}
-    >
-      <OverlayContentAddNewBudget
-        selectedCategoryItem={selectedCategoryItem}
-        handleCategoryChange={handleCategoryChange}
-        selectedColorItem={selectedColorItem}
-        handleColorChange={handleColorChange}
-        handleInputChange={handleInputChange}
-        colors={colors}
-        budgetCategories={budgetCategories}
+    <ShowcaseWrapper>
+      <OverlayCardBox
+        title="Add New Budget"
+        description={addNewBudgetDescription}
+        submitText="Add Budget"
         isHidden={isHidden}
-        hasValidInput={hasValidInput}
-      />
-    </OverlayCardBox>
+        handleEvent={handleAddNewBudget}
+        onClose={closeForm}
+        isButtonDisabled={selectedCategoryItem.disabled}
+      >
+        <OverlayContentAddNewBudget
+          selectedCategoryItem={selectedCategoryItem}
+          handleCategoryChange={handleCategoryChange}
+          selectedColorItem={selectedColorItem}
+          handleColorChange={handleColorChange}
+          handleInputChange={handleInputChange}
+          colors={colors}
+          budgetCategories={budgetCategories}
+          isHidden={isHidden}
+          hasValidInput={hasValidInput}
+        />
+      </OverlayCardBox>
+    </ShowcaseWrapper>
   );
 };
 

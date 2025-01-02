@@ -6,11 +6,13 @@ import {
   MemoryRouter,
   MemoryRouterProps,
   Routes,
+  useLocation,
 } from 'react-router-dom';
-import React, { ReactNode, useState } from 'react';
+import React, { ReactNode, useEffect, useState } from 'react';
 import ScrollToTop from './components/ScrollToTop';
 import { ReactFutureFlags } from './constants/ReactFutureFlags';
 import { getAppRoutes, getShowcaseRoutes } from './routes';
+import { useSidebar } from './globals/hooks/useSidebar';
 
 interface AppProps {
   Router?: React.ComponentType<BrowserRouterProps | MemoryRouterProps>;
@@ -24,6 +26,7 @@ const App: ({ Router, initialEntries }: AppProps) => React.ReactNode = ({
   const [isMinimized, setIsMinimized] = useState<boolean>(() => {
     return JSON.parse(localStorage.getItem('isMinimized') ?? 'false');
   });
+  const { isHidden } = useSidebar();
 
   const handleSidebarMinimize = (minimized: boolean) => {
     setIsMinimized(minimized);
@@ -41,13 +44,21 @@ const App: ({ Router, initialEntries }: AppProps) => React.ReactNode = ({
       <MemoryRouter initialEntries={initialEntries} future={ReactFutureFlags}>
         <Sidebar onMinimize={handleSidebarMinimize} />
         <ScrollToTop />
-        <section className={`content ${isMinimized ? 'minimized' : ''}`}>{routes}</section>
+        <section
+          className={`content ${isMinimized ? 'minimized' : ''} ${isHidden ? 'hidden' : ''}`}
+        >
+          {routes}
+        </section>
       </MemoryRouter>
     ) : (
       <Router future={ReactFutureFlags}>
         <Sidebar onMinimize={handleSidebarMinimize} />
         <ScrollToTop />
-        <section className={`content ${isMinimized ? 'minimized' : ''}`}>{routes}</section>
+        <section
+          className={`content ${isMinimized ? 'minimized' : ''} ${isHidden ? 'hidden' : ''}`}
+        >
+          {routes}
+        </section>
       </Router>
     );
 

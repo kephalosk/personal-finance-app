@@ -1,9 +1,10 @@
 import './Showcase.scss';
 import { Link } from 'react-router-dom';
+import ShowcaseWrapper from './ShowcaseWrapper';
 
 const Showcase = () => {
   return (
-    <>
+    <ShowcaseWrapper>
       <div className="showcase">
         <h1 className="showcaseHeadline">Showcase</h1>
         <div className="showcaseContent">
@@ -18,7 +19,7 @@ const Showcase = () => {
           </Link>
         </div>
       </div>
-    </>
+    </ShowcaseWrapper>
   );
 };
 
