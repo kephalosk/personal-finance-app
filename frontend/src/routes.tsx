@@ -10,6 +10,7 @@ import ShowcaseAddNewBudgetForm from './showcase/ShowcaseAddNewBudgetForm';
 import ShowcaseEditBudgetForm from './showcase/ShowcaseEditBudgetForm';
 import ShowcaseDeleteBudgetForm from './showcase/ShowcaseDeleteBudgetForm';
 import Showcase from './showcase/Showcase';
+import ShowcaseAddNewPotForm from './showcase/ShowcaseAddNewPotForm';
 
 export const getAppRoutes = () => {
   return (
@@ -31,6 +32,7 @@ export const getShowcaseRoutes = (): ReactNode => {
       <Route path="showcase/AddNewBudgetForm" element={<ShowcaseAddNewBudgetForm />} />
       <Route path="showcase/DeleteBudgetForm" element={<ShowcaseDeleteBudgetForm />} />
       <Route path="showcase/EditBudgetForm" element={<ShowcaseEditBudgetForm />} />
+      <Route path="showcase/AddNewPotForm" element={<ShowcaseAddNewPotForm />} />
     </>
   );
 };

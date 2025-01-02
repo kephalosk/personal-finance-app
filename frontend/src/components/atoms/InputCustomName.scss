@@ -1,0 +1,49 @@
+@use '../../styles/forms';
+
+.inputCustomName {
+  position: relative;
+}
+
+.inputCustomNameContainer {
+  margin-bottom: 16px;
+}
+
+.inputCustomNameInput {
+  border: 1px solid var(--component-background-grey);
+  padding: 12px 20px 12px 20px;
+  border-radius: 8px;
+  width: 100%;
+}
+.inputCustomNameInput:hover {
+  @include forms.form-field-outline;
+}
+.inputCustomNameInput:focus {
+  @include forms.form-field-outline;
+}
+.inputCustomNameInput::placeholder {
+  color: var(--sidebar-entry-text-default);
+}
+
+.inputCustomNameValidation {
+  margin-left: 8px;
+  font-size: 12px;
+  color: var(--text-red);
+  display: none;
+  flex-grow: 1;
+}
+.inputCustomNameValidation.visible {
+  display: block;
+}
+
+.inputCustomNameValidationContainer {
+  padding-top: 4px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  font-size: 12px;
+  color: var(--text-grey);
+}
+
+.inputCustomNameLength {
+  text-wrap: nowrap;
+}

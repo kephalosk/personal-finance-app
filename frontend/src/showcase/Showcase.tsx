@@ -17,6 +17,9 @@ const Showcase = () => {
           <Link className="showcaseContentLink" to={'/showcase/EditBudgetForm'}>
             EditBudgetForm
           </Link>
+          <Link className="showcaseContentLink" to={'/showcase/AddNewPotForm'}>
+            AddNewPotForm
+          </Link>
         </div>
       </div>
     </ShowcaseWrapper>
