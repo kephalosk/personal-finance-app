@@ -1,13 +1,12 @@
-import { createContext, useContext, Context } from 'react';
-import { ISidebarContext } from '../../model/ISidebarContext';
+import { useContext } from 'react';
+import { SidebarContext } from '../../components/provider/SidebarProvider';
 
-export const useSidebar: () => ISidebarContext = (): ISidebarContext => {
-  const sidebarContext: Context<ISidebarContext | undefined> = createContext<
-    ISidebarContext | undefined
-  >(undefined);
-  const context: ISidebarContext | undefined = useContext(sidebarContext);
+export const useSidebar = () => {
+  const context = useContext(SidebarContext);
+
   if (!context) {
     throw new Error('useSidebar must be used within SidebarProvider');
   }
+
   return context;
 };

@@ -9,6 +9,8 @@ jest.mock('react-dom/client', () => ({
   })),
 }));
 
+jest.mock('./App', () => jest.fn(() => <div data-testid="app"></div>));
+
 describe('main', () => {
   it('calls createRoot if root element exists', () => {
     document.body.innerHTML = '<div id="root"></div>';
