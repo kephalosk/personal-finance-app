@@ -7,20 +7,20 @@ jest.mock('react', () => ({
   useContext: jest.fn(),
 }));
 
-describe('useSidebar', () => {
+describe('useSidebar', (): void => {
   beforeEach(() => {
     (useContext as jest.Mock).mockReturnValue(
       createContext<ISidebarContext | undefined>(undefined)
     );
   });
 
-  it('returns SidebarContext', () => {
+  it('returns SidebarContext', (): void => {
     const result: ISidebarContext = useSidebar();
 
     expect(result).toBeDefined();
   });
 
-  it('throws if SidebarContext is undefined', () => {
+  it('throws if SidebarContext is undefined', (): void => {
     (useContext as jest.Mock).mockReturnValue(undefined);
 
     expect(() => useSidebar()).toThrow('useSidebar must be used within SidebarProvider');
