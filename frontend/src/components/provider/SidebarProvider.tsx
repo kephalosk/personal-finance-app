@@ -20,7 +20,9 @@ const SidebarProvider: ({ children }: Props) => ReactNode = ({ children }: Props
 
   return (
     <SidebarContext.Provider data-testid="sidebar-context-provider" value={value}>
-      {children}
+      <div className="sidebarProvider" data-testid="sidebar-context-provider">
+        {children}
+      </div>
     </SidebarContext.Provider>
   );
 };

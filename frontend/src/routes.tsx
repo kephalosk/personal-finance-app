@@ -30,8 +30,8 @@ export const getShowcaseRoutes = (): ReactNode => {
     <>
       <Route path="showcase" element={<Showcase />} />
       <Route path="showcase/AddNewBudgetForm" element={<ShowcaseAddNewBudgetForm />} />
-      <Route path="showcase/DeleteBudgetForm" element={<ShowcaseDeleteBudgetForm />} />
       <Route path="showcase/EditBudgetForm" element={<ShowcaseEditBudgetForm />} />
+      <Route path="showcase/DeleteBudgetForm" element={<ShowcaseDeleteBudgetForm />} />
       <Route path="showcase/AddNewPotForm" element={<ShowcaseAddNewPotForm />} />
     </>
   );

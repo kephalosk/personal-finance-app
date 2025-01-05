@@ -2,6 +2,7 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import App from './App';
 import { MemoryRouter, useLocation } from 'react-router-dom';
 import Sidebar from './components/sidebar/Sidebar';
+import { useSidebar } from './globals/hooks/useSidebar';
 
 jest.mock('./components/sidebar/Sidebar', () =>
   jest.fn((props) => <div data-testid="sidebar" onClick={() => props.onMinimize(true)}></div>)
@@ -21,16 +22,31 @@ jest.mock('./showcase/ShowcaseAddNewBudgetForm', () =>
 jest.mock('./showcase/ShowcaseEditBudgetForm', () =>
   jest.fn(() => <div data-testid="showcase-edit-budget-form"></div>)
 );
+jest.mock('./showcase/ShowcaseDeleteBudgetForm', () =>
+  jest.fn(() => <div data-testid="showcase-delete-budget-form"></div>)
+);
+jest.mock('./showcase/ShowcaseAddNewPotForm', () =>
+  jest.fn(() => <div data-testid="showcase-add-new-pot-form"></div>)
+);
 
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
   useLocation: jest.fn(),
 }));
 
+jest.mock('./globals/hooks/useSidebar', (): { __esModule: boolean; useSidebar: jest.Mock } => ({
+  __esModule: true,
+  useSidebar: jest.fn(),
+}));
+
 describe('App', () => {
   beforeEach(() => {
     (useLocation as jest.Mock).mockReturnValue({
       pathname: '/',
+    });
+    (useSidebar as jest.Mock).mockReturnValue({
+      isHidden: false,
+      setIsHidden: () => {},
     });
   });
 
@@ -136,7 +152,7 @@ describe('App', () => {
       ['ShowcaseEditBudgetForm', '/showcase/EditBudgetForm', 'showcase-edit-budget-form'],
       ['ShowcaseDeleteBudgetForm', '/showcase/DeleteBudgetForm', 'showcase-delete-budget-form'],
       ['ShowcaseAddNewPotForm', '/showcase/AddNewPotForm', 'showcase-add-new-pot-form'],
-    ])('renders %s on path %s', (title: string, path: string, testid: string) => {
+    ])('renders %s on path %s', (_: string, path: string, testid: string) => {
       const { getByTestId } = render(<App Router={MemoryRouter} initialEntries={[path]} />);
 
       expect(getByTestId(testid)).toBeInTheDocument();

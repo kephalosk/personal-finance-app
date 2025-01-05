@@ -1,11 +1,6 @@
-import { createContext, ReactNode } from 'react';
+import { ReactNode } from 'react';
 import { render, screen } from '@testing-library/react';
-import SidebarProvider from './SidebarProvider';
-
-jest.mock('react', () => ({
-  ...jest.requireActual('react'),
-  createContext: jest.fn(),
-}));
+import { SidebarProvider } from './SidebarProvider';
 
 describe('SidebarProvider', (): void => {
   const children: ReactNode = <div data-testid="children"></div>;
@@ -16,15 +11,7 @@ describe('SidebarProvider', (): void => {
     children,
   };
 
-  beforeEach((): void => {
-    (createContext as jest.Mock).mockReturnValue({
-      Provider: ({ children }: { children: ReactNode }) => (
-        <div data-testid="sidebar-context-provider">{children}</div>
-      ),
-    });
-  });
-
-  it('renders component SidebarContext.Provider', (): void => {
+  it('renders div sidebarProvider', (): void => {
     render(<SidebarProvider {...testProps}>{children}</SidebarProvider>);
 
     const sidebarContextProvider: HTMLElement = screen.getByTestId('sidebar-context-provider');

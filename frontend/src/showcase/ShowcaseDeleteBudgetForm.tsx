@@ -3,14 +3,17 @@ import React from 'react';
 import OverlayContentDeleteBudget from '../components/overlay/OverlayContentDeleteBudget';
 import { OverlayCardBoxButtonTypeEnum } from '../model/enum/OverlayCardBoxButtonTypeEnum';
 import ShowcaseWrapper from './ShowcaseWrapper';
+import { mockedBudget } from '../fixtures/MockedBudgets';
 
-const ShowcaseEditBudgetForm = () => {
+const ShowcaseDeleteBudgetForm = () => {
+  const descriptionDeleteBudget: string =
+    'Are you sure you want to delete this budget? This action cannot be reversed, and all the data inside it will be removed forever.';
   return (
     <ShowcaseWrapper>
       <OverlayCardBox
-        title="Add New Budget"
-        description="As your budgets change, feel free to update your spending limits."
-        submitText="Add Budget"
+        title={`Delete '${mockedBudget.category}'`}
+        description={descriptionDeleteBudget}
+        submitText="No, Go Back"
         isHidden={false}
         handleEvent={() => {}}
         onClose={() => {}}
@@ -23,4 +26,4 @@ const ShowcaseEditBudgetForm = () => {
   );
 };
 
-export default ShowcaseEditBudgetForm;
+export default ShowcaseDeleteBudgetForm;

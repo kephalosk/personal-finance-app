@@ -6,9 +6,8 @@ import {
   MemoryRouter,
   MemoryRouterProps,
   Routes,
-  useLocation,
 } from 'react-router-dom';
-import React, { ReactNode, useEffect, useState } from 'react';
+import React, { ReactNode, useState } from 'react';
 import ScrollToTop from './components/ScrollToTop';
 import { ReactFutureFlags } from './constants/ReactFutureFlags';
 import { getAppRoutes, getShowcaseRoutes } from './routes';
