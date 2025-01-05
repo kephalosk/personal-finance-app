@@ -78,8 +78,8 @@ const InputCustomName: ForwardRefExoticComponent<Props & RefAttributes<InputCust
       };
 
       return (
-        <div className="inputCustomNameContainer">
-          <div className="inputCustomName" data-testid="input-custom-name">
+        <div className="inputCustomNameContainer" data-testid="input-custom-name">
+          <div className="inputCustomName">
             <input
               className="inputCustomNameInput"
               placeholder="e.g. Rainy Days"
