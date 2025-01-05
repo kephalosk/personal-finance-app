@@ -7,7 +7,7 @@ import colors from '../../constants/Colors';
 
 const OverlayContentAddNewPot = () => {
   return (
-    <>
+    <div className="overlayContentAddNewPot">
       <OverlayContentLabel title="Pot Name" />
       <InputCustomName handleInputChange={() => {}} hasValidInput={true} />
       <OverlayContentLabel title="Target" />
@@ -18,7 +18,7 @@ const OverlayContentAddNewPot = () => {
         handleColorChange={() => {}}
         colors={colors}
       />
-    </>
+    </div>
   );
 };
 

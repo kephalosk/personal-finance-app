@@ -2,7 +2,7 @@ import OverlayCardBox from '../components/overlay/OverlayCardBox';
 import ShowcaseWrapper from './ShowcaseWrapper';
 import OverlayContentAddNewPot from '../components/overlay/OverlayContentAddNewPot';
 
-const ShowcaseAddNewBudgetForm = () => {
+const ShowcaseAddNewPotForm = () => {
   const addNewPotDescription: string =
     'Create a pot to set savings targets. These can help keep you on track as you save for special purchases.';
   const isHidden: boolean = false;
@@ -25,4 +25,4 @@ const ShowcaseAddNewBudgetForm = () => {
   );
 };
 
-export default ShowcaseAddNewBudgetForm;
+export default ShowcaseAddNewPotForm;
