@@ -140,23 +140,42 @@ describe('InputCustomName', () => {
     expect(element).toBeInTheDocument();
   });
 
-  it('renders label inputCustomNameValidation with passed prop hasValidInput === true', () => {
-    const { container } = render(<InputCustomName {...testProps} hasValidInput={true} />);
+  it.each(['', 'value'])(
+    'renders label inputCustomNameValidation with passed prop hasValidInput === true',
+    (initialValue: string) => {
+      const { container } = render(
+        <InputCustomName {...testProps} hasValidInput={true} initialValue={initialValue} />
+      );
 
-    const element: Element | null = container.querySelector('.inputCustomNameValidation');
+      const element: Element | null = container.querySelector('.inputCustomNameValidation');
 
-    expect(element).toBeInTheDocument();
-    expect(element).not.toHaveClass('visible');
-  });
+      expect(element).toBeInTheDocument();
+      expect(element).not.toHaveClass('visible');
+    }
+  );
 
-  it('renders label inputCustomNameValidation with passed prop hasValidInput === false', () => {
-    const { container } = render(<InputCustomName {...testProps} hasValidInput={false} />);
+  it('renders label inputCustomNameValidation with passed prop hasValidInput === false for empty value', () => {
+    const { container } = render(
+      <InputCustomName {...testProps} hasValidInput={false} initialValue="" />
+    );
 
     const element: Element | null = container.querySelector('.inputCustomNameValidation');
 
     expect(element).toBeInTheDocument();
     expect(element).toHaveClass('visible');
-    expect(element).toHaveTextContent('Please enter a spending limit!');
+    expect(element).toHaveTextContent('Please enter a Pot Name!');
+  });
+
+  it('renders label inputCustomNameValidation with passed prop hasValidInput === false for available value', () => {
+    const { container } = render(
+      <InputCustomName {...testProps} hasValidInput={false} initialValue="value" />
+    );
+
+    const element: Element | null = container.querySelector('.inputCustomNameValidation');
+
+    expect(element).toBeInTheDocument();
+    expect(element).toHaveClass('visible');
+    expect(element).toHaveTextContent('That Pot Name already exists!');
   });
 
   it('renders label inputCustomNameLength with leftover amount of charactors', () => {

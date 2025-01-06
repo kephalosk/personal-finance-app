@@ -75,12 +75,39 @@ describe('App', () => {
     expect(component).toBeInTheDocument();
   });
 
-  it('renders section content', () => {
+  it('renders section content with isHidden === false', () => {
     const { container } = render(<App />);
 
     const htmlElement = container.querySelector('.content');
 
     expect(htmlElement).toBeInTheDocument();
+    expect(htmlElement).not.toHaveClass('hidden');
+  });
+
+  it('renders section content with isHidden === true', () => {
+    (useSidebar as jest.Mock).mockReturnValue({
+      isHidden: true,
+      setIsHidden: () => {},
+    });
+    const { container } = render(<App />);
+
+    const htmlElement = container.querySelector('.content');
+
+    expect(htmlElement).toBeInTheDocument();
+    expect(htmlElement).toHaveClass('hidden');
+  });
+
+  it('renders section content with isHidden === true for MemoryRouter', () => {
+    (useSidebar as jest.Mock).mockReturnValue({
+      isHidden: true,
+      setIsHidden: () => {},
+    });
+    const { container } = render(<App Router={MemoryRouter} />);
+
+    const htmlElement = container.querySelector('.content');
+
+    expect(htmlElement).toBeInTheDocument();
+    expect(htmlElement).toHaveClass('hidden');
   });
 
   it('sets class minimized on content section if isMinimized is true', () => {
