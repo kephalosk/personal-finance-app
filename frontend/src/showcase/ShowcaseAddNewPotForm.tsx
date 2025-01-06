@@ -1,6 +1,8 @@
 import OverlayCardBox from '../components/overlay/OverlayCardBox';
 import ShowcaseWrapper from './ShowcaseWrapper';
 import OverlayContentAddNewPot from '../components/overlay/OverlayContentAddNewPot';
+import React from 'react';
+import Colors from '../constants/Colors';
 
 const ShowcaseAddNewPotForm = () => {
   const addNewPotDescription: string =
@@ -19,7 +21,15 @@ const ShowcaseAddNewPotForm = () => {
         handleEvent={handleAddNewPot}
         onClose={closeForm}
       >
-        <OverlayContentAddNewPot />
+        <OverlayContentAddNewPot
+          hasValidNameInput={true}
+          handleNameInputChange={(): void => {}}
+          hasValidTargetInput={true}
+          handleTargetInputChange={(): void => {}}
+          isHidden={isHidden}
+          selectedColorItem={Colors[0]}
+          handleColorChange={(): void => {}}
+        />
       </OverlayCardBox>
     </ShowcaseWrapper>
   );
