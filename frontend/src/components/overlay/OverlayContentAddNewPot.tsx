@@ -1,22 +1,60 @@
 import './OverlayContentAddNewPot.scss';
-import InputCustomName from '../atoms/InputCustomName';
+import InputCustomName, { InputCustomNameRef } from '../atoms/InputCustomName';
 import OverlayContentLabel from '../atoms/OverlayContentLabel';
-import InputMoney from '../atoms/InputMoney';
+import InputMoney, { InputMoneyRef } from '../atoms/InputMoney';
 import OverlayDropdownColor from './OverlayDropdownColor';
-import colors from '../../constants/Colors';
+import Colors from '../../constants/Colors';
+import { Color } from '../../model/Color';
+import { RefObject, useEffect, useRef } from 'react';
 
-const OverlayContentAddNewPot = () => {
+interface Props {
+  hasValidNameInput: boolean;
+  handleNameInputChange: (input: string) => void;
+  hasValidTargetInput: boolean;
+  handleTargetInputChange: (input: number) => void;
+  isHidden: boolean;
+  selectedColorItem: Color;
+  handleColorChange: (color: Color) => void;
+}
+
+const OverlayContentAddNewPot = ({
+  hasValidNameInput,
+  handleNameInputChange,
+  hasValidTargetInput,
+  handleTargetInputChange,
+  isHidden,
+  selectedColorItem,
+  handleColorChange,
+}: Props) => {
+  const inputMoneyRef: RefObject<InputMoneyRef> = useRef<InputMoneyRef>(null);
+  const inputCustomNameRef: RefObject<InputMoneyRef> = useRef<InputCustomNameRef>(null);
+
+  useEffect((): void => {
+    if (isHidden) {
+      inputMoneyRef.current?.reset();
+      inputCustomNameRef.current?.reset();
+    }
+  }, [isHidden]);
+
   return (
-    <div className="overlayContentAddNewPot">
+    <div className="overlayContentAddNewPot" data-testid="overlay-content-add-new-pot">
       <OverlayContentLabel title="Pot Name" />
-      <InputCustomName handleInputChange={() => {}} hasValidInput={true} />
+      <InputCustomName
+        ref={inputCustomNameRef}
+        handleInputChange={handleNameInputChange}
+        hasValidInput={hasValidNameInput}
+      />
       <OverlayContentLabel title="Target" />
-      <InputMoney handleInputChange={() => {}} hasValidInput={true} />
+      <InputMoney
+        ref={inputMoneyRef}
+        handleInputChange={handleTargetInputChange}
+        hasValidInput={hasValidTargetInput}
+      />
       <OverlayContentLabel title="Theme" />
       <OverlayDropdownColor
-        selectedColor={colors[0]}
-        handleColorChange={() => {}}
-        colors={colors}
+        selectedColor={selectedColorItem}
+        handleColorChange={handleColorChange}
+        colors={Colors}
       />
     </div>
   );

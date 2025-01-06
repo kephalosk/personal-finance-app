@@ -5,6 +5,7 @@ import LoadingSpinner from '../LoadingSpinner';
 import { EPPot } from '../../model/entrypoints/EPPot';
 import { CardHeaderItemNameEnum } from '../../model/enum/CardHeaderItemNameEnum';
 import { ReactNode } from 'react';
+import { CardHeaderItemOperationEnum } from '../../model/enum/CardHeaderItemOperationEnum';
 
 interface Props {
   pot: EPPot;
@@ -15,7 +16,14 @@ const PotCard: ({ pot, isLoading }: Props) => ReactNode = ({
   pot,
   isLoading,
 }: Props): ReactNode => {
-  const handleSelection = (): void => {};
+  const handleSelection = (itemOperation: CardHeaderItemOperationEnum): void => {
+    if (itemOperation === CardHeaderItemOperationEnum.EDIT) {
+      //TODO fe-27 edit
+    }
+    if (itemOperation === CardHeaderItemOperationEnum.DELETE) {
+      //TODO fe-28 delete
+    }
+  };
 
   return (
     <>

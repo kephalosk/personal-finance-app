@@ -207,15 +207,15 @@ const BudgetsPage: () => ReactNode = (): ReactNode => {
           isButtonDisabled={selectedCategoryItem.disabled}
         >
           <OverlayContentAddNewBudget
+            budgetCategories={budgetCategories}
             selectedCategoryItem={selectedCategoryItem}
             handleCategoryChange={handleCategoryChange}
+            hasValidInput={hasValidInput}
             handleInputChange={handleInputChange}
+            isHidden={isHidden}
             selectedColorItem={selectedColorItem}
             handleColorChange={handleColorChange}
             colors={colors}
-            budgetCategories={budgetCategories}
-            isHidden={isHidden}
-            hasValidInput={hasValidInput}
           />
         </OverlayCardBox>
       </div>

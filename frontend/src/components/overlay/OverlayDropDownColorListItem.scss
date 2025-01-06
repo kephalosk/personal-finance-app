@@ -59,6 +59,12 @@
 .dropdownColorCircle.sepia {
   background-color: var(--sepia);
 }
+.dropdownColorCircle.white {
+  background-color: var(--white);
+}
+.dropdownColorCircle.black {
+  background-color: var(--black);
+}
 
 .dropdownColorLabel {
   flex-grow: 1;
