@@ -245,10 +245,10 @@ UND mit klick auf "Save Changes" wird ein PUT request an das Backend gesendet, u
     <node id="n22">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
-          <y:Geometry height="25.999999999999545" width="228.9955780164246" x="1624.9133176808202" y="-496.990476190476"/>
-          <y:Fill color="#00FFFF" color2="#B7C9E3" transparent="false"/>
+          <y:Geometry height="25.999999999999545" width="228.9955780164246" x="1624.9133176808202" y="-552.990476190476"/>
+          <y:Fill color="#00FF00" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
-          <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="228.9955780164246" x="0.0" xml:space="preserve" y="2.9335937499997726">im showcase finzufügen<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="228.9955780164246" x="0.0" xml:space="preserve" y="2.9335937499997726">im showcase hinzufügen<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
         </y:GenericNode>
       </data>
     </node>
@@ -675,7 +675,7 @@ UND mit klick auf "Save Changes" wird ein PUT request an das Backend gesendet, u
     <node id="n64">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
-          <y:Geometry height="25.999999999999545" width="228.9955780164246" x="1624.9133176808202" y="-552.990476190476"/>
+          <y:Geometry height="25.999999999999545" width="228.9955780164246" x="1624.9133176808202" y="-496.990476190476"/>
           <y:Fill color="#00FFFF" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="228.9955780164246" x="0.0" xml:space="preserve" y="2.9335937499997726">setInitialPotName<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
@@ -833,9 +833,9 @@ UND mit klick auf "Save Changes" wird ein PUT request an das Backend gesendet, u
       <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
-          <y:Path sx="114.4977890082123" sy="-0.0" tx="-114.4977890082123" ty="-0.0">
-            <y:Point x="1609.4133176808202" y="-436.65714285714284"/>
-            <y:Point x="1609.4133176808202" y="-483.9904761904762"/>
+          <y:Path sx="114.4977890082123" sy="-8.666666666666515" tx="-114.4977890082123" ty="-0.0">
+            <y:Point x="1593.4133176808202" y="-445.32380952380936"/>
+            <y:Point x="1593.4133176808202" y="-539.9904761904762"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="standard"/>
@@ -1385,9 +1385,9 @@ UND mit klick auf "Save Changes" wird ein PUT request an das Backend gesendet, u
       <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
-          <y:Path sx="114.4977890082123" sy="-8.666666666666515" tx="-114.4977890082123" ty="-0.0">
-            <y:Point x="1593.4133176808202" y="-445.32380952380936"/>
-            <y:Point x="1593.4133176808202" y="-539.9904761904762"/>
+          <y:Path sx="114.4977890082123" sy="-0.0" tx="-114.4977890082123" ty="-0.0">
+            <y:Point x="1609.4133176808202" y="-436.65714285714284"/>
+            <y:Point x="1609.4133176808202" y="-483.9904761904762"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="standard"/>
