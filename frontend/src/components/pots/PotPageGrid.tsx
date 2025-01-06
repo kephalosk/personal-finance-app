@@ -6,11 +6,13 @@ import React from 'react';
 
 interface Props {
   pots: EPPot[];
+  updatePage: () => Promise<void>;
   isLoading: boolean;
 }
 
-const PotPageGrid: ({ pots, isLoading }: Props) => React.ReactNode = ({
+const PotPageGrid: ({ pots, updatePage, isLoading }: Props) => React.ReactNode = ({
   pots,
+  updatePage,
   isLoading,
 }: Props) => {
   return (
@@ -20,7 +22,13 @@ const PotPageGrid: ({ pots, isLoading }: Props) => React.ReactNode = ({
       ) : (
         <div className="potPageGrid" data-testid="pot-page-grid">
           {pots.map((pot: EPPot, index: number) => (
-            <PotCard key={index} pot={pot} isLoading={isLoading} />
+            <PotCard
+              key={index}
+              pots={pots}
+              pot={pot}
+              isLoading={isLoading}
+              updatePage={updatePage}
+            />
           ))}
         </div>
       )}

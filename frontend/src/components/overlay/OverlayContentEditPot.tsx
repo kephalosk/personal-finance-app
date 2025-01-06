@@ -5,27 +5,40 @@ import InputMoney, { InputMoneyRef } from '../atoms/InputMoney';
 import OverlayDropdownColor from './OverlayDropdownColor';
 import Colors from '../../constants/Colors';
 import { Color } from '../../model/Color';
-import { RefObject, useEffect, useRef } from 'react';
+import { ReactNode, RefObject, useEffect, useRef, useState } from 'react';
+import getColorObject from '../../globals/utils/getColorObject';
+import { EPPot } from '../../model/entrypoints/EPPot';
 
 interface Props {
+  pot: EPPot;
   hasValidNameInput: boolean;
   handleNameInputChange: (input: string) => void;
   hasValidTargetInput: boolean;
   handleTargetInputChange: (input: number) => void;
   isHidden: boolean;
-  selectedColorItem: Color;
-  handleColorChange: (color: Color) => void;
+  propagateColorChange: (color: Color) => void;
+  hasFormToGetAReset: boolean;
 }
 
-const OverlayContentEditPot = ({
+const OverlayContentEditPot: ({
+  pot,
   hasValidNameInput,
   handleNameInputChange,
   hasValidTargetInput,
   handleTargetInputChange,
   isHidden,
-  selectedColorItem,
-  handleColorChange,
-}: Props) => {
+  propagateColorChange,
+  hasFormToGetAReset,
+}: Props) => ReactNode = ({
+  pot,
+  hasValidNameInput,
+  handleNameInputChange,
+  hasValidTargetInput,
+  handleTargetInputChange,
+  isHidden,
+  propagateColorChange,
+  hasFormToGetAReset,
+}: Props): ReactNode => {
   const inputMoneyRef: RefObject<InputMoneyRef> = useRef<InputMoneyRef>(null);
   const inputCustomNameRef: RefObject<InputMoneyRef> = useRef<InputCustomNameRef>(null);
 
@@ -36,6 +49,22 @@ const OverlayContentEditPot = ({
     }
   }, [isHidden]);
 
+  const [colorList, setColorList] = useState<Color[]>(Colors);
+  const [selectedColorItem, setSelectedColorItem] = useState<Color>(getColorObject(pot.color));
+  useEffect((): void => {
+    const filteredColors: Color[] = colorList.filter(
+      (color: Color): boolean => color.name !== pot.color
+    );
+    const updatedColors: Color[] = [getColorObject(pot.color), ...filteredColors];
+    setColorList(updatedColors);
+    setSelectedColorItem(getColorObject(pot.color));
+  }, [pot, hasFormToGetAReset, colorList]);
+
+  const handleColorChange: (color: Color) => void = (color: Color) => {
+    setSelectedColorItem(color);
+    propagateColorChange(color);
+  };
+
   return (
     <div className="overlayContentAddNewPot" data-testid="overlay-content-add-new-pot">
       <OverlayContentLabel title="Pot Name" />
@@ -43,18 +72,20 @@ const OverlayContentEditPot = ({
         ref={inputCustomNameRef}
         handleInputChange={handleNameInputChange}
         hasValidInput={hasValidNameInput}
+        initialValue={pot.name}
       />
       <OverlayContentLabel title="Target" />
       <InputMoney
         ref={inputMoneyRef}
         handleInputChange={handleTargetInputChange}
         hasValidInput={hasValidTargetInput}
+        initialValue={pot.target.toString()}
       />
       <OverlayContentLabel title="Theme" />
       <OverlayDropdownColor
         selectedColor={selectedColorItem}
         handleColorChange={handleColorChange}
-        colors={Colors}
+        colors={colorList}
       />
     </div>
   );

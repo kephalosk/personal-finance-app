@@ -13,10 +13,10 @@ import { BudgetCategory } from '../../model/BudgetCategory';
 interface Props {
   fetchedBudgets: EPBudget[];
   budget: EPBudget;
-  handleInputChange: (input: number) => void;
-  propagateColorChange: (color: Color) => void;
-  isHidden: boolean;
   hasValidInput: boolean;
+  handleInputChange: (input: number) => void;
+  isHidden: boolean;
+  propagateColorChange: (color: Color) => void;
   hasFormToGetAReset: boolean;
 }
 
@@ -56,7 +56,7 @@ const OverlayContentEditBudget: ({
   useEffect((): void => {
     const sortedColors: Color[] = sortColors();
     const filteredColors: Color[] = sortedColors.filter(
-      (color: Color): boolean => color.name !== budget.category
+      (color: Color): boolean => color.name !== budget.color
     );
     const updatedColors: Color[] = [getColorObject(budget.color), ...filteredColors];
     setColorList(updatedColors);
