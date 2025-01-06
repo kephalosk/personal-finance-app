@@ -1279,7 +1279,7 @@ expect(window.scrollTo).toHaveBeenCalledWith(0, 0);<y:LabelModel><y:SmartNodeLab
     <node id="n110">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
-          <y:Geometry height="322.7636640050866" width="471.590037280425" x="2499.423062655585" y="-4519.343736764447"/>
+          <y:Geometry height="322.7636640050866" width="471.590037280425" x="2499.423062655585" y="-4668.228657399369"/>
           <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="302.7890625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="471.590037280425" x="0.0" xml:space="preserve" y="9.987300752542978">const mockReset = jest.fn();
@@ -1358,7 +1358,7 @@ useImperativeHandle(ref, () =&gt; ({
     <node id="n114">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
-          <y:Geometry height="318.2099369380555" width="625.7138317734162" x="2422.361165409089" y="-4166.579968469027"/>
+          <y:Geometry height="318.2099369380555" width="625.7138317734162" x="2422.361165409089" y="-3917.7156827547424"/>
           <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="302.7890625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="625.7138317734162" x="0.0" xml:space="preserve" y="7.710437219027881">jest.mock('./DropdownCategoryListItem', () =&gt;
@@ -1533,7 +1533,7 @@ jest.mock('./CardHeaderDropdownItem', () =&gt;
     <node id="n126">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
-          <y:Geometry height="157.51810883343404" width="479.277660541543" x="2495.5792510250258" y="-3818.3697687024314"/>
+          <y:Geometry height="157.51810883343404" width="479.277660541543" x="2495.5792510250258" y="-3569.5054829881456"/>
           <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="147.328125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="479.277660541543" x="0.0" xml:space="preserve" y="5.0949919167169355">jest.mock('../../overlay/OverlayCardBox', () =&gt;
@@ -1562,7 +1562,7 @@ jest.mock('../../overlay/OverlayContentEditBudget', () =&gt;
     <node id="n128">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
-          <y:Geometry height="176.85321266453246" width="479.277660541543" x="2495.5792510250258" y="-3630.8516063322663"/>
+          <y:Geometry height="176.85321266453246" width="479.277660541543" x="2495.5792510250258" y="-3381.9873206179805"/>
           <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="175.59375" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="479.277660541543" x="0.0" xml:space="preserve" y="0.6297313322661466">const spendAmount = 100;
@@ -1577,6 +1577,40 @@ jest.mock('../../overlay/OverlayContentEditBudget', () =&gt;
     &gt;&lt;/div&gt;
   ))
 );<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+        </y:GenericNode>
+      </data>
+    </node>
+    <node id="n129">
+      <data key="d6">
+        <y:GenericNode configuration="com.yworks.flowchart.process">
+          <y:Geometry height="367.7489092240741" width="625.7138317734162" x="2422.361165409089" y="-4315.464930802513"/>
+          <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
+          <y:BorderStyle color="#000000" type="line" width="1.0"/>
+          <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="359.3203125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="625.7138317734162" x="0.0" xml:space="preserve" y="4.2142983620369705">const mockReset: jest.Mock = jest.fn();
+const mockInputCustomName = jest.fn();
+jest.mock('../atoms/InputCustomName', () =&gt; {
+  const MockInputCustomName: ForwardRefExoticComponent&lt;
+    { handleInputChange: (input: string) =&gt; void } &amp; React.RefAttributes&lt;unknown&gt;
+  &gt; = forwardRef((props: { handleInputChange: (input: string) =&gt; void }, ref) =&gt; {
+    const { handleInputChange, ...rest } = props;
+
+    useImperativeHandle(ref, () =&gt; ({
+      reset: mockReset,
+    }));
+
+    mockInputCustomName(props);
+
+    const handleChange = (event: React.ChangeEvent&lt;HTMLInputElement&gt;) =&gt; {
+      handleInputChange(event.target.value);
+    };
+
+    return &lt;input {...rest} data-testid="input-custom-name" onChange={handleChange} /&gt;;
+  });
+
+  MockInputCustomName.displayName = 'InputCustomName';
+
+  return MockInputCustomName;
+});<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
         </y:GenericNode>
       </data>
     </node>
@@ -2934,9 +2968,9 @@ jest.mock('../../overlay/OverlayContentEditBudget', () =&gt;
     <edge id="e109" source="n111" target="n110">
       <data key="d10">
         <y:PolyLineEdge>
-          <y:Path sx="84.81863387042449" sy="-5.25" tx="-235.7950186402125" ty="-0.0">
-            <y:Point x="2390.861165409089" y="-3770.8607142857145"/>
-            <y:Point x="2390.861165409089" y="-4357.961904761904"/>
+          <y:Path sx="84.81863387042449" sy="-7.0" tx="-235.7950186402125" ty="-0.0">
+            <y:Point x="2390.861165409089" y="-3772.6107142857145"/>
+            <y:Point x="2390.861165409089" y="-4506.846825396826"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="standard"/>
@@ -2973,10 +3007,7 @@ jest.mock('../../overlay/OverlayContentEditBudget', () =&gt;
     <edge id="e112" source="n111" target="n114">
       <data key="d10">
         <y:PolyLineEdge>
-          <y:Path sx="84.81863387042449" sy="5.25" tx="-312.8569158867081" ty="-0.0">
-            <y:Point x="2406.861165409089" y="-3760.3607142857145"/>
-            <y:Point x="2406.861165409089" y="-4007.475"/>
-          </y:Path>
+          <y:Path sx="84.81863387042449" sy="7.0" tx="-312.8569158867081" ty="-0.0"/>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="standard"/>
           <y:BendStyle smoothed="false"/>
@@ -3146,7 +3177,10 @@ jest.mock('../../overlay/OverlayContentEditBudget', () =&gt;
     <edge id="e126" source="n127" target="n126">
       <data key="d10">
         <y:PolyLineEdge>
-          <y:Path sx="84.81863387042449" sy="-5.25" tx="-239.63883027077145" ty="-0.0"/>
+          <y:Path sx="84.81863387042449" sy="-5.25" tx="-239.63883027077145" ty="-0.0">
+            <y:Point x="2259.1944987424226" y="-3739.6107142857145"/>
+            <y:Point x="2259.1944987424226" y="-3490.7464285714286"/>
+          </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="standard"/>
           <y:BendStyle smoothed="false"/>
@@ -3160,7 +3194,21 @@ jest.mock('../../overlay/OverlayContentEditBudget', () =&gt;
             <y:Point x="1304.8905643349067" y="-3729.1107142857145"/>
             <y:Point x="1304.8905643349067" y="-3728.1107142857145"/>
             <y:Point x="2243.1944987424226" y="-3728.1107142857145"/>
-            <y:Point x="2243.1944987424226" y="-3542.425"/>
+            <y:Point x="2243.1944987424226" y="-3293.5607142857143"/>
+          </y:Path>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e128" source="n111" target="n129">
+      <data key="d9"/>
+      <data key="d10">
+        <y:PolyLineEdge>
+          <y:Path sx="84.81863387042449" sy="-0.0" tx="-312.8569158867081" ty="-0.0">
+            <y:Point x="2406.861165409089" y="-3765.6107142857145"/>
+            <y:Point x="2406.861165409089" y="-4131.590476190476"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="standard"/>

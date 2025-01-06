@@ -89,9 +89,16 @@ const InputCustomName: ForwardRefExoticComponent<Props & RefAttributes<InputCust
             />
           </div>
           <div className="inputCustomNameValidationContainer">
-            <label className={`inputCustomNameValidation ${hasValidInput ? '' : 'visible'}`}>
-              Please enter a spending limit!
-            </label>
+            {!value.length && (
+              <label className={`inputCustomNameValidation ${hasValidInput ? '' : 'visible'}`}>
+                Please enter a Pot Name!
+              </label>
+            )}
+            {value.length && (
+              <label className={`inputCustomNameValidation ${hasValidInput ? '' : 'visible'}`}>
+                That Pot Name already exists!
+              </label>
+            )}
             <label className={'inputCustomNameLength'}>{30 - value.length} characters left</label>
           </div>
         </div>

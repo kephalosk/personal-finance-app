@@ -7,7 +7,7 @@ import PotCardDetails from './PotCardDetails';
 import { CardHeaderItemNameEnum } from '../../model/enum/CardHeaderItemNameEnum';
 import { EPPot } from '../../model/entrypoints/EPPot';
 import { CardHeaderItemOperationEnum } from '../../model/enum/CardHeaderItemOperationEnum';
-import { ReactNode } from 'react';
+import { Fragment, ReactNode } from 'react';
 
 jest.mock(
   '../LoadingSpinner',
@@ -18,10 +18,16 @@ jest.mock(
   (): jest.Mock =>
     jest.fn(
       (props): ReactNode => (
-        <div
-          data-testid="card-header"
-          onClick={() => props.handleSelection(CardHeaderItemOperationEnum.EDIT)}
-        ></div>
+        <Fragment>
+          <div
+            data-testid="card-header"
+            onClick={() => props.handleSelection(CardHeaderItemOperationEnum.EDIT)}
+          ></div>
+          <div
+            data-testid="card-header-delete"
+            onClick={() => props.handleSelection(CardHeaderItemOperationEnum.DELETE)}
+          ></div>
+        </Fragment>
       )
     )
 );
@@ -93,6 +99,16 @@ describe('PotCard', () => {
     render(<PotCard {...testProps} />);
 
     const component: HTMLElement = screen.getByTestId('card-header');
+    fireEvent.click(component);
+
+    expect(component).toBeInTheDocument();
+    //TODO fe-27-edit-pot: check outcome of handleSelection
+  });
+
+  it('handels selection of CardHeader', () => {
+    render(<PotCard {...testProps} />);
+
+    const component: HTMLElement = screen.getByTestId('card-header-delete');
     fireEvent.click(component);
 
     expect(component).toBeInTheDocument();
