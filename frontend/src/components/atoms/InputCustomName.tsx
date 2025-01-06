@@ -94,7 +94,7 @@ const InputCustomName: ForwardRefExoticComponent<Props & RefAttributes<InputCust
                 Please enter a Pot Name!
               </label>
             )}
-            {value.length && (
+            {value.length > 0 && (
               <label className={`inputCustomNameValidation ${hasValidInput ? '' : 'visible'}`}>
                 That Pot Name already exists!
               </label>
