@@ -3,9 +3,9 @@ import openPage from '../utils/openPage';
 import { DeviceHeight, DeviceWidth } from '../constants';
 import removeFocus from '../utils/removeFocus';
 
-const BASE_PATH: string = 'http://localhost:5173/showcase/EditBudgetForm';
+const BASE_PATH: string = 'http://localhost:5173/showcase/AddNewPotForm';
 
-test('EditBudgetForm-Desktop', async ({ page }): Promise<void> => {
+test('AddNewPotForm-Desktop', async ({ page }): Promise<void> => {
   await openPage(page, BASE_PATH, DeviceHeight.Default, DeviceWidth.Desktop);
 
   await removeFocus(page);
@@ -13,7 +13,7 @@ test('EditBudgetForm-Desktop', async ({ page }): Promise<void> => {
   await expect(page).toHaveScreenshot();
 });
 
-test('EditBudgetForm-Tablet', async ({ page }): Promise<void> => {
+test('AddNewPotForm-Tablet', async ({ page }): Promise<void> => {
   await openPage(page, BASE_PATH, DeviceHeight.Default, DeviceWidth.Tablet);
 
   await removeFocus(page);
@@ -21,7 +21,7 @@ test('EditBudgetForm-Tablet', async ({ page }): Promise<void> => {
   await expect(page).toHaveScreenshot();
 });
 
-test('EditBudgetForm-Mobile', async ({ page }): Promise<void> => {
+test('AddNewPotForm-Mobile', async ({ page }): Promise<void> => {
   await openPage(page, BASE_PATH, DeviceHeight.Default, DeviceWidth.Mobile);
 
   await removeFocus(page);
