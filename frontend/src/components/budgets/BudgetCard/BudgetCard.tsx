@@ -175,10 +175,10 @@ const BudgetCard: ({
             <OverlayContentEditBudget
               fetchedBudgets={fetchedBudgets}
               budget={budget}
-              handleInputChange={handleInputChange}
-              propagateColorChange={propagateColorChange}
-              isHidden={isEditBudgetHidden}
               hasValidInput={hasValidInput}
+              handleInputChange={handleInputChange}
+              isHidden={isEditBudgetHidden}
+              propagateColorChange={propagateColorChange}
               hasFormToGetAReset={hasFormToGetAReset}
             />
           </OverlayCardBox>
