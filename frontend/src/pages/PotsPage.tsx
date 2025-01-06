@@ -110,7 +110,7 @@ const PotsPage: () => React.ReactNode = (): React.ReactNode => {
     <>
       <div className="potsPage" data-testid="pots-page">
         <HeaderBar h1Headline="Pots" buttonText="+ Add New Pot" handleClick={openNewPotForm} />
-        <PotPageGrid pots={pots} isLoading={isLoading} />
+        <PotPageGrid pots={pots} isLoading={isLoading} updatePage={updatePage} />
       </div>
       <OverlayCardBox
         title="Add New Pot"
