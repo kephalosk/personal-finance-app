@@ -28,6 +28,9 @@ jest.mock('./showcase/ShowcaseDeleteBudgetForm', () =>
 jest.mock('./showcase/ShowcaseAddNewPotForm', () =>
   jest.fn(() => <div data-testid="showcase-add-new-pot-form"></div>)
 );
+jest.mock('./showcase/ShowcaseEditPotForm', () =>
+  jest.fn(() => <div data-testid="showcase-edit-pot-form"></div>)
+);
 
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
@@ -179,6 +182,7 @@ describe('App', () => {
       ['ShowcaseEditBudgetForm', '/showcase/EditBudgetForm', 'showcase-edit-budget-form'],
       ['ShowcaseDeleteBudgetForm', '/showcase/DeleteBudgetForm', 'showcase-delete-budget-form'],
       ['ShowcaseAddNewPotForm', '/showcase/AddNewPotForm', 'showcase-add-new-pot-form'],
+      ['ShowcaseEditPotForm', '/showcase/EditPotForm', 'showcase-edit-pot-form'],
     ])('renders %s on path %s', (_: string, path: string, testid: string) => {
       const { getByTestId } = render(<App Router={MemoryRouter} initialEntries={[path]} />);
 
