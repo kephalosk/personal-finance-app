@@ -1,6 +1,6 @@
 import { ColorNameEnum } from '../../model/enum/ColorNameEnum';
 import { EPPot } from '../../model/entrypoints/EPPot';
-import { addNewPot, editPot, getPots } from './PotService';
+import { addNewPot, deletePot, editPot, getPots } from './PotService';
 import axios from 'axios';
 import { mockedPotsDTO } from '../../fixtures/MockedPotsDTO';
 import { mockedPots2 } from '../../fixtures/MockedPots';
@@ -42,6 +42,7 @@ describe('PotService', (): void => {
   beforeEach((): void => {
     (axios.get as jest.Mock).mockResolvedValue({ data: mockedPotsDTO });
     (axios.post as jest.Mock).mockResolvedValue(undefined);
+    (axios.delete as jest.Mock).mockResolvedValue(undefined);
   });
 
   it('maps array APIPotDTO to array EPPot correctly', async (): Promise<void> => {
@@ -101,6 +102,28 @@ describe('PotService', (): void => {
 
     expect(consoleErrorSpy).toHaveBeenCalledWith(
       expect.stringContaining('Unable to edit Pot: Error: Service Unavailable; Service Unavailable')
+    );
+  });
+
+  it('sends a DELETE request to delete a Pot and resolves successfully', async (): Promise<void> => {
+    await deletePot(firstEPPot);
+
+    expect(axios.delete).toHaveBeenCalledWith(
+      'https://backend.philippkraatz.com/api/pots/deletePot',
+      { headers: { 'Content-Type': 'application/json' }, data: { potName: firstEPPot.name } }
+    );
+  });
+
+  it('returns error if deleting a pot fails', async () => {
+    const consoleErrorSpy: jest.SpyInstance = jest.spyOn(console, 'error').mockImplementation();
+    (axios.delete as jest.Mock).mockRejectedValue(new Error('Service Unavailable'));
+
+    await deletePot(firstEPPot);
+
+    expect(consoleErrorSpy).toHaveBeenCalledWith(
+      expect.stringContaining(
+        'Unable to delete Pot: Error: Service Unavailable; Service Unavailable'
+      )
     );
   });
 });
