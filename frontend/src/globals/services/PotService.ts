@@ -1,4 +1,3 @@
-// import { InternalServerErrorException, ServiceUnavailableException } from '@nestjs/common';
 import data from '../data.json';
 import { fromColorCodeToName } from '../utils/FromColorCodeToName';
 import { APIPotDTO } from '../../model/api/APIPotDTO';
@@ -7,6 +6,8 @@ import axios, { AxiosResponse } from 'axios';
 import { AppConfig } from '../../config';
 import { fromColorNameToCode } from '../utils/FromColorNameToCode';
 import getErrorMessage from '../utils/getErrorMessage';
+import { EPEditedPot } from '../../model/entrypoints/EPEditedPot';
+import { APIEditedPotDTO } from '../../model/api/APIEditedPotDTO';
 
 export async function getPots(): Promise<EPPot[]> {
   const apiUrl = `${AppConfig.API_BACKEND_HOST}/pots`;
@@ -54,7 +55,30 @@ export async function addNewPot(newPot: EPPot): Promise<void> {
   }
 }
 
-function fromEPPotMapper(pot: EPPot): APIPotDTO {
+export async function editPot(editedPot: EPEditedPot): Promise<void> {
+  const apiUrl: string = `${AppConfig.API_BACKEND_HOST}/pots/editPot`;
+
+  try {
+    const newPotDTO: APIEditedPotDTO = fromEPEditedPotMapper(editedPot);
+
+    await axios.put<APIEditedPotDTO>(apiUrl, newPotDTO, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+  } catch (error) {
+    console.error(`Unable to edit Pot: ${error}; ${getErrorMessage(error)}`);
+  }
+}
+
+function fromEPEditedPotMapper(editedPot: EPEditedPot): APIEditedPotDTO {
+  return {
+    ...fromEPPotMapper(editedPot),
+    oldName: editedPot.oldName,
+  };
+}
+
+function fromEPPotMapper(pot: EPPot | EPEditedPot): APIPotDTO {
   return {
     name: pot.name,
     target: pot.target,
