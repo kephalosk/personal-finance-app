@@ -7,7 +7,7 @@ CREATE TABLE budgets (
                          theme VARCHAR(7) NOT NULL
 );
 
-INSERT INTO budgets (id, category, maximum, theme)
+INSERT INTO budgets (category, maximum, theme)
 VALUES
     ('Entertainment', 50.00, '#277C78'),
     ('Bills', 750.00, '#82C9D7'),
