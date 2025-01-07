@@ -24,7 +24,7 @@ const Showcase = () => {
             EditPotForm
           </Link>
           <Link className="showcaseContentLink" to={'/showcase/DeletePotForm'}>
-            deletePotForm
+            DeletePotForm
           </Link>
         </div>
       </div>
