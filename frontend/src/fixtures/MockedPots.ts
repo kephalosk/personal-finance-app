@@ -1,6 +1,5 @@
 import { EPPot } from '../model/entrypoints/EPPot';
 import { ColorNameEnum } from '../model/enum/ColorNameEnum';
-import { APIPotDTO } from '../model/api/APIPotDTO';
 
 export const mockedPot: EPPot = {
   name: 'Savings',

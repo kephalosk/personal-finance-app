@@ -58,7 +58,7 @@ const OverlayContentEditPot: ({
     const updatedColors: Color[] = [getColorObject(pot.color), ...filteredColors];
     setColorList(updatedColors);
     setSelectedColorItem(getColorObject(pot.color));
-  }, [pot, hasFormToGetAReset, colorList]);
+  }, [pot, hasFormToGetAReset]);
 
   const handleColorChange: (color: Color) => void = (color: Color) => {
     setSelectedColorItem(color);
@@ -66,7 +66,7 @@ const OverlayContentEditPot: ({
   };
 
   return (
-    <div className="overlayContentAddNewPot" data-testid="overlay-content-add-new-pot">
+    <div className="overlayContentEditPot" data-testid="overlay-content-edit-pot">
       <OverlayContentLabel title="Pot Name" />
       <InputCustomName
         ref={inputCustomNameRef}
