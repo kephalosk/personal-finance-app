@@ -1,8 +1,8 @@
 import OverlayCardBox from '../components/overlay/OverlayCardBox';
 import React from 'react';
 import ShowcaseWrapper from './ShowcaseWrapper';
-import Colors from '../constants/Colors';
 import OverlayContentEditPot from '../components/overlay/OverlayContentEditPot';
+import { mockedPot } from '../fixtures/MockedPots';
 
 const ShowcaseEditBudgetForm = () => {
   return (
@@ -16,13 +16,14 @@ const ShowcaseEditBudgetForm = () => {
         onClose={(): void => {}}
       >
         <OverlayContentEditPot
+          pot={mockedPot}
           hasValidNameInput={true}
           handleNameInputChange={(): void => {}}
           hasValidTargetInput={true}
           handleTargetInputChange={(): void => {}}
           isHidden={false}
-          selectedColorItem={Colors[0]}
-          handleColorChange={(): void => {}}
+          hasFormToGetAReset={false}
+          propagateColorChange={(): void => {}}
         />
       </OverlayCardBox>
     </ShowcaseWrapper>
