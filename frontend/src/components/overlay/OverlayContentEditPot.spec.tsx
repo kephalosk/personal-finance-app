@@ -1,12 +1,13 @@
 import React, { forwardRef, ForwardRefExoticComponent, useImperativeHandle } from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
-import OverlayContentAddNewPot from './OverlayContentAddNewPot';
 import { useLocation } from 'react-router-dom';
 import OverlayContentLabel from '../atoms/OverlayContentLabel';
 import OverlayDropdownColor from './OverlayDropdownColor';
-import colors from '../../constants/Colors';
 import { Color } from '../../model/Color';
 import Colors from '../../constants/Colors';
+import OverlayContentEditPot from './OverlayContentEditPot';
+import { EPPot } from '../../model/entrypoints/EPPot';
+import { mockedPot } from '../../fixtures/MockedPots';
 
 jest.mock('../atoms/OverlayContentLabel', () =>
   jest.fn(() => <div data-testid="overlay-content-label"></div>)
@@ -84,49 +85,52 @@ jest.mock('react-router-dom', () => ({
   useLocation: jest.fn(),
 }));
 
-describe('OverlayContentAddNewPot', (): void => {
+describe('OverlayContentEditPot', (): void => {
+  const pot: EPPot = mockedPot;
   const hasValidNameInput: boolean = true;
   const mockHandleNameInputChange: (input: string) => void = jest.fn();
   const hasValidTargetInput: boolean = true;
   const mockHandleTargetInputChange: (input: number) => void = jest.fn();
   const isHidden: boolean = false;
-  const selectedColorItem: Color = Colors[0];
-  const mockHandleColorChange: (color: Color) => void = jest.fn();
+  const mockPropagateColorChange: (color: Color) => void = jest.fn();
+  const hasFormToGetAReset: boolean = false;
 
   const testProps: {
+    pot: EPPot;
     hasValidNameInput: boolean;
     handleNameInputChange: (input: string) => void;
     hasValidTargetInput: boolean;
     handleTargetInputChange: (input: number) => void;
     isHidden: boolean;
-    selectedColorItem: Color;
-    handleColorChange: (color: Color) => void;
+    propagateColorChange: (color: Color) => void;
+    hasFormToGetAReset: boolean;
   } = {
+    pot,
     hasValidNameInput,
     handleNameInputChange: mockHandleNameInputChange,
     hasValidTargetInput,
     handleTargetInputChange: mockHandleTargetInputChange,
     isHidden,
-    selectedColorItem,
-    handleColorChange: mockHandleColorChange,
+    propagateColorChange: mockPropagateColorChange,
+    hasFormToGetAReset,
   };
 
-  beforeEach(() => {
+  beforeEach((): void => {
     (useLocation as jest.Mock).mockReturnValue({
       pathname: '/',
     });
   });
 
-  it('renders div overlayContentAddNewPot', () => {
-    const { container: cut } = render(<OverlayContentAddNewPot {...testProps} />);
+  it('renders div overlayContentEditPot', () => {
+    const { container: cut } = render(<OverlayContentEditPot {...testProps} />);
 
-    const element: HTMLDivElement | null = cut.querySelector('.overlayContentAddNewPot');
+    const element: HTMLDivElement | null = cut.querySelector('.overlayContentEditPot');
 
     expect(element).toBeInTheDocument();
   });
 
   it('renders components OverlayContentLabel with correct text', () => {
-    render(<OverlayContentAddNewPot {...testProps} />);
+    render(<OverlayContentEditPot {...testProps} />);
 
     const components: HTMLLabelElement[] = screen.getAllByTestId('overlay-content-label');
 
@@ -137,7 +141,7 @@ describe('OverlayContentAddNewPot', (): void => {
   });
 
   it('renders component InputCustomName with passed prop hasValidNameInput', () => {
-    render(<OverlayContentAddNewPot {...testProps} />);
+    render(<OverlayContentEditPot {...testProps} />);
 
     const component: HTMLLabelElement = screen.getByTestId('input-custom-name');
 
@@ -145,12 +149,13 @@ describe('OverlayContentAddNewPot', (): void => {
     expect(mockInputCustomName).toHaveBeenCalledWith({
       handleInputChange: expect.any(Function),
       hasValidInput: hasValidNameInput,
+      initialValue: mockedPot.name,
     });
   });
 
   it('handles input change of InputCustomName', async () => {
     const newValue: string = 'Island';
-    render(<OverlayContentAddNewPot {...testProps} />);
+    render(<OverlayContentEditPot {...testProps} />);
 
     const component = screen.getByTestId('input-custom-name');
     fireEvent.change(component, { target: { value: newValue } });
@@ -159,15 +164,15 @@ describe('OverlayContentAddNewPot', (): void => {
   });
 
   it('resets InputCustomName when passed prop isHidden changes', async () => {
-    const { rerender } = render(<OverlayContentAddNewPot {...testProps} isHidden={false} />);
+    const { rerender } = render(<OverlayContentEditPot {...testProps} isHidden={false} />);
 
-    rerender(<OverlayContentAddNewPot {...testProps} isHidden={true} />);
+    rerender(<OverlayContentEditPot {...testProps} isHidden={true} />);
 
     expect(mockCustomNameReset).toHaveBeenCalled();
   });
 
   it('renders component InputMoney with passed prop hasValidTargetInput', () => {
-    render(<OverlayContentAddNewPot {...testProps} />);
+    render(<OverlayContentEditPot {...testProps} />);
 
     const component: HTMLLabelElement = screen.getByTestId('input-money');
 
@@ -175,12 +180,13 @@ describe('OverlayContentAddNewPot', (): void => {
     expect(mockInputMoney).toHaveBeenCalledWith({
       handleInputChange: expect.any(Function),
       hasValidInput: true,
+      initialValue: mockedPot.target.toString(),
     });
   });
 
   it('handles input change of InputMoney', async () => {
     const newValue: string = '300000';
-    render(<OverlayContentAddNewPot {...testProps} />);
+    render(<OverlayContentEditPot {...testProps} />);
 
     const component = screen.getByTestId('input-money');
     fireEvent.change(component, { target: { value: newValue } });
@@ -189,24 +195,24 @@ describe('OverlayContentAddNewPot', (): void => {
   });
 
   it('resets InputMoney when passed prop isHidden changes', async () => {
-    const { rerender } = render(<OverlayContentAddNewPot {...testProps} isHidden={false} />);
+    const { rerender } = render(<OverlayContentEditPot {...testProps} isHidden={false} />);
 
-    rerender(<OverlayContentAddNewPot {...testProps} isHidden={true} />);
+    rerender(<OverlayContentEditPot {...testProps} isHidden={true} />);
 
     expect(mockMoneyReset).toHaveBeenCalled();
   });
 
-  it('renders component OverlayDropdownColor with passed prop selectedColorItem', () => {
-    render(<OverlayContentAddNewPot {...testProps} />);
+  it('renders component OverlayDropdownColor', () => {
+    render(<OverlayContentEditPot {...testProps} />);
 
     const component: HTMLLabelElement = screen.getByTestId('dropdown-color');
 
     expect(component).toBeInTheDocument();
     expect(OverlayDropdownColor).toHaveBeenCalledWith(
       {
-        colors: colors,
+        colors: Colors,
         handleColorChange: expect.any(Function),
-        selectedColor: selectedColorItem,
+        selectedColor: Colors[0],
       },
       {}
     );
@@ -214,11 +220,11 @@ describe('OverlayContentAddNewPot', (): void => {
 
   it('handles color change of OverlayDropdownColor', async () => {
     const newColor: Color = Colors[1];
-    render(<OverlayContentAddNewPot {...testProps} />);
+    render(<OverlayContentEditPot {...testProps} />);
 
     const component: HTMLElement = screen.getByTestId('dropdown-color');
     fireEvent.change(component, { target: { value: JSON.stringify(newColor) } });
 
-    expect(mockHandleColorChange).toHaveBeenCalledWith(newColor);
+    expect(mockPropagateColorChange).toHaveBeenCalledWith(newColor);
   });
 });

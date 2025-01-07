@@ -11,6 +11,7 @@ import { EPEditedPot } from '../../model/entrypoints/EPEditedPot';
 import getColorObject from '../../globals/utils/getColorObject';
 import { Color } from '../../model/Color';
 import OverlayContentEditPot from '../overlay/OverlayContentEditPot';
+import { editPot } from '../../globals/services/PotService';
 
 interface Props {
   pots: EPPot[];
@@ -70,7 +71,7 @@ const PotCard: ({ pots, pot, updatePage, isLoading }: Props) => ReactNode = ({
   };
 
   const handleEditPot: () => Promise<void> = async (): Promise<void> => {
-    if (!newPotName || !isPotNameValid) {
+    if (!newPotName || !isPotNameValid()) {
       setHasValidNameInput(false);
       return;
     }
@@ -78,17 +79,16 @@ const PotCard: ({ pots, pot, updatePage, isLoading }: Props) => ReactNode = ({
       setHasValidTargetInput(false);
       return;
     }
-    setHasValidNameInput(true);
-    setHasValidTargetInput(true);
 
     const editedPot: EPEditedPot = {
       oldName: pot.name,
       name: newPotName,
       target: potAmount,
-      total: 0,
+      total: pot.total,
       color: selectedColorItem.name,
     };
-    // await editPot(editedPot);
+    await editPot(editedPot);
+
     await updatePage();
     closeForm();
   };
