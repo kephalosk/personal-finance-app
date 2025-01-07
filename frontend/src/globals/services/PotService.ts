@@ -8,6 +8,7 @@ import { fromColorNameToCode } from '../utils/FromColorNameToCode';
 import getErrorMessage from '../utils/getErrorMessage';
 import { EPEditedPot } from '../../model/entrypoints/EPEditedPot';
 import { APIEditedPotDTO } from '../../model/api/APIEditedPotDTO';
+import { APIPotNameDTO } from '../../model/api/APIPotNameDTO';
 
 export async function getPots(): Promise<EPPot[]> {
   const apiUrl = `${AppConfig.API_BACKEND_HOST}/pots`;
@@ -68,6 +69,21 @@ export async function editPot(editedPot: EPEditedPot): Promise<void> {
     });
   } catch (error) {
     console.error(`Unable to edit Pot: ${error}; ${getErrorMessage(error)}`);
+  }
+}
+export async function deletePot(pot: EPPot): Promise<void> {
+  const apiUrl: string = `${AppConfig.API_BACKEND_HOST}/pots/deletePot`;
+
+  try {
+    const potNameDTO: APIPotNameDTO = { potName: pot.name };
+    await axios.delete<string>(apiUrl, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      data: potNameDTO,
+    });
+  } catch (error) {
+    console.error(`Unable to delete Pot: ${error}; ${getErrorMessage(error)}`);
   }
 }
 
