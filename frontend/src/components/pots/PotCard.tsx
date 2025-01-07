@@ -11,7 +11,9 @@ import { EPEditedPot } from '../../model/entrypoints/EPEditedPot';
 import getColorObject from '../../globals/utils/getColorObject';
 import { Color } from '../../model/Color';
 import OverlayContentEditPot from '../overlay/OverlayContentEditPot';
-import { editPot } from '../../globals/services/PotService';
+import { deletePot, editPot } from '../../globals/services/PotService';
+import OverlayContentDeletePot from '../overlay/OverlayContentDeletePot';
+import { OverlayCardBoxButtonTypeEnum } from '../../model/enum/OverlayCardBoxButtonTypeEnum';
 
 interface Props {
   pots: EPPot[];
@@ -28,16 +30,18 @@ const PotCard: ({ pots, pot, updatePage, isLoading }: Props) => ReactNode = ({
 }: Props): ReactNode => {
   const editPotDescription: string =
     'If your saving targets change, feel free to update your pots.';
+  const deletePotDescription: string =
+    'Are you sure you want to delete this pot? This action cannot be reversed, and all the data inside it will be removed forever.';
 
   const [isEditPotHidden, setIsEditPotHidden] = useState<boolean>(true);
-  // const [isDeletePotHidden, setIsDeletePotHidden] = useState<boolean>(true);
+  const [isDeletePotHidden, setIsDeletePotHidden] = useState<boolean>(true);
   const handleSelection = (itemOperation: CardHeaderItemOperationEnum): void => {
     if (itemOperation === CardHeaderItemOperationEnum.EDIT) {
       setIsEditPotHidden(false);
     }
-    // if (itemOperation === CardHeaderItemOperationEnum.DELETE) {
-    //   setIsDeletePotHidden(false);
-    // }
+    if (itemOperation === CardHeaderItemOperationEnum.DELETE) {
+      setIsDeletePotHidden(false);
+    }
   };
 
   const [hasValidNameInput, setHasValidNameInput] = useState<boolean>(true);
@@ -49,7 +53,7 @@ const PotCard: ({ pots, pot, updatePage, isLoading }: Props) => ReactNode = ({
   const [hasFormToGetAReset, setHasFormToGetAReset] = useState<boolean>(false);
   const closeForm = (): void => {
     setIsEditPotHidden(true);
-    // setIsDeletePotHidden(true);
+    setIsDeletePotHidden(true);
     deselectElement();
     resetPotCreationValues();
   };
@@ -128,6 +132,12 @@ const PotCard: ({ pots, pot, updatePage, isLoading }: Props) => ReactNode = ({
     setPotAmount(input);
   };
 
+  const handleDeletePot: () => Promise<void> = async (): Promise<void> => {
+    await deletePot(pot);
+    await updatePage();
+    closeForm();
+  };
+
   return (
     <>
       {isLoading ? (
@@ -163,6 +173,17 @@ const PotCard: ({ pots, pot, updatePage, isLoading }: Props) => ReactNode = ({
               propagateColorChange={propagateColorChange}
               hasFormToGetAReset={hasFormToGetAReset}
             />
+          </OverlayCardBox>
+          <OverlayCardBox
+            title="Delete Pot"
+            description={deletePotDescription}
+            submitText="No, Go Back"
+            isHidden={isDeletePotHidden}
+            handleEvent={closeForm}
+            onClose={closeForm}
+            buttonType={OverlayCardBoxButtonTypeEnum.ABORT}
+          >
+            <OverlayContentDeletePot handleClick={handleDeletePot} />
           </OverlayCardBox>
         </div>
       )}
