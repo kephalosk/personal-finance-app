@@ -1,0 +1,7 @@
+@use '../../../styles/spaces';
+
+.potProgressDisplay {
+  display: flex;
+  flex-direction: column;
+  row-gap: spaces.$spaceM;
+}

@@ -1,0 +1,21 @@
+@use '../../../styles/colors';
+@use '../../../styles/text';
+
+.potProgressDisplayHeader {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.potProgressDisplayHeaderTitle {
+  flex-grow: 1;
+  color: colors.$grey-500;
+
+  @include text.text-preset-4;
+}
+
+.potProgressDisplayHeaderValue {
+  color: colors.$grey-900;
+
+  @include text.text-preset-1;
+}

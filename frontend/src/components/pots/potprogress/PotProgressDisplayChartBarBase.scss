@@ -1,0 +1,9 @@
+@use '../../../styles/colors';
+@use '../../../styles/spaces';
+
+.potProgressDisplayChartBarBase {
+  border-radius: spaces.$spaceXS 0 0 spaces.$spaceXS;
+  height: spaces.$spaceS;
+  color: colors.$grey-900;
+  width: clamp(0px, calc(80% - 2px), 100%);
+}
