@@ -1,0 +1,32 @@
+@use '../../../styles/colors';
+@use '../../../styles/spaces';
+@use '../../../styles/text';
+
+.potProgressDisplayChart {
+  display: flex;
+  flex-direction: column;
+  row-gap: spaces.$spaceMS;
+}
+
+.potProgressDisplayChartBarValues {
+  display: flex;
+  flex-direction: row;
+}
+
+.potProgressDisplayChartBarValuesPercent {
+  flex-grow: 1;
+
+  @include text.text-preset-5-bold;
+}
+.potProgressDisplayChartBarValuesPercent.green {
+  color: colors.$green;
+}
+.potProgressDisplayChartBarValuesPercent.red {
+  color: colors.$red;
+}
+
+.potProgressDisplayChartBarValuesTarget {
+  color: colors.$grey-500;
+
+  @include text.text-preset-5;
+}

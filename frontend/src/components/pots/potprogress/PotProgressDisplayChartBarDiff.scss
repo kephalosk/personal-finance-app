@@ -1,0 +1,13 @@
+@use '../../../styles/colors';
+@use '../../../styles/spaces';
+
+.potProgressDisplayChartBarDiff {
+  border-radius: 0 spaces.$spaceXS spaces.$spaceXS 0;
+  height: spaces.$spaceS;
+}
+.potProgressDisplayChartBarDiff.green {
+  color: colors.$green;
+}
+.potProgressDisplayChartBarDiff.red {
+  color: colors.$red;
+}
