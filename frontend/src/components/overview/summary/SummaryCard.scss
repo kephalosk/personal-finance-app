@@ -2,7 +2,7 @@
 
 .overviewSummaryCard {
   border-radius: 12px;
-  background-color: var(--component-background-bright);
+  background-color: var(--white-0);
   padding: 24px;
   display: flex;
   flex-direction: column;
@@ -13,24 +13,24 @@
   }
 }
 .overviewSummaryCard.inverted {
-  background-color: var(--component-background-dark);
+  background-color: var(--grey-900);
 }
 
 .overviewSummaryCardTitle {
   margin: 5px 0;
   font-size: 14px;
   font-weight: 300;
-  color: var(--text-grey);
+  color: var(--grey-500);
 }
 .overviewSummaryCardTitle.inverted {
-  color: var(--text-white);
+  color: var(--white-0);
 }
 
 .overviewSummaryCardValue {
   font-size: 32px;
   font-weight: 700;
-  color: var(--text-dark);
+  color: var(--grey-900);
 }
 .overviewSummaryCardValue.inverted {
-  color: var(--text-white);
+  color: var(--white-0);
 }

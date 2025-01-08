@@ -2,7 +2,7 @@
 
 .budgetCardList{
   border-radius: 12px;
-  background-color: var(--page-background);
+  background-color: var(--beige-100);
   padding: 20px;
   display: flex;
   flex-direction: column;
@@ -19,7 +19,7 @@
   flex-grow: 1;
   font-size: 16px;
   font-weight: 600;
-  color: var(--text-dark);
+  color: var(--grey-900);
 
   @include mixins.phone() {
     font-size: 14px;
@@ -30,7 +30,7 @@
   padding: 4px;
   font-size: 14px;
   text-decoration: none;
-  color: var(--text-grey);
+  color: var(--grey-500);
 
   @include mixins.phone() {
     font-size: 12px;
@@ -38,8 +38,8 @@
 }
 .budgetCardListHeaderLink:focus-visible {
   border-radius: 4px;
-  box-shadow: 0 0 0 2px var(--component-background-dark);
-  color: var(--text-dark);
+  box-shadow: 0 0 0 2px var(--grey-900);
+  color: var(--grey-900);
   outline: none;
 }
 

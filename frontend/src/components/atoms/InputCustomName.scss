@@ -9,7 +9,7 @@
 }
 
 .inputCustomNameInput {
-  border: 1px solid var(--component-background-grey);
+  border: 1px solid var(--beige-500);
   padding: 12px 20px 12px 20px;
   border-radius: 8px;
   width: 100%;
@@ -21,13 +21,13 @@
   @include forms.form-field-outline;
 }
 .inputCustomNameInput::placeholder {
-  color: var(--sidebar-entry-text-default);
+  color: var(--grey-300);
 }
 
 .inputCustomNameValidation {
   margin-left: 8px;
   font-size: 12px;
-  color: var(--text-red);
+  color: var(--red);
   display: none;
   flex-grow: 1;
 }
@@ -41,7 +41,7 @@
   flex-direction: row;
   justify-content: flex-end;
   font-size: 12px;
-  color: var(--text-grey);
+  color: var(--grey-500);
 }
 
 .inputCustomNameLength {

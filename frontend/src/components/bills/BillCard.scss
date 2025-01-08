@@ -2,7 +2,7 @@
 
 .billCard {
   border-radius: 12px;
-  background-color: var(--component-background-bright);
+  background-color: var(--white-0);
   padding: 32px;
   display: flex;
   flex-direction: column;
@@ -17,7 +17,7 @@
   display: grid;
   grid-template-columns: 50% 25% 25%;
   font-size: 14px;
-  color: var(--text-grey);
+  color: var(--grey-500);
 }
 
 .billCardTableHeaderAmount {
@@ -27,7 +27,7 @@
 
 .billCardTableHeaderDate {
   font-size: 14px;
-  color: var(--text-grey);
+  color: var(--grey-500);
 }
 
 .billCardSearchbar {
@@ -37,6 +37,6 @@
 }
 
 .searchbarLabel {
-  color: var(--text-grey);
+  color: var(--grey-500);
   white-space: nowrap;
 }

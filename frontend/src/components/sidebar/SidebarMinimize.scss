@@ -1,7 +1,7 @@
 @use '../../styles/mixins';
 
 .sidebarMinimizeWrapper {
-  border: 2px solid var(--text-dark);
+  border: 2px solid var(--grey-900);
   @include mixins.tablet-and-down() {
     display: none;
     width: 300px;
@@ -9,7 +9,7 @@
 }
 .sidebarMinimizeWrapper:focus-visible {
   border-radius: 0 15px 15px 0;
-  border: 2px solid var(--text-white);
+  border: 2px solid var(--white-0);
   outline: none;
 
   img {
@@ -17,6 +17,6 @@
   }
 
   label {
-    color: var(--text-green);
+    color: var(--green);
   }
 }

@@ -144,16 +144,18 @@ const PotCard: ({ pots, pot, updatePage, isLoading }: Props) => ReactNode = ({
         <LoadingSpinner />
       ) : (
         <div className="potCard" data-testid="pot-card">
-          <CardHeader
-            title={pot.name}
-            color={pot.color}
-            itemName={CardHeaderItemNameEnum.POT}
-            handleSelection={handleSelection}
-          />
-          <PotCardDetails pot={pot} />
-          <div className="potCardButtons">
-            <button className="potCardButton add">+ Add Money</button>
-            <button className="potCardButton withdraw">Withdraw</button>
+          <div className="potCardContent">
+            <CardHeader
+              title={pot.name}
+              color={pot.color}
+              itemName={CardHeaderItemNameEnum.POT}
+              handleSelection={handleSelection}
+            />
+            <PotCardDetails pot={pot} />
+            <div className="potCardButtons">
+              <button className="potCardButton add">+ Add Money</button>
+              <button className="potCardButton withdraw">Withdraw</button>
+            </div>
           </div>
           <OverlayCardBox
             title="Edit Pot"
