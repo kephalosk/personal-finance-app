@@ -9,6 +9,7 @@ import getErrorMessage from '../utils/getErrorMessage';
 import { EPEditedPot } from '../../model/entrypoints/EPEditedPot';
 import { APIEditedPotDTO } from '../../model/api/APIEditedPotDTO';
 import { APIPotNameDTO } from '../../model/api/APIPotNameDTO';
+import { APIPotTotalDTO } from '../../model/api/APIPotTotalDTO';
 
 export async function getPots(): Promise<EPPot[]> {
   const apiUrl = `${AppConfig.API_BACKEND_HOST}/pots`;
@@ -71,6 +72,7 @@ export async function editPot(editedPot: EPEditedPot): Promise<void> {
     console.error(`Unable to edit Pot: ${error}; ${getErrorMessage(error)}`);
   }
 }
+
 export async function deletePot(pot: EPPot): Promise<void> {
   const apiUrl: string = `${AppConfig.API_BACKEND_HOST}/pots/deletePot`;
 
@@ -100,5 +102,28 @@ function fromEPPotMapper(pot: EPPot | EPEditedPot): APIPotDTO {
     target: pot.target,
     total: pot.total,
     theme: fromColorNameToCode(pot.color),
+  };
+}
+
+export async function updatePotTotal(updatedPot: EPPot): Promise<void> {
+  const apiUrl: string = `${AppConfig.API_BACKEND_HOST}/pots/updatePotTotal`;
+
+  try {
+    const newPotTotalDTO: APIPotTotalDTO = toAPIPotTotalMapper(updatedPot);
+
+    await axios.put<APIEditedPotDTO>(apiUrl, newPotTotalDTO, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+  } catch (error) {
+    console.error(`Unable to update Pot: ${error}; ${getErrorMessage(error)}`);
+  }
+}
+
+function toAPIPotTotalMapper(pot: EPPot): APIPotTotalDTO {
+  return {
+    potName: pot.name,
+    newTotal: pot.total,
   };
 }

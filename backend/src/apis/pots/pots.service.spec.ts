@@ -5,8 +5,7 @@ import { Pots } from '../../model/entities/Pots';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { APIPotDTO } from '../../model/apis/APIPotDTO';
 import { APIEditedPotDTO } from '../../model/apis/APIEditedPotDTO';
-import { APIPotAdditionDTO } from '../../model/apis/APIPotAdditionDTO';
-import { APIPotSubtractionDTO } from '../../model/apis/APIPotSubtractionDTO';
+import { APIPotTotalDTO } from '../../model/apis/APIPotTotalDTO';
 import { NotFoundException, ServiceUnavailableException } from '@nestjs/common';
 
 describe('PotsService', (): void => {
@@ -50,22 +49,10 @@ describe('PotsService', (): void => {
     oldName: 'Holiday',
   };
 
-  const amountToAdd: number = 1000;
-  const mockedPotAdditionEntityMapped: APIPotAdditionDTO = {
+  const newTotal: number = 1000;
+  const mockedPotTotalEntityMapped: APIPotTotalDTO = {
     potName: mockedPotsEntityMapped[0].name,
-    amountToAdd,
-  };
-
-  const amountToSubtract: number = 1000;
-  const mockedPotSubtractionEntityMapped: APIPotSubtractionDTO = {
-    potName: mockedPotsEntityMapped[0].name,
-    amountToSubtract,
-  };
-
-  const bigAmountToSubtract: number = 10000;
-  const mockedPotSubtractionEntityMappedWithBigAmount: APIPotSubtractionDTO = {
-    potName: mockedPotsEntityMapped[0].name,
-    amountToSubtract: bigAmountToSubtract,
+    newTotal,
   };
 
   const mockedPots: APIPotDTO[] = [
@@ -243,30 +230,32 @@ describe('PotsService', (): void => {
     ).rejects.toThrow('Connection failed');
   });
 
-  it('adds money to a pot in repository', async (): Promise<void> => {
-    await service.addMoneyToPot(mockedPotAdditionEntityMapped);
+  it('updates total of a pot in repository', async (): Promise<void> => {
+    await service.updatePotTotal(mockedPotTotalEntityMapped);
 
     expect(repository.findOne).toHaveBeenLastCalledWith({
-      where: { name: mockedPotAdditionEntityMapped.potName },
+      where: { name: mockedPotTotalEntityMapped.potName },
     });
 
-    expect(repository.update).toHaveBeenLastCalledWith(1, { total: 3000 });
+    expect(repository.update).toHaveBeenLastCalledWith(1, {
+      total: mockedPotTotalEntityMapped.newTotal,
+    });
   });
 
-  it('throws if pot to add to not found', async (): Promise<void> => {
+  it('throws if pot to update total not found', async (): Promise<void> => {
     jest.spyOn(repository, 'findOne').mockResolvedValue(undefined);
 
     await expect(
-      (): Promise<void> => service.addMoneyToPot(mockedPotAdditionEntityMapped),
+      (): Promise<void> => service.updatePotTotal(mockedPotTotalEntityMapped),
     ).rejects.toThrow(NotFoundException);
     await expect(
-      (): Promise<void> => service.addMoneyToPot(mockedPotAdditionEntityMapped),
+      (): Promise<void> => service.updatePotTotal(mockedPotTotalEntityMapped),
     ).rejects.toThrow(
-      `No pot found with name ${mockedPotAdditionEntityMapped.potName}.`,
+      `No pot found with name ${mockedPotTotalEntityMapped.potName}.`,
     );
   });
 
-  it('throws an error if database connection for adding money to pot fails', async (): Promise<void> => {
+  it('throws an error if database connection for updating total of pot fails', async (): Promise<void> => {
     jest
       .spyOn(repository, 'update')
       .mockImplementation((): Promise<UpdateResult> => {
@@ -274,64 +263,10 @@ describe('PotsService', (): void => {
       });
 
     await expect(
-      (): Promise<void> => service.addMoneyToPot(mockedPotAdditionEntityMapped),
+      (): Promise<void> => service.updatePotTotal(mockedPotTotalEntityMapped),
     ).rejects.toThrow(ServiceUnavailableException);
     await expect(
-      (): Promise<void> => service.addMoneyToPot(mockedPotAdditionEntityMapped),
+      (): Promise<void> => service.updatePotTotal(mockedPotTotalEntityMapped),
     ).rejects.toThrow('Connection failed');
-  });
-
-  it('withdraws money from a pot in repository', async (): Promise<void> => {
-    await service.withdrawMoneyFromPot(mockedPotSubtractionEntityMapped);
-
-    expect(repository.findOne).toHaveBeenLastCalledWith({
-      where: { name: mockedPotSubtractionEntityMapped.potName },
-    });
-
-    expect(repository.update).toHaveBeenLastCalledWith(1, { total: 1000 });
-  });
-
-  it('sets new total to 0 if current pot total is less than amount to subtract', async (): Promise<void> => {
-    await service.withdrawMoneyFromPot(
-      mockedPotSubtractionEntityMappedWithBigAmount,
-    );
-
-    expect(repository.findOne).toHaveBeenLastCalledWith({
-      where: { name: mockedPotSubtractionEntityMapped.potName },
-    });
-
-    expect(repository.update).toHaveBeenLastCalledWith(1, { total: 0 });
-  });
-
-  it('throws an error if database connection for adding money to pot fails', async (): Promise<void> => {
-    jest
-      .spyOn(repository, 'update')
-      .mockImplementation((): Promise<UpdateResult> => {
-        throw new ServiceUnavailableException('Connection failed');
-      });
-
-    await expect(
-      (): Promise<void> =>
-        service.withdrawMoneyFromPot(mockedPotSubtractionEntityMapped),
-    ).rejects.toThrow(ServiceUnavailableException);
-    await expect(
-      (): Promise<void> =>
-        service.withdrawMoneyFromPot(mockedPotSubtractionEntityMapped),
-    ).rejects.toThrow('Connection failed');
-  });
-
-  it('throws if pot to withdraw from not found', async (): Promise<void> => {
-    jest.spyOn(repository, 'findOne').mockResolvedValue(undefined);
-
-    await expect(
-      (): Promise<void> =>
-        service.withdrawMoneyFromPot(mockedPotSubtractionEntityMapped),
-    ).rejects.toThrow(NotFoundException);
-    await expect(
-      (): Promise<void> =>
-        service.withdrawMoneyFromPot(mockedPotSubtractionEntityMapped),
-    ).rejects.toThrow(
-      `No pot found with name ${mockedPotSubtractionEntityMapped.potName}.`,
-    );
   });
 });

@@ -1473,7 +1473,7 @@ import request from 'supertest';
 import { AppModule } from '../src/app.module';
 import { APICategoryDTO } from '../src/model/apis/APICategoryDTO';
 import { APIPotNameDTO } from '../src/model/apis/APIPotNameDTO';
-import { APIPotAdditionDTO } from '../src/model/apis/APIPotAdditionDTO';
+import { APIPotTotalDTO } from '../src/model/apis/APIPotTotalDTO';
 import { APIPotSubtractionDTO } from '../src/model/apis/APIPotSubtractionDTO';
 
 describe('AppController (e2e)', () =&gt; {
