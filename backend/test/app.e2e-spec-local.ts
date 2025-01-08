@@ -4,8 +4,7 @@ import request from 'supertest';
 import { AppModule } from '../src/app.module';
 import { APICategoryDTO } from '../src/model/apis/APICategoryDTO';
 import { APIPotNameDTO } from '../src/model/apis/APIPotNameDTO';
-import { APIPotAdditionDTO } from '../src/model/apis/APIPotAdditionDTO';
-import { APIPotSubtractionDTO } from '../src/model/apis/APIPotSubtractionDTO';
+import { APIPotTotalDTO } from '../src/model/apis/APIPotTotalDTO';
 
 describe('AppController (e2e)', () => {
   let app: INestApplication;
@@ -505,28 +504,15 @@ describe('AppController (e2e)', () => {
       .expect({});
   });
 
-  it('/pots/addMoneyToPot (PUT)', async () => {
-    const potAddition: APIPotAdditionDTO = {
+  it('/pots/updatePotTotal (PUT)', async () => {
+    const potTotal: APIPotTotalDTO = {
       potName: 'NewMove',
-      amountToAdd: 100000,
+      newTotal: 300000,
     };
 
     return request(app.getHttpServer())
-      .put('/pots/addMoneyToPot')
-      .send(potAddition)
-      .expect(200)
-      .expect({});
-  });
-
-  it('/pots/withdrawMoneyFromPot (PUT)', async () => {
-    const potSubtraction: APIPotSubtractionDTO = {
-      potName: 'NewMove',
-      amountToSubtract: 10000,
-    };
-
-    return request(app.getHttpServer())
-      .put('/pots/withdrawMoneyFromPot')
-      .send(potSubtraction)
+      .put('/pots/updatePotTotal')
+      .send(potTotal)
       .expect(200)
       .expect({});
   });

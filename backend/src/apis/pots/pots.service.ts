@@ -4,8 +4,7 @@ import { Pots } from '../../model/entities/Pots';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { APIEditedPotDTO } from '../../model/apis/APIEditedPotDTO';
-import { APIPotAdditionDTO } from '../../model/apis/APIPotAdditionDTO';
-import { APIPotSubtractionDTO } from '../../model/apis/APIPotSubtractionDTO';
+import { APIPotTotalDTO } from '../../model/apis/APIPotTotalDTO';
 
 @Injectable()
 export class PotsService {
@@ -81,50 +80,21 @@ export class PotsService {
     await this.potsRepository.remove(potToDelete);
   }
 
-  async addMoneyToPot(potAddition: APIPotAdditionDTO): Promise<void> {
-    const potToAddMoneyTo: Pots = await this.potsRepository.findOne({
-      where: { name: potAddition.potName },
+  async updatePotTotal(newPotTotal: APIPotTotalDTO): Promise<void> {
+    const potToUpdate: Pots = await this.potsRepository.findOne({
+      where: { name: newPotTotal.potName },
     });
 
-    if (!potToAddMoneyTo) {
+    if (!potToUpdate) {
       throw new NotFoundException(
-        `No pot found with name ${potAddition.potName}.`,
+        `No pot found with name ${newPotTotal.potName}.`,
       );
     }
 
-    const newTotal: number = potToAddMoneyTo.total + potAddition.amountToAdd;
-
     const update: Partial<APIPotDTO> = {
-      total: newTotal,
+      total: newPotTotal.newTotal,
     };
 
-    await this.potsRepository.update(potToAddMoneyTo.id, update);
-  }
-
-  async withdrawMoneyFromPot(
-    potSubtraction: APIPotSubtractionDTO,
-  ): Promise<void> {
-    const potToWithdrawFrom: Pots = await this.potsRepository.findOne({
-      where: { name: potSubtraction.potName },
-    });
-
-    if (!potToWithdrawFrom) {
-      throw new NotFoundException(
-        `No pot found with name ${potSubtraction.potName}.`,
-      );
-    }
-
-    let newTotal: number =
-      potToWithdrawFrom.total - potSubtraction.amountToSubtract;
-
-    if (newTotal < 0) {
-      newTotal = 0;
-    }
-
-    const update: Partial<APIPotDTO> = {
-      total: newTotal,
-    };
-
-    await this.potsRepository.update(potToWithdrawFrom.id, update);
+    await this.potsRepository.update(potToUpdate.id, update);
   }
 }

@@ -16,9 +16,8 @@ import { APIPotDTO } from '../../model/apis/APIPotDTO';
 import { ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { APIEditedPotDTO } from '../../model/apis/APIEditedPotDTO';
 import { APIPotNameDTO } from '../../model/apis/APIPotNameDTO';
-import { APIPotAdditionDTO } from '../../model/apis/APIPotAdditionDTO';
-import { APIPotSubtractionDTO } from '../../model/apis/APIPotSubtractionDTO';
 import getErrorMessage from '../../utils/getErrorMessage';
+import { APIPotTotalDTO } from '../../model/apis/APIPotTotalDTO';
 
 @Controller('pots')
 export class PotsController {
@@ -163,11 +162,11 @@ export class PotsController {
     }
   }
 
-  @Put('addMoneyToPot')
-  @ApiOperation({ summary: 'Add money to an existing pot' })
+  @Put('updatePotTotal')
+  @ApiOperation({ summary: 'Update total amount saved of an existing pot' })
   @ApiResponse({
     status: HttpStatus.OK,
-    description: 'Money successfully added to Pot.',
+    description: 'current total amount of Pot successfully updated.',
   })
   @ApiResponse({
     status: HttpStatus.NOT_FOUND,
@@ -175,15 +174,15 @@ export class PotsController {
   })
   @ApiResponse({
     status: HttpStatus.INTERNAL_SERVER_ERROR,
-    description: 'Server error occurred while adding money to pot.',
+    description: 'Server error occurred while updating total amount of pot.',
   })
   @ApiResponse({
     status: HttpStatus.SERVICE_UNAVAILABLE,
     description: 'Failed to connect to the database.',
   })
-  async addMoneyToPot(@Body() potAddition: APIPotAdditionDTO): Promise<void> {
+  async updatePotTotal(@Body() potAddition: APIPotTotalDTO): Promise<void> {
     try {
-      await this.potsService.addMoneyToPot(potAddition);
+      await this.potsService.updatePotTotal(potAddition);
     } catch (error) {
       if (error instanceof NotFoundException) {
         throw new NotFoundException('Pot not found.');
@@ -194,42 +193,7 @@ export class PotsController {
         );
       }
       throw new InternalServerErrorException(
-        `Error while adding money to pot: ${getErrorMessage(error)}`,
-      );
-    }
-  }
-
-  @Put('withdrawMoneyFromPot')
-  @ApiOperation({ summary: 'Withdraw money from an existing pot' })
-  @ApiResponse({
-    status: HttpStatus.OK,
-    description: 'Money successfully withdrawned from Pot.',
-  })
-  @ApiResponse({ status: HttpStatus.NOT_FOUND, description: 'Pot not found.' })
-  @ApiResponse({
-    status: HttpStatus.INTERNAL_SERVER_ERROR,
-    description: 'Server error occurred while withdrawing money from pot.',
-  })
-  @ApiResponse({
-    status: HttpStatus.SERVICE_UNAVAILABLE,
-    description: 'Failed to connect to the database.',
-  })
-  async withdrawMoneyFromPot(
-    @Body() potSubtraction: APIPotSubtractionDTO,
-  ): Promise<void> {
-    try {
-      await this.potsService.withdrawMoneyFromPot(potSubtraction);
-    } catch (error) {
-      if (error instanceof NotFoundException) {
-        throw new NotFoundException('Pot not found.');
-      }
-      if (error instanceof ServiceUnavailableException) {
-        throw new ServiceUnavailableException(
-          `Database connection error: ${getErrorMessage(error)}`,
-        );
-      }
-      throw new InternalServerErrorException(
-        `Error while withdrawing money from pot: ${getErrorMessage(error)}`,
+        `Error while updating total amount of pot: ${getErrorMessage(error)}`,
       );
     }
   }
