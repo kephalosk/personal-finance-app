@@ -8,9 +8,8 @@ import {
   ServiceUnavailableException,
 } from '@nestjs/common';
 import { APIPotNameDTO } from '../../model/apis/APIPotNameDTO';
-import { APIPotAdditionDTO } from '../../model/apis/APIPotAdditionDTO';
 import { APIPotDTO } from '../../model/apis/APIPotDTO';
-import { APIPotSubtractionDTO } from '../../model/apis/APIPotSubtractionDTO';
+import { APIPotTotalDTO } from '../../model/apis/APIPotTotalDTO';
 
 jest.mock('./pots.service', (): { PotsService: jest.Mock } => ({
   PotsService: jest.fn().mockImplementation(
@@ -19,15 +18,13 @@ jest.mock('./pots.service', (): { PotsService: jest.Mock } => ({
       addNewPot: jest.Mock;
       editPot: jest.Mock;
       deletePot: jest.Mock;
-      addMoneyToPot: jest.Mock;
-      withdrawMoneyFromPot: jest.Mock;
+      updatePotTotal: jest.Mock;
     } => ({
       findAll: jest.fn(),
       addNewPot: jest.fn(),
       editPot: jest.fn(),
       deletePot: jest.fn(),
-      addMoneyToPot: jest.fn(),
-      withdrawMoneyFromPot: jest.fn(),
+      updatePotTotal: jest.fn(),
     }),
   ),
 }));
@@ -52,16 +49,10 @@ const mockedEditedPot: APIEditedPotDTO = {
   oldName: mockedPots[0].name,
 };
 
-const amountToAdd: number = 1000;
-const mockedPotAddition: APIPotAdditionDTO = {
+const newTotal: number = 1000;
+const mockedPotTotal: APIPotTotalDTO = {
   potName: mockedPots[0].name,
-  amountToAdd,
-};
-
-const amountToSubtract: number = 1000;
-const mockedPotSubtraction: APIPotSubtractionDTO = {
-  potName: mockedPots[0].name,
-  amountToSubtract,
+  newTotal,
 };
 
 const mockedPotName: APIPotNameDTO = {
@@ -83,10 +74,7 @@ describe('PotsController', (): void => {
     (potsService.addNewPot as jest.Mock).mockResolvedValue(undefined);
     (potsService.editPot as jest.Mock).mockResolvedValue(undefined);
     (potsService.deletePot as jest.Mock).mockResolvedValue(undefined);
-    (potsService.addMoneyToPot as jest.Mock).mockResolvedValue(undefined);
-    (potsService.withdrawMoneyFromPot as jest.Mock).mockResolvedValue(
-      undefined,
-    );
+    (potsService.updatePotTotal as jest.Mock).mockResolvedValue(undefined);
 
     controller = module.get<PotsController>(PotsController);
   });
@@ -261,109 +249,50 @@ describe('PotsController', (): void => {
     ).rejects.toThrow('Database connection error: Connection failed');
   });
 
-  it('adds money to an existing pot', async (): Promise<void> => {
-    await controller.addMoneyToPot(mockedPotAddition);
+  it('updates total of an existing pot', async (): Promise<void> => {
+    await controller.updatePotTotal(mockedPotTotal);
 
-    expect(potsService.addMoneyToPot).toHaveBeenCalledWith(mockedPotAddition);
+    expect(potsService.updatePotTotal).toHaveBeenCalledWith(mockedPotTotal);
   });
 
-  it('throws if adding pot call fails', async (): Promise<void> => {
-    (potsService.addMoneyToPot as jest.Mock).mockImplementation((): void => {
+  it('throws if updating total of pot call fails', async (): Promise<void> => {
+    (potsService.updatePotTotal as jest.Mock).mockImplementation((): void => {
       throw new InternalServerErrorException('Service failure');
     });
 
     await expect(
-      (): Promise<void> => controller.addMoneyToPot(mockedPotAddition),
+      (): Promise<void> => controller.updatePotTotal(mockedPotTotal),
     ).rejects.toThrow(InternalServerErrorException);
     await expect(
-      (): Promise<void> => controller.addMoneyToPot(mockedPotAddition),
-    ).rejects.toThrow('Error while adding money to pot: Service failure');
+      (): Promise<void> => controller.updatePotTotal(mockedPotTotal),
+    ).rejects.toThrow(
+      'Error while updating total amount of pot: Service failure',
+    );
   });
 
   it('throws NotFoundException if finding pot to add to fails', async (): Promise<void> => {
-    (potsService.addMoneyToPot as jest.Mock).mockImplementation((): void => {
+    (potsService.updatePotTotal as jest.Mock).mockImplementation((): void => {
       throw new NotFoundException();
     });
 
     await expect(
-      (): Promise<void> => controller.addMoneyToPot(mockedPotAddition),
+      (): Promise<void> => controller.updatePotTotal(mockedPotTotal),
     ).rejects.toThrow(NotFoundException);
     await expect(
-      (): Promise<void> => controller.addMoneyToPot(mockedPotAddition),
+      (): Promise<void> => controller.updatePotTotal(mockedPotTotal),
     ).rejects.toThrow('Pot not found.');
   });
 
   it('throws if database connection to add to pot fails', async (): Promise<void> => {
-    (potsService.addMoneyToPot as jest.Mock).mockImplementation((): void => {
+    (potsService.updatePotTotal as jest.Mock).mockImplementation((): void => {
       throw new ServiceUnavailableException('Connection failed');
     });
 
     await expect(
-      (): Promise<void> => controller.addMoneyToPot(mockedPotAddition),
+      (): Promise<void> => controller.updatePotTotal(mockedPotTotal),
     ).rejects.toThrow(ServiceUnavailableException);
     await expect(
-      (): Promise<void> => controller.addMoneyToPot(mockedPotAddition),
-    ).rejects.toThrow('Database connection error: Connection failed');
-  });
-
-  it('withdraws money from an existing pot', async (): Promise<void> => {
-    await controller.withdrawMoneyFromPot(mockedPotSubtraction);
-
-    expect(potsService.withdrawMoneyFromPot).toHaveBeenCalledWith(
-      mockedPotSubtraction,
-    );
-  });
-
-  it('throws if withdrawing pot call fails', async (): Promise<void> => {
-    (potsService.withdrawMoneyFromPot as jest.Mock).mockImplementation(
-      (): void => {
-        throw new InternalServerErrorException('Service failure');
-      },
-    );
-
-    await expect(
-      (): Promise<void> =>
-        controller.withdrawMoneyFromPot(mockedPotSubtraction),
-    ).rejects.toThrow(InternalServerErrorException);
-    await expect(
-      (): Promise<void> =>
-        controller.withdrawMoneyFromPot(mockedPotSubtraction),
-    ).rejects.toThrow(
-      'Error while withdrawing money from pot: Service failure',
-    );
-  });
-
-  it('throws NotFoundException if finding pot to withdraw from fails', async (): Promise<void> => {
-    (potsService.withdrawMoneyFromPot as jest.Mock).mockImplementation(
-      (): void => {
-        throw new NotFoundException();
-      },
-    );
-
-    await expect(
-      (): Promise<void> =>
-        controller.withdrawMoneyFromPot(mockedPotSubtraction),
-    ).rejects.toThrow(NotFoundException);
-    await expect(
-      (): Promise<void> =>
-        controller.withdrawMoneyFromPot(mockedPotSubtraction),
-    ).rejects.toThrow('Pot not found.');
-  });
-
-  it('throws if database connection to withdraw from pot fails', async (): Promise<void> => {
-    (potsService.withdrawMoneyFromPot as jest.Mock).mockImplementation(
-      (): void => {
-        throw new ServiceUnavailableException('Connection failed');
-      },
-    );
-
-    await expect(
-      (): Promise<void> =>
-        controller.withdrawMoneyFromPot(mockedPotSubtraction),
-    ).rejects.toThrow(ServiceUnavailableException);
-    await expect(
-      (): Promise<void> =>
-        controller.withdrawMoneyFromPot(mockedPotSubtraction),
+      (): Promise<void> => controller.updatePotTotal(mockedPotTotal),
     ).rejects.toThrow('Database connection error: Connection failed');
   });
 });
