@@ -2,8 +2,8 @@
 
 .selectionMenuList {
   border-radius: 8px;
-  box-shadow: 0 5px 40px -25px var(--component-background-dark);
-  background-color: var(--component-background-bright);
+  box-shadow: 0 5px 40px -25px var(--grey-900);
+  background-color: var(--white-0);
   max-height: 40px;
   width: 100%;
   min-width: 180px;
@@ -13,7 +13,7 @@
   top: -1px;
   right: -1px;
   z-index: 100;
-  color: var(--text-dark);
+  color: var(--grey-900);
   visibility: hidden;
   transition: max-height 0.1s ease, visibility 0.1s ease;
 }
@@ -32,8 +32,8 @@
   cursor: pointer;
 }
 .selectionMenuListElement:hover, .selectionMenuListElement:focus-visible {
-  background-color: var(--component-background-grey);
-  color: var(--text-white);
+  background-color: var(--beige-500);
+  color: var(--white-0);
   outline: none;
 }
 
@@ -43,11 +43,11 @@
 
 .selectionMenu {
   border-radius: 8px;
-  border: 1px solid var(--searchbar-grey);
+  border: 1px solid var(--beige-500);
   padding: 11px 48px 11px 19px;
   min-width: 180px;
   font-size: 14px;
-  color: var(--text-dark);
+  color: var(--grey-900);
   appearance: none; /* Standard-Pfeil ausblenden */
   -webkit-appearance: none; /* Für Webkit-basierte Browser wie Chrome und Safari */
   -moz-appearance: none; /* Für Firefox */
@@ -71,11 +71,11 @@
   }
 }
 .selectionMenu:focus-visible {
-  border: 1px solid var(--component-background-grey);
-  background-color: var(--component-background-grey);
-  border-color: var(--component-background-grey);
+  border: 1px solid var(--beige-500);
+  background-color: var(--beige-500);
+  border-color: var(--beige-500);
   outline: none;
-  color: var(--text-white);
+  color: var(--white-0);
   cursor: pointer;
 
   @include mixins.phone() {
@@ -96,7 +96,7 @@
 
 .searchbarDropdownSort option{
   @include mixins.phone() {
-    color: var(--text-dark);
+    color: var(--grey-900);
   }
 }
 
@@ -124,9 +124,9 @@
 }
 .selectionMenuWrapper:hover {
   .selectionMenu {
-    border: 1px solid var(--component-background-grey);
-    background-color: var(--component-background-grey);
-    color: var(--text-white);
+    border: 1px solid var(--beige-500);
+    background-color: var(--beige-500);
+    color: var(--white-0);
     cursor: pointer;
   }
 
@@ -144,9 +144,9 @@
   outline: none;
 
   .selectionMenu {
-    border: 1px solid var(--component-background-grey);
-    background-color: var(--component-background-grey);
-    color: var(--text-white);
+    border: 1px solid var(--beige-500);
+    background-color: var(--beige-500);
+    color: var(--white-0);
     cursor: pointer;
     outline: none;
   }

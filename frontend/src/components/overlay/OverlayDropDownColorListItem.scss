@@ -42,10 +42,10 @@
   background-color: var(--blue);
 }
 .dropdownColorCircle.grey {
-  background-color: var(--grey);
+  background-color: var(--navy-grey);
 }
 .dropdownColorCircle.army {
-  background-color: var(--army);
+  background-color: var(--army-green);
 }
 .dropdownColorCircle.pink {
   background-color: var(--pink);
@@ -57,7 +57,7 @@
   background-color: var(--orange);
 }
 .dropdownColorCircle.sepia {
-  background-color: var(--sepia);
+  background-color: var(--beige-100);
 }
 .dropdownColorCircle.white {
   background-color: var(--white);
@@ -81,7 +81,7 @@
 }
 .dropDownColorListItem:hover, .dropDownColorListItem:focus {
   background-color: var(--component-background-light);
-  color: var(--text-white);
+  color: var(--white-0);
   outline: none;
 }
 .dropDownColorListItem.disabled {

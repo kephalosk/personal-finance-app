@@ -45,10 +45,10 @@
   background-color: var(--blue);
 }
 .valueBoxBorder.grey{
-  background-color: var(--grey);
+  background-color: var(--navy-grey);
 }
 .valueBoxBorder.army{
-  background-color: var(--army);
+  background-color: var(--army-green);
 }
 .valueBoxBorder.pink{
   background-color: var(--pink);
@@ -60,7 +60,7 @@
   background-color: var(--orange);
 }
 .valueBoxBorder.sepia{
-  background-color: var(--sepia);
+  background-color: var(--beige-100);
 }
 .valueBoxBorder.white{
   background-color: var(--white);
@@ -79,7 +79,7 @@
   margin: 2px 0;
   font-size: 13px;
   font-weight: 300;
-  color: var(--text-grey);
+  color: var(--grey-500);
 
   @include mixins.phone() {
     font-size: 12px;

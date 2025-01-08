@@ -3,13 +3,13 @@
 .paginationButtonPrev {
   margin-right: 8px;
   border-radius: 8px;
-  border: 1px solid var(--searchbar-grey);
-  background-color: var(--component-background-bright);
+  border: 1px solid var(--beige-500);
+  background-color: var(--white-0);
   padding: 12px 16px 10px 16px;
   display: flex;
   flex-direction: row;
   align-items: center;
-  color: var(--text-dark);
+  color: var(--grey-900);
   transition:
           border 0.3s ease,
           border-color 0.3s ease,
@@ -21,9 +21,9 @@
   }
 }
 .paginationButtonPrev.isEnabled:hover {
-  border: 1px solid var(--component-background-grey);
-  background-color: var(--component-background-grey);
-  color: var(--text-white);
+  border: 1px solid var(--beige-500);
+  background-color: var(--beige-500);
+  color: var(--white-0);
   cursor: pointer;
 
   .paginationButtonPrevCaret {
@@ -31,14 +31,14 @@
   }
  }
 .paginationButtonPrev.isEnabled:focus-visible {
-  border-color: var(--component-background-grey);
+  border-color: var(--beige-500);
   outline: none;
-  box-shadow: 0 0 0 2px var(--component-background-dark);
+  box-shadow: 0 0 0 2px var(--grey-900);
 }
 .paginationButtonPrev.isDisabled {
-  border: 1px solid var(--component-background-disabled);
-  background-color: var(--component-background-disabled);
-  color: var(--text-grey);
+  border: 1px solid var(--grey-100);
+  background-color: var(--grey-100);
+  color: var(--grey-500);
   cursor: not-allowed;
 }
 .paginationButtonPrev.isDisabled:focus-visible {

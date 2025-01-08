@@ -18,7 +18,7 @@
 
 .dropdownColorWrapper {
   border-radius: 8px;
-  border: 1px solid var(--component-background-grey);
+  border: 1px solid var(--beige-500);
   padding: 11px 21px 13px 21px;
   display: flex;
   flex-direction: row;
@@ -38,8 +38,8 @@
 
 .dropDownColorList {
   border-radius: 8px;
-  box-shadow: 0 5px 40px -25px var(--component-background-dark);
-  background-color: var(--component-background-bright);
+  box-shadow: 0 5px 40px -25px var(--grey-900);
+  background-color: var(--white-0);
   display: flex;
   flex-direction: column;
   max-height: 42px;

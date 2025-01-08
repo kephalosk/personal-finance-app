@@ -2,7 +2,7 @@
 
 .budgetCard {
   border-radius: 12px;
-  background-color: var(--component-background-bright);
+  background-color: var(--white-0);
   padding: 32px 32px 12px 32px;
   display: flex;
   flex-direction: column;
@@ -62,10 +62,10 @@
   background-color: var(--blue);
 }
 .budgetCardBarCurrent.grey{
-  background-color: var(--grey);
+  background-color: var(--navy-grey);
 }
 .budgetCardBarCurrent.army{
-  background-color: var(--army);
+  background-color: var(--army-green);
 }
 .budgetCardBarCurrent.pink{
   background-color: var(--pink);
@@ -77,7 +77,7 @@
   background-color: var(--orange);
 }
 .budgetCardBarCurrent.sepia{
-  background-color: var(--sepia);
+  background-color: var(--beige-100);
 }
 .budgetCardBarCurrent.white{
   background-color: var(--white);
@@ -88,7 +88,7 @@
 
 .budgetCardBarLabel {
   font-size: 14px;
-  color: var(--text-grey);
+  color: var(--grey-500);
 
   @include mixins.phone() {
     font-size: 12px;
@@ -97,7 +97,7 @@
 
 .budgetCardBarMax {
   border-radius: 4px;
-  background-color: var(--page-background);
+  background-color: var(--beige-100);
   height: 32px;
   position: relative;
 }

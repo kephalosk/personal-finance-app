@@ -18,9 +18,23 @@ $size: 240px;
   position: relative;
 }
 
-.overviewBudgetsDiagramCircleSmall {
+.overviewBudgetsDiagramCircleMiddle {
+  background-color: var(--white-0);
   width: 80%;
   height: 80%;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  z-index: 0;
+  opacity: 0.5;
+}
+
+.overviewBudgetsDiagramCircleSmall {
+  background-color: var(--white-0);
+  width: 70%;
+  height: 70%;
   border-radius: 50%;
   display: flex;
   flex-direction: column;
@@ -28,26 +42,19 @@ $size: 240px;
   justify-content: center;
   align-items: center;
   position: relative;
-}
-.overviewBudgetsDiagramCircleSmall::before {
-  content: "";
-  width: 85%;
-  height: 85%;
-  background-color: #fff;
-  border-radius: 50%;
-  position: absolute;
   z-index: 1;
+  opacity: 1;
 }
 
 .overviewBudgetsDiagramSpend {
   font-size: 32px;
   font-weight: 700;
   z-index: 2;
-  color: var(--text-dark);
+  color: var(--grey-900);
 }
 
 .overviewBudgetsDiagramTotal {
   font-size: 12px;
   z-index: 2;
-  color: var(--text-grey);
+  color: var(--grey-500);
 }

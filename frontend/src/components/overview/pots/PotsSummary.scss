@@ -1,6 +1,6 @@
 .overviewPotsSummary {
   border-radius: 12px;
-  background-color: var(--page-background);
+  background-color: var(--beige-100);
   padding: 16px;
   display: grid;
   grid-template-columns: auto 1fr;
@@ -16,7 +16,7 @@
 
 .overviewPotsSummaryContentTitle {
   font-weight: 300;
-  color: var(--text-grey);
+  color: var(--grey-500);
 }
 
 .overviewPotsSummaryContentValue {
@@ -25,7 +25,7 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  color: var(--text-dark);
+  color: var(--grey-900);
 }
 
 .overviewPotsSummaryIcon {

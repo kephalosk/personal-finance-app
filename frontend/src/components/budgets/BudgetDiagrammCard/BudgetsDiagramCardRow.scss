@@ -64,10 +64,10 @@
   background-color: var(--blue);
 }
 .cardRowLeftBorder.grey{
-  background-color: var(--grey);
+  background-color: var(--navy-grey);
 }
 .cardRowLeftBorder.army{
-  background-color: var(--army);
+  background-color: var(--army-green);
 }
 .cardRowLeftBorder.pink{
   background-color: var(--pink);
@@ -79,7 +79,7 @@
   background-color: var(--orange);
 }
 .cardRowLeftBorder.sepia{
-  background-color: var(--sepia);
+  background-color: var(--beige-100);
 }
 .cardRowLeftBorder.white{
   background-color: var(--white);
@@ -92,7 +92,7 @@
   flex-grow: 1;
   flex-shrink: 1;
   font-size: 14px;
-  color: var(--text-grey);
+  color: var(--grey-500);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -106,7 +106,7 @@
   margin-right: 8px;
   font-size: 16px;
   font-weight: 600;
-  color: var(--text-dark);
+  color: var(--grey-900);
 
   @include mixins.tablet-and-down() {
     margin-right: 0;
@@ -121,7 +121,7 @@
 
 .cardRowTitleMaxAmount {
   font-size: 14px;
-  color: var(--text-grey);
+  color: var(--grey-500);
   white-space: nowrap;
 
   @include mixins.phone() {

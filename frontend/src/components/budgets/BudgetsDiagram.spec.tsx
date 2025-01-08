@@ -45,6 +45,14 @@ describe('BudgetsDiagram', () => {
     expect(htmlElement).toBeInTheDocument();
   });
 
+  it('renders div overviewBudgetsDiagramCircleMiddle', () => {
+    const { container } = render(<BudgetsDiagram {...testProps} />);
+
+    const htmlElement = container.querySelector('.overviewBudgetsDiagramCircleMiddle');
+
+    expect(htmlElement).toBeInTheDocument();
+  });
+
   it('renders label overviewBudgetsDiagramSpend', () => {
     const { container } = render(<BudgetsDiagram {...testProps} />);
 
