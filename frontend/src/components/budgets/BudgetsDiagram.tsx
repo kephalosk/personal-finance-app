@@ -33,7 +33,6 @@ const BudgetsDiagram: ({ budgets, transactions }: Props) => ReactNode = ({
   const angles: number[] = [];
   let currentAngle: number = 0;
   let colors: string[] = [];
-  let colorsLightened: string[] = [];
   budgets.forEach((budget: EPBudget, index: number): void => {
     if (index < budgets.length - 1) {
       let budgetSpent: number = 0;
@@ -50,26 +49,12 @@ const BudgetsDiagram: ({ budgets, transactions }: Props) => ReactNode = ({
       angles.push(currentAngle);
     }
     colors.push(`var(--${budget.color})`);
-    colorsLightened.push(`var(--${budget.color}-lightened)`);
   });
 
   const generateConicGradientBig: () => string = (): string => {
     let gradientString: string = 'conic-gradient(';
     gradientString += colors
       .map((color: string, index: number): string => {
-        const startAngle: number = index === 0 ? 0 : angles[index - 1];
-        const endAngle: number = angles[index] || fullCircle;
-        return `${color} ${startAngle}deg ${endAngle}deg`;
-      })
-      .join(', ');
-    gradientString += ')';
-    return gradientString;
-  };
-
-  const generateConicGradientSmall: () => string = (): string => {
-    let gradientString: string = 'conic-gradient(';
-    gradientString += colorsLightened
-      .map((color: string, index: number) => {
         const startAngle: number = index === 0 ? 0 : angles[index - 1];
         const endAngle: number = angles[index] || fullCircle;
         return `${color} ${startAngle}deg ${endAngle}deg`;
@@ -88,12 +73,8 @@ const BudgetsDiagram: ({ budgets, transactions }: Props) => ReactNode = ({
             background: generateConicGradientBig(),
           }}
         >
-          <div
-            className="overviewBudgetsDiagramCircleSmall"
-            style={{
-              background: generateConicGradientSmall(),
-            }}
-          >
+          <div className="overviewBudgetsDiagramCircleMiddle"></div>
+          <div className="overviewBudgetsDiagramCircleSmall">
             <label className="overviewBudgetsDiagramSpend">${spentTotalFormatted}</label>
             <label className="overviewBudgetsDiagramTotal">of ${budgetTotal} limit</label>
           </div>

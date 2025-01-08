@@ -23,15 +23,15 @@
   font-weight: 700;
 }
 .overviewTransactionRowInfoValue.black {
-  color: var(--text-dark);
+  color: var(--grey-900);
 }
 .overviewTransactionRowInfoValue.green {
-  color: var(--text-green);
+  color: var(--green);
 }
 
 .overviewTransactionRowInfoDate {
   font-size: 12px;
-  color: var(--text-grey);
+  color: var(--grey-500);
 }
 
 .overviewTransactionRowName {

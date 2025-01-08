@@ -2,7 +2,7 @@
 
 .billSummary {
   border-radius: 12px;
-  background-color: var(--component-background-bright);
+  background-color: var(--white-0);
   padding: 24px;
   display: flex;
   flex-direction: column;
@@ -17,10 +17,10 @@
   display: flex;
   flex-direction: row;
   font-size: 14px;
-  color: var(--text-grey);
+  color: var(--grey-500);
 }
 .billSummaryRow.red {
-  color: var(--text-red);
+  color: var(--red);
 }
 
 .billSummaryRowLine {
@@ -36,7 +36,7 @@
 
 .billSummaryRowPaid,
 .billSummaryRowUpcoming{
-  color: var(--text-dark);
+  color: var(--grey-900);
 
   @include mixins.phone() {
     font-size: 14px;
@@ -54,7 +54,7 @@
 .billSummaryTitle {
   font-size: 20px;
   font-weight: 600;
-  color: var(--text-dark);
+  color: var(--grey-900);
 
   @include mixins.phone() {
     font-size: 18px;

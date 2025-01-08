@@ -23,17 +23,17 @@
   font-weight: 700;
 }
 .overviewTransactionRowSmallInfoValue.black {
-  color: var(--text-dark);
+  color: var(--grey-900);
 }
 .overviewTransactionRowSmallInfoValue.green {
-  color: var(--text-green);
+  color: var(--green);
 }
 
 .overviewTransactionRowSmallInfoDate {
   display: flex;
   justify-content: flex-end;
   font-size: 12px;
-  color: var(--text-grey);
+  color: var(--grey-500);
   white-space: nowrap;
 }
 

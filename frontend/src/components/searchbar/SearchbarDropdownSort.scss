@@ -2,9 +2,9 @@
 
 .searchbarDropdownSort {
   border-radius: 8px;
-  border: 1px solid var(--searchbar-grey);
+  border: 1px solid var(--beige-500);
   padding: 12px 40px 12px 16px;
-  color: var(--text-dark);
+  color: var(--grey-900);
   appearance: none; /* Standard-Pfeil ausblenden */
   -webkit-appearance: none; /* Für Webkit-basierte Browser wie Chrome und Safari */
   -moz-appearance: none; /* Für Firefox */
@@ -24,11 +24,11 @@
   }
 }
 .searchbarDropdownSort:focus-visible {
-  border: 1px solid var(--component-background-grey);
-  background-color: var(--component-background-grey);
-  border-color: var(--component-background-grey);
+  border: 1px solid var(--beige-500);
+  background-color: var(--beige-500);
+  border-color: var(--beige-500);
   outline: none;
-  color: var(--text-white);
+  color: var(--white-0);
   cursor: pointer;
 
   @include mixins.phone() {
@@ -42,7 +42,7 @@
 
 .searchbarDropdownSort option{
   @include mixins.phone() {
-    color: var(--text-dark);
+    color: var(--grey-900);
   }
 }
 
@@ -70,9 +70,9 @@
 }
 .searchbarDropdownSortWrapper:hover {
   .searchbarDropdownSort {
-    border: 1px solid var(--component-background-grey);
-    background-color: var(--component-background-grey);
-    color: var(--text-white);
+    border: 1px solid var(--beige-500);
+    background-color: var(--beige-500);
+    color: var(--white-0);
     cursor: pointer;
   }
 

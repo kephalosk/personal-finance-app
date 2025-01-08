@@ -5,19 +5,19 @@
   background-color: var(--red);
   padding: 16px;
   font-weight: 600;
-  color: var(--text-white);
+  color: var(--white-0);
   cursor: pointer;
 }
 .overlayContentDeletePot:hover {
-  background-color: var(--component-background-grey);
+  background-color: var(--beige-500);
   transition: background-color 0.1s ease;
-  color: var(--text-white);
+  color: var(--white-0);
 }
 .overlayContentDeletePot:focus-visible {
-  border: 2px solid var(--text-dark);
+  border: 2px solid var(--grey-900);
   padding: 14px;
-  background-color: var(--component-background-grey);
+  background-color: var(--beige-500);
   transition: background-color 0.1s ease;
-  color: var(--text-white);
+  color: var(--white-0);
   outline: none;
 }

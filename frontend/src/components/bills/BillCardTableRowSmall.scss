@@ -12,7 +12,7 @@
   font-weight: 600;
 }
 .billCardTableRowSmallAmount.red {
-  color: var(--text-red);
+  color: var(--red);
 }
 
 .billCardTableRowSmallDate {
@@ -22,10 +22,10 @@
   flex-grow: 1;
   align-items: center;
   font-size: 12px;
-  color: var(--text-grey);
+  color: var(--grey-500);
 }
 .billCardTableRowSmallDate.green {
-  color: var(--text-green);
+  color: var(--green);
 }
 
 .billCardTableRowSmallDateAmount {

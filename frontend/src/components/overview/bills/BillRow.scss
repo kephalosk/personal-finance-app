@@ -1,6 +1,6 @@
 .overviewBillsRow {
   border-radius: 8px;
-  background-color: var(--page-background);
+  background-color: var(--beige-100);
   padding: 20px 16px;
   display: flex;
   flex-direction: row;
@@ -19,11 +19,11 @@
 .overviewBillsRowTitle {
   flex-grow: 1;
   font-size: 15px;
-  color: var(--text-grey);
+  color: var(--grey-500);
 }
 
 .overviewBillsRowValue {
   font-size: 14px;
   font-weight: 600;
-  color: var(--text-dark);
+  color: var(--grey-900);
 }

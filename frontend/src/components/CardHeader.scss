@@ -46,10 +46,10 @@
   background-color: var(--blue);
 }
 .cardHeaderCircle.grey{
-  background-color: var(--grey);
+  background-color: var(--navy-grey);
 }
 .cardHeaderCircle.army{
-  background-color: var(--army);
+  background-color: var(--army-green);
 }
 .cardHeaderCircle.pink{
   background-color: var(--pink);
@@ -61,7 +61,7 @@
   background-color: var(--orange);
 }
 .cardHeaderCircle.sepia{
-  background-color: var(--sepia);
+  background-color: var(--beige-100);
 }
 .cardHeaderCircle.white{
   background-color: var(--white);
@@ -79,7 +79,7 @@
 }
 .cardHeaderEditIcon:focus-visible {
   border-radius: 4px;
-  box-shadow: 0 0 0 2px var(--component-background-dark);
+  box-shadow: 0 0 0 2px var(--grey-900);
   filter: invert(74%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(0%) contrast(100%);
   outline: none;
 }

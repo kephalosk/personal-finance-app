@@ -19,7 +19,7 @@
 
 .tableRowPartnerName {
   font-weight: 700;
-  color: var(--text-dark);
+  color: var(--grey-900);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -29,13 +29,13 @@
   display: flex;
   justify-content: flex-end;
   font-weight: 700;
-  color: var(--text-dark);
+  color: var(--grey-900);
 }
 .tableRowValue.black {
-  color: var(--text-dark);
+  color: var(--grey-900);
 }
 .tableRowValue.green {
-  color: var(--text-green);
+  color: var(--green);
 }
 
 .transactionsTableLine {
@@ -49,5 +49,5 @@
   column-gap: 32px;
   align-items: center;
   font-size: 13px;
-  color: var(--text-grey);
+  color: var(--grey-500);
 }
