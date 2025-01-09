@@ -5,11 +5,12 @@
   border-radius: spaces.$spaceXS;
   height: spaces.$spaceS;
   width: 100%;
-  color: colors.$beige-100;
+  background-color: colors.$beige-100;
   position: relative;
 }
 
 .potProgressDisplayChartBarBaseWrapper {
+  width: 100%;
   top: 50%;
   left: 0;
   transform: translateY(-50%);
@@ -17,6 +18,7 @@
 }
 
 .potProgressDisplayChartBarDiffWrapper {
+  width: 100%;
   top: 50%;
   transform: translateY(-50%);
   position: absolute;

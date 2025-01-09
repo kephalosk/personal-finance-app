@@ -20,24 +20,24 @@ const PotProgressDisplayChart: ({
   let widthPercentBase: number = 0;
   const widthTotalBase: number = isAddition ? oldTotal : oldTotal - differenceAbsolut;
   if (widthTotalBase > 0) {
-    widthPercentBase = widthTotalBase / target;
+    widthPercentBase = (widthTotalBase / target) * 100;
   }
 
   let widthPercentDiff: number = 0;
   if (difference > 0) {
-    widthPercentDiff = differenceAbsolut / target;
+    widthPercentDiff = (differenceAbsolut / target) * 100;
   }
   if (isAddition && oldTotal + differenceAbsolut >= target) {
-    widthPercentDiff = 1 - widthPercentBase;
+    widthPercentDiff = 100 - widthPercentBase;
   }
   if (!isAddition && difference >= oldTotal) {
-    widthPercentDiff = oldTotal / target;
+    widthPercentDiff = (oldTotal / target) * 100;
   }
 
   let newTotal: number = isAddition ? oldTotal + difference : oldTotal - difference;
   let newTotalPercent: number = 0;
   if (newTotal > 0) {
-    newTotalPercent = newTotal / target;
+    newTotalPercent = (newTotal / target) * 100;
   }
   const newTotalPercentFormatted: string = newTotalPercent.toFixed(2);
 

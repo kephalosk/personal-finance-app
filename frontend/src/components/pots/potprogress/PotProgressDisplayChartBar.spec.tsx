@@ -16,8 +16,8 @@ jest.mock(
 );
 
 describe('PotProgressDisplayChartBar', (): void => {
-  const widthPercentBase: number = 200;
-  const widthPercentDiff: number = 100;
+  const widthPercentBase: number = 0.7;
+  const widthPercentDiff: number = 0.5;
   const isAddition: boolean = true;
 
   const testProps = {
@@ -44,14 +44,26 @@ describe('PotProgressDisplayChartBar', (): void => {
     expect(element).toBeInTheDocument();
   });
 
-  it('renders component PotProgressDisplayChartBarBase with passed prop widthBase', (): void => {
+  it('renders component PotProgressDisplayChartBarBase with passed prop widthPercentBase', (): void => {
     render(<PotProgressDisplayChartBar {...testProps} widthPercentBase={widthPercentBase} />);
 
     const component: HTMLElement | null = screen.getByTestId('pot-progress-display-chart-bar-base');
 
     expect(component).toBeInTheDocument();
     expect(PotProgressDisplayChartBarBase).toHaveBeenCalledWith(
-      { widthPercent: widthPercentBase },
+      { widthPercent: widthPercentBase, hasVisibleDiffBar: true },
+      {}
+    );
+  });
+
+  it('renders component PotProgressDisplayChartBarBase with 99% widthPercentBase when widthPercentBase is near 100% and hasVisibleDiffBar is true', (): void => {
+    render(<PotProgressDisplayChartBar {...testProps} widthPercentBase={widthPercentBase} />);
+
+    const component: HTMLElement | null = screen.getByTestId('pot-progress-display-chart-bar-base');
+
+    expect(component).toBeInTheDocument();
+    expect(PotProgressDisplayChartBarBase).toHaveBeenCalledWith(
+      { widthPercent: widthPercentBase, hasVisibleDiffBar: true },
       {}
     );
   });
@@ -67,7 +79,7 @@ describe('PotProgressDisplayChartBar', (): void => {
     expect(element).toHaveAttribute('style', `left: ${widthPercentBase}%;`);
   });
 
-  it('renders component PotProgressDisplayChartBarDiff with passed props widthDiff and isAddition', (): void => {
+  it('renders component PotProgressDisplayChartBarDiff with passed props widthPercentDiff and isAddition', (): void => {
     render(
       <PotProgressDisplayChartBar
         {...testProps}
@@ -81,6 +93,18 @@ describe('PotProgressDisplayChartBar', (): void => {
     expect(component).toBeInTheDocument();
     expect(PotProgressDisplayChartBarDiff).toHaveBeenCalledWith(
       { widthPercent: widthPercentDiff, isAddition },
+      {}
+    );
+  });
+
+  it('renders component PotProgressDisplayChartBarDiff with widthPercentDiff === 0', (): void => {
+    render(<PotProgressDisplayChartBar {...testProps} widthPercentDiff={0} />);
+
+    const component: HTMLElement | null = screen.getByTestId('pot-progress-display-chart-bar-diff');
+
+    expect(component).toBeInTheDocument();
+    expect(PotProgressDisplayChartBarDiff).toHaveBeenCalledWith(
+      expect.objectContaining({ widthPercent: 0 }),
       {}
     );
   });

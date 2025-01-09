@@ -9,7 +9,7 @@ const PotProgressDisplayHeader: ({ newTotal }: Props) => ReactNode = ({
   newTotal,
 }: Props): ReactNode => {
   const fixedAmount: string = newTotal.toFixed(2);
-  const value: string = `${fixedAmount}`;
+  const value: string = `$${fixedAmount}`;
 
   return (
     <div className="potProgressDisplayHeader" data-testid="pot-progress-display-header">

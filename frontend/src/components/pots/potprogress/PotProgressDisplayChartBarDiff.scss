@@ -6,8 +6,11 @@
   height: spaces.$spaceS;
 }
 .potProgressDisplayChartBarDiff.green {
-  color: colors.$green;
+  background-color: colors.$green;
 }
 .potProgressDisplayChartBarDiff.red {
-  color: colors.$red;
+  background-color: colors.$red;
+}
+.potProgressDisplayChartBarDiff.showGap {
+  border-left: 2px solid colors.$beige-100;
 }

@@ -51,8 +51,8 @@ describe('PotProgressDisplayChart', (): void => {
     expect(PotProgressDisplayChartBar).toHaveBeenCalledWith(
       {
         isAddition: true,
-        widthPercentBase: oldTotal / target,
-        widthPercentDiff: difference / target,
+        widthPercentBase: (oldTotal / target) * 100,
+        widthPercentDiff: (difference / target) * 100,
       },
       {}
     );
@@ -67,8 +67,8 @@ describe('PotProgressDisplayChart', (): void => {
     expect(PotProgressDisplayChartBar).toHaveBeenCalledWith(
       {
         isAddition: false,
-        widthPercentBase: (oldTotal - difference) / target,
-        widthPercentDiff: difference / target,
+        widthPercentBase: ((oldTotal - difference) / target) * 100,
+        widthPercentDiff: (difference / target) * 100,
       },
       {}
     );
@@ -94,8 +94,8 @@ describe('PotProgressDisplayChart', (): void => {
     expect(PotProgressDisplayChartBar).toHaveBeenCalledWith(
       {
         isAddition: true,
-        widthPercentBase: oldTotal / target,
-        widthPercentDiff: 1 - oldTotal / target,
+        widthPercentBase: (oldTotal / target) * 100,
+        widthPercentDiff: (1 - oldTotal / target) * 100,
       },
       {}
     );
@@ -122,7 +122,7 @@ describe('PotProgressDisplayChart', (): void => {
       {
         isAddition: false,
         widthPercentBase: 0,
-        widthPercentDiff: oldTotal / target,
+        widthPercentDiff: (oldTotal / target) * 100,
       },
       {}
     );
@@ -137,7 +137,7 @@ describe('PotProgressDisplayChart', (): void => {
     expect(component).toBeInTheDocument();
     expect(PotProgressDisplayChartBar).toHaveBeenCalledWith(
       expect.objectContaining({
-        widthPercentBase: oldTotal / target,
+        widthPercentBase: (oldTotal / target) * 100,
         widthPercentDiff: 0,
       }),
       {}
@@ -185,7 +185,7 @@ describe('PotProgressDisplayChart', (): void => {
   });
 
   it('renders label potProgressDisplayChartBarValuesPercent with passed prop isAddition === true and correct value', (): void => {
-    const newTotalPercentFormatted: string = ((oldTotal + difference) / target).toFixed(2);
+    const newTotalPercentFormatted: string = (((oldTotal + difference) / target) * 100).toFixed(2);
     const { container } = render(<PotProgressDisplayChart {...testProps} isAddition={true} />);
 
     const element: HTMLElement | null = container.querySelector(
@@ -201,7 +201,7 @@ describe('PotProgressDisplayChart', (): void => {
     const target: number = 1000;
     const oldTotal: number = 500;
     const difference: number = 1000;
-    const newTotalPercentFormatted: string = ((oldTotal + difference) / target).toFixed(2);
+    const newTotalPercentFormatted: string = (((oldTotal + difference) / target) * 100).toFixed(2);
     const { container } = render(
       <PotProgressDisplayChart
         {...testProps}
@@ -222,7 +222,7 @@ describe('PotProgressDisplayChart', (): void => {
   });
 
   it('renders label potProgressDisplayChartBarValuesPercent with passed prop isAddition === false and correct value', (): void => {
-    const newTotalPercentFormatted: string = ((oldTotal - difference) / target).toFixed(2);
+    const newTotalPercentFormatted: string = (((oldTotal - difference) / target) * 100).toFixed(2);
     const { container } = render(<PotProgressDisplayChart {...testProps} isAddition={false} />);
 
     const element: HTMLElement | null = container.querySelector(
