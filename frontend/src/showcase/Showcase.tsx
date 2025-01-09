@@ -26,6 +26,9 @@ const Showcase = () => {
           <Link className="showcaseContentLink" to={'/showcase/DeletePotForm'}>
             DeletePotForm
           </Link>
+          <Link className="showcaseContentLink" to={'/showcase/PotProgressForm'}>
+            PotProgressForm
+          </Link>
         </div>
       </div>
     </ShowcaseWrapper>
