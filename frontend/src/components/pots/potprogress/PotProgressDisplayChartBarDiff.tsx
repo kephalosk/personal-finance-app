@@ -12,7 +12,7 @@ const PotProgressDisplayChartBarDiff: ({ widthPercent, isAddition }: Props) => R
 }: Props): ReactNode => {
   return (
     <div
-      className={`potProgressDisplayChartBarDiff ${isAddition ? 'green' : 'red'}`}
+      className={`potProgressDisplayChartBarDiff ${isAddition ? 'green' : 'red'} ${widthPercent > 0 ? 'showGap' : ''}`}
       data-testid="pot-progress-display-chart-bar-diff"
       style={{ width: `${widthPercent}%` }}
     ></div>

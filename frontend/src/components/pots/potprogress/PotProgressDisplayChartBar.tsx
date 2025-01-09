@@ -14,14 +14,21 @@ const PotProgressDisplayChartBar: ({
   widthPercentDiff,
   isAddition,
 }: Props) => ReactNode = ({ widthPercentBase, widthPercentDiff, isAddition }: Props): ReactNode => {
+  const hasVisibleDiffBar: boolean = widthPercentDiff > 0;
+  const widthPercentBaseMaxed: number =
+    widthPercentBase > 0.99 && hasVisibleDiffBar ? widthPercentBase * 0.99 : widthPercentBase;
+
   return (
     <div className="potProgressDisplayChartBar" data-testid="pot-progress-display-chart-bar">
       <div className="potProgressDisplayChartBarBaseWrapper">
-        <PotProgressDisplayChartBarBase widthPercent={widthPercentBase} />
+        <PotProgressDisplayChartBarBase
+          widthPercent={widthPercentBaseMaxed}
+          hasVisibleDiffBar={hasVisibleDiffBar}
+        />
       </div>
       <div
         className="potProgressDisplayChartBarDiffWrapper"
-        style={{ left: `${widthPercentBase}%` }}
+        style={{ left: `${widthPercentBaseMaxed}%` }}
       >
         <PotProgressDisplayChartBarDiff widthPercent={widthPercentDiff} isAddition={isAddition} />
       </div>
