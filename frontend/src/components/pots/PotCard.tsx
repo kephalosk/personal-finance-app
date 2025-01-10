@@ -14,6 +14,7 @@ import OverlayContentEditPot from '../overlay/OverlayContentEditPot';
 import { deletePot, editPot } from '../../globals/services/PotService';
 import OverlayContentDeletePot from '../overlay/OverlayContentDeletePot';
 import { OverlayCardBoxButtonTypeEnum } from '../../model/enum/OverlayCardBoxButtonTypeEnum';
+import PotCardButtons from './PotCardButtons';
 
 interface Props {
   pots: EPPot[];
@@ -152,10 +153,7 @@ const PotCard: ({ pots, pot, updatePage, isLoading }: Props) => ReactNode = ({
               handleSelection={handleSelection}
             />
             <PotCardDetails pot={pot} />
-            <div className="potCardButtons">
-              <button className="potCardButton add">+ Add Money</button>
-              <button className="potCardButton withdraw">Withdraw</button>
-            </div>
+            <PotCardButtons />
           </div>
           <OverlayCardBox
             title="Edit Pot"
