@@ -108,4 +108,18 @@ describe('PotProgressDisplayChartBar', (): void => {
       {}
     );
   });
+
+  it('renders component PotProgressDisplayChartBarDiff with widthPercentBase = 0.999 and widthPercentDiff === 0.5', (): void => {
+    render(
+      <PotProgressDisplayChartBar {...testProps} widthPercentBase={0.999} widthPercentDiff={0.5} />
+    );
+
+    const component: HTMLElement | null = screen.getByTestId('pot-progress-display-chart-bar-diff');
+
+    expect(component).toBeInTheDocument();
+    expect(PotProgressDisplayChartBarBase).toHaveBeenCalledWith(
+      expect.objectContaining({ widthPercent: 0.98901 }),
+      {}
+    );
+  });
 });
