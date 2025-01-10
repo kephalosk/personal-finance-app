@@ -180,6 +180,7 @@ describe('OverlayContentEditPot', (): void => {
     expect(mockInputMoney).toHaveBeenCalledWith({
       handleInputChange: expect.any(Function),
       hasValidInput: true,
+      isLimitInput: false,
       initialValue: mockedPot.target.toString(),
     });
   });

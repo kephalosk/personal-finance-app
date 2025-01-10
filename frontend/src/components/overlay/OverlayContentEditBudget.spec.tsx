@@ -177,6 +177,7 @@ describe('OverlayContentEditBudget', () => {
         handleInputChange: mockHandleInputChange,
         hasValidInput,
         initialValue: budget.maximum.toString(),
+        isLimitInput: true,
       },
       {}
     );

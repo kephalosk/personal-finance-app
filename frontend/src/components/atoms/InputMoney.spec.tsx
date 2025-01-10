@@ -5,10 +5,16 @@ import React from 'react';
 describe('InputMoney', () => {
   const mockHandleInputChange: jest.Mock = jest.fn();
   const hasValidInput: boolean = false;
+  const isLimitInput: boolean = true;
 
-  const testProps: { handleInputChange: jest.Mock; hasValidInput: boolean } = {
+  const testProps: {
+    handleInputChange: jest.Mock;
+    hasValidInput: boolean;
+    isLimitInput: boolean;
+  } = {
     handleInputChange: mockHandleInputChange,
     hasValidInput,
+    isLimitInput,
   };
 
   let inputMoneyRef: React.RefObject<InputMoneyRef>;
@@ -17,7 +23,7 @@ describe('InputMoney', () => {
     inputMoneyRef = React.createRef();
   });
 
-  it('renders div inputMoney', () => {
+  it('renders div inputMoney', (): void => {
     const { container } = render(<InputMoney {...testProps} />);
 
     const element: Element | null = container.querySelector('.inputMoney');
@@ -25,7 +31,7 @@ describe('InputMoney', () => {
     expect(element).toBeInTheDocument();
   });
 
-  it('renders input inputMoneyInput with placeholder', () => {
+  it('renders input inputMoneyInput with placeholder', (): void => {
     const { container } = render(<InputMoney {...testProps} />);
 
     const element: Element | null = container.querySelector('.inputMoneyInput');
@@ -35,8 +41,8 @@ describe('InputMoney', () => {
     expect(element).toHaveAttribute('type', 'text');
   });
 
-  it('renders input inputMoneyInput with passed prop initialValue', () => {
-    const initValue = '1111';
+  it('renders input inputMoneyInput with passed prop initialValue', (): void => {
+    const initValue: string = '1111';
     const { container } = render(<InputMoney {...testProps} initialValue={initValue} />);
 
     const element: Element | null = container.querySelector('.inputMoneyInput');
@@ -44,7 +50,7 @@ describe('InputMoney', () => {
     expect(element).toHaveAttribute('value', initValue);
   });
 
-  it('renders label inputMoneyIcon with $ sign', () => {
+  it('renders label inputMoneyIcon with $ sign', (): void => {
     const { container } = render(<InputMoney {...testProps} />);
 
     const element: Element | null = container.querySelector('.inputMoneyIcon');
@@ -53,7 +59,7 @@ describe('InputMoney', () => {
     expect(element).toHaveTextContent('$');
   });
 
-  it('calls callback handleInputChange with input value', () => {
+  it('calls callback handleInputChange with input value', (): void => {
     const inputValue: string = '12345';
     const inputValueNumber: number = 12345;
     const { container } = render(<InputMoney {...testProps} />);
@@ -64,7 +70,7 @@ describe('InputMoney', () => {
     expect(mockHandleInputChange).toHaveBeenCalledWith(inputValueNumber);
   });
 
-  it('only accepts numbers as input', () => {
+  it('only accepts numbers as input', (): void => {
     const inputValueAlphanumeric: string = 'test123';
     const inputValueNumeric: string = '123';
     const { container } = render(<InputMoney {...testProps} />);
@@ -88,7 +94,7 @@ describe('InputMoney', () => {
     expect(input).toHaveAttribute('value', inputValueMax);
   });
 
-  it('adds class active to icon when input has value', () => {
+  it('adds class active to icon when input has value', (): void => {
     const { container } = render(<InputMoney {...testProps} />);
     const element: Element | null = container.querySelector('.inputMoneyIcon');
     expect(element).not.toHaveClass('active');
@@ -99,7 +105,7 @@ describe('InputMoney', () => {
     expect(element).toHaveClass('active');
   });
 
-  it('removes class active from icon when input is empty', () => {
+  it('removes class active from icon when input is empty', (): void => {
     const { container } = render(<InputMoney {...testProps} />);
     const element: Element | null = container.querySelector('.inputMoneyIcon');
     const input: Element | null = container.querySelector('.inputMoneyInput');
@@ -111,8 +117,8 @@ describe('InputMoney', () => {
     expect(element).not.toHaveClass('active');
   });
 
-  it('calls reset and resets the input value', async () => {
-    const initValue = '1111';
+  it('calls reset and resets the input value', async (): Promise<void> => {
+    const initValue: string = '1111';
     const { container } = render(
       <InputMoney {...testProps} ref={inputMoneyRef} initialValue={initValue} />
     );
@@ -123,24 +129,38 @@ describe('InputMoney', () => {
 
     inputMoneyRef.current?.reset();
 
-    await waitFor(() => {
+    await waitFor((): void => {
       expect(input).toHaveAttribute('value', initValue);
     });
   });
 
-  it('renders label inputMoneyValidation when passed prop hasValidInput is false', () => {
-    const { container } = render(<InputMoney {...testProps} hasValidInput={false} />);
+  it('renders label inputMoneyValidation for limit when passed prop hasValidInput is false and isLimitInput is true', (): void => {
+    const { container } = render(
+      <InputMoney {...testProps} hasValidInput={false} isLimitInput={true} />
+    );
 
-    const element: Element | null = container.querySelector('.inputMoneyValidation');
+    const element: Element | null = container.querySelector('.limitMessage');
 
-    expect(element).toHaveClass('visible');
+    expect(element).toBeInTheDocument();
   });
 
-  it('does not render label inputMoneyValidation when passed prop hasValidInput is true', () => {
+  it('renders label inputMoneyValidation for amount when passed prop hasValidInput is false and isLimitInput is false', (): void => {
+    const { container } = render(
+      <InputMoney {...testProps} hasValidInput={false} isLimitInput={false} />
+    );
+
+    const element: Element | null = container.querySelector('.amountMessage');
+
+    expect(element).toBeInTheDocument();
+  });
+
+  it('does not render label inputMoneyValidation when passed prop hasValidInput is true', (): void => {
     const { container } = render(<InputMoney {...testProps} hasValidInput={true} />);
 
-    const element: Element | null = container.querySelector('.inputMoneyValidation');
+    const element: Element | null = container.querySelector('.limitMessage');
+    const element2: Element | null = container.querySelector('.amountMessage');
 
-    expect(element).not.toHaveClass('visible');
+    expect(element).not.toBeInTheDocument();
+    expect(element2).not.toBeInTheDocument();
   });
 });

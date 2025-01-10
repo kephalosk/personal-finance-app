@@ -153,7 +153,7 @@ const PotCard: ({ pots, pot, updatePage, isLoading }: Props) => ReactNode = ({
               handleSelection={handleSelection}
             />
             <PotCardDetails pot={pot} />
-            <PotCardButtons />
+            <PotCardButtons pot={pot} updatePage={updatePage} />
           </div>
           <OverlayCardBox
             title="Edit Pot"

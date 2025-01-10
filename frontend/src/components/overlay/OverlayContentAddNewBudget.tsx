@@ -60,6 +60,7 @@ const OverlayContentAddNewBudget: ({
         ref={inputMoneyRef}
         handleInputChange={handleInputChange}
         hasValidInput={hasValidInput}
+        isLimitInput={true}
       />
       <label className="fieldTitle">Theme</label>
       <OverlayDropdownColor
