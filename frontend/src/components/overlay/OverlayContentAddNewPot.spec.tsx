@@ -175,6 +175,7 @@ describe('OverlayContentAddNewPot', (): void => {
     expect(mockInputMoney).toHaveBeenCalledWith({
       handleInputChange: expect.any(Function),
       hasValidInput: true,
+      isLimitInput: true,
     });
   });
 

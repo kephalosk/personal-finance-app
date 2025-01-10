@@ -111,7 +111,7 @@ export async function updatePotTotal(updatedPot: EPPot): Promise<void> {
   try {
     const newPotTotalDTO: APIPotTotalDTO = toAPIPotTotalMapper(updatedPot);
 
-    await axios.put<APIEditedPotDTO>(apiUrl, newPotTotalDTO, {
+    await axios.put<APIPotTotalDTO>(apiUrl, newPotTotalDTO, {
       headers: {
         'Content-Type': 'application/json',
       },

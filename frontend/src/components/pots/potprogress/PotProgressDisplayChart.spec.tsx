@@ -256,6 +256,23 @@ describe('PotProgressDisplayChart', (): void => {
     expect(element!.innerHTML).toEqual(zeroPercent);
   });
 
+  it.each([true, false])(
+    'renders label potProgressDisplayChartBarValuesPercent with passed props difference === 0 and isAddition === %s',
+    (isAddition: boolean): void => {
+      const { container } = render(
+        <PotProgressDisplayChart {...testProps} difference={0} isAddition={isAddition} />
+      );
+
+      const element: HTMLElement | null = container.querySelector(
+        '.potProgressDisplayChartBarValuesPercent'
+      );
+
+      expect(element).toBeInTheDocument();
+      expect(element).not.toHaveClass('green');
+      expect(element).not.toHaveClass('red');
+    }
+  );
+
   it('renders label potProgressDisplayChartBarValuesTarget with correct text', (): void => {
     const formattedTarget: string = target.toLocaleString('en-US');
     const { container } = render(<PotProgressDisplayChart {...testProps} />);

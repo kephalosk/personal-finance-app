@@ -272,7 +272,7 @@ describe('PotCard', (): void => {
     const component: HTMLElement = screen.getByTestId('pot-card-buttons');
 
     expect(component).toBeInTheDocument();
-    expect(PotCardButtons).toHaveBeenCalled();
+    expect(PotCardButtons).toHaveBeenCalledWith({ pot: pot, updatePage: expect.any(Function) }, {});
   });
 
   it('renders components OverlayCardBox', async (): Promise<void> => {

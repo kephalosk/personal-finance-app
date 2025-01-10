@@ -101,6 +101,7 @@ const OverlayContentEditBudget: ({
         handleInputChange={handleInputChange}
         hasValidInput={hasValidInput}
         initialValue={budget.maximum.toString()}
+        isLimitInput={true}
       />
       <OverlayContentLabel title="Theme" />
       <OverlayDropdownColor

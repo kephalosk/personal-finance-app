@@ -49,6 +49,7 @@ const OverlayContentAddNewPot = ({
         ref={inputMoneyRef}
         handleInputChange={handleTargetInputChange}
         hasValidInput={hasValidTargetInput}
+        isLimitInput={true}
       />
       <OverlayContentLabel title="Theme" />
       <OverlayDropdownColor

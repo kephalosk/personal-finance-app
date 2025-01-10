@@ -52,7 +52,7 @@ const PotProgressDisplayChart: ({
       />
       <div className="potProgressDisplayChartBarValues">
         <label
-          className={`potProgressDisplayChartBarValuesPercent ${isAddition ? 'green' : 'red'}`}
+          className={`potProgressDisplayChartBarValuesPercent ${difference && isAddition ? 'green' : ''} ${difference && !isAddition ? 'red' : ''}`}
         >{`${newTotalPercentFormatted}%`}</label>
         <label className="potProgressDisplayChartBarValuesTarget">{`Target of $${formattedTarget}`}</label>
       </div>

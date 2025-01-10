@@ -80,6 +80,7 @@ const OverlayContentEditPot: ({
         handleInputChange={handleTargetInputChange}
         hasValidInput={hasValidTargetInput}
         initialValue={pot.target.toString()}
+        isLimitInput={false}
       />
       <OverlayContentLabel title="Theme" />
       <OverlayDropdownColor
