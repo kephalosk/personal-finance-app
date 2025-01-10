@@ -13,36 +13,6 @@
   }
 }
 
-.potCardButton {
-  border: 0;
-  border-radius: 8px;
-  background-color: var(--beige-100);
-  padding: 16px;
-  font-weight: 600;
-  color: var(--grey-900);
-  cursor: pointer;
-  white-space: nowrap;
-}
-.potCardButton:hover {
-  background-color: var(--component-background-light);
-  color: var(--white-0);
-  transition: background-color 0.2s ease, color 0.2s ease;
-}
-.potCardButton:focus-visible {
-  border-radius: 4px;
-  box-shadow: 0 0 0 2px var(--grey-900);
-  background-color: var(--component-background-light);
-  color: var(--white-0);
-  transition: background-color 0.2s ease, color 0.2s ease;
-  outline: none;
-}
-
-.potCardButtons {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  column-gap: 16px;
-}
-
 .potCardContent {
   border-radius: 12px;
   background-color: var(--white-0);
