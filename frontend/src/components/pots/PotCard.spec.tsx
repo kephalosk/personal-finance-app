@@ -15,6 +15,7 @@ import OverlayContentEditPot from '../overlay/OverlayContentEditPot';
 import { deletePot, editPot } from '../../globals/services/PotService';
 import OverlayContentDeletePot from '../overlay/OverlayContentDeletePot';
 import { OverlayCardBoxButtonTypeEnum } from '../../model/enum/OverlayCardBoxButtonTypeEnum';
+import PotCardButtons from './PotCardButtons';
 
 jest.mock(
   '../LoadingSpinner',
@@ -130,6 +131,10 @@ jest.mock(
         ></div>
       )
     )
+);
+jest.mock(
+  './PotCardButtons',
+  (): jest.Mock => jest.fn((): ReactNode => <div data-testid="pot-card-buttons"></div>)
 );
 
 jest.mock(
@@ -261,30 +266,13 @@ describe('PotCard', (): void => {
     expect(PotCardDetails).toHaveBeenCalledWith({ pot }, {});
   });
 
-  it('renders div potCardButtons', () => {
-    const { container } = render(<PotCard {...testProps} />);
+  it('renders component PotCardButtons', () => {
+    render(<PotCard {...testProps} />);
 
-    const htmlElement: HTMLElement | null = container.querySelector('.potCardButtons');
+    const component: HTMLElement = screen.getByTestId('pot-card-buttons');
 
-    expect(htmlElement).toBeInTheDocument();
-  });
-
-  it('renders div potCardButtonAdd with correct text', () => {
-    const { container } = render(<PotCard {...testProps} />);
-
-    const htmlElement: HTMLElement | null = container.querySelector('.add');
-
-    expect(htmlElement).toBeInTheDocument();
-    expect(htmlElement).toHaveTextContent('+ Add Money');
-  });
-
-  it('renders div potCardButtonWithdraw with correct text', () => {
-    const { container } = render(<PotCard {...testProps} />);
-
-    const htmlElement: HTMLElement | null = container.querySelector('.withdraw');
-
-    expect(htmlElement).toBeInTheDocument();
-    expect(htmlElement).toHaveTextContent('Withdraw');
+    expect(component).toBeInTheDocument();
+    expect(PotCardButtons).toHaveBeenCalled();
   });
 
   it('renders components OverlayCardBox', async (): Promise<void> => {
