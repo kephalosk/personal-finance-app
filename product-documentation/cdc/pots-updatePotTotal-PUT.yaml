@@ -1,0 +1,42 @@
+openapi: 3.0.0
+info:
+  title: Pot Management API
+  description: API to manage pots, including updating the total amount saved.
+  version: 1.0.0
+paths:
+  /updatePotTotal:
+    put:
+      summary: Update total amount saved of an existing pot
+      operationId: updatePotTotal
+      requestBody:
+        description: Details of the pot to update
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/APIPotTotalDTO'
+      responses:
+        '200':
+          description: current total amount of Pot successfully updated.
+        '404':
+          description: Pot not found.
+        '500':
+          description: Server error occurred while updating total amount of pot.
+        '503':
+          description: Failed to connect to the database.
+components:
+  schemas:
+    APIPotTotalDTO:
+      type: object
+      properties:
+        potName:
+          type: string
+          description: The name of the pot
+          example: Holiday
+        newTotal:
+          type: integer
+          description: The new total of the pot
+          example: 1000
+      required:
+        - potName
+        - newTotal
