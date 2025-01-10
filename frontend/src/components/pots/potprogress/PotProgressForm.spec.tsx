@@ -115,6 +115,7 @@ describe('PotProgressForm', (): void => {
     expect(mockInputMoney).toHaveBeenCalledWith({
       handleInputChange: expect.any(Function),
       hasValidInput: true,
+      isLimitInput: false,
     });
   });
 

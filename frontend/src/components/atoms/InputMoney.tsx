@@ -14,6 +14,7 @@ import {
 interface Props {
   handleInputChange: (input: number) => void;
   hasValidInput: boolean;
+  isLimitInput: boolean;
   initialValue?: string;
 }
 
@@ -26,7 +27,7 @@ const InputMoney: ForwardRefExoticComponent<Props & RefAttributes<InputMoneyRef>
   Props
 >(
   (
-    { handleInputChange, hasValidInput, initialValue = '' }: Props,
+    { handleInputChange, hasValidInput, isLimitInput, initialValue = '' }: Props,
     ref: ForwardedRef<InputMoneyRef>
   ): ReactNode => {
     const [value, setValue] = useState<string>(initialValue);
@@ -93,9 +94,14 @@ const InputMoney: ForwardRefExoticComponent<Props & RefAttributes<InputMoneyRef>
           />
           <label className={`inputMoneyIcon ${value ? 'active' : ''}`}>$</label>
         </div>
-        <label className={`inputMoneyValidation ${hasValidInput ? '' : 'visible'}`}>
-          Please enter a spending limit!
-        </label>
+        {!hasValidInput && isLimitInput && (
+          <label className="inputMoneyValidation limitMessage">
+            Please enter a spending limit!
+          </label>
+        )}
+        {!hasValidInput && !isLimitInput && (
+          <label className="inputMoneyValidation amountMessage">Please enter an amount!</label>
+        )}
       </div>
     );
   }
