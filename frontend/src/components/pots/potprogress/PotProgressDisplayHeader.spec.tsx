@@ -36,6 +36,6 @@ describe('PotProgressDisplayHeader', (): void => {
     const element: HTMLElement | null = container.querySelector('.potProgressDisplayHeaderValue');
 
     expect(element).toBeInTheDocument();
-    expect(element!.innerHTML).toEqual(headerValue);
+    expect(element!.innerHTML).toEqual(`$${headerValue}`);
   });
 });
