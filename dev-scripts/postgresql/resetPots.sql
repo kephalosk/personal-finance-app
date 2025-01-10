@@ -11,7 +11,7 @@ CREATE TABLE pots (
 INSERT INTO pots (name, target, total, theme)
 VALUES
     ('Savings', 2000.00, 159.00, '#277C78'),
-    ('Concert Ticket', 150.00, 110.00, '#82C9D7'),
-    ('Gift', 150.00, 110.00, '#F2CDAC'),
-    ('New Laptop', 1000.00, 10.00, '#626070'),
+    ('Concert Ticket', 150.00, 110.00, '#626070'),
+    ('Gift', 150.00, 110.00, '#82C9D7'),
+    ('New Laptop', 1000.00, 10.00, '#F2CDAC'),
     ('Holiday', 1440.00, 531.00, '#826CB0');
