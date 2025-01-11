@@ -34,6 +34,6 @@ module.exports = {
     '<rootDir>/coverage',
     '/src/.*\\.module.ts',
   ],
-  collectCoverage: true,
+  collectCoverage: false,
   coverageDirectory: '<rootDir>/coverage',
 };

@@ -20,5 +20,5 @@ export default {
     '<rootDir>/ui-tests/',
     '<rootDir>/src/showcase',
   ],
-  collectCoverage: true,
+  collectCoverage: false,
 };

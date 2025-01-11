@@ -2,23 +2,43 @@
 
 This is a solution to the [Personal finance app challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/personal-finance-app-JfjtZgyMt1). Frontend Mentor provides challenges to build realistic projects.
 
+- Live Site URL: [philippkraatz.com](https://philippkraatz.com)
+- Solution URL: [GitHub](https://github.com/kephalosk/personal-finance-app)
+
 ## Table of contents
 
+- [Project Structure](#project-structure)
+- [Test Coverage](#test-coverage)
+  - [Frontend](#frontend-build-0020250110_184110_fbf408e)
+  - [Backend](#backend-build-0020250110_184110_fbf408e)
 - [Overview](#overview)
     - [Screenshots - OverviewPage](#screenshots---overviewpage)
     - [Screenshots - TransactionsPage](#screenshots---transactionspage)
     - [Screenshots - BudgetsPage](#screenshots---budgetspage)
     - [Screenshots - PotsPage](#screenshots---potspage)
     - [Screenshots - BillsPage](#screenshots---billspage)
-    - [Links](#links)
-- [My process](#my-process)
-    - [Built with](#built-with)
-    - [What I learned](#what-i-learned)
-    - [Continued development](#continued-development)
-    - [Useful resources](#useful-resources)
+- [Technology Stack](#technology-stack)
 - [Author](#author)
-- [Acknowledgments](#acknowledgments)
 
+## Project Structure
+
+The project is still in development. The current status is protocolled in ./project-documentation/project-structure:
+
+![Coverage Frontend](./project-documentation/project-structure.png)
+
+## Test Coverage
+
+### Frontend (build 0.0.20250110_184110_fbf408e)
+
+<img alt="Coverage Frontend" height="100" src="frontend/test-results/performance_0.0.20250110_184110_fbf408e.png" width="auto"/>
+
+![Coverage Frontend](frontend/test-results/coverage_0.0.20250110_184110_fbf408e.png)
+
+### Backend (build 0.0.20250110_184110_fbf408e)
+
+<img alt="Coverage Frontend" height="100" src="backend/test-results/performance_0.0.20250110_184110_fbf408e.png" width="auto"/>
+
+![Coverage Frontend](backend/test-results/coverage_0.0.20250110_184110_fbf408e.png)
 
 ## Overview
 
@@ -98,96 +118,48 @@ Mobile
 
 
 
-### Links
-
-- Solution URL: [Add solution URL here](https://github.com/kephalosk/personal-finance-app)
-- Live Site URL: [Add live site URL here](https://philippkraatz.com)
-
 ## My process
 
-1. download Project
+1. Make Refinements / Requirements Engineering
 
 
-2. move Project to target folder
+2. Setup Project
 
 
-3. open Project in IDE
+3. Create UI Components
 
 
-4. read README
+4. Integrate UI Components
 
 
-5. add .gitignore-file
+5. Create Backend Services
 
 
-6. check files
+6. Create Frontend Services
 
 
-7. check design
+7. Implement Business Logic
 
 
-8. initialize repo
-* create repo on GitHub
-* git init
-* git add .
-* git commit -m "initial commit"
-* git remote add origin git@github.com:kephalosk/${projectname}.git
-* git push -u origin master
-
-9. check html
-* build general structure
-* open index.html in browser for comparison
-
-10. check css
-* 1. margin
-* 2. border
-* 3. background
-* 4. padding
-* 5. height/width
-* 6. display
-* 7. font styling
-* 8. image styling
-* 9. color styling
-
-11. check transitions
+8. Create Deployment
 
 
-12. check javascript
+9. Setup CI/CD
 
 
-13. check mobile/responsive design
+10. Implement Monitoring and Logging (TODO)
 
 
-14. check accessability
-* semantic html
-* headings
-* alternative texts
-* language
-* clear language
-* link texts
-* keyboard control / tabindex
-* img aria-hidden: true for decorative images
+11. Add Authentication and Authorization  (TODO)
 
-15. extract css
-
-
-16. add screenshots
-
-
-17. update README
-
-
-18. publish website
-
-### Built with
+### Technology Stack
 
 Frontend
-- React + Vite
-- HTML5 markup
-- SCSS custom properties
+- React/Typescript
+- HTML
+- SCSS
 - Jest
 - Playwright
-- Desktop-first workflow
 
 Backend
 - Nest.js
@@ -198,28 +170,9 @@ Backend
 Deployment
 - Docker
 - Kubernetes
-- GitHub Actions
-- CI/CD Pipeline
-
-### What I learned
-
-Building a responsive web application with React.
-
-### Continued development
-
-* improve html
-* improve css
-
-### Useful resources
-
-- [w3schools](https://www.w3schools.com/) - HTML and CSS knowledge
-- [selfhtml](https://wiki.selfhtml.org/wiki/HTML) - HTML knowledge
+- CI/CD with GitHub Actions
 
 ## Author
 
 - Website - [Philipp Kraatz](https://philippkraatz.com)
-- Frontend Mentor - [@yourusername](https://www.frontendmentor.io/profile/yourusername)
-
-## Acknowledgments
-
-None.
+- GitHub - [@kephalosk](https://github.com/kephalosk)
