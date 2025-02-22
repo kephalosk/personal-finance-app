@@ -2,7 +2,7 @@
 
 .dropdownCategoryBar {
   border-radius: 8px;
-  border: 1px solid var(--beige-500);
+  border: 1px solid colors.$beige-500;
   padding: 11px 50px 13px 20px;
   display: flex;
   flex-direction: row;
@@ -50,7 +50,7 @@
 .dropdownCategoryValidation {
   margin-left: 8px;
   font-size: 12px;
-  color: var(--red);
+  color: colors.$red;
   display: none;
 }
 .dropdownCategoryValidation.visible {

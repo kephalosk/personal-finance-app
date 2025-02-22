@@ -2,7 +2,7 @@
 
 .potCard {
   border-radius: 12px;
-  background-color: var(--white-0);
+  background-color: colors.$white-0;
   padding: 24px;
   display: flex;
   flex-direction: column;
@@ -15,7 +15,7 @@
 
 .potCardContent {
   border-radius: 12px;
-  background-color: var(--white-0);
+  background-color: colors.$white-0;
   display: flex;
   flex-direction: column;
   row-gap: 32px;

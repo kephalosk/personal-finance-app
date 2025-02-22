@@ -25,7 +25,7 @@
   flex-wrap: wrap;
   align-items: center;
   font-size: 15px;
-  color: var(--grey-500);
+  color: colors.$grey-500;
   row-gap: 16px;
 
   @include mixins.phone() {

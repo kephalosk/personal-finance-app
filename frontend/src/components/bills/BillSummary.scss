@@ -40,7 +40,7 @@
 }
 
 .billSummaryRowPaid,
-.billSummaryRowUpcoming{
+.billSummaryRowUpcoming {
   color: colors.$grey-900;
 
   @include screens.phone {
