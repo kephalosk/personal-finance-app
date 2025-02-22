@@ -1,7 +1,7 @@
 @use '../../styles/screens';
 
 .transactionsDetails {
-  border-radius: 12px;
+  border-radius: spaces.$radiusMS;
   background-color: colors.$white-0;
   padding: 32px;
   height: 100%;
@@ -9,7 +9,7 @@
   grid-template-rows: fit-content(100%) 1fr fit-content(100%);
   row-gap: 23px;
 
-  @include mixins.phone() {
+  @include screens.phone {
     padding: 24px 20px;
   }
 }

@@ -1,16 +1,21 @@
+@use '../../styles/colors';
+@use '../../styles/fonts';
+@use '../../styles/functions';
 @use '../../styles/screens';
+@use '../../styles/spaces';
 
-.overlayBackground{
-  background-color: rgb(0,0,0,0.5);
+.overlayBackground {
+  background-color: rgb(0, 0, 0, 0.5);
   height: 100%;
   width: 100%;
   top: 0;
   left: 0;
   position: fixed;
   z-index: 3;
-}
-.overlayBackground.isHidden {
-  display: none;
+
+  &.isHidden {
+    display: none;
+  }
 }
 
 .overlayCardBox {
@@ -18,28 +23,30 @@
   flex-direction: column;
 }
 
-.overlayForm{
-  border-radius: 12px;
+.overlayForm {
+  border-radius: spaces.$radiusMS;
   background-color: colors.$white-0;
-  padding: 32px;
+  padding: spaces.$spaceXL;
   height: auto;
-  width: 560px;
+  width: functions.to-rem(560px);
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   position: fixed;
   z-index: 4;
 
-  @include mixins.phone() {
-    padding: 24px 20px;
+  @include screens.phone {
+    padding: spaces.$spaceL spaces.$spaceML;
     width: calc(100% - 40px);
   }
-}
-.overlayForm.isHidden {
-  display: none;
-}
-.overlayForm.abort {
-  padding-bottom: 16px;
+
+  &.isHidden {
+    display: none;
+  }
+
+  &.abort {
+    padding-bottom: spaces.$spaceM;
+  }
 }
 
 .overlayFormContent {
@@ -53,67 +60,76 @@
 }
 
 .overlayFormHeaderBarIcon {
-  padding: 6px;
+  padding: functions.to-rem(6px);
   cursor: pointer;
-}
-.overlayFormHeaderBarIcon:hover {
-  filter: invert(74%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(0%) contrast(100%);
-}
-.overlayFormHeaderBarIcon:focus-visible {
-  border-radius: 8px;
-  border: 2px solid colors.$grey-900;
-  padding: 4px;
-  filter: invert(74%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(0%) contrast(100%);
-  outline: none;
+
+  &:hover {
+    filter: invert(74%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(0%) contrast(100%);
+  }
+
+  &:focus-visible {
+    border-radius: spaces.$radiusS;
+    border: 2px solid colors.$grey-900;
+    padding: spaces.$spaceXS;
+    filter: invert(74%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(0%) contrast(100%);
+    outline: none;
+  }
 }
 
-.overlayFormHeaderBarTitle{
+.overlayFormHeaderBarTitle {
   margin: 0;
   height: auto;
   flex-grow: 1;
-  font-size: 32px;
+
+  @include fonts.text-preset-1;
 }
 
 .overlayFormHeaderText {
-  margin: 20px 0;
-  line-height: 1.5;
-  font-size: 14px;
+  margin: spaces.$spaceML 0;
   color: colors.$grey-500;
+
+  @include fonts.text-preset-4;
 }
 
 .overlayFormSubmit {
   border: 0;
-  border-radius: 8px;
+  border-radius: spaces.$radiusS;
   background-color: colors.$grey-900;
-  padding: 16px;
+  padding: spaces.$spaceM;
   width: 100%;
-  font-weight: 600;
   color: colors.$white-0;
   cursor: pointer;
-}
-.overlayFormSubmit.isEnabled:hover, .overlayFormSubmit.abort:hover {
-  background-color: colors.$beige-500;
-  transition: background-color 0.1s ease;
-  color: colors.$white-0;
-}
-.overlayFormSubmit.isEnabled:focus-visible, .overlayFormSubmit.abort:focus-visible {
-  border: 2px solid colors.$grey-900;
-  padding: 14px;
-  background-color: colors.$beige-500;
-  transition: background-color 0.1s ease;
-  color: colors.$white-0;
-  outline: none;
-}
-.overlayFormSubmit.disabled {
-  border: 1px solid colors.$grey-100;
-  background-color: colors.$grey-100;
-  color: colors.$grey-500;
-  pointer-events: none;
-}
-.overlayFormSubmit.abort {
-  background-color: transparent;
-  font-weight: 500;
-  color: colors.$grey-500;
+
+  @include fonts.text-preset-4-bold;
+
+  &.isEnabled:hover, &.abort:hover {
+    background-color: colors.$beige-500;
+    transition: background-color 0.1s ease;
+    color: colors.$white-0;
+  }
+
+  &.isEnabled:focus-visible, &.abort:focus-visible {
+    border: 2px solid colors.$grey-900;
+    padding: functions.to-rem(14px);
+    background-color: colors.$beige-500;
+    transition: background-color 0.1s ease;
+    color: colors.$white-0;
+    outline: none;
+  }
+
+  &.disabled {
+    border: 1px solid colors.$grey-100;
+    background-color: colors.$grey-100;
+    color: colors.$grey-500;
+    pointer-events: none;
+  }
+
+  &.abort {
+    background-color: transparent;
+    color: colors.$grey-500;
+
+    @include fonts.text-preset-4;
+  }
 }
 
 .overlayFormSubmitContainer.disabled {

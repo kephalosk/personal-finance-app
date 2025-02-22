@@ -1,14 +1,14 @@
 @use '../../../styles/screens';
 
 .overviewPots {
-  border-radius: 12px;
+  border-radius: spaces.$radiusMS;
   background-color: colors.$white-0;
   padding: 32px;
   display: grid;
   grid-template-rows: auto auto;
   row-gap: 20px;
 
-  @include mixins.phone() {
+  @include screens.phone {
     padding: 24px 20px;
   }
 }
@@ -18,7 +18,7 @@
   grid-template-columns: 45% 55%;
   column-gap: 20px;
 
-  @include mixins.phone() {
+  @include screens.phone {
     grid-template-columns: 1fr;
     row-gap: 20px;
   }

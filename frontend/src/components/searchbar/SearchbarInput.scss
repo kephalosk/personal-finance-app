@@ -3,7 +3,7 @@
 }
 
 .searchbarInput {
-  border-radius: 12px;
+  border-radius: spaces.$radiusMS;
   border: 1px solid colors.$beige-500;
   padding: 14px 48px 12px 18px;
   width: 100%;

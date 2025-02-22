@@ -1,7 +1,7 @@
 @use '../../styles/screens';
 
 .selectionMenuList {
-  border-radius: 8px;
+  border-radius: spaces.$radiusS;
   box-shadow: 0 5px 40px -25px colors.$grey-900;
   background-color: colors.$white-0;
   max-height: 40px;
@@ -26,7 +26,7 @@
 }
 
 .selectionMenuListElement {
-  border-radius: 8px;
+  border-radius: spaces.$radiusS;
   padding: 12px 20px;
   display: block;
   cursor: pointer;
@@ -42,7 +42,7 @@
 }
 
 .selectionMenu {
-  border-radius: 8px;
+  border-radius: spaces.$radiusS;
   border: 1px solid colors.$beige-500;
   padding: 11px 48px 11px 19px;
   min-width: 180px;
@@ -58,7 +58,7 @@
           box-shadow 0.3s ease;
   position: relative;
 
-  @include mixins.phone() {
+  @include screens.phone {
     margin-left: 8px;
     border: 1px solid transparent;
     padding: 0 12px;
@@ -78,7 +78,7 @@
   color: colors.$white-0;
   cursor: pointer;
 
-  @include mixins.phone() {
+  @include screens.phone {
     color: transparent;
   }
 }
@@ -88,14 +88,14 @@
 .selectionMenu.smallerWidth {
   min-width: 125px;
 
-  @include mixins.phone() {
+  @include screens.phone {
     min-width: 42px;
   }
 }
 
 
 .searchbarDropdownSort option{
-  @include mixins.phone() {
+  @include screens.phone {
     color: colors.$grey-900;
   }
 }
@@ -111,7 +111,7 @@
   pointer-events: none;
   filter: var(--icon-filter);
 
-  @include mixins.phone() {
+  @include screens.phone {
     height: 20px;
     top: calc(50% - 10px);
     right: 10px;
@@ -134,7 +134,7 @@
     filter: invert(74%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(300%) contrast(100%);
   }
 
-  @include mixins.phone() {
+  @include screens.phone {
     .selectionMenu {
       color: transparent;
     }
@@ -155,7 +155,7 @@
     filter: invert(74%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(300%) contrast(100%);
   }
 
-  @include mixins.phone() {
+  @include screens.phone {
     .selectionMenu {
       color: transparent;
     }
