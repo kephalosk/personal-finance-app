@@ -1,29 +1,29 @@
 .overviewBillsRow {
   border-radius: 8px;
-  background-color: var(--beige-100);
+  background-color: colors.$beige-100;
   padding: 20px 16px;
   display: flex;
   flex-direction: row;
   align-items: center;
 }
 .overviewBillsRow.yellow {
-  border-left: 4px solid var(--yellow);
+  border-left: 4px solid colors.$yellow;
 }
 .overviewBillsRow.green {
-  border-left: 4px solid var(--green);
+  border-left: 4px solid colors.$green;
 }
 .overviewBillsRow.cyan {
-  border-left: 4px solid var(--cyan);
+  border-left: 4px solid colors.$cyan;
 }
 
 .overviewBillsRowTitle {
   flex-grow: 1;
   font-size: 15px;
-  color: var(--grey-500);
+  color: colors.$grey-500;
 }
 
 .overviewBillsRowValue {
   font-size: 14px;
   font-weight: 600;
-  color: var(--grey-900);
+  color: colors.$grey-900;
 }

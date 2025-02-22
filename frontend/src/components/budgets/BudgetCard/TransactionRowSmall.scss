@@ -1,47 +1,55 @@
+@use '../../../styles/colors';
+@use '../../../styles/fonts';
+@use '../../../styles/functions';
+@use '../../../styles/spaces';
+
 .overviewTransactionRowSmall {
   display: grid;
-  grid-template-columns: 1fr 75px;
+  grid-template-columns: 1fr functions.to-rem(75px);
   align-items: center;
 }
 
 .overviewTransactionRowSmallImage {
-  border-radius: 20px;
-  height: 40px;
+  border-radius: spaces.$radiusML;
+  height: functions.to-rem(40px);
   width: auto;
 }
 
 .overviewTransactionRowSmallInfo {
   display: grid;
   grid-template-rows: 1fr 1fr;
-  row-gap: 8px;
+  row-gap: spaces.$spaceS;
 }
 
 .overviewTransactionRowSmallInfoValue {
   display: flex;
   justify-content: flex-end;
-  font-size: 12px;
-  font-weight: 700;
-}
-.overviewTransactionRowSmallInfoValue.black {
-  color: var(--grey-900);
-}
-.overviewTransactionRowSmallInfoValue.green {
-  color: var(--green);
+
+  @include fonts.text-preset-5-bold;
+
+  &.black {
+    color: colors.$grey-900;
+  }
+
+  &.green {
+    color: colors.$green;
+  }
 }
 
 .overviewTransactionRowSmallInfoDate {
   display: flex;
   justify-content: flex-end;
-  font-size: 12px;
-  color: var(--grey-500);
+  color: colors.$grey-500;
   white-space: nowrap;
+
+  @include fonts.text-preset-5;
 }
 
 .overviewTransactionRowSmallName {
   flex-grow: 1;
-  font-size: 12px;
-  font-weight: 600;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+
+  @include fonts.text-preset-5-bold;
 }

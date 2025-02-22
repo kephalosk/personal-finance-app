@@ -1,7 +1,7 @@
 .dropdownColorCircle {
   margin-right: 12px;
   border-radius: 50%;
-  background-color: var(--green);
+  background-color: colors.$green;
   height: 16px;
   width: 16px;
 }
@@ -12,58 +12,58 @@
   width: 16px;
 }
 .dropdownColorCircle.green {
-  background-color: var(--green);
+  background-color: colors.$green;
 }
 .dropdownColorCircle.yellow {
-  background-color: var(--yellow);
+  background-color: colors.$yellow;
 }
 .dropdownColorCircle.cyan {
-  background-color: var(--cyan);
+  background-color: colors.$cyan;
 }
 .dropdownColorCircle.navy {
-  background-color: var(--navy);
+  background-color: colors.$navy;
 }
 .dropdownColorCircle.red {
-  background-color: var(--red);
+  background-color: colors.$red;
 }
 .dropdownColorCircle.purple {
-  background-color: var(--purple);
+  background-color: colors.$purple;
 }
 .dropdownColorCircle.turquoise {
-  background-color: var(--turquoise);
+  background-color: colors.$turquoise;
 }
 .dropdownColorCircle.brown {
-  background-color: var(--brown);
+  background-color: colors.$brown;
 }
 .dropdownColorCircle.magenta {
-  background-color: var(--magenta);
+  background-color: colors.$magenta;
 }
 .dropdownColorCircle.blue {
-  background-color: var(--blue);
+  background-color: colors.$blue;
 }
 .dropdownColorCircle.grey {
-  background-color: var(--navy-grey);
+  background-color: colors.$navy-grey;
 }
 .dropdownColorCircle.army {
-  background-color: var(--army-green);
+  background-color: colors.$army-green;
 }
 .dropdownColorCircle.pink {
-  background-color: var(--pink);
+  background-color: colors.$pink;
 }
 .dropdownColorCircle.gold {
-  background-color: var(--gold);
+  background-color: colors.$gold;
 }
 .dropdownColorCircle.orange {
-  background-color: var(--orange);
+  background-color: colors.$orange;
 }
 .dropdownColorCircle.sepia {
-  background-color: var(--beige-100);
+  background-color: colors.$beige-100;
 }
 .dropdownColorCircle.white {
-  background-color: var(--white);
+  background-color: colors.$white;
 }
 .dropdownColorCircle.black {
-  background-color: var(--black);
+  background-color: colors.$black;
 }
 
 .dropdownColorLabel {
@@ -80,8 +80,8 @@
   cursor: pointer;
 }
 .dropDownColorListItem:hover, .dropDownColorListItem:focus {
-  background-color: var(--component-background-light);
-  color: var(--white-0);
+  background-color: colors.$component-background-light;
+  color: colors.$white-0;
   outline: none;
 }
 .dropDownColorListItem.disabled {

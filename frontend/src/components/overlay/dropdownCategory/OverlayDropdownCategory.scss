@@ -4,8 +4,8 @@
 
 .dropdownCategoryList {
   border-radius: 8px;
-  box-shadow: 0 5px 40px -25px var(--grey-900);
-  background-color: var(--white-0);
+  box-shadow: 0 5px 40px -25px colors.$grey-900;
+  background-color: colors.$white-0;
   display: flex;
   flex-direction: column;
   max-height: 40px;

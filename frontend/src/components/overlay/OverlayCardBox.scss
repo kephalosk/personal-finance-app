@@ -20,7 +20,7 @@
 
 .overlayForm{
   border-radius: 12px;
-  background-color: var(--white-0);
+  background-color: colors.$white-0;
   padding: 32px;
   height: auto;
   width: 560px;
@@ -61,7 +61,7 @@
 }
 .overlayFormHeaderBarIcon:focus-visible {
   border-radius: 8px;
-  border: 2px solid var(--grey-900);
+  border: 2px solid colors.$grey-900;
   padding: 4px;
   filter: invert(74%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(0%) contrast(100%);
   outline: none;
@@ -78,42 +78,42 @@
   margin: 20px 0;
   line-height: 1.5;
   font-size: 14px;
-  color: var(--grey-500);
+  color: colors.$grey-500;
 }
 
 .overlayFormSubmit {
   border: 0;
   border-radius: 8px;
-  background-color: var(--grey-900);
+  background-color: colors.$grey-900;
   padding: 16px;
   width: 100%;
   font-weight: 600;
-  color: var(--white-0);
+  color: colors.$white-0;
   cursor: pointer;
 }
 .overlayFormSubmit.isEnabled:hover, .overlayFormSubmit.abort:hover {
-  background-color: var(--beige-500);
+  background-color: colors.$beige-500;
   transition: background-color 0.1s ease;
-  color: var(--white-0);
+  color: colors.$white-0;
 }
 .overlayFormSubmit.isEnabled:focus-visible, .overlayFormSubmit.abort:focus-visible {
-  border: 2px solid var(--grey-900);
+  border: 2px solid colors.$grey-900;
   padding: 14px;
-  background-color: var(--beige-500);
+  background-color: colors.$beige-500;
   transition: background-color 0.1s ease;
-  color: var(--white-0);
+  color: colors.$white-0;
   outline: none;
 }
 .overlayFormSubmit.disabled {
-  border: 1px solid var(--grey-100);
-  background-color: var(--grey-100);
-  color: var(--grey-500);
+  border: 1px solid colors.$grey-100;
+  background-color: colors.$grey-100;
+  color: colors.$grey-500;
   pointer-events: none;
 }
 .overlayFormSubmit.abort {
   background-color: transparent;
   font-weight: 500;
-  color: var(--grey-500);
+  color: colors.$grey-500;
 }
 
 .overlayFormSubmitContainer.disabled {
