@@ -1,14 +1,16 @@
+@use '../../../styles/colors';
 @use '../../../styles/screens';
+@use '../../../styles/spaces';
 
 .overviewTransactions {
   border-radius: spaces.$radiusMS;
   background-color: colors.$white-0;
-  padding: 32px;
+  padding: spaces.$spaceXL;
   display: grid;
   grid-template-rows: auto auto;
-  row-gap: 32px;
+  row-gap: spaces.$spaceXL;
 
   @include screens.phone{
-    padding: 24px 20px;
+    padding: spaces.$spaceL spaces.$spaceML;
   }
 }

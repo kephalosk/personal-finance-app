@@ -1,3 +1,7 @@
+@use '../../styles/colors';
+@use '../../styles/fonts';
+@use '../../styles/spaces';
+
 .overviewHeader {
   display: flex;
   flex-direction: row;
@@ -5,27 +9,31 @@
 }
 
 .overviewHeaderLink{
-  padding: 4px;
-  font-size: 14px;
+  padding: spaces.$spaceXS;
   text-decoration: none;
   color: colors.$grey-500;
-}
-.overviewHeaderLink:hover{
-  color: colors.$grey-900;
-}
-.overviewHeaderLink:focus{
-  border-radius: spaces.$radiusXS;
-  box-shadow: 0 0 0 2px colors.$grey-900;
-  color: colors.$grey-900;
-  outline: none;
+
+  @include fonts.text-preset-4;
+
+  &:hover{
+    color: colors.$grey-900;
+  }
+
+  &:focus{
+    border-radius: spaces.$radiusXS;
+    box-shadow: 0 0 0 2px colors.$grey-900;
+    color: colors.$grey-900;
+    outline: none;
+  }
 }
 
 .overviewHeaderLink svg{
-  margin-left: 12px;
+  margin-left: spaces.$spaceMS;
 }
 
 .overviewHeaderTitle {
   margin: 0;
   flex-grow: 1;
-  font-size: 20px;
+
+  @include fonts.text-preset-2;
 }

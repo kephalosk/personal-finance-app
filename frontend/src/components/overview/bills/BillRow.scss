@@ -1,29 +1,37 @@
+@use '../../../styles/colors';
+@use '../../../styles/fonts';
+@use '../../../styles/spaces';
+
 .overviewBillsRow {
   border-radius: spaces.$radiusS;
   background-color: colors.$beige-100;
-  padding: 20px 16px;
+  padding: spaces.$spaceML spaces.$spaceM;
   display: flex;
   flex-direction: row;
   align-items: center;
-}
-.overviewBillsRow.yellow {
-  border-left: 4px solid colors.$yellow;
-}
-.overviewBillsRow.green {
-  border-left: 4px solid colors.$green;
-}
-.overviewBillsRow.cyan {
-  border-left: 4px solid colors.$cyan;
+
+  &.yellow {
+    border-left: 4px solid colors.$yellow;
+  }
+
+  &.green {
+    border-left: 4px solid colors.$green;
+  }
+
+  &.cyan {
+    border-left: 4px solid colors.$cyan;
+  }
 }
 
 .overviewBillsRowTitle {
   flex-grow: 1;
-  font-size: 15px;
   color: colors.$grey-500;
+
+  @include fonts.text-preset-3;
 }
 
 .overviewBillsRowValue {
-  font-size: 14px;
-  font-weight: 600;
   color: colors.$grey-900;
+
+  @include fonts.text-preset-4-bold;
 }
