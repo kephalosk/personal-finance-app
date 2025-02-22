@@ -24,7 +24,7 @@
   }
 }
 
-.cardRowLeftBorder{
+.cardRowLeftBorder {
   margin-right: spaces.$spaceM;
   border-radius: spaces.$radiusS;
   height: functions.to-rem(21px);
@@ -34,79 +34,79 @@
     margin-right: spaces.$spaceS;
   }
 
-  &.green{
+  &.green {
     background-color: colors.$green;
   }
 
-  &.yellow{
+  &.yellow {
     background-color: colors.$yellow;
   }
 
-  &.cyan{
+  &.cyan {
     background-color: colors.$cyan;
   }
 
-  &.navy{
+  &.navy {
     background-color: colors.$navy;
   }
 
-  &.red{
+  &.red {
     background-color: colors.$red;
   }
 
-  &.purple{
+  &.purple {
     background-color: colors.$purple;
   }
 
-  &.turquoise{
+  &.turquoise {
     background-color: colors.$turquoise;
   }
 
-  &.brown{
+  &.brown {
     background-color: colors.$brown;
   }
 
-  &.brown{
+  &.brown {
     background-color: colors.$brown;
   }
 
-  &.magenta{
+  &.magenta {
     background-color: colors.$magenta;
   }
 
-  &.blue{
+  &.blue {
     background-color: colors.$blue;
   }
 
-  &.grey{
+  &.grey {
     background-color: colors.$navy-grey;
   }
 
-  &.army{
+  &.army {
     background-color: colors.$army-green;
   }
 
-  &.pink{
+  &.pink {
     background-color: colors.$pink;
   }
 
-  &.gold{
+  &.gold {
     background-color: colors.$gold;
   }
 
-  &.orange{
+  &.orange {
     background-color: colors.$orange;
   }
 
-  &.sepia{
+  &.sepia {
     background-color: colors.$beige-100;
   }
 
-  &.white{
+  &.white {
     background-color: colors.$white;
   }
 
-  &.black{
+  &.black {
     background-color: colors.$black;
   }
 }
@@ -114,22 +114,23 @@
 .cardRowTitle {
   flex-grow: 1;
   flex-shrink: 1;
-  font-size: 14px;
   color: colors.$grey-500;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 
+  @include fonts.text-preset-4;
+
   @include screens.phone {
-    font-size: 12px;
+    @include fonts.text-preset-5;
   }
 }
 
 .cardRowTitleCurrentAmount {
-  margin-right: 8px;
-  font-size: 16px;
-  font-weight: 600;
+  margin-right: spaces.$spaceS;
   color: colors.$grey-900;
+
+  @include fonts.text-preset-3;
 
   @include screens.tablet-and-down {
     margin-right: 0;
@@ -138,16 +139,17 @@
   }
 
   @include screens.phone {
-    font-size: 14px;
+    @include fonts.text-preset-4;
   }
 }
 
 .cardRowTitleMaxAmount {
-  font-size: 14px;
   color: colors.$grey-500;
   white-space: nowrap;
 
+  @include fonts.text-preset-4;
+
   @include screens.phone {
-    font-size: 12px;
+    @include fonts.text-preset-5;
   }
 }
