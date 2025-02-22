@@ -1,97 +1,122 @@
+@use '../../styles/colors';
+@use '../../styles/fonts';
+@use '../../styles/functions';
 @use '../../styles/screens';
+@use '../../styles/spaces';
+
+$value-box-border-width: functions.to-rem(4px);
 
 .valueBox {
   display: flex;
   flex-direction: row;
-  column-gap: 16px;
+  column-gap: spaces.$spaceM;
 }
 
 .valueBoxBorder {
   border-radius: spaces.$radiusS;
   height: 100%;
-  width: 4px;
-}
-.valueBoxBorder.green{
-  background-color: colors.$green;
-}
-.valueBoxBorder.yellow{
-  background-color: colors.$yellow;
-}
-.valueBoxBorder.cyan{
-  background-color: colors.$cyan;
-}
-.valueBoxBorder.navy{
-  background-color: colors.$navy;
-}
-.valueBoxBorder.red{
-  background-color: colors.$red;
-}
-.valueBoxBorder.purple{
-  background-color: colors.$purple;
-}
-.valueBoxBorder.turquoise{
-  background-color: colors.$turquoise;
-}
-.valueBoxBorder.brown{
-  background-color: colors.$brown;
-}
-.valueBoxBorder.brown{
-  background-color: colors.$brown;
-}
-.valueBoxBorder.magenta{
-  background-color: colors.$magenta;
-}
-.valueBoxBorder.blue{
-  background-color: colors.$blue;
-}
-.valueBoxBorder.grey{
-  background-color: colors.$navy-grey;
-}
-.valueBoxBorder.army{
-  background-color: colors.$army-green;
-}
-.valueBoxBorder.pink{
-  background-color: colors.$pink;
-}
-.valueBoxBorder.gold{
-  background-color: colors.$gold;
-}
-.valueBoxBorder.orange{
-  background-color: colors.$orange;
-}
-.valueBoxBorder.sepia{
-  background-color: colors.$beige-100;
-}
-.valueBoxBorder.white{
-  background-color: colors.$white;
-}
-.valueBoxBorder.black{
-  background-color: colors.$black;
+  width: $value-box-border-width;
+
+  &.green{
+    background-color: colors.$green;
+  }
+
+  &.yellow{
+    background-color: colors.$yellow;
+  }
+
+  &.cyan{
+    background-color: colors.$cyan;
+  }
+
+  &.navy{
+    background-color: colors.$navy;
+  }
+
+  &.red{
+    background-color: colors.$red;
+  }
+
+  &.purple{
+    background-color: colors.$purple;
+  }
+
+  &.turquoise{
+    background-color: colors.$turquoise;
+  }
+
+  &.brown{
+    background-color: colors.$brown;
+  }
+
+  &.brown{
+    background-color: colors.$brown;
+  }
+
+  &.magenta{
+    background-color: colors.$magenta;
+  }
+
+  &.blue{
+    background-color: colors.$blue;
+  }
+
+  &.grey{
+    background-color: colors.$navy-grey;
+  }
+
+  &.army{
+    background-color: colors.$army-green;
+  }
+
+  &.pink{
+    background-color: colors.$pink;
+  }
+
+  &.gold{
+    background-color: colors.$gold;
+  }
+
+  &.orange{
+    background-color: colors.$orange;
+  }
+
+  &.sepia{
+    background-color: colors.$beige-100;
+  }
+
+  &.white{
+    background-color: colors.$white;
+  }
+
+  &.black{
+    background-color: colors.$black;
+  }
 }
 
 .valueBoxContent {
   display: flex;
   flex-direction: column;
-  row-gap: 4px;
+  row-gap: spaces.$spaceXS;
 }
 
 .valueBoxContentTitle {
-  margin: 2px 0;
-  font-size: 13px;
-  font-weight: 300;
+  margin: spaces.$spaceXXS 0;
   color: colors.$grey-500;
 
+  @include fonts.text-preset-4;
+
   @include screens.phone {
-    font-size: 12px;
+    @include fonts.text-preset-5;
   }
 }
 
 .valueBoxContentValue {
-  margin: 2px 0;
-  font-size: 14px;
-  font-weight: 700;
+  margin: spaces.$spaceXXS 0;
+
+  @include fonts.text-preset-4-bold;
 
   @include screens.phone {
-    font-size: 12px;
+    @include fonts.text-preset-5;
   }
 }

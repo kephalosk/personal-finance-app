@@ -1,36 +1,43 @@
+@use '../../../styles/colors';
+@use '../../../styles/fonts';
+@use '../../../styles/functions';
 @use '../../../styles/screens';
+@use '../../../styles/spaces';
 
 .overviewSummaryCard {
   border-radius: spaces.$radiusMS;
   background-color: colors.$white-0;
-  padding: 24px;
+  padding: spaces.$spaceL;
   display: flex;
   flex-direction: column;
-  row-gap: 12px;
+  row-gap: spaces.$spaceMS;
 
-  @include screens.phone{
-    padding: 20px;
+  @include screens.phone {
+    padding: spaces.$spaceML;
   }
 }
+
 .overviewSummaryCard.inverted {
   background-color: colors.$grey-900;
 }
 
 .overviewSummaryCardTitle {
-  margin: 5px 0;
-  font-size: 14px;
-  font-weight: 300;
+  margin: functions.to-rem(5px) 0;
   color: colors.$grey-500;
-}
-.overviewSummaryCardTitle.inverted {
-  color: colors.$white-0;
+
+  @include fonts.text-preset-4;
+
+  &.inverted {
+    color: colors.$white-0;
+  }
 }
 
 .overviewSummaryCardValue {
-  font-size: 32px;
-  font-weight: 700;
   color: colors.$grey-900;
-}
-.overviewSummaryCardValue.inverted {
-  color: colors.$white-0;
+
+  @include fonts.text-preset-1;
+
+  &.inverted {
+    color: colors.$white-0;
+  }
 }

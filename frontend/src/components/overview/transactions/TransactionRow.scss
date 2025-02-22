@@ -1,3 +1,10 @@
+@use '../../../styles/colors';
+@use '../../../styles/fonts';
+@use '../../../styles/functions';
+@use '../../../styles/spaces';
+
+$transaction-row-image-height: functions.to-rem(40px);
+
 .overviewTransactionRow {
   display: flex;
   flex-direction: row;
@@ -5,38 +12,41 @@
 }
 
 .overviewTransactionRowImage {
-  border-radius: 20px;
-  height: 40px;
+  border-radius: spaces.$radiusML;
+  height: $transaction-row-image-height;
   width: auto;
 }
 
 .overviewTransactionRowInfo {
   display: grid;
   grid-template-rows: 1fr 1fr;
-  row-gap: 8px;
+  row-gap: spaces.$spaceS;
 }
 
 .overviewTransactionRowInfoValue {
   display: flex;
   justify-content: flex-end;
-  font-size: 14px;
-  font-weight: 700;
-}
-.overviewTransactionRowInfoValue.black {
-  color: colors.$grey-900;
-}
-.overviewTransactionRowInfoValue.green {
-  color: colors.$green;
+
+  @include fonts.text-preset-4-bold;
+
+  &.black {
+    color: colors.$grey-900;
+  }
+
+  &.green {
+    color: colors.$green;
+  }
 }
 
 .overviewTransactionRowInfoDate {
-  font-size: 12px;
   color: colors.$grey-500;
+
+  @include fonts.text-preset-5;
 }
 
 .overviewTransactionRowName {
-  margin-left: 16px;
+  margin-left: spaces.$spaceM;
   flex-grow: 1;
-  font-size: 14px;
-  font-weight: 600;
+
+  @include fonts.text-preset-4-bold;
 }
