@@ -1,15 +1,15 @@
-@use './styles/mixins';
+@use 'styles/screens';
 
 .content {
   padding-left: 300px;
   height: auto;
   transition: padding 0.4s ease;
 
-  @include mixins.tablet-and-down(50) {
+  @include screens.tablet-and-down(50) {
     transition: padding 0s ease;
   }
 
-  @include mixins.tablet-and-down() {
+  @include screens.tablet-and-down() {
     padding-bottom: 81px;
     padding-left: 0;
   }
@@ -17,7 +17,7 @@
 .content.minimized {
   padding-left: 90px;
 
-  @include mixins.tablet-and-down() {
+  @include screens.tablet-and-down() {
     padding-bottom: 81px;
     padding-left: 0;
   }
@@ -33,7 +33,7 @@
   min-height: calc(100vh - 14px);
   position: relative;
 
-  @include mixins.tablet-and-down() {
+  @include screens.tablet-and-down() {
     grid-template-columns: 1fr;
     grid-template-rows: 1fr auto;
   }

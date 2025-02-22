@@ -1,4 +1,4 @@
-@use '../../styles/forms';
+@use '../../styles/colors';
 
 .inputCustomName {
   position: relative;
@@ -15,10 +15,14 @@
   width: 100%;
 }
 .inputCustomNameInput:hover {
-  @include forms.form-field-outline;
+  border: 1px solid var(colors.$grey-900);
+  transition: border 0.1s ease;
+  outline: none;
 }
 .inputCustomNameInput:focus {
-  @include forms.form-field-outline;
+  border: 1px solid var(colors.$grey-900);
+  transition: border 0.1s ease;
+  outline: none;
 }
 .inputCustomNameInput::placeholder {
   color: var(--grey-300);

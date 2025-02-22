@@ -1,6 +1,8 @@
-$phone-width: 600px;
-$sidebar-width: 300px;
-$tablet-width: 960px;
+@use 'functions';
+
+$phone-width: functions.to-rem(600px);
+$sidebar-width: functions.to-rem(300px);
+$tablet-width: functions.to-rem(960px);
 
 @mixin phone($size-of-surrounding-elements: 0) {
   @media (max-width: #{$phone-width + $size-of-surrounding-elements}) {
@@ -13,4 +15,3 @@ $tablet-width: 960px;
     @content;
   }
 }
-
