@@ -1283,7 +1283,7 @@ expect(window.scrollTo).toHaveBeenCalledWith(0, 0);<y:LabelModel><y:SmartNodeLab
           <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="302.7890625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="471.590037280425" x="0.0" xml:space="preserve" y="9.987300752542978">const mockReset = jest.fn();
-jest.mock('../atoms/InputMoney', () =&gt; {
+jest.mock('../atoms/MoneyInput', () =&gt; {
   const MockInputMoney = React.forwardRef((props, ref) =&gt; {
     React.useImperativeHandle(ref, () =&gt; ({
       reset: mockReset,
@@ -1329,7 +1329,7 @@ useImperativeHandle(ref, () =&gt; ({
   });
 
   it('calls reset and clears the input value', async () =&gt; {
-    const { container } = render(&lt;InputMoney {...testProps} ref={inputMoneyRef} /&gt;);
+    const { container } = render(&lt;MoneyInput {...testProps} ref={inputMoneyRef} /&gt;);
     const input = container.querySelector('.inputMoneyInput');
     fireEvent.change(input!, { target: { value: '12345' } });
     expect(input).toHaveAttribute('value', '12,345');
@@ -1460,7 +1460,7 @@ useImperativeHandle(ref, () =&gt; ({
           <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="133.1953125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="625.7138317734162" x="0.0" xml:space="preserve" y="19.371417151228343">const itemName: CardHeaderItemNameEnum = CardHeaderItemNameEnum.BUDGET;
-jest.mock('./CardHeaderDropdownItem', () =&gt;
+jest.mock('./CardHeaderDropdownItemLabel', () =&gt;
   jest.fn((props) =&gt; (
     &lt;div
       data-testid="card-header-dropdown-item"
@@ -1588,7 +1588,7 @@ jest.mock('../../overlay/OverlayContentEditBudget', () =&gt;
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="359.3203125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="625.7138317734162" x="0.0" xml:space="preserve" y="4.2142983620369705">const mockReset: jest.Mock = jest.fn();
 const mockInputCustomName = jest.fn();
-jest.mock('../atoms/InputCustomName', () =&gt; {
+jest.mock('../atoms/CustomNameInput', () =&gt; {
   const MockInputCustomName: ForwardRefExoticComponent&lt;
     { handleInputChange: (input: string) =&gt; void } &amp; React.RefAttributes&lt;unknown&gt;
   &gt; = forwardRef((props: { handleInputChange: (input: string) =&gt; void }, ref) =&gt; {
@@ -1607,7 +1607,7 @@ jest.mock('../atoms/InputCustomName', () =&gt; {
     return &lt;input {...rest} data-testid="input-custom-name" onChange={handleChange} /&gt;;
   });
 
-  MockInputCustomName.displayName = 'InputCustomName';
+  MockInputCustomName.displayName = 'CustomNameInput';
 
   return MockInputCustomName;
 });<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>

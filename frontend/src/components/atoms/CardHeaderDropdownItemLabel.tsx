@@ -1,4 +1,4 @@
-import './CardHeaderDropdownItem.scss';
+import './CardHeaderDropdownItemLabel.scss';
 import React, { ReactNode } from 'react';
 import { CardHeaderItemOperationEnum } from '../../model/enum/CardHeaderItemOperationEnum';
 import { CardHeaderItemNameEnum } from '../../model/enum/CardHeaderItemNameEnum';
@@ -18,7 +18,7 @@ interface Props {
   clickableRefs: React.MutableRefObject<(HTMLDivElement | null)[]>;
 }
 
-const CardHeaderDropdownItem: ({
+const CardHeaderDropdownItemLabel: ({
   itemOperation,
   itemName,
   itemColor,
@@ -53,4 +53,4 @@ const CardHeaderDropdownItem: ({
   );
 };
 
-export default CardHeaderDropdownItem;
+export default CardHeaderDropdownItemLabel;

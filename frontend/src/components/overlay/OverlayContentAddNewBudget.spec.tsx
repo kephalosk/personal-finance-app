@@ -14,7 +14,7 @@ jest.mock('./dropdownCategory/OverlayDropdownCategory', () =>
   ))
 );
 const mockReset = jest.fn();
-jest.mock('../atoms/InputMoney', () => {
+jest.mock('../atoms/MoneyInput', () => {
   const MockInputMoney = forwardRef(
     (props: { handleInputChange: (input: string) => void }, ref) => {
       const { handleInputChange, ...rest } = props;
@@ -85,7 +85,7 @@ describe('OverlayContentAddNewBudget', () => {
     expect(mockHandleCategoryChange).toHaveBeenCalled();
   });
 
-  it('renders component InputMoney', async () => {
+  it('renders component MoneyInput', async () => {
     render(<OverlayContentAddNewBudget {...testProps} />);
 
     const component = screen.getByTestId('input-money');
@@ -93,7 +93,7 @@ describe('OverlayContentAddNewBudget', () => {
     expect(component).toBeInTheDocument();
   });
 
-  it('handles input change of InputMoney', async () => {
+  it('handles input change of MoneyInput', async () => {
     render(<OverlayContentAddNewBudget {...testProps} />);
 
     const component = screen.getByTestId('input-money');
@@ -102,7 +102,7 @@ describe('OverlayContentAddNewBudget', () => {
     expect(mockHandleInputChange).toHaveBeenCalledWith('1000');
   });
 
-  it('resets InputMoney when passed prop isHidden changes', async () => {
+  it('resets MoneyInput when passed prop isHidden changes', async () => {
     const { rerender } = render(<OverlayContentAddNewBudget {...testProps} />);
 
     rerender(<OverlayContentAddNewBudget {...testProps} isHidden={true} />);

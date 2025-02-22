@@ -13,7 +13,7 @@ jest.mock('../atoms/OverlayContentLabel', () =>
 );
 const mockCustomNameReset: jest.Mock = jest.fn();
 const mockInputCustomName: jest.Mock = jest.fn();
-jest.mock('../atoms/InputCustomName', () => {
+jest.mock('../atoms/CustomNameInput', () => {
   const MockInputCustomName: ForwardRefExoticComponent<
     { handleInputChange: (input: string) => void } & React.RefAttributes<unknown>
   > = forwardRef(
@@ -40,7 +40,7 @@ jest.mock('../atoms/InputCustomName', () => {
 });
 const mockMoneyReset: jest.Mock = jest.fn();
 const mockInputMoney: jest.Mock = jest.fn();
-jest.mock('../atoms/InputMoney', () => {
+jest.mock('../atoms/MoneyInput', () => {
   const MockInputMoney: ForwardRefExoticComponent<
     { handleInputChange: (input: string) => void } & React.RefAttributes<unknown>
   > = forwardRef(
@@ -136,7 +136,7 @@ describe('OverlayContentAddNewPot', (): void => {
     expect(OverlayContentLabel).toHaveBeenNthCalledWith(3, { title: 'Theme' }, {});
   });
 
-  it('renders component InputCustomName with passed prop hasValidNameInput', () => {
+  it('renders component CustomNameInput with passed prop hasValidNameInput', () => {
     render(<OverlayContentAddNewPot {...testProps} />);
 
     const component: HTMLLabelElement = screen.getByTestId('input-custom-name');
@@ -148,7 +148,7 @@ describe('OverlayContentAddNewPot', (): void => {
     });
   });
 
-  it('handles input change of InputCustomName', async () => {
+  it('handles input change of CustomNameInput', async () => {
     const newValue: string = 'Island';
     render(<OverlayContentAddNewPot {...testProps} />);
 
@@ -158,7 +158,7 @@ describe('OverlayContentAddNewPot', (): void => {
     expect(mockHandleNameInputChange).toHaveBeenCalledWith(newValue);
   });
 
-  it('resets InputCustomName when passed prop isHidden changes', async () => {
+  it('resets CustomNameInput when passed prop isHidden changes', async () => {
     const { rerender } = render(<OverlayContentAddNewPot {...testProps} isHidden={false} />);
 
     rerender(<OverlayContentAddNewPot {...testProps} isHidden={true} />);
@@ -166,7 +166,7 @@ describe('OverlayContentAddNewPot', (): void => {
     expect(mockCustomNameReset).toHaveBeenCalled();
   });
 
-  it('renders component InputMoney with passed prop hasValidTargetInput', () => {
+  it('renders component MoneyInput with passed prop hasValidTargetInput', () => {
     render(<OverlayContentAddNewPot {...testProps} />);
 
     const component: HTMLLabelElement = screen.getByTestId('input-money');
@@ -179,7 +179,7 @@ describe('OverlayContentAddNewPot', (): void => {
     });
   });
 
-  it('handles input change of InputMoney', async () => {
+  it('handles input change of MoneyInput', async () => {
     const newValue: string = '300000';
     render(<OverlayContentAddNewPot {...testProps} />);
 
@@ -189,7 +189,7 @@ describe('OverlayContentAddNewPot', (): void => {
     expect(mockHandleTargetInputChange).toHaveBeenCalledWith(newValue);
   });
 
-  it('resets InputMoney when passed prop isHidden changes', async () => {
+  it('resets MoneyInput when passed prop isHidden changes', async () => {
     const { rerender } = render(<OverlayContentAddNewPot {...testProps} isHidden={false} />);
 
     rerender(<OverlayContentAddNewPot {...testProps} isHidden={true} />);

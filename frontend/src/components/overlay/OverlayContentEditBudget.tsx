@@ -6,7 +6,7 @@ import Colors from '../../constants/Colors';
 import OverlayContentLabel from '../atoms/OverlayContentLabel';
 import OverlayDropdownCategory from './dropdownCategory/OverlayDropdownCategory';
 import OverlayDropdownColor from './OverlayDropdownColor';
-import InputMoney, { InputMoneyRef } from '../atoms/InputMoney';
+import MoneyInput, { InputMoneyRef } from '../atoms/MoneyInput';
 import getColorObject from '../../globals/utils/getColorObject';
 import { BudgetCategory } from '../../model/BudgetCategory';
 
@@ -96,7 +96,7 @@ const OverlayContentEditBudget: ({
         </div>
       </div>
       <OverlayContentLabel title={`Maximum Spend (current Maximum: $${budget.maximum})`} />
-      <InputMoney
+      <MoneyInput
         ref={inputMoneyRef}
         handleInputChange={handleInputChange}
         hasValidInput={hasValidInput}

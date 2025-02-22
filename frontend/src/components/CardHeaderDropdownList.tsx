@@ -1,8 +1,8 @@
 import './CardHeaderDropdownList.scss';
-import CardHeaderDropdownItem from './CardHeaderDropdownItem';
-import { CardHeaderItemNameEnum } from '../../model/enum/CardHeaderItemNameEnum';
-import { CardHeaderItemOperationEnum } from '../../model/enum/CardHeaderItemOperationEnum';
-import { ColorNameEnum } from '../../model/enum/ColorNameEnum';
+import CardHeaderDropdownItemLabel from './atoms/CardHeaderDropdownItemLabel';
+import { CardHeaderItemNameEnum } from '../model/enum/CardHeaderItemNameEnum';
+import { CardHeaderItemOperationEnum } from '../model/enum/CardHeaderItemOperationEnum';
+import { ColorNameEnum } from '../model/enum/ColorNameEnum';
 import React, { ReactNode, useEffect, useRef } from 'react';
 
 interface Props {
@@ -87,7 +87,7 @@ const CardHeaderDropdownList: ({
       className={`cardHeaderDropdownList ${isDropdownVisible ? 'isVisible' : ''}`}
       data-testid="card-header-dropdown-list"
     >
-      <CardHeaderDropdownItem
+      <CardHeaderDropdownItemLabel
         itemOperation={CardHeaderItemOperationEnum.EDIT}
         itemName={itemName}
         itemColor={ColorNameEnum.BLACK}
@@ -97,7 +97,7 @@ const CardHeaderDropdownList: ({
         clickableRefs={clickableRefs}
       />
       <hr className="cardHeaderDropdownListLine" />
-      <CardHeaderDropdownItem
+      <CardHeaderDropdownItemLabel
         itemOperation={CardHeaderItemOperationEnum.DELETE}
         itemName={itemName}
         itemColor={ColorNameEnum.RED}

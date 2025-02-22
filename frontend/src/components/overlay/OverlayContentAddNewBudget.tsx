@@ -3,7 +3,7 @@ import OverlayDropdownCategory from './dropdownCategory/OverlayDropdownCategory'
 import OverlayDropdownColor from './OverlayDropdownColor';
 import { Color } from '../../model/Color';
 import { ReactNode, RefObject, useEffect, useRef } from 'react';
-import InputMoney, { InputMoneyRef } from '../atoms/InputMoney';
+import MoneyInput, { InputMoneyRef } from '../atoms/MoneyInput';
 import { BudgetCategory } from '../../model/BudgetCategory';
 
 interface Props {
@@ -56,7 +56,7 @@ const OverlayContentAddNewBudget: ({
         budgetCategories={budgetCategories}
       />
       <label className="fieldTitle">Maximum Spend</label>
-      <InputMoney
+      <MoneyInput
         ref={inputMoneyRef}
         handleInputChange={handleInputChange}
         hasValidInput={hasValidInput}

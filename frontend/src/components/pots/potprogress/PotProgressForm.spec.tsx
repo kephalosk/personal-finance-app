@@ -21,7 +21,7 @@ jest.mock(
 );
 const mockMoneyReset: jest.Mock = jest.fn();
 const mockInputMoney: jest.Mock = jest.fn();
-jest.mock('../../atoms/InputMoney', () => {
+jest.mock('../../atoms/MoneyInput', () => {
   const MockInputMoney: ForwardRefExoticComponent<
     { handleInputChange: (input: string) => void } & React.RefAttributes<unknown>
   > = forwardRef(
@@ -106,7 +106,7 @@ describe('PotProgressForm', (): void => {
     }
   );
 
-  it('renders component InputMoney', (): void => {
+  it('renders component MoneyInput', (): void => {
     render(<PotProgressForm {...testProps} />);
 
     const element: HTMLElement | null = screen.getByTestId('input-money');
@@ -119,7 +119,7 @@ describe('PotProgressForm', (): void => {
     });
   });
 
-  it('handles input change of InputMoney', async () => {
+  it('handles input change of MoneyInput', async () => {
     const newValue: string = '300000';
     render(<PotProgressForm {...testProps} />);
 
@@ -129,7 +129,7 @@ describe('PotProgressForm', (): void => {
     expect(mockHandleInputChange).toHaveBeenCalledWith(newValue);
   });
 
-  it('resets InputMoney when passed prop isHidden changes', async () => {
+  it('resets MoneyInput when passed prop isHidden changes', async () => {
     const { rerender } = render(<PotProgressForm {...testProps} isHidden={false} />);
 
     rerender(<PotProgressForm {...testProps} isHidden={true} />);

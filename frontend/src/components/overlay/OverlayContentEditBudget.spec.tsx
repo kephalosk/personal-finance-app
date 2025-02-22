@@ -7,7 +7,7 @@ import Colors from '../../constants/Colors';
 import OverlayContentEditBudget from './OverlayContentEditBudget';
 import OverlayContentLabel from '../atoms/OverlayContentLabel';
 import OverlayDropdownCategory from './dropdownCategory/OverlayDropdownCategory';
-import InputMoney from '../atoms/InputMoney';
+import MoneyInput from '../atoms/MoneyInput';
 import OverlayDropdownColor from './OverlayDropdownColor';
 import getColorObject from '../../globals/utils/getColorObject';
 
@@ -26,7 +26,7 @@ jest.mock(
 );
 const budget: EPBudget = mockedBudgets[0];
 jest.mock(
-  '../atoms/InputMoney',
+  '../atoms/MoneyInput',
   (): jest.Mock =>
     jest.fn(
       (props: { handleInputChange: (input: number) => void }): ReactNode => (
@@ -161,18 +161,18 @@ describe('OverlayContentEditBudget', () => {
     expect(mockPropagateColorChange).not.toHaveBeenCalled();
     expect(OverlayContentLabel).not.toHaveBeenCalled();
     expect(OverlayDropdownCategory).not.toHaveBeenCalled();
-    expect(InputMoney).not.toHaveBeenCalled();
+    expect(MoneyInput).not.toHaveBeenCalled();
     expect(OverlayDropdownColor).not.toHaveBeenCalled();
     expect(getColorObject).not.toHaveBeenCalled();
   });
 
-  it('renders component InputMoney with passed props hasValidInput, budget.maximum and handleInputChange', () => {
+  it('renders component MoneyInput with passed props hasValidInput, budget.maximum and handleInputChange', () => {
     render(<OverlayContentEditBudget {...testProps} />);
 
     const component: HTMLElement = screen.getByTestId('input-money');
 
     expect(component).toBeInTheDocument();
-    expect(InputMoney).toHaveBeenCalledWith(
+    expect(MoneyInput).toHaveBeenCalledWith(
       {
         handleInputChange: mockHandleInputChange,
         hasValidInput,
@@ -183,7 +183,7 @@ describe('OverlayContentEditBudget', () => {
     );
   });
 
-  it('handels inputChange of InputMoney', () => {
+  it('handels inputChange of MoneyInput', () => {
     render(<OverlayContentEditBudget {...testProps} />);
 
     const component: HTMLElement = screen.getByTestId('input-money');
