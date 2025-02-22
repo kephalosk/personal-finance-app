@@ -1,8 +1,13 @@
+@use '../../../styles/functions';
+@use '../../../styles/spaces';
+
+$min-width-column: functions.to-rem(248px);
+
 .overviewSummary {
-  margin: 32px 0;
+  margin: spaces.$spaceXL 0;
   width: 100%;
   display: grid;
   grid-template-columns: repeat(auto-fit, (minmax(248px, 1fr)));
-  column-gap: 24px;
-  row-gap: 24px;
+  column-gap: spaces.$spaceL;
+  row-gap: spaces.$spaceL;
 }

@@ -1,35 +1,42 @@
+@use '../../../styles/colors';
+@use '../../../styles/fonts';
+@use '../../../styles/functions';
+@use '../../../styles/screens';
+@use '../../../styles/spaces';
+
 .overviewPotsSummary {
   border-radius: spaces.$radiusMS;
   background-color: colors.$beige-100;
-  padding: 16px;
+  padding: spaces.$spaceM;
   display: grid;
   grid-template-columns: auto 1fr;
   align-items: center;
-  column-gap: 16px;
+  column-gap: spaces.$spaceM;
 }
 
 .overviewPotsSummaryContent {
   display: flex;
   flex-direction: column;
-  row-gap: 11px;
+  row-gap: functions.to-rem(11px);
 }
 
 .overviewPotsSummaryContentTitle {
-  font-weight: 300;
   color: colors.$grey-500;
+
+  @include fonts.text-preset-4;
 }
 
 .overviewPotsSummaryContentValue {
-  font-size: 36px;
-  font-weight: 700;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   color: colors.$grey-900;
+
+  @include fonts.text-preset-1;
 }
 
 .overviewPotsSummaryIcon {
-  margin: 0 5px;
-  height: 40px;
+  margin: 0 functions.to-rem(5px);
+  height: functions.to-rem(40px);
   width: auto;
 }

@@ -1,21 +1,23 @@
+@use '../../../styles/colors';
 @use '../../../styles/screens';
+@use '../../../styles/spaces';
 
 .overviewBills {
   border-radius: spaces.$radiusMS;
   background-color: colors.$white-0;
-  padding: 32px;
+  padding: spaces.$spaceXL;
   display: flex;
   flex-direction: column;
-  row-gap: 32px;
+  row-gap: spaces.$spaceXL;
 
-  @include screens.phone{
-    padding: 24px 20px;
+  @include screens.phone {
+    padding: spaces.$spaceL spaces.$spaceML;
   }
 }
 
 .overviewBillsContent {
   height: 100%;
   display: grid;
-  grid-template-rows: repeat(3,1fr);
-  row-gap: 12px;
+  grid-template-rows: repeat(3, 1fr);
+  row-gap: spaces.$spaceMS;
 }
