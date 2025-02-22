@@ -2,7 +2,7 @@
 
 .sidebarLeft {
   border-radius: 0 16px 16px 0;
-  background-color: var(--grey-900);
+  background-color: colors.$grey-900;
   padding: 32px 24px 70px 0;
   height: calc(100% - 13px);
   width: 300px;
@@ -22,7 +22,7 @@
 
 .sidebarBottom {
   border-radius: 16px 16px 0 0;
-  background-color: var(--grey-900);
+  background-color: colors.$grey-900;
   padding: 8px 0 13px 0;
   height: auto;
   width: 100%;

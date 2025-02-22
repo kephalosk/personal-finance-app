@@ -1,12 +1,15 @@
+@use '../../../styles/colors';
+@use '../../../styles/fonts';
 @use '../../../styles/screens';
+@use '../../../styles/spaces';
 
-.budgetCardList{
-  border-radius: 12px;
-  background-color: var(--beige-100);
-  padding: 20px;
+.budgetCardList {
+  border-radius: spaces.$radiusMS;
+  background-color: colors.$beige-100;
+  padding: spaces.$spaceML;
   display: flex;
   flex-direction: column;
-  row-gap: 20px
+  row-gap: spaces.$spaceML;
 }
 
 .budgetCardListHeader {
@@ -17,37 +20,39 @@
 
 .budgetCardListHeaderLabel {
   flex-grow: 1;
-  font-size: 16px;
-  font-weight: 600;
-  color: var(--grey-900);
+  color: colors.$grey-900;
 
-  @include mixins.phone() {
-    font-size: 14px;
+  @include fonts.text-preset-3;
+
+  @include screens.phone() {
+    @include fonts.text-preset-4;
   }
 }
 
 .budgetCardListHeaderLink {
-  padding: 4px;
-  font-size: 14px;
+  padding: spaces.$spaceXS;
   text-decoration: none;
-  color: var(--grey-500);
+  color: colors.$grey-500;
 
-  @include mixins.phone() {
-    font-size: 12px;
+  @include fonts.text-preset-4;
+
+  @include screens.phone() {
+    @include fonts.text-preset-5;
   }
 }
+
 .budgetCardListHeaderLink:focus-visible {
-  border-radius: 4px;
-  box-shadow: 0 0 0 2px var(--grey-900);
-  color: var(--grey-900);
+  border-radius: spaces.$radiusXS;
+  box-shadow: 0 0 0 2px colors.$grey-900;
+  color: colors.$grey-900;
   outline: none;
 }
 
 .budgetCardListHeaderLinkCaret {
-  margin-left: 16px;
+  margin-left: spaces.$spaceM;
 }
 
 .budgetCardListLine {
-  margin: 12px 0;
-  background-color: var(--horizontal-line-darker);
+  margin: spaces.$spaceMS 0;
+  background-color: colors.$horizontal-line-darker;
 }

@@ -8,8 +8,8 @@
   cursor: pointer;
 }
 .dropdownCategoryListItem:hover, .dropdownCategoryListItem:focus {
-  background-color: var(--component-background-light);
-  color: var(--white-0);
+  background-color: colors.$component-background-light;
+  color: colors.$white-0;
   outline: none;
 }
 .dropdownCategoryListItem.disabled {

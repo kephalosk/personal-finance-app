@@ -2,22 +2,22 @@
   margin-bottom: 8px;
   border: 0;
   border-radius: 8px;
-  background-color: var(--red);
+  background-color: colors.$red;
   padding: 16px;
   font-weight: 600;
-  color: var(--white-0);
+  color: colors.$white-0;
   cursor: pointer;
 }
 .overlayContentDeleteBudget:hover {
-  background-color: var(--beige-500);
+  background-color: colors.$beige-500;
   transition: background-color 0.1s ease;
-  color: var(--white-0);
+  color: colors.$white-0;
 }
 .overlayContentDeleteBudget:focus-visible {
-  border: 2px solid var(--grey-900);
+  border: 2px solid colors.$grey-900;
   padding: 14px;
-  background-color: var(--beige-500);
+  background-color: colors.$beige-500;
   transition: background-color 0.1s ease;
-  color: var(--white-0);
+  color: colors.$white-0;
   outline: none;
 }

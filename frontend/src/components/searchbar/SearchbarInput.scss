@@ -4,10 +4,10 @@
 
 .searchbarInput {
   border-radius: 12px;
-  border: 1px solid var(--beige-500);
+  border: 1px solid colors.$beige-500;
   padding: 14px 48px 12px 18px;
   width: 100%;
-  color: var(--grey-900);
+  color: colors.$grey-900;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -18,13 +18,13 @@
           box-shadow 0.3s ease;
 }
 .searchbarInput::placeholder {
-  color: var(--beige-500);
+  color: colors.$beige-500;
   letter-spacing: 1px;
 }
 .searchbarInput:focus {
-  border-color: var(--beige-500);
+  border-color: colors.$beige-500;
   outline: none;
-  box-shadow: 0 0 0 2px var(--grey-900);
+  box-shadow: 0 0 0 2px colors.$grey-900;
 }
 
 .searchbarInputLense {

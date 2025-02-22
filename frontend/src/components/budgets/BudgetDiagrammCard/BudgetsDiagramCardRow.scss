@@ -1,103 +1,126 @@
+@use '../../../styles/colors';
+@use '../../../styles/fonts';
+@use '../../../styles/functions';
 @use '../../../styles/screens';
+@use '../../../styles/spaces';
 
 .budgetsDiagramCardRow {
   display: flex;
   flex-direction: row;
   align-items: center;
 
-  @include mixins.tablet-and-down() {
+  @include screens.tablet-and-down {
     display: grid;
-    grid-template-columns: auto 1fr 70px 70px;
-    column-gap: 8px;
+    grid-template-columns: auto 1fr functions.to-rem(70px) functions.to-rem(70px);
+    column-gap: spaces.$spaceS;
     align-items: center;
   }
 
-  @include mixins.phone() {
+  @include screens.phone {
     display: grid;
-    grid-template-columns: auto 1fr 60px 60px;
-    column-gap: 8px;
+    grid-template-columns: auto 1fr functions.to-rem(60px) functions.to-rem(60px);
+    column-gap: spaces.$spaceS;
     align-items: center;
   }
 }
 
 .cardRowLeftBorder{
-  margin-right: 16px;
-  border-radius: 8px;
-  height: 21px;
-  width: 4px;
+  margin-right: spaces.$spaceM;
+  border-radius: spaces.$radiusS;
+  height: functions.to-rem(21px);
+  width: functions.to-rem(4px);
 
-  @include mixins.tablet-and-down() {
-    margin-right: 8px;
+  @include screens.tablet-and-down {
+    margin-right: spaces.$spaceS;
   }
-}
-.cardRowLeftBorder.green{
-  background-color: var(--green);
-}
-.cardRowLeftBorder.yellow{
-  background-color: var(--yellow);
-}
-.cardRowLeftBorder.cyan{
-  background-color: var(--cyan);
-}
-.cardRowLeftBorder.navy{
-  background-color: var(--navy);
-}
-.cardRowLeftBorder.red{
-  background-color: var(--red);
-}
-.cardRowLeftBorder.purple{
-  background-color: var(--purple);
-}
-.cardRowLeftBorder.turquoise{
-  background-color: var(--turquoise);
-}
-.cardRowLeftBorder.brown{
-  background-color: var(--brown);
-}
-.cardRowLeftBorder.brown{
-  background-color: var(--brown);
-}
-.cardRowLeftBorder.magenta{
-  background-color: var(--magenta);
-}
-.cardRowLeftBorder.blue{
-  background-color: var(--blue);
-}
-.cardRowLeftBorder.grey{
-  background-color: var(--navy-grey);
-}
-.cardRowLeftBorder.army{
-  background-color: var(--army-green);
-}
-.cardRowLeftBorder.pink{
-  background-color: var(--pink);
-}
-.cardRowLeftBorder.gold{
-  background-color: var(--gold);
-}
-.cardRowLeftBorder.orange{
-  background-color: var(--orange);
-}
-.cardRowLeftBorder.sepia{
-  background-color: var(--beige-100);
-}
-.cardRowLeftBorder.white{
-  background-color: var(--white);
-}
-.cardRowLeftBorder.black{
-  background-color: var(--black);
+
+  &.green{
+    background-color: colors.$green;
+  }
+
+  &.yellow{
+    background-color: colors.$yellow;
+  }
+
+  &.cyan{
+    background-color: colors.$cyan;
+  }
+
+  &.navy{
+    background-color: colors.$navy;
+  }
+
+  &.red{
+    background-color: colors.$red;
+  }
+
+  &.purple{
+    background-color: colors.$purple;
+  }
+
+  &.turquoise{
+    background-color: colors.$turquoise;
+  }
+
+  &.brown{
+    background-color: colors.$brown;
+  }
+
+  &.brown{
+    background-color: colors.$brown;
+  }
+
+  &.magenta{
+    background-color: colors.$magenta;
+  }
+
+  &.blue{
+    background-color: colors.$blue;
+  }
+
+  &.grey{
+    background-color: colors.$navy-grey;
+  }
+
+  &.army{
+    background-color: colors.$army-green;
+  }
+
+  &.pink{
+    background-color: colors.$pink;
+  }
+
+  &.gold{
+    background-color: colors.$gold;
+  }
+
+  &.orange{
+    background-color: colors.$orange;
+  }
+
+  &.sepia{
+    background-color: colors.$beige-100;
+  }
+
+  &.white{
+    background-color: colors.$white;
+  }
+
+  &.black{
+    background-color: colors.$black;
+  }
 }
 
 .cardRowTitle {
   flex-grow: 1;
   flex-shrink: 1;
   font-size: 14px;
-  color: var(--grey-500);
+  color: colors.$grey-500;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 
-  @include mixins.phone() {
+  @include screens.phone {
     font-size: 12px;
   }
 }
@@ -106,25 +129,25 @@
   margin-right: 8px;
   font-size: 16px;
   font-weight: 600;
-  color: var(--grey-900);
+  color: colors.$grey-900;
 
-  @include mixins.tablet-and-down() {
+  @include screens.tablet-and-down {
     margin-right: 0;
     display: flex;
     justify-content: flex-end;
   }
 
-  @include mixins.phone() {
+  @include screens.phone {
     font-size: 14px;
   }
 }
 
 .cardRowTitleMaxAmount {
   font-size: 14px;
-  color: var(--grey-500);
+  color: colors.$grey-500;
   white-space: nowrap;
 
-  @include mixins.phone() {
+  @include screens.phone {
     font-size: 12px;
   }
 }

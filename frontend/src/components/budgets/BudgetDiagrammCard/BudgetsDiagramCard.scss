@@ -1,24 +1,27 @@
+@use '../../../styles/colors';
+@use '../../../styles/fonts';
 @use '../../../styles/screens';
+@use '../../../styles/spaces';
 
 .budgetsDiagramCard {
-  border-radius: 12px;
-  background-color: var(--white-0);
-  padding: 32px 32px 24px 32px;
+  border-radius: spaces.$radiusMS;
+  background-color: colors.$white-0;
+  padding: spaces.$spaceXL spaces.$spaceXL spaces.$spaceL spaces.$spaceXL;
   display: flex;
   flex-direction: column;
-  row-gap: 32px;
+  row-gap: spaces.$spaceXL;
 
-  @include mixins.tablet-and-down() {
-    padding: 21px;
+  @include screens.tablet-and-down {
+    padding: spaces.$spaceML;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    column-gap: 16px;
-    row-gap: 16px;
+    column-gap: spaces.$spaceM;
+    row-gap: spaces.$spaceM;
     align-items: center;
   }
 
-  @include mixins.phone() {
-    padding: 16px;
+  @include screens.phone {
+    padding: spaces.$spaceM;
     display: flex;
     flex-direction: column;
   }
@@ -27,26 +30,25 @@
 .budgetsDiagramCardDetails {
   display: flex;
   flex-direction: column;
-  row-gap: 24px;
+  row-gap: spaces.$spaceL;
 
-  @include mixins.phone() {
+  @include screens.phone {
     width: 100%;
   }
 }
 
 .budgetsDiagramCardDetailsLabel {
-  font-size: 20px;
-  font-weight: 600;
+  @include fonts.text-preset-2;
 
-  @include mixins.phone() {
-    font-size: 16px;
+  @include screens.phone {
+    @include fonts.text-preset-3;
   }
 }
 
 .budgetsDiagramCardDetailsLine {
-  margin: 16px 0;
+  margin: spaces.$spaceM 0;
 }
 
 .budgetsDiagramWrapper {
-  padding: 20px 0;
+  padding: spaces.$spaceML 0;
 }

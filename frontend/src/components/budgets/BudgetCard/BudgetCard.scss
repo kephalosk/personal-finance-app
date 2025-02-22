@@ -1,109 +1,133 @@
+@use '../../../styles/colors';
+@use '../../../styles/fonts';
+@use '../../../styles/functions';
 @use '../../../styles/screens';
+@use '../../../styles/spaces';
 
 .budgetCard {
-  border-radius: 12px;
-  background-color: var(--white-0);
-  padding: 32px 32px 12px 32px;
+  border-radius: spaces.$radiusMS;
+  background-color: colors.$white-0;
+  padding: spaces.$spaceXL spaces.$spaceXL spaces.$spaceMS spaces.$spaceXL;
   display: flex;
   flex-direction: column;
-  row-gap: 20px;
+  row-gap: spaces.$spaceML;
 
-  @include mixins.phone() {
-    padding: 16px;
+  @include screens.phone {
+    padding: spaces.$spaceM;
   }
 }
 
 .budgetCardBar {
   display: flex;
   flex-direction: column;
-  row-gap: 16px;
+  row-gap: spaces.$spaceM;
 }
 
 .budgetCardBarCurrent {
-  border-radius: 4px;
-  height: 24px;
+  border-radius: spaces.$radiusXS;
+  height: functions.to-rem(24px);
   width: var(--barCurrentWidthPercent);
   max-width: calc(100% - 8px);
   top: calc(50% - 12px);
-  left: 4px;
+  left: spaces.$spaceXS;
   position: absolute;
-}
-.budgetCardBarCurrent.green{
-  background-color: var(--green);
-}
-.budgetCardBarCurrent.yellow{
-  background-color: var(--yellow);
-}
-.budgetCardBarCurrent.cyan{
-  background-color: var(--cyan);
-}
-.budgetCardBarCurrent.navy{
-  background-color: var(--navy);
-}
-.budgetCardBarCurrent.red{
-  background-color: var(--red);
-}
-.budgetCardBarCurrent.purple{
-  background-color: var(--purple);
-}
-.budgetCardBarCurrent.turquoise{
-  background-color: var(--turquoise);
-}
-.budgetCardBarCurrent.brown{
-  background-color: var(--brown);
-}
-.budgetCardBarCurrent.brown{
-  background-color: var(--brown);
-}
-.budgetCardBarCurrent.magenta{
-  background-color: var(--magenta);
-}
-.budgetCardBarCurrent.blue{
-  background-color: var(--blue);
-}
-.budgetCardBarCurrent.grey{
-  background-color: var(--navy-grey);
-}
-.budgetCardBarCurrent.army{
-  background-color: var(--army-green);
-}
-.budgetCardBarCurrent.pink{
-  background-color: var(--pink);
-}
-.budgetCardBarCurrent.gold{
-  background-color: var(--gold);
-}
-.budgetCardBarCurrent.orange{
-  background-color: var(--orange);
-}
-.budgetCardBarCurrent.sepia{
-  background-color: var(--beige-100);
-}
-.budgetCardBarCurrent.white{
-  background-color: var(--white);
-}
-.budgetCardBarCurrent.black{
-  background-color: var(--black);
+
+  &.green {
+    background-color: colors.$green;
+  }
+
+  &.yellow {
+    background-color: colors.$yellow;
+  }
+
+  &.cyan {
+    background-color: colors.$cyan;
+  }
+
+  &.navy {
+    background-color: colors.$navy;
+  }
+
+  &.red {
+    background-color: colors.$red;
+  }
+
+  &.purple {
+    background-color: colors.$purple;
+  }
+
+  &.turquoise {
+    background-color: colors.$turquoise;
+  }
+
+  &.brown {
+    background-color: colors.$brown;
+  }
+
+  &.brown {
+    background-color: colors.$brown;
+  }
+
+  &.magenta {
+    background-color: colors.$magenta;
+  }
+
+  &.blue {
+    background-color: colors.$blue;
+  }
+
+  &.grey {
+    background-color: colors.$navy-grey;
+  }
+
+  &.army {
+    background-color: colors.$army-green;
+  }
+
+  &.pink {
+    background-color: colors.$pink;
+  }
+
+  &.gold {
+    background-color: colors.$gold;
+  }
+
+  &.orange {
+    background-color: colors.$orange;
+  }
+
+  &.sepia {
+    background-color: colors.$beige-100;
+  }
+
+  &.white {
+    background-color: colors.$white;
+  }
+
+  &.black {
+    background-color: colors.$black;
+  }
 }
 
 .budgetCardBarLabel {
-  font-size: 14px;
-  color: var(--grey-500);
+  color: colors.$grey-500;
 
-  @include mixins.phone() {
-    font-size: 12px;
+  @include fonts.text-preset-4;
+
+  @include screens.phone {
+    @include fonts.text-preset-5;
   }
 }
 
 .budgetCardBarMax {
-  border-radius: 4px;
-  background-color: var(--beige-100);
-  height: 32px;
+  border-radius: spaces.$radiusXS;
+  background-color: colors.$beige-100;
+  height: functions.to-rem(32px);
   position: relative;
 }
 
 .budgetCardBarValues {
   display: grid;
-  grid-template-columns: repeat(2,1fr);
-  column-gap: 16px;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: spaces.$spaceM;
 }

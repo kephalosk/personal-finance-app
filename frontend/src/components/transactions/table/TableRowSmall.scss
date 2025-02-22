@@ -32,7 +32,7 @@
 .tableRowSmallPartnerName {
   flex-shrink: 1;
   font-weight: 700;
-  color: var(--grey-900);
+  color: colors.$grey-900;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -42,13 +42,13 @@
   display: flex;
   justify-content: flex-end;
   font-weight: 700;
-  color: var(--grey-900);
+  color: colors.$grey-900;
 }
 .tableRowSmallValue.black {
-  color: var(--grey-900);
+  color: colors.$grey-900;
 }
 .tableRowSmallValue.green {
-  color: var(--green);
+  color: colors.$green;
 }
 
 .tableRowSmallValueDateWrapper {
@@ -63,5 +63,5 @@
   column-gap: 12px;
   align-items: center;
   font-size: 13px;
-  color: var(--grey-500);
+  color: colors.$grey-500;
 }

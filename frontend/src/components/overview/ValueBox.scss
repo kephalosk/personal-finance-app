@@ -12,61 +12,61 @@
   width: 4px;
 }
 .valueBoxBorder.green{
-  background-color: var(--green);
+  background-color: colors.$green;
 }
 .valueBoxBorder.yellow{
-  background-color: var(--yellow);
+  background-color: colors.$yellow;
 }
 .valueBoxBorder.cyan{
-  background-color: var(--cyan);
+  background-color: colors.$cyan;
 }
 .valueBoxBorder.navy{
-  background-color: var(--navy);
+  background-color: colors.$navy;
 }
 .valueBoxBorder.red{
-  background-color: var(--red);
+  background-color: colors.$red;
 }
 .valueBoxBorder.purple{
-  background-color: var(--purple);
+  background-color: colors.$purple;
 }
 .valueBoxBorder.turquoise{
-  background-color: var(--turquoise);
+  background-color: colors.$turquoise;
 }
 .valueBoxBorder.brown{
-  background-color: var(--brown);
+  background-color: colors.$brown;
 }
 .valueBoxBorder.brown{
-  background-color: var(--brown);
+  background-color: colors.$brown;
 }
 .valueBoxBorder.magenta{
-  background-color: var(--magenta);
+  background-color: colors.$magenta;
 }
 .valueBoxBorder.blue{
-  background-color: var(--blue);
+  background-color: colors.$blue;
 }
 .valueBoxBorder.grey{
-  background-color: var(--navy-grey);
+  background-color: colors.$navy-grey;
 }
 .valueBoxBorder.army{
-  background-color: var(--army-green);
+  background-color: colors.$army-green;
 }
 .valueBoxBorder.pink{
-  background-color: var(--pink);
+  background-color: colors.$pink;
 }
 .valueBoxBorder.gold{
-  background-color: var(--gold);
+  background-color: colors.$gold;
 }
 .valueBoxBorder.orange{
-  background-color: var(--orange);
+  background-color: colors.$orange;
 }
 .valueBoxBorder.sepia{
-  background-color: var(--beige-100);
+  background-color: colors.$beige-100;
 }
 .valueBoxBorder.white{
-  background-color: var(--white);
+  background-color: colors.$white;
 }
 .valueBoxBorder.black{
-  background-color: var(--black);
+  background-color: colors.$black;
 }
 
 .valueBoxContent {
@@ -79,7 +79,7 @@
   margin: 2px 0;
   font-size: 13px;
   font-weight: 300;
-  color: var(--grey-500);
+  color: colors.$grey-500;
 
   @include mixins.phone() {
     font-size: 12px;

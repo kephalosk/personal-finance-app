@@ -1,7 +1,7 @@
 @use '../../styles/screens';
 
 .entryRow {
-  border: 2px solid var(--grey-900);
+  border: 2px solid colors.$grey-900;
   border-radius: 0 15px 15px 0;
   padding: 18px 0 18px 32px;
   align-items: center;
@@ -28,29 +28,29 @@
   }
 
   label {
-    color: var(--white-0);
+    color: colors.$white-0;
   }
 }
 .entryRow.active {
-  border-left: 4px solid var(--green);
-  background-color: var(--beige-100);
+  border-left: 4px solid colors.$green;
+  background-color: colors.$beige-100;
 
   img {
     filter: invert(49%) sepia(22%) saturate(1093%) hue-rotate(126deg) brightness(95%) contrast(88%);
   }
 
   label {
-    color: var(--grey-900);
+    color: colors.$grey-900;
   }
 
   @include mixins.tablet-and-down() {
     border-left: 0;
-    border-bottom: 5px solid var(--green);
-    background-color: var(--beige-100);
+    border-bottom: 5px solid colors.$green;
+    background-color: colors.$beige-100;
   }
 }
 .entryRow:focus-visible{
-  border: 2px solid var(--white-0);
+  border: 2px solid colors.$white-0;
   outline: none;
 
   img {
@@ -58,7 +58,7 @@
   }
 
   label {
-    color: var(--green);
+    color: colors.$green;
   }
 }
 
@@ -85,7 +85,7 @@
 .entryRowLabel {
   margin-left: 16px;
   font-weight: 600;
-  color: var(--grey-300);
+  color: colors.$grey-300;
   cursor: pointer;
   white-space: nowrap;
   opacity: 1;
