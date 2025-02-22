@@ -1,4 +1,9 @@
 @use '../../styles/colors';
+@use '../../styles/fonts';
+@use '../../styles/functions';
+@use '../../styles/spaces';
+
+$max-height-dropdown-list: functions.to-rem(290px);
 
 .dropdownColor {
   display: flex;
@@ -7,7 +12,7 @@
 }
 
 .dropdownColorContainer {
-  margin-bottom: 20px;
+  margin-bottom: spaces.$spaceML;
   position: relative;
 }
 
@@ -17,36 +22,39 @@
 }
 
 .dropdownColorWrapper {
-  border-radius: 8px;
+  border-radius: spaces.$radiusS;
   border: 1px solid colors.$beige-500;
-  padding: 11px 21px 13px 21px;
+  padding: functions.to-rem(11px) functions.to-rem(21px) functions.to-rem(13px) functions.to-rem(21px);
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: left;
   height: auto;
-  font-size: 14px;
   cursor: pointer;
   position: relative;
-}
-.dropdownColorWrapper:hover {
-  border: 1px solid var(colors.$grey-900);
-  transition: border 0.1s ease;
-  outline: none;
-}
-.dropdownColorWrapper:focus-visible {
-  border: 1px solid var(colors.$grey-900);
-  transition: border 0.1s ease;
-  outline: none;
+
+  @include fonts.text-preset-4;
+
+  &:hover {
+    border: 1px solid var(colors.$grey-900);
+    transition: border 0.1s ease;
+    outline: none;
+  }
+
+  &:focus-visible {
+    border: 1px solid var(colors.$grey-900);
+    transition: border 0.1s ease;
+    outline: none;
+  }
 }
 
 .dropDownColorList {
-  border-radius: 8px;
+  border-radius: spaces.$radiusS;
   box-shadow: 0 5px 40px -25px colors.$grey-900;
   background-color: colors.$white-0;
   display: flex;
   flex-direction: column;
-  max-height: 42px;
+  max-height: functions.to-rem(42px);
   width: 100%;
   top: 0;
   left: 0;
@@ -55,9 +63,10 @@
   visibility: hidden;
   overflow: hidden;
   transition: max-height 0.1s ease, visibility 0.1s ease;
-}
-.dropDownColorList.isOpen {
-  max-height: 290px;
-  overflow-y: auto;
-  visibility: visible;
+
+  &.isOpen {
+    max-height: $max-height-dropdown-list;
+    overflow-y: auto;
+    visibility: visible;
+  }
 }

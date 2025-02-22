@@ -1,34 +1,35 @@
 @use '../../../styles/colors';
+@use '../../../styles/fonts';
+@use '../../../styles/functions';
+@use '../../../styles/spaces';
 
 .dropdownCategoryBar {
-  border-radius: 8px;
+  border-radius: spaces.$spaceS;
   border: 1px solid colors.$beige-500;
-  padding: 11px 50px 13px 20px;
+  padding: functions.to-rem(11px) functions.to-rem(50px) functions.to-rem(13px) spaces.$spaceML;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: left;
   height: auto;
-  font-size: 14px;
   cursor: pointer;
   position: relative;
-}
-.dropdownCategoryBar:hover {
-  border: 1px solid var(colors.$grey-900);
-  transition: border 0.1s ease;
-  outline: none;
-}
-.dropdownCategoryBar:focus-visible {
-  border: 1px solid var(colors.$grey-900);
-  transition: border 0.1s ease;
-  outline: none;
-}
-.dropdownCategoryBar.disabled {
-  cursor: not-allowed;
+
+  @include fonts.text-preset-4;
+
+  &.disabled {
+    cursor: not-allowed;
+  }
+
+  &:hover, &:focus-visible {
+    border: 1px solid var(colors.$grey-900);
+    transition: border 0.1s ease;
+    outline: none;
+  }
 }
 
 .DropdownCategoryBarContainer {
-  margin-bottom: 16px;
+  margin-bottom: spaces.$spaceM;
 }
 
 .dropdownCategoryBarItem.disabled {
@@ -43,16 +44,18 @@
 
 .dropdownCategoryIcon {
   top: calc(50% - 3px);
-  right: 21px;
+  right: functions.to-rem(21px);
   position: absolute;
 }
 
 .dropdownCategoryValidation {
-  margin-left: 8px;
-  font-size: 12px;
+  margin-left: spaces.$spaceS;
   color: colors.$red;
   display: none;
-}
-.dropdownCategoryValidation.visible {
-  display: block;
+
+  @include fonts.text-preset-5;
+
+  &.visible {
+    display: block;
+  }
 }

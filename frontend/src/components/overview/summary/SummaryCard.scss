@@ -1,14 +1,14 @@
 @use '../../../styles/screens';
 
 .overviewSummaryCard {
-  border-radius: 12px;
+  border-radius: spaces.$radiusMS;
   background-color: colors.$white-0;
   padding: 24px;
   display: flex;
   flex-direction: column;
   row-gap: 12px;
 
-  @include mixins.phone(){
+  @include screens.phone{
     padding: 20px;
   }
 }

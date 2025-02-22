@@ -9,7 +9,7 @@
   text-decoration: none;
   cursor: pointer;
 
-  @include mixins.tablet-and-down() {
+  @include screens.tablet-and-down {
     border-radius: 15px 15px 0 0;
     padding: 10px 0 12px 0;
     width: 104px;
@@ -18,7 +18,7 @@
     justify-content: center;
   }
 
-  @include mixins.phone() {
+  @include screens.phone {
     width: 68px;
   }
 }
@@ -43,7 +43,7 @@
     color: colors.$grey-900;
   }
 
-  @include mixins.tablet-and-down() {
+  @include screens.tablet-and-down {
     border-left: 0;
     border-bottom: 5px solid colors.$green;
     background-color: colors.$beige-100;
@@ -65,7 +65,7 @@
 .entryRowImg {
   width: 20px;
 
-  @include mixins.tablet-and-down() {
+  @include screens.tablet-and-down {
     height: 24px;
     width: auto;
   }
@@ -77,7 +77,7 @@
   flex-direction: row;
   align-items: center;
 
-  @include mixins.tablet-and-down() {
+  @include screens.tablet-and-down {
     height: 24px;
   }
 }
@@ -95,14 +95,14 @@
     transition: width 0s ease;
   }
 
-  @include mixins.tablet-and-down() {
+  @include screens.tablet-and-down {
     margin-top: 8px;
     margin-left: 0;
     font-size: 12px;
     transition: opacity 0s ease-in;
   }
 
-  @include mixins.phone() {
+  @include screens.phone {
     display: none;
   }
 }
@@ -111,13 +111,13 @@
   opacity: 0;
   transition: opacity 0.2s ease-out, visibility 0.2s ease-out;
 
-  @include mixins.tablet-and-down() {
+  @include screens.tablet-and-down {
     opacity: 1;
     visibility: visible;
     transition: width 0s ease;
   }
 
-  @include mixins.tablet-and-down() {
+  @include screens.tablet-and-down {
     opacity: 1;
     visibility: visible;
     transition: opacity 0s ease-out;

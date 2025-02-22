@@ -1,14 +1,14 @@
 @use '../../../styles/screens';
 
 .overviewBudgets {
-  border-radius: 12px;
+  border-radius: spaces.$radiusMS;
   background-color: colors.$white-0;
   padding: 32px;
   display: flex;
   flex-direction: column;
   row-gap: 20px;
 
-  @include mixins.phone(){
+  @include screens.phone{
     padding: 24px 20px;
   }
 }
@@ -19,7 +19,7 @@
   grid-template-columns: auto fit-content(100%);
   column-gap: 16px;
 
-  @include mixins.phone(){
+  @include screens.phone{
     grid-template-columns: 1fr;
   }
 }
@@ -29,7 +29,7 @@
   flex-direction: column;
   row-gap: 16px;
 
-  @include mixins.phone(){
+  @include screens.phone{
     margin-top: 16px;
     display: grid;
     flex-direction: column;

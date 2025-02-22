@@ -1,69 +1,86 @@
+@use '../../styles/colors';
+@use '../../styles/fonts';
+@use '../../styles/functions';
+@use '../../styles/spaces';
+
 .dropdownColorCircle {
   margin-right: 12px;
   border-radius: 50%;
   background-color: colors.$green;
   height: 16px;
   width: 16px;
-}
-.dropdownColorCircle {
-  margin-right: 12px;
-  border-radius: 50%;
-  height: 16px;
-  width: 16px;
-}
-.dropdownColorCircle.green {
-  background-color: colors.$green;
-}
-.dropdownColorCircle.yellow {
-  background-color: colors.$yellow;
-}
-.dropdownColorCircle.cyan {
-  background-color: colors.$cyan;
-}
-.dropdownColorCircle.navy {
-  background-color: colors.$navy;
-}
-.dropdownColorCircle.red {
-  background-color: colors.$red;
-}
-.dropdownColorCircle.purple {
-  background-color: colors.$purple;
-}
-.dropdownColorCircle.turquoise {
-  background-color: colors.$turquoise;
-}
-.dropdownColorCircle.brown {
-  background-color: colors.$brown;
-}
-.dropdownColorCircle.magenta {
-  background-color: colors.$magenta;
-}
-.dropdownColorCircle.blue {
-  background-color: colors.$blue;
-}
-.dropdownColorCircle.grey {
-  background-color: colors.$navy-grey;
-}
-.dropdownColorCircle.army {
-  background-color: colors.$army-green;
-}
-.dropdownColorCircle.pink {
-  background-color: colors.$pink;
-}
-.dropdownColorCircle.gold {
-  background-color: colors.$gold;
-}
-.dropdownColorCircle.orange {
-  background-color: colors.$orange;
-}
-.dropdownColorCircle.sepia {
-  background-color: colors.$beige-100;
-}
-.dropdownColorCircle.white {
-  background-color: colors.$white;
-}
-.dropdownColorCircle.black {
-  background-color: colors.$black;
+
+  &.green {
+    background-color: colors.$green;
+  }
+
+  &.yellow {
+    background-color: colors.$yellow;
+  }
+
+  &.cyan {
+    background-color: colors.$cyan;
+  }
+
+  &.navy {
+    background-color: colors.$navy;
+  }
+
+  &.red {
+    background-color: colors.$red;
+  }
+
+  &.purple {
+    background-color: colors.$purple;
+  }
+
+  &.turquoise {
+    background-color: colors.$turquoise;
+  }
+
+  &.brown {
+    background-color: colors.$brown;
+  }
+
+  &.magenta {
+    background-color: colors.$magenta;
+  }
+
+  &.blue {
+    background-color: colors.$blue;
+  }
+
+  &.grey {
+    background-color: colors.$navy-grey;
+  }
+
+  &.army {
+    background-color: colors.$army-green;
+  }
+
+  &.pink {
+    background-color: colors.$pink;
+  }
+
+  &.gold {
+    background-color: colors.$gold;
+  }
+
+  &.orange {
+    background-color: colors.$orange;
+  }
+
+  &.sepia {
+    background-color: colors.$beige-100;
+  }
+
+  &.white {
+    background-color: colors.$white;
+  }
+
+  &.black {
+    background-color: colors.$black;
+  }
 }
 
 .dropdownColorLabel {
@@ -72,32 +89,37 @@
 }
 
 .dropDownColorListItem {
-  border-radius: 8px;
-  padding: 12px 22px;
+  border-radius: spaces.$radiusS;
+  padding: spaces.$spaceMS functions.to-rem(22px);
   width: 100%;
   align-items: center;
-  font-size: 14px;
   cursor: pointer;
-}
-.dropDownColorListItem:hover, .dropDownColorListItem:focus {
-  background-color: colors.$component-background-light;
-  color: colors.$white-0;
-  outline: none;
-}
-.dropDownColorListItem.disabled {
-  opacity: 0.4;
-  pointer-events: none;
+
+  @include fonts.text-preset-4;
+
+  &.disabled {
+    opacity: 0.4;
+    pointer-events: none;
+  }
+
+  &:hover, &:focus {
+    background-color: colors.$component-background-light;
+    color: colors.$white-0;
+    outline: none;
+  }
 }
 
 .dropdownCategoryListItemContainer {
   display: flex;
   width: 100%;
-}
-.dropDownColorListItemContainer.disabled {
-  cursor: not-allowed;
+
+  &.disabled {
+    cursor: not-allowed;
+  }
+
 }
 
 .dropDownColorListItemLine {
-  margin: 0 20px;
+  margin: 0 spaces.$spaceML;
   width: calc(100% - 40px);
 }

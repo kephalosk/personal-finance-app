@@ -39,7 +39,7 @@
 .sidebarList {
   flex-grow: 1;
 
-  @include mixins.tablet-and-down() {
+  @include screens.tablet-and-down {
     padding: 0 40px;
     height: auto;
     display: flex;
@@ -47,7 +47,7 @@
     justify-content: space-between;
   }
 
-  @include mixins.phone() {
+  @include screens.phone {
     padding: 0 16px;
   }
 }
@@ -56,7 +56,7 @@
   margin: 0 0 64px 24px;
   height: 60px;
 
-  @include mixins.tablet-and-down() {
+  @include screens.tablet-and-down {
     display: none;
   }
 }

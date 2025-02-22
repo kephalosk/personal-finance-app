@@ -76,7 +76,7 @@
   filter: invert(74%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(0%) contrast(100%);
 }
 .cardHeaderEditIcon:focus-visible {
-  border-radius: 4px;
+  border-radius: spaces.$radiusXS;
   box-shadow: 0 0 0 2px colors.$grey-900;
   filter: invert(74%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(0%) contrast(100%);
   outline: none;
@@ -91,7 +91,7 @@
   font-size: 20px;
   font-weight: 600;
 
-  @include mixins.phone() {
+  @include screens.phone {
     font-size: 16px;
   }
 }
