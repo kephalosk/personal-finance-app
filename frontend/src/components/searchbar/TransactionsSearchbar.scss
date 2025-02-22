@@ -28,7 +28,7 @@
   color: colors.$grey-500;
   row-gap: 16px;
 
-  @include mixins.phone() {
+  @include screens.phone {
     justify-content: center;
   }
 }

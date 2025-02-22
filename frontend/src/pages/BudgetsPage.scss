@@ -6,7 +6,7 @@
   column-gap: 24px;
   row-gap: 24px;
 
-  @include mixins.tablet-and-down() {
+  @include screens.tablet-and-down {
     grid-template-columns: 1fr;
   }
 }
@@ -23,7 +23,7 @@
   flex-direction: column;
   row-gap: 32px;
 
-  @include mixins.phone() {
+  @include screens.phone {
     padding: 24px 16px;
   }
 }

@@ -2,7 +2,7 @@
 
 .paginationButtonPrev {
   margin-right: 8px;
-  border-radius: 8px;
+  border-radius: spaces.$radiusS;
   border: 1px solid colors.$beige-500;
   background-color: colors.$white-0;
   padding: 12px 16px 10px 16px;
@@ -16,7 +16,7 @@
           background-color 0.3s ease,
           box-shadow 0.3s ease;
 
-  @include mixins.phone() {
+  @include screens.phone {
     padding: 12px 1px 10px 15px;
   }
 }

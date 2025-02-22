@@ -14,7 +14,7 @@
   color: colors.$grey-900;
 }
 .overviewHeaderLink:focus{
-  border-radius: 4px;
+  border-radius: spaces.$radiusXS;
   box-shadow: 0 0 0 2px colors.$grey-900;
   color: colors.$grey-900;
   outline: none;

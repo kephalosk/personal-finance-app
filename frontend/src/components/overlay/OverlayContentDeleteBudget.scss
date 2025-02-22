@@ -1,23 +1,31 @@
+@use '../../styles/colors';
+@use '../../styles/fonts';
+@use '../../styles/functions';
+@use '../../styles/spaces';
+
 .overlayContentDeleteBudget {
-  margin-bottom: 8px;
+  margin-bottom: spaces.$spaceS;
   border: 0;
-  border-radius: 8px;
+  border-radius: spaces.$radiusS;
   background-color: colors.$red;
-  padding: 16px;
-  font-weight: 600;
+  padding: spaces.$spaceM;
   color: colors.$white-0;
   cursor: pointer;
-}
-.overlayContentDeleteBudget:hover {
-  background-color: colors.$beige-500;
-  transition: background-color 0.1s ease;
-  color: colors.$white-0;
-}
-.overlayContentDeleteBudget:focus-visible {
-  border: 2px solid colors.$grey-900;
-  padding: 14px;
-  background-color: colors.$beige-500;
-  transition: background-color 0.1s ease;
-  color: colors.$white-0;
-  outline: none;
+
+  @include fonts.text-preset-4-bold;
+
+  &:hover {
+    background-color: colors.$beige-500;
+    transition: background-color 0.1s ease;
+    color: colors.$white-0;
+  }
+
+  &focus-visible {
+    border: 2px solid colors.$grey-900;
+    padding: functions.to-rem(14px);
+    background-color: colors.$beige-500;
+    transition: background-color 0.1s ease;
+    color: colors.$white-0;
+    outline: none;
+  }
 }

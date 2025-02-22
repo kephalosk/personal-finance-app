@@ -1,14 +1,14 @@
 @use '../../../styles/screens';
 
 .overviewBills {
-  border-radius: 12px;
+  border-radius: spaces.$radiusMS;
   background-color: colors.$white-0;
   padding: 32px;
   display: flex;
   flex-direction: column;
   row-gap: 32px;
 
-  @include mixins.phone(){
+  @include screens.phone{
     padding: 24px 20px;
   }
 }
