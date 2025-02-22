@@ -1,9 +1,11 @@
-$spaceXXS: 2px;
-$spaceXS: 4px;
-$spaceS: 8px;
-$spaceMS: 12px;
-$spaceM: 16px;
-$spaceML: 20px;
-$spaceL: 24px;
-$spaceXL: 32px;
-$spaceXXL: 40px;
+@use 'functions';
+
+$spaceXXS: functions.to-rem(2px);
+$spaceXS: functions.to-rem(4px);
+$spaceS: functions.to-rem(8px);
+$spaceMS: functions.to-rem(12px);
+$spaceM: functions.to-rem(16px);
+$spaceML: functions.to-rem(20px);
+$spaceL: functions.to-rem(24px);
+$spaceXL: functions.to-rem(32px);
+$spaceXXL: functions.to-rem(40px);

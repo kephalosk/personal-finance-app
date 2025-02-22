@@ -1,4 +1,4 @@
-@use '../../../styles/forms';
+@use '../../../styles/colors';
 
 .dropdownCategoryBar {
   border-radius: 8px;
@@ -14,10 +14,14 @@
   position: relative;
 }
 .dropdownCategoryBar:hover {
-  @include forms.form-field-outline;
+  border: 1px solid var(colors.$grey-900);
+  transition: border 0.1s ease;
+  outline: none;
 }
 .dropdownCategoryBar:focus-visible {
-  @include forms.form-field-outline;
+  border: 1px solid var(colors.$grey-900);
+  transition: border 0.1s ease;
+  outline: none;
 }
 .dropdownCategoryBar.disabled {
   cursor: not-allowed;
