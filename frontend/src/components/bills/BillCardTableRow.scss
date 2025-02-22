@@ -1,3 +1,8 @@
+@use '../../styles/colors';
+@use '../../styles/fonts';
+@use '../../styles/functions';
+@use '../../styles/spaces';
+
 .billCardTableRow {
   display: grid;
   grid-template-columns: 50% 25% 25%;
@@ -7,32 +12,37 @@
 .billCardTableRowAmount {
   display: flex;
   justify-content: flex-end;
-  font-weight: 600;
-}
-.billCardTableRowAmount.red {
-  color: var(--red);
+
+  @include fonts.text-preset-4-bold;
+
+  &.red {
+    color: colors.$red;
+  }
 }
 
 .billCardTableRowDate {
   display: flex;
   flex-direction: row;
   align-items: center;
-  font-size: 14px;
-  color: var(--grey-500);
-}
-.billCardTableRowDate.green {
-  color: var(--green);
+  color: colors.$grey-500;
+
+  @include fonts.text-preset-4;
+
+  &.green {
+    color: colors.$green;
+  }
 }
 
 .billCardTableRowDateIcon {
-  margin-left: 8px;
+  margin-left: spaces.$spaceS;
 }
 
 .billCardTableRowName {
   display: flex;
   flex-direction: row;
   align-items: center;
-  font-weight: 600;
+
+  @include fonts.text-preset-4-bold;
 }
 
 .billCardTableRowNameLabel {
@@ -42,8 +52,8 @@
 }
 
 .billCardTableRowNamePicture {
-  margin-right: 16px;
+  margin-right: spaces.$spaceM;
   border-radius: 50%;
-  height: 32px;
+  height: functions.to-rem(32px);
   width: auto;
 }

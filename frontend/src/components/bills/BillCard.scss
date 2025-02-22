@@ -1,23 +1,27 @@
+@use '../../styles/colors';
+@use '../../styles/fonts';
 @use '../../styles/screens';
+@use '../../styles/spaces';
 
 .billCard {
-  border-radius: 12px;
-  background-color: var(--white-0);
-  padding: 32px;
+  border-radius: spaces.$radiusMS;
+  background-color: colors.$white-0;
+  padding: spaces.$spaceXL;
   display: flex;
   flex-direction: column;
-  row-gap: 24px;
+  row-gap: spaces.$spaceL;
 
-  @include mixins.phone() {
-    padding: 16px;
+  @include screens.phone {
+    padding: spaces.$spaceM;
   }
 }
 
 .billCardTableHeader{
   display: grid;
   grid-template-columns: 50% 25% 25%;
-  font-size: 14px;
-  color: var(--grey-500);
+  color: colors.$grey-500;
+
+  @include fonts.text-preset-4;
 }
 
 .billCardTableHeaderAmount {
@@ -26,8 +30,9 @@
 }
 
 .billCardTableHeaderDate {
-  font-size: 14px;
-  color: var(--grey-500);
+  color: colors.$grey-500;
+
+  @include fonts.text-preset-4;
 }
 
 .billCardSearchbar {
@@ -37,6 +42,6 @@
 }
 
 .searchbarLabel {
-  color: var(--grey-500);
+  color: colors.$grey-500;
   white-space: nowrap;
 }

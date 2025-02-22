@@ -1,3 +1,8 @@
+@use '../../styles/colors';
+@use '../../styles/fonts';
+@use '../../styles/functions';
+@use '../../styles/spaces';
+
 .billCardTableRowSmall {
   width: 100%;
   display: flex;
@@ -8,24 +13,27 @@
 .billCardTableRowSmallAmount {
   display: flex;
   justify-content: flex-end;
-  font-size: 14px;
-  font-weight: 600;
-}
-.billCardTableRowSmallAmount.red {
-  color: var(--red);
+
+  @include fonts.text-preset-4-bold;
+
+  &.red {
+    color: colors.$red;
+  }
 }
 
 .billCardTableRowSmallDate {
-  margin-top: 8px;
+  margin-top: spaces.$spaceS;
   display: flex;
   flex-direction: row;
   flex-grow: 1;
   align-items: center;
-  font-size: 12px;
-  color: var(--grey-500);
-}
-.billCardTableRowSmallDate.green {
-  color: var(--green);
+  color: colors.$grey-500;
+
+  @include fonts.text-preset-5;
+
+  &.green {
+    color: colors.$green;
+  }
 }
 
 .billCardTableRowSmallDateAmount {
@@ -36,7 +44,7 @@
 }
 
 .billCardTableRowSmallDateIcon {
-  margin-left: 8px;
+  margin-left: spaces.$spaceS;
 }
 
 .billCardTableRowSmallName {
@@ -44,19 +52,21 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  font-weight: 600;
+
+  @include fonts.text-preset-5-bold;
 }
 
 .billCardTableRowSmallNameLabel {
-  font-size: 14px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+
+  @include fonts.text-preset-4;
 }
 
 .billCardTableRowSmallNamePicture {
-  margin-right: 16px;
+  margin-right: spaces.$spaceM;
   border-radius: 50%;
-  height: 32px;
+  height: functions.to-rem(32px);
   width: auto;
 }

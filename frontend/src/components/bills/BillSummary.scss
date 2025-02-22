@@ -1,62 +1,67 @@
+@use '../../styles/colors';
+@use '../../styles/fonts';
+@use '../../styles/functions';
 @use '../../styles/screens';
+@use '../../styles/spaces';
 
 .billSummary {
-  border-radius: 12px;
-  background-color: var(--white-0);
-  padding: 24px;
+  border-radius: spaces.$radiusMS;
+  background-color: colors.$white-0;
+  padding: spaces.$spaceL;
   display: flex;
   flex-direction: column;
-  row-gap: 20px;
+  row-gap: spaces.$spaceML;
 
-  @include mixins.phone() {
-    padding: 20px;
+  @include screens.phone {
+    padding: spaces.$spaceML;
   }
 }
 
 .billSummaryRow {
   display: flex;
   flex-direction: row;
-  font-size: 14px;
-  color: var(--grey-500);
-}
-.billSummaryRow.red {
-  color: var(--red);
+  color: colors.$grey-500;
+
+  @include fonts.text-preset-4;
+
+  &.red {
+    color: colors.$red;
+  }
 }
 
 .billSummaryRowLine {
-  margin: 16px 0;
+  margin: spaces.$spaceM 0;
 }
 
 .billSummaryRowPaid,
 .billSummaryRowUpcoming,
 .billSummaryRowDue {
-  font-size: 14px;
-  font-weight: 600;
+  @include fonts.text-preset-4-bold;
 }
 
 .billSummaryRowPaid,
 .billSummaryRowUpcoming{
-  color: var(--grey-900);
+  color: colors.$grey-900;
 
-  @include mixins.phone() {
-    font-size: 14px;
+  @include screens.phone {
+    @include fonts.text-preset-4;
   }
 }
 
 .billSummaryRowTitle {
   flex-grow: 1;
 
-  @include mixins.phone() {
-    font-size: 14px;
+  @include screens.phone {
+    @include fonts.text-preset-4;
   }
 }
 
 .billSummaryTitle {
-  font-size: 20px;
-  font-weight: 600;
-  color: var(--grey-900);
+  color: colors.$grey-900;
 
-  @include mixins.phone() {
-    font-size: 18px;
+  @include fonts.text-preset-2;
+
+  @include screens.phone {
+    @include fonts.text-preset-3;
   }
 }

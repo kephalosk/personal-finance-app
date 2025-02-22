@@ -1,26 +1,30 @@
+@use '../../styles/colors';
+@use '../../styles/fonts';
+@use '../../styles/functions';
 @use '../../styles/screens';
+@use '../../styles/spaces';
 
 .billTotal {
-  border-radius: 12px;
-  background-color: var(--grey-900);
-  padding: 24px;
+  border-radius: spaces.$radiusMS;
+  background-color: colors.$grey-900;
+  padding: spaces.$spaceL;
   display: flex;
   flex-direction: column;
 
-  @include mixins.phone() {
+  @include screens.phone {
     flex-direction: row;
     align-items: center;
-    column-gap: 16px;
+    column-gap: spaces.$spaceM;
   }
 }
 
 .billTotalImage {
   justify-content: flex-start;
-  margin-bottom: 32px;
-  height: 40px;
+  margin-bottom: spaces.$spaceXL;
+  height: functions.to-rem(40px);
   width: auto;
 
-  @include mixins.phone() {
+  @include screens.phone {
     margin-bottom: 0;
   }
 }
@@ -31,13 +35,14 @@
 }
 
 .billTotalTitle {
-  margin-bottom: 11px;
-  font-size: 14px;
-  color: var(--white-0);
+  margin-bottom: spaces.$spaceMS;
+  color: colors.$white-0;
+
+  @include fonts.text-preset-4;
 }
 
 .billTotalAmount {
-  font-size: 32px;
-  font-weight: 600;
-  color: var(--white-0);
+  color: colors.$white-0;
+
+  @include fonts.text-preset-1;
 }
