@@ -3,7 +3,15 @@
 @use 'spaces';
 
 :root {
+  color-scheme: light;
+
   --icon-filter: invert(0%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: light;
+  }
 }
 
 * {
