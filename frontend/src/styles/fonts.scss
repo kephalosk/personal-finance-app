@@ -1,0 +1,107 @@
+@use 'functions';
+
+$text-scale-factor-partial: 0.8;
+$text-scale-factor-viewport: 0.7vw;
+$text-scale-factor-max: 2;
+
+$text-preset-1-min: functions.to-rem(32px);
+$text-preset-1-partial: $text-preset-1-min * $text-scale-factor-partial;
+$text-preset-1-max: $text-preset-1-min * $text-scale-factor-max;
+
+$text-preset-2-min: functions.to-rem(20px);
+$text-preset-2-partial: $text-preset-2-min * $text-scale-factor-partial;
+$text-preset-2-max: $text-preset-2-min * $text-scale-factor-max;
+
+$text-preset-3-min: functions.to-rem(16px);
+$text-preset-3-partial: $text-preset-3-min * $text-scale-factor-partial;
+$text-preset-3-max: $text-preset-3-min * $text-scale-factor-max;
+
+$text-preset-4-min: functions.to-rem(14px);
+$text-preset-4-partial: $text-preset-4-min * $text-scale-factor-partial;
+$text-preset-4-max: $text-preset-4-min * $text-scale-factor-max;
+
+$text-preset-5-min: functions.to-rem(12px);
+$text-preset-5-partial: $text-preset-5-min * $text-scale-factor-partial;
+$text-preset-5-max: $text-preset-5-min * $text-scale-factor-max;
+
+$text-preset-6-min: functions.to-rem(11px);
+$text-preset-6-partial: $text-preset-6-min * $text-scale-factor-partial;
+$text-preset-6-max: $text-preset-6-min * $text-scale-factor-max;
+
+@font-face {
+  font-family: 'Public Sans';
+  src: url('../assets/fonts/PublicSans-VariableFont_wght.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Public Sans';
+  src: url('../assets/fonts/PublicSans-Italic-VariableFont_wght.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: italic;
+}
+
+@mixin text-preset-1 {
+  font-family: 'Public Sans', sans-serif;
+  font-weight: 700;
+  font-size: clamp($text-preset-1-min, $text-preset-1-partial + $text-scale-factor-viewport, $text-preset-1-max);
+  line-height: 120%;
+  letter-spacing: 0;
+}
+
+@mixin text-preset-2 {
+  font-family: 'Public Sans', sans-serif;
+  font-weight: 700;
+  font-size: clamp($text-preset-2-min, $text-preset-2-partial + $text-scale-factor-viewport, $text-preset-2-max);
+  line-height: 120%;
+  letter-spacing: 0;
+}
+
+@mixin text-preset-3 {
+  font-family: 'Public Sans', sans-serif;
+  font-weight: 700;
+  font-size: clamp($text-preset-3-min, $text-preset-3-partial + $text-scale-factor-viewport, $text-preset-3-max);
+  line-height: 150%;
+  letter-spacing: 0;
+}
+
+@mixin text-preset-4 {
+  font-family: 'Public Sans', sans-serif;
+  font-weight: 400;
+  font-size: clamp($text-preset-4-min, $text-preset-4-partial + $text-scale-factor-viewport, $text-preset-4-max);
+  line-height: 150%;
+  letter-spacing: 0;
+}
+
+@mixin text-preset-4-bold {
+  font-family: 'Public Sans', sans-serif;
+  font-weight: 700;
+  font-size: clamp($text-preset-4-min, $text-preset-4-partial + $text-scale-factor-viewport, $text-preset-4-max);
+  line-height: 150%;
+  letter-spacing: 0;
+}
+
+@mixin text-preset-5 {
+  font-family: 'Public Sans', sans-serif;
+  font-weight: 400;
+  font-size: clamp($text-preset-5-min, $text-preset-5-partial + $text-scale-factor-viewport, $text-preset-5-max);
+  line-height: 150%;
+  letter-spacing: 0;
+}
+
+@mixin text-preset-5-bold {
+  font-family: 'Public Sans', sans-serif;
+  font-weight: 700;
+  font-size: clamp($text-preset-5-min, $text-preset-5-partial + $text-scale-factor-viewport, $text-preset-5-max);
+  line-height: 150%;
+  letter-spacing: 0;
+}
+
+@mixin text-preset-6 {
+  font-family: 'Public Sans', sans-serif;
+  font-weight: 400;
+  font-size: clamp($text-preset-6-min, $text-preset-6-partial + $text-scale-factor-viewport, $text-preset-6-max);
+  line-height: 150%;
+  letter-spacing: 0;
+}
