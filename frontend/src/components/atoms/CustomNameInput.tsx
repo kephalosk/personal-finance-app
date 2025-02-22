@@ -1,4 +1,4 @@
-import './InputCustomName.scss';
+import './CustomNameInput.scss';
 import {
   ChangeEvent,
   ForwardedRef,
@@ -21,7 +21,7 @@ export interface InputCustomNameRef {
   reset: () => void;
 }
 
-const InputCustomName: ForwardRefExoticComponent<Props & RefAttributes<InputCustomNameRef>> =
+const CustomNameInput: ForwardRefExoticComponent<Props & RefAttributes<InputCustomNameRef>> =
   forwardRef<InputCustomNameRef, Props>(
     (
       { handleInputChange, hasValidInput, initialValue = '' }: Props,
@@ -106,6 +106,6 @@ const InputCustomName: ForwardRefExoticComponent<Props & RefAttributes<InputCust
     }
   );
 
-InputCustomName.displayName = 'InputCustomName';
+CustomNameInput.displayName = 'CustomNameInput';
 
-export default InputCustomName;
+export default CustomNameInput;

@@ -1,0 +1,49 @@
+@use '../../styles/colors';
+@use '../../styles/fonts';
+@use '../../styles/spaces';
+
+.inputMoney {
+  position: relative;
+}
+
+.inputMoneyContainer {
+  margin-bottom: spaces.$spaceM;
+}
+
+.inputMoneyIcon {
+  position: absolute;
+  top: calc(50% - 9px);
+  left: spaces.$spaceML;
+  color: colors.$grey-300;
+
+  @include fonts.text-preset-4;
+
+  &.active {
+    color: colors.$grey-900;
+  }
+}
+
+.inputMoneyInput {
+  border: 1px solid colors.$beige-500;
+  padding: spaces.$spaceMS spaces.$spaceML spaces.$spaceMS spaces.$spaceXXL;
+  border-radius: spaces.$radiusS;
+  width: 100%;
+
+  &::placeholder {
+    color: colors.$grey-300;
+  }
+
+  &:hover, &:focus {
+    border: 1px solid colors.$grey-900;
+    transition: border 0.1s ease;
+    outline: none;
+  }
+}
+
+.inputMoneyValidation {
+  margin-left: spaces.$spaceS;
+  color: colors.$red;
+  display: block;
+
+  @include fonts.text-preset-5;
+}

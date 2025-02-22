@@ -1,4 +1,4 @@
-import './InputMoney.scss';
+import './MoneyInput.scss';
 import {
   ChangeEvent,
   ForwardedRef,
@@ -22,7 +22,7 @@ export interface InputMoneyRef {
   reset: () => void;
 }
 
-const InputMoney: ForwardRefExoticComponent<Props & RefAttributes<InputMoneyRef>> = forwardRef<
+const MoneyInput: ForwardRefExoticComponent<Props & RefAttributes<InputMoneyRef>> = forwardRef<
   InputMoneyRef,
   Props
 >(
@@ -107,6 +107,6 @@ const InputMoney: ForwardRefExoticComponent<Props & RefAttributes<InputMoneyRef>
   }
 );
 
-InputMoney.displayName = 'InputMoney';
+MoneyInput.displayName = 'MoneyInput';
 
-export default InputMoney;
+export default MoneyInput;

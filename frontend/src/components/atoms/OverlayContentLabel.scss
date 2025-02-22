@@ -7,5 +7,5 @@
   display: block;
   color: colors.$grey-500;
 
-  @include text.text-preset-5-bold;
+  @include fonts.text-preset-5-bold;
 }

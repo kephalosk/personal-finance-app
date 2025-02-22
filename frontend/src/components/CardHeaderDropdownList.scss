@@ -1,0 +1,23 @@
+@use '../styles/colors';
+@use '../styles/spaces';
+
+.cardHeaderDropdownList {
+  box-shadow: 0 5px 40px -25px colors.$grey-900;
+  border-radius: spaces.$radiusS;
+  background-color: colors.$white-0;
+  display: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+  z-index: 1;
+
+  &.isVisible {
+    display: block;
+  }
+}
+
+.cardHeaderDropdownListLine {
+  margin: 0 spaces.$spaceML;
+  max-width: calc(100% - 40px);
+}

@@ -1,6 +1,6 @@
 import './CardHeader.scss';
 import React, { KeyboardEvent, useState } from 'react';
-import CardHeaderDropdownList from './atoms/CardHeaderDropdownList';
+import CardHeaderDropdownList from './CardHeaderDropdownList';
 import { CardHeaderItemNameEnum } from '../model/enum/CardHeaderItemNameEnum';
 import { CardHeaderItemOperationEnum } from '../model/enum/CardHeaderItemOperationEnum';
 
