@@ -1,0 +1,29 @@
+@use '../../styles/colors';
+@use '../../styles/fonts';
+@use '../../styles/spaces';
+
+.cardHeaderDropdownItem {
+  border-radius: spaces.$radiusS;
+  padding: spaces.$spaceMS spaces.$spaceML;
+
+  @include fonts.text-preset-4;
+
+  &.black {
+    color: colors.$black;
+  }
+
+  &.red {
+    color: colors.$red;
+  }
+
+  &:hover, &:focus {
+    background-color: colors.$component-background-light;
+    color: colors.$white-0;
+    outline: none;
+  }
+}
+
+.cardHeaderDropdownItemLabel {
+  text-wrap: nowrap;
+  cursor: pointer;
+}

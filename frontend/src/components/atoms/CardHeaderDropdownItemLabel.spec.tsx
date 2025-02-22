@@ -1,11 +1,11 @@
 import { fireEvent, render } from '@testing-library/react';
-import CardHeaderDropdownItem from './CardHeaderDropdownItem';
+import CardHeaderDropdownItemLabel from './CardHeaderDropdownItemLabel';
 import { CardHeaderItemOperationEnum } from '../../model/enum/CardHeaderItemOperationEnum';
 import { CardHeaderItemNameEnum } from '../../model/enum/CardHeaderItemNameEnum';
 import { ColorNameEnum } from '../../model/enum/ColorNameEnum';
 import React from 'react';
 
-describe('CardHeaderDropdownItem', () => {
+describe('CardHeaderDropdownItemLabel', () => {
   const itemOperation: CardHeaderItemOperationEnum = CardHeaderItemOperationEnum.EDIT;
   const itemName: CardHeaderItemNameEnum = CardHeaderItemNameEnum.BUDGET;
   const itemColor: ColorNameEnum = ColorNameEnum.BLACK;
@@ -25,7 +25,7 @@ describe('CardHeaderDropdownItem', () => {
   };
 
   it('renders tabable div cardHeaderDropdownItem with passed prop itemColor', () => {
-    const { container } = render(<CardHeaderDropdownItem {...testProps} />);
+    const { container } = render(<CardHeaderDropdownItemLabel {...testProps} />);
 
     const element = container.querySelector('.cardHeaderDropdownItem');
 
@@ -35,7 +35,7 @@ describe('CardHeaderDropdownItem', () => {
   });
 
   it('calls handleDropdownClick when div cardHeaderDropdownItem is clicked', () => {
-    const { container } = render(<CardHeaderDropdownItem {...testProps} />);
+    const { container } = render(<CardHeaderDropdownItemLabel {...testProps} />);
 
     const element = container.querySelector('.cardHeaderDropdownItem');
     fireEvent.click(element!);
@@ -45,7 +45,7 @@ describe('CardHeaderDropdownItem', () => {
   });
 
   it('calls handleDropdownKeyDown with passed props itemName and index when div cardHeaderDropdownItem is pressed', () => {
-    const { container } = render(<CardHeaderDropdownItem {...testProps} />);
+    const { container } = render(<CardHeaderDropdownItemLabel {...testProps} />);
 
     const element = container.querySelector('.cardHeaderDropdownItem');
     fireEvent.keyDown(element!);
@@ -59,7 +59,7 @@ describe('CardHeaderDropdownItem', () => {
   });
 
   it('renders label cardHeaderDropdownItemLabel with passed props itemOperation and itemName', () => {
-    const { container } = render(<CardHeaderDropdownItem {...testProps} />);
+    const { container } = render(<CardHeaderDropdownItemLabel {...testProps} />);
 
     const element = container.querySelector('.cardHeaderDropdownItemLabel');
 
@@ -70,7 +70,7 @@ describe('CardHeaderDropdownItem', () => {
   it('adds div cardHeaderDropdownItem to passed prop clickableRefs', () => {
     const clickableRefs = { current: [] as (HTMLDivElement | null)[] };
 
-    render(<CardHeaderDropdownItem {...testProps} clickableRefs={clickableRefs} />);
+    render(<CardHeaderDropdownItemLabel {...testProps} clickableRefs={clickableRefs} />);
 
     expect(clickableRefs.current[testProps.index]).not.toBeNull();
     expect(clickableRefs.current[testProps.index]).toBeInstanceOf(HTMLDivElement);

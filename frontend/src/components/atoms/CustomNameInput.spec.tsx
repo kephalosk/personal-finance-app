@@ -1,8 +1,8 @@
 import { fireEvent, render, waitFor } from '@testing-library/react';
 import React from 'react';
-import InputCustomName, { InputCustomNameRef } from './InputCustomName';
+import CustomNameInput, { InputCustomNameRef } from './CustomNameInput';
 
-describe('InputCustomName', () => {
+describe('CustomNameInput', () => {
   const mockHandleInputChange: jest.Mock = jest.fn();
   const hasValidInput: boolean = false;
   const initialValue: string = '';
@@ -26,7 +26,7 @@ describe('InputCustomName', () => {
   });
 
   it('renders div inputCustomNameContainer', () => {
-    const { container } = render(<InputCustomName {...testProps} />);
+    const { container } = render(<CustomNameInput {...testProps} />);
 
     const element: Element | null = container.querySelector('.inputCustomNameContainer');
 
@@ -34,7 +34,7 @@ describe('InputCustomName', () => {
   });
 
   it('renders div inputCustomName', () => {
-    const { container } = render(<InputCustomName {...testProps} />);
+    const { container } = render(<CustomNameInput {...testProps} />);
 
     const element: Element | null = container.querySelector('.inputCustomName');
 
@@ -43,7 +43,7 @@ describe('InputCustomName', () => {
 
   it('renders input inputCustomNameInput with initialValue', () => {
     const testValue: string = 'testValue';
-    const { container } = render(<InputCustomName {...testProps} initialValue={testValue} />);
+    const { container } = render(<CustomNameInput {...testProps} initialValue={testValue} />);
 
     const element: Element | null = container.querySelector('.inputCustomNameInput');
 
@@ -56,7 +56,7 @@ describe('InputCustomName', () => {
   it('calls callback handleInputChange when input inputCustomNameInput has changed', () => {
     const testValue: string = 'testValue';
     const testInput: string = 'testInput';
-    const { container } = render(<InputCustomName {...testProps} initialValue={testValue} />);
+    const { container } = render(<CustomNameInput {...testProps} initialValue={testValue} />);
 
     const element: Element | null = container.querySelector('.inputCustomNameInput');
     fireEvent.change(element!, { target: { value: testInput } });
@@ -70,7 +70,7 @@ describe('InputCustomName', () => {
     const testValueCritical: string =
       'testValue°!"§$%&/()=?`´^*+\'#-_.:,;<>¿≠}{|][¢¶“¡„≤∞…–‘±«∑€®†¨⁄øπ•æœ@∆ºª©ƒ∂‚å¥≈ç√∫~µ12345';
     const testValueCleaned: string = 'testValue12345';
-    const { container } = render(<InputCustomName {...testProps} />);
+    const { container } = render(<CustomNameInput {...testProps} />);
 
     const element: Element | null = container.querySelector('.inputCustomNameInput');
     fireEvent.change(element!, { target: { value: testValueCritical } });
@@ -85,7 +85,7 @@ describe('InputCustomName', () => {
   it('cuts input length bigger than 30 chars back to 30 chars', () => {
     const testValueLongerThan30Chars: string = 'acbdeacb10acbdeacb20acbdeacb30acbdeacb40';
     const testValueCuttedBackTo30Chars: string = 'acbdeacb10acbdeacb20acbdeacb30';
-    const { container } = render(<InputCustomName {...testProps} />);
+    const { container } = render(<CustomNameInput {...testProps} />);
 
     const element: Element | null = container.querySelector('.inputCustomNameInput');
     fireEvent.change(element!, { target: { value: testValueLongerThan30Chars } });
@@ -101,7 +101,7 @@ describe('InputCustomName', () => {
     const initValue: string = 'initValue';
     const changedValue: string = 'changedValue';
     const { container } = render(
-      <InputCustomName {...testProps} ref={inputCustomNameRef} initialValue={initValue} />
+      <CustomNameInput {...testProps} ref={inputCustomNameRef} initialValue={initValue} />
     );
     const element: Element | null = container.querySelector('.inputCustomNameInput');
     fireEvent.change(element!, { target: { value: changedValue } });
@@ -121,7 +121,7 @@ describe('InputCustomName', () => {
     const initValue: string = 'initValue';
     const emptyString: string = '';
     const { container } = render(
-      <InputCustomName {...testProps} ref={inputCustomNameRef} initialValue={initValue} />
+      <CustomNameInput {...testProps} ref={inputCustomNameRef} initialValue={initValue} />
     );
 
     const element: Element | null = container.querySelector('.inputCustomNameInput');
@@ -133,7 +133,7 @@ describe('InputCustomName', () => {
   });
 
   it('renders div inputCustomNameValidationContainer', () => {
-    const { container } = render(<InputCustomName {...testProps} />);
+    const { container } = render(<CustomNameInput {...testProps} />);
 
     const element: Element | null = container.querySelector('.inputCustomNameValidationContainer');
 
@@ -144,7 +144,7 @@ describe('InputCustomName', () => {
     'renders label inputCustomNameValidation with passed prop hasValidInput === true',
     (initialValue: string) => {
       const { container } = render(
-        <InputCustomName {...testProps} hasValidInput={true} initialValue={initialValue} />
+        <CustomNameInput {...testProps} hasValidInput={true} initialValue={initialValue} />
       );
 
       const element: Element | null = container.querySelector('.inputCustomNameValidation');
@@ -156,7 +156,7 @@ describe('InputCustomName', () => {
 
   it('renders label inputCustomNameValidation with passed prop hasValidInput === false for empty value', () => {
     const { container } = render(
-      <InputCustomName {...testProps} hasValidInput={false} initialValue="" />
+      <CustomNameInput {...testProps} hasValidInput={false} initialValue="" />
     );
 
     const element: Element | null = container.querySelector('.inputCustomNameValidation');
@@ -168,7 +168,7 @@ describe('InputCustomName', () => {
 
   it('renders label inputCustomNameValidation with passed prop hasValidInput === false for available value', () => {
     const { container } = render(
-      <InputCustomName {...testProps} hasValidInput={false} initialValue="value" />
+      <CustomNameInput {...testProps} hasValidInput={false} initialValue="value" />
     );
 
     const element: Element | null = container.querySelector('.inputCustomNameValidation');
@@ -181,7 +181,7 @@ describe('InputCustomName', () => {
   it('renders label inputCustomNameLength with leftover amount of charactors', () => {
     const initValueLength9: string = '123456789';
     const { container: cut } = render(
-      <InputCustomName {...testProps} initialValue={initValueLength9} />
+      <CustomNameInput {...testProps} initialValue={initValueLength9} />
     );
 
     const element: Element | null = cut.querySelector('.inputCustomNameLength');
@@ -194,7 +194,7 @@ describe('InputCustomName', () => {
 
   it('handles undefined prop initialValue', async () => {
     const emptyString: string = '';
-    const { container } = render(<InputCustomName {...testProps} initialValue={undefined} />);
+    const { container } = render(<CustomNameInput {...testProps} initialValue={undefined} />);
 
     const element: Element | null = container.querySelector('.inputCustomNameInput');
 

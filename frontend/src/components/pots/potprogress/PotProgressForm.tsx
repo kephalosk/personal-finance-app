@@ -1,7 +1,7 @@
 import './PotProgressForm.scss';
 import PotProgressDisplay from './PotProgressDisplay';
 import OverlayContentLabel from '../../atoms/OverlayContentLabel';
-import InputMoney, { InputMoneyRef } from '../../atoms/InputMoney';
+import MoneyInput, { InputMoneyRef } from '../../atoms/MoneyInput';
 import { EPPot } from '../../../model/entrypoints/EPPot';
 import { RefObject, useEffect, useRef } from 'react';
 
@@ -39,7 +39,7 @@ const PotProgressForm = ({
         isAddition={isAddition}
       />
       <OverlayContentLabel title={`Amount to ${isAddition ? 'Add' : 'Withdraw'}`} />
-      <InputMoney
+      <MoneyInput
         ref={inputMoneyRef}
         handleInputChange={handleInputChange}
         hasValidInput={hasValidInput}

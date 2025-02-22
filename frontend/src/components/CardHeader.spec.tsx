@@ -2,12 +2,12 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import React, { Fragment, ReactNode } from 'react';
 import CardHeader from './CardHeader';
 import { CardHeaderItemNameEnum } from '../model/enum/CardHeaderItemNameEnum';
-import CardHeaderDropdownList from './atoms/CardHeaderDropdownList';
+import CardHeaderDropdownList from './CardHeaderDropdownList';
 import { CardHeaderItemOperationEnum } from '../model/enum/CardHeaderItemOperationEnum';
 
 const itemOperation = CardHeaderItemNameEnum.BUDGET;
 jest.mock(
-  './atoms/CardHeaderDropdownList',
+  './CardHeaderDropdownList',
   (): jest.Mock =>
     jest.fn(
       (props): ReactNode => (

@@ -1,7 +1,7 @@
 import './OverlayContentAddNewPot.scss';
-import InputCustomName, { InputCustomNameRef } from '../atoms/InputCustomName';
+import CustomNameInput, { InputCustomNameRef } from '../atoms/CustomNameInput';
 import OverlayContentLabel from '../atoms/OverlayContentLabel';
-import InputMoney, { InputMoneyRef } from '../atoms/InputMoney';
+import MoneyInput, { InputMoneyRef } from '../atoms/MoneyInput';
 import OverlayDropdownColor from './OverlayDropdownColor';
 import Colors from '../../constants/Colors';
 import { Color } from '../../model/Color';
@@ -68,14 +68,14 @@ const OverlayContentEditPot: ({
   return (
     <div className="overlayContentEditPot" data-testid="overlay-content-edit-pot">
       <OverlayContentLabel title="Pot Name" />
-      <InputCustomName
+      <CustomNameInput
         ref={inputCustomNameRef}
         handleInputChange={handleNameInputChange}
         hasValidInput={hasValidNameInput}
         initialValue={pot.name}
       />
       <OverlayContentLabel title="Target" />
-      <InputMoney
+      <MoneyInput
         ref={inputMoneyRef}
         handleInputChange={handleTargetInputChange}
         hasValidInput={hasValidTargetInput}

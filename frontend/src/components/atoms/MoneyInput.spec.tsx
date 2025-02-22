@@ -1,8 +1,8 @@
-import InputMoney, { InputMoneyRef } from './InputMoney';
+import MoneyInput, { InputMoneyRef } from './MoneyInput';
 import { fireEvent, render, waitFor } from '@testing-library/react';
 import React from 'react';
 
-describe('InputMoney', () => {
+describe('MoneyInput', () => {
   const mockHandleInputChange: jest.Mock = jest.fn();
   const hasValidInput: boolean = false;
   const isLimitInput: boolean = true;
@@ -24,7 +24,7 @@ describe('InputMoney', () => {
   });
 
   it('renders div inputMoney', (): void => {
-    const { container } = render(<InputMoney {...testProps} />);
+    const { container } = render(<MoneyInput {...testProps} />);
 
     const element: Element | null = container.querySelector('.inputMoney');
 
@@ -32,7 +32,7 @@ describe('InputMoney', () => {
   });
 
   it('renders input inputMoneyInput with placeholder', (): void => {
-    const { container } = render(<InputMoney {...testProps} />);
+    const { container } = render(<MoneyInput {...testProps} />);
 
     const element: Element | null = container.querySelector('.inputMoneyInput');
 
@@ -43,7 +43,7 @@ describe('InputMoney', () => {
 
   it('renders input inputMoneyInput with passed prop initialValue', (): void => {
     const initValue: string = '1111';
-    const { container } = render(<InputMoney {...testProps} initialValue={initValue} />);
+    const { container } = render(<MoneyInput {...testProps} initialValue={initValue} />);
 
     const element: Element | null = container.querySelector('.inputMoneyInput');
 
@@ -51,7 +51,7 @@ describe('InputMoney', () => {
   });
 
   it('renders label inputMoneyIcon with $ sign', (): void => {
-    const { container } = render(<InputMoney {...testProps} />);
+    const { container } = render(<MoneyInput {...testProps} />);
 
     const element: Element | null = container.querySelector('.inputMoneyIcon');
 
@@ -62,7 +62,7 @@ describe('InputMoney', () => {
   it('calls callback handleInputChange with input value', (): void => {
     const inputValue: string = '12345';
     const inputValueNumber: number = 12345;
-    const { container } = render(<InputMoney {...testProps} />);
+    const { container } = render(<MoneyInput {...testProps} />);
 
     const input: Element | null = container.querySelector('.inputMoneyInput');
     fireEvent.change(input!, { target: { value: inputValue } });
@@ -73,7 +73,7 @@ describe('InputMoney', () => {
   it('only accepts numbers as input', (): void => {
     const inputValueAlphanumeric: string = 'test123';
     const inputValueNumeric: string = '123';
-    const { container } = render(<InputMoney {...testProps} />);
+    const { container } = render(<MoneyInput {...testProps} />);
 
     const input: Element | null = container.querySelector('.inputMoneyInput');
     fireEvent.change(input!, { target: { value: inputValueAlphanumeric } });
@@ -85,7 +85,7 @@ describe('InputMoney', () => {
   it('sets numbers bigger than 1,000,000,000,000 back to 1,000,000,000,000', () => {
     const inputValueMax: string = '1,000,000,000,000';
     const inputValueBiggerThanMax: string = '999,999,999,999,999';
-    const { container } = render(<InputMoney {...testProps} />);
+    const { container } = render(<MoneyInput {...testProps} />);
 
     const input: Element | null = container.querySelector('.inputMoneyInput');
     fireEvent.change(input!, { target: { value: inputValueBiggerThanMax } });
@@ -95,7 +95,7 @@ describe('InputMoney', () => {
   });
 
   it('adds class active to icon when input has value', (): void => {
-    const { container } = render(<InputMoney {...testProps} />);
+    const { container } = render(<MoneyInput {...testProps} />);
     const element: Element | null = container.querySelector('.inputMoneyIcon');
     expect(element).not.toHaveClass('active');
 
@@ -106,7 +106,7 @@ describe('InputMoney', () => {
   });
 
   it('removes class active from icon when input is empty', (): void => {
-    const { container } = render(<InputMoney {...testProps} />);
+    const { container } = render(<MoneyInput {...testProps} />);
     const element: Element | null = container.querySelector('.inputMoneyIcon');
     const input: Element | null = container.querySelector('.inputMoneyInput');
     fireEvent.change(input!, { target: { value: '1' } });
@@ -120,7 +120,7 @@ describe('InputMoney', () => {
   it('calls reset and resets the input value', async (): Promise<void> => {
     const initValue: string = '1111';
     const { container } = render(
-      <InputMoney {...testProps} ref={inputMoneyRef} initialValue={initValue} />
+      <MoneyInput {...testProps} ref={inputMoneyRef} initialValue={initValue} />
     );
     const input: Element | null = container.querySelector('.inputMoneyInput');
     fireEvent.change(input!, { target: { value: '12345' } });
@@ -136,7 +136,7 @@ describe('InputMoney', () => {
 
   it('renders label inputMoneyValidation for limit when passed prop hasValidInput is false and isLimitInput is true', (): void => {
     const { container } = render(
-      <InputMoney {...testProps} hasValidInput={false} isLimitInput={true} />
+      <MoneyInput {...testProps} hasValidInput={false} isLimitInput={true} />
     );
 
     const element: Element | null = container.querySelector('.limitMessage');
@@ -146,7 +146,7 @@ describe('InputMoney', () => {
 
   it('renders label inputMoneyValidation for amount when passed prop hasValidInput is false and isLimitInput is false', (): void => {
     const { container } = render(
-      <InputMoney {...testProps} hasValidInput={false} isLimitInput={false} />
+      <MoneyInput {...testProps} hasValidInput={false} isLimitInput={false} />
     );
 
     const element: Element | null = container.querySelector('.amountMessage');
@@ -155,7 +155,7 @@ describe('InputMoney', () => {
   });
 
   it('does not render label inputMoneyValidation when passed prop hasValidInput is true', (): void => {
-    const { container } = render(<InputMoney {...testProps} hasValidInput={true} />);
+    const { container } = render(<MoneyInput {...testProps} hasValidInput={true} />);
 
     const element: Element | null = container.querySelector('.limitMessage');
     const element2: Element | null = container.querySelector('.amountMessage');
