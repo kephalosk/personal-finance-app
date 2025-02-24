@@ -4,7 +4,7 @@
 @use '../../styles/screens';
 @use '../../styles/spaces';
 
-$size: functions.to-rem(240px);
+$circle-size: functions.to-rem(240px);
 
 .overviewBudgetsDiagram {
   width: 100%;
@@ -13,8 +13,8 @@ $size: functions.to-rem(240px);
 }
 
 .overviewBudgetsDiagramCircleBig {
-  width: $size;
-  height: $size;
+  width: $circle-size;
+  height: $circle-size;
   border-radius: 50%;
   display: flex;
   flex-direction: column;

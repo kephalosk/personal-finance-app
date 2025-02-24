@@ -7,7 +7,7 @@ $min-width-column: functions.to-rem(248px);
   margin: spaces.$spaceXL 0;
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(auto-fit, (minmax(248px, 1fr)));
+  grid-template-columns: repeat(auto-fit, (minmax($min-width-column, 1fr)));
   column-gap: spaces.$spaceL;
   row-gap: spaces.$spaceL;
 }

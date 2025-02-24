@@ -2,6 +2,8 @@
 @use '../../styles/spaces';
 @use '../../styles/fonts';
 
+$transition-duration: 0.2s;
+
 .potCardButton {
   border: 0;
   border-radius: spaces.$spaceS;
@@ -16,7 +18,7 @@
   &:hover {
     background-color: colors.$component-background-light;
     color: colors.$white-0;
-    transition: background-color 0.2s ease, color 0.2s ease;
+    transition: background-color $transition-duration ease, color $transition-duration ease;
   }
 
   &:focus-visible {
@@ -24,13 +26,13 @@
     box-shadow: 0 0 0 2px colors.$grey-900;
     background-color: colors.$component-background-light;
     color: colors.$white-0;
-    transition: background-color 0.2s ease, color 0.2s ease;
+    transition: background-color $transition-duration ease, color $transition-duration ease;
     outline: none;
   }
 }
 
 .potCardButtons {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(2, 1fr);
   column-gap: spaces.$spaceM;
 }

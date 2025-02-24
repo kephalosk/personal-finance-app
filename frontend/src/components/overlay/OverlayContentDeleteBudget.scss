@@ -3,6 +3,10 @@
 @use '../../styles/functions';
 @use '../../styles/spaces';
 
+$border-thickness: functions.to-rem(2px);
+$custom-space-focused: functions.to-rem(14px);
+$transition-duration: 0.1s;
+
 .overlayContentDeleteBudget {
   margin-bottom: spaces.$spaceS;
   border: 0;
@@ -16,15 +20,15 @@
 
   &:hover {
     background-color: colors.$beige-500;
-    transition: background-color 0.1s ease;
+    transition: background-color $transition-duration ease;
     color: colors.$white-0;
   }
 
   &focus-visible {
-    border: 2px solid colors.$grey-900;
-    padding: functions.to-rem(14px);
+    border: $border-thickness solid colors.$grey-900;
+    padding: $custom-space-focused;
     background-color: colors.$beige-500;
-    transition: background-color 0.1s ease;
+    transition: background-color $transition-duration ease;
     color: colors.$white-0;
     outline: none;
   }

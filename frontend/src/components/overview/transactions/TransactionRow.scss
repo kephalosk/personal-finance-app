@@ -19,7 +19,7 @@ $transaction-row-image-height: functions.to-rem(40px);
 
 .overviewTransactionRowInfo {
   display: grid;
-  grid-template-rows: 1fr 1fr;
+  grid-template-rows: repeat(2, 1fr);
   row-gap: spaces.$spaceS;
 }
 

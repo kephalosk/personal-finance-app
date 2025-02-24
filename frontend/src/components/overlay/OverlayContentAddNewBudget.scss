@@ -1,6 +1,5 @@
 @use '../../styles/colors';
 @use '../../styles/fonts';
-@use '../../styles/functions';
 @use '../../styles/spaces';
 
 .overlayContentAddNewBudget {
@@ -11,7 +10,7 @@
 .fieldTitle {
   margin-bottom: spaces.$spaceS;
   display: block;
-  color: var(colors.$grey-500);
+  color: colors.$grey-500;
 
   @include fonts.text-preset-4-bold;
 }

@@ -1,6 +1,11 @@
 @use '../../styles/colors';
 @use '../../styles/fonts';
+@use '../../styles/functions';
 @use '../../styles/spaces';
+
+$border-thickniss: functions.to-rem(1px);
+
+$border-transition-duration: 0.1s;
 
 .inputCustomName {
   position: relative;
@@ -11,7 +16,7 @@
 }
 
 .inputCustomNameInput {
-  border: 1px solid colors.$beige-500;
+  border: $border-thickniss solid colors.$beige-500;
   padding: spaces.$spaceMS spaces.$spaceML;
   border-radius: spaces.$radiusS;
   width: 100%;
@@ -21,8 +26,8 @@
   }
 
   &:hover, &:focus {
-    border: 1px solid colors.$grey-900;
-    transition: border 0.1s ease;
+    border: $border-thickniss solid colors.$grey-900;
+    transition: border $border-transition-duration ease;
     outline: none;
   }
 }
