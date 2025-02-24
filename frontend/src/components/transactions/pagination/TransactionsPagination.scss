@@ -1,5 +1,9 @@
+@use '../../../styles/functions';
+
+$custom-space-pagination-top: functions.to-rem(6px);
+
 .transactionsPagination {
-  margin-top: 6px;
+  margin-top: $custom-space-pagination-top;
   display: flex;
   flex-direction: row;
   justify-content: space-between;

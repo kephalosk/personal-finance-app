@@ -1,3 +1,5 @@
+@use '../../../styles/spaces';
+
 .transactionsTableLine {
-  margin: 12px 0;
+  margin: spaces.$spaceMS 0;
 }

@@ -1,3 +1,9 @@
+@use '../styles/colors';
+@use '../styles/fonts';
+@use '../styles/spaces';
+
+$transition-duration: 0.2s;
+
 .headerBar {
   display: flex;
   flex-direction: row;
@@ -7,27 +13,26 @@
   border: 0;
   border-radius: spaces.$radiusS;
   background-color: colors.$grey-900;
-  padding: 16px;
-  font-weight: 600;
+  padding: spaces.$spaceM;
   color: colors.$white-0;
   cursor: pointer;
-}
-.headerBarButton:hover {
-  background-color: colors.$beige-500;
-  transition: background-color 0.2s ease;
-  outline: none;
-}
-.headerBarButton:focus-visible{
-  border-radius: spaces.$radiusS;
-  box-shadow: 0 0 0 2px colors.$grey-900;
-  border-color: colors.$grey-900;
-  background-color: colors.$beige-500;
-  padding: 16px;
-  font-weight: 600;
-  color: colors.$white-0;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-  outline: none;
+
+  @include fonts.text-preset-4-bold;
+
+  &:hover {
+    background-color: colors.$beige-500;
+    transition: background-color $transition-duration ease;
+    outline: none;
+  }
+
+  &:focus-visible{
+    border-radius: spaces.$radiusS;
+    box-shadow: 0 0 0 2px colors.$grey-900;
+    border-color: colors.$grey-900;
+    background-color: colors.$beige-500;
+    transition: background-color $transition-duration ease;
+    outline: none;
+  }
 }
 
 .headerBarTitle{

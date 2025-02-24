@@ -1,41 +1,59 @@
+@use '../../styles/colors';
+@use '../../styles/functions';
+@use '../../styles/spaces';
+
+$border-thickniss: functions.to-rem(1px);
+$custom-space-horizontal-correction: functions.to-rem(20px);
+$custom-space-input-top: functions.to-rem(14px);
+$custom-space-input-right: functions.to-rem(48px);
+$custom-space-input-bottom: functions.to-rem(12px);
+$custom-space-input-left: functions.to-rem(18px);
+$input-lense-height: functions.to-rem(16px);
+$placeholder-letter-spacing: functions.to-rem(1px);
+$searchbar-max-width: functions.to-rem(320px);
+
+$transition-duration: 0.3s;
+
 .searchbarInputContainer {
   flex-grow: 1;
 }
 
 .searchbarInput {
   border-radius: spaces.$radiusMS;
-  border: 1px solid colors.$beige-500;
-  padding: 14px 48px 12px 18px;
+  border: $border-thickniss solid colors.$beige-500;
+  padding: $custom-space-input-top $custom-space-input-right $custom-space-input-bottom $custom-space-input-left;
   width: 100%;
   color: colors.$grey-900;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   transition:
-          border 0.3s ease,
-          border-color 0.3s ease,
-          background-color 0.3s ease,
-          box-shadow 0.3s ease;
-}
-.searchbarInput::placeholder {
-  color: colors.$beige-500;
-  letter-spacing: 1px;
-}
-.searchbarInput:focus {
-  border-color: colors.$beige-500;
-  outline: none;
-  box-shadow: 0 0 0 2px colors.$grey-900;
+          border $transition-duration ease,
+          border-color $transition-duration ease,
+          background-color $transition-duration ease,
+          box-shadow $transition-duration ease;
+
+  &::placeholder {
+    color: colors.$beige-500;
+    letter-spacing: $placeholder-letter-spacing;
+  }
+
+  &:focus {
+    border-color: colors.$beige-500;
+    outline: none;
+    box-shadow: 0 0 0 2px colors.$grey-900;
+  }
 }
 
 .searchbarInputLense {
-  height: 16px;
+  height: $input-lense-height;
   width: auto;
   top: calc(50% - 8px);
-  right: 20px;
+  right: $custom-space-horizontal-correction;
   position: absolute;
 }
 
 .searchbarInputRelative {
-  max-width: 320px;
+  max-width: $searchbar-max-width;
   position: relative;
 }

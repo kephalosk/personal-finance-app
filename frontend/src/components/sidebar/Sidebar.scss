@@ -1,29 +1,43 @@
+@use '../../styles/colors';
+@use '../../styles/functions';
 @use '../../styles/screens';
+@use '../../styles/spaces';
+
+$custom-space-sidebar-title-bottom: functions.to-rem(64px);
+$custom-space-sidebar-left-right: functions.to-rem(18px);
+$custom-space-sidebar-bottom: functions.to-rem(70px);
+$custom-space-sidebar-bottom-tablet: functions.to-rem(13px);
+$sidebar-title-height: functions.to-rem(60px);
+$sidebar-width: functions.to-rem(300px);
+$sidebar-width-minimized: functions.to-rem(90px);
+$transition-duration: 0.4s;
 
 .sidebarLeft {
-  border-radius: 0 16px 16px 0;
+  border-radius: 0 spaces.$spaceM spaces.$spaceM 0;
   background-color: colors.$grey-900;
-  padding: 32px 24px 70px 0;
+  padding: spaces.$spaceXL spaces.$spaceL $custom-space-sidebar-bottom 0;
   height: calc(100% - 13px);
-  width: 300px;
+  width: $sidebar-width;
   position: fixed;
   display: flex;
   flex-direction: column;
-  transition: width 0.4s ease;
+  transition: width $transition-duration ease;
   z-index: 2;
-}
-.sidebarLeft.minimized {
-  width: 90px;
-  padding: 32px 18px 70px 0;
-}
-.sidebarLeft.hidden {
-  display: none;
+
+  &.minimized {
+    width: $sidebar-width-minimized;
+    padding: spaces.$spaceXL $custom-space-sidebar-left-right $custom-space-sidebar-bottom 0;
+  }
+
+  &.hidden {
+    display: none;
+  }
 }
 
 .sidebarBottom {
-  border-radius: 16px 16px 0 0;
+  border-radius: spaces.$spaceM spaces.$spaceM 0 0;
   background-color: colors.$grey-900;
-  padding: 8px 0 13px 0;
+  padding: spaces.$spaceS 0 $custom-space-sidebar-bottom-tablet 0;
   height: auto;
   width: 100%;
   display: flex;
@@ -31,16 +45,17 @@
   position: fixed;
   bottom: 0;
   z-index: 2;
-}
-.sidebarBottom.hidden {
-  display: none;
+
+  &.hidden {
+    display: none;
+  }
 }
 
 .sidebarList {
   flex-grow: 1;
 
   @include screens.tablet-and-down {
-    padding: 0 40px;
+    padding: 0 spaces.$spaceXXL;
     height: auto;
     display: flex;
     flex-direction: row;
@@ -48,13 +63,13 @@
   }
 
   @include screens.phone {
-    padding: 0 16px;
+    padding: 0 spaces.$spaceM;
   }
 }
 
 .sidebarTitle {
-  margin: 0 0 64px 24px;
-  height: 60px;
+  margin: 0 0 $custom-space-sidebar-title-bottom spaces.$spaceL;
+  height: $sidebar-title-height;
 
   @include screens.tablet-and-down {
     display: none;

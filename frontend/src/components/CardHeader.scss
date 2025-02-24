@@ -1,84 +1,108 @@
 @use '../styles/colors';
+@use '../styles/fonts';
+@use '../styles/functions';
 @use '../styles/screens';
+@use '../styles/spaces';
+
+$circle-size: functions.to-rem(16px);
+
+$icon-filter: invert(74%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(0%) contrast(100%);
 
 .cardHeader {
   display: flex;
   flex-direction: row;
-  column-gap: 16px;
+  column-gap: spaces.$spaceM;
   align-items: center;
 }
 
 .cardHeaderCircle {
   border-radius: 50%;
-  height: 16px;
-  width: 16px;
-}
-.cardHeaderCircle.green{
-  background-color: colors.$green;
-}
-.cardHeaderCircle.yellow{
-  background-color: colors.$yellow;
-}
-.cardHeaderCircle.cyan{
-  background-color: colors.$cyan;
-}
-.cardHeaderCircle.navy{
-  background-color: colors.$navy;
-}
-.cardHeaderCircle.red{
-  background-color: colors.$red;
-}
-.cardHeaderCircle.purple{
-  background-color: colors.$purple;
-}
-.cardHeaderCircle.turquoise{
-  background-color: colors.$turquoise;
-}
-.cardHeaderCircle.brown{
-  background-color: colors.$brown;
-}
-.cardHeaderCircle.magenta{
-  background-color: colors.$magenta;
-}
-.cardHeaderCircle.blue{
-  background-color: colors.$blue;
-}
-.cardHeaderCircle.grey{
-  background-color: colors.$navy-grey;
-}
-.cardHeaderCircle.army{
-  background-color: colors.$army-green;
-}
-.cardHeaderCircle.pink{
-  background-color: colors.$pink;
-}
-.cardHeaderCircle.gold{
-  background-color: colors.$gold;
-}
-.cardHeaderCircle.orange{
-  background-color: colors.$orange;
-}
-.cardHeaderCircle.sepia{
-  background-color: colors.$beige-100;
-}
-.cardHeaderCircle.white{
-  background-color: colors.$white;
-}
-.cardHeaderCircle.black{
-  background-color: colors.$black;
+  height: $circle-size;
+  width: $circle-size;
+
+  &.green{
+    background-color: colors.$green;
+  }
+
+  &.yellow{
+    background-color: colors.$yellow;
+  }
+  .cardHeaderCircle.cyan{
+    background-color: colors.$cyan;
+  }
+
+  &.navy{
+    background-color: colors.$navy;
+  }
+
+  &.red{
+    background-color: colors.$red;
+  }
+
+  &.purple{
+    background-color: colors.$purple;
+  }
+
+  &.turquoise{
+    background-color: colors.$turquoise;
+  }
+
+  &.brown{
+    background-color: colors.$brown;
+  }
+
+  &.magenta{
+    background-color: colors.$magenta;
+  }
+
+  &.blue{
+    background-color: colors.$blue;
+  }
+
+  &.grey{
+    background-color: colors.$navy-grey;
+  }
+
+  &.army{
+    background-color: colors.$army-green;
+  }
+
+  &pink{
+    background-color: colors.$pink;
+  }
+
+  &.gold{
+    background-color: colors.$gold;
+  }
+
+  &.orange{
+    background-color: colors.$orange;
+  }
+
+  &sepia{
+    background-color: colors.$beige-100;
+  }
+
+  &.white{
+    background-color: colors.$white;
+  }
+
+  &.black{
+    background-color: colors.$black;
+  }
 }
 
 .cardHeaderEditIcon {
-  padding: 4px;
+  padding: spaces.$spaceXS;
   cursor: pointer;
 }
 .cardHeaderEditIcon:hover {
-  filter: invert(74%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(0%) contrast(100%);
+  filter: $icon-filter;
 }
 .cardHeaderEditIcon:focus-visible {
   border-radius: spaces.$radiusXS;
   box-shadow: 0 0 0 2px colors.$grey-900;
-  filter: invert(74%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(0%) contrast(100%);
+  filter: $icon-filter;
   outline: none;
 }
 
@@ -88,10 +112,10 @@
 
 .cardHeaderTitle {
   flex-grow: 1;
-  font-size: 20px;
-  font-weight: 600;
+
+  @include  fonts.text-preset-2;
 
   @include screens.phone {
-    font-size: 16px;
+    @include  fonts.text-preset-3;
   }
 }

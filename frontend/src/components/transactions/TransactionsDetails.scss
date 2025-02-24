@@ -1,15 +1,20 @@
+@use '../../styles/colors';
+@use '../../styles/functions';
 @use '../../styles/screens';
+@use '../../styles/spaces';
+
+$custom-space-gap: functions.to-rem(23px);
 
 .transactionsDetails {
   border-radius: spaces.$radiusMS;
   background-color: colors.$white-0;
-  padding: 32px;
+  padding: spaces.$spaceXL;
   height: 100%;
   display: grid;
   grid-template-rows: fit-content(100%) 1fr fit-content(100%);
-  row-gap: 23px;
+  row-gap: $custom-space-gap;
 
   @include screens.phone {
-    padding: 24px 20px;
+    padding: spaces.$spaceL spaces.$spaceML;
   }
 }
