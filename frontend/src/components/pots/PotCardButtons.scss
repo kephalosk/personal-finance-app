@@ -11,20 +11,22 @@
   cursor: pointer;
   white-space: nowrap;
 
-  @include text.text-preset-4-bold;
-}
-.potCardButton:hover {
-  background-color: colors.$component-background-light;
-  color: colors.$white-0;
-  transition: background-color 0.2s ease, color 0.2s ease;
-}
-.potCardButton:focus-visible {
-  border-radius: spaces.$spaceXS;
-  box-shadow: 0 0 0 2px colors.$grey-900;
-  background-color: colors.$component-background-light;
-  color: colors.$white-0;
-  transition: background-color 0.2s ease, color 0.2s ease;
-  outline: none;
+  @include fonts.text-preset-4-bold;
+
+  &:hover {
+    background-color: colors.$component-background-light;
+    color: colors.$white-0;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  &:focus-visible {
+    border-radius: spaces.$spaceXS;
+    box-shadow: 0 0 0 2px colors.$grey-900;
+    background-color: colors.$component-background-light;
+    color: colors.$white-0;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    outline: none;
+  }
 }
 
 .potCardButtons {

@@ -1,14 +1,21 @@
+@use '../../styles/colors';
+@use '../../styles/fonts';
+@use '../../styles/functions';
 @use '../../styles/screens';
+@use '../../styles/spaces';
+
+$pot-card-bar-heigt: functions.to-rem(8px);
 
 .potCardDetailsPercentCurrent {
-  font-size: 12px;
-  font-weight: 600;
   color: colors.$grey-500;
+
+  @include fonts.text-preset-5;
 }
 
 .potCardDetailsPercentTotal {
-  font-size: 12px;
   color: colors.$grey-500;
+
+  @include fonts.text-preset-5;
 }
 
 .potCardDetailsTotal {
@@ -17,50 +24,55 @@
 }
 
 .potCardDetailsTotalAmount {
-  font-size: 32px;
-  font-weight: 600;
+  @include fonts.text-preset-1;
 
   @include screens.phone {
-    font-size: 24px;
+    @include fonts.text-preset-2;
   }
 }
 
 .potCardDetailsTotalLabel {
   flex-grow: 1;
-  font-size: 14px;
   color: colors.$grey-500;
+
+  @include fonts.text-preset-4;
 }
 
 .potCardBarCurrent {
   border-radius: spaces.$radiusXS;
   background-color: colors.$green;
-  height: 8px;
+  height: $pot-card-bar-heigt;
   width: var(--barCurrentWidthPercent);
   max-width: 100%;
   top: calc(50% - 4px);
   position: absolute;
-}
-.potCardBarCurrent.green{
-  background-color: colors.$green;
-}
-.potCardBarCurrent.cyan{
-  background-color: colors.$cyan;
-}
-.potCardBarCurrent.yellow{
-  background-color: colors.$yellow;
-}
-.potCardBarCurrent.navy{
-  background-color: colors.$navy;
-}
-.potCardBarCurrent.purple{
-  background-color: colors.$purple;
+
+  &.green{
+    background-color: colors.$green;
+  }
+
+  &.cyan{
+    background-color: colors.$cyan;
+  }
+
+  &.yellow{
+    background-color: colors.$yellow;
+  }
+
+  &.navy{
+    background-color: colors.$navy;
+  }
+
+  &.purple{
+    background-color: colors.$purple;
+  }
 }
 
 .potCardBarMax {
-  margin: 16px 0;
+  margin: spaces.$spaceM 0;
   border-radius: spaces.$radiusXS;
   background-color: colors.$beige-100;
-  height: 8px;
+  height: $pot-card-bar-heigt;
   position: relative;
 }
 

@@ -1,12 +1,16 @@
+@use '../../styles/functions';
 @use '../../styles/screens';
+@use '../../styles/spaces';
+
+$pot-card-min-width: functions.to-rem(350px);
 
 .potPageGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, (minmax(350px, 1fr)));
-  column-gap: 24px;
-  row-gap: 24px;
+  grid-template-columns: repeat(auto-fit, (minmax($pot-card-min-width, 1fr)));
+  column-gap: spaces.$spaceL;
+  row-gap: spaces.$spaceL;
 
   @include screens.phone {
-    grid-template-columns: repeat(auto-fit, (minmax(270px, 1fr)));
+    grid-template-columns: repeat(auto-fit, (minmax($pot-card-min-width, 1fr)));
   }
 }

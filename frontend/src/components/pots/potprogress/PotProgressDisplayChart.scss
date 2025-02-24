@@ -17,17 +17,19 @@
 .potProgressDisplayChartBarValuesPercent {
   flex-grow: 1;
 
-  @include text.text-preset-5-bold;
-}
-.potProgressDisplayChartBarValuesPercent.green {
-  color: colors.$green;
-}
-.potProgressDisplayChartBarValuesPercent.red {
-  color: colors.$red;
+  @include fonts.text-preset-5-bold;
+
+  &.green {
+    color: colors.$green;
+  }
+
+  &.red {
+    color: colors.$red;
+  }
 }
 
 .potProgressDisplayChartBarValuesTarget {
   color: colors.$grey-500;
 
-  @include text.text-preset-5;
+  @include fonts.text-preset-5;
 }
