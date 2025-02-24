@@ -11,11 +11,11 @@
   flex-grow: 1;
   color: colors.$grey-500;
 
-  @include text.text-preset-4;
+  @include fonts.text-preset-4;
 }
 
 .potProgressDisplayHeaderValue {
   color: colors.$grey-900;
 
-  @include text.text-preset-1;
+  @include fonts.text-preset-1;
 }
