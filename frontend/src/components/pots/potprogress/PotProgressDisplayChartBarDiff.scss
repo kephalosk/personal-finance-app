@@ -4,13 +4,16 @@
 .potProgressDisplayChartBarDiff {
   border-radius: 0 spaces.$spaceXS spaces.$spaceXS 0;
   height: spaces.$spaceS;
-}
-.potProgressDisplayChartBarDiff.green {
-  background-color: colors.$green;
-}
-.potProgressDisplayChartBarDiff.red {
-  background-color: colors.$red;
-}
-.potProgressDisplayChartBarDiff.showGap {
-  border-left: 2px solid colors.$beige-100;
+
+  &.green {
+    background-color: colors.$green;
+  }
+
+  &.red {
+    background-color: colors.$red;
+  }
+
+  &.showGap {
+    border-left: 2px solid colors.$beige-100;
+  }
 }
