@@ -6,6 +6,26 @@
   color-scheme: light;
 
   --icon-filter: invert(0%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);
+
+  // colors, that have to be present in runtime for in-line/in-code-styling of the Circle-Diagram
+  --green: #277C78;
+  --yellow: #F2CDAC;
+  --cyan: #82C9D7;
+  --navy: #626070;
+  --red: #C94736;
+  --purple: #826CB0;
+  --turquoise: #597C7C;
+  --brown: #93674F;
+  --magenta: #934F6F;
+  --blue: #3F82B2;
+  --navy-grey: #97A0AC;
+  --army-green: #7F9161;
+  --pink: #AF81BA;
+  --gold: #CAB361;
+  --orange: #BE6C49;
+  --white: #F7F7F7;
+  --white-0: #FFFFFF;
+  --black: #000000;
 }
 
 @media (prefers-color-scheme: dark) {
