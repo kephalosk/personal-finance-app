@@ -1,125 +1,153 @@
+@use '../../styles/colors';
+@use '../../styles/fonts';
+@use '../../styles/functions';
 @use '../../styles/screens';
+@use '../../styles/spaces';
+
+$border-bottom-active: functions.to-rem(5px);
+$border-left-active: functions.to-rem(4px);
+$border-thickniss: functions.to-rem(2px);
+$custom-space-entry-row-top-tablet: functions.to-rem(10px);
+$custom-space-entry-row-top-bottom: functions.to-rem(18px);
+$custom-space-radius-entry-row: functions.to-rem(15px);
+$entry-row-image-wrapper-height: functions.to-rem(25px);
+$entry-row-image-height-tablet: functions.to-rem(24px);
+$entry-row-image-width: functions.to-rem(20px);
+$entry-row-width-tablet: functions.to-rem(104px);
+$entry-row-width-phone: functions.to-rem(68px);
+
+$transition-duration: 0.2s;
+$transition-duration-long: 0.4s;
+
+$image-filter-active: invert(49%) sepia(22%) saturate(1093%) hue-rotate(126deg) brightness(95%) contrast(88%);
+$image-filter-hover: invert(74%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(300%) contrast(100%);
 
 .entryRow {
-  border: 2px solid colors.$grey-900;
-  border-radius: 0 15px 15px 0;
-  padding: 18px 0 18px 32px;
+  border: $border-thickniss solid colors.$grey-900;
+  border-radius: 0 $custom-space-radius-entry-row $custom-space-radius-entry-row 0;
+  padding: $custom-space-entry-row-top-bottom 0 $custom-space-entry-row-top-bottom spaces.$spaceXL;
   align-items: center;
   display: flex;
   text-decoration: none;
   cursor: pointer;
 
   @include screens.tablet-and-down {
-    border-radius: 15px 15px 0 0;
-    padding: 10px 0 12px 0;
-    width: 104px;
+    border-radius: $custom-space-radius-entry-row $custom-space-radius-entry-row 0 0;
+    padding: $custom-space-entry-row-top-tablet 0 spaces.$spaceMS 0;
+    width: $entry-row-width-tablet;
     display: flex;
     flex-direction: column;
     justify-content: center;
   }
 
   @include screens.phone {
-    width: 68px;
-  }
-}
-.entryRow:hover {
-  img {
-    filter: invert(74%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(300%) contrast(100%);
+    width: $entry-row-width-phone;
   }
 
-  label {
-    color: colors.$white-0;
-  }
-}
-.entryRow.active {
-  border-left: 4px solid colors.$green;
-  background-color: colors.$beige-100;
+  &:hover {
+    img {
+      filter: $image-filter-hover;
+    }
 
-  img {
-    filter: invert(49%) sepia(22%) saturate(1093%) hue-rotate(126deg) brightness(95%) contrast(88%);
+    label {
+      color: colors.$white-0;
+    }
   }
 
-  label {
-    color: colors.$grey-900;
-  }
-
-  @include screens.tablet-and-down {
-    border-left: 0;
-    border-bottom: 5px solid colors.$green;
+  &.active {
+    border-left: $border-left-active solid colors.$green;
     background-color: colors.$beige-100;
-  }
-}
-.entryRow:focus-visible{
-  border: 2px solid colors.$white-0;
-  outline: none;
 
-  img {
-    filter: invert(49%) sepia(22%) saturate(1093%) hue-rotate(126deg) brightness(95%) contrast(88%);
-  }
+    img {
+      filter: $image-filter-active;
+    }
 
-  label {
-    color: colors.$green;
+    label {
+      color: colors.$grey-900;
+    }
+
+    @include screens.tablet-and-down {
+      border-left: 0;
+      border-bottom: $border-bottom-active solid colors.$green;
+      background-color: colors.$beige-100;
+    }
+
+    &:focus-visible{
+      border: $border-thickniss solid colors.$white-0;
+      outline: none;
+
+      img {
+        filter: $image-filter-active;
+      }
+
+      label {
+        color: colors.$green;
+      }
+    }
   }
 }
 
 .entryRowImg {
-  width: 20px;
+  width: $entry-row-image-width;
 
   @include screens.tablet-and-down {
-    height: 24px;
+    height: $entry-row-image-height-tablet;
     width: auto;
   }
 }
 
 .entryRowImgWrapper {
-  height: 25px;
+  height: $entry-row-image-wrapper-height;
   display: flex;
   flex-direction: row;
   align-items: center;
 
   @include screens.tablet-and-down {
-    height: 24px;
+    height: $entry-row-image-height-tablet;
   }
 }
 
 .entryRowLabel {
-  margin-left: 16px;
-  font-weight: 600;
+  margin-left: spaces.$spaceM;
   color: colors.$grey-300;
   cursor: pointer;
   white-space: nowrap;
   opacity: 1;
-  transition: opacity 0.4s ease-in;
+  transition: opacity $transition-duration-long ease-in;
 
-  @include mixins.tablet-and-down(50) {
+  @include fonts.text-preset-4-bold;
+
+  @include screens.tablet-and-down(50) {
     transition: width 0s ease;
   }
 
   @include screens.tablet-and-down {
-    margin-top: 8px;
+    margin-top: spaces.$spaceS;
     margin-left: 0;
-    font-size: 12px;
     transition: opacity 0s ease-in;
+
+    @include fonts.text-preset-5;
   }
 
   @include screens.phone {
     display: none;
   }
-}
-.entryRowLabel.minimized {
-  visibility: hidden;
-  opacity: 0;
-  transition: opacity 0.2s ease-out, visibility 0.2s ease-out;
 
-  @include screens.tablet-and-down {
-    opacity: 1;
-    visibility: visible;
-    transition: width 0s ease;
-  }
+  &.minimized {
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity $transition-duration ease-out, visibility $transition-duration ease-out;
 
-  @include screens.tablet-and-down {
-    opacity: 1;
-    visibility: visible;
-    transition: opacity 0s ease-out;
+    @include screens.tablet-and-down {
+      opacity: 1;
+      visibility: visible;
+      transition: width 0s ease;
+    }
+
+    @include screens.tablet-and-down {
+      opacity: 1;
+      visibility: visible;
+      transition: opacity 0s ease-out;
+    }
   }
 }

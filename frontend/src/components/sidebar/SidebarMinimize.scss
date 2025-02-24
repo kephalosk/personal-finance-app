@@ -1,19 +1,31 @@
+@use '../../styles/colors';
+@use '../../styles/fonts';
+@use '../../styles/functions';
 @use '../../styles/screens';
+@use '../../styles/spaces';
+
+$border-thickniss: functions.to-rem(2px);
+$custom-space-radius: functions.to-rem(15px);
+$sidebar-width-minimized: functions.to-rem(300px);
+
+$image-filter-focus-visible: invert(49%) sepia(22%) saturate(1093%) hue-rotate(126deg) brightness(95%) contrast(88%);
 
 .sidebarMinimizeWrapper {
-  border: 2px solid colors.$grey-900;
+  border: $border-thickniss solid colors.$grey-900;
+
   @include screens.tablet-and-down {
     display: none;
-    width: 300px;
+    width: $sidebar-width-minimized;
   }
 }
+
 .sidebarMinimizeWrapper:focus-visible {
-  border-radius: 0 15px 15px 0;
-  border: 2px solid colors.$white-0;
+  border-radius: 0 $custom-space-radius $custom-space-radius 0;
+  border: $border-thickniss solid colors.$white-0;
   outline: none;
 
   img {
-    filter: invert(49%) sepia(22%) saturate(1093%) hue-rotate(126deg) brightness(95%) contrast(88%);
+    filter: $image-filter-focus-visible;
   }
 
   label {

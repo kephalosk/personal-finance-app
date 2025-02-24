@@ -1,10 +1,14 @@
+@use '../styles/functions';
 @use '../styles/screens';
+@use '../styles/spaces';
+
+$details-min-width: functions.to-rem(400px);
 
 .budgetsDetails {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-  column-gap: 24px;
-  row-gap: 24px;
+  grid-template-columns: repeat(auto-fit, minmax($details-min-width, 1fr));
+  column-gap: spaces.$spaceL;
+  row-gap: spaces.$spaceL;
 
   @include screens.tablet-and-down {
     grid-template-columns: 1fr;
@@ -14,16 +18,16 @@
 .budgetsDetailsRight {
   display: flex;
   flex-direction: column;
-  row-gap: 24px;
+  row-gap: spaces.$spaceL;
 }
 
 .budgetsPage {
-  padding: 32px 40px;
+  padding: spaces.$spaceXL spaces.$spaceXXL;
   display: flex;
   flex-direction: column;
-  row-gap: 32px;
+  row-gap: spaces.$spaceXL;
 
   @include screens.phone {
-    padding: 24px 16px;
+    padding: spaces.$spaceL spaces.$spaceM;
   }
 }

@@ -1,3 +1,11 @@
+@use '../../../styles/colors';
+@use '../../../styles/fonts';
+@use '../../../styles/functions';
+@use '../../../styles/spaces';
+
+$custom-space-table-column-width: functions.to-rem(80px);
+$table-row-image-height: functions.to-rem(32px);
+
 .tableRowSmallCategory {
   white-space: nowrap;
   overflow: hidden;
@@ -14,7 +22,7 @@
   display: flex;
   flex-direction: column;
   flex-shrink: 1;
-  row-gap: 8px;
+  row-gap: spaces.$spaceS;
 }
 
 .tableRowSmallPartner {
@@ -25,43 +33,48 @@
 
 .tableRowSmallPartnerImage {
   border-radius: 50%;
-  height: 32px;
+  height: $table-row-image-height;
   width: auto;
 }
 
 .tableRowSmallPartnerName {
   flex-shrink: 1;
-  font-weight: 700;
   color: colors.$grey-900;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+
+  @include fonts.text-preset-5-bold;
 }
 
 .tableRowSmallValue {
   display: flex;
   justify-content: flex-end;
-  font-weight: 700;
   color: colors.$grey-900;
-}
-.tableRowSmallValue.black {
-  color: colors.$grey-900;
-}
-.tableRowSmallValue.green {
-  color: colors.$green;
+
+  @include fonts.text-preset-5-bold;
+
+  &.black {
+    color: colors.$grey-900;
+  }
+
+  &.green {
+    color: colors.$green;
+  }
 }
 
 .tableRowSmallValueDateWrapper {
   display: flex;
   flex-direction: column;
-  row-gap: 8px;
+  row-gap: spaces.$spaceS;
 }
 
 .transactionsTableRowSmall {
   display: grid;
-  grid-template-columns: 32px calc(100% - 136px) 80px;
-  column-gap: 12px;
+  grid-template-columns: spaces.$spaceXL calc(100% - 136px) $custom-space-table-column-width;
+  column-gap: spaces.$spaceMS;
   align-items: center;
-  font-size: 13px;
   color: colors.$grey-500;
+
+  @include fonts.text-preset-5;
 }
