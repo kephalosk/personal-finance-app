@@ -4,7 +4,7 @@
 @use '../../styles/screens';
 @use '../../styles/spaces';
 
-$border-bottom-active: functions.to-rem(5px);
+$border-bottom-active: functions.to-rem(8px);
 $border-left-active: functions.to-rem(4px);
 $border-thickniss: functions.to-rem(2px);
 $custom-space-entry-row-top-tablet: functions.to-rem(10px);
@@ -71,18 +71,18 @@ $image-filter-hover: invert(74%) sepia(0%) saturate(0%) hue-rotate(0deg) brightn
       border-bottom: $border-bottom-active solid colors.$green;
       background-color: colors.$beige-100;
     }
+  }
 
-    &:focus-visible{
-      border: $border-thickniss solid colors.$white-0;
-      outline: none;
+  &:focus-visible{
+    border: $border-thickniss solid colors.$white-0;
+    outline: none;
 
-      img {
-        filter: $image-filter-active;
-      }
+    img {
+      filter: $image-filter-active;
+    }
 
-      label {
-        color: colors.$green;
-      }
+    label {
+      color: colors.$green;
     }
   }
 }

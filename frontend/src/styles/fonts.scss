@@ -1,7 +1,7 @@
 @use 'functions';
 
-$text-scale-factor-partial: 0.8;
-$text-scale-factor-viewport: 0.7vw;
+$text-scale-factor-partial: 0.6;
+$text-scale-factor-viewport: 0.6vw;
 $text-scale-factor-max: 2;
 
 $text-preset-1-min: functions.to-rem(32px);
@@ -24,7 +24,7 @@ $text-preset-5-min: functions.to-rem(12px);
 $text-preset-5-partial: $text-preset-5-min * $text-scale-factor-partial;
 $text-preset-5-max: $text-preset-5-min * $text-scale-factor-max;
 
-$text-preset-6-min: functions.to-rem(11px);
+$text-preset-6-min: functions.to-rem(10px);
 $text-preset-6-partial: $text-preset-6-min * $text-scale-factor-partial;
 $text-preset-6-max: $text-preset-6-min * $text-scale-factor-max;
 
