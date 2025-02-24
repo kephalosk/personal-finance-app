@@ -4,6 +4,14 @@
 @use '../../styles/screens';
 @use '../../styles/spaces';
 
+$border-thickness: functions.to-rem(2px);
+$border-thickness-disabled: functions.to-rem(1px);
+$custom-space-form-submit: functions.to-rem(14px);
+$custom-space-header-bar: functions.to-rem(6px);
+$overlay-form-width: functions.to-rem(560px);
+
+$transition-duration: 0.1s;
+
 .overlayBackground {
   background-color: rgb(0, 0, 0, 0.5);
   height: 100%;
@@ -28,7 +36,7 @@
   background-color: colors.$white-0;
   padding: spaces.$spaceXL;
   height: auto;
-  width: functions.to-rem(560px);
+  width: $overlay-form-width;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -60,7 +68,7 @@
 }
 
 .overlayFormHeaderBarIcon {
-  padding: functions.to-rem(6px);
+  padding: $custom-space-header-bar;
   cursor: pointer;
 
   &:hover {
@@ -69,7 +77,7 @@
 
   &:focus-visible {
     border-radius: spaces.$radiusS;
-    border: 2px solid colors.$grey-900;
+    border: $border-thickness solid colors.$grey-900;
     padding: spaces.$spaceXS;
     filter: invert(74%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(0%) contrast(100%);
     outline: none;
@@ -104,21 +112,21 @@
 
   &.isEnabled:hover, &.abort:hover {
     background-color: colors.$beige-500;
-    transition: background-color 0.1s ease;
+    transition: background-color $transition-duration ease;
     color: colors.$white-0;
   }
 
   &.isEnabled:focus-visible, &.abort:focus-visible {
-    border: 2px solid colors.$grey-900;
-    padding: functions.to-rem(14px);
+    border: $border-thickness solid colors.$grey-900;
+    padding: $custom-space-form-submit;
     background-color: colors.$beige-500;
-    transition: background-color 0.1s ease;
+    transition: background-color $transition-duration ease;
     color: colors.$white-0;
     outline: none;
   }
 
   &.disabled {
-    border: 1px solid colors.$grey-100;
+    border: $border-thickness-disabled solid colors.$grey-100;
     background-color: colors.$grey-100;
     color: colors.$grey-500;
     pointer-events: none;

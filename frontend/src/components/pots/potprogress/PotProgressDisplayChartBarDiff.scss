@@ -1,5 +1,8 @@
 @use '../../../styles/colors';
+@use '../../../styles/functions';
 @use '../../../styles/spaces';
+
+$border-thickniss: functions.to-rem(2px);
 
 .potProgressDisplayChartBarDiff {
   border-radius: 0 spaces.$spaceXS spaces.$spaceXS 0;
@@ -14,6 +17,6 @@
   }
 
   &.showGap {
-    border-left: 2px solid colors.$beige-100;
+    border-left: $border-thickniss solid colors.$beige-100;
   }
 }

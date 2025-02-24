@@ -4,6 +4,8 @@
 @use '../../../styles/screens';
 @use '../../../styles/spaces';
 
+$custom-space-card-title: functions.to-rem(5px);
+
 .overviewSummaryCard {
   border-radius: spaces.$radiusMS;
   background-color: colors.$white-0;
@@ -22,7 +24,7 @@
 }
 
 .overviewSummaryCardTitle {
-  margin: functions.to-rem(5px) 0;
+  margin: $custom-space-card-title 0;
   color: colors.$grey-500;
 
   @include fonts.text-preset-4;

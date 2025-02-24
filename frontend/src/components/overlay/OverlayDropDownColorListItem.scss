@@ -3,12 +3,14 @@
 @use '../../styles/functions';
 @use '../../styles/spaces';
 
+$color-cricle-size: functions.to-rem(16px);
+
 .dropdownColorCircle {
-  margin-right: 12px;
+  margin-right: spaces.$spaceMS;
   border-radius: 50%;
   background-color: colors.$green;
-  height: 16px;
-  width: 16px;
+  height: $color-cricle-size;
+  width: $color-cricle-size;
 
   &.green {
     background-color: colors.$green;

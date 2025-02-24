@@ -3,6 +3,8 @@
 @use '../../styles/functions';
 @use '../../styles/spaces';
 
+$table-row-picture-heigt: functions.to-rem(32px);
+
 .billCardTableRowSmall {
   width: 100%;
   display: flex;
@@ -67,6 +69,6 @@
 .billCardTableRowSmallNamePicture {
   margin-right: spaces.$spaceM;
   border-radius: 50%;
-  height: functions.to-rem(32px);
+  height: $table-row-picture-heigt;
   width: auto;
 }

@@ -3,6 +3,8 @@
 @use '../../styles/functions';
 @use '../../styles/spaces';
 
+$table-row-picture-heigt: functions.to-rem(32px);
+
 .billCardTableRow {
   display: grid;
   grid-template-columns: 50% 25% 25%;
@@ -54,6 +56,6 @@
 .billCardTableRowNamePicture {
   margin-right: spaces.$spaceM;
   border-radius: 50%;
-  height: functions.to-rem(32px);
+  height: $table-row-picture-heigt;
   width: auto;
 }

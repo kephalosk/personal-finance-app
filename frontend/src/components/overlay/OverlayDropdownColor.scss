@@ -3,7 +3,14 @@
 @use '../../styles/functions';
 @use '../../styles/spaces';
 
+$border-thickniss: functions.to-rem(1px);
+$custom-space-dropdown-top: functions.to-rem(11px);
+$custom-space-dropdown-right-left: functions.to-rem(21px);
+$custom-space-dropdown-bottom: functions.to-rem(13px);
+$max-height-dropdown-list-item: functions.to-rem(42px);
 $max-height-dropdown-list: functions.to-rem(290px);
+
+$transition-duration: 0.1s;
 
 .dropdownColor {
   display: flex;
@@ -23,8 +30,8 @@ $max-height-dropdown-list: functions.to-rem(290px);
 
 .dropdownColorWrapper {
   border-radius: spaces.$radiusS;
-  border: 1px solid colors.$beige-500;
-  padding: functions.to-rem(11px) functions.to-rem(21px) functions.to-rem(13px) functions.to-rem(21px);
+  border: $border-thickniss solid colors.$beige-500;
+  padding: $custom-space-dropdown-top $custom-space-dropdown-right-left $custom-space-dropdown-bottom;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -36,14 +43,14 @@ $max-height-dropdown-list: functions.to-rem(290px);
   @include fonts.text-preset-4;
 
   &:hover {
-    border: 1px solid var(colors.$grey-900);
-    transition: border 0.1s ease;
+    border: $border-thickniss solid colors.$grey-900;
+    transition: border $transition-duration ease;
     outline: none;
   }
 
   &:focus-visible {
-    border: 1px solid var(colors.$grey-900);
-    transition: border 0.1s ease;
+    border: $border-thickniss solid var(colors.$grey-900);
+    transition: border $transition-duration ease;
     outline: none;
   }
 }
@@ -54,7 +61,7 @@ $max-height-dropdown-list: functions.to-rem(290px);
   background-color: colors.$white-0;
   display: flex;
   flex-direction: column;
-  max-height: functions.to-rem(42px);
+  max-height: $max-height-dropdown-list-item;
   width: 100%;
   top: 0;
   left: 0;
@@ -62,7 +69,7 @@ $max-height-dropdown-list: functions.to-rem(290px);
   z-index: 4;
   visibility: hidden;
   overflow: hidden;
-  transition: max-height 0.1s ease, visibility 0.1s ease;
+  transition: max-height $transition-duration ease, visibility $transition-duration ease;
 
   &.isOpen {
     max-height: $max-height-dropdown-list;

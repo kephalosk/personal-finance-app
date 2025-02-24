@@ -4,6 +4,8 @@
 @use '../../styles/screens';
 @use '../../styles/spaces';
 
+$bill-total-image-height: functions.to-rem(40px);
+
 .billTotal {
   border-radius: spaces.$radiusMS;
   background-color: colors.$grey-900;
@@ -21,7 +23,7 @@
 .billTotalImage {
   justify-content: flex-start;
   margin-bottom: spaces.$spaceXL;
-  height: functions.to-rem(40px);
+  height: $bill-total-image-height;
   width: auto;
 
   @include screens.phone {

@@ -4,6 +4,10 @@
 @use '../../../styles/screens';
 @use '../../../styles/spaces';
 
+$custom-space-summary-content: functions.to-rem(11px);
+$custom-space-summary-icon: functions.to-rem(5px);
+$pot-summary-icon-height: functions.to-rem(40px);
+
 .overviewPotsSummary {
   border-radius: spaces.$radiusMS;
   background-color: colors.$beige-100;
@@ -17,7 +21,7 @@
 .overviewPotsSummaryContent {
   display: flex;
   flex-direction: column;
-  row-gap: functions.to-rem(11px);
+  row-gap: $custom-space-summary-content;
 }
 
 .overviewPotsSummaryContentTitle {
@@ -36,7 +40,7 @@
 }
 
 .overviewPotsSummaryIcon {
-  margin: 0 functions.to-rem(5px);
-  height: functions.to-rem(40px);
+  margin: 0 $custom-space-summary-icon;
+  height: $pot-summary-icon-height;
   width: auto;
 }

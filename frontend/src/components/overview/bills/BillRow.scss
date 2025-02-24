@@ -1,6 +1,9 @@
 @use '../../../styles/colors';
 @use '../../../styles/fonts';
+@use '../../../styles/functions';
 @use '../../../styles/spaces';
+
+$border-thickniss-left: functions.to-rem(4px);
 
 .overviewBillsRow {
   border-radius: spaces.$radiusS;
@@ -11,15 +14,15 @@
   align-items: center;
 
   &.yellow {
-    border-left: 4px solid colors.$yellow;
+    border-left: $border-thickniss-left solid colors.$yellow;
   }
 
   &.green {
-    border-left: 4px solid colors.$green;
+    border-left: $border-thickniss-left solid colors.$green;
   }
 
   &.cyan {
-    border-left: 4px solid colors.$cyan;
+    border-left: $border-thickniss-left solid colors.$cyan;
   }
 }
 

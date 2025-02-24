@@ -3,10 +3,18 @@
 @use '../../../styles/functions';
 @use '../../../styles/spaces';
 
+$border-thickniss: functions.to-rem(1px);
+$category-icon-height: functions.to-rem(21px);
+$custom-space-bar-top: functions.to-rem(11px);
+$custom-space-bar-right: functions.to-rem(50px);
+$custom-space-bar-bottom: functions.to-rem(13px);
+
+$border-transition-duration: 0.1s;
+
 .dropdownCategoryBar {
   border-radius: spaces.$spaceS;
   border: 1px solid colors.$beige-500;
-  padding: functions.to-rem(11px) functions.to-rem(50px) functions.to-rem(13px) spaces.$spaceML;
+  padding: $custom-space-bar-top $custom-space-bar-right $custom-space-bar-bottom spaces.$spaceML;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -22,8 +30,8 @@
   }
 
   &:hover, &:focus-visible {
-    border: 1px solid var(colors.$grey-900);
-    transition: border 0.1s ease;
+    border: $border-thickniss solid var(colors.$grey-900);
+    transition: border $border-transition-duration ease;
     outline: none;
   }
 }
@@ -44,7 +52,7 @@
 
 .dropdownCategoryIcon {
   top: calc(50% - 3px);
-  right: functions.to-rem(21px);
+  right: $category-icon-height;
   position: absolute;
 }
 

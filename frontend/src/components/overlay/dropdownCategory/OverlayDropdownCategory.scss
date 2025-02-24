@@ -2,6 +2,11 @@
 @use '../../../styles/functions';
 @use '../../../styles/spaces';
 
+$category-list-element-height: functions.to-rem(40px);
+$category-list-max-height: functions.to-rem(460px);
+
+$transition-duration: 0.1s;
+
 .dropdownCategoryContainer {
   position: relative;
 }
@@ -12,7 +17,7 @@
   background-color: colors.$white-0;
   display: flex;
   flex-direction: column;
-  max-height: functions.to-rem(40px);
+  max-height: $category-list-element-height;
   width: calc(100% + 2px);
   top: -1px;
   left: -1px;
@@ -21,12 +26,12 @@
   cursor: pointer;
   visibility: hidden;
   overflow: hidden;
-  transition: max-height 0.1s ease, visibility 0.1s ease;
-}
+  transition: max-height $transition-duration ease, visibility $transition-duration ease;
 
-.dropdownCategoryList.isOpen {
-  max-height: functions.to-rem(460px);
-  visibility: visible;
+  &.isOpen {
+    max-height: $category-list-max-height;
+    visibility: visible;
+  }
 }
 
 .dropdownCategoryListEntry {
