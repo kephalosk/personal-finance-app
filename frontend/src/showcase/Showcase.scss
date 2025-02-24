@@ -1,20 +1,24 @@
+@use '../styles/colors';
+@use '../styles/spaces';
+
 .showcase {
-  padding: 32px 40px;
+  padding: spaces.$spaceXL spaces.$spaceXXL;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: spaces.$spaceML;
 }
 
 .showcaseContent {
-  padding-left: 32px;
+  padding-left: spaces.$spaceXL;
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: spaces.$spaceXL;
 }
 
 .showcaseContentLink  {
   color: inherit;
-}
-.showcaseContentLink:hover  {
-  color: colors.$grey-500;
+
+  &:hover  {
+    color: colors.$grey-500;
+  }
 }

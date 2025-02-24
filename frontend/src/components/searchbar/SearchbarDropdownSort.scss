@@ -1,30 +1,42 @@
+@use '../../styles/colors';
+@use '../../styles/functions';
 @use '../../styles/screens';
+@use '../../styles/spaces';
+
+$border-thickniss: functions.to-rem(1px);
+$custom-space-horizontal-correction: functions.to-rem(20px);
+$custom-space-horizontal-correction-phone: functions.to-rem(10px);
+$searchbar-icon-height: functions.to-rem(6px);
+$searchbar-icon-height-phone: functions.to-rem(20px);
+$searchbar-width-phone: functions.to-rem(42px);
+
+$transition-duration: 0.3s;
 
 .searchbarDropdownSort {
   border-radius: spaces.$radiusS;
   border: 1px solid colors.$beige-500;
-  padding: 12px 40px 12px 16px;
+  padding: spaces.$spaceMS spaces.$spaceXXL spaces.$spaceMS spaces.$spaceM;
   color: colors.$grey-900;
-  appearance: none; /* Standard-Pfeil ausblenden */
-  -webkit-appearance: none; /* Für Webkit-basierte Browser wie Chrome und Safari */
-  -moz-appearance: none; /* Für Firefox */
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
   transition:
-          border 0.3s ease,
-          border-color 0.3s ease,
-          background-color 0.3s ease,
-          box-shadow 0.3s ease;
+          border $transition-duration ease,
+          border-color $transition-duration ease,
+          background-color $transition-duration ease,
+          box-shadow $transition-duration ease;
 
   @include screens.phone {
-    margin-left: 8px;
-    border: 1px solid transparent;
-    padding: 12px;
+    margin-left: spaces.$spaceS;
+    border: $border-thickniss solid transparent;
+    padding: spaces.$spaceMS;
     background: transparent;
-    width: 42px;
+    width: $searchbar-width-phone;
     color: transparent;
   }
 }
 .searchbarDropdownSort:focus-visible {
-  border: 1px solid colors.$beige-500;
+  border: $border-thickniss solid colors.$beige-500;
   background-color: colors.$beige-500;
   border-color: colors.$beige-500;
   outline: none;
@@ -48,41 +60,42 @@
 
 .searchbarDropdownSortIcon {
   background: transparent;
-  height: 6px;
+  height: $searchbar-icon-height;
   width: auto;
   top: calc(50% - 3px);
-  right: 20px;
+  right: $custom-space-horizontal-correction;
   position: absolute;
   cursor: pointer;
   pointer-events: none;
   filter: var(--icon-filter);
 
   @include screens.phone {
-    height: 20px;
+    height: $searchbar-icon-height-phone;
     top: calc(50% - 10px);
-    right: 10px;
+    right: $custom-space-horizontal-correction-phone;
     z-index: 1;
   }
 }
 
 .searchbarDropdownSortWrapper {
   position: relative;
-}
-.searchbarDropdownSortWrapper:hover {
-  .searchbarDropdownSort {
-    border: 1px solid colors.$beige-500;
-    background-color: colors.$beige-500;
-    color: colors.$white-0;
-    cursor: pointer;
-  }
 
-  .searchbarDropdownSortIcon {
-    filter: invert(74%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(300%) contrast(100%);
-  }
-
-  @include screens.phone {
+  &:hover {
     .searchbarDropdownSort {
-      color: transparent;
+      border: $border-thickniss solid colors.$beige-500;
+      background-color: colors.$beige-500;
+      color: colors.$white-0;
+      cursor: pointer;
+    }
+
+    .searchbarDropdownSortIcon {
+      filter: invert(74%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(300%) contrast(100%);
+    }
+
+    @include screens.phone {
+      .searchbarDropdownSort {
+        color: transparent;
+      }
     }
   }
 }

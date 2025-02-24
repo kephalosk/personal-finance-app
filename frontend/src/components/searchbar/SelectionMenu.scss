@@ -1,12 +1,37 @@
+@use '../../styles/colors';
+@use '../../styles/fonts';
+@use '../../styles/functions';
 @use '../../styles/screens';
+@use '../../styles/spaces';
+
+$border-thickniss: functions.to-rem(1px);
+$custom-space-horizontal-correction: functions.to-rem(20px);
+$custom-space-horizontal-correction-phone: functions.to-rem(10px);
+$custom-space-menu-top: functions.to-rem(11px);
+$custom-space-menu-right: functions.to-rem(48px);
+$custom-space-menu-bottom: functions.to-rem(11px);
+$custom-space-menu-left: functions.to-rem(19px);
+$icon-height: functions.to-rem(6px);
+$icon-height-phone: functions.to-rem(20px);
+$menu-list-item-height: functions.to-rem(40px);
+$menu-list-item-width: functions.to-rem(180px);
+$menu-list-item-width-smaller: functions.to-rem(125px);
+$menu-list-max-height: functions.to-rem(600px);
+$menu-height-phone: functions.to-rem(40px);
+$menu-min-width: functions.to-rem(180px);
+$menu-min-width-smaller: functions.to-rem(125px);
+$menu-width-phone: functions.to-rem(42px);
+
+$transition-duration: 0.1s;
+$transition-duration-long: 0.3s;
 
 .selectionMenuList {
   border-radius: spaces.$radiusS;
   box-shadow: 0 5px 40px -25px colors.$grey-900;
   background-color: colors.$white-0;
-  max-height: 40px;
+  max-height: $menu-list-item-height;
   width: 100%;
-  min-width: 180px;
+  min-width: $menu-list-item-width;
   display: flex;
   flex-direction: column;
   position: absolute;
@@ -15,26 +40,29 @@
   z-index: 100;
   color: colors.$grey-900;
   visibility: hidden;
-  transition: max-height 0.1s ease, visibility 0.1s ease;
-}
-.selectionMenuList.smallerWidth {
-  min-width: 125px;
-}
-.selectionMenuList.isOpen {
-  max-height: 600px;
-  visibility: visible;
+  transition: max-height $transition-duration ease, visibility $transition-duration ease;
+
+  &.smallerWidth {
+    min-width: $menu-list-item-width-smaller;
+  }
+
+  &.isOpen {
+    max-height: $menu-list-max-height;
+    visibility: visible;
+  }
 }
 
 .selectionMenuListElement {
   border-radius: spaces.$radiusS;
-  padding: 12px 20px;
+  padding: spaces.$spaceMS spaces.$spaceML;
   display: block;
   cursor: pointer;
-}
-.selectionMenuListElement:hover, .selectionMenuListElement:focus-visible {
-  background-color: colors.$beige-500;
-  color: colors.$white-0;
-  outline: none;
+
+  &:hover, &:focus-visible {
+    background-color: colors.$beige-500;
+    color: colors.$white-0;
+    outline: none;
+  }
 }
 
 .selectionMenuListLine {
@@ -43,58 +71,61 @@
 
 .selectionMenu {
   border-radius: spaces.$radiusS;
-  border: 1px solid colors.$beige-500;
-  padding: 11px 48px 11px 19px;
-  min-width: 180px;
-  font-size: 14px;
+  border: $border-thickniss solid colors.$beige-500;
+  padding: $custom-space-menu-top $custom-space-menu-right $custom-space-menu-bottom $custom-space-menu-left;
+  min-width: $menu-min-width;
   color: colors.$grey-900;
-  appearance: none; /* Standard-Pfeil ausblenden */
-  -webkit-appearance: none; /* Für Webkit-basierte Browser wie Chrome und Safari */
-  -moz-appearance: none; /* Für Firefox */
-  transition:
-          border 0.3s ease,
-          border-color 0.3s ease,
-          background-color 0.3s ease,
-          box-shadow 0.3s ease;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  transition: border $transition-duration-long ease,
+  border-color $transition-duration-long ease,
+  background-color $transition-duration-long ease,
+  box-shadow $transition-duration-long ease;
   position: relative;
 
+  @include fonts.text-preset-4;
+
   @include screens.phone {
-    margin-left: 8px;
-    border: 1px solid transparent;
-    padding: 0 12px;
+    margin-left: spaces.$spaceS;
+    border: $border-thickniss solid transparent;
+    padding: 0 spaces.$spaceMS;
     background: transparent;
-    min-height: 40px;
-    max-height: 40px;
-    width: 42px;
-    min-width: 42px;
+    min-height: $menu-height-phone;
+    max-height: $menu-height-phone;
+    width: $menu-width-phone;
+    min-width: $menu-width-phone;
     color: transparent;
   }
-}
-.selectionMenu:focus-visible {
-  border: 1px solid colors.$beige-500;
-  background-color: colors.$beige-500;
-  border-color: colors.$beige-500;
-  outline: none;
-  color: colors.$white-0;
-  cursor: pointer;
 
-  @include screens.phone {
-    color: transparent;
+  &:focus-visible {
+    border: $border-thickniss solid colors.$beige-500;
+    background-color: colors.$beige-500;
+    border-color: colors.$beige-500;
+    outline: none;
+    color: colors.$white-0;
+    cursor: pointer;
+
+    @include screens.phone {
+      color: transparent;
+    }
+
+    &:focus-visible ~ .selectionMenuIcon {
+      --icon-filter: invert(74%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(300%) contrast(100%);
+    }
+
+    &.smallerWidth {
+      min-width: $menu-min-width-smaller;
+
+      @include screens.phone {
+        min-width: $menu-width-phone;
+      }
+    }
   }
 }
-.selectionMenu:focus-visible ~ .selectionMenuIcon {
-  --icon-filter: invert(74%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(300%) contrast(100%);
-}
-.selectionMenu.smallerWidth {
-  min-width: 125px;
-
-  @include screens.phone {
-    min-width: 42px;
-  }
-}
 
 
-.searchbarDropdownSort option{
+.searchbarDropdownSort option {
   @include screens.phone {
     color: colors.$grey-900;
   }
@@ -102,62 +133,64 @@
 
 .selectionMenuIcon {
   background: transparent;
-  height: 6px;
+  height: $icon-height;
   width: auto;
   top: calc(50% - 3px);
-  right: 20px;
+  right: $custom-space-horizontal-correction;
   position: absolute;
   cursor: pointer;
   pointer-events: none;
   filter: var(--icon-filter);
 
   @include screens.phone {
-    height: 20px;
+    height: $icon-height-phone;
     top: calc(50% - 10px);
-    right: 10px;
+    right: $custom-space-horizontal-correction-phone;
     z-index: 1;
   }
 }
 
 .selectionMenuWrapper {
   position: relative;
-}
-.selectionMenuWrapper:hover {
-  .selectionMenu {
-    border: 1px solid colors.$beige-500;
-    background-color: colors.$beige-500;
-    color: colors.$white-0;
-    cursor: pointer;
-  }
 
-  .selectionMenuIcon {
-    filter: invert(74%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(300%) contrast(100%);
-  }
-
-  @include screens.phone {
+  &:hover {
     .selectionMenu {
-      color: transparent;
+      border: $border-thickniss solid colors.$beige-500;
+      background-color: colors.$beige-500;
+      color: colors.$white-0;
+      cursor: pointer;
+    }
+
+    .selectionMenuIcon {
+      filter: invert(74%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(300%) contrast(100%);
+    }
+
+    @include screens.phone {
+      .selectionMenu {
+        color: transparent;
+      }
     }
   }
-}
-.selectionMenuWrapper:focus-visible {
-  outline: none;
 
-  .selectionMenu {
-    border: 1px solid colors.$beige-500;
-    background-color: colors.$beige-500;
-    color: colors.$white-0;
-    cursor: pointer;
+  &:focus-visible {
     outline: none;
-  }
 
-  .selectionMenuIcon {
-    filter: invert(74%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(300%) contrast(100%);
-  }
-
-  @include screens.phone {
     .selectionMenu {
-      color: transparent;
+      border: $border-thickniss solid colors.$beige-500;
+      background-color: colors.$beige-500;
+      color: colors.$white-0;
+      cursor: pointer;
+      outline: none;
+    }
+
+    .selectionMenuIcon {
+      filter: invert(74%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(300%) contrast(100%);
+    }
+
+    @include screens.phone {
+      .selectionMenu {
+        color: transparent;
+      }
     }
   }
 }

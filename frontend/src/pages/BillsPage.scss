@@ -1,38 +1,38 @@
 @use '../styles/screens';
+@use '../styles/spaces';
 
 .billsPage {
-  background-color: var(--);
   height: 100%;
-  padding: 32px 40px;
+  padding: spaces.$spaceXL spaces.$spaceXXL;
   display: flex;
   flex-direction: column;
-  row-gap: 32px;
+  row-gap: spaces.$spaceXL;
 
   @include screens.phone {
-    padding: 24px 16px;
+    padding: spaces.$spaceL spaces.$spaceM;
   }
 }
 
 .billsPageDetails {
   display: grid;
   grid-template-columns: calc(33% - 24px) 67%;
-  column-gap: 24px;
+  column-gap: spaces.$spaceL;
 
-  @include mixins.tablet-and-down(250) {
+  @include screens.tablet-and-down(250) {
     grid-template-columns: 1fr;
-    row-gap: 24px;
+    row-gap: spaces.$spaceL;
   }
 }
 
 .billsPageDetailsOverview {
   display: flex;
   flex-direction: column;
-  row-gap: 24px;
+  row-gap: spaces.$spaceL;
 
-  @include mixins.tablet-and-down(250) {
+  @include screens.tablet-and-down(250) {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    column-gap: 24px;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: spaces.$spaceL;
   }
 
   @include screens.phone {

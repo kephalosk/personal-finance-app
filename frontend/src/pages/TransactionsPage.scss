@@ -1,13 +1,14 @@
 @use '../styles/screens';
+@use '../styles/spaces';
 
 .transactionsPage {
-  padding: 32px 40px;
+  padding: spaces.$spaceXL spaces.$spaceXXL;
   height: 100%;
   display: flex;
   flex-direction: column;
-  row-gap: 24px;
+  row-gap: spaces.$spaceL;
 
   @include screens.phone {
-    padding: 24px 16px;
+    padding: spaces.$spaceL spaces.$spaceM;
   }
 }
