@@ -1,7 +1,9 @@
 @use '../../styles/functions';
 
+$custom-space-horizontal-correction: functions.to-rem(21px);
+
 .dropdownColorIcon {
   top: calc(50% - 3px);
-  right: functions.to-rem(21px);
+  right: $custom-space-horizontal-correction;
   position: absolute;
 }

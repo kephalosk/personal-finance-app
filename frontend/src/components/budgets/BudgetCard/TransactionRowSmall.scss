@@ -3,15 +3,18 @@
 @use '../../../styles/functions';
 @use '../../../styles/spaces';
 
+$image-height: functions.to-rem(40px);
+$second-column-width: functions.to-rem(75px);
+
 .overviewTransactionRowSmall {
   display: grid;
-  grid-template-columns: 1fr functions.to-rem(75px);
+  grid-template-columns: 1fr $second-column-width;
   align-items: center;
 }
 
 .overviewTransactionRowSmallImage {
   border-radius: spaces.$radiusML;
-  height: functions.to-rem(40px);
+  height: $image-height;
   width: auto;
 }
 

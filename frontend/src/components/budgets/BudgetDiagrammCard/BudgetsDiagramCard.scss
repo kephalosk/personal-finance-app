@@ -14,7 +14,7 @@
   @include screens.tablet-and-down {
     padding: spaces.$spaceML;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, 1fr);
     column-gap: spaces.$spaceM;
     row-gap: spaces.$spaceM;
     align-items: center;

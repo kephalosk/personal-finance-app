@@ -3,9 +3,13 @@
 @use '../../../styles/functions';
 @use '../../../styles/spaces';
 
+$custom-space-bar-top: functions.to-rem(13px);
+$custom-space-bar-right-left: functions.to-rem(22px);
+$custom-space-bar-bottom: functions.to-rem(11px);
+
 .dropdownCategoryListItem {
   border-radius: spaces.$radiusS;
-  padding: functions.to-rem(13px) functions.to-rem(22px) functions.to-rem(11px);
+  padding: $custom-space-bar-top $custom-space-bar-right-left $custom-space-bar-bottom;
   width: 100%;
   display: flex;
   align-items: center;

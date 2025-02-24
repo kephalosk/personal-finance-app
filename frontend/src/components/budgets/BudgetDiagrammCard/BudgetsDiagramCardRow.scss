@@ -4,6 +4,11 @@
 @use '../../../styles/screens';
 @use '../../../styles/spaces';
 
+$card-border-height: functions.to-rem(21px);
+$card-border-width: functions.to-rem(4px);
+$card-row-phone-width: functions.to-rem(60px);
+$card-row-tablet-width: functions.to-rem(70px);
+
 .budgetsDiagramCardRow {
   display: flex;
   flex-direction: row;
@@ -11,14 +16,14 @@
 
   @include screens.tablet-and-down {
     display: grid;
-    grid-template-columns: auto 1fr functions.to-rem(70px) functions.to-rem(70px);
+    grid-template-columns: auto 1fr $card-row-tablet-width $card-row-tablet-width;
     column-gap: spaces.$spaceS;
     align-items: center;
   }
 
   @include screens.phone {
     display: grid;
-    grid-template-columns: auto 1fr functions.to-rem(60px) functions.to-rem(60px);
+    grid-template-columns: auto 1fr $card-row-phone-width $card-row-phone-width;
     column-gap: spaces.$spaceS;
     align-items: center;
   }
@@ -27,8 +32,8 @@
 .cardRowLeftBorder {
   margin-right: spaces.$spaceM;
   border-radius: spaces.$radiusS;
-  height: functions.to-rem(21px);
-  width: functions.to-rem(4px);
+  height: $card-border-height;
+  width: $card-border-width;
 
   @include screens.tablet-and-down {
     margin-right: spaces.$spaceS;
