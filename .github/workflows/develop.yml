@@ -224,7 +224,7 @@ jobs:
           echo "PACKAGE_VERSION_FRONTEND=$PACKAGE_VERSION_FRONTEND" >> $GITHUB_ENV
 
       - name: Build container image
-        run: docker build -t registry.digitalocean.com/kephalosk/personal-finance-app:${{ env.PACKAGE_VERSION_FRONTEND }} -f deployment/frontend.Dockerfile .
+        run: docker build --no-cache -t registry.digitalocean.com/kephalosk/personal-finance-app:${{ env.PACKAGE_VERSION_FRONTEND }} -f deployment/frontend.Dockerfile .
 
       - name: Install doctl
         uses: digitalocean/action-doctl@v2
@@ -269,7 +269,7 @@ jobs:
           echo "PACKAGE_VERSION_BACKEND=$PACKAGE_VERSION_BACKEND" >> $GITHUB_ENV
 
       - name: Build container image
-        run: docker build -t registry.digitalocean.com/kephalosk/nestjs-backend:${{ env.PACKAGE_VERSION_BACKEND }} -f deployment/backend.Dockerfile .
+        run: docker build --no-cache -t registry.digitalocean.com/kephalosk/nestjs-backend:${{ env.PACKAGE_VERSION_BACKEND }} -f deployment/backend.Dockerfile .
 
       - name: Install doctl
         uses: digitalocean/action-doctl@v2
