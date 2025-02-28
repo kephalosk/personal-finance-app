@@ -104,7 +104,7 @@ $value-box-border-width: functions.to-rem(4px);
   margin: spaces.$spaceXXS 0;
   color: colors.$grey-500;
 
-  @include fonts.text-preset-4;
+  @include fonts.text-preset-5;
 
   @include screens.phone {
     @include fonts.text-preset-5;

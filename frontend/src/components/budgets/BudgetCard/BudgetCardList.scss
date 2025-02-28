@@ -22,10 +22,10 @@
   flex-grow: 1;
   color: colors.$grey-900;
 
-  @include fonts.text-preset-3;
+  @include fonts.text-preset-4-bold;
 
   @include screens.phone() {
-    @include fonts.text-preset-4;
+    @include fonts.text-preset-5-bold;
   }
 }
 
@@ -34,11 +34,7 @@
   text-decoration: none;
   color: colors.$grey-500;
 
-  @include fonts.text-preset-4;
-
-  @include screens.phone() {
-    @include fonts.text-preset-5;
-  }
+  @include fonts.text-preset-5;
 }
 
 .budgetCardListHeaderLink:focus-visible {

@@ -10,7 +10,7 @@ describe('PotCardDetails', () => {
   it('renders div potCardDetails', () => {
     const { container } = render(<PotCardDetails {...testProps} />);
 
-    const htmlElement = container.querySelector('.potCardDetails');
+    const htmlElement = container.querySelector('' + '.potCardDetails');
 
     expect(htmlElement).toBeInTheDocument();
   });

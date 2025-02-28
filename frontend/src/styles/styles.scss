@@ -1,5 +1,6 @@
 @use 'colors';
 @use 'fonts';
+@use 'functions';
 @use 'spaces';
 
 :root {
@@ -55,7 +56,7 @@ hr {
   margin: spaces.$spaceML 0;
   border: 0;
   background-color: colors.$grey-100;
-  height: 1px;
+  height: functions.to-rem(1px);
   width: 100%;
 }
 
