@@ -115,7 +115,7 @@ $image-filter-hover: invert(74%) sepia(0%) saturate(0%) hue-rotate(0deg) brightn
   opacity: 1;
   transition: opacity $transition-duration-long ease-in;
 
-  @include fonts.text-preset-4-bold;
+  @include fonts.text-preset-3;
 
   @include screens.tablet-and-down(50) {
     transition: width 0s ease;
@@ -126,7 +126,7 @@ $image-filter-hover: invert(74%) sepia(0%) saturate(0%) hue-rotate(0deg) brightn
     margin-left: 0;
     transition: opacity 0s ease-in;
 
-    @include fonts.text-preset-5;
+    @include fonts.text-preset-5-bold;
   }
 
   @include screens.phone {

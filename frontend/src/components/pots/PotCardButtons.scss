@@ -13,7 +13,7 @@ $transition-duration: 0.2s;
   cursor: pointer;
   white-space: nowrap;
 
-  @include fonts.text-preset-4-bold;
+  @include fonts.text-preset-5-bold;
 
   &:hover {
     background-color: colors.$component-background-light;

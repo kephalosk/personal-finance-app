@@ -3,15 +3,25 @@
 @use '../../styles/screens';
 @use '../../styles/spaces';
 
+.searchbarDropdown {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
 .searchbarLabel {
   margin-right: spaces.$spaceS;
   margin-left: spaces.$spaceL;
+
+  @include fonts.text-preset-5;
 }
 
 .searchbarLabelWrapper {
   display: flex;
   flex-direction: row;
   flex-grow: 1;
+  flex-wrap: wrap;
+  row-gap: spaces.$spaceM;
   align-items: center;
   justify-content: flex-end;
 }
