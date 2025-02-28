@@ -4,6 +4,7 @@
 @use '../../styles/screens';
 @use '../../styles/spaces';
 
+$border-offset: functions.to-rem(1px);
 $border-thickniss: functions.to-rem(1px);
 $custom-space-horizontal-correction: functions.to-rem(20px);
 $custom-space-horizontal-correction-phone: functions.to-rem(10px);
@@ -30,13 +31,14 @@ $transition-duration-long: 0.3s;
   box-shadow: 0 5px 40px -25px colors.$grey-900;
   background-color: colors.$white-0;
   max-height: $menu-list-item-height;
-  width: 100%;
+  width: calc(100% + 2px);
   min-width: $menu-list-item-width;
   display: flex;
   flex-direction: column;
   position: absolute;
-  top: -1px;
-  right: -1px;
+  top: -$border-offset;
+  right: -$border-offset;
+  left: -$border-offset;
   z-index: 100;
   color: colors.$grey-900;
   visibility: hidden;

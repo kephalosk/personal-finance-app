@@ -17,9 +17,9 @@ $border-transition-duration: 0.1s;
 
 .inputMoneyIcon {
   position: absolute;
-  top: calc(50% - 9px);
   left: spaces.$spaceML;
   color: colors.$grey-300;
+  transform: translateY(50%);
 
   @include fonts.text-preset-4;
 
