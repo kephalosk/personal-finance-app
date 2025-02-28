@@ -3,6 +3,7 @@
 @use '../../styles/spaces';
 
 $pot-card-min-width: functions.to-rem(350px);
+$pot-card-min-width-phone: functions.to-rem(288px);
 
 .potPageGrid {
   display: grid;
@@ -11,6 +12,6 @@ $pot-card-min-width: functions.to-rem(350px);
   row-gap: spaces.$spaceL;
 
   @include screens.phone {
-    grid-template-columns: repeat(auto-fit, (minmax($pot-card-min-width, 1fr)));
+    grid-template-columns: repeat(auto-fit, (minmax($pot-card-min-width-phone, 1fr)));
   }
 }

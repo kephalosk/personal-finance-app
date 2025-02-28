@@ -30,7 +30,7 @@ $border-thickniss-left: functions.to-rem(4px);
   flex-grow: 1;
   color: colors.$grey-500;
 
-  @include fonts.text-preset-3;
+  @include fonts.text-preset-4;
 }
 
 .overviewBillsRowValue {

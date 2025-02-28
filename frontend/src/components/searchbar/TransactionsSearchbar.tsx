@@ -111,15 +111,19 @@ const TransactionsSearchbar: ({ fetchedTransactions, updateTransactions }: Props
     <div className="transactionsSearchbar" data-testid="transactions-searchbar">
       <SearchbarInput ref={searchbarRef} onInputChange={handleInputChange} />
       <div className={`${isSmallScreen ? 'searchbarSmall' : 'searchbarLabelWrapper'}`}>
-        {!isSmallScreen && <label className="searchbarLabel sortBy">Sort by</label>}
-        <SearchbarDropdownSort onSortChange={handleSortChange} />
-        {!isSmallScreen && <label className="searchbarLabel category">Category</label>}
-        <SearchbarDropdownCategory
-          onCategoryChange={(category: string) =>
-            handleCategoryChange(category, fetchedTransactions)
-          }
-          currentCategory={currentCategory}
-        />
+        <div className="searchbarDropdown">
+          {!isSmallScreen && <label className="searchbarLabel sortBy">Sort by</label>}
+          <SearchbarDropdownSort onSortChange={handleSortChange} />
+        </div>
+        <div className="searchbarDropdown">
+          {!isSmallScreen && <label className="searchbarLabel category">Category</label>}
+          <SearchbarDropdownCategory
+            onCategoryChange={(category: string) =>
+              handleCategoryChange(category, fetchedTransactions)
+            }
+            currentCategory={currentCategory}
+          />
+        </div>
       </div>
     </div>
   );

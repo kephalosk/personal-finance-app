@@ -130,6 +130,14 @@ describe('TransactionsSearchbar', () => {
     expect(htmlElementDesktop).toBeInTheDocument();
   });
 
+  it('renders div searchbarDropdown', () => {
+    const { container } = render(<TransactionsSearchbar {...testProps} />);
+
+    const htmlElements: NodeListOf<HTMLElement> = container.querySelectorAll('.searchbarDropdown');
+
+    expect(htmlElements).toHaveLength(2);
+  });
+
   it('renders label sortBy on desktop and tablet', async () => {
     (useIsSmallScreen as jest.Mock).mockReturnValue(false);
     const { container } = render(<TransactionsSearchbar {...testProps} />);

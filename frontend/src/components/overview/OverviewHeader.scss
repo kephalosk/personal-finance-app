@@ -8,18 +8,18 @@
   align-items: center;
 }
 
-.overviewHeaderLink{
+.overviewHeaderLink {
   padding: spaces.$spaceXS;
   text-decoration: none;
   color: colors.$grey-500;
 
-  @include fonts.text-preset-4;
+  @include fonts.text-preset-5;
 
-  &:hover{
+  &:hover {
     color: colors.$grey-900;
   }
 
-  &:focus{
+  &:focus {
     border-radius: spaces.$radiusXS;
     box-shadow: 0 0 0 2px colors.$grey-900;
     color: colors.$grey-900;
@@ -27,7 +27,7 @@
   }
 }
 
-.overviewHeaderLink svg{
+.overviewHeaderLink svg {
   margin-left: spaces.$spaceMS;
 }
 
