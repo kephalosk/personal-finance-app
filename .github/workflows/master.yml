@@ -34,7 +34,7 @@ jobs:
         shell: bash
 
       - name: Upload Package Version as Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: PACKAGE_VERSION_FRONTEND
           path: PACKAGE_VERSION_FRONTEND
@@ -69,7 +69,7 @@ jobs:
         shell: bash
 
       - name: Upload Package Version as Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: PACKAGE_VERSION_BACKEND
           path: PACKAGE_VERSION_BACKEND
@@ -212,7 +212,7 @@ jobs:
         uses: actions/checkout@main
 
       - name: Download PACKAGE_VERSION_FRONTEND Artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: PACKAGE_VERSION_FRONTEND
           path: .
@@ -249,7 +249,7 @@ jobs:
         uses: actions/checkout@main
 
       - name: Download PACKAGE_VERSION_BACKEND Artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: PACKAGE_VERSION_BACKEND
           path: .
@@ -294,7 +294,7 @@ jobs:
         run: doctl registry login --expiry-seconds 1200
 
       - name: Download PACKAGE_VERSION_FRONTEND Artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: PACKAGE_VERSION_FRONTEND
           path: .
@@ -341,7 +341,7 @@ jobs:
         run: doctl registry login --expiry-seconds 1200
 
       - name: Download PACKAGE_VERSION_BACKEND Artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: PACKAGE_VERSION_BACKEND
           path: .
@@ -399,7 +399,7 @@ jobs:
         run: doctl registry login --expiry-seconds 1200
 
       - name: Download PACKAGE_VERSION_FRONTEND Artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: PACKAGE_VERSION_FRONTEND
           path: .
@@ -459,7 +459,7 @@ jobs:
         run: doctl registry login --expiry-seconds 1200
 
       - name: Download PACKAGE_VERSION_FRONTEND Artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: PACKAGE_VERSION_FRONTEND
           path: .
@@ -521,7 +521,7 @@ jobs:
         run: doctl registry login --expiry-seconds 1200
 
       - name: Download PACKAGE_VERSION_FRONTEND Artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: PACKAGE_VERSION_FRONTEND
           path: .
@@ -572,7 +572,7 @@ jobs:
         run: doctl kubernetes cluster kubeconfig save ${{ secrets.CLUSTER_ID }}
 
       - name: Download PACKAGE_VERSION_FRONTEND Artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: PACKAGE_VERSION_FRONTEND
           path: .
@@ -622,7 +622,7 @@ jobs:
         run: doctl kubernetes cluster kubeconfig save ${{ secrets.CLUSTER_ID }}
 
       - name: Download PACKAGE_VERSION_BACKEND Artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: PACKAGE_VERSION_BACKEND
           path: .
