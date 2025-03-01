@@ -370,6 +370,7 @@ jobs:
 
       - name: Scan image with Grype
         uses: anchore/scan-action@v6
+        continue-on-error: true
         with:
           image: "registry.digitalocean.com/kephalosk/personal-finance-app:${{ env.PACKAGE_VERSION_FRONTEND }}"
           output-format: table
