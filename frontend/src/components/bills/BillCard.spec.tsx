@@ -94,6 +94,14 @@ describe('BillCard', () => {
     expect(htmlElement).toBeInTheDocument();
   });
 
+  it('renders div billCardSearchbarInput', () => {
+    const { container } = render(<BillCard {...testProps} />);
+
+    const htmlElement = container.querySelector('.billCardSearchbarInput');
+
+    expect(htmlElement).toBeInTheDocument();
+  });
+
   it('renders div billCardSearchbar', () => {
     const { container } = render(<BillCard {...testProps} />);
 

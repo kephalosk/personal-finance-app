@@ -16,6 +16,7 @@ interface Props {
   hasValidInput: boolean;
   isLimitInput: boolean;
   initialValue?: string;
+  maxInput?: number;
 }
 
 export interface InputMoneyRef {
@@ -27,7 +28,7 @@ const MoneyInput: ForwardRefExoticComponent<Props & RefAttributes<InputMoneyRef>
   Props
 >(
   (
-    { handleInputChange, hasValidInput, isLimitInput, initialValue = '' }: Props,
+    { handleInputChange, hasValidInput, isLimitInput, initialValue = '', maxInput = -1 }: Props,
     ref: ForwardedRef<InputMoneyRef>
   ): ReactNode => {
     const [value, setValue] = useState<string>(initialValue);
@@ -63,6 +64,9 @@ const MoneyInput: ForwardRefExoticComponent<Props & RefAttributes<InputMoneyRef>
       const numericValue: number = parseInt(rawValue, 10);
       if (numericValue > 1000000000000) {
         return 1000000000000;
+      }
+      if (maxInput != -1 && numericValue > maxInput) {
+        return maxInput;
       }
       return numericValue;
     };
