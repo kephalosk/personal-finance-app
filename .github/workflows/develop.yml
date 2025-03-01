@@ -2,7 +2,7 @@ name: version, test, build, push and scan
 
 on:
   push:
-    branches: 
+    branches:
       - 'develop'
 
 jobs:
@@ -74,7 +74,7 @@ jobs:
           name: PACKAGE_VERSION_BACKEND
           path: PACKAGE_VERSION_BACKEND
           retention-days: 7
-          
+
   frontend-unit-tests:
     runs-on: ubuntu-latest
 
@@ -126,7 +126,7 @@ jobs:
         run: |
           cd backend
           npm install
-          
+
       - name: install curl
         run: sudo apt update && sudo apt install curl
 
@@ -290,7 +290,7 @@ jobs:
             -d '{"name": "CURRENT_IAT_BACKEND_SERVICE_VERSION", "value": "${{ env.PACKAGE_VERSION_BACKEND }}"}' \
             https://api.github.com/repos/${{ github.repository }}/actions/variables/CURRENT_IAT_BACKEND_SERVICE_VERSION
 
-  frontend-scan:
+  frontend-trivy-scan:
     runs-on: ubuntu-latest
 
     needs: frontend-build
@@ -300,33 +300,33 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-        
+
       - name: Install doctl
         uses: digitalocean/action-doctl@v2
         with:
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
-          
+
       - name: Log in to DigitalOcean Container Registry with short-lived credentials
         run: doctl registry login --expiry-seconds 1200
-        
+
       - name: Download PACKAGE_VERSION_FRONTEND Artifact
         uses: actions/download-artifact@v4
         with:
           name: PACKAGE_VERSION_FRONTEND
           path: .
-  
+
       - name: Read PACKAGE_VERSION_FRONTEND
         id: read_package_version
         run: |
           PACKAGE_VERSION_FRONTEND=$(cat PACKAGE_VERSION_FRONTEND)
           echo "PACKAGE_VERSION_FRONTEND=$PACKAGE_VERSION_FRONTEND" >> $GITHUB_ENV
-        
+
       - name: Pull image from registry
         run: docker pull registry.digitalocean.com/kephalosk/personal-finance-app:${{ env.PACKAGE_VERSION_FRONTEND }}
 
       - name: Authenticate GitHub Container Registry
         run: echo "${{ secrets.GHCR_PAT }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
-        
+
       - name: Set up Trivy
         run: |
           curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -
@@ -337,7 +337,7 @@ jobs:
       - name: Scan Frontend Docker Image
         run: ./bin/trivy image --exit-code 1 --severity HIGH,CRITICAL registry.digitalocean.com/kephalosk/personal-finance-app:${{ env.PACKAGE_VERSION_FRONTEND }}
 
-  backend-scan:
+  backend-trivy-scan:
     runs-on: ubuntu-latest
 
     needs: backend-build
@@ -384,11 +384,53 @@ jobs:
       - name: Scan Backend Docker Image
         run: ./bin/trivy image --exit-code 1 --severity HIGH,CRITICAL registry.digitalocean.com/kephalosk/nestjs-backend:${{ env.PACKAGE_VERSION_BACKEND }}
 
+  backend-grype-scan:
+    runs-on: ubuntu-latest
+
+    needs: backend-build
+
+    continue-on-error: true
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install doctl
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+
+      - name: Log in to DigitalOcean Container Registry with short-lived credentials
+        run: doctl registry login --expiry-seconds 1200
+
+      - name: Download PACKAGE_VERSION_BACKEND Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: PACKAGE_VERSION_BACKEND
+          path: .
+
+      - name: Read PACKAGE_VERSION_BACKEND
+        id: read_package_version
+        run: |
+          PACKAGE_VERSION_BACKEND=$(cat PACKAGE_VERSION_BACKEND)
+          echo "PACKAGE_VERSION_BACKEND=$PACKAGE_VERSION_BACKEND" >> $GITHUB_ENV
+
+      - name: Pull image from registry
+        run: docker pull registry.digitalocean.com/kephalosk/nestjs-backend:${{ env.PACKAGE_VERSION_BACKEND }}
+
+      - name: Authenticate GitHub Container Registry
+        run: echo "${{ secrets.GHCR_PAT }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
+      - name: Scan image with gripe
+        uses: anchore/scan-action@v6
+        with:
+          image: "registry.digitalocean.com/kephalosk/nestjs-backend:${{ env.PACKAGE_VERSION_BACKEND }}"
+
   frontend-e2e-tests:
     timeout-minutes: 60
     runs-on: ubuntu-latest
 
-    needs: frontend-scan
+    needs: frontend-trivy-scan
 
     steps:
       - uses: actions/checkout@v4
@@ -419,7 +461,7 @@ jobs:
         with:
           name: PACKAGE_VERSION_FRONTEND
           path: .
-  
+
       - name: Read PACKAGE_VERSION_FRONTEND
         id: read_package_version
         run: |
@@ -448,7 +490,7 @@ jobs:
     timeout-minutes: 60
     runs-on: ubuntu-latest
 
-    needs: frontend-scan
+    needs: frontend-trivy-scan
 
     steps:
       - uses: actions/checkout@v4
