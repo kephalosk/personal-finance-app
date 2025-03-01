@@ -106,8 +106,11 @@ describe('PotProgressForm', (): void => {
     }
   );
 
-  it('renders component MoneyInput', (): void => {
-    render(<PotProgressForm {...testProps} />);
+  it.each([
+    [true, -1],
+    [false, pot.total],
+  ])('renders component MoneyInput', (isAddition: boolean, maxInput: number): void => {
+    render(<PotProgressForm {...testProps} isAddition={isAddition} />);
 
     const element: HTMLElement | null = screen.getByTestId('input-money');
 
@@ -116,7 +119,7 @@ describe('PotProgressForm', (): void => {
       handleInputChange: expect.any(Function),
       hasValidInput: true,
       isLimitInput: false,
-      maxInput: pot.total,
+      maxInput,
     });
   });
 
