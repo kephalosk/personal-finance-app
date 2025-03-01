@@ -11,6 +11,7 @@ $transition-duration: 0.4s;
 .content {
   padding-left: $custom-space-sidebar;
   height: auto;
+  max-width: 100%;
   transition: padding $transition-duration ease;
 
   @include screens.tablet-and-down(50) {
@@ -40,6 +41,7 @@ $transition-duration: 0.4s;
 .webapp {
   background-color: colors.$beige-100;
   height: auto;
+  max-width: 100%;
   min-height: calc(100vh - 14px);
   position: relative;
 

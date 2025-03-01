@@ -12,6 +12,10 @@ $searchbar-width-phone: functions.to-rem(42px);
 
 $transition-duration: 0.3s;
 
+.dropdownSort {
+  flex-shrink: 0;
+}
+
 .searchbarDropdownSort {
   border-radius: spaces.$radiusS;
   border: 1px solid colors.$beige-500;
