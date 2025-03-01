@@ -44,7 +44,7 @@ const PotProgressForm = ({
         handleInputChange={handleInputChange}
         hasValidInput={hasValidInput}
         isLimitInput={false}
-        maxInput={pot.total}
+        maxInput={isAddition ? -1 : pot.total}
       />
     </div>
   );
