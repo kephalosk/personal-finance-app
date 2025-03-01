@@ -371,6 +371,7 @@ jobs:
       - name: Scan image with Grype
         uses: anchore/scan-action@v6
         continue-on-error: true
+        id: grype_scan
         with:
           image: "registry.digitalocean.com/kephalosk/personal-finance-app:${{ env.PACKAGE_VERSION_FRONTEND }}"
           output-format: table
@@ -383,13 +384,13 @@ jobs:
         run: cat GRYPE_SCAN_BACKEND.txt
 
       - name: Zeige Verzeichnisinhalt nach Scan
-        run: echo "${{ github.workspace }}/GRYPE_SCAN_BACKEND"
+        run: echo "${{ github.workspace }}/GRYPE_SCAN_BACKEND.txt"
 
       - name: Upload results as Artifact
         uses: actions/upload-artifact@v4
         with:
           name: GRYPE_SCAN_BACKEND.txt
-          path: GRYPE_SCAN_BACKEND
+          path: GRYPE_SCAN_BACKEND.txt
           retention-days: 7
 
       - name: Fail if Grype Scan Failed
