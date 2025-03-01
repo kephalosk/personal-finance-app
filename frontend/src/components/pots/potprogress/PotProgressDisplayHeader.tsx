@@ -8,7 +8,7 @@ interface Props {
 const PotProgressDisplayHeader: ({ newTotal }: Props) => ReactNode = ({
   newTotal,
 }: Props): ReactNode => {
-  const fixedAmount: string = newTotal.toFixed(2);
+  const fixedAmount: string = newTotal.toFixed(0);
   const value: string = `$${fixedAmount}`;
 
   return (

@@ -9,7 +9,7 @@ interface Props {
 const PotCardDetails = ({ pot }: Props) => {
   const currentPercent = (pot.total / pot.target) * 100;
   const currentPercentFormatted = currentPercent.toFixed(2);
-  const totalFormatted = pot.total.toFixed(2);
+  const totalFormatted = pot.total.toFixed(0);
   const targetFormatted = pot.target.toFixed(0);
   return (
     <>

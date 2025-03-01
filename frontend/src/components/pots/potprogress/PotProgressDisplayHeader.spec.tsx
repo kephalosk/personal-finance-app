@@ -11,7 +11,7 @@ describe('PotProgressDisplayHeader', (): void => {
   };
 
   const headerTitle: string = 'New Amount';
-  const headerValue: string = `${newTotal.toFixed(2)}`;
+  const headerValue: string = `${newTotal.toFixed(0)}`;
 
   it('renders div potProgressDisplayHeader', (): void => {
     const { container } = render(<PotProgressDisplayHeader {...testProps} />);
