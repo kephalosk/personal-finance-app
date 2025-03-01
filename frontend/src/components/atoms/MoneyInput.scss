@@ -19,7 +19,7 @@ $border-transition-duration: 0.1s;
   position: absolute;
   left: spaces.$spaceML;
   color: colors.$grey-300;
-  transform: translateY(50%);
+  bottom: 23%;
 
   @include fonts.text-preset-4;
 

@@ -23,10 +23,6 @@
   color: colors.$grey-900;
 
   @include fonts.text-preset-4-bold;
-
-  @include screens.phone() {
-    @include fonts.text-preset-5-bold;
-  }
 }
 
 .budgetCardListHeaderLink {

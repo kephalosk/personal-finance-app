@@ -94,6 +94,18 @@ describe('MoneyInput', () => {
     expect(input).toHaveAttribute('value', inputValueMax);
   });
 
+  it('sets numbers bigger than maxInput to maxInput', () => {
+    const maxInput: number = 100;
+    const inputValueBiggerThanMax: string = '200';
+    const { container } = render(<MoneyInput {...testProps} maxInput={maxInput} />);
+
+    const input: Element | null = container.querySelector('.inputMoneyInput');
+    fireEvent.change(input!, { target: { value: inputValueBiggerThanMax } });
+
+    expect(inputValueBiggerThanMax).not.toEqual(maxInput);
+    expect(input).toHaveAttribute('value', maxInput.toString());
+  });
+
   it('adds class active to icon when input has value', (): void => {
     const { container } = render(<MoneyInput {...testProps} />);
     const element: Element | null = container.querySelector('.inputMoneyIcon');

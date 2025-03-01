@@ -116,6 +116,7 @@ describe('PotProgressForm', (): void => {
       handleInputChange: expect.any(Function),
       hasValidInput: true,
       isLimitInput: false,
+      maxInput: pot.total,
     });
   });
 
