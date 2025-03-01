@@ -109,7 +109,9 @@ const TransactionsSearchbar: ({ fetchedTransactions, updateTransactions }: Props
 
   return (
     <div className="transactionsSearchbar" data-testid="transactions-searchbar">
-      <SearchbarInput ref={searchbarRef} onInputChange={handleInputChange} />
+      <div className="transactionsSearchbarInput">
+        <SearchbarInput ref={searchbarRef} onInputChange={handleInputChange} />
+      </div>
       <div className={`${isSmallScreen ? 'searchbarSmall' : 'searchbarLabelWrapper'}`}>
         <div className="searchbarDropdown">
           {!isSmallScreen && <label className="searchbarLabel sortBy">Sort by</label>}

@@ -14,12 +14,6 @@ $searchbar-max-width: functions.to-rem(320px);
 
 $transition-duration: 0.3s;
 
-.searchbarInputContainer {
-  max-width: 60%;
-  width: fit-content;
-  flex-grow: 1;
-}
-
 .searchbarInput {
   border-radius: spaces.$radiusMS;
   border: $border-thickniss solid colors.$beige-500;

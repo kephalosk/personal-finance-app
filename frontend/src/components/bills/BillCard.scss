@@ -43,6 +43,12 @@
   align-items: center;
 }
 
+.billCardSearchbarInput {
+  max-width: 60%;
+  width: fit-content;
+  flex-grow: 1;
+}
+
 .searchbarLabel {
   color: colors.$grey-500;
   white-space: nowrap;

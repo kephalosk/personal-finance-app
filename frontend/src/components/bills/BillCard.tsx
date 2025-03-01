@@ -99,7 +99,9 @@ const BillCard: ({ bills, today, isLoading }: Props) => ReactNode = ({
       ) : (
         <div className="billCard" data-testid="bill-card">
           <div className="billCardSearchbar">
-            <SearchbarInput ref={searchbarRef} onInputChange={handleInputChange} />
+            <div className="billCardSearchbarInput">
+              <SearchbarInput ref={searchbarRef} onInputChange={handleInputChange} />
+            </div>
             {!isSmallScreen && <label className="searchbarLabel sortBy">Sort by</label>}
             <SearchbarDropdownSort onSortChange={handleSortChange} />
           </div>

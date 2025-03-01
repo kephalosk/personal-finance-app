@@ -17,6 +17,7 @@
 }
 
 .searchbarLabelWrapper {
+  margin-top: spaces.$spaceML;
   display: flex;
   flex-direction: row;
   flex-grow: 1;
@@ -29,20 +30,27 @@
 .searchbarSmall {
   display: flex;
   flex-direction: row;
+  //justify-content: flex-end;
 }
 
 .transactionsSearchbar {
   width: 100%;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-items: center;
+  //display: flex;
+  //flex-direction: row;
+  //flex-wrap: wrap;
+  //align-items: center;
   color: colors.$grey-500;
   row-gap: spaces.$spaceM;
 
   @include fonts.text-preset-3;
 
   @include screens.phone {
-    justify-content: center;
+    flex-direction: column;
+    //justify-content: center;
+    //flex-wrap: nowrap;
   }
+}
+
+.transactionsSearchbarInput {
+  max-width: fit-content;
 }
