@@ -374,10 +374,13 @@ jobs:
         with:
           image: "registry.digitalocean.com/kephalosk/personal-finance-app:${{ env.PACKAGE_VERSION_FRONTEND }}"
           output-format: table
-          output-file: GRYPE_SCAN_BACKEND
+          output-file: GRYPE_SCAN_BACKEND.txt
 
       - name: Zeige Verzeichnisinhalt nach Scan
         run: ls -lah
+
+      - name: Zeige Verzeichnisinhalt nach Scan
+        run: cat GRYPE_SCAN_BACKEND.txt
 
       - name: Zeige Verzeichnisinhalt nach Scan
         run: echo "${{ github.workspace }}/GRYPE_SCAN_BACKEND"
@@ -385,9 +388,13 @@ jobs:
       - name: Upload results as Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: GRYPE_SCAN_BACKEND
+          name: GRYPE_SCAN_BACKEND.txt
           path: GRYPE_SCAN_BACKEND
           retention-days: 7
+
+      - name: Fail if Grype Scan Failed
+        if: steps.grype_scan.outcome == 'failure'
+        run: exit 1
 
   backend-trivy-scan:
     runs-on: ubuntu-latest
