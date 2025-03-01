@@ -368,10 +368,11 @@ jobs:
       - name: Pull image from registry
         run: docker pull registry.digitalocean.com/kephalosk/personal-finance-app:${{ env.PACKAGE_VERSION_FRONTEND }}
 
-      - name: Scan image
+      - name: Scan image with Grype
         uses: anchore/scan-action@v6
         with:
           image: "registry.digitalocean.com/kephalosk/personal-finance-app:${{ env.PACKAGE_VERSION_FRONTEND }}"
+          output-format: table
 
   backend-trivy-scan:
     runs-on: ubuntu-latest
@@ -451,14 +452,10 @@ jobs:
       - name: Pull image from registry
         run: docker pull registry.digitalocean.com/kephalosk/nestjs-backend:${{ env.PACKAGE_VERSION_BACKEND }}
 
-      - name: Authenticate GitHub Container Registry
-        run: echo "${{ secrets.GHCR_PAT }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
-
-      - name: Setup Grype
-        run: curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh | sh -s -- -b /usr/local/bin
-
       - name: Scan image with Grype
-        run: grype registry.digitalocean.com/kephalosk/nestjs-backend:${{ env.PACKAGE_VERSION_BACKEND }}
+        uses: anchore/scan-action@v6
+        with:
+          image: "registry.digitalocean.com/kephalosk/nestjs-backend:${{ env.PACKAGE_VERSION_BACKEND }}"
 
   frontend-e2e-tests:
     timeout-minutes: 60
