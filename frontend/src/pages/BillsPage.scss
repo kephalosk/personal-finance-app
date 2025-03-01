@@ -3,6 +3,7 @@
 
 .billsPage {
   height: 100%;
+  max-width: 100%;
   padding: spaces.$spaceXL spaces.$spaceXXL;
   display: flex;
   flex-direction: column;
@@ -14,6 +15,7 @@
 }
 
 .billsPageDetails {
+  max-width: 100%;
   display: grid;
   grid-template-columns: calc(33% - 24px) 67%;
   column-gap: spaces.$spaceL;
