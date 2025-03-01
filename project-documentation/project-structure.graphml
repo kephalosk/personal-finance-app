@@ -1453,9 +1453,9 @@ Organisation<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel>
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
           <y:Geometry height="21.0" width="141.0" x="796.9331511304483" y="-449.0"/>
-          <y:Fill color="#999999" color2="#B7C9E3" transparent="false"/>
+          <y:Fill color="#00FF00" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
-          <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="141.0" x="0.0" xml:space="preserve" y="0.43359375">Whitesource?<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:NodeLabel alignment="left" autoSizePolicy="node_width" configuration="CroppingLabel" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="20.1328125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="141.0" x="0.0" xml:space="preserve" y="0.43359375">Grype<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
         </y:GenericNode>
       </data>
     </node>
@@ -7057,7 +7057,6 @@ Langfristige Lösung: möglicherweise funktioniert es mit css grid.</y:NodeLabel
       </data>
     </edge>
     <edge id="e314" source="n308" target="n309">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="118.94338998698959" sy="-0.0" tx="-118.94338998698959" ty="-0.0"/>
@@ -7068,7 +7067,6 @@ Langfristige Lösung: möglicherweise funktioniert es mit css grid.</y:NodeLabel
       </data>
     </edge>
     <edge id="e315" source="n213" target="n310">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="118.94338998698959" sy="-0.0" tx="-118.94338998698959" ty="-0.0"/>
@@ -7079,7 +7077,6 @@ Langfristige Lösung: möglicherweise funktioniert es mit css grid.</y:NodeLabel
       </data>
     </edge>
     <edge id="e316" source="n119" target="n311">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="115.0" sy="5.25" tx="-129.77805286436706" ty="-0.0">
@@ -7093,7 +7090,6 @@ Langfristige Lösung: möglicherweise funktioniert es mit css grid.</y:NodeLabel
       </data>
     </edge>
     <edge id="e317" source="n5" target="n312">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="70.5" sy="9.333333333333485" tx="-70.5" ty="-0.0">
@@ -7107,7 +7103,6 @@ Langfristige Lösung: möglicherweise funktioniert es mit css grid.</y:NodeLabel
       </data>
     </edge>
     <edge id="e318" source="n311" target="n313">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="129.77805286436706" sy="-0.0" tx="-172.4899718911065" ty="-0.0"/>

@@ -274,7 +274,7 @@ jobs:
       - name: Push image to DigitalOcean Container Registry
         run: docker push registry.digitalocean.com/kephalosk/nestjs-backend:${{ env.PACKAGE_VERSION_BACKEND }}
 
-  frontend-scan:
+  frontend-trivy-scan:
     runs-on: ubuntu-latest
 
     needs: frontend-build
@@ -321,7 +321,7 @@ jobs:
       - name: Scan Frontend Docker Image
         run: ./bin/trivy image --exit-code 1 --severity HIGH,CRITICAL registry.digitalocean.com/kephalosk/personal-finance-app:${{ env.PACKAGE_VERSION_FRONTEND }}
 
-  backend-scan:
+  backend-trivy-scan:
     runs-on: ubuntu-latest
 
     needs: backend-build
@@ -372,7 +372,7 @@ jobs:
     timeout-minutes: 60
     runs-on: ubuntu-latest
 
-    needs: frontend-scan
+    needs: frontend-trivy-scan
 
     steps:
       - uses: actions/checkout@v4
@@ -432,7 +432,7 @@ jobs:
     timeout-minutes: 60
     runs-on: ubuntu-latest
 
-    needs: frontend-scan
+    needs: frontend-trivy-scan
 
     steps:
       - uses: actions/checkout@v4
@@ -554,7 +554,7 @@ jobs:
   frontend-deploy:
     runs-on: ubuntu-latest
     
-    needs: [frontend-e2e-tests, frontend-gui-tests, backend-scan]
+    needs: [frontend-e2e-tests, frontend-gui-tests, backend-trivy-scan]
 
     steps:
       - name: Checkout master
@@ -604,7 +604,7 @@ jobs:
   backend-deploy:
     runs-on: ubuntu-latest
 
-    needs: [backend-scan, frontend-e2e-tests, frontend-gui-tests]
+    needs: [backend-trivy-scan, frontend-e2e-tests, frontend-gui-tests]
 
     steps:
       - name: Checkout master
