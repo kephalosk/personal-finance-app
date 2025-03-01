@@ -373,6 +373,20 @@ jobs:
         with:
           image: "registry.digitalocean.com/kephalosk/personal-finance-app:${{ env.PACKAGE_VERSION_FRONTEND }}"
           output-format: table
+          output-file: GRYPE_SCAN_BACKEND
+
+      - name: Zeige Verzeichnisinhalt nach Scan
+        run: ls -lah
+
+      - name: Zeige Verzeichnisinhalt nach Scan
+        run: echo "${{ github.workspace }}/GRYPE_SCAN_BACKEND"
+
+      - name: Upload results as Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: GRYPE_SCAN_BACKEND
+          path: GRYPE_SCAN_BACKEND
+          retention-days: 7
 
   backend-trivy-scan:
     runs-on: ubuntu-latest
@@ -456,6 +470,7 @@ jobs:
         uses: anchore/scan-action@v6
         with:
           image: "registry.digitalocean.com/kephalosk/nestjs-backend:${{ env.PACKAGE_VERSION_BACKEND }}"
+          output-format: table
 
   frontend-e2e-tests:
     timeout-minutes: 60
