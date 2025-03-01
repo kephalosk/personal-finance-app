@@ -375,22 +375,13 @@ jobs:
         with:
           image: "registry.digitalocean.com/kephalosk/personal-finance-app:${{ env.PACKAGE_VERSION_FRONTEND }}"
           output-format: table
-          output-file: GRYPE_SCAN_BACKEND.txt
-
-      - name: Zeige Verzeichnisinhalt nach Scan
-        run: ls -lah
-
-      - name: Zeige Verzeichnisinhalt nach Scan
-        run: cat GRYPE_SCAN_BACKEND.txt
-
-      - name: Zeige Verzeichnisinhalt nach Scan
-        run: echo "${{ github.workspace }}/GRYPE_SCAN_BACKEND.txt"
+          output-file: GRYPE_SCAN_FRONTEND.txt
 
       - name: Upload results as Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: GRYPE_SCAN_BACKEND.txt
-          path: GRYPE_SCAN_BACKEND.txt
+          name: GRYPE_SCAN_FRONTEND.txt
+          path: GRYPE_SCAN_FRONTEND.txt
           retention-days: 7
 
       - name: Fail if Grype Scan Failed
@@ -477,9 +468,23 @@ jobs:
 
       - name: Scan image with Grype
         uses: anchore/scan-action@v6
+        continue-on-error: true
+        id: grype_scan
         with:
           image: "registry.digitalocean.com/kephalosk/nestjs-backend:${{ env.PACKAGE_VERSION_BACKEND }}"
           output-format: table
+          output-file: GRYPE_SCAN_BACKEND.txt
+
+      - name: Upload results as Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: GRYPE_SCAN_BACKEND.txt
+          path: GRYPE_SCAN_BACKEND.txt
+          retention-days: 7
+
+      - name: Fail if Grype Scan Failed
+        if: steps.grype_scan.outcome == 'failure'
+        run: exit 1
 
   frontend-e2e-tests:
     timeout-minutes: 60
