@@ -7,8 +7,6 @@ jobs:
   codeql-scan:
     runs-on: ubuntu-latest
 
-    needs: [backend-trivy-scan, backend-grype-scan, frontend-trivy-scan, frontend-grype-scan]
-
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -29,8 +27,6 @@ jobs:
 
   gitleaks-scan:
     runs-on: ubuntu-latest
-
-    needs: [backend-trivy-scan, backend-grype-scan, frontend-trivy-scan, frontend-grype-scan]
 
     steps:
       - name: Checkout Repository
