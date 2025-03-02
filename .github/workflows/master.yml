@@ -513,7 +513,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-  eslint-scan:
+  frontend-eslint-scan:
     runs-on: ubuntu-latest
 
     needs: [codeql-scan, gitleaks-scan]
@@ -532,6 +532,15 @@ jobs:
           cd frontend
           npx eslint .
 
+  backend-eslint-scan:
+    runs-on: ubuntu-latest
+
+    needs: [codeql-scan, gitleaks-scan]
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
       - name: Install Backend Dependencies
         run: |
           cd backend
@@ -540,13 +549,13 @@ jobs:
       - name: Run ESLint
         run: |
           cd backend
-          npx eslint .
+          npx eslint src
 
   frontend-e2e-tests:
     timeout-minutes: 60
     runs-on: ubuntu-latest
 
-    needs: eslint-scan
+    needs: frontend-eslint-scan
 
     steps:
       - uses: actions/checkout@v4
@@ -606,7 +615,7 @@ jobs:
     timeout-minutes: 60
     runs-on: ubuntu-latest
 
-    needs: eslint-scan
+    needs: frontend-eslint-scan
 
     steps:
       - uses: actions/checkout@v4
@@ -728,7 +737,7 @@ jobs:
   frontend-deploy:
     runs-on: ubuntu-latest
     
-    needs: [frontend-e2e-tests, frontend-gui-tests]
+    needs: [frontend-e2e-tests, frontend-gui-tests, backend-eslint-scan]
 
     steps:
       - name: Checkout master
@@ -778,7 +787,7 @@ jobs:
   backend-deploy:
     runs-on: ubuntu-latest
 
-    needs: [frontend-e2e-tests, frontend-gui-tests]
+    needs: [frontend-e2e-tests, frontend-gui-tests, backend-eslint-scan]
 
     steps:
       - name: Checkout master
