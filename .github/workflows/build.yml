@@ -4,7 +4,7 @@ on:
   workflow_call:
 
 jobs:
-  frontend-build:
+  frontend:
     runs-on: ubuntu-latest
 
     steps:
@@ -45,7 +45,7 @@ jobs:
             -d '{"name": "CURRENT_IAT_FRONTEND_SERVICE_VERSION", "value": "${{ env.PACKAGE_VERSION_FRONTEND }}"}' \
             https://api.github.com/repos/${{ github.repository }}/actions/variables/CURRENT_IAT_FRONTEND_SERVICE_VERSION
 
-  backend-build:
+  backend:
     runs-on: ubuntu-latest
 
     steps:

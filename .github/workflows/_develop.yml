@@ -486,6 +486,7 @@ jobs:
 #      - frontend-gui-tests
 #      - frontend-e2e-tests
 #    if: needs.frontend-gui-tests.result == 'success' && needs.frontend-e2e-tests.result == 'success'
+    #${{ secrets.EMAIL_FROM }}
 
     steps:
       - name: Send Email via SendGrid
@@ -495,7 +496,7 @@ jobs:
           server_port: 587
           username: apikey
           password: ${{ secrets.SENDGRID_API_KEY }}
-          from: ${{ secrets.EMAIL_FROM }}
+          from: "kephalosk <noreply@em9676.philippkraatz.com>"
           to: ${{ secrets.EMAIL_TO }}
           subject: "CI/CD develop - Success - philippkraatz.com - Notification"
           body: |
@@ -506,4 +507,3 @@ jobs:
 
             🎯 Repository: [${{ github.repository }}](https://github.com/${{ github.repository }})
             🚀 Action Logs: [Hier ansehen](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
-          content_type: text/plain
