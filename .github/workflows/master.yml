@@ -1,4 +1,4 @@
-name: versioning, unit tests, build, image scan, code scan, linting, ui tests and deploy
+name: versioning, unit/integration tests, build, image scans, code scans, linting, ui tests and deploy
 
 on:
   push:
