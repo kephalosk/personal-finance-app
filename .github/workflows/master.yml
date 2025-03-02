@@ -516,22 +516,31 @@ jobs:
   eslint-scan:
     runs-on: ubuntu-latest
 
-    needs: [ codeql-scan, gitleaks-scan ]
+    needs: [codeql-scan, gitleaks-scan]
 
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18
-
-      - name: Install Dependencies
-        run: npm install
+      - name: Install Frontend Dependencies
+        run: |
+          cd frontend
+          npm install
 
       - name: Run ESLint
-        run: npx eslint . --ext .ts,.tsx
+        run: |
+          cd frontend
+          npx eslint .
+
+      - name: Install Backend Dependencies
+        run: |
+          cd backend
+          npm install
+
+      - name: Run ESLint
+        run: |
+          cd backend
+          npx eslint .
 
   frontend-e2e-tests:
     timeout-minutes: 60
