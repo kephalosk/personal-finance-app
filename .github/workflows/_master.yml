@@ -1,4 +1,4 @@
-name: versioning, tests, build, image-scans, code-scans, linting, ui-tests, deploy and notify
+name: versioning, tests, build, image-scans, code-scans, linting, ui-tests, deploy and notifying
 
 on:
   push:
@@ -11,215 +11,37 @@ permissions:
 
 jobs:
   versioning:
-    uses: ./.github/workflows/versioning.yml
+    uses: ./.github/workflows/stage1_versioning.yml
 
   tests:
-    uses: ./.github/workflows/tests.yml
+    uses: ./.github/workflows/stage2_tests.yml
     needs: versioning
     secrets: inherit
 
   build:
-    uses: ./.github/workflows/build.yml
+    uses: ./.github/workflows/stage3_build.yml
     needs: tests
     secrets: inherit
 
   image-scans:
-    uses: ./.github/workflows/image-scans.yml
+    uses: ./.github/workflows/stage4_image-scans.yml
     needs: build
     secrets: inherit
 
   code-scans:
-    uses: ./.github/workflows/code-scans.yml
+    uses: ./.github/workflows/stage5_code-scans.yml
     needs: image-scans
     secrets: inherit
 
   linting:
-    uses: ./.github/workflows/linting.yml
+    uses: ./.github/workflows/stage6_linting.yml
     needs: code-scans
     secrets: inherit
 
-  frontend-e2e-tests:
-    timeout-minutes: 60
-    runs-on: ubuntu-latest
-
-    needs: frontend-eslint-scan
-
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: lts/*
-
-      - name: Install dependencies
-        run: |
-         cd frontend
-         npm ci
-
-      - name: Install Playwright Browsers
-        run: |
-         cd frontend
-         npx playwright install --with-deps
-
-      - name: Install doctl
-        uses: digitalocean/action-doctl@v2
-        with:
-          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
-
-      - name: Log in to DigitalOcean Container Registry with short-lived credentials
-        run: doctl registry login --expiry-seconds 1200
-
-      - name: Download PACKAGE_VERSION_FRONTEND Artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: PACKAGE_VERSION_FRONTEND
-          path: .
-
-      - name: Read PACKAGE_VERSION_FRONTEND
-        id: read_package_version
-        run: |
-          PACKAGE_VERSION_FRONTEND=$(cat PACKAGE_VERSION_FRONTEND)
-          echo "PACKAGE_VERSION_FRONTEND=$PACKAGE_VERSION_FRONTEND" >> $GITHUB_ENV
-
-      - name: Pull image from registry
-        run: docker pull registry.digitalocean.com/kephalosk/personal-finance-app:${{ env.PACKAGE_VERSION_FRONTEND }}
-
-      - name: Run image from registry
-        run: docker run -d -p 5173:80 registry.digitalocean.com/kephalosk/personal-finance-app:${{ env.PACKAGE_VERSION_FRONTEND }}
-
-      - name: Run Playwright tests
-        run: |
-         cd frontend
-         npx playwright test ui-tests/e2e-tests
-
-      - uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: playwright-report
-          path: frontend/ui-tests/e2e-tests
-          retention-days: 30
-
-  frontend-gui-tests:
-    timeout-minutes: 60
-    runs-on: ubuntu-latest
-
-    needs: frontend-eslint-scan
-
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: lts/*
-
-      - name: Install dependencies
-        run: |
-          cd frontend
-          npm ci
-
-      - name: Install Playwright Browsers
-        run: |
-          cd frontend
-          npx playwright install --with-deps
-
-      - name: Install doctl
-        uses: digitalocean/action-doctl@v2
-        with:
-          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
-
-      - name: Log in to DigitalOcean Container Registry with short-lived credentials
-        run: doctl registry login --expiry-seconds 1200
-
-      - name: Download PACKAGE_VERSION_FRONTEND Artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: PACKAGE_VERSION_FRONTEND
-          path: .
-
-      - name: Read PACKAGE_VERSION_FRONTEND
-        id: read_package_version
-        run: |
-          PACKAGE_VERSION_FRONTEND=$(cat PACKAGE_VERSION_FRONTEND)
-          echo "PACKAGE_VERSION_FRONTEND=$PACKAGE_VERSION_FRONTEND" >> $GITHUB_ENV
-
-      - name: Pull image from registry
-        run: docker pull registry.digitalocean.com/kephalosk/personal-finance-app:${{ env.PACKAGE_VERSION_FRONTEND }}
-
-      - name: Run image from registry
-        run: docker run -d -p 5173:80 registry.digitalocean.com/kephalosk/personal-finance-app:${{ env.PACKAGE_VERSION_FRONTEND }}
-
-      - name: Run Playwright tests
-        run: |
-          cd frontend
-          npx playwright test ui-tests/gui-tests
-
-      - name: Create Artifact for Playwright report
-        uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: playwright-report-integration
-          path: frontend/ui-tests/gui-tests
-          retention-days: 30
-
-  create-new-vrts:
-    timeout-minutes: 60
-    runs-on: ubuntu-latest
-
-    needs: frontend-gui-tests
-    if: needs.frontend-gui-tests.result == 'failure'
-
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: lts/*
-
-      - name: Install dependencies
-        run: |
-          cd frontend
-          npm ci
-
-      - name: Install Playwright Browsers
-        run: |
-          cd frontend
-          npx playwright install --with-deps
-
-      - name: Install doctl
-        uses: digitalocean/action-doctl@v2
-        with:
-          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
-
-      - name: Log in to DigitalOcean Container Registry with short-lived credentials
-        run: doctl registry login --expiry-seconds 1200
-
-      - name: Download PACKAGE_VERSION_FRONTEND Artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: PACKAGE_VERSION_FRONTEND
-          path: .
-
-      - name: Read PACKAGE_VERSION_FRONTEND
-        id: read_package_version
-        run: |
-          PACKAGE_VERSION_FRONTEND=$(cat PACKAGE_VERSION_FRONTEND)
-          echo "PACKAGE_VERSION_FRONTEND=$PACKAGE_VERSION_FRONTEND" >> $GITHUB_ENV
-
-      - name: Pull image from registry
-        run: docker pull registry.digitalocean.com/kephalosk/personal-finance-app:${{ env.PACKAGE_VERSION_FRONTEND }}
-
-      - name: Run image from registry
-        run: docker run -d -p 5173:80 registry.digitalocean.com/kephalosk/personal-finance-app:${{ env.PACKAGE_VERSION_FRONTEND }}
-
-      - name: Run Playwright tests
-        run: |
-          cd frontend
-          npx playwright test ui-tests/gui-tests --update-snapshots
-
-      - name: Create Artifact for new vrt screenshots
-        uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: new-vrts
-          path: frontend/ui-tests/gui-tests
-          retention-days: 30
+  ui-tests:
+    uses: ./.github/workflows/stage7_ui-tests.yml
+    needs: linting
+    secrets: inherit
           
   frontend-deploy:
     runs-on: ubuntu-latest
