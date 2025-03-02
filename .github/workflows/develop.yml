@@ -538,12 +538,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-#      - name: Set up Node.js
-#        uses: actions/setup-node@v4
-#        with:
-#          node-version: 18
-
-      - name: Install Dependencies
+      - name: Install Frontend Dependencies
         run: |
           cd frontend
           npm install
@@ -551,6 +546,16 @@ jobs:
       - name: Run ESLint
         run: |
           cd frontend
+          npx eslint .
+
+      - name: Install Backend Dependencies
+        run: |
+          cd backend
+          npm install
+
+      - name: Run ESLint
+        run: |
+          cd backend
           npx eslint .
 
   frontend-e2e-tests:
