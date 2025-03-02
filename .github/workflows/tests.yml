@@ -6,9 +6,6 @@ jobs:
   frontend-unit:
     runs-on: ubuntu-latest
 
-    outputs:
-      result: ${{ job.status }}
-
     steps:
       - name: Checkout master
         uses: actions/checkout@v4
@@ -26,9 +23,6 @@ jobs:
   backend-unit:
     runs-on: ubuntu-latest
 
-    outputs:
-      result: ${{ job.status }}
-
     steps:
       - name: Checkout master
         uses: actions/checkout@v4
@@ -45,9 +39,6 @@ jobs:
 
   backend-integration:
     runs-on: ubuntu-latest
-
-    outputs:
-      result: ${{ job.status }}
 
     steps:
       - name: Checkout master
