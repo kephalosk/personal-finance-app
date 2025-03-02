@@ -16,7 +16,7 @@ jobs:
   tests:
     uses: ./.github/workflows/tests.yml
     needs: versioning
-    secrets: inherit
+#    secrets: inherit
 
   build:
     uses: ./.github/workflows/build.yml
@@ -479,16 +479,13 @@ jobs:
           path: frontend/ui-tests/gui-tests
           retention-days: 30
 
-  send-notification:
+  send-notification-success:
     runs-on: ubuntu-latest
 
-#    needs:
-#      - frontend-gui-tests
-#      - frontend-e2e-tests
     needs:
-      - versioning
-      - tests
-    if: needs.versioning.result == 'success' && needs.tests.result == 'success'
+      - frontend-gui-tests
+      - frontend-e2e-tests
+    if: needs.frontend-gui-tests.result == 'success' && needs.frontend-e2e-tests.result == 'success'
 
     steps:
       - name: Send Email via SendGrid
@@ -509,3 +506,35 @@ jobs:
 
             Repository: github.com/kephalosk/personal-finance-app
             Action Logs: github.com/kephalosk/personal-finance-app/actions
+
+  send-notification-failure:
+    runs-on: ubuntu-latest
+
+#    needs:
+#      - frontend-gui-tests
+#      - frontend-e2e-tests
+    needs:
+      - versioning
+      - tests
+    if: needs.versioning.result == 'failure' || needs.tests.result == 'failure'
+
+    steps:
+      - name: Send Email via SendGrid
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.sendgrid.net
+          server_port: 587
+          username: apikey
+          password: ${{ secrets.SENDGRID_API_KEY }}
+          from: ${{ secrets.EMAIL_FROM }}
+          to: ${{ secrets.EMAIL_TO }}
+          subject: "CI/CD develop - Failure - philippkraatz.com - Notification"
+          body: |
+            Pipeline abgebrochen für Repository **${{ github.repository }}**! 🎉
+
+            Commit: ${{ github.event.head_commit.message }}
+            Autor: ${{ github.event.head_commit.author.name }}
+
+            Repository: github.com/kephalosk/personal-finance-app
+            Action Logs: github.com/kephalosk/personal-finance-app/actions
+
