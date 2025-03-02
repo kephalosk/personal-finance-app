@@ -473,43 +473,47 @@ jobs:
   codeql-scan:
     runs-on: ubuntu-latest
 
-    needs: [ backend-trivy-scan, backend-grype-scan, frontend-trivy-scan, frontend-grype-scan ]
+    needs: [backend-trivy-scan, backend-grype-scan, frontend-trivy-scan, frontend-grype-scan]
 
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Install CodeQL CLI
-        run: |
-          wget https://github.com/github/codeql-cli-binaries/releases/latest/download/codeql-linux64.zip
-          unzip codeql-linux64.zip -d codeql
-          echo "$PWD/codeql" >> $GITHUB_PATH
-
-      - name: Create CodeQL Database for JavaScript and TypeScript
-        run: |
-          codeql database create codeql-db --language=javascript --source-root=.
-
-      - name: Analyze with CodeQL
-        run: |
-          codeql database analyze codeql-db --format=sarifv2.1.0 --output=codeql-results.sarif
-
-      - name: Upload CodeQL Results
-        uses: actions/upload-artifact@v4
+      - name: Set up CodeQL
+        uses: github/codeql-action/init@v3
         with:
-          name: codeql-results
-          path: codeql-results.sarif
-          retention-days: 7
+          languages: 'javascript,typescript'
+          build-mode: 'none'
 
-      - name: Upload SARIF to GitHub Security Tab
-        uses: github/codeql-action/upload-sarif@v3
+      - name: Finalize CodeQL Database and Upload Results
+        uses: github/codeql-action/analyze@v3
         with:
-          sarif_file: codeql-results.sarif
+          output: './results'
+          upload: 'always'
+          upload-database: 'true'
+          wait-for-processing: 'true'
+
+  gitleaks-scan:
+    runs-on: ubuntu-latest
+
+    needs: [backend-trivy-scan, backend-grype-scan, frontend-trivy-scan, frontend-grype-scan]
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Analyze with Gitleaks
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   frontend-e2e-tests:
     timeout-minutes: 60
     runs-on: ubuntu-latest
 
-    needs: codeql-scan
+    needs: [codeql-scan, gitleaks-scan]
 
     steps:
       - uses: actions/checkout@v4
@@ -569,7 +573,7 @@ jobs:
     timeout-minutes: 60
     runs-on: ubuntu-latest
 
-    needs: codeql-scan
+    needs: [codeql-scan, gitleaks-scan]
 
     steps:
       - uses: actions/checkout@v4
@@ -631,7 +635,7 @@ jobs:
     runs-on: ubuntu-latest
 
     needs: frontend-gui-tests
-    if: failure()
+    if: needs.frontend-gui-tests.result == 'failure'
 
     steps:
       - uses: actions/checkout@v4
