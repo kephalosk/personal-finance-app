@@ -1,4 +1,4 @@
-name: test and build
+name: unit tests and build
 
 on:
   push:
@@ -6,7 +6,6 @@ on:
       - '*'
 
 jobs:
-
   frontend-unit-tests:
     runs-on: ubuntu-latest
 
