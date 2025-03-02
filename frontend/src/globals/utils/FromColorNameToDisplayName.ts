@@ -1,5 +1,4 @@
 import { ColorNameEnum } from '../../model/enum/ColorNameEnum';
-import { ColorCodeEnum } from '../../model/enum/ColorCodeEnum';
 import { ColorDisplayNameEnum } from '../../model/enum/ColorDisplayNameEnum';
 
 export function fromColorNameToDisplayName(colorName: string): ColorDisplayNameEnum {
