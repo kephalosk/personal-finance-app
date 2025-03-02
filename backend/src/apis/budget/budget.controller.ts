@@ -53,7 +53,9 @@ export class BudgetController {
         );
       }
       throw new InternalServerErrorException(
-        `Error while retrieving budgets from database: ${getErrorMessage(error)}`,
+        `Error while retrieving budgets from database: ${getErrorMessage(
+          error,
+        )}`,
       );
     }
   }
