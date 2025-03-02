@@ -544,7 +544,9 @@ jobs:
           node-version: 18
 
       - name: Install Dependencies
-        run: npm install
+        run: |
+          cd frontend
+          npm install
 
       - name: Run ESLint
         run: npx eslint . --ext .ts,.tsx
