@@ -551,7 +551,7 @@ jobs:
       - name: Run ESLint
         run: |
           cd frontend
-          npx eslint . --ext .ts,.tsx
+          npx eslint .
 
   frontend-e2e-tests:
     timeout-minutes: 60
