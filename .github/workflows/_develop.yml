@@ -13,40 +13,40 @@ jobs:
   versioning:
     uses: ./.github/workflows/stage1_versioning.yml
 
-  tests:
-    uses: ./.github/workflows/stage2_tests.yml
+  testing:
+    uses: ./.github/workflows/stage2_testing.yml
     needs: versioning
     secrets: inherit
 
-  build:
-    uses: ./.github/workflows/stage3_build.yml
-    needs: tests
+  building:
+    uses: ./.github/workflows/stage3_building.yml
+    needs: testing
     secrets: inherit
 
-  image-scans:
-    uses: ./.github/workflows/stage4_image-scans.yml
-    needs: build
+  image-analyzing:
+    uses: ./.github/workflows/stage4_image-analyzing.yml
+    needs: building
     secrets: inherit
 
-  code-scans:
-    uses: ./.github/workflows/stage5_code-scans.yml
-    needs: image-scans
+  code-analyzing:
+    uses: ./.github/workflows/stage5_code-analyzing.yml
+    needs: image-analyzing
     secrets: inherit
 
   linting2:
     uses: ./.github/workflows/stage6_linting.yml
-    needs: code-scans
+    needs: code-analyzing
     secrets: inherit
 
-  ui-tests:
-    uses: ./.github/workflows/stage7_ui-tests.yml
+  ui-testing:
+    uses: ./.github/workflows/stage7_ui-testing.yml
     needs: linting2
     secrets: inherit
 
   send-notification-success:
     runs-on: ubuntu-latest
 
-    needs: ui-tests
+    needs: ui-testing
 
     steps:
       - name: Send Email via SendGrid
@@ -71,8 +71,8 @@ jobs:
   send-notification-failure:
     runs-on: ubuntu-latest
 
-    needs: ui-tests
-    if: always() && needs.ui-tests.result == 'failure'
+    needs: ui-testing
+    if: always() && needs.ui-testing.result == 'failure'
 
     steps:
       - name: Send Email via SendGrid
