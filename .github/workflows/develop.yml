@@ -5,6 +5,9 @@ on:
     branches:
       - 'develop'
 
+permissions:
+  security-events: write
+
 jobs:
   frontend-versioning:
     runs-on: ubuntu-latest
@@ -501,7 +504,7 @@ jobs:
           # Optional: Gib an, welche Sprachen du analysieren möchtest
           languages: 'javascript,typescript'
           # Optional: Build-Modus, wenn du manuelle Build-Schritte hast
-          build-mode: 'autobuild'
+          build-mode: 'none'
           # Optional: Registriere zusätzliche CodeQL-Pakete, falls benötigt
 #          packs: 'javascript-queries'
 
