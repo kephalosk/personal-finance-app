@@ -1,9 +1,9 @@
-name: versioning, unit/integration tests, build, image scans, code scans, linting and ui tests
+name: versioning, unit/integration tests, build, image scans, code scans, linting, ui tests and deploy
 
 on:
   push:
-    branches:
-      - 'develop'
+    branches: 
+      - 'master'
 
 permissions:
   security-events: write
@@ -11,142 +11,16 @@ permissions:
 
 jobs:
   versioning:
-    uses: ./.github/workflows/jobs/versioning.yml
+    uses: ./.github/workflows/versioning.yml
 
-#  backend-versioning:
-#    uses: ./.github/workflows/jobs/versioning.yml
-
-  frontend-unit-tests:
-    runs-on: ubuntu-latest
-
+  tests:
+    uses: ./.github/workflows/tests.yml
     needs: versioning
-
-    steps:
-      - name: Checkout master
-        uses: actions/checkout@v4
-
-      - name: Install Dependencies
-        run: |
-          cd frontend
-          npm install
-
-      - name: Run Frontend Unit Tests
-        run: |
-          cd frontend
-          npm run test
-
-  backend-unit-tests:
-    runs-on: ubuntu-latest
-
-    needs: versioning
-
-    steps:
-      - name: Checkout master
-        uses: actions/checkout@v4
-
-      - name: Install Dependencies
-        run: |
-          cd backend
-          npm install
-
-      - name: Run Backend Unit Tests
-        run: |
-          cd backend
-          npm run test
-
-  backend-integration-tests:
-    runs-on: ubuntu-latest
-
-    needs: versioning
-
-    steps:
-      - name: Checkout master
-        uses: actions/checkout@v4
-
-      - name: Install Dependencies
-        run: |
-          cd backend
-          npm install
-
-      - name: install curl
-        run: sudo apt update && sudo apt install curl
-
-      - name: Get Runner IP
-        run: |
-          export RUNNER_IP=$(curl -4 -s ifconfig.me)
-          echo "RUNNER_IP=$RUNNER_IP" >> $GITHUB_ENV
-          echo "Runner IP: $RUNNER_IP"
-
-      - name: Get existing firewall rules from DigitalOcean
-        id: get_firewall
-        run: |
-          RESPONSE=$(curl -s -X GET \
-            -H "Authorization: Bearer ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}" \
-            https://api.digitalocean.com/v2/databases/6652f7a3-beaa-416a-8bbd-e44c084b121d/firewall)
-          echo "RESPONSE=$RESPONSE" >> $GITHUB_ENV
-
-      - name: Add new IP to firewall rules
-        id: add_rule
-        run: |
-          # Parse existing rules from the response
-          EXISTING_RULES=$(echo $RESPONSE | jq '.rules')
-          
-          # Create new rule
-          NEW_RULE=$(jq -n --arg ip "${{ env.RUNNER_IP }}" '{"type": "ip_addr", "value": $ip, "database": "all"}')
-
-          # Combine existing rules and the new rule
-          UPDATED_RULES=$(echo $EXISTING_RULES | jq ". + [${NEW_RULE}]")
-
-          # Update firewall with the new rules
-          curl -X PUT \
-            -H "Authorization: Bearer ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}" \
-            -H "Content-Type: application/json" \
-            -d '{"rules": '"${UPDATED_RULES}"'}' \
-            https://api.digitalocean.com/v2/databases/6652f7a3-beaa-416a-8bbd-e44c084b121d/firewall
-        env:
-          RUNNER_IP: ${{ env.RUNNER_IP }}
-
-      - name: Run Backend E2E Tests
-        env:
-          DATABASE_HOST: ${{ secrets.DATABASE_HOST }}
-          DATABASE_PORT: ${{ secrets.DATABASE_PORT }}
-          DATABASE_USERNAME: ${{ secrets.DATABASE_USERNAME }}
-          DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
-          DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
-        run: |
-          cd backend
-          npm run test:e2e
-
-      - name: Get existing firewall rules from DigitalOcean
-        id: get_firewall_after
-        run: |
-          NEWRESPONSE=$(curl -s -X GET \
-            -H "Authorization: Bearer ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}" \
-            https://api.digitalocean.com/v2/databases/6652f7a3-beaa-416a-8bbd-e44c084b121d/firewall)
-          echo "NEWRESPONSE=$NEWRESPONSE" >> $GITHUB_ENV
-
-      - name: Remove Runner IP from firewall rules
-        id: remove_rule
-        run: |
-          # Parse existing rules from the response
-          EXISTING_RULES=$(echo $NEWRESPONSE | jq '.rules')
-          
-          # Filter out the rule with the Runner IP
-          UPDATED_RULES=$(echo $EXISTING_RULES | jq 'map(select(.value != "${{ env.RUNNER_IP }}"))')
-
-          # Update firewall with the new rules
-          curl -X PUT \
-            -H "Authorization: Bearer ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}" \
-            -H "Content-Type: application/json" \
-            -d '{"rules": '"${UPDATED_RULES}"'}' \
-            https://api.digitalocean.com/v2/databases/6652f7a3-beaa-416a-8bbd-e44c084b121d/firewall
-        env:
-          RUNNER_IP: ${{ env.RUNNER_IP }}
 
   frontend-build:
     runs-on: ubuntu-latest
 
-    needs: frontend-unit-tests
+    needs: tests
 
     steps:
       - name: Checkout master
@@ -178,20 +52,10 @@ jobs:
       - name: Push image to DigitalOcean Container Registry
         run: docker push registry.digitalocean.com/kephalosk/personal-finance-app:${{ env.PACKAGE_VERSION_FRONTEND }}
 
-      - name: Set CURRENT_IAT_FRONTEND_SERVICE_VERSION in GitHub Repository Variables
-        run: |
-          curl -X PATCH \
-            -H "Authorization: Bearer ${{ secrets.VARIABLE_GITHUB_TOKEN }}" \
-            -H "Accept: application/vnd.github+json" \
-            -d '{"name": "CURRENT_IAT_FRONTEND_SERVICE_VERSION", "value": "${{ env.PACKAGE_VERSION_FRONTEND }}"}' \
-            https://api.github.com/repos/${{ github.repository }}/actions/variables/CURRENT_IAT_FRONTEND_SERVICE_VERSION
-
   backend-build:
     runs-on: ubuntu-latest
 
-    needs:
-      - backend-unit-tests
-      - backend-integration-tests
+    needs: tests
 
     steps:
       - name: Checkout master
@@ -222,14 +86,6 @@ jobs:
 
       - name: Push image to DigitalOcean Container Registry
         run: docker push registry.digitalocean.com/kephalosk/nestjs-backend:${{ env.PACKAGE_VERSION_BACKEND }}
-
-      - name: Set CURRENT_IAT_BACKEND_SERVICE_VERSION in GitHub Repository Variables
-        run: |
-          curl -X PATCH \
-            -H "Authorization: Bearer ${{ secrets.VARIABLE_GITHUB_TOKEN }}" \
-            -H "Accept: application/vnd.github+json" \
-            -d '{"name": "CURRENT_IAT_BACKEND_SERVICE_VERSION", "value": "${{ env.PACKAGE_VERSION_BACKEND }}"}' \
-            https://api.github.com/repos/${{ github.repository }}/actions/variables/CURRENT_IAT_BACKEND_SERVICE_VERSION
 
   frontend-trivy-scan:
     runs-on: ubuntu-latest
@@ -686,32 +542,103 @@ jobs:
           name: new-vrts
           path: frontend/ui-tests/gui-tests
           retention-days: 30
+          
+  frontend-deploy:
+    runs-on: ubuntu-latest
+    
+    needs: [frontend-e2e-tests, frontend-gui-tests, backend-eslint-scan]
 
-#  send-notification:
-#    runs-on: ubuntu-latest
-#
-##    needs:
-##      - frontend-gui-tests
-##      - frontend-e2e-tests
-##    if: needs.frontend-gui-tests.result == 'success' && needs.frontend-e2e-tests.result == 'success'
-#
-#    steps:
-#      - name: Send Email via SendGrid
-#        uses: dawidd6/action-send-mail@v3
-#        with:
-#          server_address: smtp.sendgrid.net
-#          server_port: 587
-#          username: apikey
-#          password: ${{ secrets.SENDGRID_API_KEY }}
-#          from: ${{ secrets.EMAIL_FROM }}
-#          to: ${{ secrets.EMAIL_TO }}
-#          subject: "CI/CD develop - Success - philippkraatz.com - Notification"
-#          body: |
-#            Pipeline erfolgreich durchgelaufen für Repository **${{ github.repository }}**! 🎉
-#
-#            Commit: ${{ github.event.head_commit.message }}
-#            Autor: ${{ github.event.head_commit.author.name }}
-#
-#            🎯 Repository: [${{ github.repository }}](https://github.com/${{ github.repository }})
-#            🚀 Action Logs: [Hier ansehen](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
-#          content_type: text/plain
+    steps:
+      - name: Checkout master
+        uses: actions/checkout@v4
+  
+      - name: Install doctl
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+  
+      - name: Log in to DigitalOcean Container Registry with short-lived credentials
+        run: doctl registry login --expiry-seconds 1200
+  
+      - name: Renew cluster’s certificate
+        run: doctl kubernetes cluster kubeconfig save ${{ secrets.CLUSTER_ID }}
+
+      - name: Download PACKAGE_VERSION_FRONTEND Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: PACKAGE_VERSION_FRONTEND
+          path: .
+  
+      - name: Read PACKAGE_VERSION_FRONTEND
+        id: read_package_version
+        run: |
+          PACKAGE_VERSION_FRONTEND=$(cat PACKAGE_VERSION_FRONTEND)
+          echo "PACKAGE_VERSION_FRONTEND=$PACKAGE_VERSION_FRONTEND" >> $GITHUB_ENV
+
+      - name: Deploy to DigitalOcean Kubernetes
+        run: |
+          helm upgrade personal-finance-app ./deployment/helm/personal-finance-app --namespace default --set serviceVersion=${{ env.PACKAGE_VERSION_FRONTEND }} --wait
+
+      - name: restart Pods
+        run: kubectl -n default rollout restart deploy
+  
+      - name: Verify deployment
+        run: kubectl rollout status deployment/personal-finance-app
+
+      - name: Set CURRENT_PROD_FRONTEND_SERVICE_VERSION in GitHub Repository Variables
+        run: |
+          curl -X PATCH \
+            -H "Authorization: Bearer ${{ secrets.VARIABLE_GITHUB_TOKEN }}" \
+            -H "Accept: application/vnd.github+json" \
+            -d '{"name": "CURRENT_PROD_FRONTEND_SERVICE_VERSION", "value": "${{ env.PACKAGE_VERSION_FRONTEND }}"}' \
+            https://api.github.com/repos/${{ github.repository }}/actions/variables/CURRENT_PROD_FRONTEND_SERVICE_VERSION
+
+  backend-deploy:
+    runs-on: ubuntu-latest
+
+    needs: [frontend-e2e-tests, frontend-gui-tests, backend-eslint-scan]
+
+    steps:
+      - name: Checkout master
+        uses: actions/checkout@v4
+
+      - name: Install doctl
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+
+      - name: Log in to DigitalOcean Container Registry with short-lived credentials
+        run: doctl registry login --expiry-seconds 1200
+
+      - name: Renew cluster’s certificate
+        run: doctl kubernetes cluster kubeconfig save ${{ secrets.CLUSTER_ID }}
+
+      - name: Download PACKAGE_VERSION_BACKEND Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: PACKAGE_VERSION_BACKEND
+          path: .
+
+      - name: Read PACKAGE_VERSION_BACKEND
+        id: read_package_version
+        run: |
+          PACKAGE_VERSION_BACKEND=$(cat PACKAGE_VERSION_BACKEND)
+          echo "PACKAGE_VERSION_BACKEND=$PACKAGE_VERSION_BACKEND" >> $GITHUB_ENV
+
+      - name: Deploy to DigitalOcean Kubernetes
+        run: |
+          helm upgrade nestjs-backend ./deployment/helm/nestjs-backend --namespace default --set serviceVersion=${{ env.PACKAGE_VERSION_BACKEND }} --wait
+
+      - name: restart Pods
+        run: kubectl -n default rollout restart deploy
+
+      - name: Verify deployment
+        run: kubectl rollout status deployment/nestjs-backend
+
+      - name: Set CURRENT_PROD_BACKEND_SERVICE_VERSION in GitHub Repository Variables
+        run: |
+          curl -X PATCH \
+            -H "Authorization: Bearer ${{ secrets.VARIABLE_GITHUB_TOKEN }}" \
+            -H "Accept: application/vnd.github+json" \
+            -d '{"name": "CURRENT_PROD_BACKEND_SERVICE_VERSION", "value": "${{ env.PACKAGE_VERSION_BACKEND }}"}' \
+            https://api.github.com/repos/${{ github.repository }}/actions/variables/CURRENT_PROD_BACKEND_SERVICE_VERSION
