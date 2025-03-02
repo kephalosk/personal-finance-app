@@ -1,5 +1,4 @@
 import { Route } from 'playwright';
-import { ColorNameEnum } from '../../../src/model/enum/ColorNameEnum';
 
 const getPots = async (route: Route) => {
   const mockResponse = [
