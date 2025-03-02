@@ -1,0 +1,101 @@
+name: deploying
+
+on:
+  workflow_call:
+
+jobs:
+  frontend-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout master
+        uses: actions/checkout@v4
+
+      - name: Install doctl
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+
+      - name: Log in to DigitalOcean Container Registry with short-lived credentials
+        run: doctl registry login --expiry-seconds 1200
+
+      - name: Renew cluster’s certificate
+        run: doctl kubernetes cluster kubeconfig save ${{ secrets.CLUSTER_ID }}
+
+      - name: Download PACKAGE_VERSION_FRONTEND Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: PACKAGE_VERSION_FRONTEND
+          path: .
+
+      - name: Read PACKAGE_VERSION_FRONTEND
+        id: read_package_version
+        run: |
+          PACKAGE_VERSION_FRONTEND=$(cat PACKAGE_VERSION_FRONTEND)
+          echo "PACKAGE_VERSION_FRONTEND=$PACKAGE_VERSION_FRONTEND" >> $GITHUB_ENV
+
+      - name: Deploy to DigitalOcean Kubernetes
+        run: |
+          helm upgrade personal-finance-app ./deployment/helm/personal-finance-app --namespace default --set serviceVersion=${{ env.PACKAGE_VERSION_FRONTEND }} --wait
+
+      - name: restart Pods
+        run: kubectl -n default rollout restart deploy
+
+      - name: Verify deployment
+        run: kubectl rollout status deployment/personal-finance-app
+
+      - name: Set CURRENT_PROD_FRONTEND_SERVICE_VERSION in GitHub Repository Variables
+        run: |
+          curl -X PATCH \
+            -H "Authorization: Bearer ${{ secrets.VARIABLE_GITHUB_TOKEN }}" \
+            -H "Accept: application/vnd.github+json" \
+            -d '{"name": "CURRENT_PROD_FRONTEND_SERVICE_VERSION", "value": "${{ env.PACKAGE_VERSION_FRONTEND }}"}' \
+            https://api.github.com/repos/${{ github.repository }}/actions/variables/CURRENT_PROD_FRONTEND_SERVICE_VERSION
+
+  backend-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout master
+        uses: actions/checkout@v4
+
+      - name: Install doctl
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+
+      - name: Log in to DigitalOcean Container Registry with short-lived credentials
+        run: doctl registry login --expiry-seconds 1200
+
+      - name: Renew cluster’s certificate
+        run: doctl kubernetes cluster kubeconfig save ${{ secrets.CLUSTER_ID }}
+
+      - name: Download PACKAGE_VERSION_BACKEND Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: PACKAGE_VERSION_BACKEND
+          path: .
+
+      - name: Read PACKAGE_VERSION_BACKEND
+        id: read_package_version
+        run: |
+          PACKAGE_VERSION_BACKEND=$(cat PACKAGE_VERSION_BACKEND)
+          echo "PACKAGE_VERSION_BACKEND=$PACKAGE_VERSION_BACKEND" >> $GITHUB_ENV
+
+      - name: Deploy to DigitalOcean Kubernetes
+        run: |
+          helm upgrade nestjs-backend ./deployment/helm/nestjs-backend --namespace default --set serviceVersion=${{ env.PACKAGE_VERSION_BACKEND }} --wait
+
+      - name: restart Pods
+        run: kubectl -n default rollout restart deploy
+
+      - name: Verify deployment
+        run: kubectl rollout status deployment/nestjs-backend
+
+      - name: Set CURRENT_PROD_BACKEND_SERVICE_VERSION in GitHub Repository Variables
+        run: |
+          curl -X PATCH \
+            -H "Authorization: Bearer ${{ secrets.VARIABLE_GITHUB_TOKEN }}" \
+            -H "Accept: application/vnd.github+json" \
+            -d '{"name": "CURRENT_PROD_BACKEND_SERVICE_VERSION", "value": "${{ env.PACKAGE_VERSION_BACKEND }}"}' \
+            https://api.github.com/repos/${{ github.repository }}/actions/variables/CURRENT_PROD_BACKEND_SERVICE_VERSION
