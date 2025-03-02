@@ -22,7 +22,7 @@ export class BudgetService {
   }
 
   mapBudgetEntities(budgets: Budgets[]): APIBudgetDTO[] {
-    let mappedBudgets: APIBudgetDTO[] = [];
+    const mappedBudgets: APIBudgetDTO[] = [];
     budgets.forEach((budget: Budgets): void => {
       const newBudget: APIBudgetDTO = {
         category: budget.category,

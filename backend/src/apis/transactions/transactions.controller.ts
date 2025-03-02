@@ -48,7 +48,9 @@ export class TransactionsController {
         );
       }
       throw new InternalServerErrorException(
-        `Error while retrieving transactions from database: ${getErrorMessage(error)}`,
+        `Error while retrieving transactions from database: ${getErrorMessage(
+          error,
+        )}`,
       );
     }
   }

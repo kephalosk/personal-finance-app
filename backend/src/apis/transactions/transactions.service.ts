@@ -25,7 +25,7 @@ export class TransactionsService {
   private mapTransactionsEntity(
     transactions: Transactions[],
   ): APITransactionDTO[] {
-    let mappedTransactions: APITransactionDTO[] = [];
+    const mappedTransactions: APITransactionDTO[] = [];
     transactions.forEach((transaction: Transactions) => {
       const newTransaction: APITransactionDTO = {
         avatar: transaction.avatar,
