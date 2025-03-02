@@ -485,7 +485,10 @@ jobs:
 #    needs:
 #      - frontend-gui-tests
 #      - frontend-e2e-tests
-#    if: needs.frontend-gui-tests.result == 'success' && needs.frontend-e2e-tests.result == 'success'
+    needs:
+      - versioning
+      - tests
+    if: needs.versioning.result == 'success' && needs.tests.result == 'success'
 
     steps:
       - name: Send Email via SendGrid
