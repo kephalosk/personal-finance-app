@@ -501,6 +501,10 @@ jobs:
           unzip codeql-linux64.zip -d codeql
           echo "$PWD/codeql/codeql" >> $GITHUB_PATH
 
+      - name: Install JavaScript Query Pack
+        run: |
+          codeql pack install javascript
+
       - name: Create CodeQL Database for JavaScript and TypeScript
         run: |
           codeql database create codeql-db --language=javascript --source-root=.
@@ -542,7 +546,7 @@ jobs:
     timeout-minutes: 60
     runs-on: ubuntu-latest
 
-    needs: codeql-scan
+    needs: [codeql-scan, gitleaks-scan]
 
     steps:
       - uses: actions/checkout@v4
@@ -602,7 +606,7 @@ jobs:
     timeout-minutes: 60
     runs-on: ubuntu-latest
 
-    needs: codeql-scan
+    needs: [codeql-scan, gitleaks-scan]
 
     steps:
       - uses: actions/checkout@v4
