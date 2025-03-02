@@ -538,21 +538,20 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18
+#      - name: Set up Node.js
+#        uses: actions/setup-node@v4
+#        with:
+#          node-version: 18
 
       - name: Install Dependencies
         run: |
           cd frontend
           npm install
 
-      - name: list file
-        run: ls
-
       - name: Run ESLint
-        run: npx eslint . --ext .ts,.tsx
+        run: |
+          cd frontend
+          npx eslint . --ext .ts,.tsx
 
   frontend-e2e-tests:
     timeout-minutes: 60
