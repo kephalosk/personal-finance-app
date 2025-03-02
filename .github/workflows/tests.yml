@@ -1,0 +1,125 @@
+name: tests
+
+on: workflow_call
+
+jobs:
+  frontend-unit:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout master
+        uses: actions/checkout@v4
+
+      - name: Install Dependencies
+        run: |
+          cd frontend
+          npm install
+
+      - name: Run Frontend Unit Tests
+        run: |
+          cd frontend
+          npm run test
+
+  backend-unit:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout master
+        uses: actions/checkout@v4
+
+      - name: Install Dependencies
+        run: |
+          cd backend
+          npm install
+
+      - name: Run Backend Unit Tests
+        run: |
+          cd backend
+          npm run test
+
+  backend-integration:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout master
+        uses: actions/checkout@v4
+
+      - name: Install Dependencies
+        run: |
+          cd backend
+          npm install
+
+      - name: install curl
+        run: sudo apt update && sudo apt install curl
+
+      - name: Get Runner IP
+        run: |
+          export RUNNER_IP=$(curl -4 -s ifconfig.me)
+          echo "RUNNER_IP=$RUNNER_IP" >> $GITHUB_ENV
+          echo "Runner IP: $RUNNER_IP"
+
+      - name: Get existing firewall rules from DigitalOcean
+        id: get_firewall
+        run: |
+          RESPONSE=$(curl -s -X GET \
+            -H "Authorization: Bearer ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}" \
+            https://api.digitalocean.com/v2/databases/6652f7a3-beaa-416a-8bbd-e44c084b121d/firewall)
+          echo "RESPONSE=$RESPONSE" >> $GITHUB_ENV
+
+      - name: Add new IP to firewall rules
+        id: add_rule
+        run: |
+          # Parse existing rules from the response
+          EXISTING_RULES=$(echo $RESPONSE | jq '.rules')
+
+          # Create new rule
+          NEW_RULE=$(jq -n --arg ip "${{ env.RUNNER_IP }}" '{"type": "ip_addr", "value": $ip, "database": "all"}')
+
+          # Combine existing rules and the new rule
+          UPDATED_RULES=$(echo $EXISTING_RULES | jq ". + [${NEW_RULE}]")
+
+          # Update firewall with the new rules
+          curl -X PUT \
+            -H "Authorization: Bearer ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}" \
+            -H "Content-Type: application/json" \
+            -d '{"rules": '"${UPDATED_RULES}"'}' \
+            https://api.digitalocean.com/v2/databases/6652f7a3-beaa-416a-8bbd-e44c084b121d/firewall
+        env:
+          RUNNER_IP: ${{ env.RUNNER_IP }}
+
+      - name: Run Backend E2E Tests
+        env:
+          DATABASE_HOST: ${{ secrets.DATABASE_HOST }}
+          DATABASE_PORT: ${{ secrets.DATABASE_PORT }}
+          DATABASE_USERNAME: ${{ secrets.DATABASE_USERNAME }}
+          DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
+          DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
+        run: |
+          cd backend
+          npm run test:e2e
+
+      - name: Get existing firewall rules from DigitalOcean
+        id: get_firewall_after
+        run: |
+          NEWRESPONSE=$(curl -s -X GET \
+            -H "Authorization: Bearer ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}" \
+            https://api.digitalocean.com/v2/databases/6652f7a3-beaa-416a-8bbd-e44c084b121d/firewall)
+          echo "NEWRESPONSE=$NEWRESPONSE" >> $GITHUB_ENV
+
+      - name: Remove Runner IP from firewall rules
+        id: remove_rule
+        run: |
+          # Parse existing rules from the response
+          EXISTING_RULES=$(echo $NEWRESPONSE | jq '.rules')
+
+          # Filter out the rule with the Runner IP
+          UPDATED_RULES=$(echo $EXISTING_RULES | jq 'map(select(.value != "${{ env.RUNNER_IP }}"))')
+
+          # Update firewall with the new rules
+          curl -X PUT \
+            -H "Authorization: Bearer ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}" \
+            -H "Content-Type: application/json" \
+            -d '{"rules": '"${UPDATED_RULES}"'}' \
+            https://api.digitalocean.com/v2/databases/6652f7a3-beaa-416a-8bbd-e44c084b121d/firewall
+        env:
+          RUNNER_IP: ${{ env.RUNNER_IP }}
