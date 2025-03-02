@@ -10,79 +10,16 @@ permissions:
   checks: write
 
 jobs:
-  frontend-versioning:
-    runs-on: ubuntu-latest
+  versioning:
+    uses: ./.github/workflows/jobs/versioning.yml
 
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
-
-      - name: Set Build Tag
-        id: build_tag
-        run: |
-          COMMIT_DATE=$(git show -s --format=%ct $GITHUB_SHA)
-          DATE_TAG=$(date -d "@$COMMIT_DATE" +%Y%m%d_%H%M%S)
-          SHORT_SHA=${GITHUB_SHA:0:7}
-          BUILD_TAG="${DATE_TAG}_${SHORT_SHA}_$(date +%Y%m%d_%H%M%S)"
-          echo "BUILD_TAG=$BUILD_TAG" >> $GITHUB_ENV
-
-      - name: Set Version Tag
-        id: version_tag
-        run: |
-          VERSION_TAG=$(jq -r '(.version | split(".") | del(.[2]) | join("."))' frontend/package.json)
-          echo "VERSION_TAG=$VERSION_TAG" >> $GITHUB_ENV
-
-      - name: Save Package Version
-        run: |
-          echo "${{ env.VERSION_TAG }}.${{ env.BUILD_TAG }}" > PACKAGE_VERSION_FRONTEND
-        shell: bash
-
-      - name: Upload Package Version as Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: PACKAGE_VERSION_FRONTEND
-          path: PACKAGE_VERSION_FRONTEND
-          retention-days: 7
-
-
-  backend-versioning:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
-
-      - name: Set Build Tag
-        id: build_tag
-        run: |
-          COMMIT_DATE=$(git show -s --format=%ct $GITHUB_SHA)
-          DATE_TAG=$(date -d "@$COMMIT_DATE" +%Y%m%d_%H%M%S)
-          SHORT_SHA=${GITHUB_SHA:0:7}
-          BUILD_TAG="${DATE_TAG}_${SHORT_SHA}_$(date +%Y%m%d_%H%M%S)"
-          echo "BUILD_TAG=$BUILD_TAG" >> $GITHUB_ENV
-
-      - name: Set Version Tag
-        id: version_tag
-        run: |
-          VERSION_TAG=$(jq -r '(.version | split(".") | del(.[2]) | join("."))' backend/package.json)
-          echo "VERSION_TAG=$VERSION_TAG" >> $GITHUB_ENV
-
-      - name: Save Package Version
-        run: |
-          echo "${{ env.VERSION_TAG }}.${{ env.BUILD_TAG }}" > PACKAGE_VERSION_BACKEND
-        shell: bash
-
-      - name: Upload Package Version as Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: PACKAGE_VERSION_BACKEND
-          path: PACKAGE_VERSION_BACKEND
-          retention-days: 7
+#  backend-versioning:
+#    uses: ./.github/workflows/jobs/versioning.yml
 
   frontend-unit-tests:
     runs-on: ubuntu-latest
 
-    needs: frontend-versioning
+    needs: versioning
 
     steps:
       - name: Checkout master
@@ -101,7 +38,7 @@ jobs:
   backend-unit-tests:
     runs-on: ubuntu-latest
 
-    needs: backend-versioning
+    needs: versioning
 
     steps:
       - name: Checkout master
@@ -120,7 +57,7 @@ jobs:
   backend-integration-tests:
     runs-on: ubuntu-latest
 
-    needs: backend-versioning
+    needs: versioning
 
     steps:
       - name: Checkout master
@@ -300,7 +237,7 @@ jobs:
     needs: frontend-build
 
     continue-on-error: true
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -749,3 +686,32 @@ jobs:
           name: new-vrts
           path: frontend/ui-tests/gui-tests
           retention-days: 30
+
+#  send-notification:
+#    runs-on: ubuntu-latest
+#
+##    needs:
+##      - frontend-gui-tests
+##      - frontend-e2e-tests
+##    if: needs.frontend-gui-tests.result == 'success' && needs.frontend-e2e-tests.result == 'success'
+#
+#    steps:
+#      - name: Send Email via SendGrid
+#        uses: dawidd6/action-send-mail@v3
+#        with:
+#          server_address: smtp.sendgrid.net
+#          server_port: 587
+#          username: apikey
+#          password: ${{ secrets.SENDGRID_API_KEY }}
+#          from: ${{ secrets.EMAIL_FROM }}
+#          to: ${{ secrets.EMAIL_TO }}
+#          subject: "CI/CD develop - Success - philippkraatz.com - Notification"
+#          body: |
+#            Pipeline erfolgreich durchgelaufen für Repository **${{ github.repository }}**! 🎉
+#
+#            Commit: ${{ github.event.head_commit.message }}
+#            Autor: ${{ github.event.head_commit.author.name }}
+#
+#            🎯 Repository: [${{ github.repository }}](https://github.com/${{ github.repository }})
+#            🚀 Action Logs: [Hier ansehen](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
+#          content_type: text/plain

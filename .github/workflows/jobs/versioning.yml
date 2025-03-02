@@ -1,0 +1,74 @@
+name: versioning
+
+on:
+  workflow_call:
+
+jobs:
+  frontend:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set Build Tag
+        id: build_tag
+        run: |
+          COMMIT_DATE=$(git show -s --format=%ct $GITHUB_SHA)
+          DATE_TAG=$(date -d "@$COMMIT_DATE" +%Y%m%d_%H%M%S)
+          SHORT_SHA=${GITHUB_SHA:0:7}
+          BUILD_TAG="${DATE_TAG}_${SHORT_SHA}_$(date +%Y%m%d_%H%M%S)"
+          echo "BUILD_TAG=$BUILD_TAG" >> $GITHUB_ENV
+
+      - name: Set Version Tag
+        id: version_tag
+        run: |
+          VERSION_TAG=$(jq -r '(.version | split(".") | del(.[2]) | join("."))' frontend/package.json)
+          echo "VERSION_TAG=$VERSION_TAG" >> $GITHUB_ENV
+
+      - name: Save Package Version
+        run: |
+          echo "${{ env.VERSION_TAG }}.${{ env.BUILD_TAG }}" > PACKAGE_VERSION_FRONTEND
+        shell: bash
+
+      - name: Upload Package Version as Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: PACKAGE_VERSION_FRONTEND
+          path: PACKAGE_VERSION_FRONTEND
+          retention-days: 7
+
+
+  backend:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set Build Tag
+        id: build_tag
+        run: |
+          COMMIT_DATE=$(git show -s --format=%ct $GITHUB_SHA)
+          DATE_TAG=$(date -d "@$COMMIT_DATE" +%Y%m%d_%H%M%S)
+          SHORT_SHA=${GITHUB_SHA:0:7}
+          BUILD_TAG="${DATE_TAG}_${SHORT_SHA}_$(date +%Y%m%d_%H%M%S)"
+          echo "BUILD_TAG=$BUILD_TAG" >> $GITHUB_ENV
+
+      - name: Set Version Tag
+        id: version_tag
+        run: |
+          VERSION_TAG=$(jq -r '(.version | split(".") | del(.[2]) | join("."))' backend/package.json)
+          echo "VERSION_TAG=$VERSION_TAG" >> $GITHUB_ENV
+
+      - name: Save Package Version
+        run: |
+          echo "${{ env.VERSION_TAG }}.${{ env.BUILD_TAG }}" > PACKAGE_VERSION_BACKEND
+        shell: bash
+
+      - name: Upload Package Version as Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: PACKAGE_VERSION_BACKEND
+          path: PACKAGE_VERSION_BACKEND
+          retention-days: 7
