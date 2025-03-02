@@ -1,4 +1,4 @@
-name: version, test, build, push, scan and deploy
+name: versioning, unit tests, build, image scan, code scan, linting, ui tests and deploy
 
 on:
   push:
@@ -513,7 +513,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-  golangci-lint-scan:
+  eslint-scan:
     runs-on: ubuntu-latest
 
     needs: [ codeql-scan, gitleaks-scan ]
@@ -522,21 +522,22 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Setup Go
-        uses: actions/setup-go@v5
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
         with:
-          go-version: stable
+          node-version: 18
 
-      - name: Scan with Golangci-lint
-        uses: golangci/golangci-lint-action@v6
-        with:
-          version: v1.64
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Run ESLint
+        run: npx eslint . --ext .ts,.tsx
 
   frontend-e2e-tests:
     timeout-minutes: 60
     runs-on: ubuntu-latest
 
-    needs: golangci-lint-scan
+    needs: eslint-scan
 
     steps:
       - uses: actions/checkout@v4
@@ -596,7 +597,7 @@ jobs:
     timeout-minutes: 60
     runs-on: ubuntu-latest
 
-    needs: golangci-lint-scan
+    needs: eslint-scan
 
     steps:
       - uses: actions/checkout@v4
