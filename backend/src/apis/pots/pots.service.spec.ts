@@ -49,7 +49,7 @@ describe('PotsService', (): void => {
     oldName: 'Holiday',
   };
 
-  const newTotal: number = 1000;
+  const newTotal = 1000;
   const mockedPotTotalEntityMapped: APIPotTotalDTO = {
     potName: mockedPotsEntityMapped[0].name,
     newTotal,

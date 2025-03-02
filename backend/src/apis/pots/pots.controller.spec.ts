@@ -49,7 +49,7 @@ const mockedEditedPot: APIEditedPotDTO = {
   oldName: mockedPots[0].name,
 };
 
-const newTotal: number = 1000;
+const newTotal = 1000;
 const mockedPotTotal: APIPotTotalDTO = {
   potName: mockedPots[0].name,
   newTotal,

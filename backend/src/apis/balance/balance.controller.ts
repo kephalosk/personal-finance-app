@@ -50,7 +50,9 @@ export class BalanceController {
         );
       }
       throw new InternalServerErrorException(
-        `Error while retrieving balances from database: ${getErrorMessage(error)}`,
+        `Error while retrieving balances from database: ${getErrorMessage(
+          error,
+        )}`,
       );
     }
   }

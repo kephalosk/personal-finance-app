@@ -6,7 +6,7 @@ import { getRepositoryToken } from '@nestjs/typeorm';
 import { APIBalanceDTO } from '../../model/apis/APIBalanceDTO';
 import { NotFoundException, ServiceUnavailableException } from '@nestjs/common';
 
-jest.spyOn(console, 'error').mockImplementation(() => {});
+jest.spyOn(console, 'error').mockImplementation(() => null);
 
 describe('BalanceService', () => {
   let service: BalanceService;

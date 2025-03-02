@@ -4,7 +4,7 @@ import { getRepositoryToken } from '@nestjs/typeorm';
 import { AppService } from './app.service';
 import { Balance } from './model/entities/Balance';
 
-jest.spyOn(console, 'error').mockImplementation((): void => {});
+jest.spyOn(console, 'error').mockImplementation((): void => null);
 
 describe('AppService', (): void => {
   let service: AppService;

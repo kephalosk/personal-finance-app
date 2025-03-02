@@ -6,7 +6,7 @@ import { APITransactionDTO } from '../../model/apis/APITransactionDTO';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { NotFoundException, ServiceUnavailableException } from '@nestjs/common';
 
-jest.spyOn(console, 'error').mockImplementation((): void => {});
+jest.spyOn(console, 'error').mockImplementation((): void => null);
 
 describe('TransactionsService', (): void => {
   let service: TransactionsService;

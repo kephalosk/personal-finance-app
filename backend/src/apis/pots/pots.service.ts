@@ -24,7 +24,7 @@ export class PotsService {
   }
 
   mapPotEntities(pots: Pots[]): APIPotDTO[] {
-    let mappedPots: APIPotDTO[] = [];
+    const mappedPots: APIPotDTO[] = [];
     pots.forEach((pot: Pots): void => {
       const newPot: APIPotDTO = {
         name: pot.name,
