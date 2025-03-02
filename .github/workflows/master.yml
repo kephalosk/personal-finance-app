@@ -117,7 +117,7 @@ jobs:
           cd backend
           npm run test
 
-  backend-e2e-tests:
+  backend-integration-tests:
     runs-on: ubuntu-latest
 
     needs: backend-versioning
@@ -246,7 +246,7 @@ jobs:
 
     needs:
       - backend-unit-tests
-      - backend-e2e-tests
+      - backend-integration-tests
 
     steps:
       - name: Checkout master
@@ -466,8 +466,8 @@ jobs:
       - name: Upload results as Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: GRYPE_SCAN_FRONTEND
-          path: GRYPE_SCAN_FRONTEND.txt
+          name: GRYPE_SCAN_BACKEND
+          path: GRYPE_SCAN_BACKEND.txt
           retention-days: 7
 
       - name: Fail if Grype Scan Failed
@@ -565,13 +565,13 @@ jobs:
 
       - name: Install dependencies
         run: |
-          cd frontend
-          npm ci
+         cd frontend
+         npm ci
 
       - name: Install Playwright Browsers
         run: |
-          cd frontend
-          npx playwright install --with-deps
+         cd frontend
+         npx playwright install --with-deps
 
       - name: Install doctl
         uses: digitalocean/action-doctl@v2
@@ -601,8 +601,8 @@ jobs:
 
       - name: Run Playwright tests
         run: |
-          cd frontend
-          npx playwright test ui-tests/e2e-tests
+         cd frontend
+         npx playwright test ui-tests/e2e-tests
 
       - uses: actions/upload-artifact@v4
         if: always()
