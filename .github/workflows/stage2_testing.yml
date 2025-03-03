@@ -1,6 +1,12 @@
 name: testing
 
-on: workflow_call
+on:
+  workflow_call:
+    inputs:
+      job_name:
+        description: "The specific job to run"
+        required: false
+        type: string
 
 jobs:
   frontend-unit:

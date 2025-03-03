@@ -4,7 +4,7 @@ on:
   workflow_call:
 
 jobs:
-  frontend-trivy-scan:
+  frontend-trivy:
     runs-on: ubuntu-latest
 
     continue-on-error: true
@@ -46,7 +46,7 @@ jobs:
       - name: Scan Frontend Docker Image
         run: ./bin/trivy image --exit-code 1 --severity HIGH,CRITICAL registry.digitalocean.com/kephalosk/personal-finance-app:${{ env.PACKAGE_VERSION_FRONTEND }}
 
-  frontend-grype-scan:
+  frontend-grype:
     runs-on: ubuntu-latest
 
     continue-on-error: true
@@ -98,7 +98,7 @@ jobs:
         if: steps.grype_scan.outcome == 'failure'
         run: exit 1
 
-  backend-trivy-scan:
+  backend-trivy:
     runs-on: ubuntu-latest
 
     continue-on-error: true
@@ -140,7 +140,7 @@ jobs:
       - name: Scan Backend Docker Image
         run: ./bin/trivy image --exit-code 1 --severity HIGH,CRITICAL registry.digitalocean.com/kephalosk/nestjs-backend:${{ env.PACKAGE_VERSION_BACKEND }}
 
-  backend-grype-scan:
+  backend-grype:
     runs-on: ubuntu-latest
 
     continue-on-error: true
@@ -191,3 +191,38 @@ jobs:
       - name: Fail if Grype Scan Failed
         if: steps.grype_scan.outcome == 'failure'
         run: exit 1
+
+  codeql:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: 'javascript,typescript'
+          build-mode: 'none'
+
+      - name: Finalize CodeQL Database and Upload Results
+        uses: github/codeql-action/analyze@v3
+        with:
+          output: './results'
+          upload: 'always'
+          upload-database: 'true'
+          wait-for-processing: 'true'
+
+  gitleaks:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Analyze with Gitleaks
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

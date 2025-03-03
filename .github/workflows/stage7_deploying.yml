@@ -4,7 +4,7 @@ on:
   workflow_call:
 
 jobs:
-  frontend-deploy:
+  frontend:
     runs-on: ubuntu-latest
 
     steps:
@@ -52,7 +52,7 @@ jobs:
             -d '{"name": "CURRENT_PROD_FRONTEND_SERVICE_VERSION", "value": "${{ env.PACKAGE_VERSION_FRONTEND }}"}' \
             https://api.github.com/repos/${{ github.repository }}/actions/variables/CURRENT_PROD_FRONTEND_SERVICE_VERSION
 
-  backend-deploy:
+  backend:
     runs-on: ubuntu-latest
 
     steps:
