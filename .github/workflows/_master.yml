@@ -47,4 +47,10 @@ jobs:
     uses: ./.github/workflows/stage8_deploying.yml
     needs: ui-testing
     secrets: inherit
-          
+
+  notifying:
+    uses: ./.github/workflows/stage9_notifying.yml
+    needs: deploying
+    with:
+      hasFailed: ${{ needs.deploying.result == 'failure' && 'true' || 'false' }}
+      isMaster: 'true'
