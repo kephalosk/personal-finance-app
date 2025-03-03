@@ -43,53 +43,9 @@ jobs:
     needs: linting2
     secrets: inherit
 
-  send-notification-success:
-    runs-on: ubuntu-latest
-
+  notifying:
+    uses: ./.github/workflows/stage9_notifying.yml
     needs: ui-testing
-
-    steps:
-      - name: Send Email via SendGrid
-        uses: dawidd6/action-send-mail@v3
-        with:
-          server_address: smtp.sendgrid.net
-          server_port: 587
-          username: apikey
-          password: ${{ secrets.SENDGRID_API_KEY }}
-          from: ${{ secrets.EMAIL_FROM }}
-          to: ${{ secrets.EMAIL_TO }}
-          subject: "CI/CD develop - Success - philippkraatz.com - Notification"
-          body: |
-            Pipeline erfolgreich durchgelaufen für Repository **${{ github.repository }}**! 🎉
-
-            Commit: ${{ github.event.head_commit.message }}
-            Autor: ${{ github.event.head_commit.author.name }}
-
-            Repository: github.com/kephalosk/personal-finance-app
-            Action Logs: github.com/kephalosk/personal-finance-app/actions
-
-  send-notification-failure:
-    runs-on: ubuntu-latest
-
-    needs: ui-testing
-    if: always() && needs.ui-testing.result == 'failure'
-
-    steps:
-      - name: Send Email via SendGrid
-        uses: dawidd6/action-send-mail@v3
-        with:
-          server_address: smtp.sendgrid.net
-          server_port: 587
-          username: apikey
-          password: ${{ secrets.SENDGRID_API_KEY }}
-          from: ${{ secrets.EMAIL_FROM }}
-          to: ${{ secrets.EMAIL_TO }}
-          subject: "CI/CD develop - Failure - philippkraatz.com - Notification"
-          body: |
-            Pipeline abgebrochen für Repository **${{ github.repository }}**! 🎉
-
-            Commit: ${{ github.event.head_commit.message }}
-            Autor: ${{ github.event.head_commit.author.name }}
-
-            Repository: github.com/kephalosk/personal-finance-app
-            Action Logs: github.com/kephalosk/personal-finance-app/actions
+    with:
+      hasFailed: ${{ needs.ui-testing.result == 'failure' && 'true' || 'false' }}
+      isMaster: 'false'
