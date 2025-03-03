@@ -121,7 +121,7 @@ jobs:
           path: frontend/ui-tests/gui-tests
           retention-days: 30
 
-  create-new-vrts:
+  create-vrts:
     timeout-minutes: 60
     runs-on: ubuntu-latest
 
