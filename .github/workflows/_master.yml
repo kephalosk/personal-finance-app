@@ -1,4 +1,4 @@
-name: versioning, tests, build, image-scans, code-scans, linting, ui-tests, deploying and notifying
+name: versioning, testing, building, analyzing, linting, ui-testing, deploying and notifying
 
 on:
   push:
@@ -23,34 +23,29 @@ jobs:
     needs: testing
     secrets: inherit
 
-  image-analyzing:
-    uses: ./.github/workflows/stage4_image-analyzing.yml
+  analyzing:
+    uses: ./.github/workflows/stage4_analyzing.yml
     needs: building
     secrets: inherit
 
-  code-analyzing:
-    uses: ./.github/workflows/stage5_code-analyzing.yml
-    needs: image-analyzing
-    secrets: inherit
-
   linting:
-    uses: ./.github/workflows/stage6_linting.yml
-    needs: code-analyzing
+    uses: ./.github/workflows/stage5_linting.yml
+    needs: analyzing
     secrets: inherit
 
   ui-testing:
-    uses: ./.github/workflows/stage7_ui-testing.yml
+    uses: ./.github/workflows/stage6_ui-testing.yml
     needs: linting
     secrets: inherit
 
   deploying:
-    uses: ./.github/workflows/stage8_deploying.yml
+    uses: ./.github/workflows/stage7_deploying.yml
     needs: ui-testing
     secrets: inherit
 
   notifying:
-    uses: ./.github/workflows/stage9_notifying.yml
+    uses: ./.github/workflows/stage8_notifying.yml
     needs: deploying
     with:
-      hasFailed: ${{ needs.deploying.result == 'failure' && 'true' || 'false' }}
-      isMaster: 'true'
+      hasFailed: ${{ toJSON(needs.deploying.result == 'failure') }}
+      isMaster: ${{ toJSON(true) }}

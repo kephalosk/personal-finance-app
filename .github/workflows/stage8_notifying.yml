@@ -13,7 +13,7 @@ on:
         type: boolean
 
 jobs:
-  send-notification-success:
+  success:
     runs-on: ubuntu-latest
     if: ${{ inputs.hasFailed == false }}
 
@@ -37,7 +37,7 @@ jobs:
             Repository: github.com/kephalosk/personal-finance-app
             Action Logs: github.com/kephalosk/personal-finance-app/actions
 
-  send-notification-failure:
+  failure:
     runs-on: ubuntu-latest
     if: ${{ inputs.hasFailed == true }}
 

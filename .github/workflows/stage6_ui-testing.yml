@@ -4,7 +4,7 @@ on:
   workflow_call:
 
 jobs:
-  frontend-e2e-tests:
+  frontend-e2e:
     timeout-minutes: 60
     runs-on: ubuntu-latest
 
@@ -62,7 +62,7 @@ jobs:
           path: frontend/ui-tests/e2e-tests
           retention-days: 30
 
-  frontend-gui-tests:
+  frontend-gui:
     timeout-minutes: 60
     runs-on: ubuntu-latest
 
@@ -124,9 +124,6 @@ jobs:
   create-new-vrts:
     timeout-minutes: 60
     runs-on: ubuntu-latest
-
-    needs: frontend-gui-tests
-    if: needs.frontend-gui-tests.result == 'failure'
 
     steps:
       - uses: actions/checkout@v4

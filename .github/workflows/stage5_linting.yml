@@ -4,7 +4,7 @@ on:
   workflow_call
 
 jobs:
-  frontend-eslint-scan:
+  frontend-eslint:
     runs-on: ubuntu-latest
 
     steps:
@@ -21,7 +21,7 @@ jobs:
           cd frontend
           npx eslint .
 
-  backend-eslint-scan:
+  backend-eslint:
     runs-on: ubuntu-latest
 
     steps:

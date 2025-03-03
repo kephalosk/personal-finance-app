@@ -1,4 +1,4 @@
-name: unit tests and build
+name: unit testing and building
 
 on:
   push:
@@ -7,47 +7,19 @@ on:
 
 jobs:
   frontend-unit-tests:
-    runs-on: ubuntu-latest
-
     if: github.ref != 'refs/heads/master' && github.ref != 'refs/heads/develop'
-
-    steps:
-      - name: Checkout master
-        uses: actions/checkout@main
-
-      - name: Install Dependencies
-        run: |
-          cd frontend
-          npm install
-
-      - name: Run Frontend Unit Tests
-        run: |
-          cd frontend
-          npm run test
+    uses: ./.github/workflows/stage2_testing.yml
+    with:
+      job_name: frontend-unit
 
   backend-unit-tests:
-    runs-on: ubuntu-latest
-
     if: github.ref != 'refs/heads/master' && github.ref != 'refs/heads/develop'
-
-    steps:
-      - name: Checkout master
-        uses: actions/checkout@main
-
-      - name: Install Dependencies
-        run: |
-          cd backend
-          npm install
-
-      - name: Run Backend Unit Tests
-        run: |
-          cd backend
-          npm run test
+    uses: ./.github/workflows/stage2_testing.yml
+    with:
+      job_name: backend-unit
 
   frontend-build:
     runs-on: ubuntu-latest
-
-    if: github.ref != 'refs/heads/master' && github.ref != 'refs/heads/develop'
 
     needs: frontend-unit-tests
 
@@ -60,8 +32,6 @@ jobs:
 
   backend-build:
     runs-on: ubuntu-latest
-
-    if: github.ref != 'refs/heads/master' && github.ref != 'refs/heads/develop'
 
     needs: backend-unit-tests
 
