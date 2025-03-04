@@ -40,7 +40,8 @@ jobs:
 
   notifying:
     uses: ./.github/workflows/stage8_notifying.yml
-    needs: ui-testing
+    needs: versioning
+    secrets: inherit
     with:
-      hasFailed: ${{ toJSON(needs.ui-testing.result == 'failure') }}
-      isMaster: ${{ toJSON(false) }}
+      hasFailed: ${{ needs.versioning.result == 'failure' }}
+      isMaster: false

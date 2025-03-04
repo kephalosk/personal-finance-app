@@ -16,6 +16,7 @@ interface Props extends SidebarPage {
 
 const SidebarListEntry: ({
   name,
+  description,
   imgSrc,
   altImgSrc,
   imgAlt,
@@ -26,6 +27,7 @@ const SidebarListEntry: ({
   hasTabIndex,
 }: Props) => ReactNode = ({
   name,
+  description,
   imgSrc,
   altImgSrc = imgSrc,
   imgAlt,
@@ -85,6 +87,7 @@ const SidebarListEntry: ({
         className={`entryRow link ${isActive ? 'active' : ''}`}
         tabIndex={hasTabIndex ? 0 : -1}
         data-testid="sidebar-list-entry"
+        aria-label={description}
       >
         {content}
       </Link>
