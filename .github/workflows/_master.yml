@@ -46,6 +46,8 @@ jobs:
   notifying:
     uses: ./.github/workflows/stage8_notifying.yml
     needs: deploying
+    secrets: inherit
+    if: always()
     with:
-      hasFailed: ${{ toJSON(needs.deploying.result == 'failure') }}
-      isMaster: ${{ toJSON(true) }}
+      hasSucceeded: ${{ needs.deploying.result == 'success' }}
+      isMaster: true

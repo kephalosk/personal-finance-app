@@ -158,6 +158,7 @@ describe('Sidebar', () => {
         render(<Sidebar {...testProps} />);
         expect(SidebarListEntry).toHaveBeenCalledWith(
           {
+            description: expect.any(String),
             imgAlt: expect.any(String),
             imgSrc: expect.any(String),
             isActive: expect.any(Boolean),
@@ -187,6 +188,7 @@ describe('Sidebar', () => {
         render(<Sidebar {...testProps} />);
         expect(SidebarListEntry).toHaveBeenCalledWith(
           {
+            description: expect.any(String),
             imgAlt: expect.any(String),
             imgSrc: expect.any(String),
             isActive: expect.any(Boolean),
