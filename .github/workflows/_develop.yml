@@ -16,6 +16,7 @@ jobs:
   testing:
     uses: ./.github/workflows/stage2_testing.yml
     needs: versioning
+    secrets: inherit
 
   building:
     uses: ./.github/workflows/stage3_building.yml
@@ -39,9 +40,9 @@ jobs:
 
   notifying:
     uses: ./.github/workflows/stage8_notifying.yml
-    needs: testing
+    needs: ui-testing
     secrets: inherit
     if: always()
     with:
-      hasFailed: ${{ needs.testing.result == 'failure' }}
+      hasSucceeded: ${{ needs.ui-testing.result == 'success' }}
       isMaster: false

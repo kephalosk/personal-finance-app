@@ -3,8 +3,8 @@ name: notifying
 on:
   workflow_call:
     inputs:
-      hasFailed:
-        description: 'previous job failed'
+      hasSucceeded:
+        description: 'previous job has succeeded'
         required: true
         type: boolean
       isMaster:
@@ -15,7 +15,7 @@ on:
 jobs:
   success:
     runs-on: ubuntu-latest
-    if: ${{ inputs.hasFailed == false }}
+    if: ${{ inputs.hasSucceeded == true }}
 
     steps:
       - name: Send Email via SendGrid
@@ -39,7 +39,7 @@ jobs:
 
   failure:
     runs-on: ubuntu-latest
-    if: ${{ inputs.hasFailed == true }}
+    if: ${{ inputs.hasSucceeded == false }}
 
     steps:
       - name: Send Email via SendGrid

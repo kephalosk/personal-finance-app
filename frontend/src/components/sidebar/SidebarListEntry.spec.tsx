@@ -7,12 +7,14 @@ import { ReactFutureFlags } from '../../constants/ReactFutureFlags';
 
 describe('SidebarListEntry', () => {
   const name: string = 'testName';
+  const description: string = 'testDescription';
   const imgSrc: string = 'testImgSrc';
   const imgAlt: string = 'testImgAlt';
   const linkTarget: string = 'testLinkTarget';
 
   const testProps = {
     name,
+    description,
     imgSrc,
     imgAlt,
     linkTarget,

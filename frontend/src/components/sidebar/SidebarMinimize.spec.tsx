@@ -27,6 +27,7 @@ describe('SidebarMinimize', () => {
     expect(component).toBeInTheDocument();
     expect(SidebarListEntry).toHaveBeenCalledWith(
       {
+        description: 'minimize Sidebar',
         altImgSrc: '/images/icon-maximize-menu.svg',
         className: 'sidebarMinimize',
         hasTabIndex: false,
@@ -48,6 +49,7 @@ describe('SidebarMinimize', () => {
     expect(component).toBeInTheDocument();
     expect(SidebarListEntry).toHaveBeenCalledWith(
       {
+        description: 'minimize Sidebar',
         altImgSrc: '/images/icon-maximize-menu.svg',
         className: 'sidebarMinimize',
         hasTabIndex: false,
@@ -69,6 +71,7 @@ describe('SidebarMinimize', () => {
     expect(component).toBeInTheDocument();
     expect(SidebarListEntry).toHaveBeenCalledWith(
       {
+        description: 'minimize Sidebar',
         altImgSrc: '/images/icon-maximize-menu.svg',
         className: 'sidebarMinimize',
         hasTabIndex: false,
@@ -89,6 +92,7 @@ describe('SidebarMinimize', () => {
     expect(component).toBeInTheDocument();
     expect(SidebarListEntry).toHaveBeenCalledWith(
       {
+        description: 'minimize Sidebar',
         altImgSrc: '/images/icon-maximize-menu.svg',
         className: 'sidebarMinimize',
         hasTabIndex: false,
@@ -107,6 +111,7 @@ describe('SidebarMinimize', () => {
     expect(component).toBeInTheDocument();
     expect(SidebarListEntry).toHaveBeenLastCalledWith(
       {
+        description: 'minimize Sidebar',
         altImgSrc: '/images/icon-maximize-menu.svg',
         className: 'sidebarMinimize',
         hasTabIndex: false,

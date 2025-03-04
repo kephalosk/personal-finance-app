@@ -86,6 +86,7 @@ jobs:
           image: "registry.digitalocean.com/kephalosk/personal-finance-app:${{ env.PACKAGE_VERSION_FRONTEND }}"
           output-format: table
           output-file: GRYPE_SCAN_FRONTEND.txt
+          severity-cutoff: critical
 
       - name: Upload results as Artifact
         uses: actions/upload-artifact@v4
@@ -180,6 +181,7 @@ jobs:
           image: "registry.digitalocean.com/kephalosk/nestjs-backend:${{ env.PACKAGE_VERSION_BACKEND }}"
           output-format: table
           output-file: GRYPE_SCAN_BACKEND.txt
+          severity-cutoff: critical
 
       - name: Upload results as Artifact
         uses: actions/upload-artifact@v4

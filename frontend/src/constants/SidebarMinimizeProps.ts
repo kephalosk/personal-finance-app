@@ -13,6 +13,7 @@ interface Props extends SidebarPage {
 
 export const SidebarMinimizeProps: Props = {
   name: 'Minimize Menu',
+  description: 'minimize Sidebar',
   imgSrc: '/images/icon-minimize-menu.svg',
   altImgSrc: '/images/icon-maximize-menu.svg',
   imgAlt: 'minimize icon',
