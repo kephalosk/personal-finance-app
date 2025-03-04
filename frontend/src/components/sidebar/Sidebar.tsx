@@ -35,6 +35,7 @@ const Sidebar: ({ onMinimize }: Props) => ReactNode = ({ onMinimize }: Props): R
     <div className="sidebarList">
       {SidebarPages.map((entry: SidebarPage) => (
         <SidebarListEntry
+          description={entry.description}
           key={entry.name}
           name={entry.name}
           imgSrc={entry.imgSrc}

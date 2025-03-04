@@ -42,6 +42,7 @@ const SidebarMinimize: ({ onMinimize }: Props) => ReactNode = ({
       data-testid="sidebar-minimize"
     >
       <SidebarListEntry
+        description="minimize Sidebar"
         isMinimized={isMinimized}
         name="Minimize Menu"
         imgSrc="/images/icon-minimize-menu.svg"
