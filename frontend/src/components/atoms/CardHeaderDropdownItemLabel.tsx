@@ -37,7 +37,7 @@ const CardHeaderDropdownItemLabel: ({
 }: Props): ReactNode => {
   return (
     <div
-      className={`cardHeaderDropdownItem ${itemColor}`}
+      className={`cardHeaderDropdownItem ${itemColor} ${itemOperation.toLowerCase()}`}
       data-testid="card-header-dropdown-item"
       tabIndex={0}
       onClick={() => handleDropdownClick(itemOperation)}

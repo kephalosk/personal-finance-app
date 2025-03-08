@@ -102,6 +102,7 @@ const OverlayContentEditBudget: ({
         hasValidInput={hasValidInput}
         initialValue={budget.maximum.toString()}
         isLimitInput={true}
+        budgetKey={budget.categoryKey}
       />
       <OverlayContentLabel title="Theme" />
       <OverlayDropdownColor

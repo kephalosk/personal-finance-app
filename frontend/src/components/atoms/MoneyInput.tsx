@@ -15,6 +15,7 @@ interface Props {
   handleInputChange: (input: number) => void;
   hasValidInput: boolean;
   isLimitInput: boolean;
+  budgetKey: string;
   initialValue?: string;
   maxInput?: number;
 }
@@ -28,7 +29,14 @@ const MoneyInput: ForwardRefExoticComponent<Props & RefAttributes<InputMoneyRef>
   Props
 >(
   (
-    { handleInputChange, hasValidInput, isLimitInput, initialValue = '', maxInput = -1 }: Props,
+    {
+      handleInputChange,
+      hasValidInput,
+      isLimitInput,
+      budgetKey,
+      initialValue = '',
+      maxInput = -1,
+    }: Props,
     ref: ForwardedRef<InputMoneyRef>
   ): ReactNode => {
     const [value, setValue] = useState<string>(initialValue);
@@ -90,7 +98,7 @@ const MoneyInput: ForwardRefExoticComponent<Props & RefAttributes<InputMoneyRef>
       <div className="inputMoneyContainer">
         <div className="inputMoney" data-testid="input-money">
           <input
-            className="inputMoneyInput"
+            className={`inputMoneyInput ${budgetKey}`}
             placeholder="e.g. 2000"
             value={value}
             onChange={handleChange}
