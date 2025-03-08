@@ -2,14 +2,15 @@ import './OverlayContentDeleteBudget.scss';
 
 interface Props {
   handleClick: () => void;
+  budgetKey: string;
 }
 
-const OverlayContentDeleteBudget = ({ handleClick }: Props) => {
+const OverlayContentDeleteBudget = ({ handleClick, budgetKey }: Props) => {
   const buttonText: string = 'Yes, Confirm Deletion';
 
   return (
     <button
-      className="overlayContentDeleteBudget"
+      className={`overlayContentDeleteBudget ${budgetKey}`}
       data-testid="overlay-content-delete-budget"
       onClick={handleClick}
     >
