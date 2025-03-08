@@ -191,7 +191,10 @@ const BudgetCard: ({
             onClose={closeForm}
             buttonType={OverlayCardBoxButtonTypeEnum.ABORT}
           >
-            <OverlayContentDeleteBudget handleClick={handleDeleteBudget} />
+            <OverlayContentDeleteBudget
+              handleClick={handleDeleteBudget}
+              budgetKey={budget.categoryKey}
+            />
           </OverlayCardBox>
         </div>
       )}

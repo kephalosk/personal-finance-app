@@ -3,9 +3,11 @@ import OverlayContentDeleteBudget from './OverlayContentDeleteBudget';
 
 describe('OverlayContentDeleteBudget', () => {
   const mockHandleClick = jest.fn();
+  const budgetKey: string = 'budgetKey';
 
   const testProps = {
     handleClick: mockHandleClick,
+    budgetKey,
   };
 
   it('renders button overlayContentDeleteBudget with correct text', () => {
