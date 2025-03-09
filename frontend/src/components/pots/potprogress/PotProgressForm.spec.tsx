@@ -107,21 +107,25 @@ describe('PotProgressForm', (): void => {
   );
 
   it.each([
-    [true, -1],
-    [false, pot.total],
-  ])('renders component MoneyInput', (isAddition: boolean, maxInput: number): void => {
-    render(<PotProgressForm {...testProps} isAddition={isAddition} />);
+    [true, -1, 'add'],
+    [false, pot.total, 'withdraw'],
+  ])(
+    'renders component MoneyInput',
+    (isAddition: boolean, maxInput: number, cssKey: string): void => {
+      render(<PotProgressForm {...testProps} isAddition={isAddition} />);
 
-    const element: HTMLElement | null = screen.getByTestId('input-money');
+      const element: HTMLElement | null = screen.getByTestId('input-money');
 
-    expect(element).toBeInTheDocument();
-    expect(mockInputMoney).toHaveBeenCalledWith({
-      handleInputChange: expect.any(Function),
-      hasValidInput: true,
-      isLimitInput: false,
-      maxInput,
-    });
-  });
+      expect(element).toBeInTheDocument();
+      expect(mockInputMoney).toHaveBeenCalledWith({
+        handleInputChange: expect.any(Function),
+        hasValidInput: true,
+        isLimitInput: false,
+        maxInput,
+        cssKey,
+      });
+    }
+  );
 
   it('handles input change of MoneyInput', async () => {
     const newValue: string = '300000';

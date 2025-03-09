@@ -178,6 +178,7 @@ describe('OverlayContentEditBudget', () => {
         hasValidInput,
         initialValue: budget.maximum.toString(),
         isLimitInput: true,
+        cssKey: expect.any(String),
       },
       {}
     );
