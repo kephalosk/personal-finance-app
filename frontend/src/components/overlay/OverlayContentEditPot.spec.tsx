@@ -182,6 +182,7 @@ describe('OverlayContentEditPot', (): void => {
       hasValidInput: true,
       isLimitInput: false,
       initialValue: mockedPot.target.toString(),
+      cssKey: expect.any(String),
     });
   });
 
