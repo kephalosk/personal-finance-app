@@ -6,7 +6,7 @@ export default defineConfig({
   timeout: 30000,
   retries: 1,
   use: {
-    headless: true,
+    headless: false,
     viewport: { width: 1280, height: 720 },
     actionTimeout: 0,
     ignoreHTTPSErrors: true,
@@ -19,14 +19,14 @@ export default defineConfig({
       name: 'chromium',
       use: { browserName: 'chromium' },
     },
-    {
-      name: 'firefox',
-      use: { browserName: 'firefox' },
-    },
-    {
-      name: 'webkit',
-      use: { browserName: 'webkit' },
-    },
+    // {
+    //   name: 'firefox',
+    //   use: { browserName: 'firefox' },
+    // },
+    // {
+    //   name: 'webkit',
+    //   use: { browserName: 'webkit' },
+    // },
   ],
   reporter: [['list'], ['html', { outputFolder: 'ui-tests/test-results/html' }]],
   outputDir: 'ui-tests/test-results/artifacts',

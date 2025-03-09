@@ -13,6 +13,7 @@ interface Props {
   children: React.ReactNode;
   isButtonDisabled?: boolean;
   buttonType?: OverlayCardBoxButtonTypeEnum;
+  cssKey?: string;
 }
 
 const OverlayCardBox: ({
@@ -25,6 +26,7 @@ const OverlayCardBox: ({
   children,
   isButtonDisabled,
   buttonType,
+  cssKey,
 }: Props) => ReactNode = ({
   title,
   description,
@@ -35,6 +37,7 @@ const OverlayCardBox: ({
   children,
   isButtonDisabled = false,
   buttonType = OverlayCardBoxButtonTypeEnum.CONFIRM,
+  cssKey = '',
 }: Props): ReactNode => {
   const overlayRef: React.RefObject<HTMLDivElement> = useRef<HTMLDivElement>(null);
 
@@ -66,11 +69,11 @@ const OverlayCardBox: ({
   };
 
   return (
-    <div className="overlayCardBox" data-testid="overlay-card-box">
+    <div className={`overlayCardBox`} data-testid="overlay-card-box">
       <div className={`overlayBackground ${isHidden ? 'isHidden' : ''}`}></div>
       <div
         ref={overlayRef}
-        className={`overlayForm ${isHidden ? 'isHidden' : ''} ${buttonType}`}
+        className={`overlayForm ${cssKey} ${isHidden ? 'isHidden' : ''} ${buttonType}`}
         role="dialog"
         aria-hidden={isHidden}
         aria-labelledby="overlayTitle"
@@ -98,7 +101,7 @@ const OverlayCardBox: ({
           className={`overlayFormSubmitContainer ${isButtonDisabled ? 'disabled' : 'isEnabled'}`}
         >
           <button
-            className={`overlayFormSubmit ${isButtonDisabled ? 'disabled' : 'isEnabled'} ${buttonType}`}
+            className={`overlayFormSubmit ${cssKey} ${isButtonDisabled ? 'disabled' : 'isEnabled'} ${buttonType}`}
             onClick={handleSubmit}
             tabIndex={isButtonDisabled ? -1 : 0}
           >
