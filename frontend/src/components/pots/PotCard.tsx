@@ -145,7 +145,7 @@ const PotCard: ({ pots, pot, updatePage, isLoading }: Props) => ReactNode = ({
         <LoadingSpinner />
       ) : (
         <div className="potCard" data-testid="pot-card">
-          <div className="potCardContent">
+          <div className={`potCardContent ${pot.name}`}>
             <CardHeader
               title={pot.name}
               color={pot.color}
@@ -162,6 +162,7 @@ const PotCard: ({ pots, pot, updatePage, isLoading }: Props) => ReactNode = ({
             isHidden={isEditPotHidden}
             handleEvent={handleEditPot}
             onClose={closeForm}
+            cssKey={pot.name}
           >
             <OverlayContentEditPot
               pot={pot}

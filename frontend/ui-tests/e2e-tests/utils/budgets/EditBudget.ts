@@ -1,7 +1,7 @@
 import { Locator, Page } from 'playwright';
 
 export class EditBudget {
-  private static getForm(page: Page) {
+  private static getForm(page: Page): Locator {
     return page.getByTestId('overlay-content-edit-budget');
   }
 

@@ -5,7 +5,7 @@ import { AddNewBudget } from './utils/budgets/AddNewBudget';
 import { EditBudget } from './utils/budgets/EditBudget';
 import { DeleteBudget } from './utils/budgets/DeleteBudget';
 
-test('add new budget', async ({ page }) => {
+test('add new budget', async ({ page }): Promise<void> => {
   await page.goto('http://localhost:5173/budgets', { waitUntil: 'networkidle' });
 
   const headerButton: Locator = selectHeaderButton(page);
@@ -33,7 +33,7 @@ test('add new budget', async ({ page }) => {
   await submitButton.click();
 });
 
-test('edit budget', async ({ page }) => {
+test('edit budget', async ({ page }): Promise<void> => {
   await page.goto('http://localhost:5173/budgets', { waitUntil: 'networkidle' });
 
   const cardHeaderIconGeneral: Locator = EditBudget.selectCardHeaderEditIcon(page, 'General');
@@ -51,7 +51,7 @@ test('edit budget', async ({ page }) => {
   await submitButton.click();
 });
 
-test('delete budget', async ({ page }) => {
+test('delete budget', async ({ page }): Promise<void> => {
   await page.goto('http://localhost:5173/budgets', { waitUntil: 'networkidle' });
 
   const cardHeaderIconGeneral: Locator = EditBudget.selectCardHeaderEditIcon(page, 'General');
