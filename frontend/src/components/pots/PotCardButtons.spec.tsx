@@ -143,6 +143,7 @@ describe('PotCardButtons', (): void => {
         onClose: expect.any(Function),
         submitText: submitTextAdd,
         title: titleAdd,
+        cssKey: expect.any(String),
       },
       {}
     );
@@ -166,6 +167,7 @@ describe('PotCardButtons', (): void => {
         onClose: expect.any(Function),
         submitText: submitTextWithdraw,
         title: titleWithdraw,
+        cssKey: expect.any(String),
       },
       {}
     );

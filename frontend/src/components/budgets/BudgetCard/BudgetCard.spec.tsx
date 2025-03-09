@@ -513,6 +513,7 @@ describe('BudgetCard', () => {
     expect(OverlayContentDeleteBudget).toHaveBeenCalledWith(
       {
         handleClick: expect.any(Function),
+        budgetKey: expect.any(String),
       },
       {}
     );

@@ -291,6 +291,7 @@ describe('PotCard', (): void => {
         onClose: expect.any(Function),
         submitText: 'Save Changes',
         title: 'Edit Pot',
+        cssKey: expect.any(String),
       },
       {}
     );
