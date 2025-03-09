@@ -31,7 +31,7 @@ const PotProgressForm = ({
   }, [isHidden]);
 
   return (
-    <div className="potProgressForm" data-testid="pot-progress-form">
+    <div className={`potProgressForm ${pot.name}`} data-testid="pot-progress-form">
       <PotProgressDisplay
         target={pot.target}
         oldTotal={pot.total}
@@ -45,6 +45,7 @@ const PotProgressForm = ({
         hasValidInput={hasValidInput}
         isLimitInput={false}
         maxInput={isAddition ? -1 : pot.total}
+        cssKey={isAddition ? 'add' : 'withdraw'}
       />
     </div>
   );

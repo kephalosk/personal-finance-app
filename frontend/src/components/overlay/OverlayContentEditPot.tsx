@@ -81,6 +81,7 @@ const OverlayContentEditPot: ({
         hasValidInput={hasValidTargetInput}
         initialValue={pot.target.toString()}
         isLimitInput={false}
+        cssKey={pot.name.toString()}
       />
       <OverlayContentLabel title="Theme" />
       <OverlayDropdownColor

@@ -108,6 +108,7 @@ const PotCardButtons: ({ pot, updatePage }: Props) => ReactNode = ({
         isHidden={isHidden}
         handleEvent={handleEvent}
         onClose={closeForm}
+        cssKey={pot.name}
       >
         <PotProgressForm
           pot={pot}

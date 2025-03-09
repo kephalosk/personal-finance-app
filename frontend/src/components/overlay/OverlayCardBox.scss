@@ -88,6 +88,8 @@ $transition-duration: 0.1s;
   margin: 0;
   height: auto;
   flex-grow: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
 
   @include fonts.text-preset-1;
 }

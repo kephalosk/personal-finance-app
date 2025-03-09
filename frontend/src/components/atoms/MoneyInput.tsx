@@ -15,7 +15,7 @@ interface Props {
   handleInputChange: (input: number) => void;
   hasValidInput: boolean;
   isLimitInput: boolean;
-  budgetKey: string;
+  cssKey?: string;
   initialValue?: string;
   maxInput?: number;
 }
@@ -33,7 +33,7 @@ const MoneyInput: ForwardRefExoticComponent<Props & RefAttributes<InputMoneyRef>
       handleInputChange,
       hasValidInput,
       isLimitInput,
-      budgetKey,
+      cssKey = '',
       initialValue = '',
       maxInput = -1,
     }: Props,
@@ -98,7 +98,7 @@ const MoneyInput: ForwardRefExoticComponent<Props & RefAttributes<InputMoneyRef>
       <div className="inputMoneyContainer">
         <div className="inputMoney" data-testid="input-money">
           <input
-            className={`inputMoneyInput ${budgetKey}`}
+            className={`inputMoneyInput ${cssKey}`}
             placeholder="e.g. 2000"
             value={value}
             onChange={handleChange}

@@ -6,18 +6,18 @@ describe('MoneyInput', () => {
   const mockHandleInputChange: jest.Mock = jest.fn();
   const hasValidInput: boolean = false;
   const isLimitInput: boolean = true;
-  const budgetKey: string = 'testBudget';
+  const cssKey: string = 'testBudget';
 
   const testProps: {
     handleInputChange: jest.Mock;
     hasValidInput: boolean;
     isLimitInput: boolean;
-    budgetKey: string;
+    cssKey: string;
   } = {
     handleInputChange: mockHandleInputChange,
     hasValidInput,
     isLimitInput,
-    budgetKey,
+    cssKey,
   };
 
   let inputMoneyRef: React.RefObject<InputMoneyRef>;
