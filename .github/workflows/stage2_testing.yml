@@ -10,6 +10,7 @@ on:
 
 jobs:
   frontend-unit:
+    if: inputs.job_name == 'frontend-unit' || inputs.job_name == ''
     runs-on: ubuntu-latest
 
     steps:
@@ -27,6 +28,7 @@ jobs:
           npm run test
 
   backend-unit:
+    if: inputs.job_name == 'backend-unit' || inputs.job_name == ''
     runs-on: ubuntu-latest
 
     steps:
@@ -44,6 +46,7 @@ jobs:
           npm run test
 
   backend-integration:
+    if: inputs.job_name == 'backend-integration' || inputs.job_name == ''
     runs-on: ubuntu-latest
 
     steps:
